@@ -1790,10 +1790,10 @@ Check-up refers to an exam carried out by general practitioner, exam referes to 
 </c:Object>
 </o:DependencySymbol>
 <o:DependencySymbol Id="o72">
-<a:ModificationDate>1647808269</a:ModificationDate>
+<a:ModificationDate>1647808844</a:ModificationDate>
 <a:CenterTextOffset>(6225, 1575)</a:CenterTextOffset>
-<a:Rect>((-9074,-66807), (11526,-61513))</a:Rect>
-<a:ListOfPoints>((11126,-66407),(-8374,-66407),(-8374,-61913))</a:ListOfPoints>
+<a:Rect>((-9074,-66807), (11394,-61513))</a:Rect>
+<a:ListOfPoints>((10994,-66407),(-8374,-66407),(-8374,-61913))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>8</a:ArrowStyle>
 <a:LineColor>65408</a:LineColor>
@@ -1950,9 +1950,9 @@ Check-up refers to an exam carried out by general practitioner, exam referes to 
 </c:Object>
 </o:UseCaseAssociationSymbol>
 <o:UseCaseAssociationSymbol Id="o95">
-<a:ModificationDate>1647807431</a:ModificationDate>
-<a:Rect>((-33854,73013), (-20420,84466))</a:Rect>
-<a:ListOfPoints>((-33454,73413),(-31898,75456),(-27398,75456),(-27398,84066),(-20820,84066),(-22376,78948))</a:ListOfPoints>
+<a:ModificationDate>1647809015</a:ModificationDate>
+<a:Rect>((-33854,73013), (-19820,78948))</a:Rect>
+<a:ListOfPoints>((-33454,73413),(-33454,78548),(-20220,78548))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>0</a:ArrowStyle>
 <a:LineColor>128</a:LineColor>
@@ -2124,9 +2124,9 @@ Check-up refers to an exam carried out by general practitioner, exam referes to 
 </c:Object>
 </o:UseCaseAssociationSymbol>
 <o:UseCaseAssociationSymbol Id="o120">
-<a:ModificationDate>1647807431</a:ModificationDate>
-<a:Rect>((-13997,67688), (31802,79996))</a:Rect>
-<a:ListOfPoints>((-13597,78888),(31402,79596),(29846,68088))</a:ListOfPoints>
+<a:ModificationDate>1647809007</a:ModificationDate>
+<a:Rect>((-11841,67688), (30246,78888))</a:Rect>
+<a:ListOfPoints>((-11441,78488),(29846,78488),(29846,68088))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>0</a:ArrowStyle>
 <a:LineColor>128</a:LineColor>
@@ -2202,7 +2202,7 @@ Check-up refers to an exam carried out by general practitioner, exam referes to 
 </o:UseCaseAssociationSymbol>
 <o:DependencySymbol Id="o130">
 <a:ModificationDate>1647807467</a:ModificationDate>
-<a:Rect>((-2044,84131), (22143,90341))</a:Rect>
+<a:Rect>((-2044,83760), (22143,90341))</a:Rect>
 <a:ListOfPoints>((-1644,85387),(19413,85387),(19413,89941))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>8</a:ArrowStyle>
@@ -2221,7 +2221,7 @@ Check-up refers to an exam carried out by general practitioner, exam referes to 
 </o:DependencySymbol>
 <o:DependencySymbol Id="o133">
 <a:ModificationDate>1647807467</a:ModificationDate>
-<a:Rect>((-2300,94700), (22143,101053))</a:Rect>
+<a:Rect>((-2300,94700), (22143,100759))</a:Rect>
 <a:ListOfPoints>((-1900,100144),(19413,100144),(19413,95100))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>8</a:ArrowStyle>
@@ -2262,7 +2262,7 @@ Check-up refers to an exam carried out by general practitioner, exam referes to 
 </o:DependencySymbol>
 <o:DependencySymbol Id="o139">
 <a:ModificationDate>1647807473</a:ModificationDate>
-<a:Rect>((-26237,95953), (-8646,106853))</a:Rect>
+<a:Rect>((-26237,95953), (-8646,106570))</a:Rect>
 <a:ListOfPoints>((-9046,105924),(-23507,105924),(-23507,96353))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>8</a:ArrowStyle>
@@ -2282,7 +2282,7 @@ Check-up refers to an exam carried out by general practitioner, exam referes to 
 </o:DependencySymbol>
 <o:DependencySymbol Id="o141">
 <a:ModificationDate>1647807473</a:ModificationDate>
-<a:Rect>((-20682,84146), (-8486,95483))</a:Rect>
+<a:Rect>((-20682,83776), (-8486,95483))</a:Rect>
 <a:ListOfPoints>((-8886,85387),(-17952,85387),(-17952,95083))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>8</a:ArrowStyle>
@@ -2301,7 +2301,7 @@ Check-up refers to an exam carried out by general practitioner, exam referes to 
 </o:DependencySymbol>
 <o:DependencySymbol Id="o143">
 <a:ModificationDate>1647807467</a:ModificationDate>
-<a:Rect>((-2683,93271), (19813,94870))</a:Rect>
+<a:Rect>((-2683,93271), (19813,94671))</a:Rect>
 <a:ListOfPoints>((-2283,93971),(19413,93971))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>8</a:ArrowStyle>
@@ -2320,7 +2320,7 @@ Check-up refers to an exam carried out by general practitioner, exam referes to 
 </o:DependencySymbol>
 <o:DependencySymbol Id="o146">
 <a:ModificationDate>1647807473</a:ModificationDate>
-<a:Rect>((-19552,94383), (-1883,96007))</a:Rect>
+<a:Rect>((-19552,94383), (-1883,95783))</a:Rect>
 <a:ListOfPoints>((-2283,95083),(-19152,95083))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>8</a:ArrowStyle>
@@ -2339,7 +2339,7 @@ Check-up refers to an exam carried out by general practitioner, exam referes to 
 </o:DependencySymbol>
 <o:DependencySymbol Id="o148">
 <a:ModificationDate>1647807473</a:ModificationDate>
-<a:Rect>((-21882,94683), (-8468,101068))</a:Rect>
+<a:Rect>((-21882,94683), (-8468,100777))</a:Rect>
 <a:ListOfPoints>((-8868,100144),(-19152,100144),(-19152,95083))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>8</a:ArrowStyle>
@@ -2774,8 +2774,8 @@ LABL 0 Arial,8,N</a:FontList>
 </c:Object>
 </o:UseCaseSymbol>
 <o:UseCaseSymbol Id="o73">
-<a:ModificationDate>1647808157</a:ModificationDate>
-<a:Rect>((7092,-69107), (15160,-63708))</a:Rect>
+<a:ModificationDate>1647808844</a:ModificationDate>
+<a:Rect>((6960,-69107), (15028,-63708))</a:Rect>
 <a:LineColor>65408</a:LineColor>
 <a:LineWidth>1</a:LineWidth>
 <a:FillColor>65408</a:FillColor>
@@ -2906,8 +2906,8 @@ LABL 0 Arial,8,N</a:FontList>
 </c:Object>
 </o:UseCaseSymbol>
 <o:UseCaseSymbol Id="o96">
-<a:ModificationDate>1647807431</a:ModificationDate>
-<a:Rect>((-22376,76189), (-4818,81588))</a:Rect>
+<a:ModificationDate>1647809007</a:ModificationDate>
+<a:Rect>((-20220,75789), (-2662,81188))</a:Rect>
 <a:LineColor>128</a:LineColor>
 <a:LineWidth>1</a:LineWidth>
 <a:FillColor>10473471</a:FillColor>

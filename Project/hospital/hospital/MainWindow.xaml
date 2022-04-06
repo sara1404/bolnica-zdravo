@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Button Content="Patient" HorizontalAlignment="Left" Margin="199,94,0,0" VerticalAlignment="Top" Width="139" Height="55" Click="Button_Click"/>
+        <Button Content="Doctor" HorizontalAlignment="Left" Margin="419,94,0,0" VerticalAlignment="Top" Width="139" Height="55"/>
+        <Button Content="Secretary" HorizontalAlignment="Left" Margin="199,196,0,0" VerticalAlignment="Top" Width="139" Height="55" RenderTransformOrigin="0.524,2.199"/>
+        <Button Content="Manager" HorizontalAlignment="Left" Margin="419,196,0,0" VerticalAlignment="Top" Width="139" Height="55" RenderTransformOrigin="0.524,2.199"/>
+
     </Grid>
 </Window>

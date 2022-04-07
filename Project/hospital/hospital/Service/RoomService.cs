@@ -1,4 +1,7 @@
 using System;
+using Repository;
+using Model;
+using System.Collections.Generic;
 
 namespace Service
 {
@@ -21,7 +24,7 @@ namespace Service
          throw new NotImplementedException();
       }
       
-      public bool UpdateById(String id, Model.Room room)
+      public bool UpdateById(String id)
       {
          throw new NotImplementedException();
       }

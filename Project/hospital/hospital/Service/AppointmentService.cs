@@ -1,4 +1,6 @@
 using System;
+using Model;
+using System.Collections.Generic;
 
 namespace Service
 {
@@ -21,7 +23,7 @@ namespace Service
          throw new NotImplementedException();
       }
       
-      public void Update(int id, Appointment appointment)
+      public void Update(Appointment appointment)
       {
          throw new NotImplementedException();
       }

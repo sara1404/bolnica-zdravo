@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{97C27D32-843E-4390-8638-7C5A34ECD528}</ProjectGuid>
+    <ProjectGuid>{8651F9B2-50CD-432A-B050-BFFE1BFC831B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>hospital</RootNamespace>
     <AssemblyName>hospital</AssemblyName>
@@ -55,6 +55,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Repository\AppointmentRepository.cs" />
+    <Compile Include="Repository\DoctorRepository.cs" />
+    <Compile Include="Repository\MedicalRecordsRepository.cs" />
+    <Compile Include="Repository\PatientRepository.cs" />
+    <Compile Include="Repository\RoomRepository.cs" />
+    <Compile Include="Service\AppointmentService.cs" />
+    <Compile Include="Service\DoctorService.cs" />
+    <Compile Include="Service\MedicalRecordsService.cs" />
+    <Compile Include="Service\PatientService.cs" />
+    <Compile Include="Service\RoomService.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -63,37 +73,35 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controller\AppointmentController.cs" />
+    <Compile Include="Controller\MedicalRecordsController.cs" />
+    <Compile Include="Controller\PatientController.cs" />
+    <Compile Include="Controller\RoomController.cs" />
+    <Compile Include="FileHandler\AppointmentsFileHandler.cs" />
+    <Compile Include="FileHandler\DoctorFileHandler.cs" />
+    <Compile Include="FileHandler\MedicalRecordFileHandler.cs" />
+    <Compile Include="FileHandler\PatientFileHandler.cs" />
+    <Compile Include="FileHandler\RoomFileHandler.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="obj\Controller\MedicalRecordsController.cs" />
-    <Compile Include="obj\Controller\RoomController.cs" />
-    <Compile Include="obj\FileHandler\AppointmentsFileHandler.cs" />
-    <Compile Include="obj\FileHandler\MedicalRecordFileHandler.cs" />
-    <Compile Include="obj\FileHandler\PatientFileHandler.cs" />
-    <Compile Include="obj\FileHandler\RoomFileHandler.cs" />
-    <Compile Include="obj\Model\Appointment.cs" />
-    <Compile Include="obj\Model\BloodType.cs" />
-    <Compile Include="obj\Model\Doctor.cs" />
-    <Compile Include="obj\Model\Equipment.cs" />
-    <Compile Include="obj\Model\Manager.cs" />
-    <Compile Include="obj\Model\MedicalRecord.cs" />
-    <Compile Include="obj\Model\Operation.cs" />
-    <Compile Include="obj\Model\Patient.cs" />
-    <Compile Include="obj\Model\Room.cs" />
-    <Compile Include="obj\Model\Secretary.cs" />
-    <Compile Include="obj\Model\SpecialistDoctor.cs" />
-    <Compile Include="obj\Model\User.cs" />
-    <Compile Include="obj\Repository\AppointmentRepository.cs" />
-    <Compile Include="obj\Repository\MedicalRecordsRepository.cs" />
-    <Compile Include="obj\Repository\RoomRepository.cs" />
-    <Compile Include="obj\Service\AppointmentService.cs" />
-    <Compile Include="obj\Service\DoctorService.cs" />
-    <Compile Include="obj\Service\MedicalRecordsService.cs" />
-    <Compile Include="obj\Service\RoomService.cs" />
+    <Compile Include="Model\Appointment.cs" />
+    <Compile Include="Model\BloodType.cs" />
+    <Compile Include="Model\Doctor.cs" />
+    <Compile Include="Model\Equipment.cs" />
+    <Compile Include="Model\Manager.cs" />
+    <Compile Include="Model\MedicalRecord.cs" />
+    <Compile Include="Model\Medicine.cs" />
+    <Compile Include="Model\Operation.cs" />
+    <Compile Include="Model\Patient.cs" />
+    <Compile Include="Model\Room.cs" />
+    <Compile Include="Model\Secretary.cs" />
+    <Compile Include="Model\SpecialistDoctor.cs" />
+    <Compile Include="Model\Therapy.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

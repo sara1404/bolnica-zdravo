@@ -1,4 +1,6 @@
 using System;
+using Model;
+using System.Collections.Generic;
 
 namespace Repository
 {
@@ -30,6 +32,7 @@ namespace Repository
       }
       
       public System.Collections.Generic.List<MedicalRecord> medicalRecord;
+      
       
       public System.Collections.Generic.List<MedicalRecord> MedicalRecord
       {

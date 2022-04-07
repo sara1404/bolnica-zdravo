@@ -1,4 +1,7 @@
 using System;
+using Model;
+using Service;
+using System.Collections.Generic;
 
 namespace Controller
 {
@@ -21,7 +24,7 @@ namespace Controller
          throw new NotImplementedException();
       }
       
-      public bool UpdateById(String id, Model.Room room)
+      public bool UpdateById(String id)
       {
          throw new NotImplementedException();
       }

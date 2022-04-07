@@ -1,24 +1,25 @@
 using System;
 using Model;
+using Repository;
 using System.Collections.Generic;
 
-namespace Controller
+namespace Service
 {
-   public class MedicalRecordsController
+   public class PatientService
    {
-      private Service.MedicalRecordsService medicalRecordsService;
+      private PatientRepository patientRepository;
       
-      public bool Create(MedicalRecord medicalRecord)
+      public bool Create(Patient patient)
       {
          throw new NotImplementedException();
       }
       
-      public List<MedicalRecord> FindAll()
+      public List<Patient> FindAll()
       {
          throw new NotImplementedException();
       }
       
-      public MedicalRecord FindById(String id)
+      public Patient FindById(String id)
       {
          throw new NotImplementedException();
       }
@@ -28,7 +29,7 @@ namespace Controller
          throw new NotImplementedException();
       }
       
-      public bool UpdateById(String id, MedicalRecord medicalRecord)
+      public bool UpdateById(String id, Patient patient)
       {
          throw new NotImplementedException();
       }

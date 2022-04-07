@@ -1,4 +1,6 @@
 using System;
+using Model;
+using System.Collections.Generic;
 
 namespace FileHandler
 {
@@ -6,12 +8,12 @@ namespace FileHandler
    {
       private String path;
       
-      public void Read()
+      public List<Patient> Read()
       {
          throw new NotImplementedException();
       }
       
-      public void Write()
+      public bool Write(List<Patient> patients)
       {
          throw new NotImplementedException();
       }

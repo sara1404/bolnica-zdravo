@@ -1,4 +1,6 @@
 using System;
+using Model;
+using System.Collections.Generic;
 
 namespace Repository
 {
@@ -24,12 +26,13 @@ namespace Repository
          throw new NotImplementedException();
       }
       
-      public void UpdateById(Appointment appointment, int id)
+      public void UpdateById(Appointment appointment, String id)
       {
          throw new NotImplementedException();
       }
       
       public System.Collections.Generic.List<Appointment> appointment;
+      
       
       public System.Collections.Generic.List<Appointment> Appointment
       {

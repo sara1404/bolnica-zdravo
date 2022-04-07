@@ -4,16 +4,16 @@ using System.Collections.Generic;
 
 namespace FileHandler
 {
-   public class RoomFileHandler
+   public class DoctorFileHandler
    {
       private String path;
       
-      public List<Room> Read()
+      public List<Doctor> Read()
       {
          throw new NotImplementedException();
       }
       
-      public bool Write(List<Room> rooms)
+      public bool Write(List<Doctor> doctors)
       {
          throw new NotImplementedException();
       }

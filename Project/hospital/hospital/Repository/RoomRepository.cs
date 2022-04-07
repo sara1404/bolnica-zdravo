@@ -1,3 +1,5 @@
+using Model;
+using System.Collections.Generic;
 using System;
 
 namespace Repository
@@ -30,6 +32,7 @@ namespace Repository
       }
       
       public System.Collections.Generic.List<Room> room;
+      
       
       public System.Collections.Generic.List<Room> Room
       {

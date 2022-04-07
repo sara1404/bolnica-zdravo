@@ -1,4 +1,6 @@
 using System;
+using Model;
+using System.Collections.Generic;
 
 namespace FileHandler
 {
@@ -6,12 +8,12 @@ namespace FileHandler
    {
       private String path;
       
-      public bool Save(List<Room> rooms)
+      public List<Room> Read()
       {
          throw new NotImplementedException();
       }
       
-      public List<Room> Load()
+      public bool Write(List<Room> rooms)
       {
          throw new NotImplementedException();
       }

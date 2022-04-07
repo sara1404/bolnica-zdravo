@@ -1,10 +1,12 @@
-using System;
-
 namespace Model
 {
     public class SpecialistDoctor : Doctor
     {
-        private String specialization;
+        private readonly string specialization;
+        public SpecialistDoctor() : base("", "")
+        {
+
+        }
 
     }
 }

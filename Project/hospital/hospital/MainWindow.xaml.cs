@@ -25,7 +25,8 @@ namespace hospital
 
         private void Secretary_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            new SecretaryHomeWindow().Show();
+            this.Close();
         }
 
         private void Manager_Button_Click(object sender, RoutedEventArgs e)

@@ -74,8 +74,14 @@
     <Compile Include="View\ManagerRoomsWindow.xaml.cs">
       <DependentUpon>ManagerRoomsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\HandlingAccountPage.xaml.cs">
+      <DependentUpon>HandlingAccountPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PatientAppointmentsWindow.xaml.cs">
       <DependentUpon>PatientAppointmentsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SecretaryHomeWindow.xaml.cs">
+      <DependentUpon>SecretaryHomeWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -98,6 +104,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\HandlingAccountPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AddRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -111,6 +121,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PatientAppointmentsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SecretaryHomeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

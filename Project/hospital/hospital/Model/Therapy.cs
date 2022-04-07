@@ -4,7 +4,7 @@ namespace Model
 {
     public class Therapy
     {
-        private DateTime timeOfAdministration;
+        private readonly DateTime timeOfAdministration;
 
         public Medicine medicine;
 

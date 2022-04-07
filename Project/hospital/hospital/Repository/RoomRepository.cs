@@ -25,7 +25,7 @@ namespace Repository
             rooms.Add(room);
         }
 
-        public Room FindRoomById(String id)
+        public Room FindRoomById(string id)
         {
             foreach (Room room in rooms) {
                 if (room.id.Equals(id))
@@ -39,7 +39,7 @@ namespace Repository
             return rooms;
         }
 
-        public bool UpdateById(String id, Model.Room room)
+        public bool UpdateById(string id, Model.Room room)
         {
             foreach (Room r in rooms)
             {
@@ -56,7 +56,7 @@ namespace Repository
             return false;
         }
 
-        public bool DeleteById(String id)
+        public bool DeleteById(string id)
         {
             foreach (Room room in rooms)
             {
@@ -76,7 +76,10 @@ namespace Repository
             get
             {
                 if (room == null)
+                {
                     room = new System.Collections.Generic.List<Room>();
+                }
+
                 return room;
             }
             set
@@ -85,7 +88,9 @@ namespace Repository
                 if (value != null)
                 {
                     foreach (Model.Room oRoom in value)
+                    {
                         AddRoom(oRoom);
+                    }
                 }
             }
         }
@@ -94,28 +99,45 @@ namespace Repository
         public void AddRoom(Model.Room newRoom)
         {
             if (newRoom == null)
+            {
                 return;
-            if (this.room == null)
-                this.room = new System.Collections.Generic.List<Room>();
-            if (!this.room.Contains(newRoom))
-                this.room.Add(newRoom);
+            }
+
+            if (room == null)
+            {
+                room = new System.Collections.Generic.List<Room>();
+            }
+
+            if (!room.Contains(newRoom))
+            {
+                room.Add(newRoom);
+            }
         }
 
 
         public void RemoveRoom(Model.Room oldRoom)
         {
             if (oldRoom == null)
+            {
                 return;
-            if (this.room != null)
-                if (this.room.Contains(oldRoom))
-                    this.room.Remove(oldRoom);
+            }
+
+            if (room != null)
+            {
+                if (room.Contains(oldRoom))
+                {
+                    room.Remove(oldRoom);
+                }
+            }
         }
 
 
         public void RemoveAllRoom()
         {
             if (room != null)
+            {
                 room.Clear();
+            }
         }
         public FileHandler.RoomFileHandler roomFileHandler;
 

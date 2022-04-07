@@ -7,7 +7,7 @@ namespace Controller
 {
     public class RoomController
     {
-        private RoomService roomService;
+        private readonly RoomService roomService;
 
         public RoomController(RoomService roomService)
         {
@@ -34,7 +34,7 @@ namespace Controller
             return roomService.UpdateById(id, room);
         }
 
-        public bool DeleteById(String id)
+        public bool DeleteById(string id)
         {
             return roomService.DeleteById(id);
         }

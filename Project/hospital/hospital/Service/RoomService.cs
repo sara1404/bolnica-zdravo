@@ -7,7 +7,7 @@ namespace Service
 {
     public class RoomService
     {
-        private RoomRepository roomRepository;
+        private readonly RoomRepository roomRepository;
 
         public RoomService(RoomRepository roomRepository)
         {
@@ -34,7 +34,7 @@ namespace Service
             return roomRepository.UpdateById(id, room);
         }
 
-        public bool DeleteById(String id)
+        public bool DeleteById(string id)
         {
             return roomRepository.DeleteById(id);
         }

@@ -7,7 +7,7 @@ namespace Controller
 {
     public class PatientController
     {
-        private PatientService patientService;
+        private readonly PatientService patientService;
 
         public bool Create(Model.Patient patient)
         {
@@ -19,17 +19,17 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public Patient FindById(String id)
+        public Patient FindById(string id)
         {
             throw new NotImplementedException();
         }
 
-        public bool DeleteById(String id)
+        public bool DeleteById(string id)
         {
             throw new NotImplementedException();
         }
 
-        public bool UpdateById(String id, Model.Patient patient)
+        public bool UpdateById(string id, Model.Patient patient)
         {
             throw new NotImplementedException();
         }

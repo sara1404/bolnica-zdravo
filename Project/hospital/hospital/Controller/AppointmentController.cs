@@ -6,19 +6,19 @@ namespace Controller
 {
     public class AppointmentController
     {
-        private Service.AppointmentService appointmentService;
+        private readonly Service.AppointmentService appointmentService;
 
         public bool CreateAppointment(Appointment appointment)
         {
             throw new NotImplementedException();
         }
 
-        public List<Appointment> GetAppointmentByPatient(String id)
+        public List<Appointment> GetAppointmentByPatient(string id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Appointment> GetAppointmentByDoctor(String username)
+        public List<Appointment> GetAppointmentByDoctor(string username)
         {
             throw new NotImplementedException();
         }

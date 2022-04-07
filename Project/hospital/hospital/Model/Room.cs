@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace Model
@@ -13,10 +12,10 @@ namespace Model
             this.id = id;
         }
 
-        public String name { get; set; }
-        public String purpose { get; set; }
+        public string name { get; set; }
+        public string purpose { get; set; }
         public int floor { get; set; }
-        public String id { get; set; }
+        public string id { get; set; }
         public List<Equipment> equipment { get; set; }
 
     }

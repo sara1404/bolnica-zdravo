@@ -1,3 +1,4 @@
+using FileHandler;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -6,26 +7,28 @@ namespace Repository
 {
     public class DoctorRepository
     {
+        public DoctorFileHandler doctorFileHandler;
+        public List<Doctor> doctor;
+
         public List<Doctor> FindAll()
         {
             throw new NotImplementedException();
         }
 
-        public Doctor FindByUsername(String username)
+        public Doctor FindByUsername(string username)
         {
             throw new NotImplementedException();
         }
-
-        public FileHandler.DoctorFileHandler doctorFileHandler;
-        public System.Collections.Generic.List<Doctor> doctor;
-
 
         public System.Collections.Generic.List<Doctor> Doctor
         {
             get
             {
                 if (doctor == null)
+                {
                     doctor = new System.Collections.Generic.List<Doctor>();
+                }
+
                 return doctor;
             }
             set
@@ -34,7 +37,9 @@ namespace Repository
                 if (value != null)
                 {
                     foreach (Model.Doctor oDoctor in value)
+                    {
                         AddDoctor(oDoctor);
+                    }
                 }
             }
         }
@@ -43,28 +48,45 @@ namespace Repository
         public void AddDoctor(Model.Doctor newDoctor)
         {
             if (newDoctor == null)
+            {
                 return;
-            if (this.doctor == null)
-                this.doctor = new System.Collections.Generic.List<Doctor>();
-            if (!this.doctor.Contains(newDoctor))
-                this.doctor.Add(newDoctor);
+            }
+
+            if (doctor == null)
+            {
+                doctor = new System.Collections.Generic.List<Doctor>();
+            }
+
+            if (!doctor.Contains(newDoctor))
+            {
+                doctor.Add(newDoctor);
+            }
         }
 
 
         public void RemoveDoctor(Model.Doctor oldDoctor)
         {
             if (oldDoctor == null)
+            {
                 return;
-            if (this.doctor != null)
-                if (this.doctor.Contains(oldDoctor))
-                    this.doctor.Remove(oldDoctor);
+            }
+
+            if (doctor != null)
+            {
+                if (doctor.Contains(oldDoctor))
+                {
+                    doctor.Remove(oldDoctor);
+                }
+            }
         }
 
 
         public void RemoveAllDoctor()
         {
             if (doctor != null)
+            {
                 doctor.Clear();
+            }
         }
 
     }

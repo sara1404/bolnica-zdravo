@@ -6,7 +6,7 @@ namespace FileHandler
 {
     public class AppointmentsFileHandler
     {
-        private String path;
+        private readonly string path;
 
         public List<Appointment> Read()
         {

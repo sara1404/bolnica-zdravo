@@ -7,7 +7,7 @@ namespace Service
 {
     public class PatientService
     {
-        private PatientRepository patientRepository;
+        private readonly PatientRepository patientRepository;
 
         public bool Create(Patient patient)
         {
@@ -19,17 +19,17 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public Patient FindById(String id)
+        public Patient FindById(string id)
         {
             throw new NotImplementedException();
         }
 
-        public bool DeleteById(String id)
+        public bool DeleteById(string id)
         {
             throw new NotImplementedException();
         }
 
-        public bool UpdateById(String id, Patient patient)
+        public bool UpdateById(string id, Patient patient)
         {
             throw new NotImplementedException();
         }

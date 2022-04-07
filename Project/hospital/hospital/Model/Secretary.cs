@@ -2,7 +2,7 @@ namespace Model
 {
     public class Secretary : User
     {
-        private string id;
+        private readonly string id;
 
     }
 }

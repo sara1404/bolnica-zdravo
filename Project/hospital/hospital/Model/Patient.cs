@@ -1,6 +1,8 @@
+using System.ComponentModel;
+
 namespace Model
 {
-    public class Patient : User
+    public class Patient : User , INotifyPropertyChanged
     {
         private string firstName;
         private string lastName;
@@ -12,6 +14,15 @@ namespace Model
         private readonly MedicalRecord medicalRecord;
 
         public Appointment[] appointment;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
 
         public Patient(string fName, string lName, string patientId)
         {

@@ -31,7 +31,7 @@ namespace hospital
 
         private void Manager_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            new ManagerMainWindow().Show();
         }
     }
 }

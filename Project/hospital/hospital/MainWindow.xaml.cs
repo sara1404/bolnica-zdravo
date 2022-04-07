@@ -26,7 +26,22 @@ namespace hospital
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Patient_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Doctor_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Secretary_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Manager_Button_Click(object sender, RoutedEventArgs e)
         {
             new PatientAppointmentsWindow().Show();
         }

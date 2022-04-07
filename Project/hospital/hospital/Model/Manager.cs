@@ -2,9 +2,9 @@ using System;
 
 namespace Model
 {
-   public class Manager : User
-   {
-      public String id;
-   
-   }
+    public class Manager : User
+    {
+        public String id { get; set; }
+
+    }
 }

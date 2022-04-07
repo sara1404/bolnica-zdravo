@@ -1,10 +1,8 @@
-using System;
-
 namespace Model
 {
-   public class Secretary : User
-   {
-      private string id;
-   
-   }
+    public class Secretary : User
+    {
+        private string id;
+
+    }
 }

@@ -15,7 +15,10 @@ namespace Model
             Name = name;
             Surname = surname;
         }
-
+        public override string ToString()
+        {
+            return name + " " + surname;
+        }
 
     }
 }

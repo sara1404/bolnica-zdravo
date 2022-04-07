@@ -22,7 +22,20 @@ namespace Model
         public string Description { get => description; set => description = value; }
         public DateTime StartTime { get => startTime; set => startTime = value; }
         public int Duration { get => duration; set => duration = value; }
-
+        public string Doctor 
+        {
+            get
+            {
+                return doctor.Name + " " + doctor.Surname;
+            }
+        }
+        public string Patient
+        {
+            get
+            {
+                return patient.FirstName + " " + patient.LastName;
+            }
+        }
 
 
     }

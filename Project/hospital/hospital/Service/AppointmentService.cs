@@ -1,5 +1,6 @@
 using Model;
 using System;
+using System.Collections.Generic;
 
 namespace Service
 {
@@ -7,9 +8,21 @@ namespace Service
     {
         private readonly Repository.AppointmentRepository appointmentRepository;
 
+        public AppointmentService()
+        {
+            appointmentRepository = new Repository.AppointmentRepository();
+        }
+
         public Appointment Read(int id)
         {
-            throw new NotImplementedException();
+            foreach (Appointment a in appointmentRepository.FindAll())
+            {
+                if (a.Id == id)
+                {
+                    return a;
+                }
+            }
+            return null;
         }
 
         public void Delete(int id)
@@ -32,9 +45,18 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public Appointment GetByPatient(string username)
+        public List<Appointment> GetByPatient(string username)
         {
-            throw new NotImplementedException();
+            List<Appointment> retVal = new List<Appointment>();
+
+            foreach (Appointment a in appointmentRepository.FindAll())
+            {
+                if (a.patient.Id.Equals(username))
+                {
+                    retVal.Add(a);
+                }
+            }
+            return retVal;
         }
 
     }

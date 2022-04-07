@@ -31,5 +31,10 @@ namespace Model
         public string DateOfBirth { get => dateOfBirth; set => dateOfBirth = value; }
         public string PhoneNumber { get => phoneNumber; set => phoneNumber = value; }
         public bool IsGuest { get => isGuest; set => isGuest = value; }
+
+        public override string ToString()
+        {
+            return firstName + " " + lastName;
+        }
     }
 }

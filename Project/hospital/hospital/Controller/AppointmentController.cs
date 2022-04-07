@@ -8,6 +8,11 @@ namespace Controller
     {
         private readonly Service.AppointmentService appointmentService;
 
+        public AppointmentController()
+        {
+            appointmentService = new Service.AppointmentService();
+        }
+
         public bool CreateAppointment(Appointment appointment)
         {
             throw new NotImplementedException();
@@ -15,7 +20,7 @@ namespace Controller
 
         public List<Appointment> GetAppointmentByPatient(string id)
         {
-            throw new NotImplementedException();
+            return appointmentService.GetByPatient(id);
         }
 
         public List<Appointment> GetAppointmentByDoctor(string username)

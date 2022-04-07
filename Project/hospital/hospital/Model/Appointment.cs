@@ -1,8 +1,10 @@
 using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Model
 {
-    public class Appointment
+    public class Appointment : INotifyPropertyChanged
     {
         private int id;
         private string description;
@@ -34,6 +36,15 @@ namespace Model
             get
             {
                 return patient.FirstName + " " + patient.LastName;
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
 

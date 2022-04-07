@@ -1,10 +1,8 @@
-using System;
-
 namespace Model
 {
     public class Manager : User
     {
-        public String id { get; set; }
+        public string id { get; set; }
 
     }
 }

@@ -6,6 +6,17 @@ namespace Repository
 {
     public class AppointmentRepository
     {
+        public List<Appointment> appointment;
+        public FileHandler.AppointmentsFileHandler appointmentsFileHandler;
+
+        public AppointmentRepository()
+        {
+            PatientRepository pr = new PatientRepository();
+            DoctorRepository dr = new DoctorRepository();
+
+            appointment = new List<Appointment>();
+            //appointment.Add(new Appointment(1, pr.FindById("peromir"), ));
+        }
         public Appointment FindById(int id)
         {
             throw new NotImplementedException();
@@ -26,20 +37,20 @@ namespace Repository
             throw new NotImplementedException();
         }
 
-        public void UpdateById(Appointment appointment, String id)
+        public void UpdateById(Appointment appointment, string id)
         {
             throw new NotImplementedException();
         }
 
-        public System.Collections.Generic.List<Appointment> appointment;
-
-
-        public System.Collections.Generic.List<Appointment> Appointment
+        public List<Appointment> Appointment
         {
             get
             {
                 if (appointment == null)
-                    appointment = new System.Collections.Generic.List<Appointment>();
+                {
+                    appointment = new List<Appointment>();
+                }
+
                 return appointment;
             }
             set
@@ -48,7 +59,9 @@ namespace Repository
                 if (value != null)
                 {
                     foreach (Model.Appointment oAppointment in value)
+                    {
                         AddAppointment(oAppointment);
+                    }
                 }
             }
         }
@@ -57,30 +70,46 @@ namespace Repository
         public void AddAppointment(Model.Appointment newAppointment)
         {
             if (newAppointment == null)
+            {
                 return;
-            if (this.appointment == null)
-                this.appointment = new System.Collections.Generic.List<Appointment>();
-            if (!this.appointment.Contains(newAppointment))
-                this.appointment.Add(newAppointment);
+            }
+
+            if (appointment == null)
+            {
+                appointment = new List<Appointment>();
+            }
+
+            if (!appointment.Contains(newAppointment))
+            {
+                appointment.Add(newAppointment);
+            }
         }
 
 
         public void RemoveAppointment(Model.Appointment oldAppointment)
         {
             if (oldAppointment == null)
+            {
                 return;
-            if (this.appointment != null)
-                if (this.appointment.Contains(oldAppointment))
-                    this.appointment.Remove(oldAppointment);
+            }
+
+            if (appointment != null)
+            {
+                if (appointment.Contains(oldAppointment))
+                {
+                    appointment.Remove(oldAppointment);
+                }
+            }
         }
 
 
         public void RemoveAllAppointment()
         {
             if (appointment != null)
+            {
                 appointment.Clear();
+            }
         }
-        public FileHandler.AppointmentsFileHandler appointmentsFileHandler;
 
     }
 }

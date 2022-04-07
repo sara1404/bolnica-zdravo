@@ -6,7 +6,7 @@ namespace Controller
 {
     public class MedicalRecordsController
     {
-        private Service.MedicalRecordsService medicalRecordsService;
+        private readonly Service.MedicalRecordsService medicalRecordsService;
 
         public bool Create(MedicalRecord medicalRecord)
         {
@@ -18,17 +18,17 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public MedicalRecord FindById(String id)
+        public MedicalRecord FindById(string id)
         {
             throw new NotImplementedException();
         }
 
-        public bool DeleteById(String id)
+        public bool DeleteById(string id)
         {
             throw new NotImplementedException();
         }
 
-        public bool UpdateById(String id, MedicalRecord medicalRecord)
+        public bool UpdateById(string id, MedicalRecord medicalRecord)
         {
             throw new NotImplementedException();
         }

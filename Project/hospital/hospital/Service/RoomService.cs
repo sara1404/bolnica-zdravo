@@ -7,14 +7,14 @@ namespace Service
 {
     public class RoomService
     {
-        private RoomRepository roomRepository;
+        private readonly RoomRepository roomRepository;
 
         public bool Create(Room room)
         {
             throw new NotImplementedException();
         }
 
-        public Room FindRoomById(String id)
+        public Room FindRoomById(string id)
         {
             throw new NotImplementedException();
         }
@@ -24,12 +24,12 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public bool UpdateById(String id)
+        public bool UpdateById(string id)
         {
             throw new NotImplementedException();
         }
 
-        public bool DeleteById(String id)
+        public bool DeleteById(string id)
         {
             throw new NotImplementedException();
         }

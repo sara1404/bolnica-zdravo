@@ -6,7 +6,7 @@ namespace FileHandler
 {
     public class MedicalRecordFileHandler
     {
-        private String path;
+        private readonly string path;
 
         public List<Room> Read()
         {

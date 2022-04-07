@@ -5,7 +5,7 @@ namespace Service
 {
     public class AppointmentService
     {
-        private Repository.AppointmentRepository appointmentRepository;
+        private readonly Repository.AppointmentRepository appointmentRepository;
 
         public Appointment Read(int id)
         {
@@ -27,12 +27,12 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public Appointment GetByDoctor(String username)
+        public Appointment GetByDoctor(string username)
         {
             throw new NotImplementedException();
         }
 
-        public Appointment GetByPatient(String username)
+        public Appointment GetByPatient(string username)
         {
             throw new NotImplementedException();
         }

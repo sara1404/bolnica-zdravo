@@ -6,6 +6,13 @@ namespace Repository
 {
     public class PatientRepository
     {
+        public FileHandler.PatientFileHandler patientFileHandler;
+        public List<Patient> patient;
+        public PatientRepository()
+        {
+            patient = new List<Patient>();
+            patient.Add(new Patient("Pera", "Peric", "peromir"));
+        }
         public bool Create(Patient patient)
         {
             throw new NotImplementedException();
@@ -16,31 +23,38 @@ namespace Repository
             throw new NotImplementedException();
         }
 
-        public Patient FindById(String id)
+        public Patient FindById(string id)
+        {
+            foreach (Patient p in patient)
+            {
+                if (p.Id.Equals(id))
+                {
+                    return p;
+                }
+            }
+            return null;
+        }
+
+        public bool DeleteById(string id)
         {
             throw new NotImplementedException();
         }
 
-        public bool DeleteById(String id)
+        public bool UpdateById(string id, Patient patient)
         {
             throw new NotImplementedException();
         }
 
-        public bool UpdateById(String id, Patient patient)
-        {
-            throw new NotImplementedException();
-        }
 
-        public FileHandler.PatientFileHandler patientFileHandler;
-        public System.Collections.Generic.List<Patient> patient;
-
-
-        public System.Collections.Generic.List<Patient> Patient
+        public List<Patient> Patient
         {
             get
             {
                 if (patient == null)
+                {
                     patient = new System.Collections.Generic.List<Patient>();
+                }
+
                 return patient;
             }
             set
@@ -49,7 +63,9 @@ namespace Repository
                 if (value != null)
                 {
                     foreach (Model.Patient oPatient in value)
+                    {
                         AddPatient(oPatient);
+                    }
                 }
             }
         }
@@ -58,28 +74,45 @@ namespace Repository
         public void AddPatient(Model.Patient newPatient)
         {
             if (newPatient == null)
+            {
                 return;
-            if (this.patient == null)
-                this.patient = new System.Collections.Generic.List<Patient>();
-            if (!this.patient.Contains(newPatient))
-                this.patient.Add(newPatient);
+            }
+
+            if (patient == null)
+            {
+                patient = new System.Collections.Generic.List<Patient>();
+            }
+
+            if (!patient.Contains(newPatient))
+            {
+                patient.Add(newPatient);
+            }
         }
 
 
         public void RemovePatient(Model.Patient oldPatient)
         {
             if (oldPatient == null)
+            {
                 return;
-            if (this.patient != null)
-                if (this.patient.Contains(oldPatient))
-                    this.patient.Remove(oldPatient);
+            }
+
+            if (patient != null)
+            {
+                if (patient.Contains(oldPatient))
+                {
+                    patient.Remove(oldPatient);
+                }
+            }
         }
 
 
         public void RemoveAllPatient()
         {
             if (patient != null)
+            {
                 patient.Clear();
+            }
         }
 
     }

@@ -9,29 +9,34 @@ namespace Service
     {
         private RoomRepository roomRepository;
 
-        public bool Create(Room room)
+        public RoomService(RoomRepository roomRepository)
         {
-            throw new NotImplementedException();
+            this.roomRepository = roomRepository;
+        }
+
+        public void Create(Room room)
+        {
+            roomRepository.Create(room);
         }
 
         public Room FindRoomById(String id)
         {
-            throw new NotImplementedException();
+            return roomRepository.FindRoomById(id);
         }
 
         public List<Room> FindAll()
         {
-            throw new NotImplementedException();
+            return roomRepository.FindAll();
         }
 
-        public bool UpdateById(String id)
+        public bool UpdateById(String id, Room room)
         {
-            throw new NotImplementedException();
+            return roomRepository.UpdateById(id, room);
         }
 
         public bool DeleteById(String id)
         {
-            throw new NotImplementedException();
+            return roomRepository.DeleteById(id);
         }
 
     }

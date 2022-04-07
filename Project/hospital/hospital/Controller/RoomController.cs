@@ -9,29 +9,34 @@ namespace Controller
     {
         private RoomService roomService;
 
-        public bool Create(Room room)
+        public RoomController(RoomService roomService)
         {
-            throw new NotImplementedException();
+            this.roomService = roomService;
+        }
+
+        public void Create(Room room)
+        {
+            roomService.Create(room);
         }
 
         public Room FindRoomById(String id)
         {
-            throw new NotImplementedException();
+            return roomService.FindRoomById(id);
         }
 
         public List<Room> FindAll()
         {
-            throw new NotImplementedException();
+            return roomService.FindAll();
         }
 
-        public bool UpdateById(String id)
+        public bool UpdateById(String id, Room room)
         {
-            throw new NotImplementedException();
+            return roomService.UpdateById(id, room);
         }
 
         public bool DeleteById(String id)
         {
-            throw new NotImplementedException();
+            return roomService.DeleteById(id);
         }
 
     }

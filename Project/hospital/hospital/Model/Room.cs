@@ -5,13 +5,12 @@ namespace Model
 {
     public class Room
     {
-        public Room(string name, string purpose, int floor, string id, List<Equipment> equipment)
+        public Room(string name, string purpose, int floor, string id)
         {
             this.name = name;
             this.purpose = purpose;
             this.floor = floor;
             this.id = id;
-            this.equipment = equipment;
         }
 
         public String name { get; set; }

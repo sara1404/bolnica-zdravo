@@ -10,25 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using hospital.View;
 
-namespace hospital
+namespace hospital.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for PatientAppointmentsWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PatientAppointmentsWindow : Window
     {
-        public MainWindow()
+        public PatientAppointmentsWindow()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            new PatientAppointmentsWindow().Show();
         }
     }
 }

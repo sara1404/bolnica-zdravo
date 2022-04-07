@@ -2,9 +2,9 @@ using System;
 
 namespace Model
 {
-    public class SpecialistDoctor : Doctor
-    {
-        private String specialization;
-
-    }
+   public class SpecialistDoctor : Doctor
+   {
+      private String specialization;
+   
+   }
 }

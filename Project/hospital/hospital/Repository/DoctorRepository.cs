@@ -10,14 +10,28 @@ namespace Repository
         public DoctorFileHandler doctorFileHandler;
         public List<Doctor> doctor;
 
+        public DoctorRepository()
+        {
+            doctor = new List<Doctor>();
+            Doctor d = new Model.Doctor("Mitar", "Miric");
+            d.Username = "miromir";
+            doctor.Add(d);
+        }
         public List<Doctor> FindAll()
         {
-            throw new NotImplementedException();
+            return doctor;
         }
 
         public Doctor FindByUsername(string username)
         {
-            throw new NotImplementedException();
+            foreach (Doctor d in doctor)
+            {
+                if (d.Username.Equals(username))
+                {
+                    return d;
+                }
+            }
+            return null;
         }
 
         public System.Collections.Generic.List<Doctor> Doctor

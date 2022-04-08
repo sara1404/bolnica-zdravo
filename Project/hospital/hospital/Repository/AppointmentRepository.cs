@@ -11,11 +11,13 @@ namespace Repository
 
         public AppointmentRepository()
         {
+            // call filehandler read here
             PatientRepository pr = new PatientRepository();
             DoctorRepository dr = new DoctorRepository();
 
             appointment = new List<Appointment>();
-            //appointment.Add(new Appointment(1, pr.FindById("peromir"), ));
+            DateTime dt = new DateTime(2022, 4, 9, 15, 0, 0);
+            appointment.Add(new Appointment(1, dr.FindByUsername("miromir"), pr.FindById("peromir"), dt));
         }
         public Appointment FindById(int id)
         {
@@ -24,7 +26,7 @@ namespace Repository
 
         public List<Appointment> FindAll()
         {
-            throw new NotImplementedException();
+            return appointment;
         }
 
         public void DeleteById(int id)

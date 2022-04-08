@@ -50,5 +50,21 @@ namespace hospital.View
         {
             addUserControl.Visibility = Visibility;
         }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            if (dateGridHandlingAccount.SelectedIndex != -1)
+            {
+                editUserControl.Visibility= Visibility;
+                Patient p = (Patient)dateGridHandlingAccount.SelectedItem;
+                editUserControl.txtFirstName.Text =p.FirstName;
+                editUserControl.txtEmail.Text = p.Email;
+                editUserControl.txtId.Text = p.Id;
+                editUserControl.txtSurname.Text = p.LastName;
+                editUserControl.txtUsername.Text = p.Username;
+                editUserControl.txtPhone.Text = p.PhoneNumber;
+                pc.EditPatient = (Patient)dateGridHandlingAccount.SelectedItem;
+            }
+        }
     }
 }

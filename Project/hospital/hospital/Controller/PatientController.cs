@@ -9,7 +9,7 @@ namespace Controller
     public class PatientController
     {
         private readonly PatientService patientService;
-
+        public Patient EditPatient { get; set; }
 
         public PatientController(PatientService _sevice)
         {
@@ -37,7 +37,7 @@ namespace Controller
 
         public bool UpdateById(string id, Model.Patient patient)
         {
-            throw new NotImplementedException();
+            return patientService.UpdateById(id, patient);
         }
 
     }

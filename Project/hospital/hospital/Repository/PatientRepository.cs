@@ -49,7 +49,9 @@ namespace Repository
 
         public bool UpdateById(string id, Patient patient)
         {
-            throw new NotImplementedException();
+            DeleteById(id);
+            Create(patient);
+            return true;
         }
 
 

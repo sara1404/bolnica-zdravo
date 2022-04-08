@@ -34,7 +34,7 @@ namespace Service
 
         public bool UpdateById(string id, Patient patient)
         {
-            throw new NotImplementedException();
+            return patientRepository.UpdateById(id, patient);
         }
 
     }

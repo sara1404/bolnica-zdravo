@@ -38,7 +38,7 @@ namespace hospital.View
             Console.WriteLine(selectedRow);
             if(e.Key == Key.Enter && selectedRow != -1)
             {
-                Console.WriteLine("Enter udaren");
+                new EditRoomWindow().Show();
             }
         }
     }

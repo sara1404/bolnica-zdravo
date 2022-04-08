@@ -7,6 +7,18 @@
         mc:Ignorable="d"
         Title="EditRoomWindow" Height="450" Width="800">
     <Grid>
-        
+        <Label Content="Edit room" HorizontalAlignment="Left" Margin="204,25,0,0" VerticalAlignment="Top" FontSize="20px" Width="161"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="147,94,0,0" VerticalAlignment="Top" FontSize="16px" Width="56"/>
+        <Label Content="Id:" HorizontalAlignment="Left" Margin="173,156,0,0" VerticalAlignment="Top" FontSize="16px" Width="27"/>
+        <Label Content="Purpose:" HorizontalAlignment="Left" Margin="129,226,0,0" VerticalAlignment="Top" FontSize="16px" Width="71"/>
+        <Label Content="Floor:" HorizontalAlignment="Left" Margin="151,300,0,0" VerticalAlignment="Top" FontSize="16px" Width="49"/>
+        <TextBox x:Name="roomName" HorizontalAlignment="Left" Height="23" Margin="300,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
+        <TextBox x:Name="roomId"  HorizontalAlignment="Left" Height="23" Margin="300,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
+        <TextBox x:Name="roomPurpose" HorizontalAlignment="Left" Height="23" Margin="300,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
+        <TextBox x:Name="roomFloor" HorizontalAlignment="Left" Height="23" Margin="300,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
+        <Button  Content="APPLY" HorizontalAlignment="Left" Margin="129,358,0,0" VerticalAlignment="Top" Width="109" Height="36" />
+        <Button Content="CANCEL" HorizontalAlignment="Left" Margin="333,358,0,0" VerticalAlignment="Top" Width="108" Height="36"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="237" Margin="490,94,0,0" VerticalAlignment="Top" Width="254"/>
+
     </Grid>
 </Window>

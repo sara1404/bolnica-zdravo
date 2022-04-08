@@ -2,6 +2,7 @@ using Model;
 using Service;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Controller
 {
@@ -24,7 +25,7 @@ namespace Controller
             return roomService.FindRoomById(id);
         }
 
-        public ref List<Room> FindAll()
+        public ref ObservableCollection<Room> FindAll()
         {
             return ref roomService.FindAll();
         }

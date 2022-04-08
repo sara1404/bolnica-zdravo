@@ -24,9 +24,9 @@ namespace Controller
             return roomService.FindRoomById(id);
         }
 
-        public List<Room> FindAll()
+        public ref List<Room> FindAll()
         {
-            return roomService.FindAll();
+            return ref roomService.FindAll();
         }
 
         public bool UpdateById(String id, Room room)

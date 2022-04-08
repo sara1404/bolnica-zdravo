@@ -24,9 +24,9 @@ namespace Service
             return roomRepository.FindRoomById(id);
         }
 
-        public List<Room> FindAll()
+        public ref List<Room> FindAll()
         {
-            return roomRepository.FindAll();
+            return ref roomRepository.FindAll();
         }
 
         public bool UpdateById(String id, Room room)

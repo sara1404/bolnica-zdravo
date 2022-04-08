@@ -34,9 +34,9 @@ namespace Repository
             return null;
         }
 
-        public List<Room> FindAll()
+        public ref List<Room> FindAll()
         {
-            return rooms;
+            return ref rooms;
         }
 
         public bool UpdateById(string id, Model.Room room)

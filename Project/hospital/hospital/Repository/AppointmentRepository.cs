@@ -2,6 +2,8 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+
 
 namespace Repository
 {
@@ -20,9 +22,21 @@ namespace Repository
             DateTime dt = new DateTime(2022, 4, 9, 15, 0, 0);
             appointment.Add(new Appointment(1, dr.FindByUsername("miromir"), pr.FindById("peromir"), dt));
         }
+
+        public int GetAppointmentNumber()
+        {
+            return appointment.Count;
+        }
         public Appointment FindById(int id)
         {
-            throw new NotImplementedException();
+            foreach(Appointment a in appointment)
+            {
+                if(a.Id == id)
+                {
+                    return a;
+                }
+            }
+            return null;
         }
 
         public ObservableCollection<Appointment> FindAll()
@@ -32,12 +46,12 @@ namespace Repository
 
         public void DeleteById(int id)
         {
-            throw new NotImplementedException();
+            appointment.Remove(FindById(id));
         }
 
-        public void Create(Appointment appointment)
+        public void Create(Appointment _appointment)
         {
-            throw new NotImplementedException();
+            appointment.Add(_appointment);
         }
 
         public void UpdateById(Appointment appointment, string id)

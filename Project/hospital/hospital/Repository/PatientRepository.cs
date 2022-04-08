@@ -16,7 +16,9 @@ namespace Repository
         }
         public bool Create(Patient patient)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(patient.FirstName);
+            this.patient.Add(patient);
+            return true;
         }
 
         public ObservableCollection<Patient> FindAll()
@@ -47,7 +49,9 @@ namespace Repository
 
         public bool UpdateById(string id, Patient patient)
         {
-            throw new NotImplementedException();
+            DeleteById(id);
+            Create(patient);
+            return true;
         }
 
 

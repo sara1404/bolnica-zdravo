@@ -59,12 +59,13 @@ namespace Service
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            appointmentRepository.DeleteById(id);
         }
 
         public void Create(Appointment appointment)
         {
-            throw new NotImplementedException();
+            appointment.Id = appointmentRepository.GetAppointmentNumber() + 1;
+            appointmentRepository.Create(appointment);
         }
 
         public void Update(Appointment appointment)

@@ -2,6 +2,7 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 
 namespace Controller
@@ -17,14 +18,13 @@ namespace Controller
 
         public bool CreateAppointment(Appointment appointment)
         {
-            throw new NotImplementedException();
+            appointmentService.Create(appointment);
+            return true;
         }
 
         public ObservableCollection<Appointment> GetAppointmentByPatient(string id)
         {
-            // returns all appointments of one patient 
             return appointmentService.GetByPatient(id);
-           
         }
 
         public ObservableCollection<Appointment> GetAppointmentByDoctor(string username)
@@ -50,7 +50,8 @@ namespace Controller
 
         public bool DeleteAppointment(Appointment appointment)
         {
-            throw new NotImplementedException();
+            appointmentService.Delete(appointment.Id);
+            return true;
         }
 
     }

@@ -12,6 +12,7 @@ namespace hospital.View
     /// </summary>
     public partial class PatientAppointmentsWindow : Window
     {
+        private AppointmentController ac;
         public ObservableCollection<Appointment> Appointments
         {
             get;
@@ -20,15 +21,23 @@ namespace hospital.View
         public PatientAppointmentsWindow()
         {
             InitializeComponent();
+            ac = new AppointmentController();
             this.DataContext = this;
-            AppointmentController ac = new AppointmentController();
-            Appointments = new ObservableCollection<Appointment>(ac.GetAppointmentByPatient("peromir"));
-            //Appointments = new ObservableCollection<Appointment>(ac.GetFreeAppointmentsByDoctor("miromir"));
+            Appointments = ac.GetAppointmentByPatient("peromir");
+
         }
 
         private void btnNewAppointment_Click(object sender, RoutedEventArgs e)
         {
             new PatientMakeNewAppointment().Show();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (appointmentTable.SelectedIndex != -1)
+            {
+                ac.DeleteAppointment((Appointment)appointmentTable.SelectedItem);
+            }
         }
     }
 }

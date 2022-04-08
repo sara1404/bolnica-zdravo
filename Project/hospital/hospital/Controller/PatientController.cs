@@ -9,15 +9,15 @@ namespace Controller
     public class PatientController
     {
         private readonly PatientService patientService;
+        public Patient EditPatient { get; set; }
 
-
-        public PatientController()
+        public PatientController(PatientService _sevice)
         {
-            patientService = new PatientService();
+            patientService = _sevice;
         }
-        public bool Create(Model.Patient patient)
+        public bool Create(Patient patient)
         {
-            throw new NotImplementedException();
+           return patientService.Create(patient);
         }
 
         public ObservableCollection<Patient> FindAll()
@@ -37,7 +37,7 @@ namespace Controller
 
         public bool UpdateById(string id, Model.Patient patient)
         {
-            throw new NotImplementedException();
+            return patientService.UpdateById(id, patient);
         }
 
     }

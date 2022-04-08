@@ -9,7 +9,7 @@ namespace Repository
 {
     public class AppointmentRepository
     {
-        public ObservableCollection<Appointment> appointment;
+        public ObservableCollection<Appointment> appointments;
         public FileHandler.AppointmentsFileHandler appointmentsFileHandler;
 
         public AppointmentRepository()
@@ -18,18 +18,18 @@ namespace Repository
             PatientRepository pr = new PatientRepository();
             DoctorRepository dr = new DoctorRepository();
 
-            appointment = new ObservableCollection<Appointment>();
+            appointments = new ObservableCollection<Appointment>();
             DateTime dt = new DateTime(2022, 4, 9, 15, 0, 0);
-            appointment.Add(new Appointment(1, dr.FindByUsername("miromir"), pr.FindById("peromir"), dt));
+            appointments.Add(new Appointment(1, dr.FindByUsername("miromir"), pr.FindById("peromir"), dt));
         }
 
         public int GetAppointmentNumber()
         {
-            return appointment.Count;
+            return appointments.Count;
         }
         public Appointment FindById(int id)
         {
-            foreach(Appointment a in appointment)
+            foreach(Appointment a in appointments)
             {
                 if(a.Id == id)
                 {
@@ -41,17 +41,17 @@ namespace Repository
 
         public ObservableCollection<Appointment> FindAll()
         {
-            return appointment;
+            return appointments;
         }
 
         public void DeleteById(int id)
         {
-            appointment.Remove(FindById(id));
+            appointments.Remove(FindById(id));
         }
 
         public void Create(Appointment _appointment)
         {
-            appointment.Add(_appointment);
+            appointments.Add(_appointment);
         }
 
         public void UpdateById(Appointment appointment, string id)
@@ -63,12 +63,12 @@ namespace Repository
         {
             get
             {
-                if (appointment == null)
+                if (appointments == null)
                 {
-                    appointment = new ObservableCollection<Appointment>();
+                    appointments = new ObservableCollection<Appointment>();
                 }
 
-                return appointment;
+                return appointments;
             }
             set
             {
@@ -91,14 +91,14 @@ namespace Repository
                 return;
             }
 
-            if (appointment == null)
+            if (appointments == null)
             {
-                appointment = new ObservableCollection<Appointment>();
+                appointments = new ObservableCollection<Appointment>();
             }
 
-            if (!appointment.Contains(newAppointment))
+            if (!appointments.Contains(newAppointment))
             {
-                appointment.Add(newAppointment);
+                appointments.Add(newAppointment);
             }
         }
 
@@ -110,11 +110,11 @@ namespace Repository
                 return;
             }
 
-            if (appointment != null)
+            if (appointments != null)
             {
-                if (appointment.Contains(oldAppointment))
+                if (appointments.Contains(oldAppointment))
                 {
-                    appointment.Remove(oldAppointment);
+                    appointments.Remove(oldAppointment);
                 }
             }
         }
@@ -122,9 +122,9 @@ namespace Repository
 
         public void RemoveAllAppointment()
         {
-            if (appointment != null)
+            if (appointments != null)
             {
-                appointment.Clear();
+                appointments.Clear();
             }
         }
 

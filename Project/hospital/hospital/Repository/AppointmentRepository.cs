@@ -16,7 +16,7 @@ namespace Repository
             DoctorRepository dr = new DoctorRepository();
 
             appointment = new List<Appointment>();
-            DateTime dt = new DateTime(2022, 4, 7, 15, 0, 0);
+            DateTime dt = new DateTime(2022, 4, 9, 15, 0, 0);
             appointment.Add(new Appointment(1, dr.FindByUsername("miromir"), pr.FindById("peromir"), dt));
         }
         public Appointment FindById(int id)

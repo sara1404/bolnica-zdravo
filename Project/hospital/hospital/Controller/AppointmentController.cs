@@ -1,6 +1,7 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Controller
 {
@@ -20,12 +21,20 @@ namespace Controller
 
         public List<Appointment> GetAppointmentByPatient(string id)
         {
+            // returns all appointments of one patient 
             return appointmentService.GetByPatient(id);
+           
         }
 
         public List<Appointment> GetAppointmentByDoctor(string username)
         {
             throw new NotImplementedException();
+        }
+
+        public List<Appointment> GetFreeAppointmentsByDoctor(string username)
+        {
+            // returns doctors free appointments tomorrow
+            return appointmentService.GetFreeAppointmentsByDoctor(username);
         }
 
         public List<Appointment> GetAppointments()

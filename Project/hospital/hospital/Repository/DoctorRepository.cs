@@ -19,7 +19,7 @@ namespace Repository
         }
         public List<Doctor> FindAll()
         {
-            throw new NotImplementedException();
+            return doctor;
         }
 
         public Doctor FindByUsername(string username)

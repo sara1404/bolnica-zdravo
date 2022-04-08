@@ -1,6 +1,7 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Service
 {
@@ -26,10 +27,10 @@ namespace Service
             }
             return null;
         }
-        public List<Appointment> GetFreeAppointmentsByDoctor(string username)
+        public ObservableCollection<Appointment> GetFreeAppointmentsByDoctor(string username)
         {
             List<DateTime> startTimes = new List<DateTime>();
-            List<Appointment> retVal = new List<Appointment>();
+            ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
             Doctor d;
             foreach (Appointment a in appointmentRepository.FindAll())
             {
@@ -71,14 +72,28 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public Appointment GetByDoctor(string username)
+        public ObservableCollection<Appointment> GetByDoctor(string username)
         {
-            throw new NotImplementedException();
+            if(appointmentRepository.FindAll() == null)
+            {
+                throw new Exception();
+            }
+            ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
+
+            foreach (Appointment a in appointmentRepository.FindAll())
+            {
+                if (a.doctor.Username == username) // change to Id to Username
+                {
+                    retVal.Add(a);
+                }
+            }
+            return retVal;
+
         }
 
-        public List<Appointment> GetByPatient(string username)
+        public ObservableCollection<Appointment> GetByPatient(string username)
         {
-            List<Appointment> retVal = new List<Appointment>();
+            ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
 
             foreach (Appointment a in appointmentRepository.FindAll())
             {

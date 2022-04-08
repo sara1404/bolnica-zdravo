@@ -1,6 +1,7 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 
 namespace Controller
@@ -19,25 +20,25 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public List<Appointment> GetAppointmentByPatient(string id)
+        public ObservableCollection<Appointment> GetAppointmentByPatient(string id)
         {
             // returns all appointments of one patient 
             return appointmentService.GetByPatient(id);
            
         }
 
-        public List<Appointment> GetAppointmentByDoctor(string username)
+        public ObservableCollection<Appointment> GetAppointmentByDoctor(string username)
         {
-            throw new NotImplementedException();
+            return appointmentService.GetByDoctor(username);
         }
 
-        public List<Appointment> GetFreeAppointmentsByDoctor(string username)
+        public ObservableCollection<Appointment> GetFreeAppointmentsByDoctor(string username)
         {
             // returns doctors free appointments tomorrow
             return appointmentService.GetFreeAppointmentsByDoctor(username);
         }
 
-        public List<Appointment> GetAppointments()
+        public ObservableCollection<Appointment> GetAppointments()
         {
             throw new NotImplementedException();
         }

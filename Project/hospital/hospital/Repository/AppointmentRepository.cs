@@ -1,12 +1,13 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Repository
 {
     public class AppointmentRepository
     {
-        public List<Appointment> appointment;
+        public ObservableCollection<Appointment> appointment;
         public FileHandler.AppointmentsFileHandler appointmentsFileHandler;
 
         public AppointmentRepository()
@@ -15,7 +16,7 @@ namespace Repository
             PatientRepository pr = new PatientRepository();
             DoctorRepository dr = new DoctorRepository();
 
-            appointment = new List<Appointment>();
+            appointment = new ObservableCollection<Appointment>();
             DateTime dt = new DateTime(2022, 4, 9, 15, 0, 0);
             appointment.Add(new Appointment(1, dr.FindByUsername("miromir"), pr.FindById("peromir"), dt));
         }
@@ -24,7 +25,7 @@ namespace Repository
             throw new NotImplementedException();
         }
 
-        public List<Appointment> FindAll()
+        public ObservableCollection<Appointment> FindAll()
         {
             return appointment;
         }
@@ -44,13 +45,13 @@ namespace Repository
             throw new NotImplementedException();
         }
 
-        public List<Appointment> Appointment
+        public ObservableCollection<Appointment> Appointment
         {
             get
             {
                 if (appointment == null)
                 {
-                    appointment = new List<Appointment>();
+                    appointment = new ObservableCollection<Appointment>();
                 }
 
                 return appointment;
@@ -78,7 +79,7 @@ namespace Repository
 
             if (appointment == null)
             {
-                appointment = new List<Appointment>();
+                appointment = new ObservableCollection<Appointment>();
             }
 
             if (!appointment.Contains(newAppointment))

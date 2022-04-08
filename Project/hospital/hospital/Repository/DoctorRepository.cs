@@ -8,23 +8,23 @@ namespace Repository
     public class DoctorRepository
     {
         public DoctorFileHandler doctorFileHandler;
-        public List<Doctor> doctor;
+        public List<Doctor> doctors;
 
         public DoctorRepository()
         {
-            doctor = new List<Doctor>();
-            Doctor d = new Model.Doctor("Mitar", "Miric");
+            doctors = new List<Doctor>();
+            Doctor d = new Doctor("Mitar", "Miric");
             d.Username = "miromir";
-            doctor.Add(d);
+            doctors.Add(d);
         }
         public List<Doctor> FindAll()
         {
-            return doctor;
+            return doctors;
         }
 
         public Doctor FindByUsername(string username)
         {
-            foreach (Doctor d in doctor)
+            foreach (Doctor d in doctors)
             {
                 if (d.Username.Equals(username))
                 {
@@ -34,23 +34,23 @@ namespace Repository
             return null;
         }
 
-        public System.Collections.Generic.List<Doctor> Doctor
+        public List<Doctor> Doctor
         {
             get
             {
-                if (doctor == null)
+                if (doctors == null)
                 {
-                    doctor = new System.Collections.Generic.List<Doctor>();
+                    doctors = new List<Doctor>();
                 }
 
-                return doctor;
+                return doctors;
             }
             set
             {
                 RemoveAllDoctor();
                 if (value != null)
                 {
-                    foreach (Model.Doctor oDoctor in value)
+                    foreach (Doctor oDoctor in value)
                     {
                         AddDoctor(oDoctor);
                     }
@@ -59,37 +59,37 @@ namespace Repository
         }
 
 
-        public void AddDoctor(Model.Doctor newDoctor)
+        public void AddDoctor(Doctor newDoctor)
         {
             if (newDoctor == null)
             {
                 return;
             }
 
-            if (doctor == null)
+            if (doctors == null)
             {
-                doctor = new System.Collections.Generic.List<Doctor>();
+                doctors = new List<Doctor>();
             }
 
-            if (!doctor.Contains(newDoctor))
+            if (!doctors.Contains(newDoctor))
             {
-                doctor.Add(newDoctor);
+                doctors.Add(newDoctor);
             }
         }
 
 
-        public void RemoveDoctor(Model.Doctor oldDoctor)
+        public void RemoveDoctor(Doctor oldDoctor)
         {
             if (oldDoctor == null)
             {
                 return;
             }
 
-            if (doctor != null)
+            if (doctors != null)
             {
-                if (doctor.Contains(oldDoctor))
+                if (doctors.Contains(oldDoctor))
                 {
-                    doctor.Remove(oldDoctor);
+                    doctors.Remove(oldDoctor);
                 }
             }
         }
@@ -97,9 +97,9 @@ namespace Repository
 
         public void RemoveAllDoctor()
         {
-            if (doctor != null)
+            if (doctors != null)
             {
-                doctor.Clear();
+                doctors.Clear();
             }
         }
 

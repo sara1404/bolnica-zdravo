@@ -4,6 +4,7 @@ using Model;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Service;
+using System;
 
 namespace hospital.View
 {
@@ -36,7 +37,7 @@ namespace hospital.View
         {
             if (appointmentTable.SelectedIndex != -1)
             {
-                ac.DeleteAppointment((Appointment)appointmentTable.SelectedItem);
+                ac.DeleteAppointment(Convert.ToInt32(appointmentTable.SelectedItem.ToString()));
             }
         }
     }

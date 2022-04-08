@@ -23,18 +23,27 @@ namespace hospital.View
     public partial class DoctorAppointmentsWindow : Window
     {
         public ObservableCollection<Appointment> Appointments { get; set; }
-
+        public AppointmentController ac;
         public DoctorAppointmentsWindow()
         {
             InitializeComponent();
             this.DataContext = this;
-            AppointmentController ac = new AppointmentController();
+            ac = new AppointmentController();
             Appointments = ac.GetAppointmentByDoctor("miromir");
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (Table.SelectedIndex != -1)
+            {
+
+                ac.DeleteAppointment(Convert.ToInt32(Table.SelectedItem.ToString()));
+            }
         }
     }
 }

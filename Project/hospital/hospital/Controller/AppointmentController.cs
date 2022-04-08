@@ -48,9 +48,9 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public bool DeleteAppointment(Appointment appointment)
+        public bool DeleteAppointment(int id)
         {
-            appointmentService.Delete(appointment.Id);
+            appointmentService.Delete(id);
             return true;
         }
 

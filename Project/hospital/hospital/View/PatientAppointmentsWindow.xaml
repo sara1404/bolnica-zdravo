@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:hospital.View"
+        xmlns:local="clr-namespace:hospital.View" xmlns:model="clr-namespace:Model" d:DataContext="{d:DesignInstance Type=model:Appointment}"
         mc:Ignorable="d"
         Title="PatientAppointmentsWindow" Height="450" Width="800">
     <Grid>
@@ -15,7 +15,7 @@
         </DataGrid>
         <Button x:Name="btnNewAppointment" Content="Make new appointment" HorizontalAlignment="Left" Margin="330,391,0,0" VerticalAlignment="Top" Width="147" RenderTransformOrigin="0.5,0.5" Click="btnNewAppointment_Click"/>
         <Button Content="Delay appointment" HorizontalAlignment="Left" Margin="503,391,0,0" VerticalAlignment="Top" Width="127"/>
-        <Button Content="Cancel appointment" HorizontalAlignment="Left" Margin="657,391,0,0" VerticalAlignment="Top" Width="127"/>
+        <Button x:Name="btnDelete" Content="Cancel appointment" HorizontalAlignment="Left" Margin="657,391,0,0" VerticalAlignment="Top" Width="127" Click="Button_Click"/>
 
     </Grid>
 </Window>

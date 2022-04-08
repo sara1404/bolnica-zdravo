@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace Model
 {
-    public class Appointment : INotifyPropertyChanged, INotifyPropertyChanging
+    public class Appointment : INotifyPropertyChanged
     {
         private int id;
         private string description;
@@ -20,7 +20,17 @@ namespace Model
             this.patient = patient;
             StartTime = startTime;
         }
-        public int Id { get => id; set => id = value; }
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
+            }
+        }
         public string Description { get => description; set => description = value; }
         public DateTime StartTime { get => startTime; set => startTime = value; }
         public int Duration { get => duration; set => duration = value; }
@@ -54,20 +64,12 @@ namespace Model
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public event PropertyChangingEventHandler PropertyChanging;
 
         protected virtual void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
-        protected virtual void OnPropertyChanging(string name)
-        {
-            if (PropertyChanging != null)
-            {
-                PropertyChanging(this, new PropertyChangingEventArgs(name));
             }
         }
 

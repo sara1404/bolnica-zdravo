@@ -2,18 +2,19 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Repository;
 
 namespace Service
 {
     public class AppointmentService
     {
-        private readonly Repository.AppointmentRepository appointmentRepository;
-        private readonly Repository.DoctorRepository doctorRepository;
+        private readonly AppointmentRepository appointmentRepository;
+        private readonly DoctorRepository doctorRepository;
 
-        public AppointmentService()
+        public AppointmentService(AppointmentRepository appointmentRepository, DoctorRepository doctorRepository)
         {
-            appointmentRepository = new Repository.AppointmentRepository();
-            doctorRepository = new Repository.DoctorRepository();
+            this.appointmentRepository = appointmentRepository;
+            this.doctorRepository = doctorRepository;
         }
 
         public Appointment Read(int id)

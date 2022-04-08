@@ -28,7 +28,8 @@ namespace hospital.View
         {
             InitializeComponent();
             this.DataContext = this;
-            ac = new AppointmentController();
+            App app = Application.Current as App;
+            ac = app.appointmentController;
             Appointments = ac.GetAppointmentByDoctor("miromir");
         }
 
@@ -41,8 +42,8 @@ namespace hospital.View
         {
             if (Table.SelectedIndex != -1)
             {
-
-                ac.DeleteAppointment(Convert.ToInt32(Table.SelectedItem.ToString()));
+                Appointment toDelete = (Appointment)Table.SelectedItem;
+                ac.DeleteAppointment(toDelete.Id);
             }
         }
     }

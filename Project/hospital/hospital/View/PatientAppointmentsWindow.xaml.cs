@@ -22,7 +22,8 @@ namespace hospital.View
         public PatientAppointmentsWindow()
         {
             InitializeComponent();
-            ac = new AppointmentController();
+            App app = Application.Current as App;
+            ac = app.appointmentController;
             this.DataContext = this;
             Appointments = ac.GetAppointmentByPatient("peromir");
 

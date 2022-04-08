@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using Service;
 
 namespace Controller
 {
@@ -11,9 +12,9 @@ namespace Controller
     {
         private readonly Service.AppointmentService appointmentService;
 
-        public AppointmentController()
+        public AppointmentController(AppointmentService appointmentService)
         {
-            appointmentService = new Service.AppointmentService();
+            this.appointmentService = appointmentService;
         }
 
         public bool CreateAppointment(Appointment appointment)

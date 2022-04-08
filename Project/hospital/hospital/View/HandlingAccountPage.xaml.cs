@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using Model;
+using Controller;
 namespace hospital.View
 {
     /// <summary>
@@ -22,14 +23,21 @@ namespace hospital.View
     public partial class HandlingAccountPage : Page
     {
         public ObservableCollection<Patient> Patients { get; set; }
+        public PatientController pc;
         public HandlingAccountPage()
         {
             InitializeComponent();
             this.DataContext = this;
-            Patients = new ObservableCollection<Patient>();
-            Patients.Add(new Patient("Nikola", "Kalinic", "123"));
-            Patients.Add(new Patient("Nikola", "Kalinic", "123"));
-            Patients.Add(new Patient("Nikola", "Kalinic", "123"));
+            pc = new PatientController();
+            Patients = pc.FindAll();
+        }
+
+        private void btnRemove_Click(object sender, RoutedEventArgs e)
+        {
+            if (dateGridHandlingAccount.SelectedIndex != -1){
+                
+                pc.DeleteById(dateGridHandlingAccount.SelectedItem.ToString());
+            }
         }
     }
 }

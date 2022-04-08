@@ -2,6 +2,7 @@ using Model;
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Service
 {
@@ -9,14 +10,16 @@ namespace Service
     {
         private readonly PatientRepository patientRepository;
 
+
+        public PatientService() { patientRepository = new PatientRepository(); }
         public bool Create(Patient patient)
         {
             throw new NotImplementedException();
         }
 
-        public List<Patient> FindAll()
+        public ObservableCollection<Patient> FindAll()
         {
-            throw new NotImplementedException();
+            return patientRepository.FindAll();
         }
 
         public Patient FindById(string id)
@@ -26,7 +29,7 @@ namespace Service
 
         public bool DeleteById(string id)
         {
-            throw new NotImplementedException();
+            return patientRepository.DeleteById(id);
         }
 
         public bool UpdateById(string id, Patient patient)

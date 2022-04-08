@@ -2,6 +2,7 @@ using Model;
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Service
 {
@@ -24,9 +25,9 @@ namespace Service
             return roomRepository.FindRoomById(id);
         }
 
-        public List<Room> FindAll()
+        public ref ObservableCollection<Room> FindAll()
         {
-            return roomRepository.FindAll();
+            return ref roomRepository.FindAll();
         }
 
         public bool UpdateById(String id, Room room)

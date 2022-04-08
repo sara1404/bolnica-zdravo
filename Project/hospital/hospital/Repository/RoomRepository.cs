@@ -1,12 +1,13 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Repository
 {
     public class RoomRepository
     {
-        List<Room> rooms;
+        ObservableCollection<Room> rooms;
         Room room1 = new Room("123", "operation", 1, "o1");
         Room room2 = new Room("1234", "operation", 2, "o2");
         Room room3 = new Room("1235", "operation", 1, "o3");
@@ -14,7 +15,7 @@ namespace Repository
 
         public RoomRepository()
         {
-            rooms = new List<Room>();
+            rooms = new ObservableCollection<Room>();
             rooms.Add(room1);
             rooms.Add(room2);
             rooms.Add(room3);
@@ -34,9 +35,9 @@ namespace Repository
             return null;
         }
 
-        public List<Room> FindAll()
+        public ref ObservableCollection<Room> FindAll()
         {
-            return rooms;
+            return ref rooms;
         }
 
         public bool UpdateById(string id, Model.Room room)

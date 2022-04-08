@@ -32,6 +32,11 @@ namespace Model
             phoneNumber= phone;
         }
 
+        public Patient(string name)
+        {
+            FirstName=name;
+        }
+
         public string Id
         {
             get => id;

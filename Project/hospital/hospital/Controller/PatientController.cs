@@ -11,13 +11,13 @@ namespace Controller
         private readonly PatientService patientService;
 
 
-        public PatientController()
+        public PatientController(PatientService _sevice)
         {
-            patientService = new PatientService();
+            patientService = _sevice;
         }
-        public bool Create(Model.Patient patient)
+        public bool Create(Patient patient)
         {
-            throw new NotImplementedException();
+           return patientService.Create(patient);
         }
 
         public ObservableCollection<Patient> FindAll()

@@ -16,7 +16,9 @@ namespace Repository
         }
         public bool Create(Patient patient)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(patient.FirstName);
+            this.patient.Add(patient);
+            return true;
         }
 
         public ObservableCollection<Patient> FindAll()

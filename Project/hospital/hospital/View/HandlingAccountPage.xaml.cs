@@ -28,7 +28,8 @@ namespace hospital.View
         {
             InitializeComponent();
             this.DataContext = this;
-            pc = new PatientController();
+            App app = Application.Current as App;
+            pc = app.patientController;
             Patients = pc.FindAll();
         }
 
@@ -38,6 +39,16 @@ namespace hospital.View
                 
                 pc.DeleteById(dateGridHandlingAccount.SelectedItem.ToString());
             }
+        }
+
+        private void AddAccountUserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAddAccount_Click(object sender, RoutedEventArgs e)
+        {
+            addUserControl.Visibility = Visibility;
         }
     }
 }

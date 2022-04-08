@@ -12,15 +12,16 @@
         <StackPanel Height="25" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="219,25,0,0">
             <Button Content="Add" Margin="0,0,5,0"></Button>
             <Button Content="Edit" Margin="5,0,5,0"></Button>
-            <Button Content="Remove" Margin="5,0,5,0"></Button>
+            <Button x:Name="btnRemove" Content="Remove" Margin="5,0,5,0" Click="btnRemove_Click"></Button>
         </StackPanel>
         <DataGrid x:Name="dateGridHandlingAccount" ItemsSource="{Binding Patients}" HorizontalAlignment="Left" Margin="219,50,0,50" IsReadOnly ="True" SelectionMode="Single" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Width="50" Binding="{Binding FirstName}"/>
-                <DataGridTextColumn Header="Username" Binding="{Binding LastName}"/>
-                <DataGridTextColumn Header="Email" Width="70" Binding="{Binding DateOfBirth}" />
-                    <DataGridTextColumn Header="Phone number" Binding="{Binding Id}"/>
-                <DataGridTextColumn Header="Blocked" Binding="{Binding PhoneNumber}"/>
+                <DataGridTextColumn Header="Name" Width="50" Binding="{Binding FirstName}" />
+                <DataGridTextColumn Header="Surname" Binding="{Binding LastName}"/>
+                <DataGridTextColumn Header="Username" Binding="{Binding Username}"/>
+                <DataGridTextColumn Header="Email" Width="70" Binding="{Binding Email}" />
+                <DataGridTextColumn Header="Phone number" Binding="{Binding PhoneNumber}"/>
+                <DataGridTextColumn Header="Blocked" Binding="{Binding Blocked}"/>
             </DataGrid.Columns>
         </DataGrid>
 

@@ -41,5 +41,10 @@ namespace hospital.View
                 ac.DeleteAppointment(Convert.ToInt32(appointmentTable.SelectedItem.ToString()));
             }
         }
+
+        private void btnDelay_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

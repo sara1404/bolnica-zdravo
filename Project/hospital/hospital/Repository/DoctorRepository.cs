@@ -13,9 +13,12 @@ namespace Repository
         public DoctorRepository()
         {
             doctors = new ObservableCollection<Doctor>();
-            Doctor d = new Doctor("Mitar", "Miric");
-            d.Username = "miromir";
-            doctors.Add(d);
+            Doctor d1 = new Doctor("Mitar", "Miric");
+            d1.Username = "miromir";
+            doctors.Add(d1);
+            Doctor d2 = new Doctor("Jovan", "Jovanovic");
+            d2.Username = "jovanov";
+            doctors.Add(d2);
         }
         public ObservableCollection<Doctor> FindAll()
         {

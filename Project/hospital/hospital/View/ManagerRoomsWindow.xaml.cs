@@ -19,7 +19,6 @@ namespace hospital.View
 
         public ManagerRoomsWindow()
         {
-            Console.WriteLine("otvorili prozor");
             InitializeComponent();
             this.DataContext = this;
             App app = Application.Current as App;

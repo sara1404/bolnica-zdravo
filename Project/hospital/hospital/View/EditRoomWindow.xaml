@@ -1,24 +1,35 @@
-﻿<Window x:Class="hospital.View.EditRoomWindow"
+﻿<Window x:Class="hospital.View.EditRoomWindow" DataContext="{Binding RelativeSource={RelativeSource Self}}"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:hospital.View"
         mc:Ignorable="d"
         Title="EditRoomWindow" Height="450" Width="800">
-    <Grid>
+    <Grid x:Name="gridEditRoom" >
         <Label Content="Edit room" HorizontalAlignment="Left" Margin="204,25,0,0" VerticalAlignment="Top" FontSize="20px" Width="161"/>
         <Label Content="Name:" HorizontalAlignment="Left" Margin="147,94,0,0" VerticalAlignment="Top" FontSize="16px" Width="56"/>
         <Label Content="Id:" HorizontalAlignment="Left" Margin="173,156,0,0" VerticalAlignment="Top" FontSize="16px" Width="27"/>
         <Label Content="Purpose:" HorizontalAlignment="Left" Margin="129,226,0,0" VerticalAlignment="Top" FontSize="16px" Width="71"/>
         <Label Content="Floor:" HorizontalAlignment="Left" Margin="151,300,0,0" VerticalAlignment="Top" FontSize="16px" Width="49"/>
-        <TextBox x:Name="roomName" HorizontalAlignment="Left" Height="23" Margin="300,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
+        <TextBox x:Name="roomName" HorizontalAlignment="Left" Height="23" Margin="300,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" Text="{Binding SelectedItem.name}"/>
         <TextBox x:Name="roomId"  HorizontalAlignment="Left" Height="23" Margin="300,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
         <TextBox x:Name="roomPurpose" HorizontalAlignment="Left" Height="23" Margin="300,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
         <TextBox x:Name="roomFloor" HorizontalAlignment="Left" Height="23" Margin="300,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
         <Button  Content="APPLY" HorizontalAlignment="Left" Margin="129,358,0,0" VerticalAlignment="Top" Width="109" Height="36" />
         <Button Content="CANCEL" HorizontalAlignment="Left" Margin="333,358,0,0" VerticalAlignment="Top" Width="108" Height="36"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="237" Margin="490,94,0,0" VerticalAlignment="Top" Width="254"/>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="259" Margin="499,72,0,0" Stroke="Black" VerticalAlignment="Top" Width="243"/>
+        <ScrollBar HorizontalAlignment="Left" Margin="725,72,0,0" VerticalAlignment="Top" Width="13" Height="259"/>
+        <Label Content="Chair" HorizontalAlignment="Left" Margin="561,94,0,0" VerticalAlignment="Top"/>
+        <Label Content="Desk" HorizontalAlignment="Left" Margin="562,138,0,0" VerticalAlignment="Top"/>
+        <Label Content="Ultrasound" HorizontalAlignment="Left" Margin="530,178,0,0" VerticalAlignment="Top"/>
+        <Label Content="Bed" HorizontalAlignment="Left" Margin="568,226,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.363,0.492"/>
+        <Label Content="Lamp" HorizontalAlignment="Left" Margin="559,273,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="617,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="57"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="617,273,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="57"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="617,226,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="57"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="617,181,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="57"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="617,138,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="57"/>
+
 
     </Grid>
 </Window>

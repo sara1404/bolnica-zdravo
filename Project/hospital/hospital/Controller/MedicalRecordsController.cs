@@ -1,36 +1,38 @@
 using Model;
 using System;
-using System.Collections.Generic;
+using Service;
+using System.Collections.ObjectModel;
 
 namespace Controller
 {
     public class MedicalRecordsController
     {
-        private readonly Service.MedicalRecordsService medicalRecordsService;
+        private readonly MedicalRecordsService medicalRecordsService;
 
+        public MedicalRecordsController(MedicalRecordsService _service) { medicalRecordsService = _service; }
         public bool Create(MedicalRecord medicalRecord)
         {
-            throw new NotImplementedException();
+            return medicalRecordsService.Create(medicalRecord);
         }
 
-        public List<MedicalRecord> FindAll()
+        public ObservableCollection<MedicalRecord> FindAll()
         {
-            throw new NotImplementedException();
+            return medicalRecordsService.FindAll();
         }
 
         public MedicalRecord FindById(string id)
         {
-            throw new NotImplementedException();
+            return medicalRecordsService.FindById(id);
         }
 
         public bool DeleteById(string id)
         {
-            throw new NotImplementedException();
+            return medicalRecordsService.DeleteById(id);
         }
 
         public bool UpdateById(string id, MedicalRecord medicalRecord)
         {
-            throw new NotImplementedException();
+            return medicalRecordsService.UpdateById(id, medicalRecord);
         }
 
     }

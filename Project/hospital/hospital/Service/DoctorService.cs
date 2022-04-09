@@ -1,31 +1,40 @@
 using System;
 using System.Collections.Generic;
 using Model;
-
+using System.Collections.ObjectModel;
+using Repository;
 
 namespace Service
 {
     public class DoctorService
     {
-        private readonly Repository.DoctorRepository doctorRepository;
+        private readonly DoctorRepository doctorRepository;
 
-        public DoctorService()
+        public DoctorService(DoctorRepository _repo)
         {
-            doctorRepository = new Repository.DoctorRepository();
+            doctorRepository = _repo;
         }
+        public DoctorService() { }
         public List<DateTime> GetFreeTimeSlots()
         {
             throw new NotImplementedException();
         }
 
-        public List<Doctor> GetDoctors()
+        public ObservableCollection<Doctor> GetDoctors()
         {
             return doctorRepository.FindAll();
         }
 
-        public List<Doctor> GetGeneralPractitioners()
+        public ObservableCollection<Doctor> GetGeneralPractitioners()
         {
             throw new NotImplementedException();
+        }
+
+        public Doctor getByName(string name)
+        {
+            string firstname = name.Split(' ')[0];
+            string lastname = name.Split(' ')[1];
+            return doctorRepository.getByName(firstname,lastname);
         }
     }
 }

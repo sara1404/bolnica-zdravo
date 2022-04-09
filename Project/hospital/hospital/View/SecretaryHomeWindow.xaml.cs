@@ -28,5 +28,10 @@ namespace hospital.View
         {
             Main.Content = new HandlingAccountPage();
         }
+
+        private void btnHandMedRecord_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new HandlingMedicalRecordsPage();
+        }
     }
 }

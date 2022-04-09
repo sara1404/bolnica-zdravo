@@ -78,6 +78,9 @@
     <Compile Include="View\EditRoomWindow.xaml.cs">
       <DependentUpon>EditRoomWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\HandlingMedicalRecordsPage.xaml.cs">
+      <DependentUpon>HandlingMedicalRecordsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ManagerMainWindow.xaml.cs">
       <DependentUpon>ManagerMainWindow.xaml</DependentUpon>
     </Compile>
@@ -98,6 +101,9 @@
     </Compile>
     <Compile Include="View\UserControls\AddAccountUserControl.xaml.cs">
       <DependentUpon>AddAccountUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\AddMedRecUserControl.xaml.cs">
+      <DependentUpon>AddMedRecUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\EditAccountUserControl.xaml.cs">
       <DependentUpon>EditAccountUserControl.xaml</DependentUpon>
@@ -143,6 +149,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\HandlingMedicalRecordsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ManagerMainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -164,6 +174,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\AddAccountUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\AddMedRecUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

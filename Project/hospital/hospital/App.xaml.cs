@@ -14,6 +14,10 @@ namespace hospital
         public PatientController patientController { get; set; }
 
         public AppointmentController appointmentController { get; set; }
+
+        public MedicalRecordsController mediicalRecordsController { get; set; }
+
+        public DoctorController doctorController { get; set; }
         
         public App() {
             RoomRepository roomRepository = new RoomRepository();
@@ -29,6 +33,12 @@ namespace hospital
             AppointmentService appointmentService = new AppointmentService(appointmentRepository, doctorRepository);
             appointmentController = new AppointmentController(appointmentService);
 
+            MedicalRecordsRepository medicalRecordsRepository = new MedicalRecordsRepository();
+            MedicalRecordsService medicalRecordsService = new MedicalRecordsService(medicalRecordsRepository);
+            mediicalRecordsController = new MedicalRecordsController(medicalRecordsService);
+
+            DoctorService doctorService = new DoctorService(doctorRepository);
+            doctorController = new DoctorController(doctorService);
         }
     }
 }

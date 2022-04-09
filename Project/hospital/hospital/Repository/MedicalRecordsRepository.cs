@@ -1,56 +1,77 @@
 using Model;
 using System;
 using System.Collections.Generic;
-
+using System.Collections.ObjectModel;
+using FileHandler;
+using Model;
 namespace Repository
 {
     public class MedicalRecordsRepository
     {
+        public ObservableCollection<MedicalRecord> medicalRecords;
+        public MedicalRecordFileHandler medicalRecordFileHandler;
+
+        public MedicalRecordsRepository()
+        {
+            medicalRecords = new ObservableCollection<MedicalRecord>();
+            PatientRepository pr = new PatientRepository();
+            DoctorRepository dp = new DoctorRepository();
+            medicalRecords.Add(new MedicalRecord(pr.FindById("perica"),"1232141","None",dp.FindByUsername("miromir"),BloodType.oPositive,"None"));
+        }
         public bool Create(MedicalRecord medicalRecord)
         {
-            throw new NotImplementedException();
+            medicalRecords.Add(medicalRecord);
+            return true;
         }
 
-        public List<MedicalRecord> FindAll()
+        public ObservableCollection<MedicalRecord> FindAll()
         {
-            throw new NotImplementedException();
+            return medicalRecords;
         }
 
         public MedicalRecord FindById(string id)
         {
-            throw new NotImplementedException();
+            foreach (MedicalRecord medicalRecord in medicalRecords)
+            {
+                if (medicalRecord.RecordId.Equals(id))
+                {
+                    return medicalRecord;
+                }
+            }
+            return null;
         }
 
         public bool DeleteById(string id)
         {
-            throw new NotImplementedException();
+            return medicalRecords.Remove(FindById(id));
         }
 
         public bool UpdateById(string id, MedicalRecord medicalRecord)
         {
-            throw new NotImplementedException();
+            medicalRecords.Remove(FindById(id));
+            medicalRecords.Add(medicalRecord);
+            return true;
         }
 
-        public System.Collections.Generic.List<MedicalRecord> medicalRecord;
 
 
-        public System.Collections.Generic.List<MedicalRecord> MedicalRecord
+        public ObservableCollection<MedicalRecord> MedicalRecord
         {
             get
             {
-                if (medicalRecord == null)
+                if (medicalRecords == null)
                 {
-                    medicalRecord = new System.Collections.Generic.List<MedicalRecord>();
+                    medicalRecords = new ObservableCollection<MedicalRecord>();
                 }
 
-                return medicalRecord;
+                return medicalRecords;
             }
             set
             {
                 RemoveAllMedicalRecord();
                 if (value != null)
                 {
-                    foreach (Model.MedicalRecord oMedicalRecord in value)
+                    foreach (MedicalRecord oMedicalRecord in value)
                     {
                         AddMedicalRecord(oMedicalRecord);
                     }
@@ -59,37 +80,37 @@ namespace Repository
         }
 
 
-        public void AddMedicalRecord(Model.MedicalRecord newMedicalRecord)
+        public void AddMedicalRecord(MedicalRecord newMedicalRecord)
         {
             if (newMedicalRecord == null)
             {
                 return;
             }
 
-            if (medicalRecord == null)
+            if (medicalRecords == null)
             {
-                medicalRecord = new System.Collections.Generic.List<MedicalRecord>();
+                medicalRecords = new ObservableCollection<MedicalRecord>();
             }
 
-            if (!medicalRecord.Contains(newMedicalRecord))
+            if (!medicalRecords.Contains(newMedicalRecord))
             {
-                medicalRecord.Add(newMedicalRecord);
+                medicalRecords.Add(newMedicalRecord);
             }
         }
 
 
-        public void RemoveMedicalRecord(Model.MedicalRecord oldMedicalRecord)
+        public void RemoveMedicalRecord(MedicalRecord oldMedicalRecord)
         {
             if (oldMedicalRecord == null)
             {
                 return;
             }
 
-            if (medicalRecord != null)
+            if (medicalRecords != null)
             {
-                if (medicalRecord.Contains(oldMedicalRecord))
+                if (medicalRecords.Contains(oldMedicalRecord))
                 {
-                    medicalRecord.Remove(oldMedicalRecord);
+                    medicalRecords.Remove(oldMedicalRecord);
                 }
             }
         }
@@ -97,12 +118,12 @@ namespace Repository
 
         public void RemoveAllMedicalRecord()
         {
-            if (medicalRecord != null)
+            if (medicalRecords != null)
             {
-                medicalRecord.Clear();
+                medicalRecords.Clear();
             }
         }
-        public FileHandler.MedicalRecordFileHandler medicalRecordFileHandler;
+        
 
     }
 }

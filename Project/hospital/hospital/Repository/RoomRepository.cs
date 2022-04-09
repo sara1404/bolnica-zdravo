@@ -1,29 +1,26 @@
+using FileHandler;
 using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
 
 namespace Repository
 {
     public class RoomRepository
     {
         ObservableCollection<Room> rooms;
-        Room room1 = new Room("123", "operation", 1, "o1");
-        Room room2 = new Room("1234", "operation", 2, "o2");
-        Room room3 = new Room("1235", "operation", 1, "o3");
-
 
         public RoomRepository()
         {
-            rooms = new ObservableCollection<Room>();
-            rooms.Add(room1);
-            rooms.Add(room2);
-            rooms.Add(room3);
-
+            roomFileHandler = new RoomFileHandler();
+            rooms = new ObservableCollection<Room>(); 
         }
         public void Create(Model.Room room)
         {
             rooms.Add(room);
+            roomFileHandler.Write(rooms.ToList());
         }
 
         public Room FindRoomById(string id)
@@ -37,6 +34,11 @@ namespace Repository
 
         public ref ObservableCollection<Room> FindAll()
         {
+            if(roomFileHandler.Read() == null)
+                return ref rooms;
+            foreach (Room room in roomFileHandler.Read()) {
+                rooms.Add(room);
+            }
             return ref rooms;
         }
 
@@ -50,7 +52,11 @@ namespace Repository
                     r.floor = room.floor;
                     r.equipment = room.equipment;
                     r.purpose = room.purpose;
+                    roomFileHandler.Write(rooms.ToList());
+
+
                     return true;
+
                 }
                     
             }
@@ -63,7 +69,9 @@ namespace Repository
             {
                 if (room.id.Equals(id))
                 {
-                    return rooms.Remove(room);
+                    rooms.Remove(room);
+                    roomFileHandler.Write(rooms.ToList());
+                    return true;
                 }
             }
             return false;

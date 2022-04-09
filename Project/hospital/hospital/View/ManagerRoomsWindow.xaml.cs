@@ -3,6 +3,7 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -35,9 +36,19 @@ namespace hospital.View
         {
             int selectedRow = dataGridRooms.SelectedIndex;
             Console.WriteLine(selectedRow);
-            if(e.Key == Key.Enter && selectedRow != -1)
+            if (e.Key == Key.Enter && selectedRow != -1)
             {
-                new EditRoomWindow().Show();
+                EditRoomWindow editWindow = new EditRoomWindow();
+                editWindow.Show();
+                Room room = (Room)dataGridRooms.SelectedItem;
+                editWindow.roomName.Text = room.name;
+                editWindow.roomId.Text = room.id;
+                editWindow.roomPurpose.Text = room.purpose;
+                editWindow.roomFloor.Text = room.floor.ToString();
+            }
+            else if (e.Key == Key.Delete && selectedRow != -1)
+            {
+                new DeleteRoomWindow().Show();
             }
         }
     }

@@ -48,6 +48,13 @@ namespace hospital.View
 
         private void btnAddAccount_Click(object sender, RoutedEventArgs e)
         {
+            addUserControl.txtEmail.Text = "";
+            addUserControl.txtFirstName.Text = "";
+            addUserControl.txtId.Text = "";
+            addUserControl.txtPassword.Text = "";
+            addUserControl.txtSurname.Text = "";
+            addUserControl.txtUsername.Text = "";
+            addUserControl.txtPhone.Text = "";
             addUserControl.Visibility = Visibility;
         }
 
@@ -64,6 +71,7 @@ namespace hospital.View
                 editUserControl.txtUsername.Text = p.Username;
                 editUserControl.txtPhone.Text = p.PhoneNumber;
                 pc.EditPatient = (Patient)dateGridHandlingAccount.SelectedItem;
+                dateGridHandlingAccount.SelectedIndex = -1;
             }
         }
     }

@@ -26,11 +26,11 @@ namespace Repository
             return patient;
         }
 
-        public Patient FindById(string id)
+        public Patient FindById(string username)
         {
             foreach (Patient p in patient)
             {
-                if (p.Id.Equals(id))
+                if (p.Username.Equals(username))
                 {
                     return p;
                 }
@@ -40,10 +40,12 @@ namespace Repository
 
         public bool DeleteById(string id)
         {
-            foreach (Patient p in patient)
-                Console.WriteLine(p.Username);
+            Console.WriteLine(id);
+            
 
             Console.WriteLine("AAAA");
+            foreach (Patient p in patient)
+                Console.WriteLine(p.Username);
             return patient.Remove(FindById(id));
         }
 

@@ -3,6 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Repository;
+using hospital;
+using System.Windows;
+using Controller;
 
 namespace Service
 {
@@ -32,29 +35,32 @@ namespace Service
         {
             List<DateTime> startTimes = new List<DateTime>();
             ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
-            Doctor d;
             foreach (Appointment a in appointmentRepository.FindAll())
             {
                 if (a.doctor.Username.Equals(username))
                 {
                     startTimes.Add(a.StartTime);
-                    d = a.doctor;
                 }
             }
             DateTime tmrw = DateTime.Now.AddDays(1);
             // hospital starts working tomorrow at 7 and ends work at 19
             DateTime tomorrow = new DateTime(tmrw.Year, tmrw.Month, tmrw.Day, 7, 0, 0);
+            List<DateTime> allTimeSlots = new List<DateTime>();
             for (int i = 0; i < 24; i++)
             {
-                foreach (DateTime time in startTimes)
-                {
-                    if (tomorrow.AddMinutes(i * 30).CompareTo(time) != 0)
-                    {
-                        DateTime startTime = tomorrow.AddMinutes(i * 30);
-                        retVal.Add(new Appointment(-1, doctorRepository.FindByUsername(username), null, startTime));
-                    }
-                }
+                allTimeSlots.Add(tomorrow.AddMinutes(i * 30));
             }
+            foreach (DateTime time in startTimes)
+            {
+                allTimeSlots.Remove(time);
+            }
+            foreach (DateTime time in allTimeSlots)
+            {
+                App app = Application.Current as App;
+                PatientController pc = app.patientController;
+                retVal.Add(new Appointment(-1, doctorRepository.FindByUsername(username), pc.FindById("peromir"), time));
+            }
+            
             return retVal;
         }
 
@@ -65,7 +71,7 @@ namespace Service
 
         public void Create(Appointment appointment)
         {
-            appointment.Id = appointmentRepository.GetAppointmentNumber() + 1;
+            appointment.Id = appointmentRepository.GetNewId();
             appointmentRepository.Create(appointment);
         }
 
@@ -95,16 +101,22 @@ namespace Service
 
         public ObservableCollection<Appointment> GetByPatient(string username)
         {
-            ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
-
+            List<Appointment> otherPatients = new List<Appointment>();
             foreach (Appointment a in appointmentRepository.FindAll())
             {
-                if (a.patient.Id.Equals(username)) // change to Id to Username
+                if (!a.patient.Id.Equals(username)) // change to Id to Username
                 {
-                    retVal.Add(a);
+                    // finding all other patients
+                    otherPatients.Add(a);
                 }
             }
-            return retVal;
+            foreach (Appointment a in otherPatients)
+            {
+                // deleting those other patients
+                appointmentRepository.DeleteById(a.Id);
+            }
+            //return retVal;
+            return appointmentRepository.FindAll();
         }
 
     }

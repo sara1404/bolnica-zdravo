@@ -12,7 +12,7 @@ namespace Repository
         public PatientRepository()
         {
             patient = new ObservableCollection<Patient>();
-            patient.Add(new Patient("perica","perica","123","Pera", "Peric", "peromir","052152151"));
+            patient.Add(new Patient("peromir","perica","123","Pera", "Peric", "peromir","052152151"));
         }
         public bool Create(Patient patient)
         {

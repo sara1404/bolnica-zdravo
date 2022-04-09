@@ -39,6 +39,11 @@ namespace Controller
             return appointmentService.GetFreeAppointmentsByDoctor(username);
         }
 
+        public ObservableCollection<Appointment> GetFreeAppointmentsByDate(DateTime date)
+        {
+            return appointmentService.GetFreeAppointmentsByDate(date);
+        }
+
         public ObservableCollection<Appointment> GetAppointments()
         {
             throw new NotImplementedException();

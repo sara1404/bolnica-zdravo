@@ -2,19 +2,35 @@ namespace Model
 {
     public class MedicalRecord
     {
-        private readonly string note;
-        private readonly string alergies;
-        private readonly Doctor choosenDoctor;
+        private  string note;
+        private  string alergies;
+        private  Doctor choosenDoctor;
 
-        private readonly Therapy[] therapy;
-        private readonly BloodType bloodType;
-        private readonly Patient patient;
+        private  Therapy[] therapy;
+        private  BloodType bloodType;
+        private  Patient patient;
+        private  string recordId;
 
-        public string Note { get; set; }
-        public string Alergies { get; set; }
+        public MedicalRecord(Patient patient, string recordId, string _allergens, Doctor _choosen, BloodType bt, string note)
+        {
+            this.patient = patient;
+            this.recordId = recordId;
+            this.note = note;
+            this.alergies = _allergens;
+            this.choosenDoctor = _choosen;
+            this.bloodType = bt;
+        }
+
+        public string Firstname { get=>patient.FirstName; set=>patient.FirstName=value; }
+        public string Lastname { get => patient.LastName; set => patient.LastName = value; }
+        public string RecordId { get=>recordId; set=>recordId=value; }
+
+        public string Note { get=>note; set=>note=value; }
+        public string Alergies { get=>alergies; set=>alergies=value; }
 
         public Doctor ChoosenDoctor { get; set; }
-        public BloodType _BloodType { get; set; }
+        public string NameDoctor { get => choosenDoctor.ToString();}
+        public BloodType BloodType { get=> bloodType; set=> bloodType=value; }
         private Patient _Patient { get; set; }
     }
 }

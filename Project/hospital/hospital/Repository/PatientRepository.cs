@@ -16,7 +16,6 @@ namespace Repository
         }
         public bool Create(Patient patient)
         {
-            Console.WriteLine(patient.FirstName);
             this.patient.Add(patient);
             return true;
         }
@@ -40,12 +39,6 @@ namespace Repository
 
         public bool DeleteById(string id)
         {
-            Console.WriteLine(id);
-            
-
-            Console.WriteLine("AAAA");
-            foreach (Patient p in patient)
-                Console.WriteLine(p.Username);
             return patient.Remove(FindById(id));
         }
 

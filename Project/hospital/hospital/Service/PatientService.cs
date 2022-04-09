@@ -24,7 +24,7 @@ namespace Service
 
         public Patient FindById(string id)
         {
-            throw new NotImplementedException();
+            return patientRepository.FindById(id);
         }
 
         public bool DeleteById(string id)

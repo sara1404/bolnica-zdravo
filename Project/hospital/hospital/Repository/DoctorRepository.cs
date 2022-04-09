@@ -1,25 +1,34 @@
 using FileHandler;
 using Model;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Repository
 {
     public class DoctorRepository
     {
         public DoctorFileHandler doctorFileHandler;
-        public List<Doctor> doctors;
+        public ObservableCollection<Doctor> doctors;
 
         public DoctorRepository()
         {
-            doctors = new List<Doctor>();
+            doctors = new ObservableCollection<Doctor>();
             Doctor d = new Doctor("Mitar", "Miric");
             d.Username = "miromir";
             doctors.Add(d);
         }
-        public List<Doctor> FindAll()
+        public ObservableCollection<Doctor> FindAll()
         {
             return doctors;
+        }
+        public Doctor getByName(string firsname,string lastname)
+        {
+            foreach(Doctor doctor in doctors)
+            {
+                if(doctor.Name.Equals(firsname) && doctor.Surname.Equals(lastname))
+                    return doctor;
+            }
+            return null;
         }
 
         public Doctor FindByUsername(string username)
@@ -34,13 +43,13 @@ namespace Repository
             return null;
         }
 
-        public List<Doctor> Doctor
+        public ObservableCollection<Doctor> Doctor
         {
             get
             {
                 if (doctors == null)
                 {
-                    doctors = new List<Doctor>();
+                    doctors = new ObservableCollection<Doctor>();
                 }
 
                 return doctors;
@@ -68,7 +77,7 @@ namespace Repository
 
             if (doctors == null)
             {
-                doctors = new List<Doctor>();
+                doctors = new ObservableCollection<Doctor>();
             }
 
             if (!doctors.Contains(newDoctor))

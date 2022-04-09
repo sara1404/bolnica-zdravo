@@ -33,5 +33,11 @@ namespace Controller
         {
             return doctorService.getByName(name);
         }
+
+
+        public Doctor GetByUsername(string username)
+        {
+            return doctorService.GetByUsername(username);
+        }
     }
 }

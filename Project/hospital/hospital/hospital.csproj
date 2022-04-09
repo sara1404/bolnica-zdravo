@@ -105,6 +105,9 @@
     <Compile Include="View\UserControls\AddMedRecUserControl.xaml.cs">
       <DependentUpon>AddMedRecUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DoctorMakeNewAppointment.xaml.cs">
+      <DependentUpon>DoctorMakeNewAppointment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserControls\EditAccountUserControl.xaml.cs">
       <DependentUpon>EditAccountUserControl.xaml</DependentUpon>
     </Compile>
@@ -178,6 +181,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\AddMedRecUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DoctorMakeNewAppointment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

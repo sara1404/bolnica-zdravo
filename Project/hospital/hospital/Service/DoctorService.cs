@@ -29,7 +29,10 @@ namespace Service
         {
             throw new NotImplementedException();
         }
-
+        public Doctor GetByUsername(string username)
+        {
+            return doctorRepository.FindByUsername(username);
+        }
         public Doctor getByName(string name)
         {
             string firstname = name.Split(' ')[0];

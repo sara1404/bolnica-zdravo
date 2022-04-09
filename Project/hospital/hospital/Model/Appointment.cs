@@ -20,6 +20,17 @@ namespace Model
             this.patient = patient;
             StartTime = startTime;
         }
+        public Patient Patient
+        {
+            get
+            {
+                return patient;
+            }
+            set
+            {
+                patient = value;
+            }
+        }
         public int Id
         {
             get
@@ -48,7 +59,7 @@ namespace Model
                 }
             }
         }
-        public string Patient
+        public string PatientName
         {
             get
             {

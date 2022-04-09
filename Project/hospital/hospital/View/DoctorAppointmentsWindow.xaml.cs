@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Controller;
+using hospital.View.UserControls;
 using Model;
 
 namespace hospital.View
@@ -36,6 +37,11 @@ namespace hospital.View
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void New_Click(object sender, RoutedEventArgs e)
+        {
+            new DoctorMakeNewAppointment().Show();
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)

@@ -84,6 +84,9 @@
     <Compile Include="View\EditRoomWindow.xaml.cs">
       <DependentUpon>EditRoomWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\HandlingMedicalRecordsPage.xaml.cs">
+      <DependentUpon>HandlingMedicalRecordsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ManagerMainWindow.xaml.cs">
       <DependentUpon>ManagerMainWindow.xaml</DependentUpon>
     </Compile>
@@ -93,10 +96,10 @@
     <Compile Include="View\HandlingAccountPage.xaml.cs">
       <DependentUpon>HandlingAccountPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientAppointmentsWindow.xaml.cs">
+    <Compile Include="View\Patient\PatientAppointmentsWindow.xaml.cs">
       <DependentUpon>PatientAppointmentsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientMakeNewAppointment.xaml.cs">
+    <Compile Include="View\Patient\PatientMakeNewAppointment.xaml.cs">
       <DependentUpon>PatientMakeNewAppointment.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SecretaryHomeWindow.xaml.cs">
@@ -104,6 +107,12 @@
     </Compile>
     <Compile Include="View\UserControls\AddAccountUserControl.xaml.cs">
       <DependentUpon>AddAccountUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\AddMedRecUserControl.xaml.cs">
+      <DependentUpon>AddMedRecUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DoctorMakeNewAppointment.xaml.cs">
+      <DependentUpon>DoctorMakeNewAppointment.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\EditAccountUserControl.xaml.cs">
       <DependentUpon>EditAccountUserControl.xaml</DependentUpon>
@@ -153,6 +162,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\HandlingMedicalRecordsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ManagerMainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -161,11 +174,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientAppointmentsWindow.xaml">
+    <Page Include="View\Patient\PatientAppointmentsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientMakeNewAppointment.xaml">
+    <Page Include="View\Patient\PatientMakeNewAppointment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -174,6 +187,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\AddAccountUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\AddMedRecUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DoctorMakeNewAppointment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

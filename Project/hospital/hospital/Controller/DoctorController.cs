@@ -5,26 +5,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Service;
+using System.Collections.ObjectModel;
 
-namespace hospital.Controller
+namespace Controller
 {
-    class DoctorController
+    public class DoctorController
     {
         private readonly DoctorService doctorService;
 
-        public DoctorController()
+        public DoctorController(DoctorService _service)
         {
-            doctorService = new DoctorService();
+            doctorService = _service;
         }
+        public DoctorController() { }
 
-        public List<Doctor> GetDoctors()
+        public ObservableCollection<Doctor> GetDoctors()
         {
             return doctorService.GetDoctors();
         }
         
-        public List<Doctor> GetGeneralPractitioners()
+        public ObservableCollection<Doctor> GetGeneralPractitioners()
         {
             throw new NotImplementedException();
+        }
+
+        public Doctor getByName(string name)
+        {
+            return doctorService.getByName(name);
+        }
+
+
+        public Doctor GetByUsername(string username)
+        {
+            return doctorService.GetByUsername(username);
         }
     }
 }

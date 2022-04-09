@@ -24,11 +24,7 @@ namespace hospital.View
     public partial class PatientMakeNewAppointment : Window
     {
         private AppointmentController ac;
-        public ObservableCollection<Appointment> Appointments
-        {
-            get;
-            set;
-        }
+
         public PatientMakeNewAppointment()
         {
             InitializeComponent();
@@ -41,16 +37,17 @@ namespace hospital.View
 
         private void btnShow_Click(object sender, RoutedEventArgs e)
         {
+            this.DataContext = this;
             if (cmbDoctors.SelectedIndex != -1 && date.SelectedDate == null)
             {
-                this.DataContext = this;
                 Doctor d = (Doctor)cmbDoctors.SelectedItem;
                 appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDoctor(d.Username);
                 
             }
             if (cmbDoctors.SelectedIndex == -1 && date.SelectedDate != null)
             {
-
+                DateTime selectedDate = (DateTime)date.SelectedDate;
+                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDate(selectedDate);
             }
         }
 

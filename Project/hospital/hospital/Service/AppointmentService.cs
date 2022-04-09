@@ -80,16 +80,22 @@ namespace Service
 
         public ObservableCollection<Appointment> GetByPatient(string username)
         {
-            ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
-
+            List<Appointment> otherPatients = new List<Appointment>();
             foreach (Appointment a in appointmentRepository.FindAll())
             {
-                if (a.patient.Id.Equals(username)) // change to Id to Username
+                if (!a.patient.Id.Equals(username)) // change to Id to Username
                 {
-                    retVal.Add(a);
+                    // finding all other patients
+                    otherPatients.Add(a);
                 }
             }
-            return retVal;
+            foreach (Appointment a in otherPatients)
+            {
+                // deleting those other patients
+                appointmentRepository.DeleteById(a.Id);
+            }
+            //return retVal;
+            return appointmentRepository.FindAll();
         }
 
     }

@@ -24,11 +24,17 @@ namespace Model
             }
         }
 
-        public Patient(string fName, string lName, string patientId)
+        public Patient(string _username,string _password, string _email,string fName, string lName, string patientId,string phone): base(_username, _password, _email)
         {
             FirstName = fName;
             LastName = lName;
             id = patientId;
+            phoneNumber= phone;
+        }
+
+        public Patient(string name)
+        {
+            FirstName=name;
         }
 
         public string Id
@@ -43,9 +49,14 @@ namespace Model
         public string PhoneNumber { get => phoneNumber; set => phoneNumber = value; }
         public bool IsGuest { get => isGuest; set => isGuest = value; }
 
+        public string Username { get => base.Username; set => base.Username = value; }
+        public string Email { get => base.Email; set => base.Email = value; }
+
+        public bool Blocked { get => base.IsBlocked; set => base.IsBlocked = value; }
+
         public override string ToString()
         {
-            return firstName + " " + lastName;
+            return base.Username;
         }
     }
 }

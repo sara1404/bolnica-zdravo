@@ -23,6 +23,7 @@ namespace hospital.View
     /// </summary>
     public partial class PatientMakeNewAppointment : Window
     {
+        private AppointmentController ac;
         public ObservableCollection<Appointment> Appointments
         {
             get;
@@ -33,20 +34,34 @@ namespace hospital.View
             InitializeComponent();
             DoctorService ds = new DoctorService();
             cmbDoctors.ItemsSource = ds.GetDoctors();
+            App app = Application.Current as App;
+            ac = app.appointmentController;
             this.DataContext = this;
         }
 
         private void btnShow_Click(object sender, RoutedEventArgs e)
         {
-            if (cmbDoctors.SelectedIndex != -1)
+            if (cmbDoctors.SelectedIndex != -1 && date.SelectedDate == null)
             {
                 this.DataContext = this;
-                AppointmentController ac = new AppointmentController();
                 Doctor d = (Doctor)cmbDoctors.SelectedItem;
-                //Appointments = new ObservableCollection<Appointment>(ac.GetFreeAppointmentsByDoctor(d.Username));
                 appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDoctor(d.Username);
+                
             }
+            if (cmbDoctors.SelectedIndex == -1 && date.SelectedDate != null)
+            {
 
+            }
+        }
+
+        private void btnConfirm_Click(object sender, RoutedEventArgs e)
+        {
+            if(appointmentTable.SelectedIndex != -1)
+            {
+                Appointment a = (Appointment)appointmentTable.SelectedItem;
+                ac.CreateAppointment(a);
+                this.Close();
+            }
         }
     }
 }

@@ -1,7 +1,10 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
+using Service;
 
 namespace Controller
 {
@@ -9,35 +12,34 @@ namespace Controller
     {
         private readonly Service.AppointmentService appointmentService;
 
-        public AppointmentController()
+        public AppointmentController(AppointmentService appointmentService)
         {
-            appointmentService = new Service.AppointmentService();
+            this.appointmentService = appointmentService;
         }
 
         public bool CreateAppointment(Appointment appointment)
         {
-            throw new NotImplementedException();
+            appointmentService.Create(appointment);
+            return true;
         }
 
-        public List<Appointment> GetAppointmentByPatient(string id)
+        public ObservableCollection<Appointment> GetAppointmentByPatient(string id)
         {
-            // returns all appointments of one patient 
             return appointmentService.GetByPatient(id);
-           
         }
 
-        public List<Appointment> GetAppointmentByDoctor(string username)
+        public ObservableCollection<Appointment> GetAppointmentByDoctor(string username)
         {
-            throw new NotImplementedException();
+            return appointmentService.GetByDoctor(username);
         }
 
-        public List<Appointment> GetFreeAppointmentsByDoctor(string username)
+        public ObservableCollection<Appointment> GetFreeAppointmentsByDoctor(string username)
         {
             // returns doctors free appointments tomorrow
             return appointmentService.GetFreeAppointmentsByDoctor(username);
         }
 
-        public List<Appointment> GetAppointments()
+        public ObservableCollection<Appointment> GetAppointments()
         {
             throw new NotImplementedException();
         }
@@ -47,9 +49,10 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public bool DeleteAppointment(Appointment appointment)
+        public bool DeleteAppointment(int id)
         {
-            throw new NotImplementedException();
+            appointmentService.Delete(id);
+            return true;
         }
 
     }

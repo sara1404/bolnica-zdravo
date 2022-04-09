@@ -1,26 +1,29 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Repository
 {
     public class PatientRepository
     {
         public FileHandler.PatientFileHandler patientFileHandler;
-        public List<Patient> patient;
+        public ObservableCollection<Patient> patient;
         public PatientRepository()
         {
-            patient = new List<Patient>();
-            patient.Add(new Patient("Pera", "Peric", "peromir"));
+            patient = new ObservableCollection<Patient>();
+            patient.Add(new Patient("peromir","perica","123","Pera", "Peric", "peromir","052152151"));
         }
         public bool Create(Patient patient)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(patient.FirstName);
+            this.patient.Add(patient);
+            return true;
         }
 
-        public List<Patient> FindAll()
+        public ObservableCollection<Patient> FindAll()
         {
-            throw new NotImplementedException();
+            return patient;
         }
 
         public Patient FindById(string id)
@@ -37,22 +40,28 @@ namespace Repository
 
         public bool DeleteById(string id)
         {
-            throw new NotImplementedException();
+            foreach (Patient p in patient)
+                Console.WriteLine(p.Username);
+
+            Console.WriteLine("AAAA");
+            return patient.Remove(FindById(id));
         }
 
         public bool UpdateById(string id, Patient patient)
         {
-            throw new NotImplementedException();
+            DeleteById(id);
+            Create(patient);
+            return true;
         }
 
 
-        public List<Patient> Patient
+        public ObservableCollection<Patient> Patient
         {
             get
             {
                 if (patient == null)
                 {
-                    patient = new System.Collections.Generic.List<Patient>();
+                    patient = new ObservableCollection<Patient>();
                 }
 
                 return patient;
@@ -80,7 +89,7 @@ namespace Repository
 
             if (patient == null)
             {
-                patient = new System.Collections.Generic.List<Patient>();
+                patient = new ObservableCollection<Patient>();
             }
 
             if (!patient.Contains(newPatient))

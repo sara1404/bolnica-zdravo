@@ -7,6 +7,15 @@ namespace Model
         private string email;
         private bool isBlocked;
 
+
+        public User() { }
+        public User(string _username,string _password, string _email)
+        {
+            this.username = _username;
+            this.password = _password;
+            this.email = _email;
+            this.isBlocked=false;
+        }
         public string Username
         {
             get => username;

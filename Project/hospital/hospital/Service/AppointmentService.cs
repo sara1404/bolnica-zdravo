@@ -1,18 +1,23 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using Repository;
+using hospital;
+using System.Windows;
+using Controller;
 
 namespace Service
 {
     public class AppointmentService
     {
-        private readonly Repository.AppointmentRepository appointmentRepository;
-        private readonly Repository.DoctorRepository doctorRepository;
+        private readonly AppointmentRepository appointmentRepository;
+        private readonly DoctorRepository doctorRepository;
 
-        public AppointmentService()
+        public AppointmentService(AppointmentRepository appointmentRepository, DoctorRepository doctorRepository)
         {
-            appointmentRepository = new Repository.AppointmentRepository();
-            doctorRepository = new Repository.DoctorRepository();
+            this.appointmentRepository = appointmentRepository;
+            this.doctorRepository = doctorRepository;
         }
 
         public Appointment Read(int id)
@@ -26,44 +31,48 @@ namespace Service
             }
             return null;
         }
-        public List<Appointment> GetFreeAppointmentsByDoctor(string username)
+        public ObservableCollection<Appointment> GetFreeAppointmentsByDoctor(string username)
         {
             List<DateTime> startTimes = new List<DateTime>();
-            List<Appointment> retVal = new List<Appointment>();
-            Doctor d;
+            ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
             foreach (Appointment a in appointmentRepository.FindAll())
             {
                 if (a.doctor.Username.Equals(username))
                 {
                     startTimes.Add(a.StartTime);
-                    d = a.doctor;
                 }
             }
             DateTime tmrw = DateTime.Now.AddDays(1);
             // hospital starts working tomorrow at 7 and ends work at 19
             DateTime tomorrow = new DateTime(tmrw.Year, tmrw.Month, tmrw.Day, 7, 0, 0);
+            List<DateTime> allTimeSlots = new List<DateTime>();
             for (int i = 0; i < 24; i++)
             {
-                foreach (DateTime time in startTimes)
-                {
-                    if (tomorrow.AddMinutes(i * 30).CompareTo(time) != 0)
-                    {
-                        DateTime startTime = tomorrow.AddMinutes(i * 30);
-                        retVal.Add(new Appointment(-1, doctorRepository.FindByUsername(username), null, startTime));
-                    }
-                }
+                allTimeSlots.Add(tomorrow.AddMinutes(i * 30));
             }
+            foreach (DateTime time in startTimes)
+            {
+                allTimeSlots.Remove(time);
+            }
+            foreach (DateTime time in allTimeSlots)
+            {
+                App app = Application.Current as App;
+                PatientController pc = app.patientController;
+                retVal.Add(new Appointment(-1, doctorRepository.FindByUsername(username), pc.FindById("peromir"), time));
+            }
+            
             return retVal;
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            appointmentRepository.DeleteById(id);
         }
 
         public void Create(Appointment appointment)
         {
-            throw new NotImplementedException();
+            appointment.Id = appointmentRepository.GetNewId();
+            appointmentRepository.Create(appointment);
         }
 
         public void Update(Appointment appointment)
@@ -71,23 +80,43 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public Appointment GetByDoctor(string username)
+        public ObservableCollection<Appointment> GetByDoctor(string username)
         {
-            throw new NotImplementedException();
-        }
-
-        public List<Appointment> GetByPatient(string username)
-        {
-            List<Appointment> retVal = new List<Appointment>();
+            if(appointmentRepository.FindAll() == null)
+            {
+                throw new Exception();
+            }
+            ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
 
             foreach (Appointment a in appointmentRepository.FindAll())
             {
-                if (a.patient.Id.Equals(username)) // change to Id to Username
+                if (a.doctor.Username == username) // change to Id to Username
                 {
                     retVal.Add(a);
                 }
             }
             return retVal;
+
+        }
+
+        public ObservableCollection<Appointment> GetByPatient(string username)
+        {
+            List<Appointment> otherPatients = new List<Appointment>();
+            foreach (Appointment a in appointmentRepository.FindAll())
+            {
+                if (!a.patient.Id.Equals(username)) // change to Id to Username
+                {
+                    // finding all other patients
+                    otherPatients.Add(a);
+                }
+            }
+            foreach (Appointment a in otherPatients)
+            {
+                // deleting those other patients
+                appointmentRepository.DeleteById(a.Id);
+            }
+            //return retVal;
+            return appointmentRepository.FindAll();
         }
 
     }

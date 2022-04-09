@@ -20,7 +20,7 @@ namespace hospital
 
         private void Doctor_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            new DoctorHomeWindow().Show();
         }
 
         private void Secretary_Button_Click(object sender, RoutedEventArgs e)

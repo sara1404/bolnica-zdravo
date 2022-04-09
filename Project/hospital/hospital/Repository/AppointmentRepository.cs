@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
+
 namespace Repository
 {
     public class AppointmentRepository
     {
-        public ObservableCollection<Appointment> appointment;
+        public ObservableCollection<Appointment> appointments;
         public FileHandler.AppointmentsFileHandler appointmentsFileHandler;
 
         public AppointmentRepository()
@@ -17,18 +18,18 @@ namespace Repository
             PatientRepository pr = new PatientRepository();
             DoctorRepository dr = new DoctorRepository();
 
-            appointment = new ObservableCollection<Appointment>();
+            appointments = new ObservableCollection<Appointment>();
             DateTime dt = new DateTime(2022, 4, 9, 15, 0, 0);
-            appointment.Add(new Appointment(1, dr.FindByUsername("miromir"), pr.FindById("peromir"), dt));
+            appointments.Add(new Appointment(1, dr.FindByUsername("miromir"), pr.FindById("peromir"), dt));
         }
 
         public int GetAppointmentNumber()
         {
-            return appointment.Count;
+            return appointments.Count;
         }
         public Appointment FindById(int id)
         {
-            foreach(Appointment a in appointment)
+            foreach(Appointment a in appointments)
             {
                 if(a.Id == id)
                 {
@@ -40,17 +41,17 @@ namespace Repository
 
         public ObservableCollection<Appointment> FindAll()
         {
-            return appointment;
+            return appointments;
         }
 
         public void DeleteById(int id)
         {
-            appointment.Remove(FindById(id));
+            appointments.Remove(FindById(id));
         }
 
         public void Create(Appointment _appointment)
         {
-            appointment.Add(_appointment);
+            appointments.Add(_appointment);
         }
 
         public void UpdateById(Appointment appointment, string id)
@@ -58,6 +59,74 @@ namespace Repository
             throw new NotImplementedException();
         }
 
+        public ObservableCollection<Appointment> Appointment
+        {
+            get
+            {
+                if (appointments == null)
+                {
+                    appointments = new ObservableCollection<Appointment>();
+                }
+
+                return appointments;
+            }
+            set
+            {
+                RemoveAllAppointment();
+                if (value != null)
+                {
+                    foreach (Model.Appointment oAppointment in value)
+                    {
+                        AddAppointment(oAppointment);
+                    }
+                }
+            }
+        }
+
+
+        public void AddAppointment(Model.Appointment newAppointment)
+        {
+            if (newAppointment == null)
+            {
+                return;
+            }
+
+            if (appointments == null)
+            {
+                appointments = new ObservableCollection<Appointment>();
+            }
+
+            if (!appointments.Contains(newAppointment))
+            {
+                appointments.Add(newAppointment);
+            }
+        }
+
+
+        public void RemoveAppointment(Model.Appointment oldAppointment)
+        {
+            if (oldAppointment == null)
+            {
+                return;
+            }
+
+            if (appointments != null)
+            {
+                if (appointments.Contains(oldAppointment))
+                {
+                    appointments.Remove(oldAppointment);
+                }
+            }
+        }
+
+
+        public void RemoveAllAppointment()
+        {
+            if (appointments != null)
+            {
+                appointments.Clear();
+            }
+        }
 
     }
 }

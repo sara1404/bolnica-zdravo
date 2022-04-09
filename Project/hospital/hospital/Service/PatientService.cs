@@ -11,10 +11,10 @@ namespace Service
         private readonly PatientRepository patientRepository;
 
 
-        public PatientService() { patientRepository = new PatientRepository(); }
+        public PatientService(PatientRepository _repo) { patientRepository = _repo; }
         public bool Create(Patient patient)
         {
-            throw new NotImplementedException();
+            return patientRepository.Create(patient);
         }
 
         public ObservableCollection<Patient> FindAll()
@@ -34,7 +34,7 @@ namespace Service
 
         public bool UpdateById(string id, Patient patient)
         {
-            throw new NotImplementedException();
+            return patientRepository.UpdateById(id, patient);
         }
 
     }

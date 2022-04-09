@@ -2,18 +2,19 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Repository;
 
 namespace Service
 {
     public class AppointmentService
     {
-        private readonly Repository.AppointmentRepository appointmentRepository;
-        private readonly Repository.DoctorRepository doctorRepository;
+        private readonly AppointmentRepository appointmentRepository;
+        private readonly DoctorRepository doctorRepository;
 
-        public AppointmentService()
+        public AppointmentService(AppointmentRepository appointmentRepository, DoctorRepository doctorRepository)
         {
-            appointmentRepository = new Repository.AppointmentRepository();
-            doctorRepository = new Repository.DoctorRepository();
+            this.appointmentRepository = appointmentRepository;
+            this.doctorRepository = doctorRepository;
         }
 
         public Appointment Read(int id)
@@ -73,9 +74,23 @@ namespace Service
             throw new NotImplementedException();
         }
 
-        public Appointment GetByDoctor(string username)
+        public ObservableCollection<Appointment> GetByDoctor(string username)
         {
-            throw new NotImplementedException();
+            if(appointmentRepository.FindAll() == null)
+            {
+                throw new Exception();
+            }
+            ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
+
+            foreach (Appointment a in appointmentRepository.FindAll())
+            {
+                if (a.doctor.Username == username) // change to Id to Username
+                {
+                    retVal.Add(a);
+                }
+            }
+            return retVal;
+
         }
 
         public ObservableCollection<Appointment> GetByPatient(string username)

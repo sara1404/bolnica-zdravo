@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using Service;
 
 namespace Controller
 {
@@ -11,9 +12,9 @@ namespace Controller
     {
         private readonly Service.AppointmentService appointmentService;
 
-        public AppointmentController()
+        public AppointmentController(AppointmentService appointmentService)
         {
-            appointmentService = new Service.AppointmentService();
+            this.appointmentService = appointmentService;
         }
 
         public bool CreateAppointment(Appointment appointment)
@@ -27,9 +28,9 @@ namespace Controller
             return appointmentService.GetByPatient(id);
         }
 
-        public List<Appointment> GetAppointmentByDoctor(string username)
+        public ObservableCollection<Appointment> GetAppointmentByDoctor(string username)
         {
-            throw new NotImplementedException();
+            return appointmentService.GetByDoctor(username);
         }
 
         public ObservableCollection<Appointment> GetFreeAppointmentsByDoctor(string username)
@@ -38,7 +39,7 @@ namespace Controller
             return appointmentService.GetFreeAppointmentsByDoctor(username);
         }
 
-        public List<Appointment> GetAppointments()
+        public ObservableCollection<Appointment> GetAppointments()
         {
             throw new NotImplementedException();
         }
@@ -48,9 +49,9 @@ namespace Controller
             throw new NotImplementedException();
         }
 
-        public bool DeleteAppointment(Appointment appointment)
+        public bool DeleteAppointment(int id)
         {
-            appointmentService.Delete(appointment.Id);
+            appointmentService.Delete(id);
             return true;
         }
 

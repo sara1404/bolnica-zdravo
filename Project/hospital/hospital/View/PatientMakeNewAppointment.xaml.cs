@@ -34,7 +34,8 @@ namespace hospital.View
             InitializeComponent();
             DoctorService ds = new DoctorService();
             cmbDoctors.ItemsSource = ds.GetDoctors();
-            ac = new AppointmentController();
+            App app = Application.Current as App;
+            ac = app.appointmentController;
             this.DataContext = this;
         }
 

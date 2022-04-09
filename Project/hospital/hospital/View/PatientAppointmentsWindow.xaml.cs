@@ -4,6 +4,7 @@ using Model;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Service;
+using System;
 
 namespace hospital.View
 {
@@ -21,7 +22,8 @@ namespace hospital.View
         public PatientAppointmentsWindow()
         {
             InitializeComponent();
-            ac = new AppointmentController();
+            App app = Application.Current as App;
+            ac = app.appointmentController;
             this.DataContext = this;
             Appointments = ac.GetAppointmentByPatient("peromir");
 
@@ -36,7 +38,7 @@ namespace hospital.View
         {
             if (appointmentTable.SelectedIndex != -1)
             {
-                ac.DeleteAppointment((Appointment)appointmentTable.SelectedItem);
+                ac.DeleteAppointment(Convert.ToInt32(appointmentTable.SelectedItem.ToString()));
             }
         }
     }

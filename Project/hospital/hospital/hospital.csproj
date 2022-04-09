@@ -69,6 +69,12 @@
     <Compile Include="View\AddRoomWindow.xaml.cs">
       <DependentUpon>AddRoomWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DoctorAppointmentsWindow.xaml.cs">
+      <DependentUpon>DoctorAppointmentsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DoctorHomeWindow.xaml.cs">
+      <DependentUpon>DoctorHomeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EditRoomWindow.xaml.cs">
       <DependentUpon>EditRoomWindow.xaml</DependentUpon>
     </Compile>
@@ -89,6 +95,12 @@
     </Compile>
     <Compile Include="View\SecretaryHomeWindow.xaml.cs">
       <DependentUpon>SecretaryHomeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\AddAccountUserControl.xaml.cs">
+      <DependentUpon>AddAccountUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\EditAccountUserControl.xaml.cs">
+      <DependentUpon>EditAccountUserControl.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -111,6 +123,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\DoctorAppointmentsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DoctorHomeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\EditRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -140,6 +160,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SecretaryHomeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\AddAccountUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\EditAccountUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

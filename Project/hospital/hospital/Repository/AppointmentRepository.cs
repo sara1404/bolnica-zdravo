@@ -25,7 +25,10 @@ namespace Repository
 
         public int GetNewId()
         {
-            return appointments[appointments.Count - 1].Id + 1;
+            if (appointments.Count == 0)
+                return 0;
+            else 
+                return appointments[appointments.Count - 1].Id + 1;
         }
         public Appointment FindById(int id)
         {

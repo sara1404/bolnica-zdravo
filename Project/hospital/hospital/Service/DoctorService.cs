@@ -14,7 +14,7 @@ namespace Service
         {
             doctorRepository = _repo;
         }
-        public DoctorService() { }
+        public DoctorService() { doctorRepository = new DoctorRepository(); }
         public List<DateTime> GetFreeTimeSlots()
         {
             throw new NotImplementedException();

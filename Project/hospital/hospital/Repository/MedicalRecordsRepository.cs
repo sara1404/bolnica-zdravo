@@ -16,7 +16,7 @@ namespace Repository
             medicalRecords = new ObservableCollection<MedicalRecord>();
             PatientRepository pr = new PatientRepository();
             DoctorRepository dp = new DoctorRepository();
-            medicalRecords.Add(new MedicalRecord(pr.FindById("perica"),"1232141","None",dp.FindByUsername("miromir"),BloodType.oPositive,"None"));
+            medicalRecords.Add(new MedicalRecord(pr.FindById("peromir"),"1232141","None",dp.FindByUsername("miromir"),BloodType.oPositive,"None"));
         }
         public bool Create(MedicalRecord medicalRecord)
         {

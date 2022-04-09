@@ -45,8 +45,8 @@ namespace hospital.View
             {
                 this.DataContext = this;
                 Doctor d = (Doctor)cmbDoctors.SelectedItem;
-                //Appointments = new ObservableCollection<Appointment>(ac.GetFreeAppointmentsByDoctor(d.Username));
                 appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDoctor(d.Username);
+                
             }
             if (cmbDoctors.SelectedIndex == -1 && date.SelectedDate != null)
             {
@@ -60,7 +60,7 @@ namespace hospital.View
             {
                 Appointment a = (Appointment)appointmentTable.SelectedItem;
                 ac.CreateAppointment(a);
-                
+                this.Close();
             }
         }
     }

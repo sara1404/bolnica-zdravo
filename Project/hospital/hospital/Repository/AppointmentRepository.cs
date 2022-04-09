@@ -23,9 +23,9 @@ namespace Repository
             appointments.Add(new Appointment(1, dr.FindByUsername("miromir"), pr.FindById("peromir"), dt));
         }
 
-        public int GetAppointmentNumber()
+        public int GetNewId()
         {
-            return appointments.Count;
+            return appointments[appointments.Count - 1].Id + 1;
         }
         public Appointment FindById(int id)
         {

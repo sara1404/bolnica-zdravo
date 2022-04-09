@@ -27,7 +27,7 @@ namespace Controller
 
         public Patient FindById(string id)
         {
-            throw new NotImplementedException();
+            return patientService.FindById(id);
         }
 
         public bool DeleteById(string id)

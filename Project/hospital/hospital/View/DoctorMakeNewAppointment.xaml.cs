@@ -47,9 +47,10 @@ namespace hospital.View.UserControls
                 selectedPatient = (Patient)cmbPatients.SelectedItem;
                 appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDoctor(loggedInDoctor.Username);
             }
-            if (cmbPatients.SelectedIndex == -1 && date.SelectedDate != null)
+            if (cmbPatients.SelectedIndex != -1 && date.SelectedDate != null)
             {
-
+                DateTime selectedDate = (DateTime)date.SelectedDate;
+                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor(selectedDate, loggedInDoctor.Username);
             }
         }
 

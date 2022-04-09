@@ -43,6 +43,10 @@ namespace Controller
         {
             return appointmentService.GetFreeAppointmentsByDate(date);
         }
+        public ObservableCollection<Appointment> GetFreeAppointmentsByDateAndDoctor(DateTime date, string username)
+        {
+            return appointmentService.GetFreeAppointmentsByDateAndDoctor(date, username);
+        }
 
         public ObservableCollection<Appointment> GetAppointments()
         {

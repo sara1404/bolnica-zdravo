@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="DoctorAppointmentsWindow" Height="450" Width="800">
     <Grid>
-        <DataGrid Name="Table" ItemsSource="{Binding Path=Appointments}" AutoGenerateColumns ="True"  HorizontalAlignment="Left" Height="253" Margin="10,10,0,0" VerticalAlignment="Top" Width="573" />
-        <Button Content="New" HorizontalAlignment="Left" Margin="20,310,0,0" VerticalAlignment="Top" Width="86"/>
+        <DataGrid Name="Table" ItemsSource="{Binding Path=Appointments, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns ="True"  HorizontalAlignment="Left" Height="253" Margin="10,10,0,0" VerticalAlignment="Top" Width="573" />
+        <Button Content="New" HorizontalAlignment="Left" Margin="20,310,0,0" VerticalAlignment="Top" Width="86" Click="New_Click"/>
         <Button Content="Edit" HorizontalAlignment="Left" Margin="137,310,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
         <Button Content="Delete" HorizontalAlignment="Left" Margin="246,310,0,0" VerticalAlignment="Top" Width="75" Click="Delete_Click"/>
 

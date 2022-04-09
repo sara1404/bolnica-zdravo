@@ -12,11 +12,8 @@ namespace hospital
     {
         public RoomController roomController { get; set; }
         public PatientController patientController { get; set; }
-
         public AppointmentController appointmentController { get; set; }
-
         public MedicalRecordsController mediicalRecordsController { get; set; }
-
         public DoctorController doctorController { get; set; }
         
         public App() {

@@ -58,7 +58,7 @@ namespace Service
             {
                 App app = Application.Current as App;
                 PatientController pc = app.patientController;
-                retVal.Add(new Appointment(-1, doctorRepository.FindByUsername(username), pc.FindById("peromir"), time));
+                retVal.Add(new Appointment(-1, doctorRepository.FindByUsername(username), pc.FindById("peromir"), time)); //odavde izbaciti pacijenta
             }
             
             return retVal;

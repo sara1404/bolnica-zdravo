@@ -142,9 +142,13 @@ namespace Service
             appointmentRepository.Create(appointment);
         }
 
-        public void Update(Appointment appointment)
+        public void Update(Appointment oldAppointment, Appointment newAppointment)
         {
-            throw new NotImplementedException();
+            appointmentRepository.RemoveAppointment(oldAppointment);
+            newAppointment.Id = oldAppointment.Id;
+            newAppointment.doctor = oldAppointment.doctor;
+            newAppointment.patient = oldAppointment.patient;
+            appointmentRepository.AddAppointment(newAppointment);
         }
 
         public ObservableCollection<Appointment> GetByDoctor(string username)

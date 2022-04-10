@@ -24,6 +24,7 @@ namespace Model
             }
         }
 
+        public Patient() { }
         public Patient(string _username,string _password, string _email,string fName, string lName, string patientId,string phone): base(_username, _password, _email)
         {
             FirstName = fName;

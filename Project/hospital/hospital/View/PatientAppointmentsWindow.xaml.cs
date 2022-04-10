@@ -44,7 +44,10 @@ namespace hospital.View
 
         private void btnDelay_Click(object sender, RoutedEventArgs e)
         {
-
+            if(appointmentTable.SelectedIndex != -1)
+            {
+                new PatientDelayAppointment().Show();
+            }
         }
     }
 }

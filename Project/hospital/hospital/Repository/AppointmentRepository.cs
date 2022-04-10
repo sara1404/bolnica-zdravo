@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-
+using System.Linq;
 
 namespace Repository
 {
@@ -15,12 +15,22 @@ namespace Repository
         public AppointmentRepository()
         {
             // call filehandler read here
+            appointmentsFileHandler = new FileHandler.AppointmentsFileHandler();
+            //appointments = (ObservableCollection<Appointment>)appointmentsFileHandler.Read();
             PatientRepository pr = new PatientRepository();
             DoctorRepository dr = new DoctorRepository();
 
-            appointments = new ObservableCollection<Appointment>();
-            DateTime dt = new DateTime(2022, 4, 9, 15, 0, 0);
-            appointments.Add(new Appointment(1, dr.FindByUsername("miromir"), pr.FindById("peromir"), dt));
+            List<Appointment> deserializedList = appointmentsFileHandler.Read();
+            if (deserializedList == null)
+            {
+                appointments = new ObservableCollection<Appointment>();
+            }
+            else
+            {
+                appointments = new ObservableCollection<Appointment>(appointmentsFileHandler.Read());
+            }
+            //DateTime dt = new DateTime(2022, 4, 9, 15, 0, 0);
+            //appointments.Add(new Appointment(1, dr.FindByUsername("miromir"), pr.FindById("peromir"), dt));
         }
 
         public int GetNewId()
@@ -50,11 +60,13 @@ namespace Repository
         public void DeleteById(int id)
         {
             appointments.Remove(FindById(id));
+            appointmentsFileHandler.Write(appointments.ToList());
         }
 
         public void Create(Appointment _appointment)
         {
             appointments.Add(_appointment);
+            appointmentsFileHandler.Write(appointments.ToList());
         }
 
         public void UpdateById(Appointment appointment, string id)
@@ -102,6 +114,7 @@ namespace Repository
             if (!appointments.Contains(newAppointment))
             {
                 appointments.Add(newAppointment);
+                appointmentsFileHandler.Write(appointments.ToList());
             }
         }
 
@@ -118,6 +131,7 @@ namespace Repository
                 if (appointments.Contains(oldAppointment))
                 {
                     appointments.Remove(oldAppointment);
+                    appointmentsFileHandler.Write(appointments.ToList());
                 }
             }
         }

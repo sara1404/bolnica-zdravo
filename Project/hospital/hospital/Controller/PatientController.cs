@@ -3,6 +3,7 @@ using Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Controller
 {
@@ -17,6 +18,7 @@ namespace Controller
         }
         public bool Create(Patient patient)
         {
+           isValidate(patient);
            return patientService.Create(patient);
         }
 
@@ -40,5 +42,25 @@ namespace Controller
             return patientService.UpdateById(id, patient);
         }
 
+        private void isValidate(Patient patient)
+        {
+            if(patient.FirstName.Trim().Equals(""))
+            {
+                throw new Exception("Input first name");
+            }
+            else if (patient.FirstName.Trim().Any(char.IsDigit))
+            {
+                throw new Exception("number in fist name");
+            }
+
+            if (patient.LastName.Trim().Equals(""))
+            {
+                throw new Exception("Input surname");
+            }
+            else if (patient.LastName.Trim().Any(char.IsDigit))
+            {
+                throw new Exception("number in surname");
+            }
+        }
     }
 }

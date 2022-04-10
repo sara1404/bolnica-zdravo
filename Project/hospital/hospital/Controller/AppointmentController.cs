@@ -55,7 +55,8 @@ namespace Controller
 
         public bool UpdateAppointment(Appointment oldAppointment, Appointment newAppointment)
         {
-            throw new NotImplementedException();
+            appointmentService.Update(oldAppointment, newAppointment);
+            return true;
         }
 
         public bool DeleteAppointment(int id)

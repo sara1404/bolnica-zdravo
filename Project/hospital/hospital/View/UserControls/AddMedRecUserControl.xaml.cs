@@ -53,8 +53,10 @@ namespace hospital.View.UserControls
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            mc.Create(new MedicalRecord(pc.FindById(cmbUsername.Text), "1241421", txtAllergens.Text, dc.getByName(cmbDoctor.Text), getBloodType(cmbBlood.Text), txtNote.Text));
-            this.Visibility=Visibility.Collapsed;
+            if (isCorected()) { 
+                mc.Create(new MedicalRecord(pc.FindById(cmbUsername.Text), "1241421", txtAllergens.Text, dc.getByName(cmbDoctor.Text), getBloodType(cmbBlood.Text), txtNote.Text));
+                this.Visibility=Visibility.Collapsed;
+            }
         }
 
         private BloodType getBloodType(string txt)
@@ -93,5 +95,52 @@ namespace hospital.View.UserControls
                     break;
             }
         }
+        private bool isCorected()
+        {
+            bool[] isCorrected = new bool[3];
+
+            for (int i = 0; i < 2; i++)
+            {
+                isCorrected[i] = true;
+            }
+            //username
+            if (cmbUsername.Text.Equals(""))
+            {
+                errUsername.Text = "Choose one option";
+                isCorrected[0] = false;
+            }
+            else
+            {
+                errUsername.Text = "";
+                isCorrected[0] = true;
+            }
+            //doctor
+            if (cmbDoctor.Text.Equals(""))
+            {
+                errDoctor.Text = "Choose one option";
+                isCorrected[1] = false;
+            }
+            else
+            {
+                errDoctor.Text = "";
+                isCorrected[1] = true;
+            }
+            //blood
+            if (cmbBlood.Text.Equals(""))
+            {
+                errBlood.Text = "Choose one option";
+                isCorrected[2] = false;
+            }
+            else
+            {
+                errBlood.Text = "";
+                isCorrected[2] = true;
+            }
+
+
+            return (isCorrected[0] && isCorrected[1] && isCorrected[2]);
+        }
+
+       
     }
 }

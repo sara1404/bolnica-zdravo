@@ -2,7 +2,7 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-
+using System.Linq;
 namespace Repository
 {
     public class PatientRepository
@@ -11,12 +11,25 @@ namespace Repository
         public ObservableCollection<Patient> patient;
         public PatientRepository()
         {
-            patient = new ObservableCollection<Patient>();
-            patient.Add(new Patient("peromir","perica","123","Pera", "Peric", "21312312","052152151"));
+            patientFileHandler = new FileHandler.PatientFileHandler();
+
+            List<Patient> deserializedList = patientFileHandler.Read();
+            if (deserializedList != null)
+            {
+                patient = new ObservableCollection<Patient>(patientFileHandler.Read());
+            }
+            else
+            {
+                patient = new ObservableCollection<Patient>();
+                
+            }
+           // patient = new ObservableCollection<Patient>();
+           //_=Create(new Patient("peromir","perica","123","Pera", "Peric", "21312312","052152151"));
         }
         public bool Create(Patient patient)
         {
             this.patient.Add(patient);
+            patientFileHandler.Write(this.patient.ToList());
             return true;
         }
 
@@ -39,7 +52,9 @@ namespace Repository
 
         public bool DeleteById(string id)
         {
-            return patient.Remove(FindById(id));
+            bool reVal= patient.Remove(FindById(id));
+            patientFileHandler.Write(this.patient.ToList());
+            return reVal;
         }
 
         public bool UpdateById(string id, Patient patient)

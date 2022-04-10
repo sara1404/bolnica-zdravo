@@ -49,6 +49,12 @@ namespace hospital.View
                 DateTime selectedDate = (DateTime)date.SelectedDate;
                 appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDate(selectedDate);
             }
+            if (cmbDoctors.SelectedIndex != -1 && date.SelectedDate != null)
+            {
+                DateTime selectedDate = (DateTime)date.SelectedDate;
+                Doctor d = (Doctor)cmbDoctors.SelectedItem;
+                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor(selectedDate, d.Username);
+            }
         }
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)

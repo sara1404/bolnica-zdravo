@@ -33,5 +33,7 @@ namespace hospital
         {
             new ManagerMainWindow().Show();
         }
+
+     
     }
 }

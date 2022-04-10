@@ -1,19 +1,18 @@
-﻿<Window x:Class="hospital.View.UserControls.DoctorMakeNewAppointment"
+﻿<Window x:Class="hospital.View.DoctorEditAppointment"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:hospital.View"
         mc:Ignorable="d"
-        Title="DoctorMakeNewAppointment" Height="450" Width="800">
+        Title="DoctorEditAppointment" Height="450" Width="800">
     <Grid>
         <Grid>
-            <ComboBox x:Name="cmbPatients" HorizontalAlignment="Left" Margin="115,39,0,0" VerticalAlignment="Top" Width="120"/>
             <Label Content="Patient:" HorizontalAlignment="Left" Margin="33,36,0,0" VerticalAlignment="Top"/>
             <Label Content="Date:" HorizontalAlignment="Left" Margin="33,73,0,0" VerticalAlignment="Top"/>
             <DatePicker x:Name="date" HorizontalAlignment="Left" Margin="115,75,0,0" VerticalAlignment="Top" Width="120"/>
             <Label Content="Operation:" HorizontalAlignment="Left" Margin="32,107,0,0" VerticalAlignment="Top"/>
-            <RadioButton x:Name="rbOperation" Content="Yes" HorizontalAlignment="Left" Margin="114,113,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="rbOperation" IsEnabled="False" Content="Yes" HorizontalAlignment="Left" Margin="114,113,0,0" VerticalAlignment="Top"/>
             <Button x:Name="btnShow" Content="Show" HorizontalAlignment="Left" Margin="33,160,0,0" VerticalAlignment="Top" Width="86" Height="21" Click="btnShow_Click"/>
             <DataGrid x:Name="appointmentTable"  AutoGenerateColumns="True" IsReadOnly="True" HorizontalAlignment="Left" Height="321" Margin="338,36,0,0" VerticalAlignment="Top" Width="446" />
             <!--<DataGrid.Columns>
@@ -24,6 +23,7 @@
             <Button x:Name="btnConfirm" Content="Confirm" HorizontalAlignment="Left" Margin="338,372,0,0" VerticalAlignment="Top" Width="75" Click="btnConfirm_Click"/>
             <TextBox x:Name="tbDescription"  HorizontalAlignment="Left" Height="123" Margin="32,234,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="266"/>
             <Label Content="Description:" HorizontalAlignment="Left" Margin="32,203,0,0" VerticalAlignment="Top" Width="118"/>
+            <TextBox x:Name="tbPatient" HorizontalAlignment="Left" IsEnabled="False" Height="23" Margin="115,36,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
 
         </Grid>
 

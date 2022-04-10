@@ -20,6 +20,9 @@
         <TextBox x:Name="txtNote" HorizontalAlignment="Left" Margin="33,224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="199" Height="81"/>
         <Button x:Name="btnSubmit" Content="Submit" HorizontalAlignment="Left" Margin="192,319,0,0" VerticalAlignment="Top" Click="btnSubmit_Click"/>
         <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="33,320,0,0" VerticalAlignment="Top" Click="btnCancel_Click"/>
+        <TextBlock x:Name="errUsername" HorizontalAlignment="Left" Margin="112,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Foreground="#FFFC1111"/>
+        <TextBlock x:Name="errDoctor" HorizontalAlignment="Left" Margin="114,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Foreground="#FFEF0F0F"/>
+        <TextBlock x:Name="errBlood" HorizontalAlignment="Left" Margin="112,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Foreground="#FFFA1414"/>
 
     </Grid>
 </UserControl>

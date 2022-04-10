@@ -16,9 +16,6 @@ namespace hospital.View
         
         private RoomController roomController;
 
-
-
-
         public AddRoomWindow()
         {
             InitializeComponent();
@@ -39,13 +36,20 @@ namespace hospital.View
             string purpose = roomPurpose.Text;
             string floor = roomFloor.Text;
             Room newRoom = new Room(name, purpose, Int32.Parse(floor), id);
-            roomController.Create(newRoom);
+            try
+            {
+                roomController.Create(newRoom);
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message, "Error");
+            }
+            this.Close();
         }
 
 
         private void Cancel_New_Room_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
     }
 }

@@ -27,5 +27,6 @@
             </DataGrid.Columns>
         </DataGrid>
         <local:AddMedRecUserControl x:Name="addMedRecUserControl" Visibility="Hidden" Margin="0,-26,0,26"></local:AddMedRecUserControl>
+        <local:EditMedRecUserControl x:Name="editMEdRecUserControl" Visibility="Hidden" Margin="0,-26,0,26"></local:EditMedRecUserControl>
     </Grid>
 </Page>

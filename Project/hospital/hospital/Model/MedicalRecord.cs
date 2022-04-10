@@ -24,6 +24,7 @@ namespace Model
         public string Firstname { get=>patient.FirstName; set=>patient.FirstName=value; }
         public string Lastname { get => patient.LastName; set => patient.LastName = value; }
         public string RecordId { get=>recordId; set=>recordId=value; }
+        public string Username { get => patient.Username; set => patient.Username=value; }
 
         public string Note { get=>note; set=>note=value; }
         public string Alergies { get=>alergies; set=>alergies=value; }

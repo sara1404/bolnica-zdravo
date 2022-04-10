@@ -117,6 +117,9 @@
     <Compile Include="View\UserControls\EditAccountUserControl.xaml.cs">
       <DependentUpon>EditAccountUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\EditMedRecUserControl.xaml.cs">
+      <DependentUpon>EditMedRecUserControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -199,6 +202,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\EditAccountUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\EditMedRecUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

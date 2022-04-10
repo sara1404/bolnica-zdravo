@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -13,6 +14,11 @@ namespace Model
 
         public Doctor doctor;
         public Patient patient;
+        
+        public Appointment()
+        {
+
+        }
         public Appointment(int id, Doctor doctor, Patient patient, DateTime startTime)
         {
             Id = id;

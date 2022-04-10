@@ -6,7 +6,7 @@ namespace FileHandler
 {
     public class PatientFileHandler
     {
-        private readonly string path = @"../../Resources/Data/patientData.txt";
+        private readonly string path = @"../../Resources/Data/PatientData.txt";
 
         public List<Patient> Read()
         {

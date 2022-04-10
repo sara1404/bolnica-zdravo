@@ -96,10 +96,13 @@
     <Compile Include="View\HandlingAccountPage.xaml.cs">
       <DependentUpon>HandlingAccountPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Patient\PatientAppointmentsWindow.xaml.cs">
+    <Compile Include="View\PatientAppointmentsWindow.xaml.cs">
       <DependentUpon>PatientAppointmentsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Patient\PatientMakeNewAppointment.xaml.cs">
+    <Compile Include="View\PatientDelayAppointment.xaml.cs">
+      <DependentUpon>PatientDelayAppointment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientMakeNewAppointment.xaml.cs">
       <DependentUpon>PatientMakeNewAppointment.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SecretaryHomeWindow.xaml.cs">
@@ -177,11 +180,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Patient\PatientAppointmentsWindow.xaml">
+    <Page Include="View\PatientAppointmentsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Patient\PatientMakeNewAppointment.xaml">
+    <Page Include="View\PatientDelayAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientMakeNewAppointment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

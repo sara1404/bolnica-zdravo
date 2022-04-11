@@ -4710,8 +4710,8 @@ SOURCE 0 Arial,8,N</a:FontList>
 </o:GeneralizationSymbol>
 <o:AssociationSymbol Id="o34">
 <a:ModificationDate>1649181663</a:ModificationDate>
-<a:Rect>((2555,-38592), (6379,-31684))</a:Rect>
-<a:ListOfPoints>((4392,-32084),(4392,-38192))</a:ListOfPoints>
+<a:Rect>((2421,-38571), (6319,-31684))</a:Rect>
+<a:ListOfPoints>((4295,-32084),(4295,-38171))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>8</a:ArrowStyle>
 <a:LineColor>16744448</a:LineColor>
@@ -4731,8 +4731,8 @@ SOURCE 0 Arial,8,N</a:FontList>
 </o:AssociationSymbol>
 <o:AssociationSymbol Id="o37">
 <a:ModificationDate>1649161084</a:ModificationDate>
-<a:Rect>((16949,-40115), (25364,-38615))</a:Rect>
-<a:ListOfPoints>((17349,-39365),(24964,-39365))</a:ListOfPoints>
+<a:Rect>((17165,-40335), (25303,-38388))</a:Rect>
+<a:ListOfPoints>((17565,-39361),(24903,-39361))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>3328</a:ArrowStyle>
 <a:LineColor>16744448</a:LineColor>
@@ -4790,7 +4790,7 @@ SOURCE 0 Arial,8,N</a:FontList>
 </o:GeneralizationSymbol>
 <o:AssociationSymbol Id="o45">
 <a:ModificationDate>1649660784</a:ModificationDate>
-<a:Rect>((6318,-14102), (19399,9873))</a:Rect>
+<a:Rect>((6318,-14102), (19399,9830))</a:Rect>
 <a:ListOfPoints>((6718,8910),(18999,8910),(18999,-13702))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>3328</a:ArrowStyle>
@@ -4982,7 +4982,7 @@ LABL 0 Arial,8,N</a:FontList>
 <o:ClassSymbol Id="o35">
 <a:ModificationDate>1649161082</a:ModificationDate>
 <a:IconMode>-1</a:IconMode>
-<a:Rect>((3671,-41970), (17349,-38192))</a:Rect>
+<a:Rect>((3455,-41991), (17565,-38171))</a:Rect>
 <a:LineColor>16744448</a:LineColor>
 <a:FillColor>16770222</a:FillColor>
 <a:ShadowColor>12632256</a:ShadowColor>
@@ -5048,7 +5048,7 @@ LABL 0 Arial,8,N</a:FontList>
 <o:ClassSymbol Id="o38">
 <a:ModificationDate>1649161084</a:ModificationDate>
 <a:IconMode>-1</a:IconMode>
-<a:Rect>((24964,-41734), (31844,-36996))</a:Rect>
+<a:Rect>((24903,-41762), (31905,-36968))</a:Rect>
 <a:LineColor>16744448</a:LineColor>
 <a:FillColor>16770222</a:FillColor>
 <a:ShadowColor>12632256</a:ShadowColor>
@@ -10197,9 +10197,9 @@ LABL 0 Arial,8,N</a:FontList>
 </c:Object>
 </o:ClassSymbol>
 <o:ClassSymbol Id="o298">
-<a:ModificationDate>1649318669</a:ModificationDate>
+<a:ModificationDate>1649666731</a:ModificationDate>
 <a:IconMode>-1</a:IconMode>
-<a:Rect>((-7176,-18220), (27996,-9530))</a:Rect>
+<a:Rect>((-4326,-17770), (30846,-9080))</a:Rect>
 <a:LineColor>128</a:LineColor>
 <a:FillColor>8637161</a:FillColor>
 <a:ShadowColor>12632256</a:ShadowColor>
@@ -10505,9 +10505,9 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Code>recordId</a:Code>
 <a:CreationDate>1649617009</a:CreationDate>
 <a:Creator>Nikola</a:Creator>
-<a:ModificationDate>1649617021</a:ModificationDate>
-<a:Modifier>Nikola</a:Modifier>
-<a:DataType>string</a:DataType>
+<a:ModificationDate>1649666727</a:ModificationDate>
+<a:Modifier>Korisnik</a:Modifier>
+<a:DataType>int</a:DataType>
 <a:Attribute.Visibility>-</a:Attribute.Visibility>
 </o:Attribute>
 </c:Attributes>

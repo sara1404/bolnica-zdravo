@@ -61,6 +61,14 @@ namespace Controller
             {
                 throw new Exception("number in surname");
             }
+
+           foreach(Patient p in patientService.FindAll())
+            {
+                if (p.Username.Equals(patient.Username))
+                {
+                    throw new Exception("Username already exists !");
+                }
+            }
         }
     }
 }

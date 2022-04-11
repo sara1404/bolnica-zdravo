@@ -31,6 +31,7 @@ namespace Model
             LastName = lName;
             id = patientId;
             phoneNumber= phone;
+            isGuest = false;
         }
 
         public Patient(string name)
@@ -38,6 +39,14 @@ namespace Model
             FirstName=name;
         }
 
+        public Patient(string firstName,string surname,string username)
+        {
+            //constructor for guest account
+            FirstName = firstName;
+            LastName = surname;
+            Username = username;
+            isGuest = true;
+        }
         public string Id
         {
             get => id;

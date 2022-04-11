@@ -67,6 +67,11 @@ namespace hospital.View.UserControls
                     txtSurname.BorderBrush = Brushes.Red;
                     errSurname.Text = ex.Message;
                 }
+                if (ex.Message.Equals("Username already exists !"))
+                {
+                    txtUsername.BorderBrush = Brushes.Red;
+                    errUsername.Text = ex.Message;
+                }
             }
 
 

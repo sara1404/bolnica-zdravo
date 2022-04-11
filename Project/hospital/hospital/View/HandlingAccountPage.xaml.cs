@@ -94,6 +94,11 @@ namespace hospital.View
             addUserControl.errSurname.Text = "";
             addUserControl.errUsername.Text = "";
             addUserControl.errPhone.Text = "";
-        }   
+        }
+
+        private void btnGuest_Click(object sender, RoutedEventArgs e)
+        {
+            addGuestUserControl.Visibility = Visibility.Visible;
+        }
     }       
 }           

@@ -114,6 +114,9 @@
     <Compile Include="View\UserControls\AddAccountUserControl.xaml.cs">
       <DependentUpon>AddAccountUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\AddGuestAccUserControl.xaml.cs">
+      <DependentUpon>AddGuestAccUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserControls\AddMedRecUserControl.xaml.cs">
       <DependentUpon>AddMedRecUserControl.xaml</DependentUpon>
     </Compile>
@@ -204,6 +207,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\AddAccountUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\AddGuestAccUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

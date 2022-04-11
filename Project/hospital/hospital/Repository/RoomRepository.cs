@@ -20,7 +20,6 @@ namespace Repository
         public void Create(Model.Room room)
         {
             rooms.Add(room);
-            roomFileHandler.Write(rooms.ToList());
         }
 
         public Room FindRoomById(string id)
@@ -34,11 +33,6 @@ namespace Repository
 
         public ref ObservableCollection<Room> FindAll()
         {
-            if(roomFileHandler.Read() == null)
-                return ref rooms;
-            foreach (Room room in roomFileHandler.Read()) {
-                rooms.Add(room);
-            }
             return ref rooms;
         }
 
@@ -52,11 +46,7 @@ namespace Repository
                     r.floor = room.floor;
                     r.equipment = room.equipment;
                     r.purpose = room.purpose;
-                    roomFileHandler.Write(rooms.ToList());
-
-
                     return true;
-
                 }
                     
             }
@@ -68,13 +58,22 @@ namespace Repository
             foreach (Room room in rooms)
             {
                 if (room.id.Equals(id))
-                {
-                    rooms.Remove(room);
-                    roomFileHandler.Write(rooms.ToList());
-                    return true;
-                }
+                    return rooms.Remove(room);
             }
             return false;
+        }
+
+        public void LoadRoomData() {
+            if (roomFileHandler.Read() != null) {
+                foreach (Room room in roomFileHandler.Read())
+                {
+                    rooms.Add(room);
+                }
+            }
+        }
+
+        public void WriteRoomData() {
+            roomFileHandler.Write(rooms.ToList());
         }
 
         public System.Collections.Generic.List<Room> room;

@@ -35,7 +35,6 @@ namespace hospital.View
         private void KeyPressed(object sender, KeyEventArgs e)
         {
             int selectedRow = dataGridRooms.SelectedIndex;
-            Console.WriteLine(selectedRow);
             if (e.Key == Key.Enter && selectedRow != -1)
             {
                 EditRoomWindow editWindow = new EditRoomWindow();
@@ -45,6 +44,9 @@ namespace hospital.View
                 editWindow.roomId.Text = room.id;
                 editWindow.roomPurpose.Text = room.purpose;
                 editWindow.roomFloor.Text = room.floor.ToString();
+                foreach (Equipment eq in room.equipment) {
+                    editWindow.equipmentListView.Items.Add(eq.type + " " + eq.quantity);
+                }
             }
             else if (e.Key == Key.Delete && selectedRow != -1)
             {

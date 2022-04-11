@@ -59,7 +59,9 @@ namespace hospital.View
             room.id = roomId.Text;
             room.name = roomName.Text;
             room.purpose = roomPurpose.Text;
-            room.floor = Int32.Parse(roomFloor.Text);
+            if(Int32.TryParse(roomFloor.Text, out int res))
+                room.floor = res;
+            MessageBox.Show("Not valid input for floor", "Error");
             try
             {
                 roomController.DeleteById(oldId);
@@ -70,6 +72,11 @@ namespace hospital.View
                 MessageBox.Show("Warehouse cant be edited", "Error");
             }
             this.Close();
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

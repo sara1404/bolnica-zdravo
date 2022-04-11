@@ -16,5 +16,10 @@ namespace hospital.View
         {
             new ManagerRoomsWindow().Show();
         }
+
+        private void ManagerWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
     }
 }

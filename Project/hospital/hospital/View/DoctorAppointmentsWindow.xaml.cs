@@ -34,9 +34,12 @@ namespace hospital.View
             Appointments = ac.GetAppointmentByDoctor("miromir");
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Edit_Click(object sender, RoutedEventArgs e)
         {
-
+            if (Table.SelectedIndex != -1)
+            {
+                new DoctorEditAppointment().Show();
+            }
         }
 
         private void New_Click(object sender, RoutedEventArgs e)

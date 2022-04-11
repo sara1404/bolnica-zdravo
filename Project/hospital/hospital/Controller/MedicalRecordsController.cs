@@ -8,7 +8,7 @@ namespace Controller
     public class MedicalRecordsController
     {
         private readonly MedicalRecordsService medicalRecordsService;
-
+        public string RecordId { get; set; }
         public MedicalRecordsController(MedicalRecordsService _service) { medicalRecordsService = _service; }
         public bool Create(MedicalRecord medicalRecord)
         {

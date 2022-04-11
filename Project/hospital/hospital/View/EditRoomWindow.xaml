@@ -11,24 +11,19 @@
         <Label Content="Id:" HorizontalAlignment="Left" Margin="173,156,0,0" VerticalAlignment="Top" FontSize="16px" Width="27"/>
         <Label Content="Purpose:" HorizontalAlignment="Left" Margin="129,226,0,0" VerticalAlignment="Top" FontSize="16px" Width="71"/>
         <Label Content="Floor:" HorizontalAlignment="Left" Margin="151,300,0,0" VerticalAlignment="Top" FontSize="16px" Width="49"/>
-        <TextBox x:Name="roomName" HorizontalAlignment="Left" Height="23" Margin="300,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" Text="{Binding SelectedItem.name}"/>
+        <TextBox x:Name="roomName" HorizontalAlignment="Left" Height="23" Margin="300,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
         <TextBox x:Name="roomId" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="300,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
         <TextBox x:Name="roomPurpose" HorizontalAlignment="Left" Height="23" Margin="300,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
         <TextBox x:Name="roomFloor" HorizontalAlignment="Left" Height="23" Margin="300,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
         <Button  Content="APPLY" HorizontalAlignment="Left" Margin="129,358,0,0" VerticalAlignment="Top" Width="109" Height="36" Click="Edit_Room_Click"/>
         <Button Content="CANCEL" HorizontalAlignment="Left" Margin="333,358,0,0" VerticalAlignment="Top" Width="108" Height="36"/>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="259" Margin="499,72,0,0" Stroke="Black" VerticalAlignment="Top" Width="243"/>
-        <ScrollBar HorizontalAlignment="Left" Margin="725,72,0,0" VerticalAlignment="Top" Width="13" Height="259"/>
-        <Label Content="Chair" HorizontalAlignment="Left" Margin="561,94,0,0" VerticalAlignment="Top"/>
-        <Label Content="Desk" HorizontalAlignment="Left" Margin="562,138,0,0" VerticalAlignment="Top"/>
-        <Label Content="Ultrasound" HorizontalAlignment="Left" Margin="530,178,0,0" VerticalAlignment="Top"/>
-        <Label Content="Bed" HorizontalAlignment="Left" Margin="568,226,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.363,0.492"/>
-        <Label Content="Lamp" HorizontalAlignment="Left" Margin="559,273,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="617,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="57"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="617,273,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="57"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="617,226,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="57"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="617,181,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="57"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="617,138,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="57"/>
+        <ListView x:Name="equipmentListView" HorizontalAlignment="Left" Height="262" VerticalAlignment="Top" Width="188" Margin="511,94,0,0" SelectionChanged="ListView_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
 
     </Grid>

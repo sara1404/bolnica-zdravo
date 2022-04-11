@@ -22,5 +22,11 @@
         <Label Content="Phone" HorizontalAlignment="Left" Margin="24,200,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtPhone" HorizontalAlignment="Left" Margin="102,204,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
         <Label Content="Create account" HorizontalAlignment="Center" Margin="0,7,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <TextBlock x:Name="errFirstname" HorizontalAlignment="Left" Margin="102,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="13" Foreground="#FFF70C0C"/>
+        <TextBlock x:Name="errSurname" HorizontalAlignment="Left" Margin="102,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="13" Foreground="#FFF70C0C"/>
+        <TextBlock x:Name="errUsername" HorizontalAlignment="Left" Margin="102,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="13" Foreground="#FFF70C0C"/>
+        <TextBlock x:Name="errEmail" HorizontalAlignment="Left" Margin="102,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="13" Foreground="#FFF70C0C"/>
+        <TextBlock x:Name="errId" HorizontalAlignment="Left" Margin="102,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="13" Foreground="#FFF70C0C"/>
+        <TextBlock x:Name="errPhone" HorizontalAlignment="Left" Margin="102,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="13" Foreground="#FFF70C0C"/>
     </Grid>
 </UserControl>

@@ -9,17 +9,16 @@
     <Grid>
         <Menu HorizontalAlignment="Left" Height="39" VerticalAlignment="Top" Width="792"/>
         <Button Content="Demo" HorizontalAlignment="Left" Margin="662,10,0,0" VerticalAlignment="Top" Width="75" Height="21"/>
-        <Button Content="Add room" HorizontalAlignment="Left" Margin="88,61,0,0" VerticalAlignment="Top" Width="103" Height="36" Click="Add_Room_Click"/>
-        <DataGrid x:Name="dataGridRooms" IsReadOnly="True" HorizontalAlignment="Left" Margin="147,119,0,29"  SelectionUnit="FullRow" SelectionMode="Single" AutoGenerateColumns="False" Width="503" PreviewKeyDown="KeyPressed" SelectedItem="{Binding SelectedItem}" ItemsSource="Binding Rooms">
+        <Button Content="Add room" HorizontalAlignment="Left" Margin="147,61,0,0" VerticalAlignment="Top" Width="103" Height="36" Click="Add_Room_Click"/>
+        <DataGrid x:Name="dataGridRooms" IsReadOnly="True" HorizontalAlignment="Left" Margin="147,119,0,29"  SelectionUnit="FullRow" SelectionMode="Single" AutoGenerateColumns="False" Width="503" PreviewKeyDown="KeyPressed" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Width="100" Binding="{Binding name}"/>
-                <DataGridTextColumn Header="Id" Width="100" Binding="{Binding id}"/>
-                <DataGridTextColumn Header="Purpose" Width="100" Binding="{Binding purpose}" />
-                <DataGridTextColumn Header="Floor" Width="100" Binding="{Binding floor}"/>
-                <DataGridTextColumn Header="Equipment" Width="100" Binding="{Binding equipment}"/>
+                <DataGridTextColumn Header="Name" Width="120" Binding="{Binding name}"/>
+                <DataGridTextColumn Header="Id" Width="130" Binding="{Binding id}"/>
+                <DataGridTextColumn Header="Purpose" Width="130" Binding="{Binding purpose}" />
+                <DataGridTextColumn Header="Floor" Width="130" Binding="{Binding floor}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="590,61,0,0" TextWrapping="Wrap" Text="search" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="530,70,0,0" TextWrapping="Wrap" Text="search" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>

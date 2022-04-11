@@ -34,6 +34,5 @@ namespace Controller
         {
             return medicalRecordsService.UpdateById(id, medicalRecord);
         }
-
     }
 }

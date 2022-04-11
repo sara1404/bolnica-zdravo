@@ -21,10 +21,12 @@
                 <DataGridTextColumn Header="Username" Binding="{Binding Username}"/>
                 <DataGridTextColumn Header="Email" Width="70" Binding="{Binding Email}" />
                 <DataGridTextColumn Header="Phone number" Binding="{Binding PhoneNumber}"/>
-                <DataGridTextColumn Header="Blocked" Binding="{Binding Blocked}"/>
+                <DataGridTextColumn Header="Guest" Binding="{Binding IsGuest}"/>
             </DataGrid.Columns>
         </DataGrid>
         <local:AddAccountUserControl x:Name="addUserControl" Visibility="Hidden" Margin="0,-26,0,26"></local:AddAccountUserControl>
         <local:EditAccountUserControl x:Name="editUserControl" Visibility="Collapsed" Margin="0,-26,0,26"></local:EditAccountUserControl>
+        <Button x:Name="btnGuest" Content="Guest" HorizontalAlignment="Left" Margin="551,25,0,0" VerticalAlignment="Top" Width="46" Height="25" Click="btnGuest_Click"/>
+        <local:AddGuestAccUserControl x:Name="addGuestUserControl" Visibility="Hidden"></local:AddGuestAccUserControl>
     </Grid>
 </Page>

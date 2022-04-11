@@ -1,16 +1,10 @@
-﻿using System;
+﻿using System.Windows;
+using Controller;
+using Model;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.Collections.ObjectModel;
+using Service;
+using System;
 
 namespace hospital.View
 {
@@ -19,9 +13,41 @@ namespace hospital.View
     /// </summary>
     public partial class PatientAppointmentsWindow : Window
     {
+        private AppointmentController ac;
+        public ObservableCollection<Appointment> Appointments
+        {
+            get;
+            set;
+        }
         public PatientAppointmentsWindow()
         {
             InitializeComponent();
+            App app = Application.Current as App;
+            ac = app.appointmentController;
+            this.DataContext = this;
+            Appointments = ac.GetAppointmentByPatient("peromir");
+
+        }
+
+        private void btnNewAppointment_Click(object sender, RoutedEventArgs e)
+        {
+            new PatientMakeNewAppointment().Show();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (appointmentTable.SelectedIndex != -1)
+            {
+                ac.DeleteAppointment(Convert.ToInt32(appointmentTable.SelectedItem.ToString()));
+            }
+        }
+
+        private void btnDelay_Click(object sender, RoutedEventArgs e)
+        {
+            if(appointmentTable.SelectedIndex != -1)
+            {
+                new PatientDelayAppointment().Show();
+            }
         }
     }
 }

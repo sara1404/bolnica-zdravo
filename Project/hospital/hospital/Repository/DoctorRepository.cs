@@ -1,71 +1,119 @@
-using System;
+using FileHandler;
 using Model;
-using System.Collections.Generic;
+using System;
+using System.Collections.ObjectModel;
 
 namespace Repository
 {
-   public class DoctorRepository
-   {
-      public List<Doctor> FindAll()
-      {
-         throw new NotImplementedException();
-      }
-      
-      public Doctor FindByUsername(String username)
-      {
-         throw new NotImplementedException();
-      }
-      
-      public FileHandler.DoctorFileHandler doctorFileHandler;
-      public System.Collections.Generic.List<Doctor> doctor;
-      
-      
-      public System.Collections.Generic.List<Doctor> Doctor
-      {
-         get
-         {
-            if (doctor == null)
-               doctor = new System.Collections.Generic.List<Doctor>();
-            return doctor;
-         }
-         set
-         {
-            RemoveAllDoctor();
-            if (value != null)
+    public class DoctorRepository
+    {
+        public DoctorFileHandler doctorFileHandler;
+        public ObservableCollection<Doctor> doctors;
+
+        public DoctorRepository()
+        {
+            doctors = new ObservableCollection<Doctor>();
+            Doctor d1 = new Doctor("Mitar", "Miric");
+            d1.Username = "miromir";
+            doctors.Add(d1);
+            Doctor d2 = new Doctor("Jovan", "Jovanovic");
+            d2.Username = "jovanov";
+            doctors.Add(d2);
+        }
+        public ObservableCollection<Doctor> FindAll()
+        {
+            return doctors;
+        }
+        public Doctor getByName(string firsname,string lastname)
+        {
+            foreach(Doctor doctor in doctors)
             {
-               foreach (Model.Doctor oDoctor in value)
-                  AddDoctor(oDoctor);
+                if(doctor.Name.Equals(firsname) && doctor.Surname.Equals(lastname))
+                    return doctor;
             }
-         }
-      }
-      
-      
-      public void AddDoctor(Model.Doctor newDoctor)
-      {
-         if (newDoctor == null)
-            return;
-         if (this.doctor == null)
-            this.doctor = new System.Collections.Generic.List<Doctor>();
-         if (!this.doctor.Contains(newDoctor))
-            this.doctor.Add(newDoctor);
-      }
-      
-      
-      public void RemoveDoctor(Model.Doctor oldDoctor)
-      {
-         if (oldDoctor == null)
-            return;
-         if (this.doctor != null)
-            if (this.doctor.Contains(oldDoctor))
-               this.doctor.Remove(oldDoctor);
-      }
-      
-      
-      public void RemoveAllDoctor()
-      {
-         if (doctor != null)
-            doctor.Clear();
-      }
-   
-   }
+            return null;
+        }
+
+        public Doctor FindByUsername(string username)
+        {
+            foreach (Doctor d in doctors)
+            {
+                if (d.Username.Equals(username))
+                {
+                    return d;
+                }
+            }
+            return null;
+        }
+
+        public ObservableCollection<Doctor> Doctor
+        {
+            get
+            {
+                if (doctors == null)
+                {
+                    doctors = new ObservableCollection<Doctor>();
+                }
+
+                return doctors;
+            }
+            set
+            {
+                RemoveAllDoctor();
+                if (value != null)
+                {
+                    foreach (Doctor oDoctor in value)
+                    {
+                        AddDoctor(oDoctor);
+                    }
+                }
+            }
+        }
+
+
+        public void AddDoctor(Doctor newDoctor)
+        {
+            if (newDoctor == null)
+            {
+                return;
+            }
+
+            if (doctors == null)
+            {
+                doctors = new ObservableCollection<Doctor>();
+            }
+
+            if (!doctors.Contains(newDoctor))
+            {
+                doctors.Add(newDoctor);
+            }
+        }
+
+
+        public void RemoveDoctor(Doctor oldDoctor)
+        {
+            if (oldDoctor == null)
+            {
+                return;
+            }
+
+            if (doctors != null)
+            {
+                if (doctors.Contains(oldDoctor))
+                {
+                    doctors.Remove(oldDoctor);
+                }
+            }
+        }
+
+
+        public void RemoveAllDoctor()
+        {
+            if (doctors != null)
+            {
+                doctors.Clear();
+            }
+        }
+
+    }
 }

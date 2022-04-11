@@ -1,86 +1,149 @@
-using System;
 using Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
 
 namespace Repository
 {
-   public class AppointmentRepository
-   {
-      public Appointment FindById(int id)
-      {
-         throw new NotImplementedException();
-      }
-      
-      public List<Appointment> FindAll()
-      {
-         throw new NotImplementedException();
-      }
-      
-      public void DeleteById(int id)
-      {
-         throw new NotImplementedException();
-      }
-      
-      public void Create(Appointment appointment)
-      {
-         throw new NotImplementedException();
-      }
-      
-      public void UpdateById(Appointment appointment, String id)
-      {
-         throw new NotImplementedException();
-      }
-      
-      public System.Collections.Generic.List<Appointment> appointment;
-      
-      
-      public System.Collections.Generic.List<Appointment> Appointment
-      {
-         get
-         {
-            if (appointment == null)
-               appointment = new System.Collections.Generic.List<Appointment>();
-            return appointment;
-         }
-         set
-         {
-            RemoveAllAppointment();
-            if (value != null)
+    public class AppointmentRepository
+    {
+        public ObservableCollection<Appointment> appointments;
+        public FileHandler.AppointmentsFileHandler appointmentsFileHandler;
+
+        public AppointmentRepository()
+        {
+            // call filehandler read here
+            appointmentsFileHandler = new FileHandler.AppointmentsFileHandler();
+            //appointments = (ObservableCollection<Appointment>)appointmentsFileHandler.Read();
+            PatientRepository pr = new PatientRepository();
+            DoctorRepository dr = new DoctorRepository();
+
+            List<Appointment> deserializedList = appointmentsFileHandler.Read();
+            if (deserializedList == null)
             {
-               foreach (Model.Appointment oAppointment in value)
-                  AddAppointment(oAppointment);
+                appointments = new ObservableCollection<Appointment>();
             }
-         }
-      }
-      
-      
-      public void AddAppointment(Model.Appointment newAppointment)
-      {
-         if (newAppointment == null)
-            return;
-         if (this.appointment == null)
-            this.appointment = new System.Collections.Generic.List<Appointment>();
-         if (!this.appointment.Contains(newAppointment))
-            this.appointment.Add(newAppointment);
-      }
-      
-      
-      public void RemoveAppointment(Model.Appointment oldAppointment)
-      {
-         if (oldAppointment == null)
-            return;
-         if (this.appointment != null)
-            if (this.appointment.Contains(oldAppointment))
-               this.appointment.Remove(oldAppointment);
-      }
-      
-      
-      public void RemoveAllAppointment()
-      {
-         if (appointment != null)
-            appointment.Clear();
-      }
-      public FileHandler.AppointmentsFileHandler appointmentsFileHandler;
-   
-   }
+            else
+            {
+                appointments = new ObservableCollection<Appointment>(appointmentsFileHandler.Read());
+            }
+            //DateTime dt = new DateTime(2022, 4, 9, 15, 0, 0);
+            //appointments.Add(new Appointment(1, dr.FindByUsername("miromir"), pr.FindById("peromir"), dt));
+        }
+
+        public int GetNewId()
+        {
+            if (appointments.Count == 0)
+                return 0;
+            else 
+                return appointments[appointments.Count - 1].Id + 1;
+        }
+        public Appointment FindById(int id)
+        {
+            foreach(Appointment a in appointments)
+            {
+                if(a.Id == id)
+                {
+                    return a;
+                }
+            }
+            return null;
+        }
+
+        public ObservableCollection<Appointment> FindAll()
+        {
+            return appointments;
+        }
+
+        public void DeleteById(int id)
+        {
+            appointments.Remove(FindById(id));
+            appointmentsFileHandler.Write(appointments.ToList());
+        }
+
+        public void Create(Appointment _appointment)
+        {
+            appointments.Add(_appointment);
+            appointmentsFileHandler.Write(appointments.ToList());
+        }
+
+        public void UpdateById(Appointment appointment, string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ObservableCollection<Appointment> Appointment
+        {
+            get
+            {
+                if (appointments == null)
+                {
+                    appointments = new ObservableCollection<Appointment>();
+                }
+
+                return appointments;
+            }
+            set
+            {
+                RemoveAllAppointment();
+                if (value != null)
+                {
+                    foreach (Model.Appointment oAppointment in value)
+                    {
+                        AddAppointment(oAppointment);
+                    }
+                }
+            }
+        }
+
+
+        public void AddAppointment(Model.Appointment newAppointment)
+        {
+            if (newAppointment == null)
+            {
+                return;
+            }
+
+            if (appointments == null)
+            {
+                appointments = new ObservableCollection<Appointment>();
+            }
+
+            if (!appointments.Contains(newAppointment))
+            {
+                appointments.Add(newAppointment);
+                appointmentsFileHandler.Write(appointments.ToList());
+            }
+        }
+
+
+        public void RemoveAppointment(Model.Appointment oldAppointment)
+        {
+            if (oldAppointment == null)
+            {
+                return;
+            }
+
+            if (appointments != null)
+            {
+                if (appointments.Contains(oldAppointment))
+                {
+                    appointments.Remove(oldAppointment);
+                    appointmentsFileHandler.Write(appointments.ToList());
+                }
+            }
+        }
+
+
+        public void RemoveAllAppointment()
+        {
+            if (appointments != null)
+            {
+                appointments.Clear();
+            }
+        }
+
+    }
 }

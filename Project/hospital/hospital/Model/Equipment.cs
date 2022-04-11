@@ -1,13 +1,8 @@
-using System;
-
 namespace Model
 {
-   public class Equipment
-   {
-      public String type;
-      public int quantity;
-      
-      public Room room;
-   
-   }
+    public class Equipment
+    {
+        public string type { get; set; }
+        public int quantity { get; set; }
+    }
 }

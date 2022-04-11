@@ -1,0 +1,23 @@
+﻿<Window x:Class="hospital.View.AddRoomWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:hospital.View"
+        mc:Ignorable="d"
+        Title="AddRoomWindow" Height="450" Width="800">
+    <Grid>
+        <Label Content="Create new room" HorizontalAlignment="Left" Margin="284,25,0,0" VerticalAlignment="Top" FontSize="20px"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="227,94,0,0" VerticalAlignment="Top" FontSize="16px"/>
+        <Label Content="Id:" HorizontalAlignment="Left" Margin="253,156,0,0" VerticalAlignment="Top" FontSize="16px"/>
+        <Label Content="Purpose:" HorizontalAlignment="Left" Margin="209,226,0,0" VerticalAlignment="Top" FontSize="16px"/>
+        <Label Content="Floor:" HorizontalAlignment="Left" Margin="231,300,0,0" VerticalAlignment="Top" FontSize="16px"/>
+        <TextBox x:Name="roomName" HorizontalAlignment="Left" Height="23" Margin="381,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"/>
+        <TextBox x:Name="roomId"  HorizontalAlignment="Left" Height="23" Margin="381,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"/>
+        <TextBox x:Name="roomPurpose" HorizontalAlignment="Left" Height="23" Margin="381,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"/>
+        <TextBox x:Name="roomFloor" HorizontalAlignment="Left" Height="23" Margin="381,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"/>
+        <Button  Content="APPLY" HorizontalAlignment="Left" Margin="209,358,0,0" VerticalAlignment="Top" Width="109" Height="36" Click="Add_New_Room_Click"/>
+        <Button Content="CANCEL" HorizontalAlignment="Left" Margin="414,358,0,0" VerticalAlignment="Top" Width="109" Height="36" Click="Cancel_New_Room_Click"/>
+
+    </Grid>
+</Window>

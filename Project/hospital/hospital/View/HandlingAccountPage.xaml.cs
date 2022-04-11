@@ -98,6 +98,17 @@ namespace hospital.View
 
         private void btnGuest_Click(object sender, RoutedEventArgs e)
         {
+            addGuestUserControl.txtFirstName.Text = "";
+            addGuestUserControl.txtSurname.Text = "";
+            addGuestUserControl.txtUsername.Text = "";
+
+            addGuestUserControl.txtFirstName.BorderBrush = Brushes.Gray;
+            addGuestUserControl.txtSurname.BorderBrush = Brushes.Gray;
+            addGuestUserControl.txtUsername.BorderBrush = Brushes.Gray;
+
+            addGuestUserControl.errFirstname.Text = "";
+            addGuestUserControl.errSurname.Text = "";
+            addGuestUserControl.errUsername.Text = "";
             addGuestUserControl.Visibility = Visibility.Visible;
         }
     }       

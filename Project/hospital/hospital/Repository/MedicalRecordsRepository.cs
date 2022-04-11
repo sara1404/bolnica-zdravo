@@ -16,10 +16,11 @@ namespace Repository
             medicalRecords = new ObservableCollection<MedicalRecord>();
             PatientRepository pr = new PatientRepository();
             DoctorRepository dp = new DoctorRepository();
-            medicalRecords.Add(new MedicalRecord(pr.FindById("peromir"),"1232141","None",dp.FindByUsername("miromir"),BloodType.oPositive,"None"));
+            medicalRecords.Add(new MedicalRecord(pr.FindById("peromir"), "None",dp.FindByUsername("miromir"),BloodType.oPositive,"None"));
         }
         public bool Create(MedicalRecord medicalRecord)
         {
+            medicalRecord.RecordId = GetNewId();
             medicalRecords.Add(medicalRecord);
             return true;
         }
@@ -29,7 +30,7 @@ namespace Repository
             return medicalRecords;
         }
 
-        public MedicalRecord FindById(string id)
+        public MedicalRecord FindById(int id)
         {
             foreach (MedicalRecord medicalRecord in medicalRecords)
             {
@@ -41,19 +42,26 @@ namespace Repository
             return null;
         }
 
-        public bool DeleteById(string id)
+        public bool DeleteById(int id)
         {
             return medicalRecords.Remove(FindById(id));
         }
 
-        public bool UpdateById(string id, MedicalRecord medicalRecord)
+        public bool UpdateById(int id, MedicalRecord medicalRecord)
         {
             medicalRecords.Remove(FindById(id));
+            medicalRecord.RecordId =id;
             medicalRecords.Add(medicalRecord);
             return true;
         }
 
-
+        public int GetNewId()
+        {
+            if (medicalRecords.Count == 0)
+                return 0;
+            else
+                return medicalRecords[medicalRecords.Count - 1].RecordId + 1;
+        }
 
         public ObservableCollection<MedicalRecord> MedicalRecord
         {
@@ -124,6 +132,7 @@ namespace Repository
             }
         }
         
+
 
     }
 }

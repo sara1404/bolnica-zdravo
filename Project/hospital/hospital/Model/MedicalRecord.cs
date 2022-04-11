@@ -9,12 +9,11 @@ namespace Model
         private  Therapy[] therapy;
         private  BloodType bloodType;
         private  Patient patient;
-        private  string recordId;
+        private  int recordId;
 
-        public MedicalRecord(Patient patient, string recordId, string _allergens, Doctor _choosen, BloodType bt, string note)
+        public MedicalRecord(Patient patient, string _allergens, Doctor _choosen, BloodType bt, string note)
         {
             this.patient = patient;
-            this.recordId = recordId;
             this.note = note;
             this.alergies = _allergens;
             this.choosenDoctor = _choosen;
@@ -23,7 +22,7 @@ namespace Model
 
         public string Firstname { get=>patient.FirstName; set=>patient.FirstName=value; }
         public string Lastname { get => patient.LastName; set => patient.LastName = value; }
-        public string RecordId { get=>recordId; set=>recordId=value; }
+        public int RecordId { get=>recordId; set=>recordId=value; }
         public string Username { get => patient.Username; set => patient.Username=value; }
 
         public string Note { get=>note; set=>note=value; }

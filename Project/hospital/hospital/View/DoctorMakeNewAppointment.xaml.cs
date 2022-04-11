@@ -40,6 +40,8 @@ namespace hospital.View.UserControls
             cmbPatients.ItemsSource = pc.FindAll();
             cmbOpRoom.ItemsSource = rc.FindAll();
             loggedInDoctor = dc.GetDoctors().First<Doctor>(); //za sad zakucamo
+            if (loggedInDoctor.Specialization == Model.Specialization.general)
+                cbOperation.IsEnabled = false;
             this.DataContext = this;
         }
 
@@ -66,7 +68,7 @@ namespace hospital.View.UserControls
                 Appointment selectedAppointment = (Appointment)appointmentTable.SelectedItem;
                 selectedAppointment.Patient = selectedPatient;
                 selectedAppointment.Description = tbDescription.Text;
-                if (cbOperation.IsChecked == true && cmbOpRoom.SelectedIndex != -1)
+                if (cbOperation.IsChecked == true && cmbOpRoom.SelectedIndex != -1 && loggedInDoctor.Specialization != Specialization.general)
                     selectedAppointment.operationRoom = (Room)cmbOpRoom.SelectedItem;
                 ac.CreateAppointment(selectedAppointment);
                 this.Close();

@@ -28,9 +28,10 @@ namespace hospital.View
         public PatientMakeNewAppointment()
         {
             InitializeComponent();
-            DoctorService ds = new DoctorService();
-            cmbDoctors.ItemsSource = ds.GetDoctors();
+            //DoctorService ds = new DoctorService();
             App app = Application.Current as App;
+            DoctorController dc = app.doctorController;
+            cmbDoctors.ItemsSource = dc.GetDoctors();
             ac = app.appointmentController;
             this.DataContext = this;
         }

@@ -14,6 +14,7 @@ namespace Model
 
         public Doctor doctor;
         public Patient patient;
+        public Room operationRoom;
         
         public Appointment()
         {
@@ -79,6 +80,21 @@ namespace Model
                 }
             }
         }
+        public string OperationRoom
+        {
+            get
+            {
+                if (operationRoom == null)
+                {
+                    return ".";
+                }
+                else
+                {
+                    return operationRoom.name;
+                }
+            }
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

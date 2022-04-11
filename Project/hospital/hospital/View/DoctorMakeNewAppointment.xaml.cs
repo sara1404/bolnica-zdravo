@@ -21,9 +21,10 @@ namespace hospital.View.UserControls
     /// </summary>
     public partial class DoctorMakeNewAppointment : Window
     {
-        public DoctorController dc;
-        public AppointmentController ac;
-        public PatientController pc;
+        private DoctorController dc;
+        private AppointmentController ac;
+        private PatientController pc;
+        private RoomController rc;
 
         public Doctor loggedInDoctor;
         public Patient selectedPatient;
@@ -34,7 +35,10 @@ namespace hospital.View.UserControls
             dc = app.doctorController;
             ac = app.appointmentController;
             pc = app.patientController;
+            rc = app.roomController;
+            
             cmbPatients.ItemsSource = pc.FindAll();
+            cmbOpRoom.ItemsSource = rc.FindAll();
             loggedInDoctor = dc.GetDoctors().First<Doctor>(); //za sad zakucamo
             this.DataContext = this;
         }
@@ -62,8 +66,27 @@ namespace hospital.View.UserControls
                 Appointment selectedAppointment = (Appointment)appointmentTable.SelectedItem;
                 selectedAppointment.Patient = selectedPatient;
                 selectedAppointment.Description = tbDescription.Text;
+                if (cbOperation.IsChecked == true && cmbOpRoom.SelectedIndex != -1)
+                    selectedAppointment.operationRoom = (Room)cmbOpRoom.SelectedItem;
                 ac.CreateAppointment(selectedAppointment);
                 this.Close();
+            }
+        }
+
+        private void cbOperation_Checked(object sender, RoutedEventArgs e)
+        {
+            if(cbOperation.IsChecked == true)
+            {
+                cmbOpRoom.IsEnabled = true;
+            }
+
+        }
+
+        private void cbOperation_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (cbOperation.IsChecked == false)
+            { 
+                cmbOpRoom.IsEnabled = false;
             }
         }
     }

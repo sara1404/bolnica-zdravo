@@ -148,6 +148,7 @@ namespace Service
             newAppointment.Id = oldAppointment.Id;
             newAppointment.doctor = oldAppointment.doctor;
             newAppointment.patient = oldAppointment.patient;
+            //newAppointment.operationRoom = oldAppointment.operationRoom;
             appointmentRepository.AddAppointment(newAppointment);
         }
 

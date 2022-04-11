@@ -24,7 +24,7 @@ namespace hospital.View
     public partial class DoctorAppointmentsWindow : Window
     {
         public ObservableCollection<Appointment> Appointments { get; set; }
-        public AppointmentController ac;
+        private AppointmentController ac;
         public DoctorAppointmentsWindow()
         {
             InitializeComponent();

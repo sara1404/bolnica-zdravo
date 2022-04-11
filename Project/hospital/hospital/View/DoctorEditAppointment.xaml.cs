@@ -23,10 +23,15 @@ namespace hospital.View
     public partial class DoctorEditAppointment : Window
     {
         private AppointmentController ac;
+        private RoomController rc;
         private Appointment selectedAppointment;
         public DoctorEditAppointment()
         {
             InitializeComponent();
+            App app = Application.Current as App;
+            ac = app.appointmentController;
+            rc = app.roomController;
+            this.DataContext = this;
             foreach (Window window in Application.Current.Windows)
             {
                 if (window.GetType() == typeof(DoctorAppointmentsWindow))
@@ -35,11 +40,17 @@ namespace hospital.View
                     tbPatient.Text = selectedAppointment.patient.ToString(); //moze i a.PatientName()
                     date.SelectedDate = selectedAppointment.StartTime;
                     tbDescription.Text = selectedAppointment.Description;
+                    if (selectedAppointment.operationRoom != null)
+                    {
+                        cmbOpRoom.ItemsSource = rc.FindAll();
+                        //cmbOpRoom.SelectedItem = (Room)selectedAppointment.operationRoom;
+                        cmbOpRoom.SelectedIndex = 0; //za sad je zakucano
+                        cbOperation.IsChecked = true;
+                        cmbOpRoom.IsEnabled = true;
+                    }
                 }
             }
-            App app = Application.Current as App;
-            ac = app.appointmentController;
-            this.DataContext = this;
+            
         }
 
         private void btnShow_Click(object sender, RoutedEventArgs e)
@@ -54,10 +65,29 @@ namespace hospital.View
         {
             if (appointmentTable.SelectedItem != null)
             {
+
                 Appointment updatedAppointment = (Appointment)appointmentTable.SelectedItem;
                 updatedAppointment.Description = tbDescription.Text;
+                if (cmbOpRoom.SelectedIndex != -1)
+                    updatedAppointment.operationRoom = (Room)cmbOpRoom.SelectedItem;
                 ac.UpdateAppointment(selectedAppointment, updatedAppointment);
                 this.Close();
+            }
+        }
+
+        private void cbOperation_Checked(object sender, RoutedEventArgs e)
+        {
+            if(cbOperation.IsChecked == true)
+            {
+                cmbOpRoom.IsEnabled = true;
+            }
+        }
+
+        private void cbOperation_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (cbOperation.IsChecked == false)
+            {
+                cmbOpRoom.IsEnabled = false;
             }
         }
     }

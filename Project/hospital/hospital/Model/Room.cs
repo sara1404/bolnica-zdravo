@@ -18,5 +18,10 @@ namespace Model
         public string id { get; set; }
         public List<Equipment> equipment { get; set; }
 
+        public override string ToString()
+        {
+            return this.name;
+        }
+
     }
 }

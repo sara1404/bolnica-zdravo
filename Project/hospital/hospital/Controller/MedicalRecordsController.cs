@@ -8,7 +8,7 @@ namespace Controller
     public class MedicalRecordsController
     {
         private readonly MedicalRecordsService medicalRecordsService;
-        public string RecordId { get; set; }
+        public int RecordId { get; set; }
         public MedicalRecordsController(MedicalRecordsService _service) { medicalRecordsService = _service; }
         public bool Create(MedicalRecord medicalRecord)
         {
@@ -20,17 +20,17 @@ namespace Controller
             return medicalRecordsService.FindAll();
         }
 
-        public MedicalRecord FindById(string id)
+        public MedicalRecord FindById(int id)
         {
             return medicalRecordsService.FindById(id);
         }
 
-        public bool DeleteById(string id)
+        public bool DeleteById(int id)
         {
             return medicalRecordsService.DeleteById(id);
         }
 
-        public bool UpdateById(string id, MedicalRecord medicalRecord)
+        public bool UpdateById(int id, MedicalRecord medicalRecord)
         {
             return medicalRecordsService.UpdateById(id, medicalRecord);
         }

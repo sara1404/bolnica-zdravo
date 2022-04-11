@@ -36,7 +36,7 @@ namespace hospital.View.UserControls
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            mc.UpdateById(mc.RecordId, new MedicalRecord(pc.FindById(cmbUsername.Text),mc.RecordId,txtAllergens.Text,dc.getByName(cmbDoctor.Text),getBloodType(cmbBlood.Text),txtNote.Text));
+            mc.UpdateById(mc.RecordId, new MedicalRecord(pc.FindById(cmbUsername.Text),txtAllergens.Text,dc.getByName(cmbDoctor.Text),getBloodType(cmbBlood.Text),txtNote.Text));
             this.Visibility = Visibility.Hidden;
         }
 

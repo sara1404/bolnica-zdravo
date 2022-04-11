@@ -54,7 +54,7 @@ namespace hospital.View.UserControls
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
             if (isCorected()) { 
-                mc.Create(new MedicalRecord(pc.FindById(cmbUsername.Text), "1241421", txtAllergens.Text, dc.getByName(cmbDoctor.Text), getBloodType(cmbBlood.Text), txtNote.Text));
+                mc.Create(new MedicalRecord(pc.FindById(cmbUsername.Text), txtAllergens.Text, dc.getByName(cmbDoctor.Text), getBloodType(cmbBlood.Text), txtNote.Text));
                 this.Visibility=Visibility.Collapsed;
             }
         }

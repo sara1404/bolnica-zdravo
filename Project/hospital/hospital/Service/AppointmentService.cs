@@ -37,7 +37,7 @@ namespace Service
             ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
             foreach (Appointment a in appointmentRepository.FindAll())
             {
-                if (a.doctor.Username.Equals(username))
+                if (a.DoctorUsername.Equals(username))
                 {
                     startTimes.Add(a.StartTime);
                 }
@@ -58,7 +58,7 @@ namespace Service
             {
                 App app = Application.Current as App;
                 PatientController pc = app.patientController;
-                retVal.Add(new Appointment(-1, doctorRepository.FindByUsername(username), pc.FindById("peromir"), time)); //odavde izbaciti pacijenta
+                retVal.Add(new Appointment(-1, doctorRepository.FindByUsername(username).Username, pc.FindById("peromir").Username, time)); //odavde izbaciti pacijenta
             }
             
             return retVal;
@@ -91,7 +91,7 @@ namespace Service
                 PatientController pc = app.patientController;
                 foreach (Doctor d in doctorRepository.FindAll())
                 {
-                    retVal.Add(new Appointment(-1, d, pc.FindById("peromir"), time));
+                    retVal.Add(new Appointment(-1, d.Username, pc.FindById("peromir").Username, time));
                 }
             }
 
@@ -105,7 +105,7 @@ namespace Service
             ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
             foreach (Appointment a in appointmentRepository.FindAll())
             {
-                if (a.doctor.Username == username && a.StartTime.Day == date.Day && a.StartTime.Month == date.Month && a.StartTime.Year == date.Year)
+                if (a.DoctorUsername.Equals(username) && a.StartTime.Day == date.Day && a.StartTime.Month == date.Month && a.StartTime.Year == date.Year)
                 {
                     startTimes.Add(a.StartTime);
                 }
@@ -125,7 +125,7 @@ namespace Service
                 App app = Application.Current as App;
                 PatientController pc = app.patientController;
                 DoctorController dc = app.doctorController;
-                retVal.Add(new Appointment(-1, dc.GetByUsername(username), pc.FindById("peromir"), time));
+                retVal.Add(new Appointment(-1, username, pc.FindById("peromir").Username, time));
                 
             }
             return retVal;
@@ -146,8 +146,8 @@ namespace Service
         {
             appointmentRepository.RemoveAppointment(oldAppointment);
             newAppointment.Id = oldAppointment.Id;
-            newAppointment.doctor = oldAppointment.doctor;
-            newAppointment.patient = oldAppointment.patient;
+            newAppointment.DoctorUsername = oldAppointment.DoctorUsername;
+            newAppointment.PatientUsername = oldAppointment.PatientUsername;
             //newAppointment.operationRoom = oldAppointment.operationRoom;
             appointmentRepository.AddAppointment(newAppointment);
         }
@@ -162,7 +162,7 @@ namespace Service
 
             foreach (Appointment a in appointmentRepository.FindAll())
             {
-                if (a.doctor.Username == username) // change to Id to Username
+                if (a.DoctorUsername.Equals(username)) // change to Id to Username
                 {
                     retVal.Add(a);
                 }
@@ -176,7 +176,7 @@ namespace Service
             List<Appointment> otherPatients = new List<Appointment>();
             foreach (Appointment a in appointmentRepository.FindAll())
             {
-                if (!a.patient.Id.Equals(username)) // change to Id to Username
+                if (!a.PatientUsername.Equals(username))
                 {
                     // finding all other patients
                     otherPatients.Add(a);

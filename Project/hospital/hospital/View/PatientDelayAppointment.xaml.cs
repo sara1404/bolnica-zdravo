@@ -32,7 +32,7 @@ namespace hospital.View
                 if (window.GetType() == typeof(PatientAppointmentsWindow))
                 {
                     a = (window as PatientAppointmentsWindow).appointmentTable.SelectedItem as Appointment;
-                    tbxDoctor.Text = a.doctor.ToString();
+                    tbxDoctor.Text = a.DoctorUsername;
                     oldDate.SelectedDate = a.StartTime;
                 }
             }
@@ -45,7 +45,7 @@ namespace hospital.View
         {
             if (newDate.SelectedDate != null)
             {
-                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)newDate.SelectedDate, a.doctor.Username);
+                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)newDate.SelectedDate, a.DoctorUsername);
             }
         }
 

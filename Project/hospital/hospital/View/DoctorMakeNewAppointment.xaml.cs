@@ -66,10 +66,10 @@ namespace hospital.View.UserControls
             if (appointmentTable.SelectedIndex != -1 && selectedPatient != null)
             {
                 Appointment selectedAppointment = (Appointment)appointmentTable.SelectedItem;
-                selectedAppointment.Patient = selectedPatient;
+                selectedAppointment.PatientUsername = selectedPatient.Username;
                 selectedAppointment.Description = tbDescription.Text;
                 if (cbOperation.IsChecked == true && cmbOpRoom.SelectedIndex != -1 && loggedInDoctor.Specialization != Specialization.general)
-                    selectedAppointment.operationRoom = (Room)cmbOpRoom.SelectedItem;
+                    selectedAppointment.OperationRoomId = ((Room)cmbOpRoom.SelectedItem).id;
                 ac.CreateAppointment(selectedAppointment);
                 this.Close();
             }

@@ -274,5 +274,11 @@
   <ItemGroup>
     <Resource Include="Resources\Data\RoomData.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Data\AppointmentData.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Data\patientData.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

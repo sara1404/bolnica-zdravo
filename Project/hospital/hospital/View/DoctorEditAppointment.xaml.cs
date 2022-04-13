@@ -37,10 +37,10 @@ namespace hospital.View
                 if (window.GetType() == typeof(DoctorAppointmentsWindow))
                 {
                     selectedAppointment = (window as DoctorAppointmentsWindow).Table.SelectedItem as Appointment;
-                    tbPatient.Text = selectedAppointment.patient.ToString(); //moze i a.PatientName()
+                    tbPatient.Text = selectedAppointment.PatientUsername; // changed because of changes in the model 
                     date.SelectedDate = selectedAppointment.StartTime;
                     tbDescription.Text = selectedAppointment.Description;
-                    if (selectedAppointment.operationRoom != null)
+                    if (selectedAppointment.OperationRoomId != "")
                     {
                         cmbOpRoom.ItemsSource = rc.FindAll();
                         //cmbOpRoom.SelectedItem = (Room)selectedAppointment.operationRoom;
@@ -57,7 +57,7 @@ namespace hospital.View
         {
             if (date.SelectedDate != null)
             {
-                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)date.SelectedDate, selectedAppointment.doctor.Username);
+                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)date.SelectedDate, selectedAppointment.DoctorUsername);
             }
         }
 
@@ -69,7 +69,7 @@ namespace hospital.View
                 Appointment updatedAppointment = (Appointment)appointmentTable.SelectedItem;
                 updatedAppointment.Description = tbDescription.Text;
                 if (cmbOpRoom.SelectedIndex != -1)
-                    updatedAppointment.operationRoom = (Room)cmbOpRoom.SelectedItem;
+                    updatedAppointment.OperationRoomId = ((Room)cmbOpRoom.SelectedItem).id;
                 ac.UpdateAppointment(selectedAppointment, updatedAppointment);
                 this.Close();
             }

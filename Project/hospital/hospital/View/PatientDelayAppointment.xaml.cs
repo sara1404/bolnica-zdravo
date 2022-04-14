@@ -27,6 +27,8 @@ namespace hospital.View
         public PatientDelayAppointment()
         {
             InitializeComponent();
+            newDate.DisplayDateStart = DateTime.Today;
+            newDate.DisplayDateEnd = DateTime.Today.AddDays(3);
             foreach (Window window in Application.Current.Windows)
             {
                 if (window.GetType() == typeof(PatientAppointmentsWindow))

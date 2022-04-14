@@ -28,6 +28,7 @@ namespace hospital.View
         public PatientMakeNewAppointment()
         {
             InitializeComponent();
+            date.DisplayDateStart = DateTime.Today;
             //DoctorService ds = new DoctorService();
             App app = Application.Current as App;
             DoctorController dc = app.doctorController;

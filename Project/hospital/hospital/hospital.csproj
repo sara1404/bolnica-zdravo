@@ -73,6 +73,9 @@
     <Compile Include="View\AddRoomWindow.xaml.cs">
       <DependentUpon>AddRoomWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\AddUserAccountPage.xaml.cs">
+      <DependentUpon>AddUserAccountPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DeleteRoomWindow.xaml.cs">
       <DependentUpon>DeleteRoomWindow.xaml</DependentUpon>
     </Compile>
@@ -151,6 +154,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\AddUserAccountPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DeleteRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -273,6 +280,29 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Data\RoomData.txt" />
+    <Resource Include="Resources\Images\group.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\group_50x50.png" />
+    <Resource Include="Resources\Images\medical-records.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\medical-records_1_50x50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\addition_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\editing_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\delete_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\account.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\account_100x100.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

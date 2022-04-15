@@ -40,7 +40,7 @@ namespace hospital.View.UserControls
             cmbPatients.ItemsSource = pc.FindAll();
             cmbOpRoom.ItemsSource = rc.FindAll();
             loggedInDoctor = dc.GetDoctors().First<Doctor>(); //za sad zakucamo
-            if (loggedInDoctor.Specialization == Model.Specialization.general)
+            if (loggedInDoctor.Specialization == Specialization.general)
                 cbOperation.IsEnabled = false;
             this.DataContext = this;
         }

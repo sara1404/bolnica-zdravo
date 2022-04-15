@@ -41,7 +41,7 @@ namespace hospital.View.UserControls
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
             if (isCorrected()) { 
-                pc.UpdateById(pc.EditPatient.Username, new Model.Patient(txtUsername.Text, txtEmail.Text, pc.EditPatient.Password, txtFirstName.Text, txtSurname.Text, txtId.Text, txtPhone.Text));
+                pc.UpdateById(pc.EditPatient.Username, new Patient(txtUsername.Text, txtEmail.Text, pc.EditPatient.Password, txtFirstName.Text, txtSurname.Text, txtId.Text, txtPhone.Text));
                 //pc.Create(new Model.Patient(txtUsername.Text, txtEmail.Text,"123", txtFirstName.Text, txtSurname.Text, txtId.Text, txtPhone.Text));
                 this.Visibility = Visibility.Collapsed;
             }

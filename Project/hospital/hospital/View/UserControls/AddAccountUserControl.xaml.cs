@@ -43,7 +43,7 @@ namespace hospital.View.UserControls
             try {
                 if (isCorrected())
                 {
-                    pc.Create(new Model.Patient(txtUsername.Text, txtPassword.Text, txtEmail.Text, txtFirstName.Text, txtSurname.Text, txtId.Text, txtPhone.Text));
+                    pc.Create(new Patient(txtUsername.Text, txtPassword.Text, txtEmail.Text, txtFirstName.Text, txtSurname.Text, txtId.Text, txtPhone.Text));
                     this.Visibility = Visibility.Collapsed;
                 }
             }catch (Exception ex)

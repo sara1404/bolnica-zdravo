@@ -25,7 +25,7 @@ namespace Model
         }
 
         public Patient() { }
-        public Patient(string _username,string _password, string _email,string fName, string lName, string patientId,string phone): base(_username, _password, _email)
+        public Patient(string _username,string _password, string _email,string fName, string lName, string patientId,string phone): base(_username, _password, _email,hospital.Model.Role.Patient)
         {
             FirstName = fName;
             LastName = lName;

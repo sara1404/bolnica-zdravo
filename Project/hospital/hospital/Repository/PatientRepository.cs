@@ -23,8 +23,6 @@ namespace Repository
                 patient = new ObservableCollection<Patient>();
                 
             }
-           // patient = new ObservableCollection<Patient>();
-           //_=Create(new Patient("peromir","perica","123","Pera", "Peric", "21312312","052152151"));
         }
         public bool Create(Patient patient)
         {

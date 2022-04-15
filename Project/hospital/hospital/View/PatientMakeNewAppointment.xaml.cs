@@ -65,7 +65,7 @@ namespace hospital.View
             {
                 Appointment a = (Appointment)appointmentTable.SelectedItem;
                 ac.CreateAppointment(a);
-                this.Close();
+                Close();
             }
         }
     }

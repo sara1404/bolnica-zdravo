@@ -130,6 +130,121 @@ namespace Service
             }
             return retVal;
         }
+        
+        public ObservableCollection<Appointment> GetRecommendedAppointments(DateTime startDate, DateTime endDate, Doctor doctor, bool priority)
+        {
+            if (priority)   // priority is doctor
+            {
+                List<DateTime> startTimes = new List<DateTime>();
+                ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
+                foreach (Appointment a in appointmentRepository.FindAll())
+                {
+                    if (a.DoctorUsername.Equals(doctor.Username))
+                    {
+                        startTimes.Add(a.StartTime);
+                    }
+                }
+                //DateTime tmrw = DateTime.Now.AddDays(1);
+                //DateTime tomorrow = new DateTime(tmrw.Year, tmrw.Month, tmrw.Day, 7, 0, 0);
+                List<DateTime> allTimeSlots = new List<DateTime>();
+                for (var dayIt = startDate; dayIt <= endDate; dayIt = dayIt.AddDays(1)) {
+                    DateTime day = new DateTime(dayIt.Year, dayIt.Month, dayIt.Day, 7, 0, 0);
+                    for (int i = 0; i < 24; i++)
+                    {
+                        allTimeSlots.Add(day.AddMinutes(i * 30));
+                    }
+                }
+                foreach (DateTime time in startTimes)
+                {
+                    allTimeSlots.Remove(time);
+                }
+                if(allTimeSlots.Count == 0)
+                {
+                    DateTime startDatePrev = startDate.CompareTo(DateTime.Today.AddDays(-4)) > 0 ? DateTime.Today.AddDays(1) : startDate.AddDays(-4);
+                    DateTime endDatePrev = startDate;
+                    for (var dayIt = startDatePrev; dayIt <= endDatePrev; dayIt = dayIt.AddDays(1))
+                    {
+                        DateTime day = new DateTime(dayIt.Year, dayIt.Month, dayIt.Day, 7, 0, 0);
+                        for (int i = 0; i < 24; i++)
+                        {
+                            allTimeSlots.Add(day.AddMinutes(i * 30));
+                        }
+                    }
+
+                    DateTime startDatePost = endDate;
+                    DateTime endDatePost = endDate.AddDays(4);
+                    for (var dayIt = startDatePost; dayIt <= endDatePost; dayIt = dayIt.AddDays(1))
+                    {
+                        DateTime day = new DateTime(dayIt.Year, dayIt.Month, dayIt.Day, 7, 0, 0);
+                        for (int i = 0; i < 24; i++)
+                        {
+                            allTimeSlots.Add(day.AddMinutes(i * 30));
+                        }
+                    }
+                }
+                foreach (DateTime time in startTimes)
+                {
+                    allTimeSlots.Remove(time);
+                }
+
+                foreach (DateTime time in allTimeSlots)
+                {
+                    retVal.Add(new Appointment(-1, doctor.Username, "peromir", time));
+                }
+                return retVal;
+            }
+            else
+            {
+                List<DateTime> startTimes = new List<DateTime>();
+                ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
+                foreach (Appointment a in appointmentRepository.FindAll())
+                {
+                    if (a.DoctorUsername.Equals(doctor.Username))
+                    {
+                        startTimes.Add(a.StartTime);
+                    }
+                }
+                List<DateTime> allTimeSlots = new List<DateTime>();
+                for (var dayIt = startDate; dayIt <= endDate; dayIt = dayIt.AddDays(1))
+                {
+                    DateTime day = new DateTime(dayIt.Year, dayIt.Month, dayIt.Day, 7, 0, 0);
+                    for (int i = 0; i < 24; i++)
+                    {
+                        allTimeSlots.Add(day.AddMinutes(i * 30));
+                    }
+                }
+                foreach (DateTime time in startTimes)
+                {
+                    allTimeSlots.Remove(time);
+                }
+
+                if(allTimeSlots.Count == 0)
+                {
+                    for (var dayIt = startDate; dayIt <= endDate; dayIt = dayIt.AddDays(1))
+                    {
+                        DateTime day = new DateTime(dayIt.Year, dayIt.Month, dayIt.Day, 7, 0, 0);
+                        for (int i = 0; i < 24; i++)
+                        {
+                            allTimeSlots.Add(day.AddMinutes(i * 30));
+                        }
+                    }
+                    foreach (Appointment a in appointmentRepository.FindAll())
+                    {
+                        startTimes.Add(a.StartTime);
+                    }
+                    foreach (DateTime time in startTimes)
+                    {
+                        allTimeSlots.Remove(time);
+                    }
+                }
+                
+                foreach (DateTime time in allTimeSlots)
+                {
+                    retVal.Add(new Appointment(-1, doctor.Username, "peromir", time));
+                }
+                return retVal;
+            }
+        }
 
         public void Delete(int id)
         {

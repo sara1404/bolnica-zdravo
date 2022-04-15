@@ -306,5 +306,17 @@ namespace Service
             return appointmentRepository.FindAll();
         }
 
+        public ObservableCollection<Appointment> GetByDoctorSpecialization(Specialization specialization)
+        {
+            ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
+            foreach (Appointment a in appointmentRepository.FindAll())
+            {
+                if (doctorRepository.FindByUsername(a.doctorUsername).Specialization == specialization)
+                {
+                    retVal.Add(a);
+                }
+            }
+            return retVal;
+        }
     }
 }

@@ -1,0 +1,23 @@
+﻿<Window x:Class="hospital.View.DoctorViewInfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:hospital.View"
+        mc:Ignorable="d"
+        Title="DoctorViewInfoWindow" Height="450" Width="800">
+    <Grid>
+        <Label Content="Patient info" HorizontalAlignment="Left" FontWeight="ExtraBold" FontSize="22" Height="42" Margin="10,10,0,0" VerticalAlignment="Top" Width="247"/>
+        <Label Content="First name:" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" Width="92"/>
+        <Label Content="Last name:" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Width="92"/>
+        <Label Content="Username:" HorizontalAlignment="Left" Margin="10,104,0,0" VerticalAlignment="Top" Width="92"/>
+        <Label Content="Date of birth:" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" Width="92" RenderTransformOrigin="0.487,0.502"/>
+        <Label Content="Phone number:" HorizontalAlignment="Left" Margin="10,156,0,0" VerticalAlignment="Top" Width="92" RenderTransformOrigin="0.487,0.502"/>
+        <Label x:Name="lbFirstName" Content="Label" HorizontalAlignment="Left" Margin="102,52,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbLastName" Content="Label" HorizontalAlignment="Left" Margin="102,78,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbUsername" Content="Label" HorizontalAlignment="Left" Margin="102,104,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbDateOfBirth" Content="Label" HorizontalAlignment="Left" Margin="102,130,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbPhoneNumber" Content="Label" HorizontalAlignment="Left" Margin="102,156,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

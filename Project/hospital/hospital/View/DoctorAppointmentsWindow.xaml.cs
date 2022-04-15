@@ -55,5 +55,13 @@ namespace hospital.View
                 ac.DeleteAppointment(toDelete.Id);
             }
         }
+
+        private void Info_Click(object sender, RoutedEventArgs e)
+        {
+            if(Table.SelectedIndex != -1)
+            {
+                new DoctorViewInfoWindow().Show();
+            }
+        }
     }
 }

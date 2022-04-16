@@ -13,11 +13,13 @@ namespace Service
     {
         private readonly AppointmentRepository appointmentRepository;
         private readonly DoctorRepository doctorRepository;
+        private readonly UserController userController;
 
-        public AppointmentService(AppointmentRepository appointmentRepository, DoctorRepository doctorRepository)
+        public AppointmentService(AppointmentRepository appointmentRepository, DoctorRepository doctorRepository, UserController userController)
         {
             this.appointmentRepository = appointmentRepository;
             this.doctorRepository = doctorRepository;
+            this.userController = userController;
         }
 
         public Appointment Read(int id)
@@ -65,7 +67,7 @@ namespace Service
             {
                 App app = Application.Current as App;
                 PatientController pc = app.patientController;
-                retVal.Add(new Appointment(-1, username, "peromir", time)); 
+                retVal.Add(new Appointment(-1, username, userController.CurentLoggedUser.Username, time)); 
             }
             
             return retVal;
@@ -90,7 +92,7 @@ namespace Service
             }
             foreach (Appointment a in appointmentRepository.FindAll())
             {
-                if (a.patientUsername.Equals("peromir"))
+                if (a.patientUsername.Equals(userController.CurentLoggedUser.Username))
                 {
                     startTimes.Add(a.StartTime);
                 }
@@ -105,7 +107,7 @@ namespace Service
                 PatientController pc = app.patientController;
                 foreach (Doctor d in doctorRepository.FindAll())
                 {
-                    retVal.Add(new Appointment(-1, d.Username, "peromir", time));
+                    retVal.Add(new Appointment(-1, d.Username, userController.CurentLoggedUser.Username, time));
                 }
             }
 
@@ -132,7 +134,7 @@ namespace Service
             }
             foreach (Appointment a in appointmentRepository.FindAll())
             {
-                if (a.patientUsername.Equals("peromir"))
+                if (a.patientUsername.Equals(userController.CurentLoggedUser.Username))
                 {
                     startTimes.Add(a.StartTime);
                 }
@@ -146,7 +148,7 @@ namespace Service
                 App app = Application.Current as App;
                 PatientController pc = app.patientController;
                 DoctorController dc = app.doctorController;
-                retVal.Add(new Appointment(-1, username, pc.FindById("peromir").Username, time));
+                retVal.Add(new Appointment(-1, username, userController.CurentLoggedUser.Username, time));
                 
             }
             return retVal;
@@ -208,7 +210,7 @@ namespace Service
                 // add patients appointments to the start times
                 foreach (Appointment a in appointmentRepository.FindAll())
                 {
-                    if (a.patientUsername.Equals("peromir"))
+                    if (a.patientUsername.Equals(userController.CurentLoggedUser.Username))
                     {
                         startTimes.Add(a.StartTime);
                     }
@@ -222,7 +224,7 @@ namespace Service
                 // offer the patient all found appointments
                 foreach (DateTime time in allTimeSlots)
                 {
-                    retVal.Add(new Appointment(-1, doctor.Username, "peromir", time));
+                    retVal.Add(new Appointment(-1, doctor.Username, userController.CurentLoggedUser.Username, time));
                 }
                 return retVal;
             }
@@ -270,7 +272,7 @@ namespace Service
                 // take in the consideration patients appointments
                 foreach (Appointment a in appointmentRepository.FindAll())
                 {
-                    if (a.patientUsername.Equals("peromir"))
+                    if (a.patientUsername.Equals(userController.CurentLoggedUser.Username))
                     {
                         startTimes.Add(a.StartTime);
                     }
@@ -296,7 +298,7 @@ namespace Service
                             }
                             else
                             {
-                                retVal.Add(new Appointment(-1, d.Username, "peromir", time));
+                                retVal.Add(new Appointment(-1, d.Username, userController.CurentLoggedUser.Username, time));
                                 break;
                             }
                             

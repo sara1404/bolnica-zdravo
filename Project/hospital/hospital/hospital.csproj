@@ -117,6 +117,9 @@
     <Compile Include="View\PatientMakeNewAppointment.xaml.cs">
       <DependentUpon>PatientMakeNewAppointment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PatientRecommendedAppointments.xaml.cs">
+      <DependentUpon>PatientRecommendedAppointments.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SecretaryHomeWindow.xaml.cs">
       <DependentUpon>SecretaryHomeWindow.xaml</DependentUpon>
     </Compile>
@@ -212,6 +215,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PatientMakeNewAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientRecommendedAppointments.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

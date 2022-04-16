@@ -50,6 +50,13 @@ namespace Service
             {
                 allTimeSlots.Add(tomorrow.AddMinutes(i * 30));
             }
+            foreach (Appointment a in appointmentRepository.FindAll())
+            {
+                if (a.patientUsername.Equals("peromir"))
+                {
+                    startTimes.Add(a.StartTime);
+                }
+            }
             foreach (DateTime time in startTimes)
             {
                 allTimeSlots.Remove(time);
@@ -58,7 +65,7 @@ namespace Service
             {
                 App app = Application.Current as App;
                 PatientController pc = app.patientController;
-                retVal.Add(new Appointment(-1, doctorRepository.FindByUsername(username).Username, pc.FindById("peromir").Username, time)); //odavde izbaciti pacijenta
+                retVal.Add(new Appointment(-1, username, "peromir", time)); 
             }
             
             return retVal;
@@ -81,6 +88,13 @@ namespace Service
             {
                 allTimeSlots.Add(day.AddMinutes(i * 30));
             }
+            foreach (Appointment a in appointmentRepository.FindAll())
+            {
+                if (a.patientUsername.Equals("peromir"))
+                {
+                    startTimes.Add(a.StartTime);
+                }
+            }
             foreach (DateTime time in startTimes)
             {
                 allTimeSlots.Remove(time);
@@ -91,7 +105,7 @@ namespace Service
                 PatientController pc = app.patientController;
                 foreach (Doctor d in doctorRepository.FindAll())
                 {
-                    retVal.Add(new Appointment(-1, d.Username, pc.FindById("peromir").Username, time));
+                    retVal.Add(new Appointment(-1, d.Username, "peromir", time));
                 }
             }
 
@@ -116,6 +130,13 @@ namespace Service
             {
                 allTimeSlots.Add(day.AddMinutes(i * 30));
             }
+            foreach (Appointment a in appointmentRepository.FindAll())
+            {
+                if (a.patientUsername.Equals("peromir"))
+                {
+                    startTimes.Add(a.StartTime);
+                }
+            }
             foreach (DateTime time in startTimes)
             {
                 allTimeSlots.Remove(time);
@@ -129,6 +150,162 @@ namespace Service
                 
             }
             return retVal;
+        }
+        
+        public ObservableCollection<Appointment> GetRecommendedAppointments(DateTime startDate, DateTime endDate, Doctor doctor, bool priority)
+        {
+            if (priority)   // priority is doctor
+            {
+                List<DateTime> startTimes = new List<DateTime>();
+                ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
+                // take all of the appointments of chosen doctor
+                foreach (Appointment a in appointmentRepository.FindAll())
+                {
+                    if (a.DoctorUsername.Equals(doctor.Username))
+                    {
+                        startTimes.Add(a.StartTime);
+                    }
+                }
+                // take all possible appointments
+                List<DateTime> allTimeSlots = new List<DateTime>();
+                for (var dayIt = startDate; dayIt <= endDate; dayIt = dayIt.AddDays(1)) {
+                    DateTime day = new DateTime(dayIt.Year, dayIt.Month, dayIt.Day, 7, 0, 0);
+                    for (int i = 0; i < 24; i++)
+                    {
+                        allTimeSlots.Add(day.AddMinutes(i * 30));
+                    }
+                }
+                // remove that doctors appointments from all possible appointments
+                foreach (DateTime time in startTimes)
+                {
+                    allTimeSlots.Remove(time);
+                }
+                if(allTimeSlots.Count == 0)
+                {
+                    // if that doctor is too busy than expand the timeframe
+                    DateTime startDatePrev = startDate.CompareTo(DateTime.Today.AddDays(-4)) > 0 ? DateTime.Today.AddDays(1) : startDate.AddDays(-4);
+                    DateTime endDatePrev = startDate;
+                    for (var dayIt = startDatePrev; dayIt <= endDatePrev; dayIt = dayIt.AddDays(1))
+                    {
+                        DateTime day = new DateTime(dayIt.Year, dayIt.Month, dayIt.Day, 7, 0, 0);
+                        for (int i = 0; i < 24; i++)
+                        {
+                            allTimeSlots.Add(day.AddMinutes(i * 30));
+                        }
+                    }
+
+                    DateTime startDatePost = endDate;
+                    DateTime endDatePost = endDate.AddDays(4);
+                    for (var dayIt = startDatePost; dayIt <= endDatePost; dayIt = dayIt.AddDays(1))
+                    {
+                        DateTime day = new DateTime(dayIt.Year, dayIt.Month, dayIt.Day, 7, 0, 0);
+                        for (int i = 0; i < 24; i++)
+                        {
+                            allTimeSlots.Add(day.AddMinutes(i * 30));
+                        }
+                    }
+                }
+                // add patients appointments to the start times
+                foreach (Appointment a in appointmentRepository.FindAll())
+                {
+                    if (a.patientUsername.Equals("peromir"))
+                    {
+                        startTimes.Add(a.StartTime);
+                    }
+                }
+                // remove all taken timeslots
+                foreach (DateTime time in startTimes)
+                {
+                    allTimeSlots.Remove(time);
+                }
+
+                // offer the patient all found appointments
+                foreach (DateTime time in allTimeSlots)
+                {
+                    retVal.Add(new Appointment(-1, doctor.Username, "peromir", time));
+                }
+                return retVal;
+            }
+            else
+            {
+                List<DateTime> startTimes = new List<DateTime>();
+                ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
+                foreach (Appointment a in appointmentRepository.FindAll())
+                {
+                    if (a.DoctorUsername.Equals(doctor.Username))
+                    {
+                        startTimes.Add(a.StartTime);
+                    }
+                }
+                List<DateTime> allTimeSlots = new List<DateTime>();
+                for (var dayIt = startDate; dayIt <= endDate; dayIt = dayIt.AddDays(1))
+                {
+                    DateTime day = new DateTime(dayIt.Year, dayIt.Month, dayIt.Day, 7, 0, 0);
+                    for (int i = 0; i < 24; i++)
+                    {
+                        allTimeSlots.Add(day.AddMinutes(i * 30));
+                    }
+                }
+                foreach (DateTime time in startTimes)
+                {
+                    allTimeSlots.Remove(time);
+                }
+
+                if(allTimeSlots.Count == 0)
+                {
+                    // if the doctor is busy in that timeframe then find all of the appointments of every doctor
+                    foreach (Appointment a in appointmentRepository.FindAll())//GetByDoctorSpecialization(doctor.Specialization))
+                    {
+                        startTimes.Add(a.StartTime);
+                    }
+                    for (var dayIt = startDate; dayIt <= endDate; dayIt = dayIt.AddDays(1))
+                    {
+                        DateTime day = new DateTime(dayIt.Year, dayIt.Month, dayIt.Day, 7, 0, 0);
+                        for (int i = 0; i < 24; i++)
+                        {
+                            allTimeSlots.Add(day.AddMinutes(i * 30));
+                        }
+                    }
+                }
+                // take in the consideration patients appointments
+                foreach (Appointment a in appointmentRepository.FindAll())
+                {
+                    if (a.patientUsername.Equals("peromir"))
+                    {
+                        startTimes.Add(a.StartTime);
+                    }
+                }
+                foreach (DateTime time in startTimes)
+                {
+                    allTimeSlots.Remove(time);
+                }
+
+                foreach (DateTime time in allTimeSlots)
+                {
+                    // for each available timeslot ...
+                    foreach(Doctor d in doctorRepository.FindAll())
+                    {
+                        // ... list all doctors ...
+                        foreach (Appointment a in GetByDoctor(d.Username))
+                        {
+                            // ... and their appointments
+                            if(a.StartTime.CompareTo(time) == 0)
+                            {
+                                // if they have an appointment in that time than they can't be on that appointment
+                                break;
+                            }
+                            else
+                            {
+                                retVal.Add(new Appointment(-1, d.Username, "peromir", time));
+                                break;
+                            }
+                            
+                        }
+                    }
+                    
+                }
+                return retVal;
+            }
         }
 
         public void Delete(int id)
@@ -162,7 +339,7 @@ namespace Service
 
             foreach (Appointment a in appointmentRepository.FindAll())
             {
-                if (a.DoctorUsername.Equals(username)) // change to Id to Username
+                if (a.DoctorUsername.Equals(username))
                 {
                     retVal.Add(a);
                 }

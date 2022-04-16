@@ -1,7 +1,7 @@
 ﻿using Controller;
 using Repository;
 using Service;
-using hospital.Controller;
+using Controller;
 using System;
 using System.Windows;
 

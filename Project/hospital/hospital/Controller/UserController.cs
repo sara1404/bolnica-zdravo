@@ -8,7 +8,7 @@ using Service;
 using Model;
 using System.Collections.ObjectModel;
 
-namespace hospital.Controller
+namespace Controller
 {
     public class UserController
     {

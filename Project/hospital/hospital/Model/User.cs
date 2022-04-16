@@ -8,17 +8,15 @@ namespace Model
     {
         private string username;
         private string password;
-        private string email;
         private bool isBlocked;
         private Role role;
 
 
         public User() { }
-        public User(string _username,string _password, string _email,Role role)
+        public User(string _username,string _password,Role role)
         {
             this.username = _username;
             this.password = ComputeSha256Hash(_password);
-            this.email = _email;
             this.isBlocked=false;
             this.role = role;
         }
@@ -49,11 +47,6 @@ namespace Model
         {
             get => password;
             set => password = value;
-        }
-        public string Email
-        {
-            get => email;
-            set => email = value;
         }
         public bool IsBlocked
         {

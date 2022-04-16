@@ -6,11 +6,11 @@
              xmlns:local="clr-namespace:hospital.View.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="White" Width="250" Height="300">
+    <Grid Background="White" Width="250" Margin="275,75,275,25">
         <Label Content="First name" HorizontalAlignment="Left" Margin="22,41,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtFirstName" HorizontalAlignment="Left" Margin="102,47,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
-        <Button x:Name="btnSubmit" Content="Submit" HorizontalAlignment="Left" Margin="180,270,0,0" VerticalAlignment="Top" Click="btnSubmit_Click"/>
-        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="20,270,0,0" VerticalAlignment="Top" Click="btnCancel_Click"/>
+        <Button x:Name="btnSubmit" Content="Submit" HorizontalAlignment="Left" Margin="180,310,0,0" VerticalAlignment="Top" Click="btnSubmit_Click"/>
+        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="24,310,0,0" VerticalAlignment="Top" Click="btnCancel_Click"/>
         <Label Content="Surname" HorizontalAlignment="Left" Margin="24,72,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtSurname"  HorizontalAlignment="Left" Margin="102,76,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
         <Label Content="Username" HorizontalAlignment="Left" Margin="24,104,0,0" VerticalAlignment="Top"/>
@@ -31,6 +31,8 @@
         <TextBlock x:Name="errEmail" HorizontalAlignment="Left" Margin="103,186,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="153" Foreground="#FFF71212" Height="14"/>
         <TextBlock x:Name="errId" HorizontalAlignment="Left" Margin="102,218,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="154" Foreground="#FFF71212" Height="14"/>
         <TextBlock x:Name="errPhone" HorizontalAlignment="Left" Margin="103,249,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="153" Foreground="#FFF71212" Height="14"/>
+        <Label Content="Date of Birh" HorizontalAlignment="Left" Margin="24,262,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="datePicker" HorizontalAlignment="Left" Margin="103,264,0,0" VerticalAlignment="Top" Width="120" Height="24"/>
 
     </Grid>
 </UserControl>

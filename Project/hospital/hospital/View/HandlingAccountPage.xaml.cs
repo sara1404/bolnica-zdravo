@@ -24,20 +24,23 @@ namespace hospital.View
     {
         public ObservableCollection<Patient> Patients { get; set; }
         public PatientController pc;
+        public UserController uc;
         public HandlingAccountPage()
         {
             InitializeComponent();
             this.DataContext = this;
             App app = Application.Current as App;
             pc = app.patientController;
+            uc = app.userController;
             Patients = pc.FindAll();
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
             if (dateGridHandlingAccount.SelectedIndex != -1){
-                
-                pc.DeleteById(dateGridHandlingAccount.SelectedItem.ToString());
+                Patient p = (Patient)dateGridHandlingAccount.SelectedItem;
+                pc.DeleteById(p.Username);
+                uc.DeleteByUsername(p.Username);
             }
         }
 
@@ -56,6 +59,7 @@ namespace hospital.View
             addUserControl.txtSurname.Text = "";
             addUserControl.txtUsername.Text = "";
             addUserControl.txtPhone.Text = "";
+            addUserControl.datePicker.Text = "";
             addUserControl.Visibility = Visibility;
         }
 
@@ -71,6 +75,7 @@ namespace hospital.View
                 editUserControl.txtSurname.Text = p.LastName;
                 editUserControl.txtUsername.Text = p.Username;
                 editUserControl.txtPhone.Text = p.PhoneNumber;
+                editUserControl.datePicker.Text = p.DateOfBirth;
                 pc.EditPatient = (Patient)dateGridHandlingAccount.SelectedItem;
                 dateGridHandlingAccount.SelectedIndex = -1;
             }
@@ -78,7 +83,6 @@ namespace hospital.View
 
         private void resetUserControl()
         {
-            Console.WriteLine("JEbem ti sve");
             addUserControl.txtEmail.BorderBrush = Brushes.Gray;
             addUserControl.txtFirstName.BorderBrush = Brushes.Gray;
             addUserControl.txtId.BorderBrush = Brushes.Gray;

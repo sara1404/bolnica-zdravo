@@ -1,6 +1,7 @@
 ﻿using Controller;
 using Repository;
 using Service;
+using Controller;
 using System;
 using System.Windows;
 
@@ -17,6 +18,8 @@ namespace hospital
         public AppointmentController appointmentController { get; set; }
         public MedicalRecordsController mediicalRecordsController { get; set; }
         public DoctorController doctorController { get; set; }
+        public UserController userController { get; set; }
+
 
         public App()
         {
@@ -40,6 +43,10 @@ namespace hospital
             DoctorService doctorService = new DoctorService(doctorRepository);
             doctorController = new DoctorController(doctorService);
 
+            Repository.UserRepository userRepository = new Repository.UserRepository();
+            Service.UserService userService = new Service.UserService(userRepository);
+            userController = new UserController(userService);
+            
             roomRepository.LoadRoomData();
         }
 

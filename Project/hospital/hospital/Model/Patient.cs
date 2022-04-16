@@ -10,6 +10,7 @@ namespace Model
         private string dateOfBirth;
         private string phoneNumber;
         private bool isGuest;
+        private string email;
 
         private readonly MedicalRecord medicalRecord;
 
@@ -25,12 +26,15 @@ namespace Model
         }
 
         public Patient() { }
-        public Patient(string _username,string _password, string _email,string fName, string lName, string patientId,string phone): base(_username, _password, _email)
+        public Patient(string _username,string fName, string lName,string email, string patientId,string phone,string date)
         {
+            Username = _username;
             FirstName = fName;
             LastName = lName;
+            Email = email;
             id = patientId;
             phoneNumber= phone;
+            dateOfBirth= date;
             isGuest = false;
         }
 
@@ -52,7 +56,7 @@ namespace Model
             get => id;
             set => id = value;
         }
-
+        public string Email { get; set; }
         public string FirstName { get => firstName; set => firstName = value; }
         public string LastName { get => lastName; set => lastName = value; }
         public string DateOfBirth { get => dateOfBirth; set => dateOfBirth = value; }
@@ -60,7 +64,6 @@ namespace Model
         public bool IsGuest { get => isGuest; set => isGuest = value; }
 
         public string Username { get => base.Username; set => base.Username = value; }
-        public string Email { get => base.Email; set => base.Email = value; }
 
         public bool Blocked { get => base.IsBlocked; set => base.IsBlocked = value; }
 

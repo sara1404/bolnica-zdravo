@@ -28,5 +28,7 @@
         <TextBlock x:Name="errEmail" HorizontalAlignment="Left" Margin="102,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="13" Foreground="#FFF70C0C"/>
         <TextBlock x:Name="errId" HorizontalAlignment="Left" Margin="102,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="13" Foreground="#FFF70C0C"/>
         <TextBlock x:Name="errPhone" HorizontalAlignment="Left" Margin="102,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="13" Foreground="#FFF70C0C"/>
+        <Label Content="Date of Birh" HorizontalAlignment="Left" Margin="22,234,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="datePicker" HorizontalAlignment="Left" Margin="102,234,0,0" VerticalAlignment="Top" Width="120" Height="24"/>
     </Grid>
 </UserControl>

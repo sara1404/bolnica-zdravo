@@ -4,6 +4,7 @@ using Service;
 using Controller;
 using System;
 using System.Windows;
+using hospital.Model;
 
 namespace hospital
 {

@@ -25,11 +25,12 @@ namespace hospital.View
     public partial class EditRoomWindow : Window, INotifyPropertyChanged
     {
         private RoomController roomController;
-
-        public EditRoomWindow() 
+        private Room room;
+        public EditRoomWindow(Room room) 
         {
             InitializeComponent();
             App app = Application.Current as App;
+            this.room = room;
             roomController = app.roomController;
 
         }
@@ -53,30 +54,38 @@ namespace hospital.View
 
         private void Edit_Room_Click(object sender, RoutedEventArgs e)
         {
-            var viewRoomsWindow = Application.Current.Windows.OfType<ManagerRoomsWindow>().FirstOrDefault();
-            Room room = (Room)viewRoomsWindow.dataGridRooms.SelectedItem;
-            String oldId = room.id;
-            room.id = roomId.Text;
-            room.name = roomName.Text;
-            room.purpose = roomPurpose.Text;
-            if(Int32.TryParse(roomFloor.Text, out int res))
-                room.floor = res;
-            MessageBox.Show("Not valid input for floor", "Error");
+            //var viewRoomsWindow = Application.Current.Windows.OfType<ManagerRoomsWindow>().FirstOrDefault();
+
+
+            
             try
             {
-                roomController.DeleteById(oldId);
-                roomController.Create(room);
+                if (!Int32.TryParse(roomFloor.Text, out int res))
+                {
+                    MessageBox.Show("Not valid input for floor", "Error");
+                    return;
+                }
+                Room newRoom = new Room(roomName.Text, roomPurpose.Text, res, roomId.Text);
+
+                //roomController.DeleteById(room.id);
+                //roomController.Create(newRoom);
+                roomController.UpdateById(room.id, newRoom);
+                this.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Warehouse cant be edited", "Error");
-            }
-            this.Close();
+                MessageBox.Show(ex.Message);
+            } 
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void Cancel_Edit_Room_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -42,10 +42,10 @@ namespace Repository
             {
                 if (r.id.Equals(id)) {
                     r.id = room.id;
-                    r.name = room.name;
+                    r._Name = room.name;
                     r.floor = room.floor;
                     r.equipment = room.equipment;
-                    r.purpose = room.purpose;
+                    r._Purpose = room.purpose;
                     return true;
                 }
                     

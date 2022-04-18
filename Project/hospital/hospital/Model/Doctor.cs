@@ -1,4 +1,5 @@
 using Model;
+using System.Collections.ObjectModel;
 
 namespace Model
 {
@@ -9,6 +10,8 @@ namespace Model
         private Specialization specialization;
 
         public Appointment[] appointment;
+
+        public ObservableCollection<string> myPatients = new ObservableCollection<string>();
 
         public string Name { get => name; set => name = value; }
         public string Surname { get => surname; set => surname = value; }

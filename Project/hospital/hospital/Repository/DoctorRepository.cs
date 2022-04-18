@@ -120,5 +120,11 @@ namespace Repository
             }
         }
 
+        public void addPatientToDoctorsList(string patientId, string doctorUsername)
+        {
+            Doctor d = FindByUsername(doctorUsername);
+            d.myPatients.Add(patientId);
+        }
+
     }
 }

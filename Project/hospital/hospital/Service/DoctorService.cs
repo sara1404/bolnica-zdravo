@@ -39,5 +39,9 @@ namespace Service
             string lastname = name.Split(' ')[1];
             return doctorRepository.getByName(firstname,lastname);
         }
+        public void addPatientToDoctorsList(string patientId, string doctorUsername)
+        {
+            doctorRepository.addPatientToDoctorsList(patientId, doctorUsername);
+        }
     }
 }

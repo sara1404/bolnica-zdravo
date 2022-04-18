@@ -61,6 +61,7 @@
     <Compile Include="Controller\DoctorController.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="FileHandler\UserFileHandler.cs" />
+    <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\Role.cs" />
     <Compile Include="Model\Specialization.cs" />
     <Compile Include="Repository\AppointmentRepository.cs" />

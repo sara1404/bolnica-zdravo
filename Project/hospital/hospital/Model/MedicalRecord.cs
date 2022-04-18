@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Model
 {
     public class MedicalRecord
@@ -6,7 +8,7 @@ namespace Model
         private  string alergies;
         private  Doctor choosenDoctor;
 
-        private  Therapy[] therapy;
+        private  List<Therapy> therapy;
         private  BloodType bloodType;
         private  Patient patient;
         private  int recordId;
@@ -32,5 +34,7 @@ namespace Model
         public string NameDoctor { get => choosenDoctor.ToString();}
         public BloodType BloodType { get=> bloodType; set=> bloodType=value; }
         private Patient _Patient { get; set; }
+
+        public List<Therapy> Therapy { get => therapy; set => therapy = value; }
     }
 }

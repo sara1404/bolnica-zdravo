@@ -12,9 +12,9 @@ namespace Model
         private bool isGuest;
         private string email;
 
-        private readonly MedicalRecord medicalRecord;
+        private MedicalRecord medicalRecord;
 
-        public Appointment[] appointment;
+        //public Appointment[] appointment;
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string name)
@@ -62,14 +62,13 @@ namespace Model
         public string DateOfBirth { get => dateOfBirth; set => dateOfBirth = value; }
         public string PhoneNumber { get => phoneNumber; set => phoneNumber = value; }
         public bool IsGuest { get => isGuest; set => isGuest = value; }
-
         public string Username { get => base.Username; set => base.Username = value; }
-
         public bool Blocked { get => base.IsBlocked; set => base.IsBlocked = value; }
-
         public override string ToString()
         {
             return base.Username;
         }
+        public MedicalRecord MedicalRecord { get => medicalRecord; set => medicalRecord = value; }
+
     }
 }

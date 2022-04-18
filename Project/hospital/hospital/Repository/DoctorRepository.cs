@@ -1,7 +1,9 @@
 using FileHandler;
 using Model;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Repository
 {
@@ -12,7 +14,20 @@ namespace Repository
 
         public DoctorRepository()
         {
-            doctors = new ObservableCollection<Doctor>();
+            doctorFileHandler = new DoctorFileHandler();
+
+            List<Doctor> deserializedList = doctorFileHandler.Read();
+            if (deserializedList != null)
+            {
+                doctors = new ObservableCollection<Doctor>(doctorFileHandler.Read());
+            }
+            else
+            {
+                doctors = new ObservableCollection<Doctor>();
+
+            }
+
+            //doctors = new ObservableCollection<Doctor>();
             Doctor d1 = new Doctor("Mitar", "Miric");
             d1.Username = "miromir";
             d1.Specialization = Specialization.general;
@@ -24,6 +39,8 @@ namespace Repository
             Doctor d3 = new Doctor("Bosko", "Ristovic");
             d3.Username = "Skabo";
             doctors.Add(d3);
+
+            //doctorFileHandler.Write(doctors.ToList()); //ovo za sad ovde stoji
         }
         public ObservableCollection<Doctor> FindAll()
         {
@@ -91,6 +108,7 @@ namespace Repository
             if (!doctors.Contains(newDoctor))
             {
                 doctors.Add(newDoctor);
+                doctorFileHandler.Write(doctors.ToList());
             }
         }
 
@@ -107,6 +125,8 @@ namespace Repository
                 if (doctors.Contains(oldDoctor))
                 {
                     doctors.Remove(oldDoctor);
+                    doctorFileHandler.Write(doctors.ToList());
+
                 }
             }
         }
@@ -124,6 +144,7 @@ namespace Repository
         {
             Doctor d = FindByUsername(doctorUsername);
             d.myPatients.Add(patientId);
+            doctorFileHandler.Write(doctors.ToList());
         }
 
     }

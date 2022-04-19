@@ -42,9 +42,14 @@ namespace hospital.Model
         {
             // notification that runs periodically
             DateTime current = DateTime.Now;
-            TimeSpan timeToGo = startTime - current;
+            if(startTime >= endTime)
+            {
+                throw new Exception("Invalid arguments passed to notification constructor: endTime is before startTime!");
+            }
+            
             if(current <= startTime)
             {
+                TimeSpan timeToGo = startTime - current;
                 this.interval = interval;
                 this.text = text;
                 this.endTime = endTime;
@@ -54,13 +59,32 @@ namespace hospital.Model
                 preTimer.Elapsed += RunPeriodically;
                 preTimer.Start();
             }
+            else if(current > startTime && current <= endTime)
+            {
+                this.interval = interval;
+                this.text = text;
+                this.endTime = endTime;
+                DateTime iterator = startTime;
+                while(iterator <= current)
+                {
+                    iterator = iterator.AddHours(interval);
+                }
+                preTimer = new Timer();
+                TimeSpan timeToGo = iterator - current;
+                preTimer.Interval = timeToGo.TotalMilliseconds;
+                preTimer.AutoReset = false;
+                preTimer.Elapsed += RunPeriodically;
+                preTimer.Start();
+
+
+            }
         }
 
         public void RunPeriodically(Object source, System.Timers.ElapsedEventArgs e)
         {
             MessageBox.Show(text);
             timer = new Timer();
-            timer.Interval = 1000 * 30 * interval;
+            timer.Interval = 1000 * 60 * 60 * interval;
             timer.AutoReset = true;
             timer.Elapsed += NotifyPeriodically;
             timer.Enabled = true;

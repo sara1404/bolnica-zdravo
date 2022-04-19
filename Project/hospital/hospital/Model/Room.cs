@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Model
 {
-    public class Room
+    public class Room: INotifyPropertyChanged
     {
         public Room(string name, string purpose, int floor, string id)
         {
@@ -12,16 +14,46 @@ namespace Model
             this.id = id;
         }
 
-        public string name { get; set; }
-        public string purpose { get; set; }
+        public string _Name { 
+            get
+            {
+                return name;
+            }
+            set 
+            {
+                name = value;
+                OnPropertyChanged();
+            } 
+        }
+
+        public string _Purpose
+        {
+            get
+            {
+                return purpose;
+            }
+
+            set
+            {
+                purpose = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private void OnPropertyChanged(string name="")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+        public string name;
+        public string purpose;
         public int floor { get; set; }
         public string id { get; set; }
         public List<Equipment> equipment { get; set; }
 
-        public override string ToString()
-        {
-            return this.name;
-        }
+        public event PropertyChangedEventHandler PropertyChanged;
 
+
+        
     }
 }

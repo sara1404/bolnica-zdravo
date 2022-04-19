@@ -37,16 +37,20 @@ namespace hospital.View
             int selectedRow = dataGridRooms.SelectedIndex;
             if (e.Key == Key.Enter && selectedRow != -1)
             {
-                EditRoomWindow editWindow = new EditRoomWindow();
-                editWindow.Show();
                 Room room = (Room)dataGridRooms.SelectedItem;
+                EditRoomWindow editWindow = new EditRoomWindow(room);
+                
                 editWindow.roomName.Text = room.name;
                 editWindow.roomId.Text = room.id;
                 editWindow.roomPurpose.Text = room.purpose;
                 editWindow.roomFloor.Text = room.floor.ToString();
-                foreach (Equipment eq in room.equipment) {
-                    editWindow.equipmentListView.Items.Add(eq.type + " " + eq.quantity);
+                if (room.equipment != null) {
+                    foreach (Equipment eq in room.equipment)
+                    {
+                        editWindow.equipmentListView.Items.Add(eq.type + " " + eq.quantity);
+                    }
                 }
+                editWindow.Show();
             }
             else if (e.Key == Key.Delete && selectedRow != -1)
             {

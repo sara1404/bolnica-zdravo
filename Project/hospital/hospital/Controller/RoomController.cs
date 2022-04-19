@@ -45,6 +45,8 @@ namespace Controller
             {
                 throw new Exception("Warehouse cant be edited");
             }
+            if(room.purpose.ToLower().Equals("warehouse") && doesWarehouseExists())
+                throw new Exception("Warehouse already exists");
             if (room.floor < 0 || room.floor > 5)
                 throw new Exception("Floor must be between 0 and 5");
             return roomService.UpdateById(id, room);

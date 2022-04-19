@@ -17,6 +17,7 @@ namespace Service
 
         public void Create(Room room)
         {
+            Console.WriteLine("Added new user");
             roomRepository.Create(room);
         }
 

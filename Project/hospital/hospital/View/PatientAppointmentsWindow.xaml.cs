@@ -49,5 +49,10 @@ namespace hospital.View
                 new PatientDelayAppointment().Show();
             }
         }
+
+        private void btnRecommended_Click(object sender, RoutedEventArgs e)
+        {
+            new PatientRecommendedAppointments().Show();
+        }
     }
 }

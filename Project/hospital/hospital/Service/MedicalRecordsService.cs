@@ -25,17 +25,17 @@ namespace Service
              return medicalRecordsRepository.FindAll();
         }
 
-        public MedicalRecord FindById(string id)
+        public MedicalRecord FindById(int id)
         {
             return medicalRecordsRepository.FindById(id);
         }
 
-        public bool DeleteById(string id)
+        public bool DeleteById(int id)
         {
             return medicalRecordsRepository.DeleteById(id);
         }
 
-        public bool UpdateById(string id, MedicalRecord medicalRecord)
+        public bool UpdateById(int id, MedicalRecord medicalRecord)
         {
             return medicalRecordsRepository.UpdateById(id, medicalRecord);
         }

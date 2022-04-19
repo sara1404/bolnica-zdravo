@@ -59,6 +59,11 @@ namespace Controller
             return true;
         }
 
+        public ObservableCollection<Appointment> GetRecommendedAppointments(DateTime startDate, DateTime endDate, Doctor doctor, bool priority)
+        {
+            return appointmentService.GetRecommendedAppointments(startDate, endDate, doctor, priority);
+        }
+
         public bool DeleteAppointment(int id)
         {
             appointmentService.Delete(id);

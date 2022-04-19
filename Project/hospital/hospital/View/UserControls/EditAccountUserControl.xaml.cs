@@ -22,11 +22,13 @@ namespace hospital.View.UserControls
     public partial class EditAccountUserControl : UserControl
     {
         public PatientController pc;
+        public UserController uc;
         public EditAccountUserControl()
         {
             InitializeComponent();
             App app = Application.Current as App;
             pc = app.patientController;
+            uc = app.userController;
         }
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -40,8 +42,9 @@ namespace hospital.View.UserControls
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            if (isCorrected()) { 
-                pc.UpdateById(pc.EditPatient.Username, new Model.Patient(txtUsername.Text, txtEmail.Text, pc.EditPatient.Password, txtFirstName.Text, txtSurname.Text, txtId.Text, txtPhone.Text));
+            if (isCorrected()) {
+                uc.UpdateByUsername(pc.EditPatient.Username,new User(txtUsername.Text, pc.EditPatient.Password, Model.Role.Patient));
+                pc.UpdateById(pc.EditPatient.Username, new Patient(txtUsername.Text, txtFirstName.Text, txtSurname.Text, txtEmail.Text, txtId.Text, txtPhone.Text,datePicker.Text));
                 //pc.Create(new Model.Patient(txtUsername.Text, txtEmail.Text,"123", txtFirstName.Text, txtSurname.Text, txtId.Text, txtPhone.Text));
                 this.Visibility = Visibility.Collapsed;
             }

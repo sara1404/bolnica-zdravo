@@ -27,12 +27,14 @@ namespace hospital.View
         public PatientDelayAppointment()
         {
             InitializeComponent();
+            newDate.DisplayDateStart = DateTime.Today;
+            newDate.DisplayDateEnd = DateTime.Today.AddDays(3);
             foreach (Window window in Application.Current.Windows)
             {
                 if (window.GetType() == typeof(PatientAppointmentsWindow))
                 {
                     a = (window as PatientAppointmentsWindow).appointmentTable.SelectedItem as Appointment;
-                    tbxDoctor.Text = a.doctor.ToString();
+                    tbxDoctor.Text = a.DoctorUsername;
                     oldDate.SelectedDate = a.StartTime;
                 }
             }
@@ -45,7 +47,7 @@ namespace hospital.View
         {
             if (newDate.SelectedDate != null)
             {
-                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)newDate.SelectedDate, a.doctor.Username);
+                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)newDate.SelectedDate, a.DoctorUsername);
             }
         }
 

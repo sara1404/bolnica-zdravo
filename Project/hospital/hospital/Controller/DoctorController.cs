@@ -39,5 +39,10 @@ namespace Controller
         {
             return doctorService.GetByUsername(username);
         }
+
+        public void addPatientToDoctorsList(string patientId, string doctorUsername)
+        {
+            doctorService.addPatientToDoctorsList(patientId, doctorUsername);
+        }
     }
 }

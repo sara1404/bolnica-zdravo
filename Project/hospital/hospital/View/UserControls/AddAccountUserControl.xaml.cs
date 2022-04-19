@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Controller;
+using Model;
 namespace hospital.View.UserControls
 {
     /// <summary>
@@ -21,11 +22,13 @@ namespace hospital.View.UserControls
     public partial class AddAccountUserControl : UserControl
     {
         public PatientController pc;
+        public UserController uc;
         public AddAccountUserControl()
         {
             InitializeComponent();
             App app = Application.Current as App;
             pc = app.patientController;
+            uc = app.userController;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -42,7 +45,8 @@ namespace hospital.View.UserControls
             try {
                 if (isCorrected())
                 {
-                    pc.Create(new Model.Patient(txtUsername.Text, txtPassword.Text, txtEmail.Text, txtFirstName.Text, txtSurname.Text, txtId.Text, txtPhone.Text));
+                    uc.Create(new User(txtUsername.Text, txtPassword.Text, Model.Role.Patient));
+                    pc.Create(new Patient(txtUsername.Text, txtFirstName.Text, txtSurname.Text, txtEmail.Text ,txtId.Text, txtPhone.Text,datePicker.Text));
                     this.Visibility = Visibility.Collapsed;
                 }
             }catch (Exception ex)
@@ -66,6 +70,11 @@ namespace hospital.View.UserControls
                 {
                     txtSurname.BorderBrush = Brushes.Red;
                     errSurname.Text = ex.Message;
+                }
+                if (ex.Message.Equals("Username already exists !"))
+                {
+                    txtUsername.BorderBrush = Brushes.Red;
+                    errUsername.Text = ex.Message;
                 }
             }
 

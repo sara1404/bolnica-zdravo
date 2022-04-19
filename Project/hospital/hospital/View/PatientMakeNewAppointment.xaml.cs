@@ -28,9 +28,11 @@ namespace hospital.View
         public PatientMakeNewAppointment()
         {
             InitializeComponent();
-            DoctorService ds = new DoctorService();
-            cmbDoctors.ItemsSource = ds.GetDoctors();
+            date.DisplayDateStart = DateTime.Today;
+            //DoctorService ds = new DoctorService();
             App app = Application.Current as App;
+            DoctorController dc = app.doctorController;
+            cmbDoctors.ItemsSource = dc.GetDoctors();
             ac = app.appointmentController;
             this.DataContext = this;
         }
@@ -49,6 +51,12 @@ namespace hospital.View
                 DateTime selectedDate = (DateTime)date.SelectedDate;
                 appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDate(selectedDate);
             }
+            if (cmbDoctors.SelectedIndex != -1 && date.SelectedDate != null)
+            {
+                DateTime selectedDate = (DateTime)date.SelectedDate;
+                Doctor d = (Doctor)cmbDoctors.SelectedItem;
+                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor(selectedDate, d.Username);
+            }
         }
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
@@ -57,7 +65,7 @@ namespace hospital.View
             {
                 Appointment a = (Appointment)appointmentTable.SelectedItem;
                 ac.CreateAppointment(a);
-                this.Close();
+                Close();
             }
         }
     }

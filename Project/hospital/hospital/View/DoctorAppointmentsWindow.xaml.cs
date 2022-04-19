@@ -24,7 +24,7 @@ namespace hospital.View
     public partial class DoctorAppointmentsWindow : Window
     {
         public ObservableCollection<Appointment> Appointments { get; set; }
-        public AppointmentController ac;
+        private AppointmentController ac;
         public DoctorAppointmentsWindow()
         {
             InitializeComponent();
@@ -53,6 +53,14 @@ namespace hospital.View
             {
                 Appointment toDelete = (Appointment)Table.SelectedItem;
                 ac.DeleteAppointment(toDelete.Id);
+            }
+        }
+
+        private void Info_Click(object sender, RoutedEventArgs e)
+        {
+            if(Table.SelectedIndex != -1)
+            {
+                new DoctorViewInfoWindow().Show();
             }
         }
     }

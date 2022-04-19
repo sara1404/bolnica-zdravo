@@ -59,16 +59,23 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controller\DoctorController.cs" />
+    <Compile Include="Controller\UserController.cs" />
+    <Compile Include="FileHandler\UserFileHandler.cs" />
+    <Compile Include="Model\Notification.cs" />
+    <Compile Include="Model\Role.cs" />
+    <Compile Include="Model\Specialization.cs" />
     <Compile Include="Repository\AppointmentRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
     <Compile Include="Repository\MedicalRecordsRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
     <Compile Include="Repository\RoomRepository.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Service\AppointmentService.cs" />
     <Compile Include="Service\DoctorService.cs" />
     <Compile Include="Service\MedicalRecordsService.cs" />
     <Compile Include="Service\PatientService.cs" />
     <Compile Include="Service\RoomService.cs" />
+    <Compile Include="Service\UserService.cs" />
     <Compile Include="View\AddRoomWindow.xaml.cs">
       <DependentUpon>AddRoomWindow.xaml</DependentUpon>
     </Compile>
@@ -83,6 +90,9 @@
     </Compile>
     <Compile Include="View\DoctorHomeWindow.xaml.cs">
       <DependentUpon>DoctorHomeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DoctorViewInfoWindow.xaml.cs">
+      <DependentUpon>DoctorViewInfoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EditRoomWindow.xaml.cs">
       <DependentUpon>EditRoomWindow.xaml</DependentUpon>
@@ -108,11 +118,17 @@
     <Compile Include="View\PatientMakeNewAppointment.xaml.cs">
       <DependentUpon>PatientMakeNewAppointment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PatientRecommendedAppointments.xaml.cs">
+      <DependentUpon>PatientRecommendedAppointments.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SecretaryHomeWindow.xaml.cs">
       <DependentUpon>SecretaryHomeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\AddAccountUserControl.xaml.cs">
       <DependentUpon>AddAccountUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\AddGuestAccUserControl.xaml.cs">
+      <DependentUpon>AddGuestAccUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\AddMedRecUserControl.xaml.cs">
       <DependentUpon>AddMedRecUserControl.xaml</DependentUpon>
@@ -163,6 +179,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\DoctorViewInfoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\EditRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -199,11 +219,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\PatientRecommendedAppointments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\SecretaryHomeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\AddAccountUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\AddGuestAccUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -232,11 +260,9 @@
     <Compile Include="Model\Manager.cs" />
     <Compile Include="Model\MedicalRecord.cs" />
     <Compile Include="Model\Medicine.cs" />
-    <Compile Include="Model\Operation.cs" />
     <Compile Include="Model\Patient.cs" />
     <Compile Include="Model\Room.cs" />
     <Compile Include="Model\Secretary.cs" />
-    <Compile Include="Model\SpecialistDoctor.cs" />
     <Compile Include="Model\Therapy.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -267,6 +293,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Data\RoomData.txt" />
+    <Resource Include="Resources\Data\UserData.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Data\AppointmentData.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Data\patientData.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

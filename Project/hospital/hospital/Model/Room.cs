@@ -12,6 +12,7 @@ namespace Model
             this.purpose = purpose;
             this.floor = floor;
             this.id = id;
+            equipment = new List<Equipment>();
         }
 
         public string _Name { 

@@ -44,11 +44,9 @@ namespace hospital.View
                 editWindow.roomId.Text = room.id;
                 editWindow.roomPurpose.Text = room.purpose;
                 editWindow.roomFloor.Text = room.floor.ToString();
-                if (room.equipment != null) {
-                    foreach (Equipment eq in room.equipment)
-                    {
-                        editWindow.equipmentListView.Items.Add(eq.type + " " + eq.quantity);
-                    }
+                foreach (Equipment eq in room.equipment)
+                {
+                    editWindow.equipmentListView.Items.Add(eq.type + " " + eq.quantity);
                 }
                 editWindow.Show();
             }

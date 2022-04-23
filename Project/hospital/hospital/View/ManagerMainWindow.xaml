@@ -9,13 +9,13 @@
     <Grid>
         <Button Content="Medicine" HorizontalAlignment="Left" Margin="55,169,0,0" VerticalAlignment="Top" Width="153" Height="37"/>
         <Button Content="Rooms" HorizontalAlignment="Left" Margin="55,94,0,0" VerticalAlignment="Top" Width="153" Height="37" Click="Room_Button_Click"/>
-        <Button Content="Equipment" HorizontalAlignment="Left" Margin="55,241,0,0" VerticalAlignment="Top" Width="153" Height="37"/>
+        <Button Content="Equipment" HorizontalAlignment="Left" Margin="55,241,0,0" VerticalAlignment="Top" Width="153" Height="37" Click="Equipment_Button_Click"/>
         <Button Content="Renovation" HorizontalAlignment="Left" Margin="55,313,0,0" VerticalAlignment="Top" Width="153" Height="37"/>
         <Button Content="Reviews" HorizontalAlignment="Left" Margin="55,388,0,0" VerticalAlignment="Top" Width="153" Height="37"/>
         <Menu HorizontalAlignment="Left" Height="43" Margin="233,0,0,0" VerticalAlignment="Top" Width="783"/>
         <Button Content="Demo" HorizontalAlignment="Left" Margin="860,10,0,0" VerticalAlignment="Top" Width="75"/>
         <Separator HorizontalAlignment="Left" Height="454" Margin="233,10,0,0" VerticalAlignment="Top" Width="0"/>
         <DataGrid HorizontalAlignment="Left" Height="308" Margin="320,94,0,0" VerticalAlignment="Top" Width="580"/>
-
+        <Frame x:Name="Main" Margin="0,35,0,0" NavigationUIVisibility="Hidden" />
     </Grid>
 </Window>

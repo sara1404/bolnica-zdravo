@@ -26,6 +26,9 @@ namespace Service
             return roomRepository.FindRoomById(id);
         }
 
+        public Room FindRoomByName(string name) {
+            return roomRepository.FindRoomByName(name);
+        }
         public ref ObservableCollection<Room> FindAll()
         {
             return ref roomRepository.FindAll();

@@ -5,6 +5,10 @@ using Controller;
 using System;
 using System.Windows;
 using hospital.Model;
+using hospital.Controller;
+using hospital.Repository;
+using hospital.Service;
+using System.Threading;
 
 namespace hospital
 {
@@ -14,13 +18,17 @@ namespace hospital
     public partial class App : Application
     {
         public RoomRepository roomRepository;
+        public EquipmentRelocationRepository relocationRepository;
+        public ScheduledRelocationRepository scheduledRelocationRepository;
         public RoomController roomController { get; set; }
         public PatientController patientController { get; set; }
         public AppointmentController appointmentController { get; set; }
         public MedicalRecordsController mediicalRecordsController { get; set; }
         public DoctorController doctorController { get; set; }
         public UserController userController { get; set; }
+        public EquipmentRelocationController relocationController { get; set; }
 
+        public ScheduledRelocationController scheduledRelocationController { get; set; }
 
         public App()
         {
@@ -48,14 +56,29 @@ namespace hospital
             DoctorService doctorService = new DoctorService(doctorRepository);
             doctorController = new DoctorController(doctorService);
 
-            
+            relocationRepository = new EquipmentRelocationRepository();
+            EquipmentRelocationService relocationService = new EquipmentRelocationService(relocationRepository);
+            relocationController = new EquipmentRelocationController(relocationService);
+
+            scheduledRelocationRepository = new ScheduledRelocationRepository();
+            ScheduledRelocationService scheduledRelocationService = new ScheduledRelocationService(scheduledRelocationRepository);
+            scheduledRelocationController = new ScheduledRelocationController(scheduledRelocationService);
             
             roomRepository.LoadRoomData();
+            relocationRepository.LoadRelocationData();
+            scheduledRelocationRepository.LoadRelocationData();
+
+            Thread relocationThread = new Thread(scheduledRelocationService.relocationTracker);
+            relocationThread.Start();
         }
+
+
 
         private void App_Closing(object sender, ExitEventArgs e)
         {
             roomRepository.WriteRoomData();
+            relocationRepository.WriteRelocationData();
+            scheduledRelocationRepository.WriteRelocationData();
         }
     }
 }

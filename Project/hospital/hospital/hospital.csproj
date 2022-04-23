@@ -59,22 +59,33 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controller\DoctorController.cs" />
+    <Compile Include="Controller\EquipmentRelocationController.cs" />
+    <Compile Include="Controller\ScheduledRelocationController.cs" />
     <Compile Include="Controller\UserController.cs" />
+    <Compile Include="FileHandler\EquipmentRelocationFileHandler.cs" />
+    <Compile Include="FileHandler\ScheduledRelocationFileHandler.cs" />
     <Compile Include="FileHandler\UserFileHandler.cs" />
+    <Compile Include="Model\EquipmentRelocation.cs" />
     <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\Role.cs" />
+    <Compile Include="Model\ScheduledRelocation.cs" />
     <Compile Include="Model\Specialization.cs" />
     <Compile Include="Repository\AppointmentRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
+    <Compile Include="Repository\EquipmentRelocationRepository.cs" />
     <Compile Include="Repository\MedicalRecordsRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
     <Compile Include="Repository\RoomRepository.cs" />
+    <Compile Include="Repository\ScheduledRelocationRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Service\AppointmentService.cs" />
     <Compile Include="Service\DoctorService.cs" />
+    <Compile Include="Service\EquipmentRelocationService.cs" />
     <Compile Include="Service\MedicalRecordsService.cs" />
     <Compile Include="Service\PatientService.cs" />
     <Compile Include="Service\RoomService.cs" />
+    <Compile Include="Service\ScheduledRelocationService.cs" />
+    <Compile Include="Service\TimeSchedulerService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="View\AddRoomWindow.xaml.cs">
       <DependentUpon>AddRoomWindow.xaml</DependentUpon>
@@ -96,6 +107,12 @@
     </Compile>
     <Compile Include="View\EditRoomWindow.xaml.cs">
       <DependentUpon>EditRoomWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EquipmentPage.xaml.cs">
+      <DependentUpon>EquipmentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EquipmentRelocationWindow.xaml.cs">
+      <DependentUpon>EquipmentRelocationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\HandlingMedicalRecordsPage.xaml.cs">
       <DependentUpon>HandlingMedicalRecordsPage.xaml</DependentUpon>
@@ -184,6 +201,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EditRoomWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EquipmentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EquipmentRelocationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -300,6 +325,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Data\patientData.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Data\EquipmentRelocation.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Data\ScheduledRelocationData.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

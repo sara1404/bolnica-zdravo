@@ -21,5 +21,10 @@ namespace hospital.View
         {
 
         }
+
+        private void Equipment_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new EquipmentPage();
+        }
     }
 }

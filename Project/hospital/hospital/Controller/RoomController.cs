@@ -33,6 +33,10 @@ namespace Controller
             return roomService.FindRoomById(id);
         }
 
+        public Room FindRoomByName(string name) {
+            return roomService.FindRoomByName(name);
+        }
+
         public ref ObservableCollection<Room> FindAll()
         {
             return ref roomService.FindAll();

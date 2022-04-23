@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 
@@ -12,7 +13,7 @@ namespace Model
             this.purpose = purpose;
             this.floor = floor;
             this.id = id;
-            equipment = new List<Equipment>();
+            equipment = new ConcurrentBag<Equipment>();
         }
 
         public string _Name { 
@@ -50,7 +51,7 @@ namespace Model
         public string purpose;
         public int floor { get; set; }
         public string id { get; set; }
-        public List<Equipment> equipment { get; set; }
+        public ConcurrentBag<Equipment> equipment { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

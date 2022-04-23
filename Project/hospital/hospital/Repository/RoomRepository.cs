@@ -31,6 +31,15 @@ namespace Repository
             return null;
         }
 
+        public Room FindRoomByName(string name) {
+            foreach (Room room in rooms)
+            {
+                if (room._Name.Equals(name))
+                    return room;
+            }
+            return null;
+        }
+
         public ref ObservableCollection<Room> FindAll()
         {
             return ref rooms;

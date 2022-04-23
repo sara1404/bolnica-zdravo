@@ -1,6 +1,8 @@
 ﻿using hospital.View;
 using System.Windows;
 using Model;
+using Controller;
+
 namespace hospital
 {
     /// <summary>
@@ -36,7 +38,7 @@ namespace hospital
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            Controller.UserController uc;
+            UserController uc;
             App app = Application.Current as App;
             uc = app.userController;
 

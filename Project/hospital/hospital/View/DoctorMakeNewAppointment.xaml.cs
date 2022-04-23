@@ -25,6 +25,7 @@ namespace hospital.View.UserControls
         private AppointmentController ac;
         private PatientController pc;
         private RoomController rc;
+        private UserController uc;
 
         public Doctor loggedInDoctor;
         public Patient selectedPatient;
@@ -36,10 +37,11 @@ namespace hospital.View.UserControls
             ac = app.appointmentController;
             pc = app.patientController;
             rc = app.roomController;
+            uc = app.userController;
             
             cmbPatients.ItemsSource = pc.FindAll();
             cmbOpRoom.ItemsSource = rc.FindAll();
-            loggedInDoctor = dc.GetDoctors().First<Doctor>(); //za sad zakucamo
+            loggedInDoctor = dc.GetByUsername(uc.CurentLoggedUser.Username);
             if (loggedInDoctor.Specialization == Specialization.general)
                 cbOperation.IsEnabled = false;
             this.DataContext = this;

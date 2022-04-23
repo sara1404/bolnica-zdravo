@@ -8,6 +8,7 @@
         Title="DoctorHomeWindow" Height="450" Width="800">
     <Grid>
         <Button Content="Appointments" HorizontalAlignment="Left" Margin="46,52,0,0" VerticalAlignment="Top" Width="95" Click="Appointment_Click"/>
+        <Button Content="Medical Records" HorizontalAlignment="Left" Margin="46,116,0,0" VerticalAlignment="Top" Width="95" Click="MedicalRecord_Click"/>
 
     </Grid>
 </Window>

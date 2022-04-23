@@ -91,6 +91,9 @@
     <Compile Include="View\DoctorHomeWindow.xaml.cs">
       <DependentUpon>DoctorHomeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DoctorMedicalRecordsWindow.xaml.cs">
+      <DependentUpon>DoctorMedicalRecordsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DoctorViewInfoWindow.xaml.cs">
       <DependentUpon>DoctorViewInfoWindow.xaml</DependentUpon>
     </Compile>
@@ -176,6 +179,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DoctorHomeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DoctorMedicalRecordsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

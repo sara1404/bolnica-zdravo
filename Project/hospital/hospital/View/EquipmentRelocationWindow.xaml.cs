@@ -24,7 +24,6 @@ namespace hospital.View
     public partial class EquipmentRelocationWindow : Window
     {
 
-        EquipmentRelocationController relocationController;
         RoomController roomController;
         ScheduledRelocationController scheduledRelocationController;
 
@@ -33,7 +32,6 @@ namespace hospital.View
             InitializeComponent();
             App app = Application.Current as App;
             //this.room = room;
-            relocationController = app.relocationController;
             roomController = app.roomController;
             scheduledRelocationController = app.scheduledRelocationController;
             loadRoomsToComboBoxes();
@@ -42,24 +40,20 @@ namespace hospital.View
         private void Show_Appointmets_Click(object sender, KeyEventArgs e)
         {
             string relocationDuration = duration.Text;
-            List<EquipmentRelocation> relocations = relocationController.FindAll();
-            int id = relocations.Count;
+            List<TimeInterval> freeTimeIntervals = new List<TimeInterval>();
             DateTime now = DateTime.Now;
+            DateTime last = now.AddDays(7);
             if (e.Key == Key.Enter)
             {
-                int i = 0;
-                if (Int32.Parse(relocationDuration) != 0) {
-                    i = 7 / Int32.Parse(relocationDuration);
-                }
-                for (; i < 7; i++)
+
+                int intervalDuration  = Int32.Parse(relocationDuration);
+                while(true)
                 {
-                    relocations.Add(new EquipmentRelocation((++id).ToString(), now.Date, now.AddDays(Int32.Parse(relocationDuration)).Date));
+                    if (last.CompareTo(now.AddDays(intervalDuration)) < 0) break;
+                    freeTimeIntervals.Add(new TimeInterval(freeTimeIntervals.Count.ToString(), now, now.AddDays(intervalDuration)));
                     now = now.AddDays(1);
                 }
-                foreach (EquipmentRelocation relocation in relocations)
-                {
-                    relocationListView.Items.Add(relocation._Id + "\t" + relocation._Start + "\n\t" + relocation._End);
-                }
+                relocationListView.ItemsSource = freeTimeIntervals;
             }
         }
 
@@ -75,7 +69,8 @@ namespace hospital.View
             string equip = equipment.SelectedItem.ToString();
             int equipmentQuantity = Int32.Parse(quantity.Text);
             String relocationId = relocationListView.SelectedItem.ToString().Split('\t')[0];
-            EquipmentRelocation relocation = relocationController.FindById(relocationId);
+            //TimeInterval relocation = relocationController.FindById(relocationId);
+            TimeInterval relocation = (TimeInterval)relocationListView.SelectedItem;
             string id = scheduledRelocationController.FindAll().Count.ToString();
             ScheduledRelocation scheduledRelocation = new ScheduledRelocation(id, fromRoomSelected, toRoomSelected, equip, equipmentQuantity, relocation);
             scheduledRelocationController.Create(scheduledRelocation);

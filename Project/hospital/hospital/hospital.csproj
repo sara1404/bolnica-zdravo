@@ -59,20 +59,17 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controller\DoctorController.cs" />
-    <Compile Include="Controller\EquipmentRelocationController.cs" />
     <Compile Include="Controller\ScheduledRelocationController.cs" />
     <Compile Include="Controller\UserController.cs" />
-    <Compile Include="FileHandler\EquipmentRelocationFileHandler.cs" />
     <Compile Include="FileHandler\ScheduledRelocationFileHandler.cs" />
     <Compile Include="FileHandler\UserFileHandler.cs" />
-    <Compile Include="Model\EquipmentRelocation.cs" />
+    <Compile Include="Model\TimeInterval.cs" />
     <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\Role.cs" />
     <Compile Include="Model\ScheduledRelocation.cs" />
     <Compile Include="Model\Specialization.cs" />
     <Compile Include="Repository\AppointmentRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
-    <Compile Include="Repository\EquipmentRelocationRepository.cs" />
     <Compile Include="Repository\MedicalRecordsRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
     <Compile Include="Repository\RoomRepository.cs" />
@@ -80,7 +77,6 @@
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Service\AppointmentService.cs" />
     <Compile Include="Service\DoctorService.cs" />
-    <Compile Include="Service\EquipmentRelocationService.cs" />
     <Compile Include="Service\MedicalRecordsService.cs" />
     <Compile Include="Service\PatientService.cs" />
     <Compile Include="Service\RoomService.cs" />
@@ -89,6 +85,9 @@
     <Compile Include="Service\UserService.cs" />
     <Compile Include="View\AddRoomWindow.xaml.cs">
       <DependentUpon>AddRoomWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BasicRenovationWindow.xaml.cs">
+      <DependentUpon>BasicRenovationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DeleteRoomWindow.xaml.cs">
       <DependentUpon>DeleteRoomWindow.xaml</DependentUpon>
@@ -138,6 +137,9 @@
     <Compile Include="View\PatientRecommendedAppointments.xaml.cs">
       <DependentUpon>PatientRecommendedAppointments.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\RoomRenovationPage.xaml.cs">
+      <DependentUpon>RoomRenovationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SecretaryHomeWindow.xaml.cs">
       <DependentUpon>SecretaryHomeWindow.xaml</DependentUpon>
     </Compile>
@@ -180,6 +182,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\BasicRenovationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DeleteRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -245,6 +251,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PatientRecommendedAppointments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RoomRenovationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -325,9 +335,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Data\patientData.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Data\EquipmentRelocation.txt" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Data\ScheduledRelocationData.txt" />

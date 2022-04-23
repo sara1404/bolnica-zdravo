@@ -26,5 +26,10 @@ namespace hospital.View
         {
             Main.Content = new EquipmentPage();
         }
+
+        private void Renovation_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new RoomRenovationPage();
+        }
     }
 }

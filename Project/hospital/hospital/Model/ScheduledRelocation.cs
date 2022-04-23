@@ -14,9 +14,9 @@ namespace hospital.Model
         private Room toRoom;
         private string typeOfEquipment;
         private int quantity;
-        private EquipmentRelocation relocation;
+        private TimeInterval relocation;
 
-        public ScheduledRelocation(string id, Room froomRoom, Room toRoom, string typeOfEquipment, int quantity, EquipmentRelocation relocation) {
+        public ScheduledRelocation(string id, Room froomRoom, Room toRoom, string typeOfEquipment, int quantity, TimeInterval relocation) {
             this.id = id;
             this.fromRoom = froomRoom;
             this.toRoom = toRoom;
@@ -77,7 +77,7 @@ namespace hospital.Model
                 quantity = value;
             }
         }
-        public EquipmentRelocation _Relocation
+        public TimeInterval _Relocation
         {
             get
             {

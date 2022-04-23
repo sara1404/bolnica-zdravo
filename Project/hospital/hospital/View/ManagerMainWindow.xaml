@@ -10,7 +10,7 @@
         <Button Content="Medicine" HorizontalAlignment="Left" Margin="55,169,0,0" VerticalAlignment="Top" Width="153" Height="37"/>
         <Button Content="Rooms" HorizontalAlignment="Left" Margin="55,94,0,0" VerticalAlignment="Top" Width="153" Height="37" Click="Room_Button_Click"/>
         <Button Content="Equipment" HorizontalAlignment="Left" Margin="55,241,0,0" VerticalAlignment="Top" Width="153" Height="37" Click="Equipment_Button_Click"/>
-        <Button Content="Renovation" HorizontalAlignment="Left" Margin="55,313,0,0" VerticalAlignment="Top" Width="153" Height="37"/>
+        <Button Content="Renovation" HorizontalAlignment="Left" Margin="55,313,0,0" VerticalAlignment="Top" Width="153" Height="37" Click="Renovation_Button_Click"/>
         <Button Content="Reviews" HorizontalAlignment="Left" Margin="55,388,0,0" VerticalAlignment="Top" Width="153" Height="37"/>
         <Menu HorizontalAlignment="Left" Height="43" Margin="233,0,0,0" VerticalAlignment="Top" Width="783"/>
         <Button Content="Demo" HorizontalAlignment="Left" Margin="860,10,0,0" VerticalAlignment="Top" Width="75"/>

@@ -6,15 +6,13 @@ using System.Threading.Tasks;
 
 namespace hospital.Model
 {
-    public class EquipmentRelocation
+    public class TimeInterval
     {
-        private string id;
         private DateTime start;
         private DateTime end;
 
-        public EquipmentRelocation(string id, DateTime start, DateTime end)
+        public TimeInterval(string id, DateTime start, DateTime end)
         {
-            this.id = id;
             this.start = start;
             this.end = end;
         }
@@ -44,16 +42,10 @@ namespace hospital.Model
 
         }
 
-        public string _Id {
-            get 
-            {
-                return id;
-            }
-            set {
-                id = value;
-            }
+        public override string ToString()
+        {
+            return start + "\n" + end;
         }
-
     }
 }
 

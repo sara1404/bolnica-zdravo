@@ -63,20 +63,20 @@ namespace hospital.Service
                             string equipmentType = rel._TypeOfEquipment;
                             int quantity = rel._Quantity;
                             Equipment equipment = new Equipment(equipmentType, quantity);
-                            foreach (Equipment eq in fromRoom.equipment)
-                            {
-                                if (eq.type.Equals(equipmentType))
-                                {
-                                    eq.quantity -= quantity;
-                                    if (eq.quantity == 0)
-                                    {
-                                        List<Equipment> equipTemp = fromRoom.equipment.ToList();
-                                        equipTemp.Remove(eq);
-                                        fromRoom.equipment = new ConcurrentBag<Equipment>(equipTemp);
+                            //foreach (Equipment eq in fromRoom.equipment)
+                            //{
+                            //    if (eq.type.Equals(equipmentType))
+                            //    {
+                            //        eq.quantity -= quantity;
+                            //        if (eq.quantity == 0)
+                            //        {
+                            //            List<Equipment> equipTemp = fromRoom.equipment.ToList();
+                            //            equipTemp.Remove(eq);
+                            //            fromRoom.equipment = new ConcurrentBag<Equipment>(equipTemp);
 
-                                    }
-                                }
-                            }
+                            //        }
+                            //    }
+                            //}
                             foreach (Equipment eq in toRoom.equipment)
                             {
                                 if (eq.type.Equals(equipmentType))

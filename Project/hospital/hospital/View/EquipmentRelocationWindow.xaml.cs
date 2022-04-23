@@ -3,6 +3,7 @@ using hospital.Controller;
 using hospital.Model;
 using Model;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -68,12 +69,20 @@ namespace hospital.View
             Room toRoomSelected = roomController.FindRoomByName(toRoom.SelectedItem.ToString());
             string equip = equipment.SelectedItem.ToString();
             int equipmentQuantity = Int32.Parse(quantity.Text);
-            String relocationId = relocationListView.SelectedItem.ToString().Split('\t')[0];
-            //TimeInterval relocation = relocationController.FindById(relocationId);
             TimeInterval relocation = (TimeInterval)relocationListView.SelectedItem;
             string id = scheduledRelocationController.FindAll().Count.ToString();
             ScheduledRelocation scheduledRelocation = new ScheduledRelocation(id, fromRoomSelected, toRoomSelected, equip, equipmentQuantity, relocation);
             scheduledRelocationController.Create(scheduledRelocation);
+            foreach (Equipment eq in fromRoomSelected.equipment) {
+                if (eq.type.Equals(equip)) {
+                    eq.quantity -= equipmentQuantity;
+                    if (eq.quantity == 0) {
+                        List<Equipment> equipTemp = fromRoomSelected.equipment.ToList();
+                        equipTemp.Remove(eq);
+                        fromRoomSelected.equipment = new ConcurrentBag<Equipment>(equipTemp);
+                    }
+                }
+            }
             this.Close();
         }
         private void Cancel_Relocation_Click(object sender, RoutedEventArgs e)

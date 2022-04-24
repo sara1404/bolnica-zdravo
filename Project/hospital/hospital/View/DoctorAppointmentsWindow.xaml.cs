@@ -25,13 +25,15 @@ namespace hospital.View
     {
         public ObservableCollection<Appointment> Appointments { get; set; }
         private AppointmentController ac;
+        private UserController uc;
         public DoctorAppointmentsWindow()
         {
             InitializeComponent();
             this.DataContext = this;
             App app = Application.Current as App;
             ac = app.appointmentController;
-            Appointments = ac.GetAppointmentByDoctor("miromir");
+            uc = app.userController;
+            Appointments = ac.GetAppointmentByDoctor(uc.CurentLoggedUser.Username);
         }
 
         private void Edit_Click(object sender, RoutedEventArgs e)

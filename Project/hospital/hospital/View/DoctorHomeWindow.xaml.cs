@@ -26,6 +26,9 @@ namespace hospital.View
         public ObservableCollection<Appointment> Appointments { get; set; }
         private AppointmentController ac;
         private DoctorController dc;
+        private UserController uc;
+
+        private Doctor loggedInDoctor;
         public DoctorHomeWindow()
         {
             InitializeComponent();
@@ -33,6 +36,9 @@ namespace hospital.View
             App app = Application.Current as App;
             ac = app.appointmentController;
             dc = app.doctorController;
+            uc = app.userController;
+
+            loggedInDoctor = dc.GetByUsername(uc.CurentLoggedUser.Username);
            
 
             System.Timers.Timer timer = new System.Timers.Timer();
@@ -43,14 +49,14 @@ namespace hospital.View
 
         private void OnTimedEvent(object sender, ElapsedEventArgs e)
         {
-            Appointments = ac.GetAppointmentByDoctor("miromir");//za sad zakucano na miromira
+            Appointments = ac.GetAppointmentByDoctor(loggedInDoctor.Username);
             foreach (Appointment a in Appointments)
             {
                 if (a.StartTime <= DateTime.Now)
                 {
-                    if(!dc.GetByUsername("miromir").myPatients.Contains(a.PatientUsername))
+                    if(!loggedInDoctor.myPatients.Contains(a.PatientUsername))
                     {
-                        dc.addPatientToDoctorsList(a.PatientUsername, "miromir");
+                        dc.addPatientToDoctorsList(a.PatientUsername, loggedInDoctor.Username);
                         //MessageBox.Show("DODAT PACIJENT U DOKTORA");
                     }
                 }
@@ -60,6 +66,11 @@ namespace hospital.View
         private void Appointment_Click(object sender, RoutedEventArgs e)
         {
             new DoctorAppointmentsWindow().Show();
+        }
+
+        private void MedicalRecord_Click(object sender, RoutedEventArgs e)
+        {
+            new DoctorMedicalRecordsWindow().Show();
         }
     }
 }

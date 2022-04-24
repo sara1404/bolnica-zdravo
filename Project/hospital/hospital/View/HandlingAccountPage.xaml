@@ -5,28 +5,45 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:hospital.View.UserControls"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="1000"
       Title="HandlingAccountPage">
 
-    <Grid x:Name="grid">
-        <StackPanel Height="25" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="219,25,0,0">
-            <Button x:Name="btnAddAccount" Content="Add" Margin="0,0,5,0" Click="btnAddAccount_Click"></Button>
-            <Button x:Name="btnEdit" Content="Edit" Margin="5,0,5,0" Click="btnEdit_Click"></Button>
-            <Button x:Name="btnRemove" Content="Remove" Margin="5,0,5,0" Click="btnRemove_Click"></Button>
+    <Grid x:Name="grid" Background="White">
+        <!--<Border BorderBrush="Gray" CornerRadius="5" BorderThickness="2" Width="600" Height="350">-->
+            <StackPanel Background="White">
+            <Frame x:Name="HandlingAccount" NavigationUIVisibility="Hidden"></Frame>
+            <Label HorizontalAlignment="Center" Margin="10" FontSize="20" FontWeight="SemiBold">Handling account</Label>
+                <StackPanel Height="25" Width="417" Orientation="Horizontal" Margin="158,0,159,0">
+                    <Button x:Name="btnAddAccount" Margin="0,0,5,0" Click="btnAddAccount_Click" BorderBrush="Transparent">
+                        <Image Source="../Resources/Images/addition_24x24.png"></Image>
+                    </Button>
+                    <Button x:Name="btnEdit" Margin="5,0,5,0" Click="btnEdit_Click" BorderBrush="Transparent">
+                        <Image Source="../Resources/Images/editing_24x24.png"></Image>
+                    </Button>
+                    <Button x:Name="btnRemove" Margin="5,0,5,0" Click="btnRemove_Click" BorderBrush="Transparent">
+                        <Image Source="../Resources/Images/delete_24x24.png"></Image>
+                    </Button>
+                    <Button x:Name="btnGuest" Content="Guest"  Margin="280,0,5,0"  Click="btnGuest_Click"/>
+                </StackPanel>
+                <DataGrid x:Name="dateGridHandlingAccount" Width="417" ItemsSource="{Binding Patients}" Margin="158,0,159,0" IsReadOnly ="True" SelectionMode="Single" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Width="60"  Binding="{Binding FirstName}" />
+                        <DataGridTextColumn Header="Surname" Width="70" Binding="{Binding LastName}"/>
+                        <DataGridTextColumn Header="Username" Width="70" Binding="{Binding Username}"/>
+                        <DataGridTextColumn Header="Email" Width="80" Binding="{Binding Email}" />
+                        <DataGridTextColumn Header="Phone number"  Binding="{Binding PhoneNumber}"/>
+                        <DataGridTextColumn Header="Guest" Binding="{Binding IsGuest}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+               <!--<local:AddAccountUserControl x:Name="addUserControl" Visibility="Hidden" Margin="0,-26,0,26"/>
+                <local:EditAccountUserControl x:Name="editUserControl" Visibility="Collapsed" Margin="0,-26,0,26"/>
+                <local:AddGuestAccUserControl x:Name="addGuestUserControl" Visibility="Hidden"/> -->
+            <Popup x:Name="pop1" Visibility="Visible" IsOpen="true">
+                <Grid Background="blue" Width="200" Height="200">
+                    <Label FontSize="40">Ajde grobari</Label>
+                </Grid>
+            </Popup>
         </StackPanel>
-        <DataGrid x:Name="dateGridHandlingAccount" ItemsSource="{Binding Patients}" HorizontalAlignment="Left" Margin="219,50,0,50" IsReadOnly ="True" SelectionMode="Single" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Width="50" Binding="{Binding FirstName}" />
-                <DataGridTextColumn Header="Surname" Binding="{Binding LastName}"/>
-                <DataGridTextColumn Header="Username" Binding="{Binding Username}"/>
-                <DataGridTextColumn Header="Email" Width="70" Binding="{Binding Email}" />
-                <DataGridTextColumn Header="Phone number" Binding="{Binding PhoneNumber}"/>
-                <DataGridTextColumn Header="Guest" Binding="{Binding IsGuest}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <local:AddAccountUserControl x:Name="addUserControl" Visibility="Hidden" Margin="0,-90,0,26"></local:AddAccountUserControl>
-        <local:EditAccountUserControl x:Name="editUserControl" Visibility="Collapsed" Margin="0,-26,0,26"></local:EditAccountUserControl>
-        <Button x:Name="btnGuest" Content="Guest" HorizontalAlignment="Left" Margin="551,25,0,0" VerticalAlignment="Top" Width="46" Height="25" Click="btnGuest_Click"/>
-        <local:AddGuestAccUserControl x:Name="addGuestUserControl" Visibility="Hidden"></local:AddGuestAccUserControl>
+       <!-- </Border> -->
     </Grid>
 </Page>

@@ -34,7 +34,6 @@ namespace hospital.View
             uc = app.userController;
             Patients = pc.FindAll();
         }
-
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
             if (dateGridHandlingAccount.SelectedIndex != -1){
@@ -51,7 +50,7 @@ namespace hospital.View
 
         private void btnAddAccount_Click(object sender, RoutedEventArgs e)
         {
-            resetUserControl();
+            /*resetUserControl();
             addUserControl.txtEmail.Text = "";
             addUserControl.txtFirstName.Text = "";
             addUserControl.txtId.Text = "";
@@ -61,11 +60,12 @@ namespace hospital.View
             addUserControl.txtPhone.Text = "";
             addUserControl.datePicker.Text = "";
             addUserControl.Visibility = Visibility;
+            */
+            HandlingAccount.Content = new AddUserAccountPage();
         }
-
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            if (dateGridHandlingAccount.SelectedIndex != -1)
+            /*if (dateGridHandlingAccount.SelectedIndex != -1)
             {
                 editUserControl.Visibility= Visibility;
                 Patient p = (Patient)dateGridHandlingAccount.SelectedItem;
@@ -78,11 +78,13 @@ namespace hospital.View
                 editUserControl.datePicker.Text = p.DateOfBirth;
                 pc.EditPatient = (Patient)dateGridHandlingAccount.SelectedItem;
                 dateGridHandlingAccount.SelectedIndex = -1;
-            }
+            }*/
+            pop1.IsOpen = true;
         }
 
         private void resetUserControl()
         {
+           /* Console.WriteLine("JEbem ti sve");
             addUserControl.txtEmail.BorderBrush = Brushes.Gray;
             addUserControl.txtFirstName.BorderBrush = Brushes.Gray;
             addUserControl.txtId.BorderBrush = Brushes.Gray;
@@ -97,12 +99,12 @@ namespace hospital.View
             addUserControl.errPassword.Text = "";
             addUserControl.errSurname.Text = "";
             addUserControl.errUsername.Text = "";
-            addUserControl.errPhone.Text = "";
+            addUserControl.errPhone.Text = ""; */
         }
 
         private void btnGuest_Click(object sender, RoutedEventArgs e)
         {
-            addGuestUserControl.txtFirstName.Text = "";
+            /* addGuestUserControl.txtFirstName.Text = "";
             addGuestUserControl.txtSurname.Text = "";
             addGuestUserControl.txtUsername.Text = "";
 
@@ -113,7 +115,8 @@ namespace hospital.View
             addGuestUserControl.errFirstname.Text = "";
             addGuestUserControl.errSurname.Text = "";
             addGuestUserControl.errUsername.Text = "";
-            addGuestUserControl.Visibility = Visibility.Visible;
+            addGuestUserControl.Visibility = Visibility.Visible; */
         }
+
     }       
 }           

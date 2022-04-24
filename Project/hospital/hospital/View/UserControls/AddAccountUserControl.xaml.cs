@@ -22,12 +22,15 @@ namespace hospital.View.UserControls
     public partial class AddAccountUserControl : UserControl
     {
         public PatientController pc;
+        private bool[] isCorrected = new bool[7];
         public UserController uc;
         public AddAccountUserControl()
         {
             InitializeComponent();
             App app = Application.Current as App;
             pc = app.patientController;
+
+            resetCorected();
             uc = app.userController;
         }
 
@@ -35,9 +38,16 @@ namespace hospital.View.UserControls
         {
         }
 
+        public void resetCorected()
+        {
+            for (int i = 0; i < 7; i++)
+            {
+                isCorrected[i] = false;
+            }
+        }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Visibility= Visibility.Collapsed;
+            this.Visibility = Visibility.Collapsed; 
         }
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
@@ -49,165 +59,136 @@ namespace hospital.View.UserControls
                     pc.Create(new Patient(txtUsername.Text, txtFirstName.Text, txtSurname.Text, txtEmail.Text ,txtId.Text, txtPhone.Text,datePicker.Text));
                     this.Visibility = Visibility.Collapsed;
                 }
-            }catch (Exception ex)
-            {
-                if(ex.Message.Equals("Input first name")){
-                    txtFirstName.BorderBrush=Brushes.Red;
-                    errFirstname.Text=ex.Message;
-                }
-                else if(ex.Message.Equals("number in first name"))
-                {
-                    txtFirstName.BorderBrush = Brushes.Red;
-                    errFirstname.Text = ex.Message;
-                }
+             }catch (Exception ex)
+             {
+                 if(ex.Message.Equals("Input first name")){
+                     errFristname.Text=ex.Message;
+                 }
 
-                if (ex.Message.Equals("Input surname"))
-                {
-                    txtSurname.BorderBrush = Brushes.Red;
-                    errSurname.Text = ex.Message;
-                }
-                else if (ex.Message.Equals("number in surname"))
-                {
-                    txtSurname.BorderBrush = Brushes.Red;
-                    errSurname.Text = ex.Message;
-                }
-                if (ex.Message.Equals("Username already exists !"))
-                {
-                    txtUsername.BorderBrush = Brushes.Red;
-                    errUsername.Text = ex.Message;
-                }
-            }
+                 if (ex.Message.Equals("Input surname"))
+                 {
+                     errLastname.Text = ex.Message;
+                 }
+                 if (ex.Message.Equals("Username already exists !"))
+                 {
+                     errUsername.Text = ex.Message;
+                 }
+             }
 
 
-        }
+         }
 
-        private bool isCorrected()
+        private void txtFirstName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            bool[] isCorrected= new bool[7];
-
-            for (int i = 0; i < 7; i++)
+            if (txtFirstName.Text.Any(char.IsDigit))
             {
-                isCorrected[i] = true;
-            }
-
-            if (txtFirstName.Text.Trim().Equals(""))
-            {
-                errFirstname.Text = "Input first name";
-                txtFirstName.BorderBrush = Brushes.Red;
+                errFristname.Text = "Mustn't be number";
                 isCorrected[0] = false;
             }
-            else if (txtFirstName.Text.Any(char.IsDigit))
+            else if (txtFirstName.Text.Trim().Equals(""))
             {
-                errFirstname.Text = "number isn't allowed";
-                txtFirstName.BorderBrush = Brushes.Red;
+                errFristname.Text = "Must be filled";
                 isCorrected[0] = false;
             }
             else
             {
-                errFirstname.Text = "";
-                txtFirstName.BorderBrush = Brushes.Gray;
+                errFristname.Text = "";
                 isCorrected[0] = true;
             }
+        }
 
-            //Surname validation
-            if (txtSurname.Text.Trim().Equals(""))
+        private void txtLastName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (txtLastName.Text.Any(char.IsDigit))
             {
-                errSurname.Text = "Input surname";
-                txtSurname.BorderBrush = Brushes.Red;
+                errLastname.Text = "Mustn't be number";
                 isCorrected[1] = false;
             }
-            else if (txtSurname.Text.Any(char.IsDigit))
+            else if (txtLastName.Text.Trim().Equals(""))
             {
-                errSurname.Text = "number isn't allowed";
-                txtSurname.BorderBrush = Brushes.Red;
+                errLastname.Text = "Must be filled";
                 isCorrected[1] = false;
             }
             else
             {
-                errSurname.Text = "";
-                txtSurname.BorderBrush = Brushes.Gray;
+                errLastname.Text = "";
                 isCorrected[1] = true;
             }
-            //usernam validate
-            if (txtUsername.Text.Trim().Equals(""))
+        }
+
+        private void txtPhone_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (txtPhone.Text.Trim().Equals(""))
             {
-                errUsername.Text = "Input username";
-                txtUsername.BorderBrush = Brushes.Red;
+                errPhone.Text = "Must be filled";
                 isCorrected[2] = false;
             }
             else
             {
-                errUsername.Text = "";
-                txtUsername.BorderBrush = Brushes.Gray;
+                errPhone.Text = "";
                 isCorrected[2] = true;
             }
-            //validate password
-            if (txtPassword.Text.Trim().Equals(""))
+        }
+
+        private void txtId_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (txtId.Text.Trim().Equals(""))
             {
-                errPassword.Text = "Input password";
-                txtPassword.BorderBrush = Brushes.Red;
+                errId.Text = "Must be filled";
                 isCorrected[3] = false;
             }
             else
             {
-                errPassword.Text = "";
-                txtPassword.BorderBrush = Brushes.Gray;
+                errId.Text = "";
                 isCorrected[3] = true;
             }
+        }
 
-            //validate email
-            if (txtEmail.Text.Trim().Equals(""))
+        private void txtEmail_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!txtEmail.Text.Contains("@"))
             {
-                errEmail.Text = "Input email";
-                txtEmail.BorderBrush = Brushes.Red;
+                errEmail.Text = "Must have @";
+                isCorrected[4] = false;
+            }
+            else if (txtEmail.Text.Trim().Equals(""))
+            {
+                errEmail.Text = "Must be filled";
                 isCorrected[4] = false;
             }
             else
             {
                 errEmail.Text = "";
-                txtEmail.BorderBrush = Brushes.Gray;
                 isCorrected[4] = true;
             }
+        }
 
-            //validate id
-            if (txtId.Text.Trim().Equals(""))
+        private void txtUsername_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (txtUsername.Text.Trim().Equals(""))
             {
-                errId.Text = "Input id";
-                txtId.BorderBrush = Brushes.Red;
-                isCorrected[5] = false;
-            }
-            else if (!txtId.Text.All(char.IsDigit))
-            {
-                errId.Text = "Only number allowed";
-                txtId.BorderBrush = Brushes.Red;
+                errUsername.Text = "Must be filled";
                 isCorrected[5] = false;
             }
             else
             {
-                errId.Text = "";
-                txtId.BorderBrush = Brushes.Gray;
+                errUsername.Text = "";
                 isCorrected[5] = true;
             }
+        }
 
-            //validate phone
-            if (txtPhone.Text.Trim().Equals(""))
+        private void txtPassword_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (txtPassword.Text.Trim().Equals(""))
             {
-                errPhone.Text = "Input phone number";
-                txtPhone.BorderBrush = Brushes.Red;
+                errPassword.Text = "Must be filled";
                 isCorrected[6] = false;
             }
             else
             {
-                errPhone.Text = "";
-                txtPhone.BorderBrush = Brushes.Gray;
+                errPassword.Text = "";
                 isCorrected[6] = true;
             }
-
-
-            return (isCorrected[0] && isCorrected[1] && isCorrected[2] && isCorrected[3] && isCorrected[4] && isCorrected[5] && isCorrected[6]);
         }
-
-
-        
     }
 }

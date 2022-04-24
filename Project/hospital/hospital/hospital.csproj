@@ -86,6 +86,9 @@
     <Compile Include="View\AddRoomWindow.xaml.cs">
       <DependentUpon>AddRoomWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\AddUserAccountPage.xaml.cs">
+      <DependentUpon>AddUserAccountPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\BasicRenovationWindow.xaml.cs">
       <DependentUpon>BasicRenovationWindow.xaml</DependentUpon>
     </Compile>
@@ -164,6 +167,9 @@
     <Compile Include="View\UserControls\EditMedRecUserControl.xaml.cs">
       <DependentUpon>EditMedRecUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\HandlingAccountUserControl.xaml.cs">
+      <DependentUpon>HandlingAccountUserControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -185,6 +191,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\AddUserAccountPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\BasicRenovationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -293,6 +303,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UserControls\HandlingAccountUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Appointment.cs" />
@@ -335,6 +349,27 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Data\RoomData.txt" />
+    <Resource Include="Resources\Images\addition_24x24.png" />
+    <Resource Include="Resources\Images\group.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\group_50x50.png" />
+    <Resource Include="Resources\Images\medical-records.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\medical-records_1_50x50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\editing_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\delete_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\account.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\account_100x100.png" />
     <Resource Include="Resources\Data\UserData.txt" />
   </ItemGroup>
   <ItemGroup>

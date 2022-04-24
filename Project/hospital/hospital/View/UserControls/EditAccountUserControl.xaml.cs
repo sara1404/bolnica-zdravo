@@ -42,16 +42,17 @@ namespace hospital.View.UserControls
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            if (isCorrected()) {
-                uc.UpdateByUsername(pc.EditPatient.Username,new User(txtUsername.Text, pc.EditPatient.Password, Model.Role.Patient));
-                pc.UpdateById(pc.EditPatient.Username, new Patient(txtUsername.Text, txtFirstName.Text, txtSurname.Text, txtEmail.Text, txtId.Text, txtPhone.Text,datePicker.Text));
+            //if (isCorrected()) { 
+                pc.UpdateById(pc.EditPatient.Username, new Patient(txtUsername.Text, txtEmail.Text, pc.EditPatient.Password, txtFirstName.Text, txtLastName.Text, txtId.Text, txtPhone.Text));
                 //pc.Create(new Model.Patient(txtUsername.Text, txtEmail.Text,"123", txtFirstName.Text, txtSurname.Text, txtId.Text, txtPhone.Text));
+                    
                 this.Visibility = Visibility.Collapsed;
-            }
-        }
+                
+           // }
+       // }
 
 
-        private bool isCorrected()
+       /* private bool isCorrected()
         {
             bool[] isCorrected = new bool[7];
 
@@ -162,6 +163,6 @@ namespace hospital.View.UserControls
 
 
             return (isCorrected[0] && isCorrected[1] && isCorrected[2] && isCorrected[3] && isCorrected[4] && isCorrected[5] && isCorrected[6]);
-        }
+        */}
     }
 }

@@ -29,7 +29,7 @@ namespace Repository
         public bool Create(Patient patient)
         {
             this.patient.Add(patient);
-            patientFileHandler.Write(this.patient.ToList());
+            //patientFileHandler.Write(this.patient.ToList());
             return true;
         }
 
@@ -53,7 +53,7 @@ namespace Repository
         public bool DeleteById(string id)
         {
             bool reVal= patient.Remove(FindById(id));
-            patientFileHandler.Write(this.patient.ToList());
+            //patientFileHandler.Write(this.patient.ToList());
             return reVal;
         }
 

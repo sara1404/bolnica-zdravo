@@ -11,8 +11,8 @@
     <Grid x:Name="grid" Background="White">
         <!--<Border BorderBrush="Gray" CornerRadius="5" BorderThickness="2" Width="600" Height="350">-->
             <StackPanel Background="White">
-                <Frame x:Name="HandlingAccount" NavigationUIVisibility="Hidden"></Frame>
-                <Label HorizontalAlignment="Center" Margin="10" FontSize="20" FontWeight="SemiBold">Handling account</Label>
+            <Frame x:Name="HandlingAccount" NavigationUIVisibility="Hidden"></Frame>
+            <Label HorizontalAlignment="Center" Margin="10" FontSize="20" FontWeight="SemiBold">Handling account</Label>
                 <StackPanel Height="25" Width="417" Orientation="Horizontal" Margin="158,0,159,0">
                     <Button x:Name="btnAddAccount" Margin="0,0,5,0" Click="btnAddAccount_Click" BorderBrush="Transparent">
                         <Image Source="../Resources/Images/addition_24x24.png"></Image>
@@ -38,8 +38,12 @@
                <!--<local:AddAccountUserControl x:Name="addUserControl" Visibility="Hidden" Margin="0,-26,0,26"/>
                 <local:EditAccountUserControl x:Name="editUserControl" Visibility="Collapsed" Margin="0,-26,0,26"/>
                 <local:AddGuestAccUserControl x:Name="addGuestUserControl" Visibility="Hidden"/> -->
-
-            </StackPanel>
+            <Popup x:Name="pop1" Visibility="Visible" IsOpen="true">
+                <Grid Background="blue" Width="200" Height="200">
+                    <Label FontSize="40">Ajde grobari</Label>
+                </Grid>
+            </Popup>
+        </StackPanel>
        <!-- </Border> -->
     </Grid>
 </Page>

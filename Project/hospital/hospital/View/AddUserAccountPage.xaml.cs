@@ -27,6 +27,12 @@ namespace hospital.View
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

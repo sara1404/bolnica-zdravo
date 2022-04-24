@@ -26,12 +26,20 @@ namespace hospital.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new HandlingAccountPage();
+            handlingAccountUserControl.Visibility = Visibility.Visible;
         }
 
         private void btnHandMedRecord_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new HandlingMedicalRecordsPage();
+            handlingAccountUserControl.addAccountUserControl.Visibility = Visibility.Collapsed;
+            handlingAccountUserControl.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mw = new MainWindow();
+            mw.Show();
+            this.Close();
         }
     }
 }

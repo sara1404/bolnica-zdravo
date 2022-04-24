@@ -32,7 +32,6 @@ namespace hospital.View
             pc = app.patientController;
             Patients = pc.FindAll();
         }
-
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
             if (dateGridHandlingAccount.SelectedIndex != -1){
@@ -75,6 +74,7 @@ namespace hospital.View
                 pc.EditPatient = (Patient)dateGridHandlingAccount.SelectedItem;
                 dateGridHandlingAccount.SelectedIndex = -1;
             }*/
+            pop1.IsOpen = true;
         }
 
         private void resetUserControl()
@@ -112,5 +112,6 @@ namespace hospital.View
             addGuestUserControl.errUsername.Text = "";
             addGuestUserControl.Visibility = Visibility.Visible; */
         }
+
     }       
 }           

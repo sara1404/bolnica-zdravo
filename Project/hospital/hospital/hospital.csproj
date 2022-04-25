@@ -86,9 +86,6 @@
     <Compile Include="View\AddRoomWindow.xaml.cs">
       <DependentUpon>AddRoomWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\AddUserAccountPage.xaml.cs">
-      <DependentUpon>AddUserAccountPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\BasicRenovationWindow.xaml.cs">
       <DependentUpon>BasicRenovationWindow.xaml</DependentUpon>
     </Compile>
@@ -127,9 +124,6 @@
     </Compile>
     <Compile Include="View\ManagerRoomsWindow.xaml.cs">
       <DependentUpon>ManagerRoomsWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\HandlingAccountPage.xaml.cs">
-      <DependentUpon>HandlingAccountPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PatientAppointmentsWindow.xaml.cs">
       <DependentUpon>PatientAppointmentsWindow.xaml</DependentUpon>
@@ -191,10 +185,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\AddUserAccountPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\BasicRenovationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -232,10 +222,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EquipmentRelocationWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\HandlingAccountPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

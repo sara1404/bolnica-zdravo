@@ -5,35 +5,11 @@ using Controller;
 
 namespace hospital
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void Patient_Button_Click(object sender, RoutedEventArgs e)
-        {
-            new PatientAppointmentsWindow().Show();
-        }
-
-        private void Doctor_Button_Click(object sender, RoutedEventArgs e)
-        {
-            new DoctorHomeWindow().Show();
-        }
-
-        private void Secretary_Button_Click(object sender, RoutedEventArgs e)
-        {
-            new SecretaryHomeWindow().Show();
-            this.Close();
-        }
-
-        private void Manager_Button_Click(object sender, RoutedEventArgs e)
-        {
-            new ManagerMainWindow().Show();
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
@@ -47,6 +23,10 @@ namespace hospital
             if (u == null)
             {
                 labIncorect.Text = "The username or password you've entered is incorrect.";
+                txtPassword.Password = "";
+            }else if (u.IsBlocked)
+            {
+                labIncorect.Text = "User is blocked.";
                 txtPassword.Password = "";
             }
             else

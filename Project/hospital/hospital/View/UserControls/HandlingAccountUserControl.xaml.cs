@@ -25,12 +25,14 @@ namespace hospital.View.UserControls
     {
         public ObservableCollection<Patient> Patients { get; set; }
         public PatientController pc;
+        public UserController uc;
         public HandlingAccountUserControl()
         {
             InitializeComponent();
             this.DataContext = this;
             App app = Application.Current as App;
             pc = app.patientController;
+            uc = app.userController;
             Patients = pc.FindAll();
         }
 
@@ -38,8 +40,9 @@ namespace hospital.View.UserControls
         {
             if (dateGridHandlingAccount.SelectedIndex != -1)
             {
-
-                pc.DeleteById(dateGridHandlingAccount.SelectedItem.ToString());
+                Patient p = (Patient)dateGridHandlingAccount.SelectedItem;
+                pc.DeleteById(p.Username);
+                uc.DeleteByUsername(p.Username);
             }
         }
 
@@ -52,7 +55,7 @@ namespace hospital.View.UserControls
             addAccountUserControl.txtId.Clear();
             addAccountUserControl.txtEmail.Clear();
             addAccountUserControl.radioFemale.IsChecked=false;
-            addAccountUserControl.radioMale.IsChecked = false;
+            addAccountUserControl.radioMale.IsChecked = true;
             addAccountUserControl.txtDate.Text="";
             addAccountUserControl.txtUsername.Clear();
             addAccountUserControl.txtPassword.Clear();
@@ -84,6 +87,34 @@ namespace hospital.View.UserControls
                 editAccountUserControl.txtId.Text = p.Id;
                 editAccountUserControl.txtEmail.Text = p.Email;
                 editAccountUserControl.txtUsername.Text = p.Username;
+
+                if (p.Gender.Equals("Male")) {
+                    editAccountUserControl.radioMale.IsChecked = true;
+                    editAccountUserControl.radioFemale.IsChecked = false;
+                }
+                else
+                {
+                    editAccountUserControl.radioMale.IsChecked = false;
+                    editAccountUserControl.radioFemale.IsChecked = true;
+                }
+                if (p.Role == Model.Role.Patient)
+                    editAccountUserControl.cmbRole.SelectedIndex = 0;
+                else if (p.Role == Model.Role.Doctor)
+                    editAccountUserControl.cmbRole.SelectedIndex = 1;
+                else if (p.Role == Model.Role.Secretary)
+                    editAccountUserControl.cmbRole.SelectedIndex = 2;
+                else if (p.Role == Model.Role.Manager)
+                    editAccountUserControl.cmbRole.SelectedIndex = 3;
+
+                editAccountUserControl.txtDate.Text = p.DateOfBirth;
+                if (p.IsBlocked)
+                {
+                    editAccountUserControl.cbBlocked.IsChecked = true;
+                }
+                else
+                {
+                    editAccountUserControl.cbBlocked.IsChecked = false;
+                }
                 editAccountUserControl.Visibility=Visibility.Visible;
             }
         }

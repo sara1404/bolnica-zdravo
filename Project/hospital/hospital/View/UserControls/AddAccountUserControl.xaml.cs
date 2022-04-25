@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,16 +23,19 @@ namespace hospital.View.UserControls
     public partial class AddAccountUserControl : UserControl
     {
         public PatientController pc;
-        private bool[] isCorrected = new bool[7];
+        private bool[] isCorrected = new bool[8];
         public UserController uc;
+        public ObservableCollection<Model.Role> Roles { get; set; }
         public AddAccountUserControl()
         {
             InitializeComponent();
             App app = Application.Current as App;
             pc = app.patientController;
-
+            this.DataContext = this;
             resetCorected();
             uc = app.userController;
+
+            Roles = new ObservableCollection<Model.Role>(Enum.GetValues(typeof(Model.Role)).Cast<Model.Role>().ToList());
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -40,7 +44,7 @@ namespace hospital.View.UserControls
 
         public void resetCorected()
         {
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 8; i++)
             {
                 isCorrected[i] = false;
             }
@@ -52,11 +56,12 @@ namespace hospital.View.UserControls
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
+            validateDate();
             try {
-                if (isCorrected())
+                if (isCorrected[0] & isCorrected[1] & isCorrected[2] & isCorrected[3] & isCorrected[4] & isCorrected[5] & isCorrected[6] & isCorrected[7])
                 {
-                    uc.Create(new User(txtUsername.Text, txtPassword.Text, Model.Role.Patient));
-                    pc.Create(new Patient(txtUsername.Text, txtFirstName.Text, txtSurname.Text, txtEmail.Text ,txtId.Text, txtPhone.Text,datePicker.Text));
+                    pc.Create(new Patient(txtUsername.Text,txtPassword.Text, txtFirstName.Text, txtLastName.Text, txtEmail.Text ,txtId.Text, txtPhone.Text,txtDate.Text, getGender(),false));
+                    uc.Create(new User(txtUsername.Text, txtPassword.Text, getRole(cmbRole.Text),false));
                     this.Visibility = Visibility.Collapsed;
                 }
              }catch (Exception ex)
@@ -78,6 +83,48 @@ namespace hospital.View.UserControls
 
          }
 
+        private void validateDate()
+        {
+            if (txtDate.Text.Trim().Equals(""))
+            {
+                errDate.Text = "Must be filled";
+                isCorrected[7] = false;
+            }
+            else
+            {
+                errDate.Text = "";
+                isCorrected[7] = true;
+            }
+        }
+        private Model.Role getRole(string txt)
+        {
+            switch (txt)
+            {
+                case "Patient":
+                    return Model.Role.Patient;
+                    break;
+                case "Doctor":
+                    return Model.Role.Doctor;
+                    break;
+                case "Secretary":
+                    return Model.Role.Secretary;
+                    break;
+                default:
+                    return Model.Role.Manager;
+                    break;
+            }
+        }
+        private string getGender()
+        {
+            if(radioMale.IsChecked == true)
+            {
+                return "Male";
+            }
+            else
+            {
+                return "Female";
+            }
+        }
         private void txtFirstName_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (txtFirstName.Text.Any(char.IsDigit))

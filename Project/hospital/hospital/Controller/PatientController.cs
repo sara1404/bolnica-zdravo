@@ -37,9 +37,9 @@ namespace Controller
             return patientService.DeleteById(id);
         }
 
-        public bool UpdateById(string id, Model.Patient patient)
+        public bool UpdateByUsername(string username, Patient patient)
         {
-            return patientService.UpdateById(id, patient);
+            return patientService.UpdateById(username, patient);
         }
 
         private void isValidate(Patient patient)

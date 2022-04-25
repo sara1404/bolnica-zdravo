@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Controller;
 
 namespace hospital.View
 {
@@ -19,9 +20,12 @@ namespace hospital.View
     /// </summary>
     public partial class SecretaryHomeWindow : Window
     {
+        public UserController uc;
         public SecretaryHomeWindow()
         {
             InitializeComponent();
+            App app = Application.Current as App;
+            uc = app.userController;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -37,6 +41,7 @@ namespace hospital.View
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
+            uc.CurentLoggedUser = null;
             MainWindow mw = new MainWindow();
             mw.Show();
             this.Close();

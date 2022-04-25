@@ -26,8 +26,8 @@
                         <TextBlock TextWrapping="Wrap" Text="Email" FontSize="15" Margin="68,185,598,197" FontWeight="DemiBold"/>
                         <TextBox x:Name="txtEmail" TextWrapping="Wrap" Margin="69,205,373,173" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" TextChanged="txtEmail_TextChanged"/>
                         <TextBlock TextWrapping="Wrap" Text="Gender" FontSize="15" Margin="69,252,596,130" FontWeight="DemiBold"/>
-                        <RadioButton x:Name="radioMale" Content="Male" HorizontalAlignment="Left" Margin="193,255,0,0" FontWeight="DemiBold" VerticalAlignment="Top"/>
-                        <RadioButton x:Name="radioFemale" Content="Female" HorizontalAlignment="Left" Margin="286,256,0,0" FontWeight="DemiBold" VerticalAlignment="Top"/>
+                        <RadioButton x:Name="radioMale" IsChecked="True" Content="Male" HorizontalAlignment="Left" Margin="193,255,0,0" FontWeight="DemiBold" VerticalAlignment="Top"/>
+                        <RadioButton x:Name="radioFemale" IsChecked="False" Content="Female" HorizontalAlignment="Left" Margin="286,256,0,0" FontWeight="DemiBold" VerticalAlignment="Top"/>
                         <TextBlock TextWrapping="Wrap" Text="Date of Birth" FontSize="15" Margin="68,299,570,83" FontWeight="DemiBold"/>
                         <DatePicker x:Name="txtDate" HorizontalAlignment="Left" Margin="233,297,0,0" VerticalAlignment="Top" Width="141"/>
 
@@ -40,7 +40,7 @@
                         <TextBlock TextWrapping="Wrap" Text="Password" FontSize="15" Margin="440,223,225,159" FontWeight="DemiBold"/>
                         <TextBox x:Name="txtPassword" Height="25" TextWrapping="Wrap" Margin="545,221,72,156" Text="" BorderBrush="Black" BorderThickness="1" TextChanged="txtPassword_TextChanged"/>
                         <TextBlock TextWrapping="Wrap" Text="User role" FontSize="15" Margin="440,271,225,111" FontWeight="DemiBold"/>
-                        <ComboBox  Height="23" HorizontalAlignment="Left" Margin="545,271,0,0" VerticalAlignment="Top" Width="132"/>
+                        <ComboBox x:Name="cmbRole" Height="23" SelectedIndex="0" HorizontalAlignment="Left" ItemsSource="{Binding Roles}" Margin="545,271,0,0" VerticalAlignment="Top" Width="132"/>
                         <TextBlock x:Name="errFristname" Foreground="red" HorizontalAlignment="Left" Margin="71,102,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="132"/>
                         <TextBlock x:Name="errLastname" Foreground="red" HorizontalAlignment="Left" Margin="244,101,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="132"/>
                         <TextBlock x:Name="errPhone" Foreground="red" HorizontalAlignment="Left" Margin="71,166,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="132"/>
@@ -48,6 +48,7 @@
                         <TextBlock x:Name="errEmail" Foreground="red" HorizontalAlignment="Left" Margin="71,230,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="305"/>
                         <TextBlock x:Name="errUsername" Foreground="red" HorizontalAlignment="Left" Margin="545,195,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="164"/>
                         <TextBlock x:Name="errPassword" Foreground="red" HorizontalAlignment="Left" Margin="545,246,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="164"/>
+                        <TextBlock x:Name="errDate" Foreground="red" HorizontalAlignment="Left" Margin="238,321,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="132"/>
                     </Grid>
                 </StackPanel>
             </Border>

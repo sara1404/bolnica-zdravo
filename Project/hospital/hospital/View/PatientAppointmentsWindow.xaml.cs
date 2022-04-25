@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Service;
 using System;
+using hospital.Model;
 
 namespace hospital.View
 {
@@ -25,7 +26,17 @@ namespace hospital.View
             App app = Application.Current as App;
             ac = app.appointmentController;
             this.DataContext = this;
-            Appointments = ac.GetAppointmentByPatient("peromir");
+            User current = app.userController.CurentLoggedUser;
+            Appointments = ac.GetAppointmentByPatient(current.Username);
+            MedicalRecord mr = app.patientController.FindById(current.Username).MedicalRecord;
+            if(mr != null && mr.Therapy != null)
+            {
+                foreach (Therapy t in mr.Therapy)
+                {
+                    new Notification(t.TimeStart, t.TimeEnd, t.Interval, "Take " + t.Medicine.Name);
+                }
+            }
+            
 
         }
 

@@ -125,9 +125,6 @@
     <Compile Include="View\ManagerRoomsWindow.xaml.cs">
       <DependentUpon>ManagerRoomsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\HandlingAccountPage.xaml.cs">
-      <DependentUpon>HandlingAccountPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\PatientAppointmentsWindow.xaml.cs">
       <DependentUpon>PatientAppointmentsWindow.xaml</DependentUpon>
     </Compile>
@@ -163,6 +160,9 @@
     </Compile>
     <Compile Include="View\UserControls\EditMedRecUserControl.xaml.cs">
       <DependentUpon>EditMedRecUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\HandlingAccountUserControl.xaml.cs">
+      <DependentUpon>HandlingAccountUserControl.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -222,10 +222,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EquipmentRelocationWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\HandlingAccountPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -293,6 +289,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UserControls\HandlingAccountUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Appointment.cs" />
@@ -335,6 +335,27 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Data\RoomData.txt" />
+    <Resource Include="Resources\Images\addition_24x24.png" />
+    <Resource Include="Resources\Images\group.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\group_50x50.png" />
+    <Resource Include="Resources\Images\medical-records.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\medical-records_1_50x50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\editing_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\delete_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\account.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\account_100x100.png" />
     <Resource Include="Resources\Data\UserData.txt" />
   </ItemGroup>
   <ItemGroup>

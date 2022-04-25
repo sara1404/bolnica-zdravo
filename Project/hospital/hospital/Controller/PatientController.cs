@@ -37,9 +37,9 @@ namespace Controller
             return patientService.DeleteById(id);
         }
 
-        public bool UpdateById(string id, Model.Patient patient)
+        public bool UpdateByUsername(string username, Patient patient)
         {
-            return patientService.UpdateById(id, patient);
+            return patientService.UpdateById(username, patient);
         }
 
         private void isValidate(Patient patient)
@@ -48,18 +48,10 @@ namespace Controller
             {
                 throw new Exception("Input first name");
             }
-            else if (patient.FirstName.Trim().Any(char.IsDigit))
-            {
-                throw new Exception("number in fist name");
-            }
 
             if (patient.LastName.Trim().Equals(""))
             {
                 throw new Exception("Input surname");
-            }
-            else if (patient.LastName.Trim().Any(char.IsDigit))
-            {
-                throw new Exception("number in surname");
             }
 
            foreach(Patient p in patientService.FindAll())

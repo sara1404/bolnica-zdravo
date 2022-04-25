@@ -327,7 +327,7 @@ namespace Service
             newAppointment.Id = oldAppointment.Id;
             newAppointment.DoctorUsername = oldAppointment.DoctorUsername;
             newAppointment.PatientUsername = oldAppointment.PatientUsername;
-            //newAppointment.operationRoom = oldAppointment.operationRoom;
+            newAppointment.roomId = oldAppointment.roomId;
             appointmentRepository.AddAppointment(newAppointment);
         }
 

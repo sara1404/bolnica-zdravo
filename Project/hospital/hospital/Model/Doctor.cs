@@ -8,6 +8,7 @@ namespace Model
         private string name;
         private string surname;
         private Specialization specialization;
+        private string ordinationId;
 
         public Appointment[] appointment;
 
@@ -15,6 +16,8 @@ namespace Model
 
         public string Name { get => name; set => name = value; }
         public string Surname { get => surname; set => surname = value; }
+
+        public string OrdinationId { get => ordinationId; set => ordinationId = value; }
 
         public Specialization Specialization { get => specialization; set => specialization = value; }
 

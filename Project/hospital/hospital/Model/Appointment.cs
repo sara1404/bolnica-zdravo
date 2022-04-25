@@ -14,7 +14,7 @@ namespace Model
 
         public string doctorUsername;
         public string patientUsername;
-        public string operationRoomId;
+        public string roomId;
         
         public Appointment(int id, string doctorUsername, string patientUsername, DateTime startTime)
         {
@@ -65,18 +65,18 @@ namespace Model
                 doctorUsername = value;
             }
         }
-        public string OperationRoomId
+        public string RoomId
         {
             get
             {
-                if (operationRoomId == null)
+                if (roomId == null)
                     return "";
                 else
-                    return operationRoomId;
+                    return roomId;
             }
             set
             {
-                operationRoomId = value;
+                roomId = value;
             }
         }
 

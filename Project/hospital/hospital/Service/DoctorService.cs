@@ -43,5 +43,9 @@ namespace Service
         {
             doctorRepository.addPatientToDoctorsList(patientId, doctorUsername);
         }
+        public void addOrdinationToDoctor(string doctorUsername, string ordinationId)
+        {
+            doctorRepository.addOrdinationToDoctor(doctorUsername, ordinationId);
+        }
     }
 }

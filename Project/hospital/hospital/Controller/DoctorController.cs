@@ -44,5 +44,10 @@ namespace Controller
         {
             doctorService.addPatientToDoctorsList(patientId, doctorUsername);
         }
+
+        public void addOrdinationToDoctor(string doctorUsername, string ordinationId)
+        {
+            doctorService.addOrdinationToDoctor(doctorUsername, ordinationId);
+        }
     }
 }

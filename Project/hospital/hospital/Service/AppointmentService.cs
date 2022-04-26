@@ -331,6 +331,12 @@ namespace Service
             appointmentRepository.AddAppointment(newAppointment);
         }
 
+        public ObservableCollection<Appointment> GetAll()
+        {
+            return appointmentRepository.FindAll();
+        }
+
+        // do not delete or change this method because it is used in GetRecommendedAppointments
         public ObservableCollection<Appointment> GetByDoctor(string username)
         {
             if(appointmentRepository.FindAll() == null)
@@ -352,7 +358,7 @@ namespace Service
 
         public ObservableCollection<Appointment> GetByPatient(string username)
         {
-            List<Appointment> otherPatients = new List<Appointment>();
+            /*List<Appointment> otherPatients = new List<Appointment>();
             foreach (Appointment a in appointmentRepository.FindAll())
             {
                 if (!a.PatientUsername.Equals(username))
@@ -366,7 +372,7 @@ namespace Service
                 // deleting those other patients
                 appointmentRepository.DeleteById(a.Id);
             }
-            //return retVal;
+            //return retVal;*/
             return appointmentRepository.FindAll();
         }
 

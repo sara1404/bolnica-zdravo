@@ -7,11 +7,12 @@
         mc:Ignorable="d"
         Title="PatientAppointmentsWindow" Height="450" Width="800">
     <Grid>
-        <DataGrid x:Name="appointmentTable" ItemsSource="{Binding Path=Appointments}" AutoGenerateColumns="True" IsReadOnly="True" HorizontalAlignment="Left" Height="355" Margin="10,20,0,0" VerticalAlignment="Top" Width="774" />
-        <!--<DataGrid.Columns>
+        <DataGrid x:Name="appointmentTable" ItemsSource="{Binding Path=Appointments}" AutoGenerateColumns="True" IsReadOnly="True" HorizontalAlignment="Left" Height="355" Margin="10,20,0,0" VerticalAlignment="Top" Width="774">
+            <!--<DataGrid.Columns>
             <DataGridTextColumn Header="Doctor name" Binding="{Binding Doctor}"/>
             <DataGridTextColumn Header="Date" Binding="{Binding StartTime}" Width="*"/>
         </DataGrid.Columns>-->
+        </DataGrid>
 
         <Button x:Name="btnNewAppointment" Content="Make new appointment" HorizontalAlignment="Left" Margin="330,391,0,0" VerticalAlignment="Top" Width="147" RenderTransformOrigin="0.5,0.5" Click="btnNewAppointment_Click"/>
         <Button x:Name="btnDelay" Content="Delay appointment" HorizontalAlignment="Left" Margin="503,391,0,0" VerticalAlignment="Top" Width="127" Click="btnDelay_Click"/>

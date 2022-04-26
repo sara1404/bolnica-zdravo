@@ -6,6 +6,8 @@ using System.Collections.ObjectModel;
 using Service;
 using System;
 using hospital.Model;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace hospital.View
 {
@@ -25,9 +27,13 @@ namespace hospital.View
             InitializeComponent();
             App app = Application.Current as App;
             ac = app.appointmentController;
-            this.DataContext = this;
+            DataContext = this;
             User current = app.userController.CurentLoggedUser;
-            Appointments = ac.GetAppointmentByPatient(current.Username);
+            Appointments = ac.GetAppointments();
+
+            ICollectionView appointmentsView = CollectionViewSource.GetDefaultView(ac.GetAppointments());
+            appointmentsView.Filter = UserFilter;
+
             MedicalRecord mr = app.patientController.FindById(current.Username).MedicalRecord;
             if(mr != null && mr.Therapy != null)
             {
@@ -36,8 +42,6 @@ namespace hospital.View
                     new Notification(t.TimeStart, t.TimeEnd, t.Interval, "Take " + t.Medicine.Name);
                 }
             }
-            
-
         }
 
         private void btnNewAppointment_Click(object sender, RoutedEventArgs e)
@@ -64,6 +68,13 @@ namespace hospital.View
         private void btnRecommended_Click(object sender, RoutedEventArgs e)
         {
             new PatientRecommendedAppointments().Show();
+        }
+        private bool UserFilter(object item)
+        {
+            Appointment appointment = item as Appointment;
+            App app = Application.Current as App;
+            User current = app.userController.CurentLoggedUser;
+            return appointment.PatientUsername.Equals(current.Username);
         }
     }
 }

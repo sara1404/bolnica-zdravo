@@ -1,4 +1,6 @@
 using System.ComponentModel;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Model
 {
@@ -8,6 +10,7 @@ namespace Model
         private string lastName;
         private string id;
         private string dateOfBirth;
+        private string gender;
         private string phoneNumber;
         private bool isGuest;
         private string email;
@@ -26,9 +29,10 @@ namespace Model
         }
 
         public Patient() { }
-        public Patient(string _username,string fName, string lName,string email, string patientId,string phone,string date)
+        public Patient(string _username, string password,string fName, string lName,string email, string patientId,string phone,string date,string gender,bool blocked)
         {
             Username = _username;
+            Password = password;
             FirstName = fName;
             LastName = lName;
             Email = email;
@@ -36,6 +40,8 @@ namespace Model
             phoneNumber= phone;
             dateOfBirth= date;
             isGuest = false;
+            Gender = gender;
+            IsBlocked = blocked;
         }
 
         public Patient(string name)
@@ -56,6 +62,7 @@ namespace Model
             get => id;
             set => id = value;
         }
+        public string Gender { get; set; }
         public string Email { get; set; }
         public string FirstName { get => firstName; set => firstName = value; }
         public string LastName { get => lastName; set => lastName = value; }
@@ -63,12 +70,12 @@ namespace Model
         public string PhoneNumber { get => phoneNumber; set => phoneNumber = value; }
         public bool IsGuest { get => isGuest; set => isGuest = value; }
         public string Username { get => base.Username; set => base.Username = value; }
-        public bool Blocked { get => base.IsBlocked; set => base.IsBlocked = value; }
         public override string ToString()
         {
             return base.Username;
         }
         public MedicalRecord MedicalRecord { get => medicalRecord; set => medicalRecord = value; }
+
 
     }
 }

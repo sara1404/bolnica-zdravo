@@ -147,5 +147,12 @@ namespace Repository
             doctorFileHandler.Write(doctors.ToList());
         }
 
+        public void addOrdinationToDoctor(string doctorUsername, string ordinationId)
+        {
+            Doctor d = FindByUsername(doctorUsername);
+            d.OrdinationId = ordinationId;
+            doctorFileHandler.Write(doctors.ToList());
+        }
+
     }
 }

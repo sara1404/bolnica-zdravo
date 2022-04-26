@@ -13,11 +13,11 @@ namespace Model
 
 
         public User() { }
-        public User(string _username,string _password,Role role)
+        public User(string _username,string _password,Role role,bool blocked)
         {
             this.username = _username;
             this.password = ComputeSha256Hash(_password);
-            this.isBlocked=false;
+            this.isBlocked=blocked;
             this.role = role;
         }
 

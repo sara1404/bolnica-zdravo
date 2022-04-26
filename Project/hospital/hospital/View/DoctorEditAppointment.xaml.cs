@@ -40,7 +40,7 @@ namespace hospital.View
                     tbPatient.Text = selectedAppointment.PatientUsername; // changed because of changes in the model 
                     date.SelectedDate = selectedAppointment.StartTime;
                     tbDescription.Text = selectedAppointment.Description;
-                    if (selectedAppointment.OperationRoomId != "")
+                    if (rc.FindRoomById(selectedAppointment.RoomId) != null && rc.FindRoomById(selectedAppointment.RoomId)._Purpose == "operation") //Znaci mora ovako purpose da se zove
                     {
                         cmbOpRoom.ItemsSource = rc.FindAll();
                         //cmbOpRoom.SelectedItem = (Room)selectedAppointment.operationRoom;
@@ -69,7 +69,7 @@ namespace hospital.View
                 Appointment updatedAppointment = (Appointment)appointmentTable.SelectedItem;
                 updatedAppointment.Description = tbDescription.Text;
                 if (cmbOpRoom.SelectedIndex != -1)
-                    updatedAppointment.OperationRoomId = ((Room)cmbOpRoom.SelectedItem).id;
+                    updatedAppointment.RoomId = ((Room)cmbOpRoom.SelectedItem).id;
                 ac.UpdateAppointment(selectedAppointment, updatedAppointment);
                 this.Close();
             }

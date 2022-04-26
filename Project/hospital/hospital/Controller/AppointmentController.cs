@@ -50,7 +50,7 @@ namespace Controller
 
         public ObservableCollection<Appointment> GetAppointments()
         {
-            throw new NotImplementedException();
+            return appointmentService.GetAll();
         }
 
         public bool UpdateAppointment(Appointment oldAppointment, Appointment newAppointment)

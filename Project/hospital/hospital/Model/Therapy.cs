@@ -18,5 +18,11 @@ namespace Model
             this.interval = interval;
             this.medicine = medicine;
         }
+
+        public DateTime TimeStart{ get => timeStart; set => timeStart = value; }
+        public DateTime TimeEnd { get => timeEnd; set => timeEnd = value; }
+        public int Interval { get => interval; set => interval = value; }
+        public Medicine Medicine { get => medicine; set => medicine = value; }
+
     }
 }

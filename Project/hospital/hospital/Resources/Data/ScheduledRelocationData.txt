@@ -1,1 +1,1 @@
-[{"_Id":"0","_FromRoom":{"name":"794","purpose":"op","_Name":"794","_Purpose":"op","floor":2,"id":"56","equipment":[]},"_ToRoom":{"name":"fd","purpose":"afsd","_Name":"fd","_Purpose":"afsd","floor":2,"id":"546","equipment":[]},"_TypeOfEquipment":"chair","_Quantity":60,"_Relocation":{"_Start":"2022-04-23T22:38:51.2676841+02:00","_End":"2022-04-26T22:38:51.2676841+02:00"}}]
+[]

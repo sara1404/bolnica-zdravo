@@ -1,4 +1,5 @@
 ﻿using Controller;
+using hospital.Controller;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -22,10 +23,12 @@ namespace hospital.View
     public partial class BasicRenovationWindow : Window
     {
         private RoomController roomController;
+        private ScheduledBasicRenovationController scheduledBasicRenovationController;
         public BasicRenovationWindow()
         {
             App app = Application.Current as App;
             roomController = app.roomController;
+            scheduledBasicRenovationController = app.scheduledBasicRenovationController;
             InitializeComponent();
             loadRooms();
         }
@@ -38,7 +41,28 @@ namespace hospital.View
 
         private void Show_Appointments_Click(object sender, KeyEventArgs e)
         {
-
+            if (e.Key == Key.Enter) {
+                int renovationDuration = 0;
+                try
+                {
+                    renovationDuration = Int32.Parse(durationRenovation.Text);
+                }
+                catch(Exception ex)
+                {
+                    durationRenovation.Foreground = Brushes.Red;
+                }
+                try
+                {
+                    if (roomRenovationListView.SelectedItem == null) throw new Exception();
+                    Room room = roomController.FindRoomByName(roomRenovationListView.SelectedItem.ToString());
+                    Console.WriteLine(room.id);
+                    renovationListView.ItemsSource = scheduledBasicRenovationController.FindFreeTimeIntervals(room, renovationDuration);
+                }
+                catch(Exception ex) {
+                    roomRenovationListView.Foreground = Brushes.Red;
+                }
+            }
+           
         }
     }
 }

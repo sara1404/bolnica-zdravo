@@ -1,5 +1,6 @@
 ﻿using hospital.Model;
 using hospital.Service;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace hospital.Controller
 {
-    class ScheduledBasicRenovationController
+    public class ScheduledBasicRenovationController
     {
         private ScheduledBasicRenovationService renovationService;
 
@@ -34,6 +35,10 @@ namespace hospital.Controller
 
         public bool DeleteById(string id) {
             return renovationService.DeleteById(id);
+        }
+
+        public List<TimeInterval> FindFreeTimeIntervals(Room room, int renovationDuration) {
+            return renovationService.FindFreeTimeIntervals(room, renovationDuration);
         }
     }
 }

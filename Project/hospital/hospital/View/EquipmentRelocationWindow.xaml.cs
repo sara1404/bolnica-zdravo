@@ -51,7 +51,7 @@ namespace hospital.View
                 while(true)
                 {
                     if (last.CompareTo(now.AddDays(intervalDuration)) < 0) break;
-                    freeTimeIntervals.Add(new TimeInterval(freeTimeIntervals.Count.ToString(), now, now.AddDays(intervalDuration)));
+                    freeTimeIntervals.Add(new TimeInterval(now, now.AddDays(intervalDuration)));
                     now = now.AddDays(1);
                 }
                 relocationListView.ItemsSource = freeTimeIntervals;

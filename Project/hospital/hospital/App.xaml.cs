@@ -19,6 +19,7 @@ namespace hospital
     {
         public RoomRepository roomRepository;
         public ScheduledRelocationRepository scheduledRelocationRepository;
+        public ScheduledBasicRenovationRepository scheduledBasicRenovationRepository;
         public RoomController roomController { get; set; }
         public PatientController patientController { get; set; }
         public AppointmentController appointmentController { get; set; }
@@ -26,7 +27,9 @@ namespace hospital
         public DoctorController doctorController { get; set; }
         public UserController userController { get; set; }
         public ScheduledRelocationController scheduledRelocationController { get; set; }
+        public ScheduledBasicRenovationController scheduledBasicRenovationController { get; set; }
 
+        Thread relocationThread;
         public App()
         {
             Repository.UserRepository userRepository = new Repository.UserRepository();
@@ -57,11 +60,17 @@ namespace hospital
             scheduledRelocationRepository = new ScheduledRelocationRepository();
             ScheduledRelocationService scheduledRelocationService = new ScheduledRelocationService(scheduledRelocationRepository);
             scheduledRelocationController = new ScheduledRelocationController(scheduledRelocationService);
+
+            TimeSchedulerService timeSchedulerService = new TimeSchedulerService(appointmentRepository);
+
+            scheduledBasicRenovationRepository = new ScheduledBasicRenovationRepository();
+            ScheduledBasicRenovationService scheduledBasicRenovationService = new ScheduledBasicRenovationService(scheduledBasicRenovationRepository ,timeSchedulerService);
+            scheduledBasicRenovationController = new ScheduledBasicRenovationController(scheduledBasicRenovationService);
             
             roomRepository.LoadRoomData();
             scheduledRelocationRepository.LoadRelocationData();
 
-            Thread relocationThread = new Thread(scheduledRelocationService.relocationTracker);
+            relocationThread = new Thread(scheduledRelocationService.relocationTracker);
             relocationThread.Start();
         }
 
@@ -71,6 +80,7 @@ namespace hospital
         {
             roomRepository.WriteRoomData();
             scheduledRelocationRepository.WriteRelocationData();
+            relocationThread.Abort();
         }
     }
 }

@@ -12,9 +12,11 @@ namespace hospital.Service
     public class ScheduledBasicRenovationService
     {
         private ScheduledBasicRenovationRepository scheduledRenovationRepository;
+        private TimeSchedulerService timeSchedulerService;
 
-        public ScheduledBasicRenovationService(ScheduledBasicRenovationRepository scheduledRenovationRepository) {
+        public ScheduledBasicRenovationService(ScheduledBasicRenovationRepository scheduledRenovationRepository, TimeSchedulerService timeSchedulerService) {
             this.scheduledRenovationRepository = scheduledRenovationRepository;
+            this.timeSchedulerService = timeSchedulerService;
         }
 
         public void Create(ScheduledBasicRenovation renovation) {
@@ -37,8 +39,9 @@ namespace hospital.Service
             return scheduledRenovationRepository.DeleteById(id);
         }
 
-        //public List<TimeInterval> FindFreeIntervalsForRenovation(int renovationDuration, Room room) {
-            
-        //}
+        public List<TimeInterval> FindFreeTimeIntervals(Room room, int renovationDuration) {
+            return timeSchedulerService.FindFreeTimeIntervals(room, renovationDuration);
+        }
+
     }
 }

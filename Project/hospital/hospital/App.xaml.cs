@@ -38,7 +38,8 @@ namespace hospital
             roomController = new RoomController(roomService);
 
             PatientRepository patientRepository = new PatientRepository();
-            PatientService patientService = new PatientService(patientRepository);
+            MedicalRecordsRepository medicalRecordsRepository = new MedicalRecordsRepository();
+            PatientService patientService = new PatientService(patientRepository, medicalRecordsRepository);
             patientController = new PatientController(patientService);
 
             AppointmentRepository appointmentRepository = new AppointmentRepository();
@@ -46,7 +47,6 @@ namespace hospital
             AppointmentService appointmentService = new AppointmentService(appointmentRepository, doctorRepository, userController);
             appointmentController = new AppointmentController(appointmentService);
 
-            MedicalRecordsRepository medicalRecordsRepository = new MedicalRecordsRepository();
             MedicalRecordsService medicalRecordsService = new MedicalRecordsService(medicalRecordsRepository);
             mediicalRecordsController = new MedicalRecordsController(medicalRecordsService);
 

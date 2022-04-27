@@ -61,6 +61,7 @@
     <Compile Include="Controller\DoctorController.cs" />
     <Compile Include="Controller\ScheduledRelocationController.cs" />
     <Compile Include="Controller\UserController.cs" />
+    <Compile Include="FileHandler\MedicalRecordFileHandler.cs" />
     <Compile Include="FileHandler\ScheduledRelocationFileHandler.cs" />
     <Compile Include="FileHandler\UserFileHandler.cs" />
     <Compile Include="Model\TimeInterval.cs" />
@@ -164,6 +165,12 @@
     <Compile Include="View\UserControls\HandlingAccountUserControl.xaml.cs">
       <DependentUpon>HandlingAccountUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\HandlingMedRecordUserControl.xaml.cs">
+      <DependentUpon>HandlingMedRecordUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\MedicalRecordUserControl.xaml.cs">
+      <DependentUpon>MedicalRecordUserControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -178,7 +185,6 @@
     <Compile Include="Controller\RoomController.cs" />
     <Compile Include="FileHandler\AppointmentsFileHandler.cs" />
     <Compile Include="FileHandler\DoctorFileHandler.cs" />
-    <Compile Include="FileHandler\MedicalRecordFileHandler.cs" />
     <Compile Include="FileHandler\PatientFileHandler.cs" />
     <Compile Include="FileHandler\RoomFileHandler.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -293,6 +299,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UserControls\HandlingMedRecordUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\MedicalRecordUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Appointment.cs" />
@@ -366,6 +380,27 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Data\ScheduledRelocationData.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Data\DoctorData.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\cardiology.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\hospital.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Data\MedicalRecordData.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

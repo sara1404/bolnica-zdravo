@@ -15,7 +15,7 @@ namespace Model
         private bool isGuest;
         private string email;
 
-        private MedicalRecord medicalRecord;
+        private int recordID;
 
         //public Appointment[] appointment;
 
@@ -74,7 +74,7 @@ namespace Model
         {
             return base.Username;
         }
-        public MedicalRecord MedicalRecord { get => medicalRecord; set => medicalRecord = value; }
+        public int RecordId { get => recordID; set => recordID = value; }
 
 
     }

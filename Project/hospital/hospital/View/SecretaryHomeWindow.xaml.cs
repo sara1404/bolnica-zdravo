@@ -21,22 +21,36 @@ namespace hospital.View
     public partial class SecretaryHomeWindow : Window
     {
         public UserController uc;
+       
         public SecretaryHomeWindow()
         {
             InitializeComponent();
+            this.DataContext = this;
             App app = Application.Current as App;
             uc = app.userController;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void handlingAccount_Click(object sender, RoutedEventArgs e)
         {
+            handlingMedRecordUserControl.Visibility = Visibility.Collapsed;
+            handlingMedRecordUserControl.medRecUserControl.Visibility = Visibility.Collapsed;
+            btnhandlingMedRecord.BorderBrush = Brushes.Transparent;
+            btnhandlingAccount.BorderBrush = Brushes.Olive;
+            btnhandlingAccount.BorderThickness = new Thickness(3,0,0,0);
             handlingAccountUserControl.Visibility = Visibility.Visible;
         }
 
         private void btnHandMedRecord_Click(object sender, RoutedEventArgs e)
         {
+            btnhandlingMedRecord.BorderBrush = Brushes.Olive;
+            btnhandlingAccount.BorderBrush = Brushes.Transparent;
+            btnhandlingMedRecord.BorderThickness = new Thickness(3, 0, 0, 0);
+
             handlingAccountUserControl.addAccountUserControl.Visibility = Visibility.Collapsed;
+            handlingAccountUserControl.editAccountUserControl.Visibility = Visibility.Collapsed;
             handlingAccountUserControl.Visibility = Visibility.Collapsed;
+
+            handlingMedRecordUserControl.Visibility = Visibility.Visible;
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
@@ -45,6 +59,17 @@ namespace hospital.View
             MainWindow mw = new MainWindow();
             mw.Show();
             this.Close();
+        }
+
+        public string LoggedName {
+            get
+            {
+                return uc.CurentLoggedUser.Username;
+            }
+        }
+        private void handlingMedRecord_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

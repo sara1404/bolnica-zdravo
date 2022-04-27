@@ -18,7 +18,7 @@
                         <Button x:Name="btnEdit" Margin="5,0,5,0"  BorderBrush="Transparent" Width="25" Background="Transparent" Click="btnEdit_Click" >
                             <Image Source="../../Resources/Images/editing_24x24.png"></Image>
                         </Button>
-                        <Button x:Name="btnRemove" Margin="5,0,5,0"  BorderBrush="Transparent" Width="25" Background="Transparent" >
+                        <Button x:Name="btnRemove" Margin="5,0,5,0"  BorderBrush="Transparent" Width="25" Background="Transparent" Click="btnRemove_Click" >
                             <Image Source="../../Resources/Images/delete_24x24.png"></Image>
                         </Button>
                     </StackPanel>

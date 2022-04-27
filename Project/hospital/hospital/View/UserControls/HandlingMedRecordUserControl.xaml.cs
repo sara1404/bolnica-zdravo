@@ -144,5 +144,10 @@ namespace hospital.View.UserControls
                 editMedRecUserControl.Visibility = Visibility.Visible;
             }
         }
+
+        private void btnRemove_Click(object sender, RoutedEventArgs e)
+        {
+            pc.DeleteById(((Patient)dateGridHandlingMedicalRecord.SelectedItem).Username);
+        }
     }
 }

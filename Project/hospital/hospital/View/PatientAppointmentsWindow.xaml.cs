@@ -34,7 +34,7 @@ namespace hospital.View
             ICollectionView appointmentsView = CollectionViewSource.GetDefaultView(ac.GetAppointments());
             appointmentsView.Filter = UserFilter;
 
-            MedicalRecord mr = app.patientController.FindById(current.Username).MedicalRecord;
+            MedicalRecord mr = app.mediicalRecordsController.FindById(app.patientController.FindById(current.Username).RecordId);
             if(mr != null && mr.Therapy != null)
             {
                 foreach (Therapy t in mr.Therapy)

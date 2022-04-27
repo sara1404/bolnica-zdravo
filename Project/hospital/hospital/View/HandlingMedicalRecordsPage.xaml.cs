@@ -48,12 +48,12 @@ namespace hospital.View
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            addMedRecUserControl.Visibility = Visibility.Visible;
+           // addMedRecUserControl.Visibility = Visibility.Visible;
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            if(dateGridHandlingMedRec.SelectedIndex != -1)
+          /*  if(dateGridHandlingMedRec.SelectedIndex != -1)
             {
                 MedicalRecord md =(MedicalRecord) dateGridHandlingMedRec.SelectedItem;
                 mc.RecordId = md.RecordId;
@@ -65,15 +65,15 @@ namespace hospital.View
                 editMEdRecUserControl.Visibility = Visibility.Visible;
                 dateGridHandlingMedRec.SelectedIndex= -1;
 
-            }
+            }*/
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
-            if (dateGridHandlingMedRec.SelectedIndex != -1)
+          /*  if (dateGridHandlingMedRec.SelectedIndex != -1)
             {
                 mc.DeleteById(((MedicalRecord)dateGridHandlingMedRec.SelectedItem).RecordId);
-            }
+            }*/
         }
 
         private string getBloodType(BloodType type)

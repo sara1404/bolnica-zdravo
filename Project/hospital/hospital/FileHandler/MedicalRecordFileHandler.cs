@@ -1,21 +1,34 @@
-using Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Model;
 
 namespace FileHandler
 {
     public class MedicalRecordFileHandler
     {
-        private readonly string path;
+        private readonly string path = @"../../Resources/Data/MedicalRecordData.txt";
 
-        public List<Room> Read()
+        public List<MedicalRecord> Read()
         {
-            throw new NotImplementedException();
+            try
+            {
+                string serializedPatients = System.IO.File.ReadAllText(path);
+                List<MedicalRecord> patients = Newtonsoft.Json.JsonConvert.DeserializeObject<List<MedicalRecord>>(serializedPatients);
+                return patients;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
-        public bool Write(List<Room> rooms)
+        public void Write(List<MedicalRecord> patients)
         {
-            throw new NotImplementedException();
+            string serializedPatients = Newtonsoft.Json.JsonConvert.SerializeObject(patients);
+            System.IO.File.WriteAllText(path, serializedPatients);
         }
 
     }

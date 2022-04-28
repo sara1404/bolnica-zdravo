@@ -17,10 +17,10 @@ namespace Repository
         {
             PatientRepository pr = new PatientRepository();
             DoctorRepository dp = new DoctorRepository();
-            medicalRecords = new ObservableCollection<MedicalRecord>();
-            medicalRecords.Add(new MedicalRecord("peromir", 333));
-            medicalRecords.Add(new MedicalRecord("Ratko", 334));
-            /* medicalRecordFileHandler = new MedicalRecordFileHandler();
+            //medicalRecords = new ObservableCollection<MedicalRecord>();
+            //medicalRecords.Add(new MedicalRecord("peromir", 333));
+            //medicalRecords.Add(new MedicalRecord("Ratko", 334));
+             medicalRecordFileHandler = new MedicalRecordFileHandler();
              List<MedicalRecord> deserializedList = medicalRecordFileHandler.Read();
              if (deserializedList != null)
              {
@@ -29,12 +29,12 @@ namespace Repository
              else
              {
                  medicalRecords = new ObservableCollection<MedicalRecord>();
-             }*/
+             }
         }
         public bool Create(MedicalRecord medicalRecord)
         {;
             medicalRecords.Add(medicalRecord);
-            //medicalRecordFileHandler.Write(this.medicalRecords.ToList());
+            medicalRecordFileHandler.Write(this.medicalRecords.ToList());
             return true;
         }
 
@@ -58,15 +58,18 @@ namespace Repository
         public bool DeleteById(int id)
         {
             bool retVal= medicalRecords.Remove(FindById(id));
-            //medicalRecordFileHandler.Write(this.medicalRecords.ToList());
+            medicalRecordFileHandler.Write(this.medicalRecords.ToList());
             return retVal;
         }
 
         public bool UpdateById(int id, MedicalRecord medicalRecord)
         {
-            medicalRecords.Remove(FindById(id));
-            medicalRecord.RecordId =id;
-            medicalRecords.Add(medicalRecord);
+            MedicalRecord med = FindById(id);
+            med.DoctorUsername = medicalRecord.DoctorUsername;
+            med.BloodType = medicalRecord.BloodType;
+            med.Alergies = medicalRecord.Alergies;
+            med.Note = medicalRecord.Note;
+            medicalRecordFileHandler.Write(this.medicalRecords.ToList());
             return true;
         }
 

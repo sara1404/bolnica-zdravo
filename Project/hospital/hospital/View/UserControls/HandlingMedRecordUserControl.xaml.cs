@@ -67,7 +67,8 @@ namespace hospital.View.UserControls
                 Allergens = new List<String>();
                 foreach (String s in tmp)
                 {
-                    Allergens.Add(s);
+                    if(!s.Trim().Equals(""))
+                        Allergens.Add(s.Trim());
                 }
                 medRecUserControl.listAllergens.ItemsSource=Allergens;
             }

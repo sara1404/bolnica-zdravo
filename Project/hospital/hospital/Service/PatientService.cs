@@ -12,12 +12,15 @@ namespace Service
     {
         private readonly PatientRepository patientRepository;
         private readonly MedicalRecordsRepository medicalRecordsRepository;
+        private readonly UserRepository userRepository;
         private  ObservableCollection<MedicalRecord> medicalRecords;
+        
 
-        public PatientService(PatientRepository _repo,MedicalRecordsRepository mec)
+        public PatientService(PatientRepository _repo,MedicalRecordsRepository mec,UserRepository uc)
         { 
             patientRepository = _repo;
             medicalRecordsRepository = mec;
+            userRepository = uc;
         }
         public bool Create(Patient patient)
         {
@@ -40,6 +43,7 @@ namespace Service
         public bool DeleteById(string id)
         {
             medicalRecordsRepository.DeleteById(FindById(id).RecordId);
+            userRepository.DeleteByUsername(id);
             return patientRepository.DeleteById(id);
         }
 

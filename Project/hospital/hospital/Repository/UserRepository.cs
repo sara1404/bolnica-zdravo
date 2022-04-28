@@ -7,7 +7,7 @@ using Model;
 using System.Collections.ObjectModel;
 using hospital.FileHandler;
 
-namespace hospital.Repository
+namespace Repository
 {
     public class UserRepository
     {
@@ -16,7 +16,7 @@ namespace hospital.Repository
 
         public UserRepository()
         {
-            userFileHandler = new FileHandler.UserFileHandler();
+            userFileHandler = new UserFileHandler();
 
             
             List<User> deserializedList = userFileHandler.Read();
@@ -66,8 +66,10 @@ namespace hospital.Repository
 
         public bool UpdateByUsername(string username, User user)
         {
-            DeleteByUsername(username);
-            Create(user);
+            User u = FindByUsername(username);
+            u.Username = user.Username;
+            u.Role = user.Role;
+            u.IsBlocked = user.IsBlocked;
             return true;
         }
 

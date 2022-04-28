@@ -19,7 +19,6 @@ namespace hospital
             uc = app.userController;
 
             User u = uc.sendDate(txtUsername.Text, txtPassword.Password);
-
             if (u == null)
             {
                 labIncorect.Text = "The username or password you've entered is incorrect.";

@@ -9,13 +9,13 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace hospital.Service
+namespace Service
 {
    public  class UserService
     {
-        private readonly Repository.UserRepository userRepository;
+        private readonly UserRepository userRepository;
 
-        public UserService(Repository.UserRepository _repo) { userRepository = _repo; }
+        public UserService(UserRepository _repo) { userRepository = _repo; }
 
         public bool Create(User user)
         {

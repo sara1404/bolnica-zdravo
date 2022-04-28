@@ -1,17 +1,18 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Model
 {
-    public class MedicalRecord
+    public class MedicalRecord : INotifyPropertyChanged
     {
-        /*private  string note;
+        private  string note;
         private  string alergies;
         private  string doctorUsername;
 
-        //private  List<Therapy> therapy;
+        private  List<Therapy> therapy;
         private  BloodType bloodType;
         private  string patientUsername;
-        private  int recordId;*/
+        private  int recordId;
 
         public MedicalRecord(string patientUsername, string _allergens, string _choosen, BloodType bt, string note)
         {
@@ -26,20 +27,24 @@ namespace Model
             this.PatientUsername=patientsUsername;
             this.RecordId=id;
         }
+        public MedicalRecord() { }
 
-        //public string Firstname { get=>patient.FirstName; set=>patient.FirstName=value; }
-        //public string Lastname { get => patient.LastName; set => patient.LastName = value; }
-        //public Doctor ChoosenDoctor { get; set; }
-        //public string Username { get => patient.Username; set => patient.Username=value; }
-        //public string NameDoctor { get => choosenDoctor.ToString();}
-        //private Patient _Patient { get; set; }
-        public int RecordId { get; set; }
-        public string Note { get; set; }
-        public string Alergies { get; set; }
-        public string DoctorUsername { get; set; }
-        public string PatientUsername { get; set; }
-        public BloodType BloodType { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
 
-        public List<Therapy> Therapy { get; set; }
+        public int RecordId { get { return recordId; } set { recordId = value; OnPropertyChanged(""); } }
+        public string Note { get { return note; } set { note = value; OnPropertyChanged(""); } }
+        public string Alergies { get { return alergies; } set { alergies = value; OnPropertyChanged(""); } }
+        public string DoctorUsername { get { return doctorUsername; } set { doctorUsername = value; OnPropertyChanged(""); } }
+        public string PatientUsername { get { return patientUsername; } set { patientUsername = value; OnPropertyChanged(""); } }
+        public BloodType BloodType { get { return bloodType; } set { bloodType = value; OnPropertyChanged(""); } }
+
+        public List<Therapy> Therapy { get { return therapy; } set { therapy = value; OnPropertyChanged(""); } }
     }
 }

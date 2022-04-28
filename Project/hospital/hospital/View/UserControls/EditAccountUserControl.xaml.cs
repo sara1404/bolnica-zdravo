@@ -36,10 +36,6 @@ namespace hospital.View.UserControls
             resetCorected();
             Roles = new ObservableCollection<Model.Role>(Enum.GetValues(typeof(Model.Role)).Cast<Model.Role>().ToList());
         }
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //Sstring text = txtField.Text;
-        }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
@@ -59,12 +55,30 @@ namespace hospital.View.UserControls
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            if (isCorrected[0] & isCorrected[1] & isCorrected[2] & isCorrected[3] & isCorrected[4] & isCorrected[5] & isCorrected[6] & isCorrected[7]) {
-                uc.UpdateByUsername(pc.EditPatient.Username, new User(txtUsername.Text, pc.EditPatient.Password, getRole(cmbRole.Text),isBlocked()));
-                pc.UpdateByUsername(pc.EditPatient.Username, new Patient(txtUsername.Text, pc.EditPatient.Password, txtFirstName.Text,  txtLastName.Text,txtEmail.Text , txtId.Text, txtPhone.Text,txtDate.Text,getGender(), isBlocked())); 
-                Console.WriteLine(txtUsername.Text);
-                Console.WriteLine(pc.EditPatient.Password);
-                this.Visibility = Visibility.Collapsed;
+            try
+            {
+                if (isCorrected[0] & isCorrected[1] & isCorrected[2] & isCorrected[3] & isCorrected[4] & isCorrected[5] & isCorrected[6] & isCorrected[7])
+                {
+                    pc.UpdateByUsername(pc.EditPatient.Username, new Patient(txtUsername.Text, txtFirstName.Text, txtLastName.Text, txtEmail.Text, txtId.Text, txtPhone.Text, txtDate.Text, getGender(), isBlocked()));
+                    uc.UpdateByUsername(pc.EditPatient.Username, new User(txtUsername.Text, getRole(cmbRole.Text), isBlocked()));
+                    this.Visibility = Visibility.Collapsed;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Equals("Input first name"))
+                {
+                    errFristname.Text = ex.Message;
+                }
+
+                if (ex.Message.Equals("Input surname"))
+                {
+                    errLastname.Text = ex.Message;
+                }
+                if (ex.Message.Equals("Username already exists !"))
+                {
+                    errUsername.Text = ex.Message;
+                }
             }
         }
 

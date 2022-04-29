@@ -35,6 +35,7 @@ namespace Model
             set
             {
                 patientUsername = value;
+                OnPropertyChanged();
             }
         }
         public int Id
@@ -46,6 +47,7 @@ namespace Model
             set
             {
                 id = value;
+                OnPropertyChanged();
             }
         }
         public string Description { get => description; set => description = value; }
@@ -63,6 +65,7 @@ namespace Model
             set
             {
                 doctorUsername = value;
+                OnPropertyChanged();
             }
         }
         public string RoomId
@@ -77,13 +80,14 @@ namespace Model
             set
             {
                 roomId = value;
+                OnPropertyChanged();
             }
         }
 
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged(string name)
+        protected virtual void OnPropertyChanged(string name = "")
         {
             if (PropertyChanged != null)
             {

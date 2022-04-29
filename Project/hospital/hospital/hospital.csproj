@@ -59,6 +59,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controller\DoctorController.cs" />
+    <Compile Include="Controller\MedicineController.cs" />
     <Compile Include="Controller\ScheduledRelocationController.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="FileHandler\MedicalRecordFileHandler.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Repository\AppointmentRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
     <Compile Include="Repository\MedicalRecordsRepository.cs" />
+    <Compile Include="Repository\MedicineRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
     <Compile Include="Repository\RoomRepository.cs" />
     <Compile Include="Repository\ScheduledRelocationRepository.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="Service\AppointmentService.cs" />
     <Compile Include="Service\DoctorService.cs" />
     <Compile Include="Service\MedicalRecordsService.cs" />
+    <Compile Include="Service\MedicineService.cs" />
     <Compile Include="Service\PatientService.cs" />
     <Compile Include="Service\RoomService.cs" />
     <Compile Include="Service\ScheduledRelocationService.cs" />
@@ -104,6 +107,9 @@
     </Compile>
     <Compile Include="View\DoctorMedicalRecordsWindow.xaml.cs">
       <DependentUpon>DoctorMedicalRecordsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DoctorTherapyWindow.xaml.cs">
+      <DependentUpon>DoctorTherapyWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DoctorViewInfoWindow.xaml.cs">
       <DependentUpon>DoctorViewInfoWindow.xaml</DependentUpon>
@@ -212,6 +218,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DoctorMedicalRecordsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DoctorTherapyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

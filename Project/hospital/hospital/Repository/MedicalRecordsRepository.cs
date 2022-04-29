@@ -19,7 +19,7 @@ namespace Repository
             DoctorRepository dp = new DoctorRepository();
             medicalRecords = new ObservableCollection<MedicalRecord>();
             medicalRecords.Add(new MedicalRecord("peromir", 333));
-            medicalRecords.Add(new MedicalRecord("Ratko", 334));
+            medicalRecords.Add(new MedicalRecord("Ratko", 335));
             /* medicalRecordFileHandler = new MedicalRecordFileHandler();
              List<MedicalRecord> deserializedList = medicalRecordFileHandler.Read();
              if (deserializedList != null)
@@ -32,7 +32,7 @@ namespace Repository
              }*/
         }
         public bool Create(MedicalRecord medicalRecord)
-        {;
+        {
             medicalRecords.Add(medicalRecord);
             //medicalRecordFileHandler.Write(this.medicalRecords.ToList());
             return true;
@@ -67,6 +67,12 @@ namespace Repository
             medicalRecords.Remove(FindById(id));
             medicalRecord.RecordId =id;
             medicalRecords.Add(medicalRecord);
+            return true;
+        }
+
+        public bool AddTheraphy(int id, Therapy therapy)
+        {
+            FindById(id).Therapy.Add(therapy);
             return true;
         }
 

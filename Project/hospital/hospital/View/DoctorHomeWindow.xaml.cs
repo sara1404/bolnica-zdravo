@@ -72,5 +72,10 @@ namespace hospital.View
         {
             new DoctorMedicalRecordsWindow().Show();
         }
+
+        private void Therapy_Click(object sender, RoutedEventArgs e)
+        {
+            new DoctorTherapyWindow().Show();
+        }
     }
 }

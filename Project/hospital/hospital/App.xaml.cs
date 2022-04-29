@@ -26,6 +26,7 @@ namespace hospital
         public DoctorController doctorController { get; set; }
         public UserController userController { get; set; }
         public ScheduledRelocationController scheduledRelocationController { get; set; }
+        public MedicineController medicineController { get; set; }
 
         public App()
         {
@@ -57,6 +58,10 @@ namespace hospital
             scheduledRelocationRepository = new ScheduledRelocationRepository();
             ScheduledRelocationService scheduledRelocationService = new ScheduledRelocationService(scheduledRelocationRepository);
             scheduledRelocationController = new ScheduledRelocationController(scheduledRelocationService);
+
+            MedicineRepository medicineRepository = new MedicineRepository();
+            MedicineService medicineService = new MedicineService(medicineRepository);
+            medicineController = new MedicineController(medicineService);
             
             roomRepository.LoadRoomData();
             scheduledRelocationRepository.LoadRelocationData();

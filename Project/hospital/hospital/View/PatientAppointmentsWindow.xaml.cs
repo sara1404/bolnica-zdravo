@@ -59,9 +59,17 @@ namespace hospital.View
 
         private void btnDelay_Click(object sender, RoutedEventArgs e)
         {
-            if(appointmentTable.SelectedIndex != -1)
+            Appointment selectedAppointment = (Appointment)appointmentTable.SelectedItem;
+            if (selectedAppointment != null)
             {
-                new PatientDelayAppointment().Show();
+                if(ac.CanBeDelayed(selectedAppointment))
+                {
+                    new PatientDelayAppointment().Show();
+                }
+                else
+                {
+                    MessageBox.Show("You can't delay an appointment now!");
+                }
             }
         }
 

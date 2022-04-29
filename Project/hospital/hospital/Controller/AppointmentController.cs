@@ -59,6 +59,18 @@ namespace Controller
             return true;
         }
 
+        public bool CanBeDelayed(Appointment appointment)
+        {
+            DateTime now = DateTime.Now;
+            if(now <= appointment.StartTime.AddHours(-24))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public ObservableCollection<Appointment> GetRecommendedByDoctor(DateTime startDate, DateTime endDate, Doctor doctor)
         {
             return appointmentService.GetRecommendedByDoctor(startDate, endDate, doctor);

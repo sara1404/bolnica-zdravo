@@ -154,93 +154,43 @@ namespace Service
             return retVal;
         }
         
-        public ObservableCollection<Appointment> GetRecommendedAppointments(DateTime startDate, DateTime endDate, Doctor doctor, bool priority)
+        /*
+         -change var to DateTime
+         -remove userController from constructor
+         */
+        public ObservableCollection<Appointment> GetRecommendedByDoctor(DateTime startDate, DateTime endDate, Doctor doctor)
         {
-            if (priority)   // priority is doctor
+            List<DateTime> startTimes = new List<DateTime>();
+            ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
+            // take all of the appointments of chosen doctor
+            foreach (Appointment a in appointmentRepository.FindAll())
             {
-                List<DateTime> startTimes = new List<DateTime>();
-                ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
-                // take all of the appointments of chosen doctor
-                foreach (Appointment a in appointmentRepository.FindAll())
+                if (a.DoctorUsername.Equals(doctor.Username))
                 {
-                    if (a.DoctorUsername.Equals(doctor.Username))
-                    {
-                        startTimes.Add(a.StartTime);
-                    }
+                    startTimes.Add(a.StartTime);
                 }
-                // take all possible appointments
-                List<DateTime> allTimeSlots = new List<DateTime>();
-                for (var dayIt = startDate; dayIt <= endDate; dayIt = dayIt.AddDays(1)) {
-                    DateTime day = new DateTime(dayIt.Year, dayIt.Month, dayIt.Day, 7, 0, 0);
-                    for (int i = 0; i < 24; i++)
-                    {
-                        allTimeSlots.Add(day.AddMinutes(i * 30));
-                    }
-                }
-                // remove that doctors appointments from all possible appointments
-                foreach (DateTime time in startTimes)
-                {
-                    allTimeSlots.Remove(time);
-                }
-                if(allTimeSlots.Count == 0)
-                {
-                    // if that doctor is too busy than expand the timeframe
-                    DateTime startDatePrev = startDate.CompareTo(DateTime.Today.AddDays(-4)) > 0 ? DateTime.Today.AddDays(1) : startDate.AddDays(-4);
-                    DateTime endDatePrev = startDate;
-                    for (var dayIt = startDatePrev; dayIt <= endDatePrev; dayIt = dayIt.AddDays(1))
-                    {
-                        DateTime day = new DateTime(dayIt.Year, dayIt.Month, dayIt.Day, 7, 0, 0);
-                        for (int i = 0; i < 24; i++)
-                        {
-                            allTimeSlots.Add(day.AddMinutes(i * 30));
-                        }
-                    }
-
-                    DateTime startDatePost = endDate;
-                    DateTime endDatePost = endDate.AddDays(4);
-                    for (var dayIt = startDatePost; dayIt <= endDatePost; dayIt = dayIt.AddDays(1))
-                    {
-                        DateTime day = new DateTime(dayIt.Year, dayIt.Month, dayIt.Day, 7, 0, 0);
-                        for (int i = 0; i < 24; i++)
-                        {
-                            allTimeSlots.Add(day.AddMinutes(i * 30));
-                        }
-                    }
-                }
-                // add patients appointments to the start times
-                foreach (Appointment a in appointmentRepository.FindAll())
-                {
-                    if (a.patientUsername.Equals(userController.CurentLoggedUser.Username))
-                    {
-                        startTimes.Add(a.StartTime);
-                    }
-                }
-                // remove all taken timeslots
-                foreach (DateTime time in startTimes)
-                {
-                    allTimeSlots.Remove(time);
-                }
-
-                // offer the patient all found appointments
-                foreach (DateTime time in allTimeSlots)
-                {
-                    retVal.Add(new Appointment(-1, doctor.Username, userController.CurentLoggedUser.Username, time));
-                }
-                return retVal;
             }
-            else
+            // take all possible appointments
+            List<DateTime> allTimeSlots = new List<DateTime>();
+            for (DateTime dayIt = startDate; dayIt <= endDate; dayIt = dayIt.AddDays(1))
             {
-                List<DateTime> startTimes = new List<DateTime>();
-                ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
-                foreach (Appointment a in appointmentRepository.FindAll())
+                DateTime day = new DateTime(dayIt.Year, dayIt.Month, dayIt.Day, 7, 0, 0);
+                for (int i = 0; i < 24; i++)
                 {
-                    if (a.DoctorUsername.Equals(doctor.Username))
-                    {
-                        startTimes.Add(a.StartTime);
-                    }
+                    allTimeSlots.Add(day.AddMinutes(i * 30));
                 }
-                List<DateTime> allTimeSlots = new List<DateTime>();
-                for (var dayIt = startDate; dayIt <= endDate; dayIt = dayIt.AddDays(1))
+            }
+            // remove that doctors appointments from all possible appointments
+            foreach (DateTime time in startTimes)
+            {
+                allTimeSlots.Remove(time);
+            }
+            if (allTimeSlots.Count == 0)
+            {
+                // if that doctor is too busy than expand the timeframe
+                DateTime startDatePrev = startDate.CompareTo(DateTime.Today.AddDays(-4)) > 0 ? DateTime.Today.AddDays(1) : startDate.AddDays(-4);
+                DateTime endDatePrev = startDate;
+                for (DateTime dayIt = startDatePrev; dayIt <= endDatePrev; dayIt = dayIt.AddDays(1))
                 {
                     DateTime day = new DateTime(dayIt.Year, dayIt.Month, dayIt.Day, 7, 0, 0);
                     for (int i = 0; i < 24; i++)
@@ -248,66 +198,104 @@ namespace Service
                         allTimeSlots.Add(day.AddMinutes(i * 30));
                     }
                 }
-                foreach (DateTime time in startTimes)
-                {
-                    allTimeSlots.Remove(time);
-                }
 
-                if(allTimeSlots.Count == 0)
+                DateTime startDatePost = endDate;
+                DateTime endDatePost = endDate.AddDays(4);
+                for (DateTime dayIt = startDatePost; dayIt <= endDatePost; dayIt = dayIt.AddDays(1))
                 {
-                    // if the doctor is busy in that timeframe then find all of the appointments of every doctor
-                    foreach (Appointment a in appointmentRepository.FindAll())//GetByDoctorSpecialization(doctor.Specialization))
+                    DateTime day = new DateTime(dayIt.Year, dayIt.Month, dayIt.Day, 7, 0, 0);
+                    for (int i = 0; i < 24; i++)
                     {
-                        startTimes.Add(a.StartTime);
-                    }
-                    for (var dayIt = startDate; dayIt <= endDate; dayIt = dayIt.AddDays(1))
-                    {
-                        DateTime day = new DateTime(dayIt.Year, dayIt.Month, dayIt.Day, 7, 0, 0);
-                        for (int i = 0; i < 24; i++)
-                        {
-                            allTimeSlots.Add(day.AddMinutes(i * 30));
-                        }
+                        allTimeSlots.Add(day.AddMinutes(i * 30));
                     }
                 }
-                // take in the consideration patients appointments
-                foreach (Appointment a in appointmentRepository.FindAll())
+            } 
+            // add patients appointments to the start times
+            foreach (Appointment a in appointmentRepository.FindAll())
+            {
+                if (a.patientUsername.Equals(userController.CurentLoggedUser.Username))
                 {
-                    if (a.patientUsername.Equals(userController.CurentLoggedUser.Username))
-                    {
-                        startTimes.Add(a.StartTime);
-                    }
+                    startTimes.Add(a.StartTime);
                 }
-                foreach (DateTime time in startTimes)
-                {
-                    allTimeSlots.Remove(time);
-                }
-
-                foreach (DateTime time in allTimeSlots)
-                {
-                    // for each available timeslot ...
-                    foreach(Doctor d in doctorRepository.FindAll())
-                    {
-                        // ... list all doctors ...
-                        foreach (Appointment a in GetByDoctor(d.Username))
-                        {
-                            // ... and their appointments
-                            if(a.StartTime.CompareTo(time) == 0)
-                            {
-                                // if they have an appointment in that time than they can't be on that appointment
-                                break;
-                            }
-                            else
-                            {
-                                retVal.Add(new Appointment(-1, d.Username, userController.CurentLoggedUser.Username, time));
-                                break;
-                            }
-                            
-                        }
-                    }
-                    
-                }
-                return retVal;
             }
+            // remove all taken timeslots
+            foreach (DateTime time in startTimes)
+            {
+                allTimeSlots.Remove(time);
+            }
+
+            // offer the patient all found appointments
+            foreach (DateTime time in allTimeSlots)
+            {
+                retVal.Add(new Appointment(-1, doctor.Username, userController.CurentLoggedUser.Username, time));
+            }
+            return retVal;
+        }
+
+        public ObservableCollection<Appointment> GetRecommendedByDate(DateTime startDate, DateTime endDate, Doctor doctor)
+        {
+            List<DateTime> startTimes = new List<DateTime>();
+            List<Appointment> retVal = new List<Appointment>();
+            // take all of the patients appointments
+            foreach (Appointment a in appointmentRepository.FindAll())
+            {
+                if (a.patientUsername.Equals(userController.CurentLoggedUser.Username))
+                {
+                    startTimes.Add(a.StartTime);
+                }
+            }
+            // add timeslots
+            List<DateTime> allTimeSlots = new List<DateTime>();
+            for (DateTime dayIt = startDate; dayIt <= endDate; dayIt = dayIt.AddDays(1))
+            {
+                DateTime day = new DateTime(dayIt.Year, dayIt.Month, dayIt.Day, 7, 0, 0);
+                for (int i = 0; i < 24; i++)
+                {
+                    allTimeSlots.Add(day.AddMinutes(i * 30));
+                }
+            }
+
+            bool foundDefaultDoctorsAppointment = false;
+            // remove the patients appointments from all timeslots
+            foreach (DateTime time in startTimes)
+            {
+                allTimeSlots.Remove(time);
+            }
+
+            // search all available timeslots
+            foreach (DateTime time in allTimeSlots)
+            {
+                // look for every doctor 
+                foreach (Doctor d in doctorRepository.FindAll())
+                {
+                    bool found = false;
+                    // and search for every one of his appointments
+                    foreach (Appointment a in GetByDoctor(d.Username))
+                    {
+                        if (a.StartTime == time)
+                        {
+                            found = true;
+                        }
+                    }
+                    // if an appointment is not found than that timeslot is available so fill it
+                    if (!found)
+                    {
+                        if (d.Username.Equals(doctor.Username))
+                        {
+                            foundDefaultDoctorsAppointment = true;
+                        }
+                        retVal.Add(new Appointment(-1, d.Username, userController.CurentLoggedUser.Username, time));
+                    }
+                }
+            }
+            // if the doctor that we asked for has available appointments than we will remove all other doctors
+            if (foundDefaultDoctorsAppointment)
+            {
+                retVal.RemoveAll(s => !s.DoctorUsername.Equals(doctor.Username));
+            }
+
+            ObservableCollection<Appointment> retValObserve = new ObservableCollection<Appointment>(retVal);
+            return retValObserve;
         }
 
         public void Delete(int id)

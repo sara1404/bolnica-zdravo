@@ -37,9 +37,13 @@ namespace hospital.View
         {
             if(dateStart.SelectedDate != null && dateEnd.SelectedDate != null && cbxDoctor.SelectedItem != null)
             {
-                if(dateStart.SelectedDate.Value.CompareTo(dateEnd.SelectedDate.Value) < 0 && ((bool)rbDoctor.IsChecked || (bool)rbDate.IsChecked))
+                if(dateStart.SelectedDate.Value.CompareTo(dateEnd.SelectedDate.Value) < 0 && (bool)rbDoctor.IsChecked)
                 {
-                    appointmentTable.ItemsSource = ac.GetRecommendedAppointments((DateTime)dateStart.SelectedDate, (DateTime)dateEnd.SelectedDate, (Doctor)cbxDoctor.SelectedItem, (bool)rbDoctor.IsChecked);
+                    appointmentTable.ItemsSource = ac.GetRecommendedByDoctor((DateTime)dateStart.SelectedDate, (DateTime)dateEnd.SelectedDate, (Doctor)cbxDoctor.SelectedItem);
+                }
+                else if(dateStart.SelectedDate.Value.CompareTo(dateEnd.SelectedDate.Value) < 0 && (bool)rbDate.IsChecked)
+                {
+                    appointmentTable.ItemsSource = ac.GetRecommendedByDate((DateTime)dateStart.SelectedDate, (DateTime)dateEnd.SelectedDate, (Doctor)cbxDoctor.SelectedItem);
                 }
             }
         }

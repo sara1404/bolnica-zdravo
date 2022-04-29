@@ -10,11 +10,13 @@ namespace Controller
     public class PatientController
     {
         private readonly PatientService patientService;
+        private readonly UserService userService;
         public Patient EditPatient { get; set; }
 
-        public PatientController(PatientService _sevice)
+        public PatientController(PatientService _sevice,UserService uc)
         {
             patientService = _sevice;
+            userService = uc;
         }
         public bool Create(Patient patient)
         {
@@ -39,10 +41,31 @@ namespace Controller
 
         public bool UpdateByUsername(string username, Patient patient)
         {
+            isValidate(username,patient);
             return patientService.UpdateById(username, patient);
         }
 
         private void isValidate(Patient patient)
+        {
+            if (patient.FirstName.Trim().Equals(""))
+            {
+                throw new Exception("Input first name");
+            }
+
+            if (patient.LastName.Trim().Equals(""))
+            {
+                throw new Exception("Input surname");
+            }
+
+            foreach (Patient p in userService.FindAll())
+            {
+                if (p.Username.Equals(patient.Username))
+                {
+                    throw new Exception("Username already exists !");
+                }
+            }
+        }
+        private void isValidate(string oldUsername,Patient patient)
         {
             if(patient.FirstName.Trim().Equals(""))
             {
@@ -54,12 +77,16 @@ namespace Controller
                 throw new Exception("Input surname");
             }
 
-           foreach(Patient p in patientService.FindAll())
+           foreach(User p in userService.FindAll())
             {
+
+                    if (p.Username.Equals(oldUsername))
+                        return;
                 if (p.Username.Equals(patient.Username))
                 {
                     throw new Exception("Username already exists !");
                 }
+                
             }
         }
     }

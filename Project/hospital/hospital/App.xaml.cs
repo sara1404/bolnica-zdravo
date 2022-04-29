@@ -30,8 +30,8 @@ namespace hospital
 
         public App()
         {
-            Repository.UserRepository userRepository = new Repository.UserRepository();
-            Service.UserService userService = new Service.UserService(userRepository);
+            UserRepository userRepository = new UserRepository();
+            UserService userService = new UserService(userRepository);
             userController = new UserController(userService);
 
             roomRepository = new RoomRepository();
@@ -40,8 +40,8 @@ namespace hospital
 
             PatientRepository patientRepository = new PatientRepository();
             MedicalRecordsRepository medicalRecordsRepository = new MedicalRecordsRepository();
-            PatientService patientService = new PatientService(patientRepository, medicalRecordsRepository);
-            patientController = new PatientController(patientService);
+            PatientService patientService = new PatientService(patientRepository, medicalRecordsRepository, userRepository);
+            patientController = new PatientController(patientService, userService);
 
             AppointmentRepository appointmentRepository = new AppointmentRepository();
             DoctorRepository doctorRepository = new DoctorRepository();

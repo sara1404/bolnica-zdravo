@@ -61,8 +61,17 @@ namespace Repository
 
         public bool UpdateById(string id, Patient patient)
         {
-            DeleteById(id);
-            Create(patient);
+            Patient oldPatient=FindById(id);
+            oldPatient.Username = patient.Username;
+            oldPatient.FirstName = patient.FirstName;
+            oldPatient.LastName = patient.LastName; 
+            oldPatient.Email = patient.Email;
+            oldPatient.Id = patient.Id; 
+            oldPatient.DateOfBirth = patient.DateOfBirth;
+            oldPatient.PhoneNumber = patient.PhoneNumber;
+            oldPatient.IsBlocked = patient.IsBlocked;
+            oldPatient.Gender = patient.Gender;
+            patientFileHandler.Write(this.patient.ToList());
             return true;
         }
 

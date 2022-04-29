@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Model
 {
@@ -27,6 +28,7 @@ namespace Model
             this.PatientUsername=patientsUsername;
             this.RecordId=id;
         }
+
         public int RecordId { get; set; }
         public string Note { get; set; }
         public string Alergies { get; set; }

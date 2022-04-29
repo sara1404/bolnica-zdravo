@@ -18,9 +18,6 @@ using Model;
 
 namespace hospital.View.UserControls
 {
-    /// <summary>
-    /// Interaction logic for HandlingAccountUserControl.xaml
-    /// </summary>
     public partial class HandlingAccountUserControl : UserControl
     {
         public ObservableCollection<Patient> Patients { get; set; }

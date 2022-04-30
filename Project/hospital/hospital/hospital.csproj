@@ -168,6 +168,9 @@
     <Compile Include="View\UserControls\HandlingMedRecordUserControl.xaml.cs">
       <DependentUpon>HandlingMedRecordUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\MakeAppointmentUserControl.xaml.cs">
+      <DependentUpon>MakeAppointmentUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserControls\MedicalRecordUserControl.xaml.cs">
       <DependentUpon>MedicalRecordUserControl.xaml</DependentUpon>
     </Compile>
@@ -303,6 +306,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UserControls\MakeAppointmentUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UserControls\MedicalRecordUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -401,6 +408,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Data\MedicalRecordData.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\stethoscope.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

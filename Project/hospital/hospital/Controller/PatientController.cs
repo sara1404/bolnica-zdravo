@@ -57,7 +57,7 @@ namespace Controller
                 throw new Exception("Input surname");
             }
 
-            foreach (Patient p in userService.FindAll())
+            foreach (User p in userService.FindAll())
             {
                 if (p.Username.Equals(patient.Username))
                 {

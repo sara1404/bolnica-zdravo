@@ -42,96 +42,16 @@ namespace hospital.View.UserControls
         {
             if (isValidate())
             {
-                ObservableCollection<Appointment> apointments = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)date.SelectedDate, ((Doctor)cmbDoctor.SelectedItem).Username);
-                for (int i = 0; i<apointments.Count;i++)
+                if (ac.tryMakeAppointment(txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1],cmbUsername.Text,"-666", (DateTime)date.SelectedDate, (Doctor)cmbDoctor.SelectedItem))
                 {
-                    string time = (apointments[i]).StartTime.ToString();
-                    time = time.Split(' ')[1];
-                    string hours = time.Split(':')[0];
-                    string minuts = time.Split(':')[1];
-                    if (txtTime.Text.Split(':')[0].Equals(hours) && txtTime.Text.Split(':')[1].Equals(minuts))
-                    {  
-                        //stavi id sobee kad sazanas
-                        (apointments[i]).patientUsername = cmbUsername.Text;
-                        (apointments[i]).roomId = "-333";
-                        //pozovi controller i napravi appointment
-                        ac.CreateAppointment(apointments[i]);
-                        this.Visibility = Visibility.Collapsed;
-                        return;
-                    }  
+                    this.Visibility = Visibility.Collapsed;
+                    return;
                 }
                 btnShowRec.Visibility = Visibility.Visible;
                 notFree.Text = "Appointment is not free";
             }
         }
-        public Appointment RecommendedOne { set; get; }
-        public Appointment RecommendedTwo { set; get; }
-        private void findFreeForward(ObservableCollection<Appointment> apointments,string hours, string minuts)
-        {
-            //PROVERI DA LI JE 6 i 30
-            int _hours = Int32.Parse(hours);
-            int _minuts = Int32.Parse(minuts);
-            if (_minuts == 30)
-            {
-                _minuts = 0;
-                _hours = ++_hours;
-            }
-            else if (_minuts == 0)
-            {
-                _minuts = 30;
-            }
 
-            string itemHours;
-            string itemMinuts;
-            string time;
-            for (int i= 0; i < apointments.Count;i++) {
-                time = (apointments[i]).StartTime.ToString();
-                time = time.Split(' ')[1];
-                itemHours = time.Split(':')[0];
-                itemMinuts = time.Split(':')[1];
-                if (Int32.Parse(itemHours)==(_hours % 13) && Int32.Parse(itemMinuts)==_minuts)
-                {
-                    RecommendedOne=apointments[i];
-                    return;
-                }
-            }
-            findFreeForward(apointments,_hours.ToString(), _minuts.ToString());
-
-        }
-        private void findFreeBack(ObservableCollection<Appointment> apointments, string hours, string minuts)
-        {
-            //PROVERI DA LI JE 7
-            int _hours = Int32.Parse(hours);
-            int _minuts = Int32.Parse(minuts);
-            if (_minuts == 30)
-            {
-                _minuts = 0;
-               
-            }
-            else if (_minuts == 0)
-            {
-                _minuts = 30;
-                _hours = --_hours;
-            }
-
-            string itemHours;
-            string itemMinuts;
-            string time;
-            for (int i = 0; i < apointments.Count; i++)
-            {
-                time = (apointments[i]).StartTime.ToString();
-                time = time.Split(' ')[1];
-                itemHours = time.Split(':')[0];
-                itemMinuts = time.Split(':')[1];
-                if (Int32.Parse(itemHours) == (_hours % 12) && Int32.Parse(itemMinuts) == _minuts)
-                {
-                    RecommendedTwo = apointments[i];
-                    return;
-                }
-            }
-            findFreeBack(apointments, _hours.ToString(), _minuts.ToString());
-
-        }
         private bool isValidate()
         {
             bool[] isCorrected = new bool[5];
@@ -250,10 +170,10 @@ namespace hospital.View.UserControls
                     else
                         btnRecTwo.Visibility = Visibility.Visible;
                     ObservableCollection<Appointment> apointments = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)date.SelectedDate, ((Doctor)cmbDoctor.SelectedItem).Username);
-                    findFreeForward(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
-                    findFreeBack(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
-                    btnRecOne.Content = "Doctor: " + dc.GetByUsername(RecommendedOne.doctorUsername) + "\n" + RecommendedOne.StartTime;
-                    btnRecTwo.Content = "Doctor: " + dc.GetByUsername(RecommendedTwo.doctorUsername) + "\n" + RecommendedTwo.StartTime;
+                    ac.findFreeForward(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
+                    ac.findFreeBack(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
+                    btnRecOne.Content = "Doctor: " + dc.GetByUsername(ac.RecommendedOne.doctorUsername) + "\n" + ac.RecommendedOne.StartTime;
+                    btnRecTwo.Content = "Doctor: " + dc.GetByUsername(ac.RecommendedTwo.doctorUsername) + "\n" + ac.RecommendedTwo.StartTime;
                 }
                 else
                 {
@@ -262,44 +182,12 @@ namespace hospital.View.UserControls
                     btnRecOne.Visibility = Visibility.Visible;
                     btnRecTwo.Visibility = Visibility.Visible;
                     ObservableCollection<Appointment> apointments = ac.GetFreeAppointmentsByDate((DateTime)date.SelectedDate);
-                    findRecByTime(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
-                    btnRecOne.Content = "Doctor: " + dc.GetByUsername(RecommendedOne.doctorUsername) + "\n" + RecommendedOne.StartTime;
-                    btnRecTwo.Content = "Doctor: " + dc.GetByUsername(RecommendedTwo.doctorUsername) + "\n" + RecommendedTwo.StartTime;
+                    ac.findRecByTime(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
+                    btnRecOne.Content = "Doctor: " + dc.GetByUsername(ac.RecommendedOne.doctorUsername) + "\n" + ac.RecommendedOne.StartTime;
+                    btnRecTwo.Content = "Doctor: " + dc.GetByUsername(ac.RecommendedTwo.doctorUsername) + "\n" + ac.RecommendedTwo.StartTime;
                 }
             }
         }
-
-        private void findRecByTime(ObservableCollection<Appointment> apointments,string hours,string minuts)
-        {
-            bool oneRecFilled = false;
-            foreach (Appointment appointment in apointments)
-            {
-                Console.WriteLine(appointment.doctorUsername +"+++"+ appointment.StartTime);
-            }
-            foreach(Appointment appointment in apointments)
-            {
-                string time = (appointment).StartTime.ToString();
-                time = time.Split(' ')[1];
-                string _hours = time.Split(':')[0];
-                string _minuts = time.Split(':')[1];
-                if(_hours.Equals(hours) && _minuts.Equals(minuts))
-                {
-                    if (oneRecFilled == false)
-                    {
-                        Console.WriteLine("Napunio prvog");
-                        RecommendedOne = appointment;
-                        oneRecFilled = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Napunio drugog");
-                        RecommendedTwo = appointment;
-                        return;
-                    }
-                }
-            }
-        }
-
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Visibility = Visibility.Collapsed;
@@ -316,7 +204,7 @@ namespace hospital.View.UserControls
 
         private void btnRecTwo_Click(object sender, RoutedEventArgs e)
         {
-            ac.CreateAppointment(RecommendedTwo);
+            ac.CreateAppointment(ac.RecommendedTwo);
             this.Visibility = Visibility.Collapsed;
             cmbDoctor.Text = "";
             cmbUsername.Text = "";
@@ -331,7 +219,7 @@ namespace hospital.View.UserControls
 
         private void btnRecOne_Click(object sender, RoutedEventArgs e)
         {
-            ac.CreateAppointment(RecommendedOne);
+            ac.CreateAppointment(ac.RecommendedOne);
             this.Visibility = Visibility.Collapsed;
             cmbDoctor.Text = "";
             cmbUsername.Text = "";
@@ -342,6 +230,11 @@ namespace hospital.View.UserControls
             errDate.Text = "";
             btnRecOne.Visibility = Visibility.Collapsed;
             btnRecTwo.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnDelay_Click(object sender, RoutedEventArgs e)
+        {
+            delayAppointmentUserControl.Visibility = Visibility.Visible;
         }
     }
 }

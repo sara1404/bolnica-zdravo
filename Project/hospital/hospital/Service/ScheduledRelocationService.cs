@@ -14,14 +14,18 @@ namespace hospital.Service
     public class ScheduledRelocationService
     {
         private ScheduledRelocationRepository scheduledRelocationRepository;
+        private TimeSchedulerService timeSchedulerService;
 
-        public ScheduledRelocationService(ScheduledRelocationRepository scheduledRelocationRepository)
+        public ScheduledRelocationService(ScheduledRelocationRepository scheduledRelocationRepository, TimeSchedulerService timeSchedulerService)
         {
             this.scheduledRelocationRepository = scheduledRelocationRepository;
+            this.timeSchedulerService = timeSchedulerService;
         }
 
         public void Create(ScheduledRelocation relocation)
         {
+            if (relocation._FromRoom.id.Equals(relocation._ToRoom.id))
+                throw new Exception("Cant relocate to same room");
             scheduledRelocationRepository.Create(relocation);
         }
 
@@ -63,30 +67,7 @@ namespace hospital.Service
                             string equipmentType = rel._TypeOfEquipment;
                             int quantity = rel._Quantity;
                             Equipment equipment = new Equipment(equipmentType, quantity);
-                            //foreach (Equipment eq in fromRoom.equipment)
-                            //{
-                            //    if (eq.type.Equals(equipmentType))
-                            //    {
-                            //        eq.quantity -= quantity;
-                            //        if (eq.quantity == 0)
-                            //        {
-                            //            List<Equipment> equipTemp = fromRoom.equipment.ToList();
-                            //            equipTemp.Remove(eq);
-                            //            fromRoom.equipment = new ConcurrentBag<Equipment>(equipTemp);
-
-                            //        }
-                            //    }
-                            //}
-                            foreach (Equipment eq in toRoom.equipment)
-                            {
-                                if (eq.type.Equals(equipmentType))
-                                {
-                                    eq.quantity += quantity;
-                                    DeleteById(rel._Id);
-                                    return;
-                                }
-                            }
-                            toRoom.equipment.Add(equipment);
+                            toRoom.AddEquipment(equipment);
                             DeleteById(rel._Id);
                         }
                     }
@@ -98,6 +79,10 @@ namespace hospital.Service
                 }
             }
 
+        }
+
+        public List<TimeInterval> FindRelocationIntervals(int relocationDuration) {
+            return timeSchedulerService.FindRelocationIntervals(relocationDuration);
         }
 
     }

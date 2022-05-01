@@ -1,4 +1,5 @@
 ﻿using hospital.Model;
+using hospital.Repository;
 using Model;
 using Repository;
 using System;
@@ -14,13 +15,16 @@ namespace hospital.Service
     {
 
         private AppointmentRepository appointmentRepository;
+        private ScheduledBasicRenovationRepository scheduledBasicRenovationRepository;
 
-        public TimeSchedulerService(AppointmentRepository appointmentRepository) {
+        public TimeSchedulerService(AppointmentRepository appointmentRepository, ScheduledBasicRenovationRepository scheduledBasicRenovationRepository) {
             this.appointmentRepository = appointmentRepository;
+            this.scheduledBasicRenovationRepository = scheduledBasicRenovationRepository;
         }
 
         public List<TimeInterval> FindFreeTimeIntervals(Room room, int renovationDuration) {
             List<Appointment> appointments = appointmentRepository.FindAll().ToList();
+            List<ScheduledBasicRenovation> renovations = scheduledBasicRenovationRepository.FindAll();
             List<TimeInterval> freeTimeIntervals = new List<TimeInterval>();
             DateTime now = DateTime.Now;
             DateTime last = now.AddDays(30);
@@ -39,10 +43,21 @@ namespace hospital.Service
                     {
                         if (interval._Start.Date.CompareTo(appointment.StartTime.Date) == 0 || interval._End.Date.CompareTo(appointment.StartTime.Date) == 0 ||
                             (interval._Start.Date.CompareTo(appointment.StartTime.Date) == -1 && interval._End.Date.CompareTo(appointment.StartTime.Date) == 1)) {
-                            Console.WriteLine(interval._Start);
                             forDeleting.Add(interval);
                         }
 
+                    }
+                }
+            }
+
+            foreach (TimeInterval interval in freeTimeIntervals) {
+                foreach (ScheduledBasicRenovation renovation in renovations) {
+                    if (renovation._Room._Name.Equals(room._Name)) {
+                        if (interval._Start.Date.CompareTo(renovation._Interval._Start.Date) == 0 || interval._End.Date.CompareTo(renovation._Interval._Start.Date) == 0 ||
+                            (interval._Start.Date.CompareTo(renovation._Interval._Start.Date) == -1 && interval._End.Date.CompareTo(renovation._Interval._Start.Date) == 1))
+                        {
+                            forDeleting.Add(interval);
+                        }
                     }
                 }
             }
@@ -53,6 +68,19 @@ namespace hospital.Service
             return freeTimeIntervals;
         }
 
-
+        public List<TimeInterval> FindRelocationIntervals(int relocationDuration)
+        {
+            List<TimeInterval> freeTimeIntervals = new List<TimeInterval>();
+            DateTime now = DateTime.Now;
+            DateTime last = now.AddDays(7);
+            while (true)
+            {
+                if (last.CompareTo(now.AddDays(relocationDuration)) < 0) break;
+                freeTimeIntervals.Add(new TimeInterval(now, now.AddDays(relocationDuration)));
+                now = now.AddDays(1);
+            }
+            return freeTimeIntervals;
+        }
+            
     }
 }

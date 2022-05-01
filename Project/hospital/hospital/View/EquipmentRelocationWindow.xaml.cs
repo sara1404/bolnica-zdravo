@@ -36,25 +36,24 @@ namespace hospital.View
             roomController = app.roomController;
             scheduledRelocationController = app.scheduledRelocationController;
             loadRoomsToComboBoxes();
+            scheduleBtn.IsEnabled = false;
         }
 
         private void Show_Appointmets_Click(object sender, KeyEventArgs e)
         {
             string relocationDuration = duration.Text;
-            List<TimeInterval> freeTimeIntervals = new List<TimeInterval>();
-            DateTime now = DateTime.Now;
-            DateTime last = now.AddDays(7);
             if (e.Key == Key.Enter)
             {
-
-                int intervalDuration  = Int32.Parse(relocationDuration);
-                while(true)
+                try
                 {
-                    if (last.CompareTo(now.AddDays(intervalDuration)) < 0) break;
-                    freeTimeIntervals.Add(new TimeInterval(now, now.AddDays(intervalDuration)));
-                    now = now.AddDays(1);
+                    int duration = Int32.Parse(relocationDuration);
+                    relocationListView.ItemsSource = scheduledRelocationController.FindRelocationIntervals(duration);
                 }
-                relocationListView.ItemsSource = freeTimeIntervals;
+                catch (Exception ex) {
+                    duration.Foreground = Brushes.Red;
+                    duration.Text = "Invalid input";
+                    return;
+                }
             }
         }
 
@@ -65,6 +64,17 @@ namespace hospital.View
 
         private void Schedule_Relocation_Click(object sender, RoutedEventArgs e)
         {
+
+            try
+            {
+                Int32.Parse(quantity.Text);
+            }
+            catch (Exception ex) {
+                quantity.Text = "Invalid input";
+                quantity.Foreground = Brushes.Red;
+                return;
+            }
+
             Room fromRoomSelected = roomController.FindRoomByName(fromRoom.SelectedItem.ToString());
             Room toRoomSelected = roomController.FindRoomByName(toRoom.SelectedItem.ToString());
             string equip = equipment.SelectedItem.ToString();
@@ -72,9 +82,21 @@ namespace hospital.View
             TimeInterval relocation = (TimeInterval)relocationListView.SelectedItem;
             string id = scheduledRelocationController.FindAll().Count.ToString();
             ScheduledRelocation scheduledRelocation = new ScheduledRelocation(id, fromRoomSelected, toRoomSelected, equip, equipmentQuantity, relocation);
-            scheduledRelocationController.Create(scheduledRelocation);
+            try
+            {
+                scheduledRelocationController.Create(scheduledRelocation);
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+                return;
+            }
             foreach (Equipment eq in fromRoomSelected.equipment) {
                 if (eq.type.Equals(equip)) {
+                    if (eq.quantity < equipmentQuantity) {
+                        quantity.Text = "Unavailable amount";
+                        quantity.Foreground = Brushes.Red;
+                        return;
+                    }
                     eq.quantity -= equipmentQuantity;
                     if (eq.quantity == 0) {
                         List<Equipment> equipTemp = fromRoomSelected.equipment.ToList();
@@ -110,15 +132,31 @@ namespace hospital.View
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (fromRoom.SelectedIndex != -1 && toRoom.SelectedIndex != -1 && equipment.SelectedIndex != -1 && !quantity.Text.Equals("") && relocationListView.SelectedIndex != -1)
+                scheduleBtn.IsEnabled = true;
             string roomName = fromRoom.SelectedItem.ToString();
             equipment.Items.Clear();
             quantity.Text = "";
             loadEquipmentToComboBox(roomName);
         }
 
-        private void ComboBox_DropDownClosed(object sender, EventArgs e)
+        private void Validate(object sender, SelectionChangedEventArgs e)
         {
+            ValidateInputs();
+        }
 
+        private void Validate(object sender, TextChangedEventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private void ValidateInputs() {
+            if (fromRoom.SelectedIndex != -1 && toRoom.SelectedIndex != -1 && equipment.SelectedIndex != -1 && !quantity.Text.Equals("") && relocationListView.SelectedIndex != -1)
+            {
+                scheduleBtn.IsEnabled = true;
+                return;
+            }
+            scheduleBtn.IsEnabled = false;
         }
     }
 }

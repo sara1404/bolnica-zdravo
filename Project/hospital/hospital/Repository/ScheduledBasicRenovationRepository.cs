@@ -63,7 +63,7 @@ namespace hospital.Repository
             }
         }
 
-        public void WriteRoomData()
+        public void WriteRenovationData()
         {
             renovationFileHandler.Write(renovations);
         }

@@ -55,7 +55,15 @@ namespace Model
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-
+        public void AddEquipment(Equipment equipment) {
+            foreach (Equipment e in this.equipment) {
+                if (e.type.Equals(equipment.type)) {
+                    e.quantity += equipment.quantity;
+                    return;
+                }
+            }
+            this.equipment.Add(equipment);
+        }
         
     }
 }

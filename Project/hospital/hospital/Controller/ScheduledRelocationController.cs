@@ -36,6 +36,9 @@ namespace hospital.Controller
             return scheduledRelocationService.DeleteById(id);
         }
 
+        public List<TimeInterval> FindRelocationIntervals(int relocationDuration) {
+            return scheduledRelocationService.FindRelocationIntervals(relocationDuration);
+        }
 
     }
 }

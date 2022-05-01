@@ -24,18 +24,21 @@ namespace hospital.View
         private AppointmentController ac;
         private Appointment selectedAppointment;
 
-        public PatientDelayAppointment()
+        public PatientDelayAppointment(Appointment a)
         {
             InitializeComponent();
-            foreach (Window window in Application.Current.Windows)
+            /*foreach (Window window in Application.Current.Windows)
             {
-                if (window.GetType() == typeof(PatientAppointmentsWindow))
+                if (window.GetType() == typeof(PatientHomeWindow))
                 {
-                    selectedAppointment = (window as PatientAppointmentsWindow).appointmentTable.SelectedItem as Appointment;
+                    selectedAppointment = (window as PatientHomeWindow).appointmentTable.SelectedItem as Appointment;
                     tbxDoctor.Text = selectedAppointment.DoctorUsername;
                     oldDate.SelectedDate = selectedAppointment.StartTime;
                 }
-            }
+            */
+            selectedAppointment = a;
+            tbxDoctor.Text = selectedAppointment.DoctorUsername;
+            oldDate.SelectedDate = selectedAppointment.StartTime;
             App app = Application.Current as App;
             ac = app.appointmentController;
             newDate.DisplayDateStart = DateTime.Now > selectedAppointment.StartTime.AddDays(-4) ? DateTime.Now : selectedAppointment.StartTime.AddDays(-4);

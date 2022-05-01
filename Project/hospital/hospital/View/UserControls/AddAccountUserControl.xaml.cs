@@ -60,7 +60,7 @@ namespace hospital.View.UserControls
             try {
                 if (isCorrected[0] & isCorrected[1] & isCorrected[2] & isCorrected[3] & isCorrected[4] & isCorrected[5] & isCorrected[6] & isCorrected[7])
                 {
-                    pc.Create(new Patient(txtUsername.Text,txtPassword.Text, txtFirstName.Text, txtLastName.Text, txtEmail.Text ,txtId.Text, txtPhone.Text,txtDate.Text, getGender(),false));
+                    pc.Create(new Patient(txtUsername.Text, txtFirstName.Text, txtLastName.Text, txtEmail.Text ,txtId.Text, txtPhone.Text,txtDate.Text, getGender(),false));
                     uc.Create(new User(txtUsername.Text, txtPassword.Text, getRole(cmbRole.Text),false));
                     this.Visibility = Visibility.Collapsed;
                 }

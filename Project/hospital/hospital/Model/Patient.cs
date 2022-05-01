@@ -15,7 +15,7 @@ namespace Model
         private bool isGuest;
         private string email;
 
-        private MedicalRecord medicalRecord;
+        private int recordID;
 
         //public Appointment[] appointment;
 
@@ -29,10 +29,9 @@ namespace Model
         }
 
         public Patient() { }
-        public Patient(string _username, string password,string fName, string lName,string email, string patientId,string phone,string date,string gender,bool blocked)
+        public Patient(string _username,string fName, string lName,string email, string patientId,string phone,string date,string gender,bool blocked)
         {
             Username = _username;
-            Password = password;
             FirstName = fName;
             LastName = lName;
             Email = email;
@@ -44,10 +43,6 @@ namespace Model
             IsBlocked = blocked;
         }
 
-        public Patient(string name)
-        {
-            FirstName=name;
-        }
 
         public Patient(string firstName,string surname,string username)
         {
@@ -59,22 +54,22 @@ namespace Model
         }
         public string Id
         {
-            get => id;
-            set => id = value;
+            get { return id;}
+            set { id = value; OnPropertyChanged(""); }
         }
-        public string Gender { get; set; }
-        public string Email { get; set; }
-        public string FirstName { get => firstName; set => firstName = value; }
-        public string LastName { get => lastName; set => lastName = value; }
-        public string DateOfBirth { get => dateOfBirth; set => dateOfBirth = value; }
-        public string PhoneNumber { get => phoneNumber; set => phoneNumber = value; }
-        public bool IsGuest { get => isGuest; set => isGuest = value; }
-        public string Username { get => base.Username; set => base.Username = value; }
+        public string Gender { get { return gender; } set { gender = value; OnPropertyChanged(""); } }
+        public string Email { get { return email; } set { email = value; OnPropertyChanged(""); } }
+        public string FirstName { get { return firstName; } set { firstName = value; OnPropertyChanged(""); } }
+        public string LastName { get { return lastName; } set { lastName = value; OnPropertyChanged(""); } }
+        public string DateOfBirth { get { return dateOfBirth; } set { dateOfBirth = value; OnPropertyChanged(""); } }
+        public string PhoneNumber { get { return phoneNumber; } set { phoneNumber = value; OnPropertyChanged(""); } }
+        public bool IsGuest { get { return isGuest; } set { isGuest = value; OnPropertyChanged(""); } }
+        public string Username { get { return base.Username; } set { base.Username = value; OnPropertyChanged(""); } }
         public override string ToString()
         {
             return base.Username;
         }
-        public MedicalRecord MedicalRecord { get => medicalRecord; set => medicalRecord = value; }
+        public int RecordId { get { return recordID; } set { recordID = value; OnPropertyChanged(""); } }
 
 
     }

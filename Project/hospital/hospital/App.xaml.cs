@@ -28,13 +28,14 @@ namespace hospital
         public UserController userController { get; set; }
         public ScheduledRelocationController scheduledRelocationController { get; set; }
         public ScheduledBasicRenovationController scheduledBasicRenovationController { get; set; }
+        public MedicineController medicineController { get; set; }
 
         Thread relocationThread;
         Thread renovationThread;
         public App()
         {
-            Repository.UserRepository userRepository = new Repository.UserRepository();
-            Service.UserService userService = new Service.UserService(userRepository);
+            UserRepository userRepository = new UserRepository();
+            UserService userService = new UserService(userRepository);
             userController = new UserController(userService);
 
             roomRepository = new RoomRepository();
@@ -42,15 +43,15 @@ namespace hospital
             roomController = new RoomController(roomService);
 
             PatientRepository patientRepository = new PatientRepository();
-            PatientService patientService = new PatientService(patientRepository);
-            patientController = new PatientController(patientService);
+            MedicalRecordsRepository medicalRecordsRepository = new MedicalRecordsRepository();
+            PatientService patientService = new PatientService(patientRepository, medicalRecordsRepository, userRepository);
+            patientController = new PatientController(patientService, userService);
 
             AppointmentRepository appointmentRepository = new AppointmentRepository();
             DoctorRepository doctorRepository = new DoctorRepository();
             AppointmentService appointmentService = new AppointmentService(appointmentRepository, doctorRepository, userController);
             appointmentController = new AppointmentController(appointmentService);
 
-            MedicalRecordsRepository medicalRecordsRepository = new MedicalRecordsRepository();
             MedicalRecordsService medicalRecordsService = new MedicalRecordsService(medicalRecordsRepository);
             mediicalRecordsController = new MedicalRecordsController(medicalRecordsService);
 
@@ -71,7 +72,10 @@ namespace hospital
             ScheduledRelocationService scheduledRelocationService = new ScheduledRelocationService(scheduledRelocationRepository, timeSchedulerService);
             scheduledRelocationController = new ScheduledRelocationController(scheduledRelocationService);
 
-
+            MedicineRepository medicineRepository = new MedicineRepository();
+            MedicineService medicineService = new MedicineService(medicineRepository);
+            medicineController = new MedicineController(medicineService);
+            
             roomRepository.LoadRoomData();
             scheduledRelocationRepository.LoadRelocationData();
 

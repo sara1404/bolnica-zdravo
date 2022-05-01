@@ -9,12 +9,13 @@
     <Grid>
 
         <Grid>
-            <TextBlock HorizontalAlignment="Left" Margin="270,119,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" FontSize="15" FontWeight="DemiBold"/>
-            <TextBox HorizontalAlignment="Left" x:Name="txtUsername" Height="23" Margin="370,119,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-            <TextBlock HorizontalAlignment="Left" Margin="270,170,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" FontSize="15" FontWeight="DemiBold"/>
-            <Button Content="Login" Click="Login_Click"  HorizontalAlignment="Left" Margin="415,224,0,0" VerticalAlignment="Top" Width="75"/>
-            <PasswordBox HorizontalAlignment="Left" x:Name="txtPassword"  Height="23" Margin="370,170,0,0" VerticalAlignment="Top" Width="120"/>
-            <TextBlock x:Name="labIncorect" HorizontalAlignment="Left" Margin="261,74,0,0" FontWeight="DemiBold" FontSize="15" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="276" Foreground="Red"/>
+            <TextBlock HorizontalAlignment="Left" Margin="270,167,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" FontSize="15" FontWeight="DemiBold"/>
+            <TextBox HorizontalAlignment="Left" x:Name="txtUsername" Height="23" Margin="370,167,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+            <TextBlock HorizontalAlignment="Left" Margin="270,217,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" FontSize="15" FontWeight="DemiBold"/>
+            <Button Content="Login" Click="Login_Click"  HorizontalAlignment="Left" Margin="415,283,0,0" VerticalAlignment="Top" Width="75"/>
+            <PasswordBox HorizontalAlignment="Left" x:Name="txtPassword"  Height="23" Margin="370,217,0,0" VerticalAlignment="Top" Width="120"/>
+            <TextBlock x:Name="labIncorect" HorizontalAlignment="Left" Margin="270,245,0,0" FontWeight="DemiBold" FontSize="15" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="276" Foreground="Red"/>
+            <Image Source="../Resources/Images/logo.png" Width="160" Height="100" VerticalAlignment="top" Margin="0,50,0,0"></Image>
         </Grid>
 
 

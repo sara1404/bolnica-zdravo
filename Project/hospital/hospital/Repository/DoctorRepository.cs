@@ -28,7 +28,7 @@ namespace Repository
             }
 
             //doctors = new ObservableCollection<Doctor>();
-            Doctor d1 = new Doctor("Mitar", "Miric");
+            /*Doctor d1 = new Doctor("Mitar", "Miric");
             d1.Username = "miromir";
             d1.Specialization = Specialization.general;
             doctors.Add(d1);
@@ -38,7 +38,7 @@ namespace Repository
             doctors.Add(d2);
             Doctor d3 = new Doctor("Bosko", "Ristovic");
             d3.Username = "Skabo";
-            doctors.Add(d3);
+            doctors.Add(d3);*/
 
             //doctorFileHandler.Write(doctors.ToList()); //ovo za sad ovde stoji
         }

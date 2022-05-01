@@ -22,32 +22,32 @@ namespace hospital.View
     public partial class PatientDelayAppointment : Window
     {
         private AppointmentController ac;
-        private Appointment a;
+        private Appointment selectedAppointment;
 
         public PatientDelayAppointment()
         {
             InitializeComponent();
-            newDate.DisplayDateStart = DateTime.Today;
-            newDate.DisplayDateEnd = DateTime.Today.AddDays(3);
             foreach (Window window in Application.Current.Windows)
             {
                 if (window.GetType() == typeof(PatientAppointmentsWindow))
                 {
-                    a = (window as PatientAppointmentsWindow).appointmentTable.SelectedItem as Appointment;
-                    tbxDoctor.Text = a.DoctorUsername;
-                    oldDate.SelectedDate = a.StartTime;
+                    selectedAppointment = (window as PatientAppointmentsWindow).appointmentTable.SelectedItem as Appointment;
+                    tbxDoctor.Text = selectedAppointment.DoctorUsername;
+                    oldDate.SelectedDate = selectedAppointment.StartTime;
                 }
             }
             App app = Application.Current as App;
             ac = app.appointmentController;
-            this.DataContext = this;
+            newDate.DisplayDateStart = DateTime.Now > selectedAppointment.StartTime.AddDays(-4) ? DateTime.Now : selectedAppointment.StartTime.AddDays(-4);
+            newDate.DisplayDateEnd = selectedAppointment.StartTime.AddDays(4);
+            DataContext = this;
         }
 
         private void btnShow_Click(object sender, RoutedEventArgs e)
         {
             if (newDate.SelectedDate != null)
             {
-                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)newDate.SelectedDate, a.DoctorUsername);
+                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)newDate.SelectedDate, selectedAppointment.DoctorUsername);
             }
         }
 
@@ -55,8 +55,8 @@ namespace hospital.View
         {
             if(appointmentTable.SelectedItem != null)
             {
-                ac.UpdateAppointment(a, (Appointment)appointmentTable.SelectedItem);
-                this.Close();
+                ac.UpdateAppointment(selectedAppointment, (Appointment)appointmentTable.SelectedItem);
+                Close();
             }
         }
     }

@@ -1,0 +1,1 @@
+[{"RecordId":333,"Note":null,"Alergies":null,"DoctorUsername":null,"PatientUsername":"peromir","BloodType":0,"Therapy":null},{"RecordId":334,"Note":null,"Alergies":null,"DoctorUsername":null,"PatientUsername":"Ratko","BloodType":0,"Therapy":null}]

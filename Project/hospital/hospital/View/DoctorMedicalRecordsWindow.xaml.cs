@@ -50,15 +50,15 @@ namespace hospital.View
         private void cmbPatients_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedPatient = pc.FindById((string)cmbPatients.SelectedItem);
-            if(selectedPatient.MedicalRecord == null)
+            if( mrc.FindById(selectedPatient.RecordId) == null)
             {
-                MedicalRecord medicalRecord = new MedicalRecord(selectedPatient, "", loggedInDoctor, BloodType.abPositive, "");
+                MedicalRecord medicalRecord = new MedicalRecord(selectedPatient.Username, "", loggedInDoctor.Username, BloodType.abPositive, "");
                 mrc.Create(medicalRecord);
-                selectedPatient.MedicalRecord = medicalRecord;
+                selectedPatient.RecordId = medicalRecord.RecordId;
             }
-            tbAlergies.Text = selectedPatient.MedicalRecord.Alergies;
-            tbNotes.Text = selectedPatient.MedicalRecord.Note;
-            cmbBloodType.SelectedItem = selectedPatient.MedicalRecord.BloodType;
+            tbAlergies.Text = mrc.FindById(selectedPatient.RecordId).Alergies;
+            tbNotes.Text = mrc.FindById(selectedPatient.RecordId).Note;
+            cmbBloodType.SelectedItem = mrc.FindById(selectedPatient.RecordId).BloodType;
         }
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
@@ -66,9 +66,9 @@ namespace hospital.View
             if(cmbPatients.SelectedIndex != -1)
             {
                 //medical record controller nije najsrecnije napisan pa stoji ovako za sad
-                selectedPatient.MedicalRecord.Alergies = tbAlergies.Text;
-                selectedPatient.MedicalRecord.Note = tbNotes.Text;
-                selectedPatient.MedicalRecord.BloodType = getBloodType(cmbBloodType.Text);
+                mrc.FindById(selectedPatient.RecordId).Alergies = tbAlergies.Text;
+                mrc.FindById(selectedPatient.RecordId).Note = tbNotes.Text;
+                mrc.FindById(selectedPatient.RecordId).BloodType = getBloodType(cmbBloodType.Text);
                 this.Close();
             }
         }

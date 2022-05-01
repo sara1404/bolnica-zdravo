@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using FileHandler;
 using Model;
+using System.Linq;
+
 namespace Repository
 {
     public class MedicalRecordsRepository
@@ -13,15 +15,27 @@ namespace Repository
 
         public MedicalRecordsRepository()
         {
-            medicalRecords = new ObservableCollection<MedicalRecord>();
             PatientRepository pr = new PatientRepository();
             DoctorRepository dp = new DoctorRepository();
-            medicalRecords.Add(new MedicalRecord(pr.FindById("peromir"), "None",dp.FindByUsername("miromir"),BloodType.oPositive,"None"));
+
+            medicalRecords = new ObservableCollection<MedicalRecord>();
+            medicalRecords.Add(new MedicalRecord("peromir", 333));
+            medicalRecords.Add(new MedicalRecord("Ratko", 335));
+
+/*             List<MedicalRecord> deserializedList = medicalRecordFileHandler.Read();
+             if (deserializedList != null)
+             {
+                 medicalRecords = new ObservableCollection<MedicalRecord>(medicalRecordFileHandler.Read());
+             }
+             else
+             {
+                 medicalRecords = new ObservableCollection<MedicalRecord>();
+             }*/
         }
         public bool Create(MedicalRecord medicalRecord)
         {
-            medicalRecord.RecordId = GetNewId();
             medicalRecords.Add(medicalRecord);
+            //medicalRecordFileHandler.Write(this.medicalRecords.ToList());
             return true;
         }
 
@@ -44,24 +58,28 @@ namespace Repository
 
         public bool DeleteById(int id)
         {
-            return medicalRecords.Remove(FindById(id));
+            bool retVal= medicalRecords.Remove(FindById(id));
+            //medicalRecordFileHandler.Write(this.medicalRecords.ToList());
+            return retVal;
         }
 
         public bool UpdateById(int id, MedicalRecord medicalRecord)
         {
-            medicalRecords.Remove(FindById(id));
-            medicalRecord.RecordId =id;
-            medicalRecords.Add(medicalRecord);
+            MedicalRecord med = FindById(id);
+            med.DoctorUsername = medicalRecord.DoctorUsername;
+            med.BloodType = medicalRecord.BloodType;
+            med.Alergies = medicalRecord.Alergies;
+            med.Note = medicalRecord.Note;
+            //medicalRecordFileHandler.Write(this.medicalRecords.ToList());
             return true;
         }
 
-        public int GetNewId()
+        public bool AddTheraphy(int id, Therapy therapy)
         {
-            if (medicalRecords.Count == 0)
-                return 0;
-            else
-                return medicalRecords[medicalRecords.Count - 1].RecordId + 1;
+            FindById(id).Therapy.Add(therapy);
+            return true;
         }
+
 
         public ObservableCollection<MedicalRecord> MedicalRecord
         {

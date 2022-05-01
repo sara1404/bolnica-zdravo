@@ -34,7 +34,7 @@ namespace hospital.View
             ICollectionView appointmentsView = CollectionViewSource.GetDefaultView(ac.GetAppointments());
             appointmentsView.Filter = UserFilter;
 
-            MedicalRecord mr = app.patientController.FindById(current.Username).MedicalRecord;
+            MedicalRecord mr = app.mediicalRecordsController.FindById(app.patientController.FindById(current.Username).RecordId);
             if(mr != null && mr.Therapy != null)
             {
                 foreach (Therapy t in mr.Therapy)
@@ -59,9 +59,17 @@ namespace hospital.View
 
         private void btnDelay_Click(object sender, RoutedEventArgs e)
         {
-            if(appointmentTable.SelectedIndex != -1)
+            Appointment selectedAppointment = (Appointment)appointmentTable.SelectedItem;
+            if (selectedAppointment != null)
             {
-                new PatientDelayAppointment().Show();
+                if(ac.CanBeDelayed(selectedAppointment))
+                {
+                    new PatientDelayAppointment().Show();
+                }
+                else
+                {
+                    MessageBox.Show("You can't delay an appointment now!");
+                }
             }
         }
 

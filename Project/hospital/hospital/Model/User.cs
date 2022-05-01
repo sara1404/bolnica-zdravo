@@ -1,23 +1,37 @@
 using hospital.Model;
+using System.ComponentModel;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace Model
 {
-    public class User
+    public class User: INotifyPropertyChanged
     {
         private string username;
         private string password;
         private bool isBlocked;
         private Role role;
 
-
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
         public User() { }
         public User(string _username,string _password,Role role,bool blocked)
         {
             this.username = _username;
             this.password = ComputeSha256Hash(_password);
             this.isBlocked=blocked;
+            this.role = role;
+        }
+        public User(string _username, Role role, bool blocked)
+        {
+            this.username = _username;
+            this.isBlocked = blocked;
             this.role = role;
         }
 
@@ -40,25 +54,25 @@ namespace Model
         }
         public string Username
         {
-            get => username;
-            set => username = value;
+            get { return username; }
+            set { username = value; OnPropertyChanged(""); }
         }
         public string Password
         {
-            get => password;
-            set => password = value;
-        }
+            get { return password; }
+            set { password = value; OnPropertyChanged(""); }
+            }
         public bool IsBlocked
         {
-            get => isBlocked;
-            set => isBlocked = value;
+            get { return isBlocked; }
+            set { isBlocked = value; OnPropertyChanged(""); } 
         }
 
         public Role Role
         {
-            get => role;
-            set => role = value;
-        }
+            get { return role; }
+            set { role = value; OnPropertyChanged(""); }
+            }
 
     }
 }

@@ -11,7 +11,7 @@ namespace hospital.Model
         private DateTime start;
         private DateTime end;
 
-        public TimeInterval(string id, DateTime start, DateTime end)
+        public TimeInterval(DateTime start, DateTime end)
         {
             this.start = start;
             this.end = end;

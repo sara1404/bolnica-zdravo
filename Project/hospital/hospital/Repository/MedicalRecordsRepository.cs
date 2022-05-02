@@ -17,11 +17,12 @@ namespace Repository
         {
             PatientRepository pr = new PatientRepository();
             DoctorRepository dp = new DoctorRepository();
-            //medicalRecords = new ObservableCollection<MedicalRecord>();
-            //medicalRecords.Add(new MedicalRecord("peromir", 333));
-            //medicalRecords.Add(new MedicalRecord("Ratko", 334));
-             medicalRecordFileHandler = new MedicalRecordFileHandler();
-             List<MedicalRecord> deserializedList = medicalRecordFileHandler.Read();
+
+            medicalRecords = new ObservableCollection<MedicalRecord>();
+            medicalRecords.Add(new MedicalRecord("peromir", 333));
+            medicalRecords.Add(new MedicalRecord("Ratko", 335));
+
+/*             List<MedicalRecord> deserializedList = medicalRecordFileHandler.Read();
              if (deserializedList != null)
              {
                  medicalRecords = new ObservableCollection<MedicalRecord>(medicalRecordFileHandler.Read());
@@ -29,12 +30,12 @@ namespace Repository
              else
              {
                  medicalRecords = new ObservableCollection<MedicalRecord>();
-             }
+             }*/
         }
         public bool Create(MedicalRecord medicalRecord)
-        {;
+        {
             medicalRecords.Add(medicalRecord);
-            medicalRecordFileHandler.Write(this.medicalRecords.ToList());
+            //medicalRecordFileHandler.Write(this.medicalRecords.ToList());
             return true;
         }
 
@@ -58,7 +59,7 @@ namespace Repository
         public bool DeleteById(int id)
         {
             bool retVal= medicalRecords.Remove(FindById(id));
-            medicalRecordFileHandler.Write(this.medicalRecords.ToList());
+            //medicalRecordFileHandler.Write(this.medicalRecords.ToList());
             return retVal;
         }
 
@@ -69,7 +70,13 @@ namespace Repository
             med.BloodType = medicalRecord.BloodType;
             med.Alergies = medicalRecord.Alergies;
             med.Note = medicalRecord.Note;
-            medicalRecordFileHandler.Write(this.medicalRecords.ToList());
+            //medicalRecordFileHandler.Write(this.medicalRecords.ToList());
+            return true;
+        }
+
+        public bool AddTheraphy(int id, Therapy therapy)
+        {
+            FindById(id).Therapy.Add(therapy);
             return true;
         }
 

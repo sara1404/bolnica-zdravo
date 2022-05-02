@@ -59,11 +59,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controller\DoctorController.cs" />
+    <Compile Include="Controller\MedicineController.cs" />
+    <Compile Include="Controller\ScheduledBasicRenovationController.cs" />
     <Compile Include="Controller\ScheduledRelocationController.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="FileHandler\MedicalRecordFileHandler.cs" />
+    <Compile Include="FileHandler\ScheduledBasicRenovationFIleHandler.cs" />
     <Compile Include="FileHandler\ScheduledRelocationFileHandler.cs" />
     <Compile Include="FileHandler\UserFileHandler.cs" />
+    <Compile Include="Model\ScheduledBasicRenovation.cs" />
     <Compile Include="Model\TimeInterval.cs" />
     <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\Role.cs" />
@@ -72,15 +76,19 @@
     <Compile Include="Repository\AppointmentRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
     <Compile Include="Repository\MedicalRecordsRepository.cs" />
+    <Compile Include="Repository\MedicineRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
     <Compile Include="Repository\RoomRepository.cs" />
+    <Compile Include="Repository\ScheduledBasicRenovationRepository.cs" />
     <Compile Include="Repository\ScheduledRelocationRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Service\AppointmentService.cs" />
     <Compile Include="Service\DoctorService.cs" />
     <Compile Include="Service\MedicalRecordsService.cs" />
+    <Compile Include="Service\MedicineService.cs" />
     <Compile Include="Service\PatientService.cs" />
     <Compile Include="Service\RoomService.cs" />
+    <Compile Include="Service\ScheduledBasicRenovationService.cs" />
     <Compile Include="Service\ScheduledRelocationService.cs" />
     <Compile Include="Service\TimeSchedulerService.cs" />
     <Compile Include="Service\UserService.cs" />
@@ -105,6 +113,9 @@
     <Compile Include="View\DoctorMedicalRecordsWindow.xaml.cs">
       <DependentUpon>DoctorMedicalRecordsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DoctorTherapyWindow.xaml.cs">
+      <DependentUpon>DoctorTherapyWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DoctorViewInfoWindow.xaml.cs">
       <DependentUpon>DoctorViewInfoWindow.xaml</DependentUpon>
     </Compile>
@@ -126,17 +137,23 @@
     <Compile Include="View\ManagerRoomsWindow.xaml.cs">
       <DependentUpon>ManagerRoomsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientAppointmentsWindow.xaml.cs">
-      <DependentUpon>PatientAppointmentsWindow.xaml</DependentUpon>
+    <Compile Include="View\PatientView\PatientAppointmentsPage.xaml.cs">
+      <DependentUpon>PatientAppointmentsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientDelayAppointment.xaml.cs">
+    <Compile Include="View\PatientView\PatientDelayAppointment.xaml.cs">
       <DependentUpon>PatientDelayAppointment.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientMakeNewAppointment.xaml.cs">
-      <DependentUpon>PatientMakeNewAppointment.xaml</DependentUpon>
+    <Compile Include="View\PatientView\PatientGradingPage.xaml.cs">
+      <DependentUpon>PatientGradingPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientRecommendedAppointments.xaml.cs">
-      <DependentUpon>PatientRecommendedAppointments.xaml</DependentUpon>
+    <Compile Include="View\PatientView\PatientHomeWindow.xaml.cs">
+      <DependentUpon>PatientHomeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientView\PatientMainMenu.xaml.cs">
+      <DependentUpon>PatientMainMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientView\PatientMakeAppointmentFirst.xaml.cs">
+      <DependentUpon>PatientMakeAppointmentFirst.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\RoomRenovationPage.xaml.cs">
       <DependentUpon>RoomRenovationPage.xaml</DependentUpon>
@@ -221,6 +238,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\DoctorTherapyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DoctorViewInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -253,19 +274,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientAppointmentsWindow.xaml">
+    <Page Include="View\PatientView\PatientAppointmentsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientDelayAppointment.xaml">
+    <Page Include="View\PatientView\PatientDelayAppointment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientMakeNewAppointment.xaml">
+    <Page Include="View\PatientView\PatientGradingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientRecommendedAppointments.xaml">
+    <Page Include="View\PatientView\PatientHomeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientView\PatientMainMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientView\PatientMakeAppointmentFirst.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

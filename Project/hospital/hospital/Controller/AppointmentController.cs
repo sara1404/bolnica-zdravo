@@ -59,9 +59,25 @@ namespace Controller
             return true;
         }
 
-        public ObservableCollection<Appointment> GetRecommendedAppointments(DateTime startDate, DateTime endDate, Doctor doctor, bool priority)
+        public bool CanBeDelayed(Appointment appointment)
         {
-            return appointmentService.GetRecommendedAppointments(startDate, endDate, doctor, priority);
+            DateTime now = DateTime.Now;
+            if(now <= appointment.StartTime.AddHours(-24))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public ObservableCollection<Appointment> GetRecommendedByDoctor(DateTime startDate, DateTime endDate, Doctor doctor)
+        {
+            return appointmentService.GetRecommendedByDoctor(startDate, endDate, doctor);
+        }
+        public ObservableCollection<Appointment> GetRecommendedByDate(DateTime startDate, DateTime endDate, Doctor doctor)
+        {
+            return appointmentService.GetRecommendedByDate(startDate, endDate, doctor);
         }
 
         public bool DeleteAppointment(int id)

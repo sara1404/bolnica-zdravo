@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="BasicRenovationWindow" Height="500" Width="800">
     <Grid>
-        <ListView x:Name="roomRenovationListView" HorizontalAlignment="Left" Height="332" Margin="75,48,0,0" VerticalAlignment="Top" Width="198">
+        <ListView x:Name="roomRenovationListView" HorizontalAlignment="Left" Height="332" Margin="75,48,0,0" VerticalAlignment="Top" Width="198" SelectionChanged="Validate">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
@@ -17,11 +17,11 @@
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="51" Margin="435,51,0,0" Stroke="Black" VerticalAlignment="Top" Width="256"/>
         <Label Content="Relocation duration in days:" HorizontalAlignment="Left" Margin="452,60,0,0" VerticalAlignment="Top" Width="162" Height="27"/>
         <TextBox x:Name="durationRenovation" HorizontalAlignment="Left" Height="24" Margin="619,64,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49" PreviewKeyDown="Show_Appointments_Click"/>
-        <ListView HorizontalAlignment="Left" Height="151" Margin="435,102,0,0" VerticalAlignment="Top" Width="256" x:Name="renovationListView"/>
+        <ListView HorizontalAlignment="Left" Height="151" Margin="435,102,0,0" VerticalAlignment="Top" Width="256" x:Name="renovationListView" SelectionChanged="Validate"/>
         <Label Content="Renovation description:" HorizontalAlignment="Left" Margin="435,272,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.255,0.385" Width="154"/>
-        <TextBox HorizontalAlignment="Left" Height="77" Margin="435,303,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="256"/>
-        <Button Content="SCHEDULE" HorizontalAlignment="Left" Margin="213,413,0,0" VerticalAlignment="Top" Width="128" Height="35"/>
-        <Button Content="CANCEL" HorizontalAlignment="Left" Margin="407,413,0,0" VerticalAlignment="Top" Width="128" Height="35"/>
+        <TextBox x:Name="descriptionInput" HorizontalAlignment="Left" Height="77" Margin="435,303,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="256" TextChanged="Validate"/>
+        <Button x:Name="ScheduleBtn" Content="SCHEDULE" HorizontalAlignment="Left" Margin="213,413,0,0" VerticalAlignment="Top" Width="128" Height="35" Click="Schedule_Renovation_Click"/>
+        <Button Content="CANCEL" HorizontalAlignment="Left" Margin="407,413,0,0" VerticalAlignment="Top" Width="128" Height="35" Click="Cancel_Renovation_Click"/>
 
     </Grid>
 </Window>

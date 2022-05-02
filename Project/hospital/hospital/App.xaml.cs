@@ -19,6 +19,7 @@ namespace hospital
     {
         public RoomRepository roomRepository;
         public ScheduledRelocationRepository scheduledRelocationRepository;
+        public ScheduledBasicRenovationRepository scheduledBasicRenovationRepository;
         public RoomController roomController { get; set; }
         public PatientController patientController { get; set; }
         public AppointmentController appointmentController { get; set; }
@@ -26,7 +27,11 @@ namespace hospital
         public DoctorController doctorController { get; set; }
         public UserController userController { get; set; }
         public ScheduledRelocationController scheduledRelocationController { get; set; }
+        public ScheduledBasicRenovationController scheduledBasicRenovationController { get; set; }
+        public MedicineController medicineController { get; set; }
 
+        Thread relocationThread;
+        Thread renovationThread;
         public App()
         {
             UserRepository userRepository = new UserRepository();
@@ -54,15 +59,31 @@ namespace hospital
             doctorController = new DoctorController(doctorService);
 
 
+
+
+            scheduledBasicRenovationRepository = new ScheduledBasicRenovationRepository();
+            TimeSchedulerService timeSchedulerService = new TimeSchedulerService(appointmentRepository, scheduledBasicRenovationRepository);
+
+            ScheduledBasicRenovationService scheduledBasicRenovationService = new ScheduledBasicRenovationService(scheduledBasicRenovationRepository, timeSchedulerService);
+            scheduledBasicRenovationController = new ScheduledBasicRenovationController(scheduledBasicRenovationService);
+
+
             scheduledRelocationRepository = new ScheduledRelocationRepository();
-            ScheduledRelocationService scheduledRelocationService = new ScheduledRelocationService(scheduledRelocationRepository);
+            ScheduledRelocationService scheduledRelocationService = new ScheduledRelocationService(scheduledRelocationRepository, timeSchedulerService);
             scheduledRelocationController = new ScheduledRelocationController(scheduledRelocationService);
+
+            MedicineRepository medicineRepository = new MedicineRepository();
+            MedicineService medicineService = new MedicineService(medicineRepository);
+            medicineController = new MedicineController(medicineService);
             
             roomRepository.LoadRoomData();
             scheduledRelocationRepository.LoadRelocationData();
 
-            Thread relocationThread = new Thread(scheduledRelocationService.relocationTracker);
+            relocationThread = new Thread(scheduledRelocationService.relocationTracker);
             relocationThread.Start();
+
+            renovationThread = new Thread(scheduledBasicRenovationService.renovationTracker);
+            renovationThread.Start();
         }
 
 
@@ -71,6 +92,8 @@ namespace hospital
         {
             roomRepository.WriteRoomData();
             scheduledRelocationRepository.WriteRelocationData();
+            relocationThread.Abort();
+            renovationThread.Abort();
         }
     }
 }

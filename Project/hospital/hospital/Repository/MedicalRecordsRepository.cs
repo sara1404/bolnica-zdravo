@@ -73,6 +73,7 @@ namespace Repository
         public bool AddTheraphy(int id, Therapy therapy)
         {
             FindById(id).Therapy.Add(therapy);
+            medicalRecordFileHandler.Write(this.medicalRecords.ToList());
             return true;
         }
 

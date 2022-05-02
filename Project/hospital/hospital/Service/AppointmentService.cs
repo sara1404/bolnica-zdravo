@@ -77,19 +77,14 @@ namespace Service
         {
             List<DateTime> startTimes = new List<DateTime>();
             ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
-            foreach (Appointment a in appointmentRepository.FindAll())
-            {
-                if (a.StartTime.Day == date.Day && a.StartTime.Month == date.Month && a.StartTime.Year == date.Year)
-                {
-                    startTimes.Add(a.StartTime);
-                }
-            }
+            
             List<DateTime> allTimeSlots = new List<DateTime>();
             DateTime day = new DateTime(date.Year, date.Month, date.Day, 7, 0, 0);
             for (int i = 0; i < 24; i++)
             {
                 allTimeSlots.Add(day.AddMinutes(i * 30));
             }
+            // add logged in patients appointments
             foreach (Appointment a in appointmentRepository.FindAll())
             {
                 if (a.patientUsername.Equals(userController.CurentLoggedUser.Username))
@@ -97,17 +92,32 @@ namespace Service
                     startTimes.Add(a.StartTime);
                 }
             }
+            // remove those appointments from available timeslots
             foreach (DateTime time in startTimes)
             {
                 allTimeSlots.Remove(time);
             }
+
+            // search all available timeslots
             foreach (DateTime time in allTimeSlots)
             {
-                App app = Application.Current as App;
-                PatientController pc = app.patientController;
+                // look for every doctor 
                 foreach (Doctor d in doctorRepository.FindAll())
                 {
-                    retVal.Add(new Appointment(-1, d.Username, userController.CurentLoggedUser.Username, time));
+                    bool found = false;
+                    // and search for every one of his appointments
+                    foreach (Appointment a in GetByDoctor(d.Username))
+                    {
+                        if (a.StartTime == time)
+                        {
+                            found = true;
+                        }
+                    }
+                    // if an appointment is not found than that timeslot is available so fill it
+                    if (!found)
+                    {
+                        retVal.Add(new Appointment(-1, d.Username, userController.CurentLoggedUser.Username, time));
+                    }
                 }
             }
 

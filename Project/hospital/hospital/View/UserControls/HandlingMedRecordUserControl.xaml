@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="530" d:DesignWidth="950">
     <Grid Background="White">
-        <StackPanel>
+        <StackPanel Background="white">
             <Border BorderBrush="gray" BorderThickness="2" Margin="0,40,0,0" Height="450" Width="750" CornerRadius="10">
                 <StackPanel>
                     <Label FontSize="25" FontWeight="DemiBold" Margin="0,0,0,0" HorizontalAlignment="Center">Handling medical records</Label>
@@ -22,7 +22,7 @@
                             <Image Source="../../Resources/Images/delete_24x24.png"></Image>
                         </Button>
                     </StackPanel>
-                    <DataGrid x:Name="dateGridHandlingMedicalRecord" HorizontalContentAlignment="Center" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="475" Height="350" ItemsSource="{Binding Patients}" IsReadOnly ="True" SelectionMode="Single" HorizontalAlignment="Center" AutoGenerateColumns="False" CanUserResizeColumns="false" CanUserResizeRows="false">
+                    <DataGrid x:Name="dateGridHandlingMedicalRecord" Background="white" HorizontalContentAlignment="Center" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="475" Height="350" ItemsSource="{Binding Patients}" IsReadOnly ="True" SelectionMode="Single" HorizontalAlignment="Center" AutoGenerateColumns="False" CanUserResizeColumns="false" CanUserResizeRows="false">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="First name"  Width="80"  Binding="{Binding FirstName}" >
                                 <DataGridTextColumn.HeaderStyle>

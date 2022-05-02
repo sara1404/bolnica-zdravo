@@ -50,7 +50,7 @@ namespace hospital
                 }
                 else if (u.Role == Model.Role.Patient)
                 {
-                    new PatientAppointmentsWindow().Show();
+                    new PatientHomeWindow().Show();
                     this.Close();
                 }
             }

@@ -137,17 +137,23 @@
     <Compile Include="View\ManagerRoomsWindow.xaml.cs">
       <DependentUpon>ManagerRoomsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientAppointmentsWindow.xaml.cs">
-      <DependentUpon>PatientAppointmentsWindow.xaml</DependentUpon>
+    <Compile Include="View\PatientView\PatientAppointmentsPage.xaml.cs">
+      <DependentUpon>PatientAppointmentsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientDelayAppointment.xaml.cs">
+    <Compile Include="View\PatientView\PatientDelayAppointment.xaml.cs">
       <DependentUpon>PatientDelayAppointment.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientMakeNewAppointment.xaml.cs">
-      <DependentUpon>PatientMakeNewAppointment.xaml</DependentUpon>
+    <Compile Include="View\PatientView\PatientGradingPage.xaml.cs">
+      <DependentUpon>PatientGradingPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientRecommendedAppointments.xaml.cs">
-      <DependentUpon>PatientRecommendedAppointments.xaml</DependentUpon>
+    <Compile Include="View\PatientView\PatientHomeWindow.xaml.cs">
+      <DependentUpon>PatientHomeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientView\PatientMainMenu.xaml.cs">
+      <DependentUpon>PatientMainMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientView\PatientMakeAppointmentFirst.xaml.cs">
+      <DependentUpon>PatientMakeAppointmentFirst.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\RoomRenovationPage.xaml.cs">
       <DependentUpon>RoomRenovationPage.xaml</DependentUpon>
@@ -167,6 +173,9 @@
     <Compile Include="View\DoctorMakeNewAppointment.xaml.cs">
       <DependentUpon>DoctorMakeNewAppointment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\DelayAppointmentUserControl.xaml.cs">
+      <DependentUpon>DelayAppointmentUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserControls\EditAccountUserControl.xaml.cs">
       <DependentUpon>EditAccountUserControl.xaml</DependentUpon>
     </Compile>
@@ -178,6 +187,9 @@
     </Compile>
     <Compile Include="View\UserControls\HandlingMedRecordUserControl.xaml.cs">
       <DependentUpon>HandlingMedRecordUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\MakeAppointmentUserControl.xaml.cs">
+      <DependentUpon>MakeAppointmentUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\MedicalRecordUserControl.xaml.cs">
       <DependentUpon>MedicalRecordUserControl.xaml</DependentUpon>
@@ -262,19 +274,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientAppointmentsWindow.xaml">
+    <Page Include="View\PatientView\PatientAppointmentsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientDelayAppointment.xaml">
+    <Page Include="View\PatientView\PatientDelayAppointment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientMakeNewAppointment.xaml">
+    <Page Include="View\PatientView\PatientGradingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientRecommendedAppointments.xaml">
+    <Page Include="View\PatientView\PatientHomeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientView\PatientMainMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientView\PatientMakeAppointmentFirst.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -302,6 +322,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UserControls\DelayAppointmentUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UserControls\EditAccountUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -315,6 +339,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\HandlingMedRecordUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\MakeAppointmentUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -416,6 +444,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Data\MedicalRecordData.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\stethoscope.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

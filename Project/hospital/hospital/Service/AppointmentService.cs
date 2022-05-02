@@ -77,19 +77,14 @@ namespace Service
         {
             List<DateTime> startTimes = new List<DateTime>();
             ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
-            foreach (Appointment a in appointmentRepository.FindAll())
-            {
-                if (a.StartTime.Day == date.Day && a.StartTime.Month == date.Month && a.StartTime.Year == date.Year)
-                {
-                    startTimes.Add(a.StartTime);
-                }
-            }
+            
             List<DateTime> allTimeSlots = new List<DateTime>();
             DateTime day = new DateTime(date.Year, date.Month, date.Day, 7, 0, 0);
             for (int i = 0; i < 24; i++)
             {
                 allTimeSlots.Add(day.AddMinutes(i * 30));
             }
+            // add logged in patients appointments
             foreach (Appointment a in appointmentRepository.FindAll())
             {
                 if (a.patientUsername.Equals(userController.CurentLoggedUser.Username))
@@ -97,17 +92,32 @@ namespace Service
                     startTimes.Add(a.StartTime);
                 }
             }
+            // remove those appointments from available timeslots
             foreach (DateTime time in startTimes)
             {
                 allTimeSlots.Remove(time);
             }
+
+            // search all available timeslots
             foreach (DateTime time in allTimeSlots)
             {
-                App app = Application.Current as App;
-                PatientController pc = app.patientController;
+                // look for every doctor 
                 foreach (Doctor d in doctorRepository.FindAll())
                 {
-                    retVal.Add(new Appointment(-1, d.Username, userController.CurentLoggedUser.Username, time));
+                    bool found = false;
+                    // and search for every one of his appointments
+                    foreach (Appointment a in GetByDoctor(d.Username))
+                    {
+                        if (a.StartTime == time)
+                        {
+                            found = true;
+                        }
+                    }
+                    // if an appointment is not found than that timeslot is available so fill it
+                    if (!found)
+                    {
+                        retVal.Add(new Appointment(-1, d.Username, userController.CurentLoggedUser.Username, time));
+                    }
                 }
             }
 
@@ -376,5 +386,156 @@ namespace Service
             }
             return retVal;
         }
+
+
+
+        //secretary function for appointment--------------
+        public bool tryMakeAppointment(string _hours, string _minuts, string patientUsername, string roomId,DateTime date,Doctor doctor)
+        {
+            ObservableCollection<Appointment> apointments = GetFreeAppointmentsByDateAndDoctor(date, doctor.Username);
+            for (int i = 0; i < apointments.Count; i++)
+            {
+                string time = (apointments[i]).StartTime.ToString();
+                time = time.Split(' ')[1];
+                string hours = time.Split(':')[0];
+                string minuts = time.Split(':')[1];
+                if (_hours.Equals(hours) && _minuts.Equals(minuts))
+                {
+                    //stavi id sobee kad sazanas
+                    (apointments[i]).patientUsername = patientUsername;
+                    (apointments[i]).roomId = "-333";
+                    //pozovi controller i napravi appointment
+                    Create(apointments[i]);
+                    // this.Visibility = Visibility.Collapsed;
+                    return true;
+                }
+            }
+            return false;
+        }
+        public Appointment RecommendedOne { set; get; }
+        public Appointment RecommendedTwo { set; get; }
+        public void findFreeForward(ObservableCollection<Appointment> apointments, string hours, string minuts)
+        {
+            int _hours = Int32.Parse(hours);
+            int _minuts = Int32.Parse(minuts);
+            if (_minuts == 30)
+            {
+                _minuts = 0;
+                _hours = ++_hours;
+            }
+            else if (_minuts == 0)
+            {
+                _minuts = 30;
+            }
+
+            string itemHours;
+            string itemMinuts;
+            string time;
+            for (int i = 0; i < apointments.Count; i++)
+            {
+                time = (apointments[i]).StartTime.ToString();
+                time = time.Split(' ')[1];
+                itemHours = time.Split(':')[0];
+                itemMinuts = time.Split(':')[1];
+                if (Int32.Parse(itemHours) == (_hours % 13) && Int32.Parse(itemMinuts) == _minuts)
+                {
+                    RecommendedOne = apointments[i];
+                    return;
+                }
+            }
+            findFreeForward(apointments, _hours.ToString(), _minuts.ToString());
+        }
+        public void findFreeBack(ObservableCollection<Appointment> apointments, string hours, string minuts)
+        {
+            int _hours = Int32.Parse(hours);
+            int _minuts = Int32.Parse(minuts);
+            if (_minuts == 30)
+            {
+                _minuts = 0;
+
+            }
+            else if (_minuts == 0)
+            {
+                _minuts = 30;
+                _hours = --_hours;
+            }
+
+            string itemHours;
+            string itemMinuts;
+            string time;
+            for (int i = 0; i < apointments.Count; i++)
+            {
+                time = (apointments[i]).StartTime.ToString();
+                time = time.Split(' ')[1];
+                itemHours = time.Split(':')[0];
+                itemMinuts = time.Split(':')[1];
+                if (Int32.Parse(itemHours) == (_hours % 12) && Int32.Parse(itemMinuts) == _minuts)
+                {
+                    RecommendedTwo = apointments[i];
+                    return;
+                }
+            }
+            findFreeBack(apointments, _hours.ToString(), _minuts.ToString());
+
+        }
+
+        public void findRecByTime(ObservableCollection<Appointment> apointments, string hours, string minuts)
+        {
+            bool oneRecFilled = false;
+            foreach (Appointment item in apointments)
+            {
+                Console.WriteLine(item.doctorUsername +" " + item.StartTime);
+            }
+            foreach (Appointment appointment in apointments)
+            {
+                string time = (appointment).StartTime.ToString();
+                time = time.Split(' ')[1];
+                string _hours = time.Split(':')[0];
+                string _minuts = time.Split(':')[1];
+                if (_hours.Equals(hours) && _minuts.Equals(minuts))
+                {
+                    if (oneRecFilled == false)
+                    {
+                        Console.WriteLine("Napunio prvog");
+                        RecommendedOne = appointment;
+                        oneRecFilled = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Napunio drugog");
+                        RecommendedTwo = appointment;
+                        return;
+                    }
+                }
+            }
+            //ako nije uspeo naci tacno taj nek nadje neke najblize
+            findFreeBack(apointments,hours,minuts);
+            findFreeForward(apointments,hours,minuts);
+        }
+
+        public bool tryChangeAppointment(Appointment oldAppointment,DateTime newDate,string newTime)
+        {
+            ObservableCollection<Appointment> appointments = GetFreeAppointmentsByDateAndDoctor(newDate,oldAppointment.doctorUsername);
+            string newHours = newTime.Split(':')[0];
+            string newMinuts =newTime.Split(':')[1];
+            for (int i = 0; i < appointments.Count; i++)
+            {
+                string time = (appointments[i]).StartTime.ToString();
+                time = time.Split(' ')[1];
+                string hours = time.Split(':')[0];
+                string minuts = time.Split(':')[1];
+                if (newHours.Equals(hours) && newMinuts.Equals(minuts))
+                {
+                    //stavi id sobee kad sazanas
+                    Appointment newAppointmet = appointments[i];
+                    newAppointmet.patientUsername = oldAppointment.patientUsername;
+                    Update(oldAppointment, newAppointmet);
+                    // this.Visibility = Visibility.Collapsed;
+                    return true;
+                }
+            }
+            return false;
+        }
+        //------------------------------------------------
     }
 }

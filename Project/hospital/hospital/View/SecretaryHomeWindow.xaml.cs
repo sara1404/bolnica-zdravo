@@ -32,23 +32,33 @@ namespace hospital.View
 
         private void handlingAccount_Click(object sender, RoutedEventArgs e)
         {
-            handlingMedRecordUserControl.Visibility = Visibility.Collapsed;
-            handlingMedRecordUserControl.medRecUserControl.Visibility = Visibility.Collapsed;
             btnhandlingMedRecord.BorderBrush = Brushes.Transparent;
-            btnhandlingAccount.BorderBrush = Brushes.Olive;
+            btnAppointment.BorderBrush = Brushes.Transparent;
+            btnhandlingAccount.BorderBrush = (Brush)(new BrushConverter().ConvertFrom("#c8d8e4")); 
             btnhandlingAccount.BorderThickness = new Thickness(3,0,0,0);
+
+            handlingMedRecordUserControl.Visibility = Visibility.Collapsed;
+            handlingMedRecordUserControl.addMedRecUserControl.Visibility=Visibility.Collapsed;
+            handlingMedRecordUserControl.editMedRecUserControl.Visibility = Visibility.Collapsed;
+            handlingMedRecordUserControl.medRecUserControl.Visibility = Visibility.Collapsed;
+
+            handlingAppointmentUserControl.Visibility = Visibility.Collapsed;
+
             handlingAccountUserControl.Visibility = Visibility.Visible;
         }
 
         private void btnHandMedRecord_Click(object sender, RoutedEventArgs e)
         {
-            btnhandlingMedRecord.BorderBrush = Brushes.Olive;
+            btnhandlingMedRecord.BorderBrush = (Brush)(new BrushConverter().ConvertFrom("#c8d8e4"));
             btnhandlingAccount.BorderBrush = Brushes.Transparent;
+            btnAppointment.BorderBrush = Brushes.Transparent;
             btnhandlingMedRecord.BorderThickness = new Thickness(3, 0, 0, 0);
 
             handlingAccountUserControl.addAccountUserControl.Visibility = Visibility.Collapsed;
             handlingAccountUserControl.editAccountUserControl.Visibility = Visibility.Collapsed;
             handlingAccountUserControl.Visibility = Visibility.Collapsed;
+
+            handlingAppointmentUserControl.Visibility = Visibility.Collapsed;
 
             handlingMedRecordUserControl.Visibility = Visibility.Visible;
         }
@@ -67,9 +77,25 @@ namespace hospital.View
                 return uc.CurentLoggedUser.Username;
             }
         }
-        private void handlingMedRecord_Click(object sender, RoutedEventArgs e)
-        {
 
+        private void btnAppointment_Click(object sender, RoutedEventArgs e)
+        {
+            //clossing handling account user control
+            handlingAccountUserControl.addAccountUserControl.Visibility = Visibility.Collapsed;
+            handlingAccountUserControl.editAccountUserControl.Visibility = Visibility.Collapsed;
+            handlingAccountUserControl.Visibility = Visibility.Collapsed;
+            //closing med. records user control
+            handlingMedRecordUserControl.Visibility = Visibility.Collapsed;
+            handlingMedRecordUserControl.addMedRecUserControl.Visibility = Visibility.Collapsed;
+            handlingMedRecordUserControl.editMedRecUserControl.Visibility = Visibility.Collapsed;
+            handlingMedRecordUserControl.medRecUserControl.Visibility = Visibility.Collapsed;
+
+            btnAppointment.BorderBrush = (Brush)(new BrushConverter().ConvertFrom("#c8d8e4"));
+            btnhandlingAccount.BorderBrush = Brushes.Transparent;
+            btnhandlingMedRecord.BorderBrush = Brushes.Transparent;
+            btnAppointment.BorderThickness = new Thickness(3, 0, 0, 0);
+
+            handlingAppointmentUserControl.Visibility = Visibility.Visible;
         }
     }
 }

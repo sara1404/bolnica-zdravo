@@ -65,10 +65,8 @@ namespace hospital.View
         {
             if(cmbPatients.SelectedIndex != -1)
             {
-                //medical record controller nije najsrecnije napisan pa stoji ovako za sad
-                mrc.FindById(selectedPatient.RecordId).Alergies = tbAlergies.Text;
-                mrc.FindById(selectedPatient.RecordId).Note = tbNotes.Text;
-                mrc.FindById(selectedPatient.RecordId).BloodType = getBloodType(cmbBloodType.Text);
+                MedicalRecord newMedRec = new MedicalRecord(selectedPatient.Id, tbAlergies.Text, null, getBloodType(cmbBloodType.Text), tbNotes.Text);
+                mrc.UpdateById(selectedPatient.RecordId, newMedRec);
                 this.Close();
             }
         }

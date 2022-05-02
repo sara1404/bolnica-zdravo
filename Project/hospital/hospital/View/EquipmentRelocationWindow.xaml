@@ -13,7 +13,7 @@
         <Label Content="Quantity:" HorizontalAlignment="Left" Margin="66,259,0,0" VerticalAlignment="Top" Width="88" FontSize="16px"/>
         <ComboBox x:Name="fromRoom" HorizontalAlignment="Left" Margin="187,65,0,0" VerticalAlignment="Top" Width="120"  SelectionChanged="ComboBox_SelectionChanged"/>
         <ComboBox x:Name="toRoom" HorizontalAlignment="Left" Margin="187,124,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Validate"/>
-        <ComboBox x:Name="equipment" HorizontalAlignment="Left" Margin="187,193,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Validate"/>
+        <ComboBox x:Name="equipment" HorizontalAlignment="Left" Margin="187,193,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="equipmentChosen"/>
         <TextBox x:Name="quantity" HorizontalAlignment="Left" Height="23" Margin="187,267,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="Validate"/>
         <Button x:Name="scheduleBtn" Content="SCHEDULE" HorizontalAlignment="Left" Margin="216,336,0,0" VerticalAlignment="Top" Width="128" Height="39" Click="Schedule_Relocation_Click"/>
         <Button Content="CANCEL" HorizontalAlignment="Left" Margin="407,336,0,0" VerticalAlignment="Top" Width="128" Height="39" Click="Cancel_Relocation_Click"/>

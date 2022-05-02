@@ -28,6 +28,17 @@ namespace hospital.View.UserControls
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             this.Visibility = Visibility.Collapsed;
+            txtFirstName.Clear();
+            txtLastName.Clear();
+            txtPhone.Clear();
+            txtId.Clear();
+            txtDoctor.Clear();
+            txtRecordId.Clear();
+            txtDate.Clear();
+            txtBlood.Clear();
+            txtNote.Clear();
+            listAllergens.ItemsSource = new List<string>();
+
         }
     }
 }

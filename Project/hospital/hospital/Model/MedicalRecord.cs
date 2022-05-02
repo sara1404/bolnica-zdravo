@@ -3,56 +3,48 @@ using System.ComponentModel;
 
 namespace Model
 {
-    public class MedicalRecord
+    public class MedicalRecord : INotifyPropertyChanged
     {
-        private  string note;
-        private  string alergies;
-        private  string doctorUsername;
+        private string note;
+        private string alergies;
+        private string doctorUsername;
 
-        private  List<Therapy> therapy;
-        private  BloodType bloodType;
-        private  string patientUsername;
-        private  int recordId;
+        private List<Therapy> therapy;
+        private BloodType bloodType;
+        private string patientUsername;
+        private int recordId;
 
         public MedicalRecord(string patientUsername, string _allergens, string _choosen, BloodType bt, string note)
         {
-            this.patientUsername = patientUsername;
-            this.note = note;
-            this.alergies = _allergens;
-            this.doctorUsername = _choosen;
-            this.bloodType = bt;
-            this.therapy = new List<Therapy>();
+            this.PatientUsername = patientUsername;
+            this.Note = note;
+            this.Alergies = _allergens;
+            this.DoctorUsername = _choosen;
+            this.BloodType = bt;
         }
-        public MedicalRecord(string patientsUsername,int id)
+        public MedicalRecord(string patientsUsername, int id)
         {
-            this.PatientUsername=patientsUsername;
-            this.RecordId=id;
+            this.PatientUsername = patientsUsername;
+            this.RecordId = id;
         }
+        public MedicalRecord() { }
 
-        public int RecordId { get; set; }
-        public string Note { get; set; }
-        public string Alergies { get; set; }
-        public string DoctorUsername { get; set; }
-        public string PatientUsername { get; set; }
-        public BloodType BloodType { get; set; }
-
-        public List<Therapy> Therapy { 
-            get 
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
             {
-                if (therapy == null) 
-                {
-                    therapy = new List<Therapy>();
-                    return therapy;
-                }
-                else
-                {
-                    return therapy;
-                }
-            } 
-            set
-            {
-                therapy = value;
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
+
+        public int RecordId { get { return recordId; } set { recordId = value; OnPropertyChanged(""); } }
+        public string Note { get { return note; } set { note = value; OnPropertyChanged(""); } }
+        public string Alergies { get { return alergies; } set { alergies = value; OnPropertyChanged(""); } }
+        public string DoctorUsername { get { return doctorUsername; } set { doctorUsername = value; OnPropertyChanged(""); } }
+        public string PatientUsername { get { return patientUsername; } set { patientUsername = value; OnPropertyChanged(""); } }
+        public BloodType BloodType { get { return bloodType; } set { bloodType = value; OnPropertyChanged(""); } }
+
+        public List<Therapy> Therapy { get { return therapy; } set { therapy = value; OnPropertyChanged(""); } }
     }
 }

@@ -1,1 +1,1 @@
-[{"RecordId":333,"Note":null,"Alergies":null,"DoctorUsername":null,"PatientUsername":"peromir","BloodType":0,"Therapy":null},{"RecordId":334,"Note":null,"Alergies":null,"DoctorUsername":null,"PatientUsername":"Ratko","BloodType":0,"Therapy":null}]
+[{"RecordId":333,"Note":"ajde","Alergies":"Perje, Grinje","DoctorUsername":"Skabo","PatientUsername":"peromir","BloodType":2,"Therapy":null},{"RecordId":334,"Note":"","Alergies":"Kikiriki","DoctorUsername":"miromir","PatientUsername":"Ratko","BloodType":9,"Therapy":null}]

@@ -196,8 +196,8 @@ namespace hospital.View.UserControls
                 else
                     btnRecTwo.Visibility = Visibility.Visible;
                 ObservableCollection<Appointment> apointments = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)date.SelectedDate, CurrentAppointment.doctorUsername);
-                ac.findFreeForward(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
-                ac.findFreeBack(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
+                ac.findFreeForward(apointments, txtNewTime.Text.Split(':')[0], txtNewTime.Text.Split(':')[1]);
+                ac.findFreeBack(apointments, txtNewTime.Text.Split(':')[0], txtNewTime.Text.Split(':')[1]);
                 btnRecOne.Content = "Doctor: " + dc.GetByUsername(ac.RecommendedOne.doctorUsername) + "\n" + ac.RecommendedOne.StartTime;
                 btnRecTwo.Content = "Doctor: " + dc.GetByUsername(ac.RecommendedTwo.doctorUsername) + "\n" + ac.RecommendedTwo.StartTime;
             }
@@ -238,6 +238,7 @@ namespace hospital.View.UserControls
                         sucess = ac.tryChangeAppointment(appointment, (DateTime)newDate.SelectedDate,txtNewTime.Text);
                         if (sucess)
                         {
+                            Console.WriteLine("12321412412");
                             this.Visibility = Visibility.Collapsed;
                             return;
                         }

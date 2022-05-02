@@ -510,6 +510,9 @@ namespace Service
                     }
                 }
             }
+            //ako nije uspeo naci tacno taj nek nadje neke najblize
+            findFreeBack(apointments,hours,minuts);
+            findFreeForward(apointments,hours,minuts);
         }
 
         public bool tryChangeAppointment(Appointment oldAppointment,DateTime newDate,string newTime)

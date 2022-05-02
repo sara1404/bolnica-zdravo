@@ -47,6 +47,8 @@ namespace hospital.View.UserControls
                     this.Visibility = Visibility.Collapsed;
                     return;
                 }
+                btnRecOne.Visibility = Visibility.Collapsed;
+                btnRecTwo.Visibility = Visibility.Collapsed;
                 btnShowRec.Visibility = Visibility.Visible;
                 notFree.Text = "Appointment is not free";
             }

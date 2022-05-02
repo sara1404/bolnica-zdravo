@@ -55,7 +55,7 @@ namespace Service
             return null;
         }
 
-        static string ComputeSha256Hash(string rawData)
+        public static string ComputeSha256Hash(string rawData)
         {
             // Create a SHA256   
             using (SHA256 sha256Hash = SHA256.Create())

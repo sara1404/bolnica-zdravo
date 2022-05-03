@@ -204,6 +204,9 @@
     <Compile Include="View\UserControls\MedicalRecordUserControl.xaml.cs">
       <DependentUpon>MedicalRecordUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\RemoveAppointementUserControl.xaml.cs">
+      <DependentUpon>RemoveAppointementUserControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -357,6 +360,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\MedicalRecordUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\RemoveAppointementUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

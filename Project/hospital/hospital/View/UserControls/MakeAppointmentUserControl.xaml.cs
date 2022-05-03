@@ -258,5 +258,17 @@ namespace hospital.View.UserControls
         {
             delayAppointmentUserControl.Visibility = Visibility.Visible;
         }
+
+        private void btnRemove_Click(object sender, RoutedEventArgs e)
+        {
+            removeAppointmentUserControl.Visibility= Visibility.Visible;
+            removeAppointmentUserControl.cmbUsername.Text = "";
+            removeAppointmentUserControl.date.Text = "";
+            removeAppointmentUserControl.txtTime.Text = "";
+            removeAppointmentUserControl.notFree.Text = "";
+            removeAppointmentUserControl.errDate.Text = "";
+            removeAppointmentUserControl.errTime.Text = "";
+            removeAppointmentUserControl.errUsername.Text = "";
+        }
     }
 }

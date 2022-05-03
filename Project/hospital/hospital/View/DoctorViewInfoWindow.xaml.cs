@@ -22,13 +22,16 @@ namespace hospital.View
     public partial class DoctorViewInfoWindow : Window
     {
         private PatientController pc;
+        private MedicalRecordsController mrc;
         private Patient selectedPatient;
         private Appointment selectedAppointment;
+        private MedicalRecord selectedMedicalRecord;
         public DoctorViewInfoWindow()
         {
             InitializeComponent();
             App app = Application.Current as App;
             pc = app.patientController;
+            mrc = app.mediicalRecordsController;
             this.DataContext = this;
             foreach (Window window in Application.Current.Windows)
             {
@@ -36,11 +39,15 @@ namespace hospital.View
                 {
                     selectedAppointment = (window as DoctorAppointmentsWindow).Table.SelectedItem as Appointment;
                     selectedPatient = pc.FindById(selectedAppointment.patientUsername);
+                    selectedMedicalRecord = mrc.FindById(selectedPatient.RecordId);
                     lbFirstName.Content = selectedPatient.FirstName;
                     lbLastName.Content = selectedPatient.LastName;
                     lbUsername.Content = selectedPatient.Username;
                     lbDateOfBirth.Content = selectedPatient.DateOfBirth;
                     lbPhoneNumber.Content = selectedPatient.PhoneNumber;
+                    tbAlergies.Text = selectedMedicalRecord.Alergies;
+                    tbNotes.Text = selectedMedicalRecord.Note;
+                    lbBloodType.Content = selectedMedicalRecord.BloodType;
                 }
             }
         }

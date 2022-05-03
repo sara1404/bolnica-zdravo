@@ -18,6 +18,12 @@
         <Label x:Name="lbUsername" Content="Label" HorizontalAlignment="Left" Margin="102,104,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbDateOfBirth" Content="Label" HorizontalAlignment="Left" Margin="102,130,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbPhoneNumber" Content="Label" HorizontalAlignment="Left" Margin="102,156,0,0" VerticalAlignment="Top"/>
+        <Label Content="Alergies:" HorizontalAlignment="Left" Margin="279,48,0,0" VerticalAlignment="Top"/>
+        <Label Content="Blood Type:" HorizontalAlignment="Left" Margin="279,118,0,0" VerticalAlignment="Top" Width="77"/>
+        <Label Content="Notes:" HorizontalAlignment="Left" Margin="279,156,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbAlergies" IsEnabled="False" HorizontalAlignment="Left" Height="60" Margin="371,48,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="294"/>
+        <TextBox x:Name="tbNotes" IsEnabled="False" HorizontalAlignment="Left" Height="149" Margin="371,156,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="294"/>
+        <Label x:Name="lbBloodType" Content="Label" HorizontalAlignment="Left" Margin="371,118,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

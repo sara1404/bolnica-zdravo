@@ -45,6 +45,20 @@ namespace Model
         public string PatientUsername { get { return patientUsername; } set { patientUsername = value; OnPropertyChanged(""); } }
         public BloodType BloodType { get { return bloodType; } set { bloodType = value; OnPropertyChanged(""); } }
 
-        public List<Therapy> Therapy { get { return therapy; } set { therapy = value; OnPropertyChanged(""); } }
+        public List<Therapy> Therapy
+        { 
+            get 
+            {
+                if (therapy == null)
+                    therapy = new List<Therapy>();
+                
+                return therapy; 
+            } 
+            set 
+            { 
+                therapy = value; 
+                OnPropertyChanged(""); 
+            } 
+        }
     }
 }

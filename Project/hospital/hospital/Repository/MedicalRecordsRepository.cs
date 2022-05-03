@@ -62,7 +62,8 @@ namespace Repository
         public bool UpdateById(int id, MedicalRecord medicalRecord)
         {
             MedicalRecord med = FindById(id);
-            med.DoctorUsername = medicalRecord.DoctorUsername;
+            if(med.DoctorUsername != null)
+                med.DoctorUsername = medicalRecord.DoctorUsername;
             med.BloodType = medicalRecord.BloodType;
             med.Alergies = medicalRecord.Alergies;
             med.Note = medicalRecord.Note;
@@ -70,9 +71,12 @@ namespace Repository
             return true;
         }
 
+        
+
         public bool AddTheraphy(int id, Therapy therapy)
         {
             FindById(id).Therapy.Add(therapy);
+            medicalRecordFileHandler.Write(this.medicalRecords.ToList());
             return true;
         }
 

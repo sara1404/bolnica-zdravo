@@ -124,7 +124,6 @@ namespace hospital.View
                 if (room._Name.Equals(roomName)) {
                     foreach (Equipment eq in room.equipment) {
                         equipment.Items.Add(eq.type);
-                        quantity.Text = eq.quantity.ToString();
                     }
                 }
             }
@@ -157,6 +156,22 @@ namespace hospital.View
                 return;
             }
             scheduleBtn.IsEnabled = false;
+        }
+
+        private void equipmentChosen(object sender, SelectionChangedEventArgs e)
+        {
+            foreach (Room room in roomController.FindAll())
+            {
+                if (room._Name.Equals(fromRoom.SelectedItem.ToString()))
+                {
+                    foreach (Equipment eq in room.equipment)
+                    {
+                        if(eq.type.Equals(equipment.SelectedItem.ToString()))
+                            quantity.Text = eq.quantity.ToString();
+                    }
+                }
+            }
+            ValidateInputs();
         }
     }
 }

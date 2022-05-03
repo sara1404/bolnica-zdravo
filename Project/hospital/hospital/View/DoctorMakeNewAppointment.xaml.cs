@@ -13,6 +13,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using hospital.Controller;
+using hospital.Model;
 
 namespace hospital.View.UserControls
 {
@@ -26,6 +28,7 @@ namespace hospital.View.UserControls
         private PatientController pc;
         private RoomController rc;
         private UserController uc;
+        private ScheduledBasicRenovationController sbrc;
 
         public Doctor loggedInDoctor;
         public Patient selectedPatient;
@@ -38,6 +41,7 @@ namespace hospital.View.UserControls
             pc = app.patientController;
             rc = app.roomController;
             uc = app.userController;
+            sbrc = app.scheduledBasicRenovationController;
             
             cmbPatients.ItemsSource = pc.FindAll();
             cmbOpRoom.ItemsSource = rc.FindAll();//dodati ovde proveru da izlistava samo "operation" sale
@@ -74,8 +78,22 @@ namespace hospital.View.UserControls
                     selectedAppointment.RoomId = ((Room)cmbOpRoom.SelectedItem).id;
                 else
                     selectedAppointment.RoomId = loggedInDoctor.OrdinationId;
-                ac.CreateAppointment(selectedAppointment);
-                this.Close();
+
+                List<ScheduledBasicRenovation> renovationList = sbrc.FindAll();
+                bool canMake = true;
+                foreach(ScheduledBasicRenovation renovation in renovationList)
+                {
+                    if(renovation._Room.id == selectedAppointment.RoomId && renovation._Interval._Start < selectedAppointment.StartTime && renovation._Interval._End > selectedAppointment.StartTime)
+                    {
+                        MessageBox.Show("Invalid time because of renovations");
+                        canMake = false;
+                    }
+                }
+                if (canMake)
+                {
+                    ac.CreateAppointment(selectedAppointment);
+                    this.Close();
+                }
             }
         }
 

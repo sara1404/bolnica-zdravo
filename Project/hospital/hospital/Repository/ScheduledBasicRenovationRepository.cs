@@ -20,7 +20,7 @@ namespace hospital.Repository
 
         public void Create(ScheduledBasicRenovation renovation) {
             renovations.Add(renovation);
-            renovationFileHandler.Write(renovations);
+            renovationFileHandler.Write(this.renovations.ToList());
         }
 
         public ScheduledBasicRenovation FindById(string id) {
@@ -42,7 +42,7 @@ namespace hospital.Repository
                     ren._Room = renovation._Room;
                     ren._Interval = renovation._Interval;
                     ren._Description = renovation._Description;
-                    renovationFileHandler.Write(renovations);
+                    renovationFileHandler.Write(this.renovations.ToList());
                     return true;
                 }
             }
@@ -51,8 +51,9 @@ namespace hospital.Repository
 
         public bool DeleteById(string id) {
             ScheduledBasicRenovation renovation = FindById(id);
-            renovationFileHandler.Write(renovations);
-            return renovations.Remove(renovation);
+            renovations.Remove(renovation);
+            renovationFileHandler.Write(this.renovations.ToList());
+            return true;
         }
 
         public void LoadRenovationData()

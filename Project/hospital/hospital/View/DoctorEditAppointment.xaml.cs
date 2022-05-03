@@ -1,4 +1,5 @@
 ﻿using Controller;
+using hospital.Model;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using hospital.Controller;
 
 namespace hospital.View
 {
@@ -24,6 +26,8 @@ namespace hospital.View
     {
         private AppointmentController ac;
         private RoomController rc;
+        private ScheduledBasicRenovationController sbrc;
+
         private Appointment selectedAppointment;
         public DoctorEditAppointment()
         {
@@ -31,6 +35,7 @@ namespace hospital.View
             App app = Application.Current as App;
             ac = app.appointmentController;
             rc = app.roomController;
+            sbrc = app.scheduledBasicRenovationController;
             this.DataContext = this;
             foreach (Window window in Application.Current.Windows)
             {
@@ -70,8 +75,22 @@ namespace hospital.View
                 updatedAppointment.Description = tbDescription.Text;
                 if (cmbOpRoom.SelectedIndex != -1)
                     updatedAppointment.RoomId = ((Room)cmbOpRoom.SelectedItem).id;
-                ac.UpdateAppointment(selectedAppointment, updatedAppointment);
-                this.Close();
+
+                List<ScheduledBasicRenovation> renovationList = sbrc.FindAll();
+                bool canMake = true;
+                foreach (ScheduledBasicRenovation renovation in renovationList)
+                {
+                    if (renovation._Room.id == selectedAppointment.RoomId && renovation._Interval._Start < updatedAppointment.StartTime && renovation._Interval._End > updatedAppointment.StartTime)
+                    {
+                        MessageBox.Show("Invalid time because of renovations");
+                        canMake = false;
+                    }
+                }
+                if (canMake)
+                {
+                    ac.UpdateAppointment(selectedAppointment, updatedAppointment);
+                    this.Close();
+                }
             }
         }
 

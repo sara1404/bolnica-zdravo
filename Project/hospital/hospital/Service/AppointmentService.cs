@@ -14,12 +14,14 @@ namespace Service
         private readonly AppointmentRepository appointmentRepository;
         private readonly DoctorRepository doctorRepository;
         private readonly UserController userController;
+        private readonly NotificationRepository notificationRepository;
 
-        public AppointmentService(AppointmentRepository appointmentRepository, DoctorRepository doctorRepository, UserController userController)
+        public AppointmentService(AppointmentRepository appointmentRepository, DoctorRepository doctorRepository, UserController userController, NotificationRepository notificationRepository)
         {
             this.appointmentRepository = appointmentRepository;
             this.doctorRepository = doctorRepository;
             this.userController = userController;
+            this.notificationRepository = notificationRepository;
         }
 
         public Appointment Read(int id)
@@ -403,7 +405,7 @@ namespace Service
                 {
                     //stavi id sobee kad sazanas
                     (apointments[i]).patientUsername = patientUsername;
-                    (apointments[i]).roomId = "-333";
+                    (apointments[i]).roomId = roomId;
                     //pozovi controller i napravi appointment
                     Create(apointments[i]);
                     // this.Visibility = Visibility.Collapsed;
@@ -526,11 +528,11 @@ namespace Service
                 string minuts = time.Split(':')[1];
                 if (newHours.Equals(hours) && newMinuts.Equals(minuts))
                 {
-                    //stavi id sobee kad sazanas
                     Appointment newAppointmet = appointments[i];
                     newAppointmet.patientUsername = oldAppointment.patientUsername;
                     Update(oldAppointment, newAppointmet);
-                    // this.Visibility = Visibility.Collapsed;
+                    notificationRepository.Create(new Notification(oldAppointment.PatientUsername));
+                    notificationRepository.Create(new Notification(oldAppointment.DoctorUsername));
                     return true;
                 }
             }

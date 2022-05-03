@@ -42,7 +42,7 @@ namespace hospital.View.UserControls
         {
             if (isValidate())
             {
-                if (ac.tryMakeAppointment(txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1],cmbUsername.Text,"-666", (DateTime)date.SelectedDate, (Doctor)cmbDoctor.SelectedItem))
+                if (ac.tryMakeAppointment(txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1],cmbUsername.Text, ((Doctor)cmbDoctor.SelectedItem).OrdinationId, (DateTime)date.SelectedDate, (Doctor)cmbDoctor.SelectedItem))
                 {
                     this.Visibility = Visibility.Collapsed;
                     return;

@@ -20,9 +20,11 @@ namespace hospital
         public RoomRepository roomRepository;
         public ScheduledRelocationRepository scheduledRelocationRepository;
         public ScheduledBasicRenovationRepository scheduledBasicRenovationRepository;
+        public NotificationRepository notificationRepository;
         public RoomController roomController { get; set; }
         public PatientController patientController { get; set; }
         public AppointmentController appointmentController { get; set; }
+        public NotificationController notificationController { get; set; }
         public MedicalRecordsController mediicalRecordsController { get; set; }
         public DoctorController doctorController { get; set; }
         public UserController userController { get; set; }
@@ -38,6 +40,10 @@ namespace hospital
             UserService userService = new UserService(userRepository);
             userController = new UserController(userService);
 
+            NotificationRepository notificationRepository = new NotificationRepository();
+            NotificationService notificationService = new NotificationService(notificationRepository);
+            notificationController = new NotificationController(notificationService);
+
             roomRepository = new RoomRepository();
             RoomService roomService = new RoomService(roomRepository);
             roomController = new RoomController(roomService);
@@ -49,7 +55,7 @@ namespace hospital
 
             AppointmentRepository appointmentRepository = new AppointmentRepository();
             DoctorRepository doctorRepository = new DoctorRepository();
-            AppointmentService appointmentService = new AppointmentService(appointmentRepository, doctorRepository, userController);
+            AppointmentService appointmentService = new AppointmentService(appointmentRepository, doctorRepository, userController,notificationRepository);
             appointmentController = new AppointmentController(appointmentService);
 
             MedicalRecordsService medicalRecordsService = new MedicalRecordsService(medicalRecordsRepository);

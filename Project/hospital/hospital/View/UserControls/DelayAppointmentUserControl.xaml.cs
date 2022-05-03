@@ -26,6 +26,7 @@ namespace hospital.View.UserControls
         private PatientController pc;
         private AppointmentController ac;
         private DoctorController dc;
+        private NotificationController nc;
         public ObservableCollection<Patient> Patients { get; set; }
         public ObservableCollection<Doctor> Doctors { get; set; }
         public DelayAppointmentUserControl()
@@ -36,6 +37,7 @@ namespace hospital.View.UserControls
             newDate.DisplayDateStart = DateTime.Today;
             App app = Application.Current as App;
             pc = app.patientController;
+            nc = app.notificationController;
             ac = app.appointmentController;
             dc = app.doctorController;
             Patients = pc.FindAll();
@@ -238,7 +240,6 @@ namespace hospital.View.UserControls
                         sucess = ac.tryChangeAppointment(appointment, (DateTime)newDate.SelectedDate,txtNewTime.Text);
                         if (sucess)
                         {
-                            Console.WriteLine("12321412412");
                             this.Visibility = Visibility.Collapsed;
                             return;
                         }

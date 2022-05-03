@@ -49,6 +49,12 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="ToastNotifications, Version=2.5.1.0, Culture=neutral, PublicKeyToken=e89d9d7314a7c797, processorArchitecture=MSIL">
+      <HintPath>..\packages\ToastNotifications.2.5.1\lib\net40\ToastNotifications.dll</HintPath>
+    </Reference>
+    <Reference Include="ToastNotifications.Messages, Version=2.5.1.0, Culture=neutral, PublicKeyToken=e89d9d7314a7c797, processorArchitecture=MSIL">
+      <HintPath>..\packages\ToastNotifications.Messages.2.5.1\lib\net40\ToastNotifications.Messages.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -60,10 +66,12 @@
     </ApplicationDefinition>
     <Compile Include="Controller\DoctorController.cs" />
     <Compile Include="Controller\MedicineController.cs" />
+    <Compile Include="Controller\NotificationController.cs" />
     <Compile Include="Controller\ScheduledBasicRenovationController.cs" />
     <Compile Include="Controller\ScheduledRelocationController.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="FileHandler\MedicalRecordFileHandler.cs" />
+    <Compile Include="FileHandler\NotificationFileHandler.cs" />
     <Compile Include="FileHandler\ScheduledBasicRenovationFIleHandler.cs" />
     <Compile Include="FileHandler\ScheduledRelocationFileHandler.cs" />
     <Compile Include="FileHandler\UserFileHandler.cs" />
@@ -77,6 +85,7 @@
     <Compile Include="Repository\DoctorRepository.cs" />
     <Compile Include="Repository\MedicalRecordsRepository.cs" />
     <Compile Include="Repository\MedicineRepository.cs" />
+    <Compile Include="Repository\NotificationRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
     <Compile Include="Repository\RoomRepository.cs" />
     <Compile Include="Repository\ScheduledBasicRenovationRepository.cs" />
@@ -86,6 +95,7 @@
     <Compile Include="Service\DoctorService.cs" />
     <Compile Include="Service\MedicalRecordsService.cs" />
     <Compile Include="Service\MedicineService.cs" />
+    <Compile Include="Service\NotificationService.cs" />
     <Compile Include="Service\PatientService.cs" />
     <Compile Include="Service\RoomService.cs" />
     <Compile Include="Service\ScheduledBasicRenovationService.cs" />
@@ -447,6 +457,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\stethoscope.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Data\NotificationData.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

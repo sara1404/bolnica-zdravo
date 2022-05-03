@@ -5,10 +5,11 @@ using System.Text;
 using System.Timers;
 using System.Windows;
 
-namespace hospital.Model
+namespace Model
 {
-    class Notification
+    public class Notification
     {
+        private string username;
         private DateTime startTime;
         private DateTime endTime;
         private int interval;
@@ -17,6 +18,10 @@ namespace hospital.Model
         private static Timer timer;
         private static Timer preTimer;
 
+        public Notification() { }
+        public Notification(string username) {
+            Username = username;
+        }
         public Notification(DateTime startTime, string text)
         {
             // notification that runs only once, on specified time
@@ -101,5 +106,7 @@ namespace hospital.Model
             }
         }
 
+        public string Username { get; set; }
+        public string Text { get; set; }
     }
 }

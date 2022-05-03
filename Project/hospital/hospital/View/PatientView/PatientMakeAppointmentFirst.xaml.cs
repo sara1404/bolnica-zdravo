@@ -23,12 +23,14 @@ namespace hospital.View.PatientView
     public partial class PatientMakeAppointmentFirst : Page
     {
         private AppointmentController ac;
+        private UserController uc;
         public PatientMakeAppointmentFirst()
         {
             InitializeComponent();
             dateFrom.DisplayDateStart = DateTime.Today;
             dateTo.DisplayDateStart = DateTime.Today;
             App app = Application.Current as App;
+            uc = app.userController;
             ac = app.appointmentController;
             DoctorController dc = app.doctorController;
             cbDoctor.ItemsSource = dc.GetDoctors();
@@ -69,13 +71,13 @@ namespace hospital.View.PatientView
             else if (cbDoctor.SelectedIndex == -1 && dateFrom.SelectedDate != null && !priorityDoctor && !priorityDate)
             {
                 DateTime selectedDate = (DateTime)dateFrom.SelectedDate;
-                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDate(selectedDate);
+                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDate(selectedDate,uc.CurentLoggedUser.Username);
             }
             else if (cbDoctor.SelectedIndex != -1 && dateFrom.SelectedDate != null && !priorityDoctor && !priorityDate)
             {
                 DateTime selectedDate = (DateTime)dateFrom.SelectedDate;
                 Doctor d = (Doctor)cbDoctor.SelectedItem;
-                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor(selectedDate, d.Username);
+                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor(selectedDate, d.Username,uc.CurentLoggedUser.Username);
             }
         }
 

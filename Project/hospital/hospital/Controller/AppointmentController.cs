@@ -39,13 +39,13 @@ namespace Controller
             return appointmentService.GetFreeAppointmentsByDoctor(username);
         }
 
-        public ObservableCollection<Appointment> GetFreeAppointmentsByDate(DateTime date)
+        public ObservableCollection<Appointment> GetFreeAppointmentsByDate(DateTime date,string patientUsername)
         {
-            return appointmentService.GetFreeAppointmentsByDate(date);
+            return appointmentService.GetFreeAppointmentsByDate(date, patientUsername);
         }
-        public ObservableCollection<Appointment> GetFreeAppointmentsByDateAndDoctor(DateTime date, string username)
+        public ObservableCollection<Appointment> GetFreeAppointmentsByDateAndDoctor(DateTime date, string username,string patientUsername)
         {
-            return appointmentService.GetFreeAppointmentsByDateAndDoctor(date, username);
+            return appointmentService.GetFreeAppointmentsByDateAndDoctor(date, username, patientUsername);
         }
 
         public ObservableCollection<Appointment> GetAppointments()

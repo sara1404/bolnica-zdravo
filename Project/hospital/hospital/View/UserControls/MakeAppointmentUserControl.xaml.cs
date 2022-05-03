@@ -15,6 +15,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Controller;
 using Model;
+using ToastNotifications;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Messages;
+using ToastNotifications.Position;
 
 namespace hospital.View.UserControls
 {
@@ -37,7 +41,20 @@ namespace hospital.View.UserControls
             Patients = pc.FindAll();
             Doctors = dc.GetDoctors();
         }
+        Notifier notifier = new Notifier(cfg =>
+        {
+            cfg.PositionProvider = new WindowPositionProvider(
+                parentWindow: Application.Current.MainWindow,
+                corner: Corner.TopRight,
+                offsetX: 10,
+                offsetY: 10);
 
+            cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+                notificationLifetime: TimeSpan.FromSeconds(3),
+                maximumNotificationCount: MaximumNotificationCount.FromCount(5));
+
+            cfg.Dispatcher = Application.Current.Dispatcher;
+        });
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
             if (isValidate())
@@ -45,6 +62,7 @@ namespace hospital.View.UserControls
                 if (ac.tryMakeAppointment(txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1],cmbUsername.Text, ((Doctor)cmbDoctor.SelectedItem).OrdinationId, (DateTime)date.SelectedDate, (Doctor)cmbDoctor.SelectedItem))
                 {
                     this.Visibility = Visibility.Collapsed;
+                    notifier.ShowSuccess("Appointment successfully scheduled");
                     return;
                 }
                 btnRecOne.Visibility = Visibility.Collapsed;
@@ -171,7 +189,7 @@ namespace hospital.View.UserControls
                         btnRecTwo.Visibility = Visibility.Collapsed;
                     else
                         btnRecTwo.Visibility = Visibility.Visible;
-                    ObservableCollection<Appointment> apointments = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)date.SelectedDate, ((Doctor)cmbDoctor.SelectedItem).Username);
+                    ObservableCollection<Appointment> apointments = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)date.SelectedDate, ((Doctor)cmbDoctor.SelectedItem).Username,cmbUsername.Text);
                     ac.findFreeForward(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
                     ac.findFreeBack(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
                     btnRecOne.Content = "Doctor: " + dc.GetByUsername(ac.RecommendedOne.doctorUsername) + "\n" + ac.RecommendedOne.StartTime;
@@ -183,7 +201,7 @@ namespace hospital.View.UserControls
                     notFree.Text = "";
                     btnRecOne.Visibility = Visibility.Visible;
                     btnRecTwo.Visibility = Visibility.Visible;
-                    ObservableCollection<Appointment> apointments = ac.GetFreeAppointmentsByDate((DateTime)date.SelectedDate);
+                    ObservableCollection<Appointment> apointments = ac.GetFreeAppointmentsByDate((DateTime)date.SelectedDate,cmbUsername.Text);
                     ac.findRecByTime(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
                     btnRecOne.Content = "Doctor: " + dc.GetByUsername(ac.RecommendedOne.doctorUsername) + "\n" + ac.RecommendedOne.StartTime;
                     btnRecTwo.Content = "Doctor: " + dc.GetByUsername(ac.RecommendedTwo.doctorUsername) + "\n" + ac.RecommendedTwo.StartTime;
@@ -207,6 +225,7 @@ namespace hospital.View.UserControls
         private void btnRecTwo_Click(object sender, RoutedEventArgs e)
         {
             ac.CreateAppointment(ac.RecommendedTwo);
+            notifier.ShowSuccess("Appointment successfully scheduled");
             this.Visibility = Visibility.Collapsed;
             cmbDoctor.Text = "";
             cmbUsername.Text = "";
@@ -222,6 +241,7 @@ namespace hospital.View.UserControls
         private void btnRecOne_Click(object sender, RoutedEventArgs e)
         {
             ac.CreateAppointment(ac.RecommendedOne);
+            notifier.ShowSuccess("Appointment successfully scheduled");
             this.Visibility = Visibility.Collapsed;
             cmbDoctor.Text = "";
             cmbUsername.Text = "";

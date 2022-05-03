@@ -15,6 +15,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Model;
 using Controller;
+using ToastNotifications;
+using ToastNotifications.Position;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Messages;
 
 namespace hospital.View.UserControls
 {
@@ -45,7 +49,20 @@ namespace hospital.View.UserControls
         }
 
 
+        Notifier notifier = new Notifier(cfg =>
+        {
+            cfg.PositionProvider = new WindowPositionProvider(
+                parentWindow: Application.Current.MainWindow,
+                corner: Corner.TopRight,
+                offsetX: 10,
+                offsetY: 10);
 
+            cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+                notificationLifetime: TimeSpan.FromSeconds(3),
+                maximumNotificationCount: MaximumNotificationCount.FromCount(5));
+
+            cfg.Dispatcher = Application.Current.Dispatcher;
+        });
 
 
 
@@ -197,7 +214,7 @@ namespace hospital.View.UserControls
                     btnRecTwo.Visibility = Visibility.Collapsed;
                 else
                     btnRecTwo.Visibility = Visibility.Visible;
-                ObservableCollection<Appointment> apointments = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)date.SelectedDate, CurrentAppointment.doctorUsername);
+                ObservableCollection<Appointment> apointments = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)newDate.SelectedDate, CurrentAppointment.doctorUsername,cmbUsername.Text);
                 ac.findFreeForward(apointments, txtNewTime.Text.Split(':')[0], txtNewTime.Text.Split(':')[1]);
                 ac.findFreeBack(apointments, txtNewTime.Text.Split(':')[0], txtNewTime.Text.Split(':')[1]);
                 btnRecOne.Content = "Doctor: " + dc.GetByUsername(ac.RecommendedOne.doctorUsername) + "\n" + ac.RecommendedOne.StartTime;
@@ -219,6 +236,7 @@ namespace hospital.View.UserControls
                 ObservableCollection<Appointment> appointments= ac.GetAppointmentByPatient(cmbUsername.Text);
                 string hours = txtTime.Text.Split(':')[0];
                 string minuts = txtTime.Text.Split(':')[1];
+                string dates = date.ToString().Split(' ')[0];
                 bool exists = false;
 
                 //da li je uopste uneta promena nekakva
@@ -232,14 +250,15 @@ namespace hospital.View.UserControls
                 {
                     string hoursFromAppointment = appointment.StartTime.ToString().Split(' ')[1].Split(':')[0];
                     string minutsFromAppointment = appointment.StartTime.ToString().Split(' ')[1].Split(':')[1];
-                    if(hoursFromAppointment.Equals(hours) && minutsFromAppointment.Equals(minuts))
+                    string dateFromAppointment = appointment.StartTime.ToString().Split(' ')[0];
+                    if(hoursFromAppointment.Equals(hours) && minutsFromAppointment.Equals(minuts) && dates.Equals(dateFromAppointment))
                     {
                         exists = true;
-                        //oldAppointment = appointment;
                         CurrentAppointment = appointment;
                         sucess = ac.tryChangeAppointment(appointment, (DateTime)newDate.SelectedDate,txtNewTime.Text);
                         if (sucess)
                         {
+                            notifier.ShowSuccess("Appointment has been moved successfully.");
                             this.Visibility = Visibility.Collapsed;
                             return;
                         }

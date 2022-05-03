@@ -59,7 +59,7 @@ namespace hospital.View.UserControls
             {
                 DateTime selectedDate = (DateTime)date.SelectedDate;
                 selectedPatient = (Patient)cmbPatients.SelectedItem;
-                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor(selectedDate, loggedInDoctor.Username);
+                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor(selectedDate, loggedInDoctor.Username, cmbPatients.Text);
             }
         }
 

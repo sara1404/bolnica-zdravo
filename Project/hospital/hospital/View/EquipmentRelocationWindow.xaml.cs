@@ -160,6 +160,8 @@ namespace hospital.View
 
         private void equipmentChosen(object sender, SelectionChangedEventArgs e)
         {
+            if (equipment.SelectedItem == null) return;
+            
             foreach (Room room in roomController.FindAll())
             {
                 if (room._Name.Equals(fromRoom.SelectedItem.ToString()))

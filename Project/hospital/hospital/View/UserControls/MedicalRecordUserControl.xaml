@@ -43,7 +43,7 @@
                                 </Grid>
                             </GroupBox>
                             <GroupBox DockPanel.Dock="Right" Header="Note" BorderThickness="1" Margin="10" BorderBrush="Gray" FontSize="20" VerticalAlignment="Top" Width="330" Height="162">
-                                <TextBox x:Name="txtNote" IsEnabled="false" BorderThickness="0" FontSize="13"></TextBox>
+                                <TextBox x:Name="txtNote" IsEnabled="false" AcceptsReturn="True" BorderThickness="0" FontSize="13"></TextBox>
                             </GroupBox>
                         </DockPanel>
                     </Grid>

@@ -29,6 +29,9 @@
                         <Button x:Name="btnDelay" Foreground="blue" Visibility="Visible"  HorizontalAlignment="Left" Margin="266,4,0,0" VerticalAlignment="Top" BorderBrush="Transparent" Background="white" Click="btnDelay_Click">
                             <Underline>Delay appointment</Underline>
                         </Button>
+                        <Button x:Name="btnRemove" Foreground="blue" Visibility="Visible"  HorizontalAlignment="Left" Margin="75,4,0,0" VerticalAlignment="Top" BorderBrush="Transparent" Background="white" Click="btnRemove_Click">
+                            <Underline>Remove appointment</Underline>
+                        </Button>
                         <TextBlock x:Name="errUsername" Height="20" Width="132" Foreground="red" Margin="239,59,75,321"></TextBlock>
                         <TextBlock x:Name="errDate" Height="20" Width="132" Foreground="red" Margin="239,108,75,272"></TextBlock>
                         <TextBlock x:Name="errTime" Height="20" Width="132" Foreground="red" Margin="239,158,75,222"></TextBlock>
@@ -44,5 +47,6 @@
             </Border>
         </StackPanel>
         <local:DelayAppointmentUserControl x:Name="delayAppointmentUserControl" Visibility="Collapsed" Height="530"/>
+        <local:RemoveAppointementUserControl x:Name="removeAppointmentUserControl" Visibility="Collapsed" Height="530"/>
     </Grid>
 </UserControl>

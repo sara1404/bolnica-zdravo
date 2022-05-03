@@ -17,16 +17,10 @@ namespace Controller
         {
             doctorService = _service;
         }
-        public DoctorController() { }
 
         public ObservableCollection<Doctor> GetDoctors()
         {
             return doctorService.GetDoctors();
-        }
-        
-        public ObservableCollection<Doctor> GetGeneralPractitioners()
-        {
-            throw new NotImplementedException();
         }
 
         public Doctor getByName(string name)

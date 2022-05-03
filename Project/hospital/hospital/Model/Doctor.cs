@@ -27,6 +27,7 @@ namespace Model
             Surname = surname;
             this.specialization = specialization;
         }
+        public Doctor() { }
         public override string ToString()
         {
             return name + " " + surname;

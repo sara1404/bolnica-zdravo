@@ -14,21 +14,12 @@ namespace Service
         {
             doctorRepository = _repo;
         }
-        public DoctorService() { doctorRepository = new DoctorRepository(); }
-        public List<DateTime> GetFreeTimeSlots()
-        {
-            throw new NotImplementedException();
-        }
 
         public ObservableCollection<Doctor> GetDoctors()
         {
             return doctorRepository.FindAll();
         }
 
-        public ObservableCollection<Doctor> GetGeneralPractitioners()
-        {
-            throw new NotImplementedException();
-        }
         public Doctor GetByUsername(string username)
         {
             return doctorRepository.FindByUsername(username);

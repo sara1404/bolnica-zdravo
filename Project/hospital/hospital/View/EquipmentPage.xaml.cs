@@ -29,5 +29,15 @@ namespace hospital.View
         {
             new EquipmentRelocationWindow().Show();
         }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            this.Visibility = Visibility.Collapsed;
+        }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

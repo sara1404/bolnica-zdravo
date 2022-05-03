@@ -37,11 +37,15 @@
 
             </Grid.ColumnDefinitions>
             <Border Grid.Row="0" BorderBrush="Black" BorderThickness="0,2,2,2">
-                <StackPanel>
-                    <Image HorizontalAlignment="Left" Height="46" Margin="25,35,0,0" VerticalAlignment="Top" Width="46" Source="../Resources/Images/account.png"/>
-                    <Label Content="Dusan" HorizontalAlignment="Left" Margin="86,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.163,0.423"/>
-                    <Label Content="dusan@zdravocorp.com" HorizontalAlignment="Left" Margin="86,64,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Manager" HorizontalAlignment="Left" Margin="20,81,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.163,0.423"/>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <Image HorizontalAlignment="Left" Height="46" Margin="40 40 0 0" VerticalAlignment="Top" Width="46" Source="../Resources/Images/account.png"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="Dusan" HorizontalAlignment="Left" Margin="40 30 0 0" VerticalAlignment="Top"/>
+                        <Label Content="dusan@zdravocorp.com" HorizontalAlignment="Left"  Margin="40 0 0 0" VerticalAlignment="Top"/>
+                        <Label Content="Manager" HorizontalAlignment="Left"  Margin="40 0 0 0" VerticalAlignment="Top" RenderTransformOrigin="0.163,0.423"/>
+                    </StackPanel>
                 </StackPanel>
             </Border>
 

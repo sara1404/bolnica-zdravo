@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Controller;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace hospital.View
     /// </summary>
     public partial class EquipmentPage : Page
     {
+        private UserController uc;
         public EquipmentPage()
         {
             InitializeComponent();
+            App app = Application.Current as App;
+            uc = app.userController;
         }
 
         private void Show_Relocation_Window_Click(object sender, RoutedEventArgs e)
@@ -37,7 +41,9 @@ namespace hospital.View
 
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
-
+            uc.CurentLoggedUser = null;
+            MainWindow mw = new MainWindow();
+            mw.Show();
         }
     }
 }

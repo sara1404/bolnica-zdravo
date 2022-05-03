@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Controller;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace hospital.View
     /// </summary>
     public partial class RoomRenovationPage : Page
     {
+        private UserController uc;
         public RoomRenovationPage()
         {
             InitializeComponent();
+            App app = Application.Current as App;
+            uc = app.userController;
         }
 
         private void Basic_Renovation_Click(object sender, RoutedEventArgs e)
@@ -33,6 +37,18 @@ namespace hospital.View
         private void Advanced_Renovation_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            uc.CurentLoggedUser = null;
+            MainWindow mw = new MainWindow();
+            mw.Show();
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            this.Visibility = Visibility.Collapsed;
         }
     }
 }

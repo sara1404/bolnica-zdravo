@@ -468,5 +468,8 @@
   <ItemGroup>
     <Resource Include="Resources\Data\NotificationData.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Data\ScheduledBasicRenovationData.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

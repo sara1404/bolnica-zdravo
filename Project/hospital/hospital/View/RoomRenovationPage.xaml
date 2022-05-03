@@ -9,9 +9,68 @@
       Title="RoomRenovationPage">
 
     <Grid Background="White">
-        <Button Content="BASIC RENOVATION" HorizontalAlignment="Left" Margin="54,147,0,0" VerticalAlignment="Top" Width="154" Height="47" Click="Basic_Renovation_Click"/>
-        <Button Content="ADVANCED RENOVATION" HorizontalAlignment="Left" Margin="54,249,0,0" VerticalAlignment="Top" Width="154" Height="46" Click="Advanced_Renovation_Click"/>
-        <DataGrid HorizontalAlignment="Left" Height="286" Margin="280,92,0,0" VerticalAlignment="Top" Width="444"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel  Grid.Column="0" Grid.ColumnSpan="7" Grid.Row="0" Grid.RowSpan="1" VerticalAlignment="Stretch">
+            <Border BorderBrush="Black" BorderThickness="0,2,0,2">
+                <Grid Height="60" DockPanel.Dock="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+
+                    </Grid.ColumnDefinitions>
+
+                    <Image DockPanel.Dock="Left" Height="56" Width="100" Source="../Resources/Images/logo.png" Grid.Column="0"/>
+                    <Button Height="30" DockPanel.Dock ="Right"  Grid.Column="4" Margin="88,15,10,15" Click="Logout_Click">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Image Source="../Resources/Images/logout.png"/>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </Border>
+
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <Button Height="30" Click="Back_Click" Margin="0,0,26,0">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Source="../Resources/Images/back.png"/>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="2">
+            <Button Content="BASIC RENOVATION" HorizontalAlignment="Left" Margin="0 40" VerticalAlignment="Top" Width="154" Height="47" Click="Basic_Renovation_Click" RenderTransformOrigin="0.909,0.441"/>
+            <Button Content="ADVANCED RENOVATION" HorizontalAlignment="Left" VerticalAlignment="Top" Width="154" Height="46" Click="Advanced_Renovation_Click"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.RowSpan="4" Grid.Column="3" Grid.ColumnSpan="4">
+            <DataGrid HorizontalAlignment="Left" Height="286" VerticalAlignment="Top" Width="414"/>
+        </StackPanel>
+
 
 
     </Grid>

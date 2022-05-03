@@ -54,7 +54,7 @@ namespace hospital.View
 
 
 
-            //-------sekretar salje notifikacije tebi cim se ulogujes
+            //-------sekretar salje notifikacije tebi cim se ulogujes - hvala sekretaru
             foreach (Notification n in nc.FindAll().ToList())
             {
                 if (n.Username.Equals(uc.CurentLoggedUser.Username))
@@ -119,6 +119,14 @@ namespace hospital.View
         private void Therapy_Click(object sender, RoutedEventArgs e)
         {
             new DoctorTherapyWindow().Show();
+        }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            uc.CurentLoggedUser = null;
+            MainWindow mw = new MainWindow();
+            mw.Show();
+            this.Close();
         }
     }
 }

@@ -75,7 +75,7 @@ namespace Service
             return retVal;
         }
 
-        public ObservableCollection<Appointment> GetFreeAppointmentsByDate(DateTime date)
+        public ObservableCollection<Appointment> GetFreeAppointmentsByDate(DateTime date,string patientUsername)
         {
             List<DateTime> startTimes = new List<DateTime>();
             ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
@@ -89,7 +89,7 @@ namespace Service
             // add logged in patients appointments
             foreach (Appointment a in appointmentRepository.FindAll())
             {
-                if (a.patientUsername.Equals(userController.CurentLoggedUser.Username))
+                if (a.patientUsername.Equals(patientUsername))
                 {
                     startTimes.Add(a.StartTime);
                 }
@@ -118,7 +118,7 @@ namespace Service
                     // if an appointment is not found than that timeslot is available so fill it
                     if (!found)
                     {
-                        retVal.Add(new Appointment(-1, d.Username, userController.CurentLoggedUser.Username, time));
+                        retVal.Add(new Appointment(-1, d.Username, patientUsername, time));
                     }
                 }
             }
@@ -127,7 +127,7 @@ namespace Service
 
         }
 
-        public ObservableCollection<Appointment> GetFreeAppointmentsByDateAndDoctor(DateTime date, string username)
+        public ObservableCollection<Appointment> GetFreeAppointmentsByDateAndDoctor(DateTime date, string username,string patientUsername)
         {
             List<DateTime> startTimes = new List<DateTime>();
             ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
@@ -146,7 +146,7 @@ namespace Service
             }
             foreach (Appointment a in appointmentRepository.FindAll())
             {
-                if (a.patientUsername.Equals(userController.CurentLoggedUser.Username))
+                if (a.patientUsername.Equals(patientUsername))
                 {
                     startTimes.Add(a.StartTime);
                 }
@@ -160,7 +160,7 @@ namespace Service
                 App app = Application.Current as App;
                 PatientController pc = app.patientController;
                 DoctorController dc = app.doctorController;
-                retVal.Add(new Appointment(-1, username, userController.CurentLoggedUser.Username, time));
+                retVal.Add(new Appointment(-1, username, patientUsername, time));
                 
             }
             return retVal;
@@ -394,7 +394,7 @@ namespace Service
         //secretary function for appointment--------------
         public bool tryMakeAppointment(string _hours, string _minuts, string patientUsername, string roomId,DateTime date,Doctor doctor)
         {
-            ObservableCollection<Appointment> apointments = GetFreeAppointmentsByDateAndDoctor(date, doctor.Username);
+            ObservableCollection<Appointment> apointments = GetFreeAppointmentsByDateAndDoctor(date, doctor.Username,patientUsername);
             for (int i = 0; i < apointments.Count; i++)
             {
                 string time = (apointments[i]).StartTime.ToString();
@@ -498,13 +498,11 @@ namespace Service
                 {
                     if (oneRecFilled == false)
                     {
-                        Console.WriteLine("Napunio prvog");
                         RecommendedOne = appointment;
                         oneRecFilled = true;
                     }
                     else
                     {
-                        Console.WriteLine("Napunio drugog");
                         RecommendedTwo = appointment;
                         return;
                     }
@@ -512,12 +510,15 @@ namespace Service
             }
             //ako nije uspeo naci tacno taj nek nadje neke najblize
             findFreeBack(apointments,hours,minuts);
-            findFreeForward(apointments,hours,minuts);
+            if(!oneRecFilled)
+                findFreeForward(apointments,hours,minuts);
         }
 
         public bool tryChangeAppointment(Appointment oldAppointment,DateTime newDate,string newTime)
         {
-            ObservableCollection<Appointment> appointments = GetFreeAppointmentsByDateAndDoctor(newDate,oldAppointment.doctorUsername);
+            //svi SLOBODNi pregledi tog dana za tog doktora
+            ObservableCollection<Appointment> appointments = GetFreeAppointmentsByDateAndDoctor(newDate,oldAppointment.doctorUsername,oldAppointment.patientUsername);
+            //zeljeno vreme
             string newHours = newTime.Split(':')[0];
             string newMinuts =newTime.Split(':')[1];
             for (int i = 0; i < appointments.Count; i++)

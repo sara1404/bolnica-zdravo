@@ -23,6 +23,7 @@ namespace hospital.View
     {
         private AppointmentController ac;
         private Appointment selectedAppointment;
+        private UserController uc;
 
         public PatientDelayAppointment(Appointment a)
         {
@@ -40,6 +41,7 @@ namespace hospital.View
             tbxDoctor.Text = selectedAppointment.DoctorUsername;
             oldDate.SelectedDate = selectedAppointment.StartTime;
             App app = Application.Current as App;
+            uc = app.userController;
             ac = app.appointmentController;
             newDate.DisplayDateStart = DateTime.Now > selectedAppointment.StartTime.AddDays(-4) ? DateTime.Now : selectedAppointment.StartTime.AddDays(-4);
             newDate.DisplayDateEnd = selectedAppointment.StartTime.AddDays(4);
@@ -50,7 +52,7 @@ namespace hospital.View
         {
             if (newDate.SelectedDate != null)
             {
-                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)newDate.SelectedDate, selectedAppointment.DoctorUsername);
+                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)newDate.SelectedDate, selectedAppointment.DoctorUsername,uc.CurentLoggedUser.Username);
             }
         }
 

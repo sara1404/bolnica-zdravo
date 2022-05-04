@@ -19,6 +19,8 @@ using ToastNotifications;
 using ToastNotifications.Lifetime;
 using ToastNotifications.Messages;
 using ToastNotifications.Position;
+using hospital.Controller;
+using hospital.Model;
 
 namespace hospital.View.UserControls
 {
@@ -27,6 +29,7 @@ namespace hospital.View.UserControls
         private PatientController pc;
         private AppointmentController ac;
         private DoctorController dc;
+        private ScheduledBasicRenovationController sbrc;
         public ObservableCollection<Patient> Patients { get; set; }
         public ObservableCollection<Doctor> Doctors { get; set; }
         public MakeAppointmentUserControl()
@@ -38,6 +41,7 @@ namespace hospital.View.UserControls
             pc = app.patientController;
             ac = app.appointmentController;
             dc = app.doctorController;
+            sbrc = app.scheduledBasicRenovationController;
             Patients = pc.FindAll();
             Doctors = dc.GetDoctors();
         }
@@ -59,16 +63,29 @@ namespace hospital.View.UserControls
         {
             if (isValidate())
             {
-                if (ac.tryMakeAppointment(txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1],cmbUsername.Text, ((Doctor)cmbDoctor.SelectedItem).OrdinationId, (DateTime)date.SelectedDate, (Doctor)cmbDoctor.SelectedItem))
+                List<ScheduledBasicRenovation> renovationList = sbrc.FindAll();
+                bool canMake = true;
+                foreach (ScheduledBasicRenovation renovation in renovationList)
                 {
-                    this.Visibility = Visibility.Collapsed;
-                    notifier.ShowSuccess("Appointment successfully scheduled");
-                    return;
+                    if (renovation._Room.id == ((Doctor)cmbDoctor.SelectedItem).OrdinationId && renovation._Interval._Start <= (DateTime)date.SelectedDate && renovation._Interval._End >= (DateTime)date.SelectedDate)
+                    {
+                        notifier.ShowError("Invalid time because of renovations");
+                        canMake = false;
+                    }
                 }
-                btnRecOne.Visibility = Visibility.Collapsed;
-                btnRecTwo.Visibility = Visibility.Collapsed;
-                btnShowRec.Visibility = Visibility.Visible;
-                notFree.Text = "Appointment is not free";
+                if (canMake)
+                {
+                    if (ac.tryMakeAppointment(txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1], cmbUsername.Text, ((Doctor)cmbDoctor.SelectedItem).OrdinationId, (DateTime)date.SelectedDate, (Doctor)cmbDoctor.SelectedItem))
+                    {
+                        this.Visibility = Visibility.Collapsed;
+                        notifier.ShowSuccess("Appointment successfully scheduled");
+                        return;
+                    }
+                    btnRecOne.Visibility = Visibility.Collapsed;
+                    btnRecTwo.Visibility = Visibility.Collapsed;
+                    btnShowRec.Visibility = Visibility.Visible;
+                    notFree.Text = "Appointment is not free";
+                }
             }
         }
 

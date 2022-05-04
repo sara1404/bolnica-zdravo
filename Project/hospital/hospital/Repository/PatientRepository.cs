@@ -1,8 +1,12 @@
+using hospital;
+using hospital.Model;
 using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
+
 namespace Repository
 {
     public class PatientRepository
@@ -23,8 +27,6 @@ namespace Repository
                 patient = new ObservableCollection<Patient>();
                 
             }
-           // patient = new ObservableCollection<Patient>();
-           //_=Create(new Patient("peromir","perica","123","Pera", "Peric", "21312312","052152151"));
         }
         public bool Create(Patient patient)
         {
@@ -59,8 +61,17 @@ namespace Repository
 
         public bool UpdateById(string id, Patient patient)
         {
-            DeleteById(id);
-            Create(patient);
+            Patient oldPatient=FindById(id);
+            oldPatient.Username = patient.Username;
+            oldPatient.FirstName = patient.FirstName;
+            oldPatient.LastName = patient.LastName; 
+            oldPatient.Email = patient.Email;
+            oldPatient.Id = patient.Id; 
+            oldPatient.DateOfBirth = patient.DateOfBirth;
+            oldPatient.PhoneNumber = patient.PhoneNumber;
+            oldPatient.IsBlocked = patient.IsBlocked;
+            oldPatient.Gender = patient.Gender;
+            patientFileHandler.Write(this.patient.ToList());
             return true;
         }
 

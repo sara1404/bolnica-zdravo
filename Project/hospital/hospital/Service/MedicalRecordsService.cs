@@ -39,6 +39,10 @@ namespace Service
         {
             return medicalRecordsRepository.UpdateById(id, medicalRecord);
         }
+        public bool AddTheraphy(int id, Therapy therapy)
+        {
+            return medicalRecordsRepository.AddTheraphy(id, therapy);
+        }
 
     }
 }

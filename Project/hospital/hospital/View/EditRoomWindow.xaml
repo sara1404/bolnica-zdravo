@@ -16,7 +16,7 @@
         <TextBox x:Name="roomPurpose" HorizontalAlignment="Left" Height="23" Margin="300,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
         <TextBox x:Name="roomFloor" HorizontalAlignment="Left" Height="23" Margin="300,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
         <Button  Content="APPLY" HorizontalAlignment="Left" Margin="129,358,0,0" VerticalAlignment="Top" Width="109" Height="36" Click="Edit_Room_Click"/>
-        <Button Content="CANCEL" HorizontalAlignment="Left" Margin="333,358,0,0" VerticalAlignment="Top" Width="108" Height="36"/>
+        <Button Content="CANCEL" HorizontalAlignment="Left" Margin="333,358,0,0" VerticalAlignment="Top" Width="108" Height="36" Click="Cancel_Edit_Room_Click"/>
         <ListView x:Name="equipmentListView" HorizontalAlignment="Left" Height="262" VerticalAlignment="Top" Width="188" Margin="511,94,0,0" SelectionChanged="ListView_SelectionChanged">
             <ListView.View>
                 <GridView>

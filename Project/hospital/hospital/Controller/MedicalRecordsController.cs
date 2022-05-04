@@ -34,5 +34,9 @@ namespace Controller
         {
             return medicalRecordsService.UpdateById(id, medicalRecord);
         }
+        public bool AddTheraphy(int id, Therapy therapy)
+        {
+            return medicalRecordsService.AddTheraphy(id, therapy);
+        }
     }
 }

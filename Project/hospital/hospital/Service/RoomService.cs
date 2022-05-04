@@ -17,6 +17,7 @@ namespace Service
 
         public void Create(Room room)
         {
+            Console.WriteLine("Added new user");
             roomRepository.Create(room);
         }
 
@@ -25,6 +26,9 @@ namespace Service
             return roomRepository.FindRoomById(id);
         }
 
+        public Room FindRoomByName(string name) {
+            return roomRepository.FindRoomByName(name);
+        }
         public ref ObservableCollection<Room> FindAll()
         {
             return ref roomRepository.FindAll();

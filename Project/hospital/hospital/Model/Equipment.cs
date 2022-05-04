@@ -4,5 +4,11 @@ namespace Model
     {
         public string type { get; set; }
         public int quantity { get; set; }
+
+        public Equipment(string type, int quantity)
+        {
+            this.type = type;
+            this.quantity = quantity;
+        }
     }
 }

@@ -14,21 +14,12 @@ namespace Service
         {
             doctorRepository = _repo;
         }
-        public DoctorService() { doctorRepository = new DoctorRepository(); }
-        public List<DateTime> GetFreeTimeSlots()
-        {
-            throw new NotImplementedException();
-        }
 
         public ObservableCollection<Doctor> GetDoctors()
         {
             return doctorRepository.FindAll();
         }
 
-        public ObservableCollection<Doctor> GetGeneralPractitioners()
-        {
-            throw new NotImplementedException();
-        }
         public Doctor GetByUsername(string username)
         {
             return doctorRepository.FindByUsername(username);
@@ -38,6 +29,14 @@ namespace Service
             string firstname = name.Split(' ')[0];
             string lastname = name.Split(' ')[1];
             return doctorRepository.getByName(firstname,lastname);
+        }
+        public void addPatientToDoctorsList(string patientId, string doctorUsername)
+        {
+            doctorRepository.addPatientToDoctorsList(patientId, doctorUsername);
+        }
+        public void addOrdinationToDoctor(string doctorUsername, string ordinationId)
+        {
+            doctorRepository.addOrdinationToDoctor(doctorUsername, ordinationId);
         }
     }
 }

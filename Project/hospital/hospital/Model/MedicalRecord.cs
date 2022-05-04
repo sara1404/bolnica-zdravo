@@ -1,36 +1,64 @@
+using System.Collections.Generic;
+using System.ComponentModel;
+
 namespace Model
 {
-    public class MedicalRecord
+    public class MedicalRecord : INotifyPropertyChanged
     {
-        private  string note;
-        private  string alergies;
-        private  Doctor choosenDoctor;
+        private string note;
+        private string alergies;
+        private string doctorUsername;
 
-        private  Therapy[] therapy;
-        private  BloodType bloodType;
-        private  Patient patient;
-        private  int recordId;
+        private List<Therapy> therapy;
+        private BloodType bloodType;
+        private string patientUsername;
+        private int recordId;
 
-        public MedicalRecord(Patient patient, string _allergens, Doctor _choosen, BloodType bt, string note)
+        public MedicalRecord(string patientUsername, string _allergens, string _choosen, BloodType bt, string note)
         {
-            this.patient = patient;
-            this.note = note;
-            this.alergies = _allergens;
-            this.choosenDoctor = _choosen;
-            this.bloodType = bt;
+            this.PatientUsername = patientUsername;
+            this.Note = note;
+            this.Alergies = _allergens;
+            this.DoctorUsername = _choosen;
+            this.BloodType = bt;
+        }
+        public MedicalRecord(string patientsUsername, int id)
+        {
+            this.PatientUsername = patientsUsername;
+            this.RecordId = id;
+        }
+        public MedicalRecord() { }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
 
-        public string Firstname { get=>patient.FirstName; set=>patient.FirstName=value; }
-        public string Lastname { get => patient.LastName; set => patient.LastName = value; }
-        public int RecordId { get=>recordId; set=>recordId=value; }
-        public string Username { get => patient.Username; set => patient.Username=value; }
+        public int RecordId { get { return recordId; } set { recordId = value; OnPropertyChanged(""); } }
+        public string Note { get { return note; } set { note = value; OnPropertyChanged(""); } }
+        public string Alergies { get { return alergies; } set { alergies = value; OnPropertyChanged(""); } }
+        public string DoctorUsername { get { return doctorUsername; } set { doctorUsername = value; OnPropertyChanged(""); } }
+        public string PatientUsername { get { return patientUsername; } set { patientUsername = value; OnPropertyChanged(""); } }
+        public BloodType BloodType { get { return bloodType; } set { bloodType = value; OnPropertyChanged(""); } }
 
-        public string Note { get=>note; set=>note=value; }
-        public string Alergies { get=>alergies; set=>alergies=value; }
-
-        public Doctor ChoosenDoctor { get; set; }
-        public string NameDoctor { get => choosenDoctor.ToString();}
-        public BloodType BloodType { get=> bloodType; set=> bloodType=value; }
-        private Patient _Patient { get; set; }
+        public List<Therapy> Therapy
+        { 
+            get 
+            {
+                if (therapy == null)
+                    therapy = new List<Therapy>();
+                
+                return therapy; 
+            } 
+            set 
+            { 
+                therapy = value; 
+                OnPropertyChanged(""); 
+            } 
+        }
     }
 }

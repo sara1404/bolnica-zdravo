@@ -12,30 +12,30 @@ namespace Model
         private DateTime startTime;
         private int duration;
 
-        public Doctor doctor;
-        public Patient patient;
-        public Room operationRoom;
+        public string doctorUsername;
+        public string patientUsername;
+        public string roomId;
         
-        public Appointment()
-        {
-
-        }
-        public Appointment(int id, Doctor doctor, Patient patient, DateTime startTime)
+        public Appointment(int id, string doctorUsername, string patientUsername, DateTime startTime)
         {
             Id = id;
-            this.doctor = doctor;
-            this.patient = patient;
+            this.doctorUsername = doctorUsername;
+            this.patientUsername = patientUsername;
             StartTime = startTime;
         }
-        public Patient Patient
+        public string PatientUsername
         {
             get
             {
-                return patient;
+                if (patientUsername == null)
+                    return "";
+                else
+                    return patientUsername;
             }
             set
             {
-                patient = value;
+                patientUsername = value;
+                OnPropertyChanged();
             }
         }
         public int Id
@@ -47,58 +47,47 @@ namespace Model
             set
             {
                 id = value;
+                OnPropertyChanged();
             }
         }
         public string Description { get => description; set => description = value; }
         public DateTime StartTime { get => startTime; set => startTime = value; }
         public int Duration { get => duration; set => duration = value; }
-        public string Doctor
+        public string DoctorUsername
         {
             get
             {
-                if (doctor == null)
-                {
-                    return ".";
-                }
+                if (doctorUsername == null)
+                    return "";
                 else
-                {
-                    return doctor.Name + " " + doctor.Surname;
-                }
+                    return doctorUsername;
+            }
+            set
+            {
+                doctorUsername = value;
+                OnPropertyChanged();
             }
         }
-        public string PatientName
+        public string RoomId
         {
             get
             {
-                if (patient == null)
-                {
-                    return ".";
-                }
+                if (roomId == null)
+                    return "";
                 else
-                {
-                    return patient.FirstName + " " + patient.LastName;
-                }
+                    return roomId;
             }
-        }
-        public string OperationRoom
-        {
-            get
+            set
             {
-                if (operationRoom == null)
-                {
-                    return ".";
-                }
-                else
-                {
-                    return operationRoom.name;
-                }
+                roomId = value;
+                OnPropertyChanged();
             }
         }
 
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged(string name)
+        protected virtual void OnPropertyChanged(string name = "")
         {
             if (PropertyChanged != null)
             {

@@ -5,21 +5,42 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:hospital.View.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="White" Width="250" Height="350">
-        <Label Content="Update medical record" HorizontalAlignment="Center" Margin="0,7,0,0" VerticalAlignment="Top" FontSize="18"/>
-        <Label Content="Username" HorizontalAlignment="Left" Margin="22,41,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cmbUsername" ItemsSource="{Binding Patients}" HorizontalAlignment="Left" Margin="112,45,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Choosen doctor" HorizontalAlignment="Left" Margin="22,84,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cmbDoctor" ItemsSource="{Binding Doctors}" HorizontalAlignment="Left" Margin="112,88,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Blood type" HorizontalAlignment="Left" Margin="22,124,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cmbBlood" ItemsSource="{Binding BloodTypes}" HorizontalAlignment="Left" Margin="112,128,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Allergens" HorizontalAlignment="Left" Margin="22,167,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtAllergens" HorizontalAlignment="Left" Margin="112,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="22"/>
-        <Label Content="Note" HorizontalAlignment="Left" Margin="22,198,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtNote" HorizontalAlignment="Left" Margin="33,224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="199" Height="81"/>
-        <Button x:Name="btnSubmit" Content="Submit" HorizontalAlignment="Left" Margin="192,319,0,0" VerticalAlignment="Top" Click="btnSubmit_Click"/>
-        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="33,320,0,0" VerticalAlignment="Top" Click="btnCancel_Click"/>
+            d:DesignHeight="530" d:DesignWidth="950">
+    <Grid Background="White">
+        <StackPanel>
+            <Border BorderBrush="gray" BorderThickness="2" Margin="0,40,0,0" Height="450" Width="750" CornerRadius="10">
+                <Grid>
+
+                    <Label FontSize="25" FontWeight="DemiBold" Margin="0,0,0,401" HorizontalAlignment="Center">Update medical record</Label>
+                    <Grid Width="742" Margin="2,45,2,10">
+
+                        <DockPanel>
+                            <Grid Width="370" DockPanel.Dock="Left" Height="389">
+                                <TextBlock FontSize="15" FontWeight="DemiBold" Width="60" Height="25" Margin="61,20,249,344">Patient</TextBlock>
+                                <ComboBox x:Name="cmbUsername" IsEnabled="False" ItemsSource="{Binding Patients}" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="223" Margin="63,45,0,0"/>
+                                <TextBlock FontSize="15" FontWeight="DemiBold" Height="25" Margin="66,92,179,272">Choosen doctor</TextBlock>
+                                <ComboBox x:Name="cmbDoctor" ItemsSource="{Binding Doctors}" HorizontalAlignment="Left" Margin="66,117,0,0" VerticalAlignment="Top" Width="220"/>
+                                <TextBlock FontSize="15" FontWeight="DemiBold" Height="25" Margin="66,164,221,200">Blood type</TextBlock>
+                                <ComboBox x:Name="cmbBlood" ItemsSource="{Binding BloodTypes}" HorizontalAlignment="Left" Margin="64,194,0,0" VerticalAlignment="Top" Width="222"/>
+                                <TextBlock FontSize="15" FontWeight="DemiBold" Height="25" Margin="66,241,221,123">Allergens</TextBlock>
+                                <TextBox x:Name="txtAllergens" HorizontalAlignment="Left" Margin="67,266,0,35" TextWrapping="Wrap" Width="219"/>
+                                <TextBlock x:Name="errUsername" Foreground="red" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="223" Margin="63,67,0,0"/>
+                                <TextBlock x:Name="errDoctor" Foreground="red" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="219" Margin="67,139,0,0"/>
+                                <TextBlock x:Name="errBlood" Foreground="red" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="222" Margin="64,216,0,0"/>
+                            </Grid>
+
+                            <Grid>
+                                <GroupBox DockPanel.Dock="Right" Header="Note" BorderThickness="1" Margin="10,20,60,100" BorderBrush="Gray" FontSize="20" >
+                                    <TextBox x:Name="txtNote" BorderThickness="0" AcceptsReturn="True" FontSize="13"></TextBox>
+                                </GroupBox>
+                                <Button x:Name="btnSubmit" Content="Update"  VerticalAlignment="Top" Height="26" Width="75" Click="btnSubmit_Click" Margin="237,328,60,0"/>
+                                <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Height="26" Click="btnCancel_Click" Margin="10,328,0,0"/>
+                            </Grid>
+                        </DockPanel>
+                    </Grid>
+                </Grid>
+            </Border>
+        </StackPanel>
 
     </Grid>
 </UserControl>

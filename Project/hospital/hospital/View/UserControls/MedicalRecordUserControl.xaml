@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="hospital.View.UserControls.MedicalRecordUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:hospital.View.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="530" d:DesignWidth="950">
+    <Grid Background="White">
+        <StackPanel>
+            <Border BorderBrush="gray" BorderThickness="2" Margin="0,40,0,0" Height="450" Width="750" CornerRadius="10">
+                <Grid>
+                    <Button x:Name="btnBack" Margin="10,5" Width="50" Height="30" Background="white"  BorderBrush="Transparent" HorizontalAlignment="left" VerticalAlignment="top" Click="btnBack_Click">
+                        <Image Source="../../Resources/Images/back.png"></Image>
+                    </Button>
+                    <Label FontSize="25" FontWeight="DemiBold" Margin="0,0,0,401" HorizontalAlignment="Center">Medical record</Label>
+                    <Grid Height="402" Width="742">
+                        <DockPanel>
+                            <GroupBox DockPanel.Dock="Left" Header="General Information" Margin="10" BorderThickness="1" BorderBrush="Gray" FontSize="20" HorizontalAlignment="Left" Width="371">
+                                <Grid>
+                                    <TextBlock TextWrapping="Wrap" Text="First name" FontSize="15" FontWeight="DemiBold" Margin="40,27,237,296"/>
+                                    <TextBlock TextWrapping="Wrap" Text="Last name" FontSize="15" FontWeight="DemiBold" Margin="198,27,79,296"/>
+                                    <TextBox  x:Name="txtFirstName" IsEnabled="false" TextWrapping="Wrap" Height="24" Width="120" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="40,52,199,272"/>
+                                    <TextBox  x:Name="txtLastName" IsEnabled="false" TextWrapping="Wrap" Height="24" Width="120" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="198,52,41,272"/>
+                                    <TextBlock TextWrapping="Wrap" Text="Phone number" FontSize="15" FontWeight="DemiBold" Margin="40,98,211,223"/>
+                                    <TextBlock TextWrapping="Wrap" Text="ID" FontSize="15" FontWeight="DemiBold" Margin="198,98,79,224"/>
+                                    <TextBox  x:Name="txtPhone" IsEnabled="false" TextWrapping="Wrap" Height="24" Width="120" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="40,124,199,200"/>
+                                    <TextBox  x:Name="txtId" IsEnabled="false" TextWrapping="Wrap" Height="24" Width="120" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="198,124,41,200"/>
+                                    <TextBlock TextWrapping="Wrap" Text="Choosen doctor" FontSize="15" FontWeight="DemiBold" Margin="40,169,199,151"/>
+                                    <TextBox  x:Name="txtDoctor" IsEnabled="false" TextWrapping="Wrap" Height="24" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="40,197,41,127"/>
+                                    <TextBlock TextWrapping="Wrap" Text="Record ID" FontSize="15" FontWeight="DemiBold" Margin="40,243,211,77"/>
+                                    <TextBox  x:Name="txtRecordId" IsEnabled="false" TextWrapping="Wrap" Height="24" Width="120" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="198,243,41,81"/>
+                                    <TextBlock TextWrapping="Wrap" Text="Date of Birth" FontSize="15" FontWeight="DemiBold" Margin="40,290,211,29"/>
+                                    <TextBox  x:Name="txtDate" TextWrapping="Wrap" IsEnabled="false" Height="24" Width="120" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="198,290,41,34"/>
+                                </Grid>
+                            </GroupBox>
+                            <GroupBox DockPanel.Dock="Top" Header="Medical Information" Margin="10" BorderThickness="1" BorderBrush="Gray" FontSize="20" VerticalAlignment="Top" Width="330" Height="200">
+                                <Grid>
+                                    <TextBlock TextWrapping="Wrap" Height="25" Text="Blood type" FontSize="15" FontWeight="DemiBold" Margin="30,16,209,125"/>
+                                    <TextBox  x:Name="txtBlood" TextWrapping="Wrap" IsEnabled="false" Height="24" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="149,17,30,125"/>
+                                    <TextBlock TextWrapping="Wrap" Height="25" Text="Allergens" FontSize="15" FontWeight="DemiBold" Margin="30,58,209,83"/>
+                                    <ListBox x:Name="listAllergens" Margin="30,83,30,10" FontSize="13"/>
+                                </Grid>
+                            </GroupBox>
+                            <GroupBox DockPanel.Dock="Right" Header="Note" BorderThickness="1" Margin="10" BorderBrush="Gray" FontSize="20" VerticalAlignment="Top" Width="330" Height="162">
+                                <TextBox x:Name="txtNote" IsEnabled="false" AcceptsReturn="True" BorderThickness="0" FontSize="13"></TextBox>
+                            </GroupBox>
+                        </DockPanel>
+                    </Grid>
+                </Grid>
+            </Border>
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>

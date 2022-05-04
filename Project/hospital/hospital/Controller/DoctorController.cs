@@ -17,16 +17,10 @@ namespace Controller
         {
             doctorService = _service;
         }
-        public DoctorController() { }
 
         public ObservableCollection<Doctor> GetDoctors()
         {
             return doctorService.GetDoctors();
-        }
-        
-        public ObservableCollection<Doctor> GetGeneralPractitioners()
-        {
-            throw new NotImplementedException();
         }
 
         public Doctor getByName(string name)
@@ -38,6 +32,16 @@ namespace Controller
         public Doctor GetByUsername(string username)
         {
             return doctorService.GetByUsername(username);
+        }
+
+        public void addPatientToDoctorsList(string patientId, string doctorUsername)
+        {
+            doctorService.addPatientToDoctorsList(patientId, doctorUsername);
+        }
+
+        public void addOrdinationToDoctor(string doctorUsername, string ordinationId)
+        {
+            doctorService.addOrdinationToDoctor(doctorUsername, ordinationId);
         }
     }
 }

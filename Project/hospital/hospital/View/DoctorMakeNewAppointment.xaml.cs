@@ -13,6 +13,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using hospital.Controller;
+using hospital.Model;
 
 namespace hospital.View.UserControls
 {
@@ -25,6 +27,8 @@ namespace hospital.View.UserControls
         private AppointmentController ac;
         private PatientController pc;
         private RoomController rc;
+        private UserController uc;
+        private ScheduledBasicRenovationController sbrc;
 
         public Doctor loggedInDoctor;
         public Patient selectedPatient;
@@ -36,11 +40,13 @@ namespace hospital.View.UserControls
             ac = app.appointmentController;
             pc = app.patientController;
             rc = app.roomController;
+            uc = app.userController;
+            sbrc = app.scheduledBasicRenovationController;
             
             cmbPatients.ItemsSource = pc.FindAll();
-            cmbOpRoom.ItemsSource = rc.FindAll();
-            loggedInDoctor = dc.GetDoctors().First<Doctor>(); //za sad zakucamo
-            if (loggedInDoctor.Specialization == Model.Specialization.general)
+            cmbOpRoom.ItemsSource = rc.FindAll();//dodati ovde proveru da izlistava samo "operation" sale
+            loggedInDoctor = dc.GetByUsername(uc.CurentLoggedUser.Username);
+            if (loggedInDoctor.Specialization == Specialization.general)
                 cbOperation.IsEnabled = false;
             this.DataContext = this;
         }
@@ -57,7 +63,7 @@ namespace hospital.View.UserControls
             {
                 DateTime selectedDate = (DateTime)date.SelectedDate;
                 selectedPatient = (Patient)cmbPatients.SelectedItem;
-                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor(selectedDate, loggedInDoctor.Username);
+                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor(selectedDate, loggedInDoctor.Username, cmbPatients.Text);
             }
         }
 
@@ -66,12 +72,28 @@ namespace hospital.View.UserControls
             if (appointmentTable.SelectedIndex != -1 && selectedPatient != null)
             {
                 Appointment selectedAppointment = (Appointment)appointmentTable.SelectedItem;
-                selectedAppointment.Patient = selectedPatient;
+                selectedAppointment.PatientUsername = selectedPatient.Username;
                 selectedAppointment.Description = tbDescription.Text;
                 if (cbOperation.IsChecked == true && cmbOpRoom.SelectedIndex != -1 && loggedInDoctor.Specialization != Specialization.general)
-                    selectedAppointment.operationRoom = (Room)cmbOpRoom.SelectedItem;
-                ac.CreateAppointment(selectedAppointment);
-                this.Close();
+                    selectedAppointment.RoomId = ((Room)cmbOpRoom.SelectedItem).id;
+                else
+                    selectedAppointment.RoomId = loggedInDoctor.OrdinationId;
+
+                List<ScheduledBasicRenovation> renovationList = sbrc.FindAll();
+                bool canMake = true;
+                foreach(ScheduledBasicRenovation renovation in renovationList)
+                {
+                    if(renovation._Room.id == selectedAppointment.RoomId && renovation._Interval._Start < selectedAppointment.StartTime && renovation._Interval._End > selectedAppointment.StartTime)
+                    {
+                        MessageBox.Show("Invalid time because of renovations");
+                        canMake = false;
+                    }
+                }
+                if (canMake)
+                {
+                    ac.CreateAppointment(selectedAppointment);
+                    this.Close();
+                }
             }
         }
 

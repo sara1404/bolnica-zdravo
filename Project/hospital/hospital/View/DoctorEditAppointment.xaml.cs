@@ -1,4 +1,5 @@
 ﻿using Controller;
+using hospital.Model;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using hospital.Controller;
 
 namespace hospital.View
 {
@@ -24,6 +26,8 @@ namespace hospital.View
     {
         private AppointmentController ac;
         private RoomController rc;
+        private ScheduledBasicRenovationController sbrc;
+
         private Appointment selectedAppointment;
         public DoctorEditAppointment()
         {
@@ -31,16 +35,17 @@ namespace hospital.View
             App app = Application.Current as App;
             ac = app.appointmentController;
             rc = app.roomController;
+            sbrc = app.scheduledBasicRenovationController;
             this.DataContext = this;
             foreach (Window window in Application.Current.Windows)
             {
                 if (window.GetType() == typeof(DoctorAppointmentsWindow))
                 {
                     selectedAppointment = (window as DoctorAppointmentsWindow).Table.SelectedItem as Appointment;
-                    tbPatient.Text = selectedAppointment.patient.ToString(); //moze i a.PatientName()
+                    tbPatient.Text = selectedAppointment.PatientUsername; // changed because of changes in the model 
                     date.SelectedDate = selectedAppointment.StartTime;
                     tbDescription.Text = selectedAppointment.Description;
-                    if (selectedAppointment.operationRoom != null)
+                    if (rc.FindRoomById(selectedAppointment.RoomId) != null && rc.FindRoomById(selectedAppointment.RoomId)._Purpose == "operation") //Znaci mora ovako purpose da se zove
                     {
                         cmbOpRoom.ItemsSource = rc.FindAll();
                         //cmbOpRoom.SelectedItem = (Room)selectedAppointment.operationRoom;
@@ -57,7 +62,7 @@ namespace hospital.View
         {
             if (date.SelectedDate != null)
             {
-                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)date.SelectedDate, selectedAppointment.doctor.Username);
+                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)date.SelectedDate, selectedAppointment.DoctorUsername, tbPatient.Text);
             }
         }
 
@@ -69,9 +74,23 @@ namespace hospital.View
                 Appointment updatedAppointment = (Appointment)appointmentTable.SelectedItem;
                 updatedAppointment.Description = tbDescription.Text;
                 if (cmbOpRoom.SelectedIndex != -1)
-                    updatedAppointment.operationRoom = (Room)cmbOpRoom.SelectedItem;
-                ac.UpdateAppointment(selectedAppointment, updatedAppointment);
-                this.Close();
+                    updatedAppointment.RoomId = ((Room)cmbOpRoom.SelectedItem).id;
+
+                List<ScheduledBasicRenovation> renovationList = sbrc.FindAll();
+                bool canMake = true;
+                foreach (ScheduledBasicRenovation renovation in renovationList)
+                {
+                    if (renovation._Room.id == selectedAppointment.RoomId && renovation._Interval._Start < updatedAppointment.StartTime && renovation._Interval._End > updatedAppointment.StartTime)
+                    {
+                        MessageBox.Show("Invalid time because of renovations");
+                        canMake = false;
+                    }
+                }
+                if (canMake)
+                {
+                    ac.UpdateAppointment(selectedAppointment, updatedAppointment);
+                    this.Close();
+                }
             }
         }
 

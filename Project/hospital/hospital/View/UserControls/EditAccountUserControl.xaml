@@ -5,28 +5,54 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:hospital.View.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="White" Width="250" Height="300">
-        <Label Content="Firstname" HorizontalAlignment="Left" Margin="22,41,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtFirstName" HorizontalAlignment="Left" Margin="102,47,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
-        <Button x:Name="btnSubmit" Content="Submit" HorizontalAlignment="Left" Margin="180,270,0,0" VerticalAlignment="Top" Click="btnSubmit_Click"/>
-        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="20,270,0,0" VerticalAlignment="Top" Click="btnCancel_Click"/>
-        <Label Content="Surname" HorizontalAlignment="Left" Margin="24,72,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtSurname" HorizontalAlignment="Left" Margin="102,76,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
-        <Label Content="Username" HorizontalAlignment="Left" Margin="24,104,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Margin="102,108,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
-        <Label Content="Email" HorizontalAlignment="Left" Margin="24,0,0,0" VerticalAlignment="Center"/>
-        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Margin="102,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="120" TextChanged="TextBox_TextChanged"/>
-        <Label Content="ID" HorizontalAlignment="Left" Margin="24,168,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtId" HorizontalAlignment="Left" Margin="102,172,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
-        <Label Content="Phone" HorizontalAlignment="Left" Margin="24,200,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtPhone" HorizontalAlignment="Left" Margin="102,204,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
-        <Label Content="Create account" HorizontalAlignment="Center" Margin="0,7,0,0" VerticalAlignment="Top" FontSize="18"/>
-        <TextBlock x:Name="errFirstname" HorizontalAlignment="Left" Margin="102,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="13" Foreground="#FFF70C0C"/>
-        <TextBlock x:Name="errSurname" HorizontalAlignment="Left" Margin="102,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="13" Foreground="#FFF70C0C"/>
-        <TextBlock x:Name="errUsername" HorizontalAlignment="Left" Margin="102,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="13" Foreground="#FFF70C0C"/>
-        <TextBlock x:Name="errEmail" HorizontalAlignment="Left" Margin="102,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="13" Foreground="#FFF70C0C"/>
-        <TextBlock x:Name="errId" HorizontalAlignment="Left" Margin="102,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="13" Foreground="#FFF70C0C"/>
-        <TextBlock x:Name="errPhone" HorizontalAlignment="Left" Margin="102,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Height="13" Foreground="#FFF70C0C"/>
+             d:DesignHeight="530" d:DesignWidth="950">
+    <Grid Background="White">
+        <StackPanel>
+            <Border BorderBrush="gray" BorderThickness="2" Margin="0,40,0,0" Height="450" Width="750" CornerRadius="10">
+                <StackPanel>
+                    <Label FontSize="25" FontWeight="DemiBold" Margin="0,0,0,0" HorizontalAlignment="Center">Update account</Label>
+                    <Grid Height="402" Width="749">
+                        <TextBlock TextWrapping="Wrap" Text="First name" FontSize="15" Margin="69,57,598,325" FontWeight="DemiBold"/>
+                        <TextBox  x:Name="txtFirstName" TextWrapping="Wrap"  Margin="71,77,546,301" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" TextChanged="txtFirstName_TextChanged"/>
+                        <TextBlock TextWrapping="Wrap" Text="Last name" FontSize="15" Margin="242,55,425,327" FontWeight="DemiBold"/>
+                        <TextBox x:Name="txtLastName" Height="25" TextWrapping="Wrap" Margin="242,76,375,301" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" TextChanged="txtLastName_TextChanged"/>
+
+
+                        <TextBlock TextWrapping="Wrap" Text="Phone number" FontSize="15" Margin="68,118,570,264" FontWeight="DemiBold"/>
+                        <TextBlock TextWrapping="Wrap" Text="ID" FontSize="15" Margin="244,118,422,264" FontWeight="DemiBold"/>
+                        <TextBox x:Name="txtPhone" TextWrapping="Wrap" Margin="71,142,546,236" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" TextChanged="txtPhone_TextChanged"/>
+                        <TextBox  x:Name="txtId" Height="25" TextWrapping="Wrap" Margin="244,142,373,235" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" TextChanged="txtId_TextChanged"/>
+
+                        <TextBlock TextWrapping="Wrap" Text="Email" FontSize="15" Margin="68,185,598,197" FontWeight="DemiBold"/>
+                        <TextBox x:Name="txtEmail" TextWrapping="Wrap" Margin="69,205,373,173" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" TextChanged="txtEmail_TextChanged"/>
+                        <TextBlock TextWrapping="Wrap" Text="Gender" FontSize="15" Margin="69,252,596,130" FontWeight="DemiBold"/>
+                        <RadioButton x:Name="radioMale" Content="Male" HorizontalAlignment="Left" Margin="193,255,0,0" FontWeight="DemiBold" VerticalAlignment="Top"/>
+                        <RadioButton x:Name="radioFemale" Content="Female" HorizontalAlignment="Left" Margin="286,256,0,0" FontWeight="DemiBold" VerticalAlignment="Top"/>
+                        <TextBlock TextWrapping="Wrap" Text="Date of Birth" FontSize="15" Margin="68,299,570,83" FontWeight="DemiBold"/>
+                        <DatePicker x:Name="txtDate" HorizontalAlignment="Left" Margin="233,297,0,0" VerticalAlignment="Top" Width="141" SelectedDateChanged="txtDate_SelectedDateChanged"/>
+
+                        <Image Source="../../Resources/Images/account_100x100.png" Width="100" Margin="514,39,135,269"/>
+
+                        <Button x:Name="btnSubmit" Content="Update" Margin="600,348,73,0" VerticalAlignment="Top" Height="26" Width="75" Click="btnSubmit_Click"/>
+                        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="460,348,0,0" VerticalAlignment="Top" Width="75" Height="26" Click="btnCancel_Click"/>
+                        <TextBlock TextWrapping="Wrap" Text="Username" FontSize="15" Margin="440,170,225,212" FontWeight="DemiBold"/>
+                        <TextBox x:Name="txtUsername" Height="25" TextWrapping="Wrap" Margin="545,170,72,207" Text="" BorderBrush="Black" BorderThickness="1" TextChanged="txtUsername_TextChanged"/>
+                        <TextBlock TextWrapping="Wrap" Text="Blocked" FontSize="15" Margin="440,269,225,113" FontWeight="DemiBold"/>
+                        <TextBlock TextWrapping="Wrap" Text="User role" FontSize="15" Margin="440,223,225,159" FontWeight="DemiBold"/>
+                        <ComboBox x:Name="cmbRole" ItemsSource="{Binding Roles}" Height="23" HorizontalAlignment="Left" Margin="545,223,0,0" VerticalAlignment="Top" Width="132"/>
+                        <CheckBox x:Name="cbBlocked" Content="" HorizontalAlignment="Left" Margin="545,272,0,0" VerticalAlignment="Top" Width="19" Height="17"/>
+                        <TextBlock x:Name="errFristname" Foreground="red" HorizontalAlignment="Left" Margin="71,102,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="132"/>
+                        <TextBlock x:Name="errLastname" Foreground="red" HorizontalAlignment="Left" Margin="244,101,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="132"/>
+                        <TextBlock x:Name="errPhone" Foreground="red" HorizontalAlignment="Left" Margin="71,166,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="132"/>
+                        <TextBlock x:Name="errId" Foreground="red" HorizontalAlignment="Left" Margin="244,167,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="132"/>
+                        <TextBlock x:Name="errEmail" Foreground="red" HorizontalAlignment="Left" Margin="71,230,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="305"/>
+                        <TextBlock x:Name="errUsername" Foreground="red" HorizontalAlignment="Left" Margin="545,195,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="164"/>
+                        <TextBlock x:Name="errDate" Foreground="red" HorizontalAlignment="Left" Margin="238,321,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="132"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+
     </Grid>
 </UserControl>

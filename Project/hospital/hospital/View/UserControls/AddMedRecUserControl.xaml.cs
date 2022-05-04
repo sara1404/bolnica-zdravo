@@ -38,7 +38,20 @@ namespace hospital.View.UserControls
             this.DataContext = this;
             App app = Application.Current as App;
             pc = app.patientController;
-            Patients = pc.FindAll();
+            //ako ima vec karton ne moze da pravi jos jedan
+            ObservableCollection<Patient>  p = pc.FindAll();
+            Patients = new ObservableCollection<Patient>();
+            foreach (Patient pat in p)
+            {
+                if (pat.RecordId == 0)
+                {
+                    Patients.Add(pat);
+                }
+            }
+            if (Patients.Count == 0)
+            {
+                errUsername.Text = "All patients have record";
+            }
             dc = app.doctorController;
             mc = app.mediicalRecordsController;
             Doctors = dc.GetDoctors();
@@ -54,7 +67,7 @@ namespace hospital.View.UserControls
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
             if (isCorected()) { 
-                mc.Create(new MedicalRecord(pc.FindById(cmbUsername.Text), txtAllergens.Text, dc.getByName(cmbDoctor.Text), getBloodType(cmbBlood.Text), txtNote.Text));
+                mc.Create(new MedicalRecord(cmbUsername.Text, txtAllergens.Text, cmbDoctor.Text, getBloodType(cmbBlood.Text), txtNote.Text));
                 this.Visibility=Visibility.Collapsed;
             }
         }
@@ -140,7 +153,7 @@ namespace hospital.View.UserControls
 
             return (isCorrected[0] && isCorrected[1] && isCorrected[2]);
         }
-
+       
        
     }
 }

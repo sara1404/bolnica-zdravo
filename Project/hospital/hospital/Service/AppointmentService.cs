@@ -200,7 +200,7 @@ namespace Service
             if (allTimeSlots.Count == 0)
             {
                 // if that doctor is too busy than expand the timeframe
-                DateTime startDatePrev = startDate.CompareTo(DateTime.Today.AddDays(-4)) > 0 ? DateTime.Today.AddDays(1) : startDate.AddDays(-4);
+                DateTime startDatePrev = startDate.CompareTo(DateTime.Today.AddDays(-4)) < 0 ? DateTime.Today.AddDays(1) : startDate.AddDays(-4);
                 DateTime endDatePrev = startDate;
                 for (DateTime dayIt = startDatePrev; dayIt <= endDatePrev; dayIt = dayIt.AddDays(1))
                 {

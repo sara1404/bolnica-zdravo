@@ -64,6 +64,10 @@ namespace Model
             }
             this.equipment.Add(equipment);
         }
-        
+
+        public override string ToString()
+        {
+            return _Name;
+        }
     }
 }

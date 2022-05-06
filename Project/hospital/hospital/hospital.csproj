@@ -67,14 +67,17 @@
     <Compile Include="Controller\DoctorController.cs" />
     <Compile Include="Controller\MedicineController.cs" />
     <Compile Include="Controller\NotificationController.cs" />
+    <Compile Include="Controller\ScheduledAdvancedRenovationController.cs" />
     <Compile Include="Controller\ScheduledBasicRenovationController.cs" />
     <Compile Include="Controller\ScheduledRelocationController.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="FileHandler\MedicalRecordFileHandler.cs" />
     <Compile Include="FileHandler\NotificationFileHandler.cs" />
+    <Compile Include="FileHandler\ScheduledAdvancedRenovationFileHandler.cs" />
     <Compile Include="FileHandler\ScheduledBasicRenovationFIleHandler.cs" />
     <Compile Include="FileHandler\ScheduledRelocationFileHandler.cs" />
     <Compile Include="FileHandler\UserFileHandler.cs" />
+    <Compile Include="Model\ScheduledAdvancedRenovation.cs" />
     <Compile Include="Model\ScheduledBasicRenovation.cs" />
     <Compile Include="Model\TimeInterval.cs" />
     <Compile Include="Model\Notification.cs" />
@@ -88,6 +91,7 @@
     <Compile Include="Repository\NotificationRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
     <Compile Include="Repository\RoomRepository.cs" />
+    <Compile Include="Repository\ScheduledAdvancedRenovationRepository.cs" />
     <Compile Include="Repository\ScheduledBasicRenovationRepository.cs" />
     <Compile Include="Repository\ScheduledRelocationRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
@@ -98,12 +102,17 @@
     <Compile Include="Service\NotificationService.cs" />
     <Compile Include="Service\PatientService.cs" />
     <Compile Include="Service\RoomService.cs" />
+    <Compile Include="Service\ScheduledAdvancedRenovationService.cs" />
     <Compile Include="Service\ScheduledBasicRenovationService.cs" />
     <Compile Include="Service\ScheduledRelocationService.cs" />
+    <Compile Include="Service\SystemTimer.cs" />
     <Compile Include="Service\TimeSchedulerService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="View\AddRoomWindow.xaml.cs">
       <DependentUpon>AddRoomWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AdvancedRenovationWindow.xaml.cs">
+      <DependentUpon>AdvancedRenovationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\BasicRenovationWindow.xaml.cs">
       <DependentUpon>BasicRenovationWindow.xaml</DependentUpon>
@@ -227,6 +236,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\AdvancedRenovationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\BasicRenovationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -470,6 +483,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Data\ScheduledBasicRenovationData.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Data\ScheduledAdvancedRenovationData.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

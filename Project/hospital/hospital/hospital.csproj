@@ -195,6 +195,9 @@
     <Compile Include="View\UserControls\HandlingAccountUserControl.xaml.cs">
       <DependentUpon>HandlingAccountUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\HandlingEmergencyUserControl.xaml.cs">
+      <DependentUpon>HandlingEmergencyUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserControls\HandlingMedRecordUserControl.xaml.cs">
       <DependentUpon>HandlingMedRecordUserControl.xaml</DependentUpon>
     </Compile>
@@ -351,6 +354,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UserControls\HandlingEmergencyUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UserControls\HandlingMedRecordUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -470,6 +477,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Data\ScheduledBasicRenovationData.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\ambulance.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\alert.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

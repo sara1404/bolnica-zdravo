@@ -116,6 +116,10 @@ namespace Controller
         {
             return appointmentService.tryChangeAppointment(oldAppointment, newDate, newTime);
         }
+        public void tryMakeEmergencyAppointment(string patientUsername, Specialization requiredSpecialization,bool isOperation)
+        {
+            appointmentService.tryMakeEmergencyAppointment(patientUsername, requiredSpecialization,isOperation);
+        }
         //------------------------------------------------
 
     }

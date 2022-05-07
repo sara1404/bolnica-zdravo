@@ -9,6 +9,9 @@ using hospital.Controller;
 using hospital.Repository;
 using hospital.Service;
 using System.Threading;
+using ToastNotifications;
+using ToastNotifications.Position;
+using ToastNotifications.Lifetime;
 
 namespace hospital
 {
@@ -32,6 +35,8 @@ namespace hospital
         public ScheduledBasicRenovationController scheduledBasicRenovationController { get; set; }
         public MedicineController medicineController { get; set; }
 
+        public Notifier Notifier { get; set; }
+
         Thread relocationThread;
         Thread renovationThread;
         public App()
@@ -44,8 +49,13 @@ namespace hospital
             NotificationService notificationService = new NotificationService(notificationRepository);
             notificationController = new NotificationController(notificationService);
 
+            DoctorRepository doctorRepository = new DoctorRepository();
+            DoctorService doctorService = new DoctorService(doctorRepository);
+            doctorController = new DoctorController(doctorService);
+
             roomRepository = new RoomRepository();
-            RoomService roomService = new RoomService(roomRepository);
+            AppointmentRepository appointmentRepository = new AppointmentRepository();
+            RoomService roomService = new RoomService(roomRepository, appointmentRepository);
             roomController = new RoomController(roomService);
 
             PatientRepository patientRepository = new PatientRepository();
@@ -53,16 +63,14 @@ namespace hospital
             PatientService patientService = new PatientService(patientRepository, medicalRecordsRepository, userRepository);
             patientController = new PatientController(patientService, userService);
 
-            AppointmentRepository appointmentRepository = new AppointmentRepository();
-            DoctorRepository doctorRepository = new DoctorRepository();
-            AppointmentService appointmentService = new AppointmentService(appointmentRepository, doctorRepository, userController,notificationRepository);
+
+            AppointmentService appointmentService = new AppointmentService(appointmentRepository, doctorRepository, userController, notificationRepository, doctorService,roomService);
             appointmentController = new AppointmentController(appointmentService);
 
             MedicalRecordsService medicalRecordsService = new MedicalRecordsService(medicalRecordsRepository);
             mediicalRecordsController = new MedicalRecordsController(medicalRecordsService);
 
-            DoctorService doctorService = new DoctorService(doctorRepository);
-            doctorController = new DoctorController(doctorService);
+           
 
 
 
@@ -92,6 +100,21 @@ namespace hospital
 
             renovationThread = new Thread(scheduledBasicRenovationService.renovationTracker);
             renovationThread.Start();
+
+            Notifier = new Notifier(cfg =>
+            {
+                cfg.PositionProvider = new WindowPositionProvider(
+                    parentWindow: Application.Current.MainWindow,
+                    corner: Corner.TopRight,
+                    offsetX: 10,
+                    offsetY: 10);
+
+                cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+                    notificationLifetime: TimeSpan.FromSeconds(3),
+                    maximumNotificationCount: MaximumNotificationCount.FromCount(5));
+
+                cfg.Dispatcher = Application.Current.Dispatcher;
+            });
         }
 
 

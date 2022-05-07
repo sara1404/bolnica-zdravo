@@ -38,5 +38,19 @@ namespace Service
         {
             doctorRepository.addOrdinationToDoctor(doctorUsername, ordinationId);
         }
+
+        public List<Doctor> GetDoctorsBySpecialization(Specialization requiredSpecialization)
+        {
+            List<Doctor> requiredDoctors = new List<Doctor>();
+
+            foreach(Doctor doctor in doctorRepository.FindAll())
+            {
+                if(doctor.Specialization == requiredSpecialization)
+                {
+                    requiredDoctors.Add(doctor);
+                }
+            }
+            return requiredDoctors;
+        }
     }
 }

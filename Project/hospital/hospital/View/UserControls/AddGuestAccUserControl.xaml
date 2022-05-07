@@ -5,19 +5,30 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:hospital.View.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="White" Width="250" Margin="275,75,275,85">
-        <Label Content="First name" HorizontalAlignment="Left" Margin="16,51,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtFirstName" HorizontalAlignment="Left" Margin="96,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
-        <Label Content="Surname" HorizontalAlignment="Left" Margin="18,82,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtSurname"  HorizontalAlignment="Left" Margin="96,86,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
-        <Label Content="Username" HorizontalAlignment="Left" Margin="18,114,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Margin="96,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"  TextChanged="TextBox_TextChanged"/>
-        <Label Content="Create Guest account" HorizontalAlignment="Center" Margin="27,7,28,0" VerticalAlignment="Top" FontSize="18" Width="195"/>
-        <TextBlock x:Name="errFirstname" HorizontalAlignment="Left" Margin="96,70,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="154" Foreground="#FFF71212" Height="16"/>
-        <TextBlock x:Name="errSurname" HorizontalAlignment="Left" Margin="97,101,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="153" Foreground="#FFF71212" Height="14"/>
-        <TextBlock x:Name="errUsername" HorizontalAlignment="Left" Margin="97,136,-1,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="154" Foreground="#FFF71212" Height="14"/>
-        <Button x:Name="btnRegister" Content="Register" HorizontalAlignment="Left" Margin="141,179,0,0" VerticalAlignment="Top" Width="75" Click="btnRegister_Click"/>
-        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="16,179,0,0" VerticalAlignment="Top" Width="75" Click="btnCancel_Click"/>
+             d:DesignHeight="530" d:DesignWidth="950">
+    <Grid Background="White">
+        <StackPanel Background="white">
+            <Border BorderBrush="gray" BorderThickness="2" Margin="0,40,0,0" Height="450" Width="450" CornerRadius="10">
+                <StackPanel>
+                    <Label FontSize="25" FontWeight="DemiBold" Margin="0,0,0,0" HorizontalAlignment="Center">Create guest account</Label>
+                    <Grid Height="400">
+                        <TextBlock FontSize="15" FontWeight="DemiBold" Height="25" Margin="75,34,266,341" RenderTransformOrigin="0.428,2.257"><Run Text="First name"/></TextBlock>
+                        <TextBox x:Name="txtFirstname" Height="25" Margin="239,34,75,340"/>
+                        <TextBlock FontSize="15" FontWeight="DemiBold" Height="25" Margin="78,94,266,281" Text="Last name"/>
+                        <TextBox x:Name="txtLastname" Height="25" Margin="239,95,75,280"/>
+                        <TextBlock FontSize="15" FontWeight="DemiBold" Height="25" Margin="78,156,298,219" Text="Username"/>
+                        <TextBox x:Name="txtUsername" Height="25" Margin="239,156,75,219"/>
+
+
+                        <TextBlock x:Name="errFirstname" Height="20" Width="132" Foreground="red" Margin="239,59,75,321"></TextBlock>
+                        <TextBlock x:Name="errLastname" Height="20" Width="132" Foreground="red" Margin="241,120,73,260"></TextBlock>
+                        <TextBlock x:Name="errUsername" Height="20" Width="132" Foreground="red" Margin="239,181,75,199"></TextBlock>
+
+                        <Button x:Name="btnSubmit" Content="Create"  VerticalAlignment="Top" Height="26" Width="75"  Margin="296,360,75,0" Click="btnSubmit_Click"/>
+                        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Height="26" Margin="78,360,0,0" Click="btnCancel_Click"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </StackPanel>
     </Grid>
 </UserControl>

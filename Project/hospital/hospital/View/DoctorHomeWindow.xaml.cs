@@ -121,6 +121,11 @@ namespace hospital.View
             new DoctorTherapyWindow().Show();
         }
 
+        private void Vacation_Click(object sender, RoutedEventArgs e)
+        {
+            new DoctorVacationWindow().Show();
+        }
+
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
             uc.CurentLoggedUser = null;

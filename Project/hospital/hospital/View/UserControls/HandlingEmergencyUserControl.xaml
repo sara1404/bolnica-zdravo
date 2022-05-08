@@ -36,5 +36,6 @@
             </Border>
         </StackPanel>
         <local:AddGuestAccUserControl x:Name="addGuestuserControl" Visibility="Collapsed" Height="530"/>
+        <local:SuggestedDelayUserControl x:Name="suggestedDelayUserControl" Visibility="Collapsed" Height="530"/>
     </Grid>
 </UserControl>

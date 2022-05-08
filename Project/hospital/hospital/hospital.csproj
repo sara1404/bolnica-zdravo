@@ -67,16 +67,20 @@
     <Compile Include="Controller\DoctorController.cs" />
     <Compile Include="Controller\MedicineController.cs" />
     <Compile Include="Controller\NotificationController.cs" />
+    <Compile Include="Controller\OrderController.cs" />
     <Compile Include="Controller\ScheduledBasicRenovationController.cs" />
     <Compile Include="Controller\ScheduledRelocationController.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="Controller\VacationRequestController.cs" />
     <Compile Include="FileHandler\MedicalRecordFileHandler.cs" />
     <Compile Include="FileHandler\NotificationFileHandler.cs" />
+    <Compile Include="FileHandler\OrderFileHandler.cs" />
     <Compile Include="FileHandler\ScheduledBasicRenovationFIleHandler.cs" />
     <Compile Include="FileHandler\ScheduledRelocationFileHandler.cs" />
     <Compile Include="FileHandler\UserFileHandler.cs" />
+    <Compile Include="Model\Order.cs" />
     <Compile Include="FileHandler\VacationRequestFileHandler.cs" />
+
     <Compile Include="Model\ScheduledBasicRenovation.cs" />
     <Compile Include="Model\TimeInterval.cs" />
     <Compile Include="Model\Notification.cs" />
@@ -89,6 +93,7 @@
     <Compile Include="Repository\MedicalRecordsRepository.cs" />
     <Compile Include="Repository\MedicineRepository.cs" />
     <Compile Include="Repository\NotificationRepository.cs" />
+    <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
     <Compile Include="Repository\RoomRepository.cs" />
     <Compile Include="Repository\ScheduledBasicRenovationRepository.cs" />
@@ -100,6 +105,7 @@
     <Compile Include="Service\MedicalRecordsService.cs" />
     <Compile Include="Service\MedicineService.cs" />
     <Compile Include="Service\NotificationService.cs" />
+    <Compile Include="Service\OrderService.cs" />
     <Compile Include="Service\PatientService.cs" />
     <Compile Include="Service\RoomService.cs" />
     <Compile Include="Service\ScheduledBasicRenovationService.cs" />
@@ -215,8 +221,14 @@
     <Compile Include="View\UserControls\MedicalRecordUserControl.xaml.cs">
       <DependentUpon>MedicalRecordUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\OrderEquipmentUserControl.xaml.cs">
+      <DependentUpon>OrderEquipmentUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserControls\RemoveAppointementUserControl.xaml.cs">
       <DependentUpon>RemoveAppointementUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\SuggestedDelayUserControl.xaml.cs">
+      <DependentUpon>SuggestedDelayUserControl.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -382,7 +394,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UserControls\OrderEquipmentUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UserControls\RemoveAppointementUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\SuggestedDelayUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -495,9 +515,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\alert.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Data\VacationRequestData.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

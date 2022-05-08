@@ -93,11 +93,23 @@ namespace hospital.View
 
             handlingEmergencyUserControl.Visibility = Visibility.Collapsed;
             handlingEmergencyUserControl.addGuestuserControl.Visibility = Visibility.Collapsed;
+            handlingEmergencyUserControl.suggestedDelayUserControl.Visibility = Visibility.Collapsed;
+
+            orderEquipmentUserControl.Visibility = Visibility.Collapsed;
 
             btnhandlingAccount.BorderBrush = Brushes.Transparent;
             btnhandlingMedRecord.BorderBrush = Brushes.Transparent;
             btnAppointment.BorderBrush = Brushes.Transparent;
             btnEmergency.BorderBrush = Brushes.Transparent;
+            btnOrder.BorderBrush = Brushes.Transparent;
+        }
+
+        private void btnOrder_Click(object sender, RoutedEventArgs e)
+        {
+            CloseAllUserControl();
+            btnOrder.BorderBrush = (Brush)(new BrushConverter().ConvertFrom("#c8d8e4"));
+            btnOrder.BorderThickness = new Thickness(3, 0, 0, 0);
+            orderEquipmentUserControl.Visibility = Visibility.Visible;
         }
     }
 }

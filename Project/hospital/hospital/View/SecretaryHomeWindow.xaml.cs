@@ -93,6 +93,7 @@ namespace hospital.View
 
             handlingEmergencyUserControl.Visibility = Visibility.Collapsed;
             handlingEmergencyUserControl.addGuestuserControl.Visibility = Visibility.Collapsed;
+            handlingEmergencyUserControl.suggestedDelayUserControl.Visibility = Visibility.Collapsed;
 
             btnhandlingAccount.BorderBrush = Brushes.Transparent;
             btnhandlingMedRecord.BorderBrush = Brushes.Transparent;

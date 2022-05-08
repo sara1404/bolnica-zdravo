@@ -55,7 +55,7 @@ namespace hospital.View.UserControls
                 try
                 {
                     _appointmentController.tryMakeEmergencyAppointment(cmbPatient.Text, GetSpecialization(cmbSpecialization.Text),(bool)cbOperation.IsChecked);
-                    _notifier.ShowSuccess("asas");
+                    _notifier.ShowSuccess("Successfully scheduled an emergency.");
                 }catch(Exception ex)
                 {
                     err.Text = ex.Message;
@@ -136,7 +136,42 @@ namespace hospital.View.UserControls
 
         private void btnShowRec_Click(object sender, RoutedEventArgs e)
         {
+            
+            suggestedDelayUserControl.Visibility = Visibility.Visible;
 
+            List<Appointment> oldAppointments = _appointmentController.FindAppointmentsForCancelation();
+            PreviewAppointment(oldAppointments,true);
+            List<Appointment> newAppointments = _appointmentController.FindSuggestedAppointments();
+            PreviewAppointment(newAppointments,false);
+        }
+        private void PreviewAppointment(List<Appointment> appointments,bool isOld)
+        {
+            if(isOld)
+                for (int i = 1; i < appointments.Count+1; i++)
+                {
+                    SetOldValueOnButton("old" + i, appointments);
+                }
+            else
+                for (int i = 1; i < appointments.Count + 1; i++)
+                {
+                    SetOldValueOnButton("new" + i, appointments);
+                }
+        }
+
+        private void SetOldValueOnButton(string button, List<Appointment> appointments)
+        {
+            if (button == "old1")
+                suggestedDelayUserControl.old1.Text = "Patient: " + appointments[0].patientUsername + "\n" + "Doctor: " + appointments[0].doctorUsername + "\n" + appointments[0].StartTime;
+            else if (button == "old2")
+                suggestedDelayUserControl.old2.Text = "Patient: " + appointments[1].patientUsername + "\n" + "Doctor: " + appointments[1].doctorUsername + "\n" + appointments[1].StartTime;
+            else if (button == "old3")
+                suggestedDelayUserControl.old3.Text = "Patient: " + appointments[2].patientUsername + "\n" + "Doctor: " + appointments[2].doctorUsername + "\n" + appointments[2].StartTime;
+            else if (button == "new1")
+                suggestedDelayUserControl.new1.Text = "Patient: " + appointments[0].patientUsername + "\n" + "Doctor: " + appointments[0].doctorUsername + "\n" + appointments[0].StartTime;
+            else if (button == "new2")
+                suggestedDelayUserControl.new2.Text = "Patient: " + appointments[1].patientUsername + "\n" + "Doctor: " + appointments[1].doctorUsername + "\n" + appointments[1].StartTime;
+            else if (button == "new3")
+                suggestedDelayUserControl.new3.Text = "Patient: " + appointments[2].patientUsername + "\n" + "Doctor: " + appointments[2].doctorUsername + "\n" + appointments[2].StartTime;
         }
     }
 }

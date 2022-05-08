@@ -210,6 +210,9 @@
     <Compile Include="View\UserControls\RemoveAppointementUserControl.xaml.cs">
       <DependentUpon>RemoveAppointementUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\SuggestedDelayUserControl.xaml.cs">
+      <DependentUpon>SuggestedDelayUserControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -374,6 +377,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UserControls\SuggestedDelayUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Appointment.cs" />
@@ -483,6 +490,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\alert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\fast-forward.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

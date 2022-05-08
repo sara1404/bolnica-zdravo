@@ -101,7 +101,7 @@ namespace hospital.View
                     if (eq.quantity == 0) {
                         List<Equipment> equipTemp = fromRoomSelected.equipment.ToList();
                         equipTemp.Remove(eq);
-                        fromRoomSelected.equipment = new ConcurrentBag<Equipment>(equipTemp);
+                        fromRoomSelected.equipment = new List<Equipment>(equipTemp);
                     }
                 }
             }

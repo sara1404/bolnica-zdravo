@@ -10,10 +10,15 @@ namespace hospital.Service
     {
         public static Timer timer;
         private ScheduledAdvancedRenovationService scheduledAdvancedRenovationService;
+        private ScheduledBasicRenovationService scheduledBasicRenovationService;
+        private ScheduledRelocationService scheduledRelocationService;
 
-        public SystemTimer(ScheduledAdvancedRenovationService scheduledAdvancedRenovationService)
+        public SystemTimer(ScheduledAdvancedRenovationService scheduledAdvancedRenovationService, ScheduledBasicRenovationService scheduledBasicRenovationService,
+            ScheduledRelocationService scheduledRelocationService)
         {
             this.scheduledAdvancedRenovationService = scheduledAdvancedRenovationService;
+            this.scheduledBasicRenovationService = scheduledBasicRenovationService;
+            this.scheduledRelocationService = scheduledRelocationService;
             SetTimer();
         }
 
@@ -30,6 +35,8 @@ namespace hospital.Service
         private void FireScheduledTask(Object source, ElapsedEventArgs e)
         {
             scheduledAdvancedRenovationService.RenovationTracker();
+            scheduledBasicRenovationService.renovationTracker();
+            scheduledRelocationService.relocationTracker();
         }
     }
     

@@ -29,6 +29,14 @@ namespace Service
         public Room FindRoomByName(string name) {
             return roomRepository.FindRoomByName(name);
         }
+
+        public Room FindRoomByPurpose(string purpose) {
+            return roomRepository.FindRoomByPurpose(purpose);
+        }
+
+        public List<Equipment> FindEquipmentInRoom(Room room) {
+            return roomRepository.FindEquipmentInRoom(room);
+        }
         public ref ObservableCollection<Room> FindAll()
         {
             return ref roomRepository.FindAll();

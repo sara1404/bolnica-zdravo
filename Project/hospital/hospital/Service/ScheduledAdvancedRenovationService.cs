@@ -77,7 +77,13 @@ namespace hospital.Service
                             MergeRooms(renovation);
                         DeleteById(renovation._Id);
                     });
-
+                }
+                else if (renovation._Interval._Start.Date.CompareTo(now.Date) >= 0)
+                {
+                    App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                    {
+                        MoveEquipmentToWarehouse(renovation);
+                    });
                 }
             }
         }
@@ -95,5 +101,37 @@ namespace hospital.Service
             roomService.DeleteById(renovation.rooms[1].id);
             roomService.Create(renovation._Room);
         }
+
+        private void MoveEquipmentToWarehouse(ScheduledAdvancedRenovation renovation)
+        {
+            if (renovation.flag.Equals("split"))
+                MoveEquipmentToWarehouseWhenSplit(renovation);
+            else if (renovation.flag.Equals("merge"))
+                MoveEquipmentToWarehouseWhenMerge(renovation);
+        }
+
+        private void MoveEquipmentToWarehouseWhenSplit(ScheduledAdvancedRenovation renovation) {
+            foreach (Equipment eq in renovation._Room.equipment)
+            {
+                roomService.FindRoomByPurpose("warehouse").AddEquipment(eq);
+            }
+            renovation._Room.equipment.Clear();
+        }
+
+        private void MoveEquipmentToWarehouseWhenMerge(ScheduledAdvancedRenovation renovation) {
+            foreach (Equipment eq in renovation.rooms[0].equipment)
+            {
+                roomService.FindRoomByPurpose("warehouse").AddEquipment(eq);
+            }
+            foreach (Equipment eq in renovation.rooms[1].equipment)
+            {
+                roomService.FindRoomByPurpose("warehouse").AddEquipment(eq);
+            }
+            renovation.rooms[0].equipment.Clear();
+            renovation.rooms[1].equipment.Clear();
+        }
+
+
+      
     }
 }

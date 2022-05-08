@@ -35,8 +35,6 @@ namespace hospital
         public ScheduledAdvancedRenovationController scheduledAdvancedRenovationController { get; set; }
         public MedicineController medicineController { get; set; }
 
-        Thread relocationThread;
-        Thread renovationThread;
         public App()
         {
             UserRepository userRepository = new UserRepository();
@@ -93,13 +91,7 @@ namespace hospital
             scheduledBasicRenovationRepository.LoadRenovationData();
             scheduledAdvancedRenovationRepository.LoadRenovationData();
 
-            //relocationThread = new Thread(scheduledRelocationService.relocationTracker);
-            //relocationThread.Start();
-
-            //renovationThread = new Thread(scheduledBasicRenovationService.renovationTracker);
-            //renovationThread.Start();
-
-            SystemTimer systemTimer = new SystemTimer(scheduledAdvancedRenovationService);
+            SystemTimer systemTimer = new SystemTimer(scheduledAdvancedRenovationService, scheduledBasicRenovationService, scheduledRelocationService);
         }
 
 
@@ -110,8 +102,6 @@ namespace hospital
             scheduledRelocationRepository.WriteRelocationData();
             scheduledBasicRenovationRepository.WriteRenovationData();
             scheduledAdvancedRenovationRepository.WriteRenovationData();
-            //relocationThread.Abort();
-            //renovationThread.Abort();
         }
     }
 }

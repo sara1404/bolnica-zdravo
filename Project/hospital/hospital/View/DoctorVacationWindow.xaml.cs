@@ -56,13 +56,13 @@ namespace hospital.View
             {
                 VacationRequest newRequest = new VacationRequest((DateTime)dpStartDate.SelectedDate, (DateTime)dpEndDate.SelectedDate, (bool)cbHighPriority.IsChecked, tbNote.Text, uc.CurentLoggedUser.Username, -1);
                 vc.Create(newRequest);
-                MessageBox.Show("opravio ga majsstor HITNO");
+                MessageBox.Show("High priority vacation request sent!");
             }
             else if(canReserve == true && dpEndDate.SelectedDate != null && dpStartDate.SelectedDate != null && dpStartDate.SelectedDate < dpEndDate.SelectedDate)
             {
                 VacationRequest newRequest = new VacationRequest((DateTime)dpStartDate.SelectedDate, (DateTime)dpEndDate.SelectedDate, (bool)cbHighPriority.IsChecked, tbNote.Text, uc.CurentLoggedUser.Username, -1);
                 vc.Create(newRequest);
-                MessageBox.Show("opravio ga majsstor");
+                MessageBox.Show("Vacation request sent!");
             }
         }
 

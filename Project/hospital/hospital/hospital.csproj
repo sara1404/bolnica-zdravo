@@ -496,5 +496,8 @@
   <ItemGroup>
     <Resource Include="Resources\Images\alert.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Data\VacationRequestData.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

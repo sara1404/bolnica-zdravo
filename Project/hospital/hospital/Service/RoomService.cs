@@ -9,10 +9,12 @@ namespace Service
     public class RoomService
     {
         private readonly RoomRepository roomRepository;
+        private readonly AppointmentRepository _appointmentRepository;
 
-        public RoomService(RoomRepository roomRepository)
+        public RoomService(RoomRepository roomRepository, AppointmentRepository appointmentRepository)
         {
             this.roomRepository = roomRepository;
+            this._appointmentRepository = appointmentRepository;
         }
 
         public void Create(Room room)
@@ -48,5 +50,34 @@ namespace Service
             return roomRepository.DeleteById(id);
         }
 
+        public ObservableCollection<Room> FindAllOperationRooms()
+        {
+            ObservableCollection<Room> roomsForOperation = new ObservableCollection<Room>();
+            foreach (Room room in FindAll())
+            {
+                if(room.purpose == "operation")
+                {
+                    roomsForOperation.Add(room);
+                }
+            }
+            return roomsForOperation;
+        }
+        public Room FindRoomForOperationByTime(DateTime dateTime)
+        {
+            foreach(Room room in FindAllOperationRooms())
+            {
+                bool isBussy = false;
+                foreach(Appointment appointment in _appointmentRepository.FindAll())
+                {
+                    if (dateTime == appointment.StartTime && appointment.roomId == room.id)
+                    {
+                        isBussy = true;
+                        break;
+                    }
+                }
+                if (!isBussy) return room;
+            }
+            return null;
+        }
     }
 }

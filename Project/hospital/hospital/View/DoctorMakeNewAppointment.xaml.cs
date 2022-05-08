@@ -46,7 +46,7 @@ namespace hospital.View.UserControls
             cmbPatients.ItemsSource = pc.FindAll();
             cmbOpRoom.ItemsSource = rc.FindAll();//dodati ovde proveru da izlistava samo "operation" sale
             loggedInDoctor = dc.GetByUsername(uc.CurentLoggedUser.Username);
-            if (loggedInDoctor.Specialization == Specialization.general)
+            if (loggedInDoctor.Specialization == Specialization.General)
                 cbOperation.IsEnabled = false;
             this.DataContext = this;
         }
@@ -74,7 +74,7 @@ namespace hospital.View.UserControls
                 Appointment selectedAppointment = (Appointment)appointmentTable.SelectedItem;
                 selectedAppointment.PatientUsername = selectedPatient.Username;
                 selectedAppointment.Description = tbDescription.Text;
-                if (cbOperation.IsChecked == true && cmbOpRoom.SelectedIndex != -1 && loggedInDoctor.Specialization != Specialization.general)
+                if (cbOperation.IsChecked == true && cmbOpRoom.SelectedIndex != -1 && loggedInDoctor.Specialization != Specialization.General)
                     selectedAppointment.RoomId = ((Room)cmbOpRoom.SelectedItem).id;
                 else
                     selectedAppointment.RoomId = loggedInDoctor.OrdinationId;

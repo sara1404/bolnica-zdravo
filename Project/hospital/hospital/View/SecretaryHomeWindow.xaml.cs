@@ -32,34 +32,17 @@ namespace hospital.View
 
         private void handlingAccount_Click(object sender, RoutedEventArgs e)
         {
-            btnhandlingMedRecord.BorderBrush = Brushes.Transparent;
-            btnAppointment.BorderBrush = Brushes.Transparent;
+            CloseAllUserControl();
             btnhandlingAccount.BorderBrush = (Brush)(new BrushConverter().ConvertFrom("#c8d8e4")); 
             btnhandlingAccount.BorderThickness = new Thickness(3,0,0,0);
-
-            handlingMedRecordUserControl.Visibility = Visibility.Collapsed;
-            handlingMedRecordUserControl.addMedRecUserControl.Visibility=Visibility.Collapsed;
-            handlingMedRecordUserControl.editMedRecUserControl.Visibility = Visibility.Collapsed;
-            handlingMedRecordUserControl.medRecUserControl.Visibility = Visibility.Collapsed;
-
-            handlingAppointmentUserControl.Visibility = Visibility.Collapsed;
-
             handlingAccountUserControl.Visibility = Visibility.Visible;
         }
 
         private void btnHandMedRecord_Click(object sender, RoutedEventArgs e)
         {
+            CloseAllUserControl();
             btnhandlingMedRecord.BorderBrush = (Brush)(new BrushConverter().ConvertFrom("#c8d8e4"));
-            btnhandlingAccount.BorderBrush = Brushes.Transparent;
-            btnAppointment.BorderBrush = Brushes.Transparent;
             btnhandlingMedRecord.BorderThickness = new Thickness(3, 0, 0, 0);
-
-            handlingAccountUserControl.addAccountUserControl.Visibility = Visibility.Collapsed;
-            handlingAccountUserControl.editAccountUserControl.Visibility = Visibility.Collapsed;
-            handlingAccountUserControl.Visibility = Visibility.Collapsed;
-
-            handlingAppointmentUserControl.Visibility = Visibility.Collapsed;
-
             handlingMedRecordUserControl.Visibility = Visibility.Visible;
         }
 
@@ -80,22 +63,53 @@ namespace hospital.View
 
         private void btnAppointment_Click(object sender, RoutedEventArgs e)
         {
-            //clossing handling account user control
-            handlingAccountUserControl.addAccountUserControl.Visibility = Visibility.Collapsed;
-            handlingAccountUserControl.editAccountUserControl.Visibility = Visibility.Collapsed;
-            handlingAccountUserControl.Visibility = Visibility.Collapsed;
-            //closing med. records user control
+            CloseAllUserControl();
+            btnAppointment.BorderBrush = (Brush)(new BrushConverter().ConvertFrom("#c8d8e4"));
+            btnAppointment.BorderThickness = new Thickness(3, 0, 0, 0);
+            handlingAppointmentUserControl.Visibility = Visibility.Visible;
+        }
+
+        private void btnEmergency_Click(object sender, RoutedEventArgs e)
+        {
+            CloseAllUserControl();
+            btnEmergency.BorderBrush = (Brush)(new BrushConverter().ConvertFrom("#c8d8e4"));
+            btnEmergency.BorderThickness = new Thickness(3, 0, 0, 0);
+            handlingEmergencyUserControl.Visibility = Visibility.Visible;
+        }
+        private void CloseAllUserControl()
+        {
             handlingMedRecordUserControl.Visibility = Visibility.Collapsed;
             handlingMedRecordUserControl.addMedRecUserControl.Visibility = Visibility.Collapsed;
             handlingMedRecordUserControl.editMedRecUserControl.Visibility = Visibility.Collapsed;
             handlingMedRecordUserControl.medRecUserControl.Visibility = Visibility.Collapsed;
 
-            btnAppointment.BorderBrush = (Brush)(new BrushConverter().ConvertFrom("#c8d8e4"));
+            handlingAccountUserControl.addAccountUserControl.Visibility = Visibility.Collapsed;
+            handlingAccountUserControl.editAccountUserControl.Visibility = Visibility.Collapsed;
+            handlingAccountUserControl.Visibility = Visibility.Collapsed;
+
+            handlingAppointmentUserControl.Visibility = Visibility.Collapsed;
+            handlingAppointmentUserControl.removeAppointmentUserControl.Visibility = Visibility.Collapsed;
+            handlingAppointmentUserControl.delayAppointmentUserControl.Visibility = Visibility.Collapsed;
+
+            handlingEmergencyUserControl.Visibility = Visibility.Collapsed;
+            handlingEmergencyUserControl.addGuestuserControl.Visibility = Visibility.Collapsed;
+            handlingEmergencyUserControl.suggestedDelayUserControl.Visibility = Visibility.Collapsed;
+
+            orderEquipmentUserControl.Visibility = Visibility.Collapsed;
+
             btnhandlingAccount.BorderBrush = Brushes.Transparent;
             btnhandlingMedRecord.BorderBrush = Brushes.Transparent;
-            btnAppointment.BorderThickness = new Thickness(3, 0, 0, 0);
+            btnAppointment.BorderBrush = Brushes.Transparent;
+            btnEmergency.BorderBrush = Brushes.Transparent;
+            btnOrder.BorderBrush = Brushes.Transparent;
+        }
 
-            handlingAppointmentUserControl.Visibility = Visibility.Visible;
+        private void btnOrder_Click(object sender, RoutedEventArgs e)
+        {
+            CloseAllUserControl();
+            btnOrder.BorderBrush = (Brush)(new BrushConverter().ConvertFrom("#c8d8e4"));
+            btnOrder.BorderThickness = new Thickness(3, 0, 0, 0);
+            orderEquipmentUserControl.Visibility = Visibility.Visible;
         }
     }
 }

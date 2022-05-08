@@ -15,13 +15,17 @@ namespace Service
         private readonly DoctorRepository doctorRepository;
         private readonly UserController userController;
         private readonly NotificationRepository notificationRepository;
+        private readonly DoctorService doctorService;
+        private readonly RoomService _roomService;
 
-        public AppointmentService(AppointmentRepository appointmentRepository, DoctorRepository doctorRepository, UserController userController, NotificationRepository notificationRepository)
+        public AppointmentService(AppointmentRepository appointmentRepository, DoctorRepository doctorRepository, UserController userController, NotificationRepository notificationRepository, DoctorService doctorService,RoomService roomService)
         {
             this.appointmentRepository = appointmentRepository;
             this.doctorRepository = doctorRepository;
             this.userController = userController;
             this.notificationRepository = notificationRepository;
+            this.doctorService = doctorService;
+            this._roomService = roomService;
         }
 
         public Appointment Read(int id)
@@ -538,6 +542,183 @@ namespace Service
                 }
             }
             return false;
+        }
+
+
+
+
+
+        //"CLEAN CODE" START HERE :)
+        public void MoveAppointemntAndMakeNotification(Appointment oldAppointment,Appointment newAppoitnemnt)
+        {
+            Update(oldAppointment, newAppoitnemnt);
+            notificationRepository.Create(new Notification(oldAppointment.PatientUsername));
+            notificationRepository.Create(new Notification(oldAppointment.DoctorUsername));
+        }
+
+        public List<DateTime> MakeTimeSlotsNextTwoHours()
+        {
+            DateTime currentDateAndTime = DateTime.Now;
+            string timeClock = currentDateAndTime.ToString().Split(' ')[1];
+            string currentHours = timeClock.Split(':')[0];
+            string currentMinuts = timeClock.Split(':')[1];
+
+            List<DateTime> allTimeSlots = new List<DateTime>();
+            if (Int32.Parse(currentMinuts) > 30)
+            {
+                DateTime day = new DateTime(currentDateAndTime.Year, currentDateAndTime.Month, currentDateAndTime.Day, Int32.Parse(currentHours) +1, 0, 0);
+                for (int i = 0; i < 4; i++)
+                {
+                    allTimeSlots.Add(day.AddMinutes(i * 30));
+                }
+            }
+            else
+            {
+                DateTime day = new DateTime(currentDateAndTime.Year, currentDateAndTime.Month, currentDateAndTime.Day, Int32.Parse(currentHours), 30, 0);
+                for (int i = 0; i < 4; i++)
+                {
+                    allTimeSlots.Add(day.AddMinutes(i * 30));
+                }
+
+            }
+            return allTimeSlots;
+        }
+
+        private ObservableCollection<Appointment> FindAvailableAppointmentsNextTwoHours(List<Doctor> requiredDoctor, string patientUsername)
+        {
+            List<DateTime> timeSlots = MakeTimeSlotsNextTwoHours();
+            ObservableCollection<Appointment> availableAppointment = new ObservableCollection<Appointment>();
+            foreach (Doctor doctor in requiredDoctor)
+            {
+                ObservableCollection<Appointment> allAvailableAppointmenTodaytByDoctor = GetFreeAppointmentsByDateAndDoctor(DateTime.Now, doctor.Username, patientUsername);
+                foreach (Appointment appointment in allAvailableAppointmenTodaytByDoctor)
+                {
+                    foreach (DateTime dateTime in timeSlots)
+                    {
+                        if (appointment.StartTime == dateTime)
+                        {
+                            appointment.roomId = doctor.OrdinationId;
+                            availableAppointment.Add(appointment);
+                        }
+                    }
+                }
+            }
+            return SortAppointmentByTime(availableAppointment);
+        }
+
+        private ObservableCollection<Appointment> SortAppointmentByTime(ObservableCollection<Appointment> availableAppointment)
+        {
+            int size = availableAppointment.Count;
+
+            for (int i = 0; i < (size - 1); i++)
+            {
+                bool swapped = false;
+                for (int j = 0; j < (size - i - 1); j++)
+                {
+                    if (availableAppointment[j].StartTime > availableAppointment[j + 1].StartTime)
+                    {
+                        Appointment temp = availableAppointment[j];
+                        availableAppointment[j] = availableAppointment[j + 1];
+                        availableAppointment[j + 1] = temp;
+                        swapped = true;
+                    }
+                }
+                if (!swapped)
+                    break;
+            }
+            return availableAppointment;
+        } 
+
+        private void MakeEmergencyOperation(ObservableCollection<Appointment> availableAppointment)
+        {
+            foreach (Appointment app in availableAppointment)
+            {
+                if (_roomService.FindRoomForOperationByTime(app.StartTime) != null)
+                {
+                    app.RoomId = _roomService.FindRoomForOperationByTime(app.StartTime).id;
+                    Create(app);
+                    Console.WriteLine(app.StartTime + " " + app.RoomId + " " + app.doctorUsername + " " + app.patientUsername);
+                    return;
+                }
+            }
+        }
+
+        public void tryMakeEmergencyAppointment(string patientUsername, Specialization requiredSpecialization,bool isOperation)
+        {
+            List<Doctor> requiredDoctor = doctorService.GetDoctorsBySpecialization(requiredSpecialization);
+
+            if (requiredDoctor.Count == 0) throw new Exception("There is no doctor with such a specialization");
+
+            ObservableCollection<Appointment> availableAppointment = FindAvailableAppointmentsNextTwoHours(requiredDoctor, patientUsername);
+
+            if (availableAppointment.Count == 0) throw new Exception("No free appointments");
+
+            if (isOperation)
+            {
+                MakeEmergencyOperation(availableAppointment);
+            }
+            else
+            {
+                Create(availableAppointment[0]);
+            }
+        }
+
+        private DateTime FindNearestBusyTimeSlot()
+        {
+            DateTime currentDateAndTime = DateTime.Now;
+            string timeClock = currentDateAndTime.ToString().Split(' ')[1];
+            string currentHours = timeClock.Split(':')[0];
+            string currentMinuts = timeClock.Split(':')[1];
+
+            if (Int32.Parse(currentMinuts) > 30)
+            {
+               return   new DateTime(currentDateAndTime.Year, currentDateAndTime.Month, currentDateAndTime.Day, Int32.Parse(currentHours) + 1, 0, 0);
+            }
+            else
+            {
+                return new DateTime(currentDateAndTime.Year, currentDateAndTime.Month, currentDateAndTime.Day, Int32.Parse(currentHours), 30, 0);
+            }
+        }
+
+        public List<Appointment> FindAppointmentsForCancelation()
+        {
+            DateTime firstBusyTimeSlot = FindNearestBusyTimeSlot();
+
+            List<Appointment> appointmentsForCancelation = new List<Appointment>();
+            foreach (Appointment appointment in GetAll())
+            {
+                if (appointment.StartTime == firstBusyTimeSlot)
+                    appointmentsForCancelation.Add(appointment);
+            }
+            return appointmentsForCancelation;
+        }
+
+        private void FindNewSuggestedAppointment(Appointment delayAppointment)
+        {
+            ObservableCollection<Appointment> allFreeAppointment = GetFreeAppointmentsByDateAndDoctor(delayAppointment.StartTime, delayAppointment.doctorUsername, delayAppointment.patientUsername);
+            foreach(Appointment appointment in allFreeAppointment)
+            {
+                if(delayAppointment.StartTime < appointment.StartTime)
+                {
+                    RecommendedOne = appointment;
+                    return;
+                }
+            }
+            delayAppointment.StartTime.AddDays(1);
+            FindNewSuggestedAppointment(delayAppointment);
+        }
+
+        public List<Appointment> FindSuggestedAppointments()
+        {
+            List<Appointment> suggestionAppointments = new List<Appointment>();
+
+            foreach(Appointment appointment in FindAppointmentsForCancelation())
+            {
+                FindNewSuggestedAppointment(appointment);
+                suggestionAppointments.Add(RecommendedOne);
+            }
+            return suggestionAppointments; 
+
         }
         //------------------------------------------------
     }

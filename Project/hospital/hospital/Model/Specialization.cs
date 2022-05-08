@@ -8,11 +8,11 @@ namespace Model
 {
     public enum Specialization
     {
-        general,
-        cardiologist,
-        dermatologist,
-        endocrinologist,
-        neurologist,
-        oncologist
+        General,
+        Cardiologist,
+        Dermatologist,
+        Endocrinologist,
+        Neurologist,
+        Oncologist
     }
 }

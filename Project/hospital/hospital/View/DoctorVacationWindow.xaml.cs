@@ -54,14 +54,13 @@ namespace hospital.View
             }
             if(canReserve == true && cbHighPriority.IsChecked == true && dpStartDate.SelectedDate < dpEndDate.SelectedDate)
             {
-                VacationRequest newRequest = new VacationRequest((DateTime)dpStartDate.SelectedDate, (DateTime)dpEndDate.SelectedDate, (bool)cbHighPriority.IsChecked, tbNote.Text, uc.CurentLoggedUser.Username, 1);
+                VacationRequest newRequest = new VacationRequest((DateTime)dpStartDate.SelectedDate, (DateTime)dpEndDate.SelectedDate, (bool)cbHighPriority.IsChecked, tbNote.Text, uc.CurentLoggedUser.Username, -1);
                 vc.Create(newRequest);
                 MessageBox.Show("opravio ga majsstor HITNO");
             }
             else if(canReserve == true && dpEndDate.SelectedDate != null && dpStartDate.SelectedDate != null && dpStartDate.SelectedDate < dpEndDate.SelectedDate)
             {
-                //DateTime startDate = (DateTime)dpStartDate.SelectedDate;
-                VacationRequest newRequest = new VacationRequest((DateTime)dpStartDate.SelectedDate, (DateTime)dpEndDate.SelectedDate, (bool)cbHighPriority.IsChecked, tbNote.Text, uc.CurentLoggedUser.Username, 1);
+                VacationRequest newRequest = new VacationRequest((DateTime)dpStartDate.SelectedDate, (DateTime)dpEndDate.SelectedDate, (bool)cbHighPriority.IsChecked, tbNote.Text, uc.CurentLoggedUser.Username, -1);
                 vc.Create(newRequest);
                 MessageBox.Show("opravio ga majsstor");
             }

@@ -76,6 +76,7 @@
     <Compile Include="FileHandler\ScheduledBasicRenovationFIleHandler.cs" />
     <Compile Include="FileHandler\ScheduledRelocationFileHandler.cs" />
     <Compile Include="FileHandler\UserFileHandler.cs" />
+    <Compile Include="FileHandler\VacationRequestFileHandler.cs" />
     <Compile Include="Model\ScheduledBasicRenovation.cs" />
     <Compile Include="Model\TimeInterval.cs" />
     <Compile Include="Model\Notification.cs" />

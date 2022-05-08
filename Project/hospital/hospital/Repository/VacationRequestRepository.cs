@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using FileHandler;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,13 +12,31 @@ namespace Repository
     public class VacationRequestRepository
     {
         public ObservableCollection<VacationRequest> vacationRequests;
+        public VacationRequestFileHandler vacationRequestFileHandler;
         public VacationRequestRepository()
         {
-            vacationRequests = new ObservableCollection<VacationRequest>();
+            vacationRequestFileHandler = new VacationRequestFileHandler();
+            List<VacationRequest> deserializedList = vacationRequestFileHandler.Read();
+            if (deserializedList != null)
+            {
+                vacationRequests = new ObservableCollection<VacationRequest>(vacationRequestFileHandler.Read());
+            }
+            else
+            {
+                vacationRequests = new ObservableCollection<VacationRequest>();
+            }
         }
         public bool Create(VacationRequest vacationRequest)
         {
+            int maxId = 0;
+            foreach(VacationRequest v in FindAll())
+            {
+                if (v.Id > maxId)
+                    maxId = v.Id;
+            }
+            vacationRequest.Id = maxId + 1;
             vacationRequests.Add(vacationRequest);
+            vacationRequestFileHandler.Write(this.vacationRequests.ToList());
             return true;
         }
         public ObservableCollection<VacationRequest> FindAll()
@@ -49,6 +68,7 @@ namespace Repository
         public bool DeleteById(int id)
         {
             vacationRequests.Remove(FindById(id));
+            vacationRequestFileHandler.Write(this.vacationRequests.ToList());
             return true;
         }
     }

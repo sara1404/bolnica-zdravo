@@ -101,6 +101,10 @@ namespace Model
             {
                 return id;
             }
+            set
+            {
+                id = value;
+            }
         }
 
     }

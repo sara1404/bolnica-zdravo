@@ -70,6 +70,7 @@
     <Compile Include="Controller\ScheduledBasicRenovationController.cs" />
     <Compile Include="Controller\ScheduledRelocationController.cs" />
     <Compile Include="Controller\UserController.cs" />
+    <Compile Include="Controller\VacationRequestController.cs" />
     <Compile Include="FileHandler\MedicalRecordFileHandler.cs" />
     <Compile Include="FileHandler\NotificationFileHandler.cs" />
     <Compile Include="FileHandler\ScheduledBasicRenovationFIleHandler.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Model\Role.cs" />
     <Compile Include="Model\ScheduledRelocation.cs" />
     <Compile Include="Model\Specialization.cs" />
+    <Compile Include="Model\VacationRequest.cs" />
     <Compile Include="Repository\AppointmentRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
     <Compile Include="Repository\MedicalRecordsRepository.cs" />
@@ -91,6 +93,7 @@
     <Compile Include="Repository\ScheduledBasicRenovationRepository.cs" />
     <Compile Include="Repository\ScheduledRelocationRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
+    <Compile Include="Repository\VacationRequestRepository.cs" />
     <Compile Include="Service\AppointmentService.cs" />
     <Compile Include="Service\DoctorService.cs" />
     <Compile Include="Service\MedicalRecordsService.cs" />
@@ -102,6 +105,7 @@
     <Compile Include="Service\ScheduledRelocationService.cs" />
     <Compile Include="Service\TimeSchedulerService.cs" />
     <Compile Include="Service\UserService.cs" />
+    <Compile Include="Service\VacationRequestService.cs" />
     <Compile Include="View\AddRoomWindow.xaml.cs">
       <DependentUpon>AddRoomWindow.xaml</DependentUpon>
     </Compile>
@@ -125,6 +129,9 @@
     </Compile>
     <Compile Include="View\DoctorTherapyWindow.xaml.cs">
       <DependentUpon>DoctorTherapyWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DoctorVacationWindow.xaml.cs">
+      <DependentUpon>DoctorVacationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DoctorViewInfoWindow.xaml.cs">
       <DependentUpon>DoctorViewInfoWindow.xaml</DependentUpon>
@@ -255,6 +262,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DoctorTherapyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DoctorVacationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

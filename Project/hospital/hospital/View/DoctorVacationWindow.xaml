@@ -12,9 +12,9 @@
         <Label Content="End Date:" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top" Width="77"/>
         <DatePicker x:Name="dpEndDate" HorizontalAlignment="Left" Margin="92,70,0,0" VerticalAlignment="Top"/>
         <Label Content="High priority:" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Width="82"/>
-        <CheckBox x:Name="cbHighPriority" Content="" HorizontalAlignment="Left" Margin="92,106,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbHighPriority" Content="" HorizontalAlignment="Left" Margin="92,106,0,0" VerticalAlignment="Top" Checked="cbHighPriority_Checked" Unchecked="cbHighPriority_Unchecked"/>
         <Label Content="Note:" HorizontalAlignment="Left" Margin="10,126,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbNote" HorizontalAlignment="Left" Height="174" Margin="10,152,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="290"/>
+        <TextBox x:Name="tbNote" HorizontalAlignment="Left" Height="174" Margin="10,152,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="290"/>
         <Button x:Name="btnSubmit" Content="Submit" HorizontalAlignment="Left" Margin="585,287,0,0" VerticalAlignment="Top" Width="199" Height="39" Click="btnSubmit_Click"/>
 
     </Grid>

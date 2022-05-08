@@ -35,6 +35,8 @@ namespace hospital
         public ScheduledBasicRenovationController scheduledBasicRenovationController { get; set; }
         public MedicineController medicineController { get; set; }
 
+        public VacationRequestController vacationRequestController { get; set; }
+
         public Notifier Notifier { get; set; }
 
         Thread relocationThread;
@@ -89,6 +91,10 @@ namespace hospital
             MedicineRepository medicineRepository = new MedicineRepository();
             MedicineService medicineService = new MedicineService(medicineRepository);
             medicineController = new MedicineController(medicineService);
+
+            VacationRequestRepository vacationRequestRepository = new VacationRequestRepository();
+            VacationRequestService vacationRequestService = new VacationRequestService(vacationRequestRepository);
+            vacationRequestController = new VacationRequestController(vacationRequestService);
             
             roomRepository.LoadRoomData();
             scheduledRelocationRepository.LoadRelocationData();

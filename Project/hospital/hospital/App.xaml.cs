@@ -31,6 +31,7 @@ namespace hospital
         public MedicalRecordsController mediicalRecordsController { get; set; }
         public DoctorController doctorController { get; set; }
         public UserController userController { get; set; }
+        public OrderController orderController { get; set; }
         public ScheduledRelocationController scheduledRelocationController { get; set; }
         public ScheduledBasicRenovationController scheduledBasicRenovationController { get; set; }
         public MedicineController medicineController { get; set; }
@@ -39,6 +40,7 @@ namespace hospital
 
         Thread relocationThread;
         Thread renovationThread;
+        Thread orderThread;
         public App()
         {
             UserRepository userRepository = new UserRepository();
@@ -64,13 +66,16 @@ namespace hospital
             patientController = new PatientController(patientService, userService);
 
 
+            OrderRepository orderRepository = new OrderRepository();
+            OrderService orderService = new OrderService(orderRepository,roomRepository);
+            orderController = new OrderController(orderService);
+
             AppointmentService appointmentService = new AppointmentService(appointmentRepository, doctorRepository, userController, notificationRepository, doctorService,roomService);
             appointmentController = new AppointmentController(appointmentService);
 
             MedicalRecordsService medicalRecordsService = new MedicalRecordsService(medicalRecordsRepository);
             mediicalRecordsController = new MedicalRecordsController(medicalRecordsService);
 
-           
 
 
 
@@ -101,6 +106,9 @@ namespace hospital
             renovationThread = new Thread(scheduledBasicRenovationService.renovationTracker);
             renovationThread.Start();
 
+            orderThread = new Thread(orderService.orderTracker);
+            orderThread.Start();
+
             Notifier = new Notifier(cfg =>
             {
                 cfg.PositionProvider = new WindowPositionProvider(
@@ -126,6 +134,7 @@ namespace hospital
             scheduledBasicRenovationRepository.WriteRenovationData();
             relocationThread.Abort();
             renovationThread.Abort();
+            orderThread.Abort();
         }
     }
 }

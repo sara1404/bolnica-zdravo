@@ -48,7 +48,7 @@ namespace hospital.View
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            this.Visibility = Visibility.Collapsed;
+            NavigationService.GoBack();
         }
     }
 }

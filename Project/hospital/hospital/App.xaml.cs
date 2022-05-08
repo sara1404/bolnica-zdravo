@@ -85,6 +85,7 @@ namespace hospital
             roomRepository.LoadRoomData();
             scheduledRelocationRepository.LoadRelocationData();
             scheduledBasicRenovationRepository.LoadRenovationData();
+            medicineRepository.LoadMedicineData();
 
 
             relocationThread = new Thread(scheduledRelocationService.relocationTracker);

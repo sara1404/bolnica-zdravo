@@ -28,6 +28,10 @@ namespace Service
         {
             return medicineRepository.FindById(id);
         }
+
+        public Medicine FindByName(string name) {
+            return medicineRepository.FindByName(name);
+        }
         public bool UpdateById(string id, Medicine medicine)
         {
             return medicineRepository.UpdateById(id, medicine);

@@ -28,6 +28,11 @@ namespace Controller
         {
             return medicineService.FindById(id);
         }
+
+        public Medicine FindByName(string name)
+        {
+            return medicineService.FindByName(name);
+        }
         public bool UpdateById(string id, Medicine medicine)
         {
             return medicineService.UpdateById(id, medicine);

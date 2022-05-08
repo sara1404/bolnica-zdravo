@@ -40,6 +40,15 @@ namespace Repository
             return null;
         }
 
+        public Room FindRoomByPurpose(string purpose) {
+            foreach (Room room in rooms)
+            {
+                if (room._Purpose.Equals(purpose))
+                    return room;
+            }
+            return null;
+        }
+
         public ref ObservableCollection<Room> FindAll()
         {
             return ref rooms;

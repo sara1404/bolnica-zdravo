@@ -61,31 +61,33 @@ namespace hospital.Service
 
         public void RenovationTracker()
         {
-
-
             DateTime now = DateTime.Now;
             List<ScheduledAdvancedRenovation> renovations = new List<ScheduledAdvancedRenovation>(FindAll());
             foreach (ScheduledAdvancedRenovation renovation in renovations)
             {
                 if (renovation._Interval._End.Date.CompareTo(now.Date) <= 0)
-                {
-                    App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
-                    {
-                        if (renovation.flag.Equals("split"))
-                            SplitRoom(renovation);
-                        else if (renovation.flag.Equals("merge"))
-                            MergeRooms(renovation);
-                        DeleteById(renovation._Id);
-                    });
-                }
+                    FinishRenovation(renovation);
                 else if (renovation._Interval._Start.Date.CompareTo(now.Date) >= 0)
-                {
-                    App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
-                    {
-                        MoveEquipmentToWarehouse(renovation);
-                    });
-                }
+                    StartRenovation(renovation);
             }
+        }
+
+        private void FinishRenovation(ScheduledAdvancedRenovation renovation) {
+            App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+            {
+                if (renovation.flag.Equals("split"))
+                    SplitRoom(renovation);
+                else if (renovation.flag.Equals("merge"))
+                    MergeRooms(renovation);
+                DeleteById(renovation._Id);
+            });
+        }
+
+        private void StartRenovation(ScheduledAdvancedRenovation renovation) {
+            App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+            {
+                MoveEquipmentToWarehouse(renovation);
+            });
         }
 
         private void SplitRoom(ScheduledAdvancedRenovation renovation)

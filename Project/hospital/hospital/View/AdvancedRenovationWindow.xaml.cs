@@ -39,25 +39,36 @@ namespace hospital.View
             if (e.Key == Key.Enter) {
                 int renovationDuration = Int32.Parse(durationRenovation.Text);
                 try {
-                    if (listViewRooms.SelectedItems.Count >= 2)
-                    {
-                        List<Room> rooms = new List<Room>();
-                        rooms.Add((Room)listViewRooms.SelectedItems[0]);
-                        rooms.Add((Room)listViewRooms.SelectedItems[1]);
-                        renovationListView.ItemsSource = scheduledAdvancedRenovationController.FindIntervalsForMergingRooms(rooms, renovationDuration);
-                    }
-                    else
-                    {
-                        Room room = (Room)listViewRooms.SelectedItem;
-                        renovationListView.ItemsSource = scheduledAdvancedRenovationController.FindIntervalsForSplitingRoom(room, renovationDuration);
-                    }
-
+                    CheckTypeOfAdvancedRenovation(renovationDuration);
                 }
                 catch (Exception ex) {
-                    durationRenovation.Text = "Invalid input";
-                    durationRenovation.Foreground = Brushes.Red;
+                    DisplayError();
                 }
             }
+        }
+
+        private void CheckTypeOfAdvancedRenovation(int renovationDuration) {
+            if (listViewRooms.SelectedItems.Count >= 2)
+                ListIntervalsWhenMerge(renovationDuration);
+            else
+                ListIntervalsWhenSplit(renovationDuration);
+        }
+
+        private void ListIntervalsWhenMerge(int renovationDuration) {
+            List<Room> rooms = new List<Room>();
+            rooms.Add((Room)listViewRooms.SelectedItems[0]);
+            rooms.Add((Room)listViewRooms.SelectedItems[1]);
+            renovationListView.ItemsSource = scheduledAdvancedRenovationController.FindIntervalsForMergingRooms(rooms, renovationDuration);
+        }
+
+        private void ListIntervalsWhenSplit(int renovationDuration) {
+            Room room = (Room)listViewRooms.SelectedItem;
+            renovationListView.ItemsSource = scheduledAdvancedRenovationController.FindIntervalsForSplitingRoom(room, renovationDuration);
+        }
+
+        private void DisplayError() {
+            durationRenovation.Text = "Invalid input";
+            durationRenovation.Foreground = Brushes.Red;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -79,7 +90,6 @@ namespace hospital.View
         private void ScheduleMergingRooms(List<Room> rooms, TimeInterval interval) {
             rooms.Add((Room)listViewRooms.SelectedItems[0]);
             rooms.Add((Room)listViewRooms.SelectedItems[1]);
-
             Room resultRoom = new Room(newRoom.Text, newPurpose.Text, Int32.Parse(floor.Text), newCode.Text);
             ScheduledAdvancedRenovation newRenovation = new ScheduledAdvancedRenovation(scheduledAdvancedRenovationController.FindAll().Count.ToString(),
                 resultRoom, interval, description.Text, rooms, "merge");

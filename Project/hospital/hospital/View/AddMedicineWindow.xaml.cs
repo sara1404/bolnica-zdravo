@@ -46,19 +46,39 @@ namespace hospital.View
 
         private void Add_Medicine_Click(object sender, RoutedEventArgs e)
         {
-            string name = nameField.Text;
-            string code = codeField.Text;
-            int quantity = Int32.Parse(quanityField.Text);
-            Medicine medicine = new Medicine(code, name, GetIngridients(), name, quantity);
-            if (medicineController.FindByName(medicine.Name) != null) {
-                MessageBox.Show("Medicine with this name already exists");
+            try
+            {
+                int quantity = Int32.Parse(quanityField.Text);
+                AddMedicine();
+                this.Close();
+            }
+            catch (Exception ex) {
+                MessageBox.Show("Invalid input for quanity");
                 return;
             }
+        }
+
+        private void AddMedicine() {
+            Medicine medicine = new Medicine(codeField.Text, nameField.Text, GetIngridients(), nameField.Text, Int32.Parse(quanityField.Text));
+            if (!IsMedicineNew(medicine))
+                return;
             medicine.Alternatives = GetAlternatives();
             medicineController.Create(medicine);
-            Equipment equipment = new Equipment(name, quantity);
+            AddMedicineAsEquipment();
+        }
+
+        private bool IsMedicineNew(Medicine medicine) {
+            if (medicineController.FindByName(medicine.Name) != null)
+            {
+                MessageBox.Show("Medicine with this name already exists");
+                return false;
+            }
+            return true;
+        }
+
+        private void AddMedicineAsEquipment() {
+            Equipment equipment = new Equipment(nameField.Text, Int32.Parse(quanityField.Text));
             roomController.FindRoomByPurpose("warehouse").AddEquipment(equipment);
-            this.Close();
         }
 
         private List<Medicine> GetAlternatives() {

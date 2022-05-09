@@ -12,6 +12,7 @@ using System.Threading;
 using ToastNotifications;
 using ToastNotifications.Position;
 using ToastNotifications.Lifetime;
+using hospital.View;
 
 namespace hospital
 {
@@ -136,7 +137,16 @@ namespace hospital
             });
         }
 
-
+        public void PatientBackToMainMenu()
+        {
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(PatientHomeWindow))
+                {
+                    (window as PatientHomeWindow).Main.Content = new PatientMainMenu();
+                }
+            }
+        }
 
         private void App_Closing(object sender, ExitEventArgs e)
         {

@@ -21,12 +21,17 @@ namespace hospital.View.PatientView
     /// </summary>
     public partial class PatientHospitalPoll : Page
     {
+        private App app;
         public PatientHospitalPoll()
         {
             InitializeComponent();
-            App app = Application.Current as App;
+            app = Application.Current as App;
             PollBlueprintController pbc = app.pollBlueprintController;
             pollTable.ItemsSource = pbc.GetHospitalPoll().PollQuestions;
+            AddComboboxColumn();
+        }
+        private void AddComboboxColumn()
+        {
             DataGridComboBoxColumn dgcc = new DataGridComboBoxColumn();
             IEnumerable<int> grades = new List<int>() { 1, 2, 3, 4, 5 };
             dgcc.ItemsSource = grades;
@@ -37,13 +42,13 @@ namespace hospital.View.PatientView
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            foreach (Window window in Application.Current.Windows)
-            {
-                if (window.GetType() == typeof(PatientHomeWindow))
-                {
-                    (window as PatientHomeWindow).Main.Content = new PatientMainMenu();
-                }
-            }
+            app.PatientBackToMainMenu();
+        }
+
+        private void btnConfirm_Click(object sender, RoutedEventArgs e)
+        {
+            //foreach()
+            Console.WriteLine();
         }
     }
 }

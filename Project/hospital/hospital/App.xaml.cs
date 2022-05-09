@@ -37,6 +37,7 @@ namespace hospital
         public MedicineController medicineController { get; set; }
 
         public VacationRequestController vacationRequestController { get; set; }
+        public InvalidMedicineReportController invalidMedicineReportController { get; set; }
 
         public Notifier Notifier { get; set; }
 
@@ -100,6 +101,10 @@ namespace hospital
             VacationRequestRepository vacationRequestRepository = new VacationRequestRepository();
             VacationRequestService vacationRequestService = new VacationRequestService(vacationRequestRepository);
             vacationRequestController = new VacationRequestController(vacationRequestService);
+
+            InvalidMedicineReportRepository invalidMedicineReportRepository = new InvalidMedicineReportRepository();
+            InvalidMedicineReportService invalidMedicineReportService = new InvalidMedicineReportService(invalidMedicineReportRepository);
+            invalidMedicineReportController = new InvalidMedicineReportController(invalidMedicineReportService);
             
             roomRepository.LoadRoomData();
             scheduledRelocationRepository.LoadRelocationData();

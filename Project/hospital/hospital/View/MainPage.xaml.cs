@@ -22,6 +22,7 @@ namespace hospital.View
     public partial class MainPage : Page
     {
         private Frame Main;
+        private ManagerMainWindow mainWindow;
         private UserController uc;
         public MainPage()
         {
@@ -29,6 +30,7 @@ namespace hospital.View
             foreach (Window win in Application.Current.Windows) {
                 if (win is ManagerMainWindow) {
                     Main = ((ManagerMainWindow)win).Main;
+                    mainWindow = (ManagerMainWindow)win;
                 }
             }
             App app = Application.Current as App;
@@ -62,6 +64,7 @@ namespace hospital.View
             uc.CurentLoggedUser = null;
             MainWindow mw = new MainWindow();
             mw.Show();
+            mainWindow.Close();
         }
 
         private void Medication_Button_Click(object sender, RoutedEventArgs e)

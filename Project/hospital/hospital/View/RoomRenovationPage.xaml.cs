@@ -36,7 +36,7 @@ namespace hospital.View
 
         private void Advanced_Renovation_Click(object sender, RoutedEventArgs e)
         {
-
+            new AdvancedRenovationWindow().Show();
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e)

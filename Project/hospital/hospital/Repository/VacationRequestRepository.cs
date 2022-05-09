@@ -28,16 +28,20 @@ namespace Repository
         }
         public bool Create(VacationRequest vacationRequest)
         {
+            vacationRequest.Id = generateId();
+            vacationRequests.Add(vacationRequest);
+            vacationRequestFileHandler.Write(this.vacationRequests.ToList());
+            return true;
+        }
+        private int generateId()
+        {
             int maxId = 0;
-            foreach(VacationRequest v in FindAll())
+            foreach (VacationRequest v in FindAll())
             {
                 if (v.Id > maxId)
                     maxId = v.Id;
             }
-            vacationRequest.Id = maxId + 1;
-            vacationRequests.Add(vacationRequest);
-            vacationRequestFileHandler.Write(this.vacationRequests.ToList());
-            return true;
+            return maxId + 1;
         }
         public ObservableCollection<VacationRequest> FindAll()
         {

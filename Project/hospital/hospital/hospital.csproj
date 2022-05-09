@@ -86,7 +86,6 @@
     <Compile Include="Model\InvalidMedicineReport.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="FileHandler\VacationRequestFileHandler.cs" />
-
     <Compile Include="Model\ScheduledAdvancedRenovation.cs" />
     <Compile Include="Model\ScheduledBasicRenovation.cs" />
     <Compile Include="Model\TimeInterval.cs" />
@@ -575,6 +574,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Data\ScheduledAdvancedRenovationData.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Data\InvalidMedicineReportData.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

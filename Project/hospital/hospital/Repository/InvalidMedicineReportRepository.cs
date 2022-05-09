@@ -29,16 +29,20 @@ namespace Repository
         }
         public bool Create(InvalidMedicineReport invalidMedicineReport)
         {
+            invalidMedicineReport.Id = generateId();
+            invalidMedicineReports.Add(invalidMedicineReport);
+            invalidMedicineReportFileHandler.Write(this.invalidMedicineReports.ToList());
+            return true;
+        }
+        private int generateId()
+        {
             int maxId = 0;
-            foreach(InvalidMedicineReport report in FindAll())
+            foreach (InvalidMedicineReport report in FindAll())
             {
                 if (report.Id > maxId)
                     maxId = report.Id;
             }
-            invalidMedicineReport.Id = maxId + 1;
-            invalidMedicineReports.Add(invalidMedicineReport);
-            invalidMedicineReportFileHandler.Write(this.invalidMedicineReports.ToList());
-            return true;
+            return maxId + 1;
         }
         public ObservableCollection<InvalidMedicineReport> FindAll()
         {

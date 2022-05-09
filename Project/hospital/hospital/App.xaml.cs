@@ -43,8 +43,6 @@ namespace hospital
 
         public Notifier Notifier { get; set; }
 
-        Thread relocationThread;
-        Thread renovationThread;
         Thread orderThread;
         public App()
         {
@@ -113,12 +111,7 @@ namespace hospital
             medicineRepository.LoadMedicineData();
 
 
-            relocationThread = new Thread(scheduledRelocationService.relocationTracker);
-            relocationThread.Start();
             scheduledAdvancedRenovationRepository.LoadRenovationData();
-
-            renovationThread = new Thread(scheduledBasicRenovationService.renovationTracker);
-            renovationThread.Start();
 
             orderThread = new Thread(orderService.orderTracker);
             orderThread.Start();
@@ -147,8 +140,6 @@ namespace hospital
             roomRepository.WriteRoomData();
             scheduledRelocationRepository.WriteRelocationData();
             scheduledBasicRenovationRepository.WriteRenovationData();
-            relocationThread.Abort();
-            renovationThread.Abort();
             orderThread.Abort();
             scheduledAdvancedRenovationRepository.WriteRenovationData();
         }

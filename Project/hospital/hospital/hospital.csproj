@@ -68,6 +68,7 @@
     <Compile Include="Controller\MedicineController.cs" />
     <Compile Include="Controller\NotificationController.cs" />
     <Compile Include="Controller\OrderController.cs" />
+    <Compile Include="Controller\PollBlueprintController.cs" />
     <Compile Include="Controller\ScheduledBasicRenovationController.cs" />
     <Compile Include="Controller\ScheduledRelocationController.cs" />
     <Compile Include="Controller\UserController.cs" />
@@ -81,7 +82,8 @@
     <Compile Include="FileHandler\UserFileHandler.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="FileHandler\VacationRequestFileHandler.cs" />
-
+    <Compile Include="Model\PollBlueprint.cs" />
+    <Compile Include="Model\PollQuestion.cs" />
     <Compile Include="Model\ScheduledBasicRenovation.cs" />
     <Compile Include="Model\TimeInterval.cs" />
     <Compile Include="Model\Notification.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="Repository\NotificationRepository.cs" />
     <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
+    <Compile Include="Repository\PollBlueprintRepository.cs" />
     <Compile Include="Repository\RoomRepository.cs" />
     <Compile Include="Repository\ScheduledBasicRenovationRepository.cs" />
     <Compile Include="Repository\ScheduledRelocationRepository.cs" />
@@ -108,6 +111,7 @@
     <Compile Include="Service\NotificationService.cs" />
     <Compile Include="Service\OrderService.cs" />
     <Compile Include="Service\PatientService.cs" />
+    <Compile Include="Service\PollBlueprintService.cs" />
     <Compile Include="Service\RoomService.cs" />
     <Compile Include="Service\ScheduledBasicRenovationService.cs" />
     <Compile Include="Service\ScheduledRelocationService.cs" />
@@ -185,6 +189,9 @@
     </Compile>
     <Compile Include="View\PatientView\PatientHomeWindow.xaml.cs">
       <DependentUpon>PatientHomeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientView\PatientHospitalPoll.xaml.cs">
+      <DependentUpon>PatientHospitalPoll.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PatientView\PatientMainMenu.xaml.cs">
       <DependentUpon>PatientMainMenu.xaml</DependentUpon>
@@ -356,6 +363,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PatientView\PatientHomeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientView\PatientHospitalPoll.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

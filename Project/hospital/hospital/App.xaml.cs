@@ -35,8 +35,8 @@ namespace hospital
         public ScheduledRelocationController scheduledRelocationController { get; set; }
         public ScheduledBasicRenovationController scheduledBasicRenovationController { get; set; }
         public MedicineController medicineController { get; set; }
-
         public VacationRequestController vacationRequestController { get; set; }
+        public PollBlueprintController pollBlueprintController { get; set; }
 
         public Notifier Notifier { get; set; }
 
@@ -100,6 +100,10 @@ namespace hospital
             VacationRequestRepository vacationRequestRepository = new VacationRequestRepository();
             VacationRequestService vacationRequestService = new VacationRequestService(vacationRequestRepository);
             vacationRequestController = new VacationRequestController(vacationRequestService);
+
+            PollBlueprintRepository pollBlueprintRepository = new PollBlueprintRepository();
+            PollBlueprintService pollBlueprintService = new PollBlueprintService(pollBlueprintRepository);
+            pollBlueprintController = new PollBlueprintController(pollBlueprintService);
             
             roomRepository.LoadRoomData();
             scheduledRelocationRepository.LoadRelocationData();

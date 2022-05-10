@@ -7,11 +7,24 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PatientHospitalPoll">
-
+    <Page.Resources>
+        <DataTemplate x:Key="pollTemplate">
+            <StackPanel>
+                <!--<TextBlock Text="{Binding Path=Category}" />-->
+                <TextBlock Text="{Binding Path=Question}"/>
+                <RadioButton x:Name="rbOne">1</RadioButton>
+                <RadioButton x:Name="rbTwo">2</RadioButton>
+                <RadioButton x:Name="rbThree">3</RadioButton>
+                <RadioButton x:Name="rbFour">4</RadioButton>
+                <RadioButton x:Name="rbFive">5</RadioButton>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
     <Grid>
-        <DataGrid x:Name="pollTable" CanUserAddRows="False" HorizontalAlignment="Left" Height="355" Margin="39,26,0,0" VerticalAlignment="Top" Width="709"/>
-        <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="39,386,0,0" VerticalAlignment="Top" Width="75" Click="btnBack_Click"/>
+        <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="10,386,0,0" VerticalAlignment="Top" Width="75" Click="btnBack_Click"/>
         <Button x:Name="btnConfirm" Content="Confirm" HorizontalAlignment="Left" Margin="673,386,0,0" VerticalAlignment="Top" Width="75" Click="btnConfirm_Click"/>
+        <ListBox x:Name="lbPoll" ItemsSource="{Binding Path=Poll}" ItemTemplate="{StaticResource pollTemplate}" HorizontalAlignment="Left" Height="371" Margin="10,10,0,0" VerticalAlignment="Top" Width="738"/>
+        
 
     </Grid>
 </Page>

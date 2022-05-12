@@ -11,19 +11,19 @@
         <DataTemplate x:Key="pollTemplate">
             <StackPanel>
                 <!--<TextBlock Text="{Binding Path=Category}" />-->
-                <TextBlock Text="{Binding Path=Question}"/>
-                <RadioButton x:Name="rbOne">1</RadioButton>
-                <RadioButton x:Name="rbTwo">2</RadioButton>
-                <RadioButton x:Name="rbThree">3</RadioButton>
-                <RadioButton x:Name="rbFour">4</RadioButton>
-                <RadioButton x:Name="rbFive">5</RadioButton>
+                <TextBlock Text="{Binding Path=Question}" HorizontalAlignment="Left"/>
+                <RadioButton x:Name="rbOne" HorizontalAlignment="Left">1</RadioButton>
+                <RadioButton x:Name="rbTwo" HorizontalAlignment="Left">2</RadioButton>
+                <RadioButton x:Name="rbThree" HorizontalAlignment="Left">3</RadioButton>
+                <RadioButton x:Name="rbFour" HorizontalAlignment="Left">4</RadioButton>
+                <RadioButton x:Name="rbFive" HorizontalAlignment="Left">5</RadioButton>
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
     <Grid>
         <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="10,386,0,0" VerticalAlignment="Top" Width="75" Click="btnBack_Click"/>
-        <Button x:Name="btnConfirm" Content="Confirm" HorizontalAlignment="Left" Margin="673,386,0,0" VerticalAlignment="Top" Width="75" Click="btnConfirm_Click"/>
-        <ListBox x:Name="lbPoll" ItemsSource="{Binding Path=Poll}" ItemTemplate="{StaticResource pollTemplate}" HorizontalAlignment="Left" Height="371" Margin="10,10,0,0" VerticalAlignment="Top" Width="738"/>
+        <Button x:Name="btnConfirm" Content="Confirm" HorizontalAlignment="Left" Margin="688,386,0,0" VerticalAlignment="Top" Width="75" Click="btnConfirm_Click"/>
+        <ListBox x:Name="lbPoll" ItemsSource="{Binding Path=Poll}" ItemTemplate="{StaticResource pollTemplate}" HorizontalAlignment="Left" Height="371" Margin="10,10,0,0" VerticalAlignment="Top" Width="753"/>
         
 
     </Grid>

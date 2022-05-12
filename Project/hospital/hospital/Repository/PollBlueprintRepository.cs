@@ -14,15 +14,31 @@ namespace hospital.Repository
         
         public PollBlueprintRepository()
         {
-            // hospital poll will always have an id of 0
             blueprints = new ObservableCollection<PollBlueprint>();
             PollBlueprint hospitalPoll = new PollBlueprint();
-            hospitalPoll.Id = 0;
+            hospitalPoll.Type = PollType.HOSPITAL_POLL;
             hospitalPoll.PollName = "Hospital poll";
-            hospitalPoll.PollQuestions = new List<PollQuestion>() { 
-                new PollQuestion("Do you like our hospital?", "general"),
-                new PollQuestion("Do you like our staff?", "staff"),
-                new PollQuestion("Do you like our equipment?", "equipment")};
+            hospitalPoll.Categories = new List<PollCategory>
+            {
+                new PollCategory(0, "Staff", new List<PollQuestion>()
+                {
+                    new PollQuestion(0, "How do you rate staff hospitality?"),
+                    new PollQuestion(1, "How do you rate staff kindness?"),
+                    new PollQuestion(2, "How do you rate staff dedication?")
+                }),
+                new PollCategory(1, "App", new List<PollQuestion>()
+                {
+                    new PollQuestion(3, "How do you rate app UI?"),
+                    new PollQuestion(4, "How do you rate app UX?"),
+                    new PollQuestion(5, "How do you rate app responsiveness?")
+                }),
+                new PollCategory(2, "Appointments", new List<PollQuestion>()
+                {
+                    new PollQuestion(6, "How do you rate our recommended appointments functionality?"),
+                    new PollQuestion(7, "How do you rate our appointment scheduling system?"),
+                    new PollQuestion(8, "How do you rate our ...?")
+                }),
+            };
             blueprints.Add(hospitalPoll);
         }
 
@@ -32,11 +48,11 @@ namespace hospital.Repository
         }
 
         // maybe add GetHospitalPoll() and GetDoctorPoll() methods 
-        public PollBlueprint GetById(int id)
+        public PollBlueprint GetHospitalPoll()
         {
             foreach(PollBlueprint blueprint in blueprints)
             {
-                if(blueprint.Id == id)
+                if(blueprint.Type == PollType.HOSPITAL_POLL)
                 {
                     return blueprint;
                 }

@@ -17,9 +17,9 @@ namespace hospital.Service
             pbr = _pbr;
         }
 
-        public PollBlueprint GetById(int id)
+        public PollBlueprint GetHospitalPoll()
         {
-            return pbr.GetById(id);
+            return pbr.GetHospitalPoll();
         }
     }
 }

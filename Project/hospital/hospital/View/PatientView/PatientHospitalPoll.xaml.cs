@@ -1,4 +1,5 @@
-﻿using hospital.Controller;
+﻿using Controller;
+using hospital.Controller;
 using hospital.Model;
 using System;
 using System.Collections.Generic;
@@ -24,26 +25,18 @@ namespace hospital.View.PatientView
     public partial class PatientHospitalPoll : Page
     {
         private App app;
+        private PollBlueprintController pbc;
+        private UserController uc;
         public List<PollQuestion> Poll { get; set; }
         public PatientHospitalPoll()
         {
             InitializeComponent();
             app = Application.Current as App;
-            PollBlueprintController pbc = app.pollBlueprintController;
-            //lbPoll.ItemsSource = pbc.GetHospitalPoll().PollQuestions;
+            pbc = app.pollBlueprintController;
+            uc = app.userController;
             DataContext = this;
-            Poll = pbc.GetHospitalPoll().PollQuestions;
-            //AddComboboxColumn();
-            //this.Resources.Add("poll", pbc.GetHospitalPoll().PollQuestions);
-        }
-        private void AddComboboxColumn()
-        {
-            DataGridComboBoxColumn dgcc = new DataGridComboBoxColumn();
-            IEnumerable<int> grades = new List<int>() { 1, 2, 3, 4, 5 };
-            dgcc.ItemsSource = grades;
-            dgcc.Width = 50;
-            dgcc.DisplayIndex = 3;
-            //pollTable.Columns.Add(dgcc);
+            Poll = pbc.GetHospitalPollQuestions();
+
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -59,11 +52,58 @@ namespace hospital.View.PatientView
             }
             else
             {
-
+                PollBlueprint poll = FillPoll();
+                poll.Username = uc.CurentLoggedUser.Username;
             }
             
 
         }
+
+        private PollBlueprint FillPoll()
+        {
+            PollBlueprint poll = pbc.GetHospitalPoll();
+            foreach (var listIterator in lbPoll.Items)
+            {
+                PollQuestion question = (PollQuestion)listIterator;
+                ListBoxItem item = (ListBoxItem)lbPoll.ItemContainerGenerator.ContainerFromItem(listIterator);
+                ContentPresenter presenter = FindVisualChild<ContentPresenter>(item);
+                DataTemplate dataTemplate = presenter.ContentTemplate;
+                if (dataTemplate != null)
+                {
+                    int grade;
+                    bool oneChecked = (bool)((RadioButton)dataTemplate.FindName("rbOne", presenter)).IsChecked;
+                    bool twoChecked = (bool)((RadioButton)dataTemplate.FindName("rbTwo", presenter)).IsChecked;
+                    bool threeChecked = (bool)((RadioButton)dataTemplate.FindName("rbThree", presenter)).IsChecked;
+                    bool fourChecked = (bool)((RadioButton)dataTemplate.FindName("rbFour", presenter)).IsChecked;
+                    bool fiveChecked = (bool)((RadioButton)dataTemplate.FindName("rbFive", presenter)).IsChecked;
+
+                    if (oneChecked)
+                        grade = 1;
+                    else if (twoChecked)
+                        grade = 2;
+                    else if (threeChecked)
+                        grade = 3;
+                    else if (fourChecked)
+                        grade = 4;
+                    else 
+                        grade = 5;
+
+
+                    foreach (PollCategory category in poll.Categories)
+                    {
+                        foreach (PollQuestion pollQuestion in category.PollQuestions)
+                        {
+                            if(pollQuestion.Id == question.Id)
+                            {
+                                pollQuestion.Grade = grade;
+                            }
+                        }
+                    }
+                }
+            }
+            return poll;
+        }
+
 
         private bool CheckIfFilled()
         {

@@ -19,7 +19,20 @@ namespace hospital.Controller
         
         public PollBlueprint GetHospitalPoll()
         {
-            return pbs.GetById(0);
+            return pbs.GetHospitalPoll();
+        }
+
+        public List<PollQuestion> GetHospitalPollQuestions()
+        {
+            List<PollQuestion> retVal = new List<PollQuestion>();
+            foreach(PollCategory category in pbs.GetHospitalPoll().Categories)
+            {
+                foreach(PollQuestion question in category.PollQuestions)
+                {
+                    retVal.Add(question);
+                }
+            }
+            return retVal;
         }
     }
 }

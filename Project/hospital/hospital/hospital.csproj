@@ -83,6 +83,7 @@
     <Compile Include="Model\Order.cs" />
     <Compile Include="FileHandler\VacationRequestFileHandler.cs" />
     <Compile Include="Model\PollBlueprint.cs" />
+    <Compile Include="Model\PollCategory.cs" />
     <Compile Include="Model\PollQuestion.cs" />
     <Compile Include="Model\ScheduledBasicRenovation.cs" />
     <Compile Include="Model\TimeInterval.cs" />

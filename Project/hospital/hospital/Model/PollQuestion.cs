@@ -8,19 +8,19 @@ namespace hospital.Model
 {
     public class PollQuestion
     {
+        private int id;
         private string question;
-        private string category;
         private int grade;
 
         public PollQuestion() { }
 
-        public PollQuestion(string _question, string _category)
+        public PollQuestion(int _id, string _question)
         {
+            id = _id;
             question = _question;
-            category = _category;
         }
+        public int Id { get => id; set => id = value; }
         public string Question { get => question; set => question = value; }
-        public string Category { get => category; set => category = value; }
         public int Grade
         {
             get

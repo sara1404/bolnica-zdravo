@@ -57,6 +57,7 @@ namespace hospital.View.PatientView
                     PollBlueprint poll = FillPoll();
                     poll.Username = uc.CurentLoggedUser.Username;
                     pbc.SavePoll(poll);
+                    app.PatientBackToMainMenu();
                 }
                 else
                 {

@@ -103,7 +103,8 @@ namespace hospital
             vacationRequestController = new VacationRequestController(vacationRequestService);
 
             PollBlueprintRepository pollBlueprintRepository = new PollBlueprintRepository();
-            PollBlueprintService pollBlueprintService = new PollBlueprintService(pollBlueprintRepository);
+            PollResultRepository pollResultRepository = new PollResultRepository();
+            PollBlueprintService pollBlueprintService = new PollBlueprintService(pollBlueprintRepository, pollResultRepository);
             pollBlueprintController = new PollBlueprintController(pollBlueprintService);
             
             roomRepository.LoadRoomData();

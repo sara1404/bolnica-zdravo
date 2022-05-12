@@ -52,8 +52,17 @@ namespace hospital.View.PatientView
             }
             else
             {
-                PollBlueprint poll = FillPoll();
-                poll.Username = uc.CurentLoggedUser.Username;
+                if (!pbc.HospitalPollAlreadyFilled(uc.CurentLoggedUser.Username))
+                {
+                    PollBlueprint poll = FillPoll();
+                    poll.Username = uc.CurentLoggedUser.Username;
+                    pbc.SavePoll(poll);
+                }
+                else
+                {
+                    MessageBox.Show("You have already filled this poll!");
+                }
+                
             }
             
 

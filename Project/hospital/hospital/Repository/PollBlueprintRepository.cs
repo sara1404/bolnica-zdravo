@@ -48,7 +48,7 @@ namespace hospital.Repository
         }
 
         // maybe add GetHospitalPoll() and GetDoctorPoll() methods 
-        public PollBlueprint GetHospitalPoll()
+        public PollBlueprint GetHospitalPollBlueprint()
         {
             foreach(PollBlueprint blueprint in blueprints)
             {

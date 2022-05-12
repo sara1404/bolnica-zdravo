@@ -19,13 +19,13 @@ namespace hospital.Controller
         
         public PollBlueprint GetHospitalPoll()
         {
-            return pbs.GetHospitalPoll();
+            return pbs.GetHospitalPollBlueprint();
         }
 
         public List<PollQuestion> GetHospitalPollQuestions()
         {
             List<PollQuestion> retVal = new List<PollQuestion>();
-            foreach(PollCategory category in pbs.GetHospitalPoll().Categories)
+            foreach(PollCategory category in pbs.GetHospitalPollBlueprint().Categories)
             {
                 foreach(PollQuestion question in category.PollQuestions)
                 {
@@ -33,6 +33,23 @@ namespace hospital.Controller
                 }
             }
             return retVal;
+        }
+
+        public bool HospitalPollAlreadyFilled(string username)
+        {
+            foreach(PollBlueprint poll in pbs.GetHospitalPollResults())
+            {
+                if(poll.Username.Equals(username))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void SavePoll(PollBlueprint poll)
+        {
+            pbs.SavePoll(poll);
         }
     }
 }

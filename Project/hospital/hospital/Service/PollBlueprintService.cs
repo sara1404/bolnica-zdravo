@@ -11,15 +11,27 @@ namespace hospital.Service
     public class PollBlueprintService
     {
         private PollBlueprintRepository pbr;
+        private PollResultRepository prr;
 
-        public PollBlueprintService(PollBlueprintRepository _pbr)
+        public PollBlueprintService(PollBlueprintRepository _pbr, PollResultRepository _prr)
         {
             pbr = _pbr;
+            prr = _prr;
         }
 
-        public PollBlueprint GetHospitalPoll()
+        public PollBlueprint GetHospitalPollBlueprint()
         {
-            return pbr.GetHospitalPoll();
+            return pbr.GetHospitalPollBlueprint();
+        }
+
+        public List<PollBlueprint> GetHospitalPollResults()
+        {
+            return prr.GetHospitalPollResults();
+        }
+
+        public void SavePoll(PollBlueprint poll)
+        {
+            prr.AddResult(poll);
         }
     }
 }

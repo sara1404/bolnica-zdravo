@@ -77,6 +77,7 @@
     <Compile Include="FileHandler\MedicineFileHandler.cs" />
     <Compile Include="FileHandler\NotificationFileHandler.cs" />
     <Compile Include="FileHandler\OrderFileHandler.cs" />
+    <Compile Include="FileHandler\PollFileHandler.cs" />
     <Compile Include="FileHandler\ScheduledBasicRenovationFIleHandler.cs" />
     <Compile Include="FileHandler\ScheduledRelocationFileHandler.cs" />
     <Compile Include="FileHandler\UserFileHandler.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
     <Compile Include="Repository\PollBlueprintRepository.cs" />
+    <Compile Include="Repository\PollResultRepository.cs" />
     <Compile Include="Repository\RoomRepository.cs" />
     <Compile Include="Repository\ScheduledBasicRenovationRepository.cs" />
     <Compile Include="Repository\ScheduledRelocationRepository.cs" />
@@ -559,6 +561,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Data\MedicineData.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Data\PollResultData.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Data\OrderData.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Data\VacationRequestData.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

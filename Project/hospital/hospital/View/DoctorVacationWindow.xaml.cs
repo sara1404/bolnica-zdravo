@@ -24,9 +24,11 @@ namespace hospital.View
     {
         public ObservableCollection<Appointment> Appointments { get; set; }
         private CalendarDateRange invalidDates;
+        private Doctor loggedInDoctor;
         private VacationRequestController vc;
         private UserController uc;
         private AppointmentController ac;
+        private DoctorController dc;
         
         public DoctorVacationWindow()
         {
@@ -36,20 +38,34 @@ namespace hospital.View
             vc = app.vacationRequestController;
             uc = app.userController;
             ac = app.appointmentController;
+            dc = app.doctorController;
             Appointments = ac.GetAppointmentByDoctor(uc.CurentLoggedUser.Username);
             invalidDates = new CalendarDateRange(new DateTime(2010, 1, 1), DateTime.Today.AddDays(2));
             dpStartDate.BlackoutDates.Add(invalidDates);
             dpEndDate.BlackoutDates.Add(invalidDates);
+            loggedInDoctor = dc.GetByUsername(uc.CurentLoggedUser.Username);
         }
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
             bool canReserve = true;
+            bool isOverlappingWithOtherDoctorWithSameSpecialization = false;
             foreach(Appointment appointment in Appointments)
             {
                 if(appointment.StartTime > dpStartDate.SelectedDate && appointment.StartTime < dpEndDate.SelectedDate)
                 {
                     canReserve = false;
+                }
+            }
+            foreach(VacationRequest vacationRequest in vc.FindAll())
+            {
+                if(loggedInDoctor.Specialization == dc.GetByUsername(vacationRequest.DoctorId).Specialization)
+                {
+                    if(dpStartDate.SelectedDate > vacationRequest.StartDate && dpStartDate.SelectedDate < vacationRequest.EndDate
+                        && dpEndDate.SelectedDate > vacationRequest.StartDate && dpEndDate.SelectedDate < vacationRequest.EndDate)
+                    {
+                        isOverlappingWithOtherDoctorWithSameSpecialization = true;
+                    }
                 }
             }
             if(canReserve == true && cbHighPriority.IsChecked == true && dpStartDate.SelectedDate < dpEndDate.SelectedDate)
@@ -58,7 +74,7 @@ namespace hospital.View
                 vc.Create(newRequest);
                 MessageBox.Show("High priority vacation request sent!");
             }
-            else if(canReserve == true && dpEndDate.SelectedDate != null && dpStartDate.SelectedDate != null && dpStartDate.SelectedDate < dpEndDate.SelectedDate)
+            else if(isOverlappingWithOtherDoctorWithSameSpecialization == false && canReserve == true && dpEndDate.SelectedDate != null && dpStartDate.SelectedDate != null && dpStartDate.SelectedDate < dpEndDate.SelectedDate)
             {
                 VacationRequest newRequest = new VacationRequest((DateTime)dpStartDate.SelectedDate, (DateTime)dpEndDate.SelectedDate, (bool)cbHighPriority.IsChecked, tbNote.Text, uc.CurentLoggedUser.Username, -1);
                 vc.Create(newRequest);

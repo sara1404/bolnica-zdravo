@@ -5,19 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="EditRoomWindow" Height="450" Width="800">
-    <Grid x:Name="gridEditRoom" >
-        <Label Content="Edit room" HorizontalAlignment="Left" Margin="204,25,0,0" VerticalAlignment="Top" FontSize="20px" Width="161"/>
-        <Label Content="Name:" HorizontalAlignment="Left" Margin="147,94,0,0" VerticalAlignment="Top" FontSize="16px" Width="56"/>
-        <Label Content="Id:" HorizontalAlignment="Left" Margin="173,156,0,0" VerticalAlignment="Top" FontSize="16px" Width="27"/>
-        <Label Content="Purpose:" HorizontalAlignment="Left" Margin="129,226,0,0" VerticalAlignment="Top" FontSize="16px" Width="71"/>
-        <Label Content="Floor:" HorizontalAlignment="Left" Margin="151,300,0,0" VerticalAlignment="Top" FontSize="16px" Width="49"/>
+    <Window.Resources>
+        <ResourceDictionary Source="ManagerResources.xaml"></ResourceDictionary>
+    </Window.Resources>
+    <Grid x:Name="gridEditRoom" Background="#1d1b1f">
+        <Label Content="Edit room" HorizontalAlignment="Left" Margin="317,19,0,0" VerticalAlignment="Top" FontSize="20px" Width="161" Foreground="white"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="147,94,0,0" VerticalAlignment="Top" FontSize="16px" Width="56" Foreground="white"/>
+        <Label Content="Id:" HorizontalAlignment="Left" Margin="173,156,0,0" VerticalAlignment="Top" FontSize="16px" Width="27" Foreground="white"/>
+        <Label Content="Purpose:" HorizontalAlignment="Left" Margin="129,226,0,0" VerticalAlignment="Top" FontSize="16px" Width="71" Foreground="white"/>
+        <Label Content="Floor:" HorizontalAlignment="Left" Margin="151,300,0,0" VerticalAlignment="Top" FontSize="16px" Width="49" Foreground="white"/>
         <TextBox x:Name="roomName" HorizontalAlignment="Left" Height="23" Margin="300,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
         <TextBox x:Name="roomId" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="300,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
         <TextBox x:Name="roomPurpose" HorizontalAlignment="Left" Height="23" Margin="300,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
         <TextBox x:Name="roomFloor" HorizontalAlignment="Left" Height="23" Margin="300,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
-        <Button  Content="APPLY" HorizontalAlignment="Left" Margin="129,358,0,0" VerticalAlignment="Top" Width="109" Height="36" Click="Edit_Room_Click"/>
-        <Button Content="CANCEL" HorizontalAlignment="Left" Margin="333,358,0,0" VerticalAlignment="Top" Width="108" Height="36" Click="Cancel_Edit_Room_Click"/>
-        <ListView x:Name="equipmentListView" HorizontalAlignment="Left" Height="262" VerticalAlignment="Top" Width="188" Margin="511,94,0,0" SelectionChanged="ListView_SelectionChanged">
+        <Button  Content="APPLY" HorizontalAlignment="Left" Margin="226,358,0,0" VerticalAlignment="Top" Width="109" Height="36" Click="Edit_Room_Click" Background="#bc84fc" FontSize="16"/>
+        <Button Content="CANCEL" HorizontalAlignment="Left" Margin="424,358,0,0" VerticalAlignment="Top" Width="108" Height="36" Click="Cancel_Edit_Room_Click" Background="#bc84fc" FontSize="16"/>
+        <ListView x:Name="equipmentListView" HorizontalAlignment="Left" Height="237" VerticalAlignment="Top" Width="188" Margin="511,94,0,0" SelectionChanged="ListView_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

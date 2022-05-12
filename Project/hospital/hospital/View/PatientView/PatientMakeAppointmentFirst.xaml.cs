@@ -24,12 +24,13 @@ namespace hospital.View.PatientView
     {
         private AppointmentController ac;
         private UserController uc;
+        private App app;
         public PatientMakeAppointmentFirst()
         {
             InitializeComponent();
             dateFrom.DisplayDateStart = DateTime.Today;
             dateTo.DisplayDateStart = DateTime.Today;
-            App app = Application.Current as App;
+            app = Application.Current as App;
             uc = app.userController;
             ac = app.appointmentController;
             DoctorController dc = app.doctorController;
@@ -38,13 +39,7 @@ namespace hospital.View.PatientView
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            foreach (Window window in Application.Current.Windows)
-            {
-                if (window.GetType() == typeof(PatientHomeWindow))
-                {
-                    (window as PatientHomeWindow).Main.Content = new PatientMainMenu();
-                }
-            }
+            app.PatientBackToMainMenu();
         }
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
@@ -86,13 +81,7 @@ namespace hospital.View.PatientView
             if (appointmentTable.SelectedIndex != -1)
             {
                 ac.CreateAppointment((Appointment)appointmentTable.SelectedItem);
-                foreach (Window window in Application.Current.Windows)
-                {
-                    if (window.GetType() == typeof(PatientHomeWindow))
-                    {
-                        (window as PatientHomeWindow).Main.Content = new PatientMainMenu();
-                    }
-                }
+                app.PatientBackToMainMenu();
             }
         }
     }

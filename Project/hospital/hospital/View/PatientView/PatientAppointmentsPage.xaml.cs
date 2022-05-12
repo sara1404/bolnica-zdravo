@@ -25,6 +25,7 @@ namespace hospital.View
     public partial class PatientAppointmentsPage : Page
     {
         private AppointmentController ac;
+        private App app;
         public ObservableCollection<Appointment> Appointments
         {
             get;
@@ -33,7 +34,7 @@ namespace hospital.View
         public PatientAppointmentsPage()
         {
             InitializeComponent();
-            App app = Application.Current as App;
+            app = Application.Current as App;
             ac = app.appointmentController;
             this.DataContext = this;
             User current = app.userController.CurentLoggedUser;
@@ -46,20 +47,13 @@ namespace hospital.View
         private bool UserFilter(object item)
         {
             Appointment appointment = item as Appointment;
-            App app = Application.Current as App;
             User current = app.userController.CurentLoggedUser;
             return appointment.PatientUsername.Equals(current.Username);
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            foreach (Window window in Application.Current.Windows)
-            {
-                if (window.GetType() == typeof(PatientHomeWindow))
-                {
-                    (window as PatientHomeWindow).Main.Content = new PatientMainMenu();
-                }
-            }
+            app.PatientBackToMainMenu();
         }
 
         private void btnDelay_Click(object sender, RoutedEventArgs e)

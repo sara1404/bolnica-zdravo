@@ -1,0 +1,30 @@
+﻿<Page x:Class="hospital.View.PatientView.PatientHospitalPoll"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:hospital.View.PatientView"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PatientHospitalPoll">
+    <Page.Resources>
+        <DataTemplate x:Key="pollTemplate">
+            <StackPanel>
+                <!--<TextBlock Text="{Binding Path=Category}" />-->
+                <TextBlock Text="{Binding Path=Question}" HorizontalAlignment="Left"/>
+                <RadioButton x:Name="rbOne" HorizontalAlignment="Left">1</RadioButton>
+                <RadioButton x:Name="rbTwo" HorizontalAlignment="Left">2</RadioButton>
+                <RadioButton x:Name="rbThree" HorizontalAlignment="Left">3</RadioButton>
+                <RadioButton x:Name="rbFour" HorizontalAlignment="Left">4</RadioButton>
+                <RadioButton x:Name="rbFive" HorizontalAlignment="Left">5</RadioButton>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid>
+        <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="10,386,0,0" VerticalAlignment="Top" Width="75" Click="btnBack_Click"/>
+        <Button x:Name="btnConfirm" Content="Confirm" HorizontalAlignment="Left" Margin="688,386,0,0" VerticalAlignment="Top" Width="75" Click="btnConfirm_Click"/>
+        <ListBox x:Name="lbPoll" ItemsSource="{Binding Path=Poll}" ItemTemplate="{StaticResource pollTemplate}" HorizontalAlignment="Left" Height="371" Margin="10,10,0,0" VerticalAlignment="Top" Width="753"/>
+        
+
+    </Grid>
+</Page>

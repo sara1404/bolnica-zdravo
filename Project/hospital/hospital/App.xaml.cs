@@ -13,6 +13,7 @@ using ToastNotifications;
 using ToastNotifications.Position;
 using ToastNotifications.Lifetime;
 using System.Collections.Generic;
+using hospital.View;
 
 namespace hospital
 {
@@ -38,11 +39,13 @@ namespace hospital
         public ScheduledBasicRenovationController scheduledBasicRenovationController { get; set; }
         public ScheduledAdvancedRenovationController scheduledAdvancedRenovationController { get; set; }
         public MedicineController medicineController { get; set; }
-
         public VacationRequestController vacationRequestController { get; set; }
         public InvalidMedicineReportController invalidMedicineReportController { get; set; }
 
         public EmergencyController emergencyController { get; set; }
+
+        public PollBlueprintController pollBlueprintController { get; set; }
+
 
         public Notifier Notifier { get; set; }
 
@@ -110,6 +113,7 @@ namespace hospital
             VacationRequestService vacationRequestService = new VacationRequestService(vacationRequestRepository);
             vacationRequestController = new VacationRequestController(vacationRequestService);
 
+
             InvalidMedicineReportRepository invalidMedicineReportRepository = new InvalidMedicineReportRepository();
             InvalidMedicineReportService invalidMedicineReportService = new InvalidMedicineReportService(invalidMedicineReportRepository);
             invalidMedicineReportController = new InvalidMedicineReportController(invalidMedicineReportService);
@@ -117,6 +121,12 @@ namespace hospital
 
             EmergencyService emergencyService = new EmergencyService(appointmentService, notificationRepository, doctorService, roomService);
             emergencyController = new EmergencyController(emergencyService);
+
+            PollBlueprintRepository pollBlueprintRepository = new PollBlueprintRepository();
+            PollResultRepository pollResultRepository = new PollResultRepository();
+            PollBlueprintService pollBlueprintService = new PollBlueprintService(pollBlueprintRepository, pollResultRepository);
+            pollBlueprintController = new PollBlueprintController(pollBlueprintService);
+
             
             roomRepository.LoadRoomData();
             scheduledRelocationRepository.LoadRelocationData();
@@ -146,7 +156,16 @@ namespace hospital
             SystemTimer systemTimer = new SystemTimer(scheduledAdvancedRenovationService, scheduledBasicRenovationService, scheduledRelocationService);
         }
 
-
+        public void PatientBackToMainMenu()
+        {
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(PatientHomeWindow))
+                {
+                    (window as PatientHomeWindow).Main.Content = new PatientMainMenu();
+                }
+            }
+        }
 
         private void App_Closing(object sender, ExitEventArgs e)
         {

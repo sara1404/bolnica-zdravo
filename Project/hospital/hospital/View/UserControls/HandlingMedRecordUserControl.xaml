@@ -21,6 +21,14 @@
                         <Button x:Name="btnRemove" Margin="5,0,5,0"  BorderBrush="Transparent" Width="25" Background="Transparent" Click="btnRemove_Click" >
                             <Image Source="../../Resources/Images/delete_24x24.png"></Image>
                         </Button>
+                        <Border Margin="255,0,0,0" Width="120" BorderBrush="DarkGray" BorderThickness="1">
+                            <DockPanel Margin="-1,0,-1,0" Width="120">
+                                <TextBox x:Name="txtSearch" Text="" FontSize="15" HorizontalAlignment="Stretch" Width="95" Background="Transparent" BorderThickness="0" TextChanged="txtSearch_TextChanged"/>
+                                <Button BorderThickness="0" DockPanel.Dock="Left" HorizontalAlignment="Right" Height="25" Width="25" Background="Transparent"  BorderBrush="Gray">
+                                    <Image Source="../../Resources/Images/loupe.png"></Image>
+                                </Button>
+                            </DockPanel>
+                        </Border>
                     </StackPanel>
                     <DataGrid x:Name="dateGridHandlingMedicalRecord" Background="white" HorizontalContentAlignment="Center" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="475" Height="350" ItemsSource="{Binding Patients}" IsReadOnly ="True" SelectionMode="Single" HorizontalAlignment="Center" AutoGenerateColumns="False" CanUserResizeColumns="false" CanUserResizeRows="false">
                         <DataGrid.Columns>

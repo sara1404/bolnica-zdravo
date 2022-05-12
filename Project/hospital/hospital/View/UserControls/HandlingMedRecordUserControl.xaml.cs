@@ -150,5 +150,20 @@ namespace hospital.View.UserControls
         {
             pc.DeleteById(((Patient)dateGridHandlingMedicalRecord.SelectedItem).Username);
         }
+
+        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var tbx = sender as TextBox;
+            if (tbx != null)
+            {
+                var filteredList = Patients.Where(x => x.FirstName.ToLower().Contains(tbx.Text.ToLower()) || x.RecordId.ToString().ToLower().Contains(tbx.Text.ToLower()) || x.LastName.ToLower().Contains(tbx.Text.ToLower()) || x.DateOfBirth.ToLower().Contains(tbx.Text.ToLower()) || x.PhoneNumber.ToLower().Contains(tbx.Text.ToLower())).ToList();
+                dateGridHandlingMedicalRecord.ItemsSource = null;
+                dateGridHandlingMedicalRecord.ItemsSource = filteredList;
+            }
+            else
+            {
+                dateGridHandlingMedicalRecord.ItemsSource = Patients;
+            }
+        }
     }
 }

@@ -65,53 +65,76 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controller\DoctorController.cs" />
+    <Compile Include="Controller\InvalidMedicineReportController.cs" />
     <Compile Include="Controller\EmergencyController.cs" />
     <Compile Include="Controller\MedicineController.cs" />
     <Compile Include="Controller\NotificationController.cs" />
     <Compile Include="Controller\OrderController.cs" />
+    <Compile Include="Controller\ScheduledAdvancedRenovationController.cs" />
     <Compile Include="Controller\ScheduledBasicRenovationController.cs" />
     <Compile Include="Controller\ScheduledRelocationController.cs" />
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="DTO\EmergencyDTO.cs" />
+    <Compile Include="Controller\VacationRequestController.cs" />
+    <Compile Include="FileHandler\InvalidMedicineReportFileHandler.cs" />
     <Compile Include="FileHandler\MedicalRecordFileHandler.cs" />
+    <Compile Include="FileHandler\MedicineFileHandler.cs" />
     <Compile Include="FileHandler\NotificationFileHandler.cs" />
     <Compile Include="FileHandler\OrderFileHandler.cs" />
+    <Compile Include="FileHandler\ScheduledAdvancedRenovationFileHandler.cs" />
     <Compile Include="FileHandler\ScheduledBasicRenovationFIleHandler.cs" />
     <Compile Include="FileHandler\ScheduledRelocationFileHandler.cs" />
     <Compile Include="FileHandler\UserFileHandler.cs" />
+    <Compile Include="Model\InvalidMedicineReport.cs" />
     <Compile Include="Model\Order.cs" />
+    <Compile Include="FileHandler\VacationRequestFileHandler.cs" />
+    <Compile Include="Model\ScheduledAdvancedRenovation.cs" />
     <Compile Include="Model\ScheduledBasicRenovation.cs" />
     <Compile Include="Model\TimeInterval.cs" />
     <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\Role.cs" />
     <Compile Include="Model\ScheduledRelocation.cs" />
     <Compile Include="Model\Specialization.cs" />
+    <Compile Include="Model\VacationRequest.cs" />
     <Compile Include="Repository\AppointmentRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
+    <Compile Include="Repository\InvalidMedicineReportRepository.cs" />
     <Compile Include="Repository\MedicalRecordsRepository.cs" />
     <Compile Include="Repository\MedicineRepository.cs" />
     <Compile Include="Repository\NotificationRepository.cs" />
     <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
     <Compile Include="Repository\RoomRepository.cs" />
+    <Compile Include="Repository\ScheduledAdvancedRenovationRepository.cs" />
     <Compile Include="Repository\ScheduledBasicRenovationRepository.cs" />
     <Compile Include="Repository\ScheduledRelocationRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
+    <Compile Include="Repository\VacationRequestRepository.cs" />
     <Compile Include="Service\AppointmentService.cs" />
     <Compile Include="Service\DoctorService.cs" />
     <Compile Include="Service\EmergencyService.cs" />
+    <Compile Include="Service\InvalidMedicineReportService.cs" />
     <Compile Include="Service\MedicalRecordsService.cs" />
     <Compile Include="Service\MedicineService.cs" />
     <Compile Include="Service\NotificationService.cs" />
     <Compile Include="Service\OrderService.cs" />
     <Compile Include="Service\PatientService.cs" />
     <Compile Include="Service\RoomService.cs" />
+    <Compile Include="Service\ScheduledAdvancedRenovationService.cs" />
     <Compile Include="Service\ScheduledBasicRenovationService.cs" />
     <Compile Include="Service\ScheduledRelocationService.cs" />
+    <Compile Include="Service\SystemTimer.cs" />
     <Compile Include="Service\TimeSchedulerService.cs" />
     <Compile Include="Service\UserService.cs" />
+    <Compile Include="Service\VacationRequestService.cs" />
+    <Compile Include="View\AddMedicineWindow.xaml.cs">
+      <DependentUpon>AddMedicineWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AddRoomWindow.xaml.cs">
       <DependentUpon>AddRoomWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AdvancedRenovationWindow.xaml.cs">
+      <DependentUpon>AdvancedRenovationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\BasicRenovationWindow.xaml.cs">
       <DependentUpon>BasicRenovationWindow.xaml</DependentUpon>
@@ -131,11 +154,20 @@
     <Compile Include="View\DoctorMedicalRecordsWindow.xaml.cs">
       <DependentUpon>DoctorMedicalRecordsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DoctorMedicineWindow.xaml.cs">
+      <DependentUpon>DoctorMedicineWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DoctorTherapyWindow.xaml.cs">
       <DependentUpon>DoctorTherapyWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DoctorVacationWindow.xaml.cs">
+      <DependentUpon>DoctorVacationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DoctorViewInfoWindow.xaml.cs">
       <DependentUpon>DoctorViewInfoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditMedicineWindow.xaml.cs">
+      <DependentUpon>EditMedicineWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EditRoomWindow.xaml.cs">
       <DependentUpon>EditRoomWindow.xaml</DependentUpon>
@@ -149,11 +181,17 @@
     <Compile Include="View\HandlingMedicalRecordsPage.xaml.cs">
       <DependentUpon>HandlingMedicalRecordsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ManagerMainWindow.xaml.cs">
       <DependentUpon>ManagerMainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ManagerRoomsWindow.xaml.cs">
       <DependentUpon>ManagerRoomsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MedicinePage.xaml.cs">
+      <DependentUpon>MedicinePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PatientView\PatientAppointmentsPage.xaml.cs">
       <DependentUpon>PatientAppointmentsPage.xaml</DependentUpon>
@@ -244,6 +282,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\AddMedicineWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AdvancedRenovationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\BasicRenovationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -268,11 +314,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\DoctorMedicineWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DoctorTherapyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\DoctorVacationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DoctorViewInfoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditMedicineWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -296,11 +354,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ManagerMainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ManagerRoomsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MedicinePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -507,7 +573,13 @@
     <Resource Include="Resources\Images\alert.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\fast-forward.png" />
+    <Resource Include="Resources\Data\MedicineData.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Data\ScheduledAdvancedRenovationData.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Data\InvalidMedicineReportData.txt" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\order.png" />
@@ -515,6 +587,8 @@
   <ItemGroup>
     <Resource Include="Resources\Data\OrderData.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Data\VacationRequestData.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

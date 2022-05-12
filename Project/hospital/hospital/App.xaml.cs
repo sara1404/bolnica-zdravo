@@ -12,6 +12,7 @@ using System.Threading;
 using ToastNotifications;
 using ToastNotifications.Position;
 using ToastNotifications.Lifetime;
+using System.Collections.Generic;
 
 namespace hospital
 {
@@ -23,6 +24,7 @@ namespace hospital
         public RoomRepository roomRepository;
         public ScheduledRelocationRepository scheduledRelocationRepository;
         public ScheduledBasicRenovationRepository scheduledBasicRenovationRepository;
+        public ScheduledAdvancedRenovationRepository scheduledAdvancedRenovationRepository;
         public NotificationRepository notificationRepository;
         public RoomController roomController { get; set; }
         public PatientController patientController { get; set; }
@@ -34,14 +36,16 @@ namespace hospital
         public OrderController orderController { get; set; }
         public ScheduledRelocationController scheduledRelocationController { get; set; }
         public ScheduledBasicRenovationController scheduledBasicRenovationController { get; set; }
+        public ScheduledAdvancedRenovationController scheduledAdvancedRenovationController { get; set; }
         public MedicineController medicineController { get; set; }
+
+        public VacationRequestController vacationRequestController { get; set; }
+        public InvalidMedicineReportController invalidMedicineReportController { get; set; }
 
         public EmergencyController emergencyController { get; set; }
 
         public Notifier Notifier { get; set; }
 
-        Thread relocationThread;
-        Thread renovationThread;
         Thread orderThread;
         public App()
         {
@@ -59,9 +63,15 @@ namespace hospital
 
             AppointmentRepository appointmentRepository = new AppointmentRepository();
             scheduledBasicRenovationRepository = new ScheduledBasicRenovationRepository();
-            TimeSchedulerService timeSchedulerService = new TimeSchedulerService(appointmentRepository, scheduledBasicRenovationRepository);
+           // TimeSchedulerService timeSchedulerService = new TimeSchedulerService(appointmentRepository, scheduledBasicRenovationRepository);
+
+            scheduledBasicRenovationRepository = new ScheduledBasicRenovationRepository();
+            scheduledAdvancedRenovationRepository = new ScheduledAdvancedRenovationRepository();
+            TimeSchedulerService timeSchedulerService = new TimeSchedulerService(appointmentRepository, scheduledBasicRenovationRepository, scheduledAdvancedRenovationRepository);
 
             ScheduledBasicRenovationService scheduledBasicRenovationService = new ScheduledBasicRenovationService(scheduledBasicRenovationRepository, timeSchedulerService);
+            scheduledBasicRenovationController = new ScheduledBasicRenovationController(scheduledBasicRenovationService);
+           // ScheduledBasicRenovationService scheduledBasicRenovationService = new ScheduledBasicRenovationService(scheduledBasicRenovationRepository, timeSchedulerService);
             scheduledBasicRenovationController = new ScheduledBasicRenovationController(scheduledBasicRenovationService);
 
             roomRepository = new RoomRepository();
@@ -84,6 +94,10 @@ namespace hospital
             MedicalRecordsService medicalRecordsService = new MedicalRecordsService(medicalRecordsRepository);
             mediicalRecordsController = new MedicalRecordsController(medicalRecordsService);
 
+
+            ScheduledAdvancedRenovationService scheduledAdvancedRenovationService = new ScheduledAdvancedRenovationService(scheduledAdvancedRenovationRepository, timeSchedulerService, roomService);
+            scheduledAdvancedRenovationController = new ScheduledAdvancedRenovationController(scheduledAdvancedRenovationService);
+
             scheduledRelocationRepository = new ScheduledRelocationRepository();
             ScheduledRelocationService scheduledRelocationService = new ScheduledRelocationService(scheduledRelocationRepository, timeSchedulerService);
             scheduledRelocationController = new ScheduledRelocationController(scheduledRelocationService);
@@ -92,19 +106,25 @@ namespace hospital
             MedicineService medicineService = new MedicineService(medicineRepository);
             medicineController = new MedicineController(medicineService);
 
+            VacationRequestRepository vacationRequestRepository = new VacationRequestRepository();
+            VacationRequestService vacationRequestService = new VacationRequestService(vacationRequestRepository);
+            vacationRequestController = new VacationRequestController(vacationRequestService);
+
+            InvalidMedicineReportRepository invalidMedicineReportRepository = new InvalidMedicineReportRepository();
+            InvalidMedicineReportService invalidMedicineReportService = new InvalidMedicineReportService(invalidMedicineReportRepository);
+            invalidMedicineReportController = new InvalidMedicineReportController(invalidMedicineReportService);
+            
+
             EmergencyService emergencyService = new EmergencyService(appointmentService, notificationRepository, doctorService, roomService);
             emergencyController = new EmergencyController(emergencyService);
             
             roomRepository.LoadRoomData();
             scheduledRelocationRepository.LoadRelocationData();
             scheduledBasicRenovationRepository.LoadRenovationData();
+            medicineRepository.LoadMedicineData();
 
 
-            relocationThread = new Thread(scheduledRelocationService.relocationTracker);
-            relocationThread.Start();
-
-            renovationThread = new Thread(scheduledBasicRenovationService.renovationTracker);
-            renovationThread.Start();
+            scheduledAdvancedRenovationRepository.LoadRenovationData();
 
             orderThread = new Thread(orderService.orderTracker);
             orderThread.Start();
@@ -123,6 +143,7 @@ namespace hospital
 
                 cfg.Dispatcher = Application.Current.Dispatcher;
             });
+            SystemTimer systemTimer = new SystemTimer(scheduledAdvancedRenovationService, scheduledBasicRenovationService, scheduledRelocationService);
         }
 
 
@@ -132,9 +153,8 @@ namespace hospital
             roomRepository.WriteRoomData();
             scheduledRelocationRepository.WriteRelocationData();
             scheduledBasicRenovationRepository.WriteRenovationData();
-            relocationThread.Abort();
-            renovationThread.Abort();
             orderThread.Abort();
+            scheduledAdvancedRenovationRepository.WriteRenovationData();
         }
     }
 }

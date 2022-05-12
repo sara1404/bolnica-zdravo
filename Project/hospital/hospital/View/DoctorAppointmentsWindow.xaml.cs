@@ -65,5 +65,10 @@ namespace hospital.View
                 new DoctorViewInfoWindow().Show();
             }
         }
+
+        private void btnOtherDoctor_Click(object sender, RoutedEventArgs e)
+        {
+            new DoctorMakeNewAppointmentForOtherDoctors().Show();
+        }
     }
 }

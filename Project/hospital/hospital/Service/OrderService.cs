@@ -43,19 +43,23 @@ namespace Service
             {
                 try
                 {
-                    Thread.Sleep(10000);
-                    foreach (Order order in FindAll())
-                    {
-                        if (order.OrderDate.AddDays(3)<DateTime.Now)
-                        {
-                            AddEquipmentInWarehouse(order);
-                            _orderRepository.DeleteById(order.Id);
-                        }
-                    }
+                    CheckTimeHasExpired();
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
+                }
+            }
+        }
+        private void CheckTimeHasExpired()
+        {
+            Thread.Sleep(10000);
+            foreach (Order order in FindAll())
+            {
+                if (order.OrderDate.AddDays(3) < DateTime.Now)
+                {
+                    AddEquipmentInWarehouse(order);
+                    _orderRepository.DeleteById(order.Id);
                 }
             }
         }

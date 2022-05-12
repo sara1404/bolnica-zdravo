@@ -3,6 +3,9 @@ using Repository;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Model;
+using hospital.Service;
+using hospital.Model;
 
 namespace Service
 {
@@ -10,11 +13,13 @@ namespace Service
     {
         private readonly RoomRepository roomRepository;
         private readonly AppointmentRepository _appointmentRepository;
+        private readonly ScheduledBasicRenovationService _basicRenovation;
 
-        public RoomService(RoomRepository roomRepository, AppointmentRepository appointmentRepository)
+        public RoomService(RoomRepository roomRepository, AppointmentRepository appointmentRepository, ScheduledBasicRenovationService basicRenovation)
         {
             this.roomRepository = roomRepository;
             this._appointmentRepository = appointmentRepository;
+            this._basicRenovation = basicRenovation;
         }
 
         public void Create(Room room)
@@ -71,9 +76,23 @@ namespace Service
                         break;
                     }
                 }
-                if (!isBussy) return room;
+                if (!isBussy && IsRenovation(room.id,dateTime)) return room;
             }
             return null;
+        }
+
+        public bool IsRenovation(string roomId, DateTime dateTime)
+        {
+            List<ScheduledBasicRenovation> renovationList = _basicRenovation.FindAll();
+            bool canMake = true;
+            foreach (ScheduledBasicRenovation renovation in renovationList)
+            {
+                if (renovation._Room.id == roomId && renovation._Interval._Start <= dateTime && renovation._Interval._End >= dateTime)
+                {
+                    canMake = false;
+                }
+            }
+            return canMake;
         }
     }
 }

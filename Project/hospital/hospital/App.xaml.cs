@@ -36,6 +36,8 @@ namespace hospital
         public ScheduledBasicRenovationController scheduledBasicRenovationController { get; set; }
         public MedicineController medicineController { get; set; }
 
+        public EmergencyController emergencyController { get; set; }
+
         public Notifier Notifier { get; set; }
 
         Thread relocationThread;
@@ -55,9 +57,15 @@ namespace hospital
             DoctorService doctorService = new DoctorService(doctorRepository);
             doctorController = new DoctorController(doctorService);
 
-            roomRepository = new RoomRepository();
             AppointmentRepository appointmentRepository = new AppointmentRepository();
-            RoomService roomService = new RoomService(roomRepository, appointmentRepository);
+            scheduledBasicRenovationRepository = new ScheduledBasicRenovationRepository();
+            TimeSchedulerService timeSchedulerService = new TimeSchedulerService(appointmentRepository, scheduledBasicRenovationRepository);
+
+            ScheduledBasicRenovationService scheduledBasicRenovationService = new ScheduledBasicRenovationService(scheduledBasicRenovationRepository, timeSchedulerService);
+            scheduledBasicRenovationController = new ScheduledBasicRenovationController(scheduledBasicRenovationService);
+
+            roomRepository = new RoomRepository();
+            RoomService roomService = new RoomService(roomRepository, appointmentRepository, scheduledBasicRenovationService);
             roomController = new RoomController(roomService);
 
             PatientRepository patientRepository = new PatientRepository();
@@ -76,17 +84,6 @@ namespace hospital
             MedicalRecordsService medicalRecordsService = new MedicalRecordsService(medicalRecordsRepository);
             mediicalRecordsController = new MedicalRecordsController(medicalRecordsService);
 
-
-
-
-
-            scheduledBasicRenovationRepository = new ScheduledBasicRenovationRepository();
-            TimeSchedulerService timeSchedulerService = new TimeSchedulerService(appointmentRepository, scheduledBasicRenovationRepository);
-
-            ScheduledBasicRenovationService scheduledBasicRenovationService = new ScheduledBasicRenovationService(scheduledBasicRenovationRepository, timeSchedulerService);
-            scheduledBasicRenovationController = new ScheduledBasicRenovationController(scheduledBasicRenovationService);
-
-
             scheduledRelocationRepository = new ScheduledRelocationRepository();
             ScheduledRelocationService scheduledRelocationService = new ScheduledRelocationService(scheduledRelocationRepository, timeSchedulerService);
             scheduledRelocationController = new ScheduledRelocationController(scheduledRelocationService);
@@ -94,6 +91,9 @@ namespace hospital
             MedicineRepository medicineRepository = new MedicineRepository();
             MedicineService medicineService = new MedicineService(medicineRepository);
             medicineController = new MedicineController(medicineService);
+
+            EmergencyService emergencyService = new EmergencyService(appointmentService, notificationRepository, doctorService, roomService);
+            emergencyController = new EmergencyController(emergencyService);
             
             roomRepository.LoadRoomData();
             scheduledRelocationRepository.LoadRelocationData();

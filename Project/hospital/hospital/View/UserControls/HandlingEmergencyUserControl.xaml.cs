@@ -29,6 +29,7 @@ namespace hospital.View.UserControls
         public ObservableCollection<Specialization> Specializations { get; set; }
         private PatientController _patientController;
         private AppointmentController _appointmentController;
+        private EmergencyController _emergencyController;
 
         private Notifier _notifier;
         public HandlingEmergencyUserControl()
@@ -37,6 +38,7 @@ namespace hospital.View.UserControls
             this.DataContext = this;
             App app = Application.Current as App;
             _patientController = app.patientController;
+            _emergencyController = app.emergencyController;
             _notifier = app.Notifier;
             _appointmentController = app.appointmentController;
             Patients = _patientController.FindAll();
@@ -54,11 +56,12 @@ namespace hospital.View.UserControls
             {
                 try
                 {
-                    _appointmentController.tryMakeEmergencyAppointment(cmbPatient.Text, GetSpecialization(cmbSpecialization.Text),(bool)cbOperation.IsChecked);
-                    _notifier.ShowSuccess("Successfully scheduled an emergency.");
+                    _emergencyController.tryMakeEmergencyAppointment(cmbPatient.Text, GetSpecialization(cmbSpecialization.Text),(bool)cbOperation.IsChecked);
+                    //_notifier.ShowSuccess("Successfully scheduled an emergency.");
                 }catch(Exception ex)
                 {
                     err.Text = ex.Message;
+                    Console.WriteLine(ex.Message);
                     btnShowRec.Visibility = Visibility.Visible;
                 }
             }
@@ -127,22 +130,46 @@ namespace hospital.View.UserControls
         private void cmbSpecialization_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             errSpecialization.Text = "";
+            btnShowRec.Visibility = Visibility.Collapsed;
+            err.Text = "";
         }
 
         private void cmbPatient_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             errPatient.Text = "";
+            btnShowRec.Visibility = Visibility.Collapsed;
+            err.Text = "";
         }
 
+        public static List<Appointment> OldAppointments { get; set; }
+        public static List<Appointment> NewAppointments { get; set; }
         private void btnShowRec_Click(object sender, RoutedEventArgs e)
         {
             
             suggestedDelayUserControl.Visibility = Visibility.Visible;
 
-            List<Appointment> oldAppointments = _appointmentController.FindAppointmentsForCancelation();
-            PreviewAppointment(oldAppointments,true);
-            List<Appointment> newAppointments = _appointmentController.FindSuggestedAppointments();
-            PreviewAppointment(newAppointments,false);
+            OldAppointments = _emergencyController.FindAppointmentsForCancelation();
+            PewviewButton(OldAppointments);
+            PreviewAppointment(OldAppointments, true);
+            NewAppointments = _emergencyController.FindSuggestedAppointments();
+            PreviewAppointment(NewAppointments, false);
+        }
+        private void PewviewButton(List<Appointment> appointments)
+        {
+            if (appointments.Count == 1)
+                suggestedDelayUserControl.btnSuggestedOne.Visibility = Visibility.Visible;
+            else if (appointments.Count == 2)
+            {
+                suggestedDelayUserControl.btnSuggestedOne.Visibility = Visibility.Visible;
+                suggestedDelayUserControl.btnSuggestedTwo.Visibility = Visibility.Visible;
+            }
+            else if (appointments.Count == 3)
+            {   
+                suggestedDelayUserControl.btnSuggestedOne.Visibility = Visibility.Visible;
+                suggestedDelayUserControl.btnSuggestedTwo.Visibility = Visibility.Visible;
+                suggestedDelayUserControl.btnSuggestedThree.Visibility = Visibility.Visible;
+            }
+            
         }
         private void PreviewAppointment(List<Appointment> appointments,bool isOld)
         {

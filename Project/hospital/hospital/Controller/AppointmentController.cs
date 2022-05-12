@@ -116,22 +116,6 @@ namespace Controller
         {
             return appointmentService.tryChangeAppointment(oldAppointment, newDate, newTime);
         }
-        public void tryMakeEmergencyAppointment(string patientUsername, Specialization requiredSpecialization,bool isOperation)
-        {
-            appointmentService.tryMakeEmergencyAppointment(patientUsername, requiredSpecialization,isOperation);
-        }
-        public List<Appointment> FindSuggestedAppointments()
-        {
-            return appointmentService.FindSuggestedAppointments();
-        }
-        public List<Appointment> FindAppointmentsForCancelation()
-        {
-            return appointmentService.FindAppointmentsForCancelation();
-        }
-        public void MoveAppointemntAndMakeNotification(Appointment oldAppointment, Appointment newAppoitnemnt)
-        {
-            appointmentService.MoveAppointemntAndMakeNotification((Appointment)oldAppointment, (Appointment)newAppoitnemnt);
-        }
         //------------------------------------------------
 
     }

@@ -30,7 +30,6 @@
                         <TextBlock x:Name="err" FontSize="20" TextWrapping="Wrap" FontWeight="DemiBold" Width="250" Foreground="red" Margin="121,249,75,76"/>
                         <Button x:Name="btnSubmit" Content="Submit"  VerticalAlignment="Top" Height="26" Width="75"  Margin="296,360,75,0" Click="btnSubmit_Click"/>
                         <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Height="26" Margin="78,360,0,0" Click="btnCancel_Click"/>
-
                     </Grid>
                 </StackPanel>
             </Border>

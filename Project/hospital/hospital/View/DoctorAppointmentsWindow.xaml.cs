@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,9 @@ namespace hospital.View
         public ObservableCollection<Appointment> Appointments { get; set; }
         private AppointmentController ac;
         private UserController uc;
+        private DoctorController dc;
+
+        private Doctor loggedInDoctor;
         public DoctorAppointmentsWindow()
         {
             InitializeComponent();
@@ -33,7 +37,19 @@ namespace hospital.View
             App app = Application.Current as App;
             ac = app.appointmentController;
             uc = app.userController;
-            Appointments = ac.GetAppointmentByDoctor(uc.CurentLoggedUser.Username);
+            dc = app.doctorController;
+            //Appointments = ac.GetAppointmentByDoctor(uc.CurentLoggedUser.Username);
+            Appointments = ac.GetAppointments();
+            loggedInDoctor = dc.GetByUsername(uc.CurentLoggedUser.Username);
+
+            ICollectionView appointmentsView = CollectionViewSource.GetDefaultView(ac.GetAppointments());
+            appointmentsView.Filter = DoctorFilter;
+        }
+
+        private bool DoctorFilter(object item)
+        {
+            Appointment appointment = item as Appointment;
+            return appointment.DoctorUsername.Equals(loggedInDoctor.Username);
         }
 
         private void Edit_Click(object sender, RoutedEventArgs e)

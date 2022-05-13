@@ -25,6 +25,9 @@ namespace hospital.View
     public partial class PatientAppointmentsPage : Page
     {
         private AppointmentController ac;
+        private PatientController pc;
+        private UserController uc;
+        private App app;
         public ObservableCollection<Appointment> Appointments
         {
             get;
@@ -33,8 +36,10 @@ namespace hospital.View
         public PatientAppointmentsPage()
         {
             InitializeComponent();
-            App app = Application.Current as App;
+            app = Application.Current as App;
             ac = app.appointmentController;
+            pc = app.patientController;
+            uc = app.userController;
             this.DataContext = this;
             User current = app.userController.CurentLoggedUser;
             Appointments = ac.GetAppointments();
@@ -46,20 +51,13 @@ namespace hospital.View
         private bool UserFilter(object item)
         {
             Appointment appointment = item as Appointment;
-            App app = Application.Current as App;
             User current = app.userController.CurentLoggedUser;
             return appointment.PatientUsername.Equals(current.Username);
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            foreach (Window window in Application.Current.Windows)
-            {
-                if (window.GetType() == typeof(PatientHomeWindow))
-                {
-                    (window as PatientHomeWindow).Main.Content = new PatientMainMenu();
-                }
-            }
+            app.PatientBackToMainMenu();
         }
 
         private void btnDelay_Click(object sender, RoutedEventArgs e)
@@ -69,8 +67,6 @@ namespace hospital.View
             {
                 if (ac.CanBeDelayed(selectedAppointment))
                 {
-                    //PatientDelayAppointment p = new PatientDelayAppointment();
-                    //NavigationService.Navigate(p, selectedAppointment);
                     new PatientDelayAppointment(selectedAppointment).Show();
                 }
                 else
@@ -80,10 +76,67 @@ namespace hospital.View
             }
         }
 
+        private void AddDelayOrCancelAppointment()
+        {
+            Patient currentPatient = pc.FindById(uc.CurentLoggedUser.Username);
+            currentPatient.DelayOrCancelAppointment.Add(DateTime.Now);
+            pc.UpdateByUsername(uc.CurentLoggedUser.Username, currentPatient);
+        }
+
+        private bool IsTroll()
+        {
+            Patient currentPatient = pc.FindById(uc.CurentLoggedUser.Username);
+            int delayOrCancelCnt = 0;
+            foreach(DateTime time in currentPatient.DelayOrCancelAppointment)
+            {
+                if (time >= DateTime.Now.AddDays(-30))
+                {
+                    delayOrCancelCnt++;
+                }
+            }
+            if(delayOrCancelCnt >= 5)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void BlockPatient()
+        {
+            Patient currentPatient = pc.FindById(uc.CurentLoggedUser.Username);
+            currentPatient.IsBlocked = true;
+            //pc.UpdateByUsername(uc.CurentLoggedUser.Username, currentPatient);
+            User blockedUser = uc.CurentLoggedUser;
+            blockedUser.IsBlocked = true;
+            uc.UpdateByUsername(uc.CurentLoggedUser.Username, blockedUser);
+        }
+        public void LogoutUser()
+        {
+            uc.CurentLoggedUser = null;
+            MainWindow mw = new MainWindow();
+            mw.Show();
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(PatientHomeWindow))
+                {
+                    (window as PatientHomeWindow).Close();
+                }
+            }
+        }
+
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             if (appointmentTable.SelectedIndex != -1)
             {
+                AddDelayOrCancelAppointment();
+                if (IsTroll())
+                {
+                    BlockPatient();
+                    LogoutUser();
+                }
                 ac.DeleteAppointment(Convert.ToInt32(appointmentTable.SelectedItem.ToString()));
             }
         }

@@ -61,7 +61,7 @@ namespace Repository
 
         public bool UpdateById(string id, Patient patient)
         {
-            Patient oldPatient=FindById(id);
+            Patient oldPatient = FindById(id);
             oldPatient.Username = patient.Username;
             oldPatient.FirstName = patient.FirstName;
             oldPatient.LastName = patient.LastName; 

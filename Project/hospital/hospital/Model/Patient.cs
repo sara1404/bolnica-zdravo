@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Security.Cryptography;
 using System.Text;
@@ -16,6 +18,8 @@ namespace Model
         private string email;
 
         private int recordID;
+
+        private List<DateTime> delayOrCancelAppointment;
 
         //public Appointment[] appointment;
 
@@ -71,6 +75,19 @@ namespace Model
         }
         public int RecordId { get { return recordID; } set { recordID = value; OnPropertyChanged(""); } }
 
-
+        public List<DateTime> DelayOrCancelAppointment {
+            get
+            { 
+                if (delayOrCancelAppointment != null)
+                {
+                    return delayOrCancelAppointment;
+                }
+                else
+                {
+                    delayOrCancelAppointment = new List<DateTime>();
+                    return delayOrCancelAppointment;
+                }
+            } 
+            set { delayOrCancelAppointment = value; } }
     }
 }

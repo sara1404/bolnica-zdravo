@@ -22,27 +22,20 @@ namespace hospital.View
     public partial class PatientDelayAppointment : Window
     {
         private AppointmentController ac;
+        private PatientController pc;
         private Appointment selectedAppointment;
         private UserController uc;
 
         public PatientDelayAppointment(Appointment a)
         {
             InitializeComponent();
-            /*foreach (Window window in Application.Current.Windows)
-            {
-                if (window.GetType() == typeof(PatientHomeWindow))
-                {
-                    selectedAppointment = (window as PatientHomeWindow).appointmentTable.SelectedItem as Appointment;
-                    tbxDoctor.Text = selectedAppointment.DoctorUsername;
-                    oldDate.SelectedDate = selectedAppointment.StartTime;
-                }
-            */
             selectedAppointment = a;
             tbxDoctor.Text = selectedAppointment.DoctorUsername;
             oldDate.SelectedDate = selectedAppointment.StartTime;
             App app = Application.Current as App;
             uc = app.userController;
             ac = app.appointmentController;
+            pc = app.patientController;
             newDate.DisplayDateStart = DateTime.Now > selectedAppointment.StartTime.AddDays(-4) ? DateTime.Now : selectedAppointment.StartTime.AddDays(-4);
             newDate.DisplayDateEnd = selectedAppointment.StartTime.AddDays(4);
             DataContext = this;
@@ -55,11 +48,66 @@ namespace hospital.View
                 appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)newDate.SelectedDate, selectedAppointment.DoctorUsername,uc.CurentLoggedUser.Username);
             }
         }
+        private void AddDelayOrCancelAppointment()
+        {
+            Patient currentPatient = pc.FindById(uc.CurentLoggedUser.Username);
+            currentPatient.DelayOrCancelAppointment.Add(DateTime.Now);
+            pc.UpdateByUsername(uc.CurentLoggedUser.Username, currentPatient);
+        }
+        private bool IsTroll()
+        {
+            Patient currentPatient = pc.FindById(uc.CurentLoggedUser.Username);
+            int delayOrCancelCnt = 0;
+            foreach (DateTime time in currentPatient.DelayOrCancelAppointment)
+            {
+                if (time >= DateTime.Now.AddDays(-30))
+                {
+                    delayOrCancelCnt++;
+                }
+            }
+            if (delayOrCancelCnt >= 5)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void BlockPatient()
+        {
+            Patient currentPatient = pc.FindById(uc.CurentLoggedUser.Username);
+            currentPatient.IsBlocked = true;
+            User blockedUser = uc.CurentLoggedUser;
+            blockedUser.IsBlocked = true;
+            uc.UpdateByUsername(uc.CurentLoggedUser.Username, blockedUser);
+        }
+
+        public void LogoutUser()
+        {
+            uc.CurentLoggedUser = null;
+            MainWindow mw = new MainWindow();
+            mw.Show();
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(PatientHomeWindow))
+                {
+                    (window as PatientHomeWindow).Close();
+                }
+            }
+        }
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
             if(appointmentTable.SelectedItem != null)
             {
+                AddDelayOrCancelAppointment();
+                if (IsTroll())
+                {
+                    BlockPatient();
+                    LogoutUser();
+                }
                 ac.UpdateAppointment(selectedAppointment, (Appointment)appointmentTable.SelectedItem);
                 Close();
             }

@@ -64,7 +64,12 @@ namespace hospital.View
 
         private void btnDoctorGrading_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new PatientGradingPage();
+            Main.Content = new PatientHospitalPoll();
+        }
+
+        private void btnDoctorPoll_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new PatientDoctorPoll();
         }
     }
 }

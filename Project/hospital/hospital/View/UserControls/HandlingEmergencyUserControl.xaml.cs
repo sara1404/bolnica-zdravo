@@ -17,6 +17,8 @@ using Model;
 using Controller;
 using ToastNotifications;
 using ToastNotifications.Messages;
+using ToastNotifications.Position;
+using ToastNotifications.Lifetime;
 
 namespace hospital.View.UserControls
 {
@@ -31,7 +33,7 @@ namespace hospital.View.UserControls
         private AppointmentController _appointmentController;
         private EmergencyController _emergencyController;
 
-        private Notifier _notifier;
+        private Notifier Notifier { get; set; }
         public HandlingEmergencyUserControl()
         {
             InitializeComponent();
@@ -39,11 +41,12 @@ namespace hospital.View.UserControls
             App app = Application.Current as App;
             _patientController = app.patientController;
             _emergencyController = app.emergencyController;
-            _notifier = app.Notifier;
             _appointmentController = app.appointmentController;
             Patients = _patientController.FindAll();
             Specializations = new ObservableCollection<Specialization>(Enum.GetValues(typeof(Specialization)).Cast<Specialization>().ToList());
+            Notifier = GetNotifier();
         }
+
 
         private void btnGuest_Click(object sender, RoutedEventArgs e)
         {
@@ -57,7 +60,7 @@ namespace hospital.View.UserControls
                 try
                 {
                     _emergencyController.tryMakeEmergencyAppointment(cmbPatient.Text, GetSpecialization(cmbSpecialization.Text),(bool)cbOperation.IsChecked);
-                    //_notifier.ShowSuccess("Successfully scheduled an emergency.");
+                    Notifier.ShowSuccess("Successfully scheduled an emergency.");
                 }catch(Exception ex)
                 {
                     err.Text = ex.Message;
@@ -199,6 +202,27 @@ namespace hospital.View.UserControls
                 suggestedDelayUserControl.new2.Text = "Patient: " + appointments[1].patientUsername + "\n" + "Doctor: " + appointments[1].doctorUsername + "\n" + appointments[1].StartTime;
             else if (button == "new3")
                 suggestedDelayUserControl.new3.Text = "Patient: " + appointments[2].patientUsername + "\n" + "Doctor: " + appointments[2].doctorUsername + "\n" + appointments[2].StartTime;
+        }
+
+
+        
+
+        private Notifier GetNotifier()
+        {
+            return new Notifier(cfg =>
+            {
+                cfg.PositionProvider = new WindowPositionProvider(
+                    parentWindow: Application.Current.MainWindow,
+                    corner: Corner.TopRight,
+                    offsetX: 10,
+                    offsetY: 10);
+
+                cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+                    notificationLifetime: TimeSpan.FromSeconds(3),
+                    maximumNotificationCount: MaximumNotificationCount.FromCount(5));
+
+                cfg.Dispatcher = Application.Current.Dispatcher;
+            });
         }
     }
 }

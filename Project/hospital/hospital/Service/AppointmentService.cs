@@ -530,7 +530,7 @@ namespace Service
                     newAppointmet.patientUsername = oldAppointment.patientUsername;
                     Update(oldAppointment, newAppointmet);
                     notificationRepository.Create(new Notification(oldAppointment.PatientUsername));
-                    notificationRepository.Create(new Notification(oldAppointment.DoctorUsername));
+                    notificationRepository.Create(new Notification (oldAppointment.doctorUsername));
                     return true;
                 }
             }

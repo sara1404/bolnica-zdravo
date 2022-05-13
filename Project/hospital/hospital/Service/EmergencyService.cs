@@ -38,8 +38,7 @@ namespace Service
             {
                 Console.WriteLine(ex.ToString());
             }
-            _notificationRepository.Create(new Notification(oldAppointment.PatientUsername));
-            _notificationRepository.Create(new Notification(oldAppointment.DoctorUsername));
+            MakeNotification(oldAppointment.PatientUsername,oldAppointment.doctorUsername);
         }
 
         public List<DateTime> MakeTimeSlotsNextTwoHours()
@@ -122,6 +121,7 @@ namespace Service
                 {
                     app.RoomId = _roomService.FindRoomForOperationByTime(app.StartTime).id;
                     _appointmentService.Create(app);
+                    MakeNotification(app.patientUsername, app.doctorUsername);
                     return;
                 }
             }
@@ -146,9 +146,14 @@ namespace Service
             else
             {
                 _appointmentService.Create(availableAppointment[0]);
+                MakeNotification(patientUsername, availableAppointment[0].doctorUsername);
             }
         }
-
+        private void MakeNotification(string patientUsername,string doctorUsername)
+        {
+            _notificationRepository.Create(new Notification(patientUsername));
+            _notificationRepository.Create(new Notification(doctorUsername));
+        }
         private DateTime FindNearestBusyTimeSlot()
         {
             DateTime currentDateAndTime = DateTime.Now;

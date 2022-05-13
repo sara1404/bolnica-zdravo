@@ -20,7 +20,7 @@ namespace Model
 
         public Notification() { }
         public Notification(string username) {
-            Username = username;
+            this.username = username;
         }
         public Notification(DateTime startTime, string text)
         {
@@ -106,7 +106,7 @@ namespace Model
             }
         }
 
-        public string Username { get; set; }
+        public string Username { get { return username; } set { username = value; } }
         public string Text { get; set; }
     }
 }

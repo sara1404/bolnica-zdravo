@@ -66,7 +66,7 @@ namespace hospital.View
         {
             this.Dispatcher.Invoke(() =>
             {
-                notifier.ShowInformation("Appointment has been moved. Look new appointment.");
+                notifier.ShowInformation("Check appointments");
             });
         }
         Notifier notifier = new Notifier(cfg =>

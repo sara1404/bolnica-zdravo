@@ -54,7 +54,15 @@ namespace hospital.Repository
 
         public List<PollBlueprint> GetDoctorPollResults()
         {
-            throw new NotImplementedException();
+            List<PollBlueprint> retVal = new List<PollBlueprint>();
+            foreach (PollBlueprint poll in pollResults)
+            {
+                if (poll.Type == PollType.DOCTOR_POLL)
+                {
+                    retVal.Add(poll);
+                }
+            }
+            return retVal;
         }
     }
 }

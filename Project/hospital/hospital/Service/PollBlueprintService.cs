@@ -24,9 +24,26 @@ namespace hospital.Service
             return pbr.GetHospitalPollBlueprint();
         }
 
+        public PollBlueprint GetDoctorPollBlueprint()
+        {
+            return pbr.GetDoctorPollBlueprint();
+        }
+
         public List<PollBlueprint> GetHospitalPollResults()
         {
             return prr.GetHospitalPollResults();
+        }
+
+        public bool AppointmentPollAlreadyFilled(int appointmentId)
+        {
+            foreach(PollBlueprint poll in prr.GetDoctorPollResults())
+            {
+                if(poll.AppointmentId == appointmentId)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void SavePoll(PollBlueprint poll)

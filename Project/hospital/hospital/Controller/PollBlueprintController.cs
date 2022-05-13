@@ -17,17 +17,35 @@ namespace hospital.Controller
             pbs = _pbs;
         }
         
-        public PollBlueprint GetHospitalPoll()
+        public PollBlueprint GetHospitalPollBlueprint()
         {
             return pbs.GetHospitalPollBlueprint();
+        }
+
+        public PollBlueprint GetDoctorPollBlueprint()
+        {
+            return pbs.GetDoctorPollBlueprint();
         }
 
         public List<PollQuestion> GetHospitalPollQuestions()
         {
             List<PollQuestion> retVal = new List<PollQuestion>();
-            foreach(PollCategory category in pbs.GetHospitalPollBlueprint().Categories)
+            foreach(PollCategory category in GetHospitalPollBlueprint().Categories)
             {
                 foreach(PollQuestion question in category.PollQuestions)
+                {
+                    retVal.Add(question);
+                }
+            }
+            return retVal;
+        }
+
+        public List<PollQuestion> GetDoctorPollQuestions()
+        {
+            List<PollQuestion> retVal = new List<PollQuestion>();
+            foreach (PollCategory category in GetDoctorPollBlueprint().Categories)
+            {
+                foreach (PollQuestion question in category.PollQuestions)
                 {
                     retVal.Add(question);
                 }
@@ -45,6 +63,11 @@ namespace hospital.Controller
                 }
             }
             return false;
+        }
+
+        public bool AppointmentPollAlreadyFilled(int appointmentId)
+        {
+            return pbs.AppointmentPollAlreadyFilled(appointmentId);
         }
 
         public void SavePoll(PollBlueprint poll)

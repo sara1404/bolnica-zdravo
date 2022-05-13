@@ -207,6 +207,9 @@
     <Compile Include="View\PatientView\PatientDelayAppointment.xaml.cs">
       <DependentUpon>PatientDelayAppointment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PatientView\PatientDoctorPoll.xaml.cs">
+      <DependentUpon>PatientDoctorPoll.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PatientView\PatientGradingPage.xaml.cs">
       <DependentUpon>PatientGradingPage.xaml</DependentUpon>
     </Compile>
@@ -386,6 +389,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PatientView\PatientDelayAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientView\PatientDoctorPoll.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

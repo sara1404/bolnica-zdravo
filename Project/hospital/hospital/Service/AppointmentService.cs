@@ -362,22 +362,15 @@ namespace Service
 
         public ObservableCollection<Appointment> GetByPatient(string username)
         {
-            /*List<Appointment> otherPatients = new List<Appointment>();
+            ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
             foreach (Appointment a in appointmentRepository.FindAll())
             {
-                if (!a.PatientUsername.Equals(username))
+                if (a.PatientUsername.Equals(username))
                 {
-                    // finding all other patients
-                    otherPatients.Add(a);
+                    retVal.Add(a);
                 }
             }
-            foreach (Appointment a in otherPatients)
-            {
-                // deleting those other patients
-                appointmentRepository.DeleteById(a.Id);
-            }
-            //return retVal;*/
-            return appointmentRepository.FindAll();
+            return retVal;
         }
 
         public ObservableCollection<Appointment> GetByDoctorSpecialization(Specialization specialization)

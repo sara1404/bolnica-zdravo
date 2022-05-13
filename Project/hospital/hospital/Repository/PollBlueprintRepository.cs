@@ -40,19 +40,51 @@ namespace hospital.Repository
                 }),
             };
             blueprints.Add(hospitalPoll);
+
+            PollBlueprint doctorPoll = new PollBlueprint();
+            doctorPoll.Type = PollType.DOCTOR_POLL;
+            doctorPoll.PollName = "Doctor poll";
+            doctorPoll.Categories = new List<PollCategory>()
+            {
+                new PollCategory(0, "A", new List<PollQuestion>()
+                {
+                    new PollQuestion(0, "Aaaa"),
+                    new PollQuestion(1, "Bbbb"),
+                    new PollQuestion(2, "Cccc"),
+                }),
+                new PollCategory(1, "B", new List<PollQuestion>()
+                {
+                    new PollQuestion(3, "Aaaa"),
+                    new PollQuestion(4, "Bbbb"),
+                    new PollQuestion(5, "Cccc"),
+                }),
+                new PollCategory(2, "C", new List<PollQuestion>()
+                {
+                    new PollQuestion(6, "Aaaa"),
+                    new PollQuestion(7, "Bbbb"),
+                    new PollQuestion(8, "Cccc"),
+                }),
+            };
+            blueprints.Add(doctorPoll);
         }
 
-        public ObservableCollection<PollBlueprint> GetAll()
-        {
-            return blueprints;
-        }
-
-        // maybe add GetHospitalPoll() and GetDoctorPoll() methods 
         public PollBlueprint GetHospitalPollBlueprint()
         {
             foreach(PollBlueprint blueprint in blueprints)
             {
                 if(blueprint.Type == PollType.HOSPITAL_POLL)
+                {
+                    return blueprint;
+                }
+            }
+            return null;
+        }
+
+        public PollBlueprint GetDoctorPollBlueprint()
+        {
+            foreach (PollBlueprint blueprint in blueprints)
+            {
+                if (blueprint.Type == PollType.DOCTOR_POLL)
                 {
                     return blueprint;
                 }

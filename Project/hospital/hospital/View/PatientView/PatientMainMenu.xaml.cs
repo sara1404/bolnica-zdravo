@@ -66,5 +66,10 @@ namespace hospital.View
         {
             Main.Content = new PatientHospitalPoll();
         }
+
+        private void btnDoctorPoll_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new PatientDoctorPoll();
+        }
     }
 }

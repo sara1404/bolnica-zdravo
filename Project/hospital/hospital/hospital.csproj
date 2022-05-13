@@ -159,6 +159,9 @@
     <Compile Include="View\DoctorHomeWindow.xaml.cs">
       <DependentUpon>DoctorHomeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DoctorMakeNewAppointmentForOtherDoctors.xaml.cs">
+      <DependentUpon>DoctorMakeNewAppointmentForOtherDoctors.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DoctorMedicalRecordsWindow.xaml.cs">
       <DependentUpon>DoctorMedicalRecordsWindow.xaml</DependentUpon>
     </Compile>
@@ -206,6 +209,9 @@
     </Compile>
     <Compile Include="View\PatientView\PatientDelayAppointment.xaml.cs">
       <DependentUpon>PatientDelayAppointment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientView\PatientDoctorPoll.xaml.cs">
+      <DependentUpon>PatientDoctorPoll.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PatientView\PatientGradingPage.xaml.cs">
       <DependentUpon>PatientGradingPage.xaml</DependentUpon>
@@ -321,6 +327,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\DoctorMakeNewAppointmentForOtherDoctors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DoctorMedicalRecordsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -386,6 +396,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PatientView\PatientDelayAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientView\PatientDoctorPoll.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

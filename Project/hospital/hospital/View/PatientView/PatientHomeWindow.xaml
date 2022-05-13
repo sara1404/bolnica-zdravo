@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:hospital.View"
         mc:Ignorable="d"
-        Title="PatientHomeWindow" Height="450" Width="800">
-    <Grid>
-        <Frame NavigationUIVisibility="Hidden" x:Name="Main" HorizontalAlignment="Left" Height="421" VerticalAlignment="Top" Width="794"/>
+        Title="PatientHomeWindow" Height="489.062" Width="821.751">
+    <Grid Margin="0,0,4,0">
+        <Frame NavigationUIVisibility="Hidden" x:Name="Main" Margin="0,0,0,0" Height="450" VerticalAlignment="Top" HorizontalAlignment="Left" Width="800"/>
 
     </Grid>
 </Window>

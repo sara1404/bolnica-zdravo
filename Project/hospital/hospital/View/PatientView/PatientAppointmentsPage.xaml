@@ -9,15 +9,15 @@
       Title="PatientAppointmentsPage">
 
     <Grid>
-        <DataGrid x:Name="appointmentTable" ItemsSource="{Binding Appointments}" AutoGenerateColumns="True" IsReadOnly="True" HorizontalAlignment="Left" Height="355" Margin="10,20,0,0" VerticalAlignment="Top" Width="774">
+        <DataGrid x:Name="appointmentTable" ItemsSource="{Binding Appointments}" AutoGenerateColumns="True" IsReadOnly="True" HorizontalAlignment="Left" Height="378" Margin="10,20,0,0" VerticalAlignment="Top" Width="780">
             <!--<DataGrid.Columns>
             <DataGridTextColumn Header="Doctor name" Binding="{Binding Doctor}"/>
             <DataGridTextColumn Header="Date" Binding="{Binding StartTime}" Width="*"/>
         </DataGrid.Columns>-->
         </DataGrid>
-        <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="10,391,0,0" VerticalAlignment="Top" Width="75" Click="btnBack_Click"/>
-        <Button x:Name="btnDelay" Content="Delay" HorizontalAlignment="Left" Margin="575,391,0,0" VerticalAlignment="Top" Width="75" Click="btnDelay_Click"/>
-        <Button x:Name="btnCancel" Content="Cancel appointment" HorizontalAlignment="Left" Margin="666,391,0,0" VerticalAlignment="Top" Width="118" Click="btnCancel_Click"/>
+        <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="10,420,0,0" VerticalAlignment="Top" Width="75" Click="btnBack_Click"/>
+        <Button x:Name="btnDelay" Content="Delay" HorizontalAlignment="Left" Margin="576,420,0,0" VerticalAlignment="Top" Width="75" Click="btnDelay_Click"/>
+        <Button x:Name="btnCancel" Content="Cancel appointment" HorizontalAlignment="Left" Margin="672,420,0,0" VerticalAlignment="Top" Width="118" Click="btnCancel_Click"/>
 
     </Grid>
 </Page>

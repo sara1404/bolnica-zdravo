@@ -15,7 +15,9 @@ using System.Windows.Shapes;
 using Controller;
 using Model;
 using ToastNotifications;
+using ToastNotifications.Lifetime;
 using ToastNotifications.Messages;
+using ToastNotifications.Position;
 
 namespace hospital.View.UserControls
 {
@@ -28,20 +30,20 @@ namespace hospital.View.UserControls
         private readonly EmergencyController _emergencyController;
         private List<Appointment> oldAppointments;
         private List<Appointment> newAppointments;
-        public Notifier _notifier;
+        public Notifier Notifier;
         public SuggestedDelayUserControl()
         {
             InitializeComponent();
             App app = Application.Current as App;
             _emergencyController = app.emergencyController;
-            _notifier = app.Notifier;
+            Notifier = GetNotifier();
             _appointmentController = app.appointmentController;
         }
         private void btnSuggestedOne_Click(object sender, RoutedEventArgs e)
         {
             InitializeAppointments();
             _emergencyController.MoveAppointemntAndMakeNotification(oldAppointments[0], newAppointments[0]);
-            //_notifier.ShowSuccess("Successfully scheduled an emergency.");
+            Notifier.ShowSuccess("Successfully scheduled an emergency.");
             hiddenAllButton();
             this.Visibility = Visibility.Collapsed;
         }
@@ -50,7 +52,7 @@ namespace hospital.View.UserControls
         {
             InitializeAppointments();
             _emergencyController.MoveAppointemntAndMakeNotification(oldAppointments[2], newAppointments[2]);
-            //_notifier.ShowSuccess("Successfully scheduled an emergency.");
+            Notifier.ShowSuccess("Successfully scheduled an emergency.");
             hiddenAllButton();
             this.Visibility = Visibility.Collapsed;
         }
@@ -59,7 +61,7 @@ namespace hospital.View.UserControls
         {
             InitializeAppointments();
             _emergencyController.MoveAppointemntAndMakeNotification(oldAppointments[1], newAppointments[1]);
-            //_notifier.ShowSuccess("Successfully scheduled an emergency.");
+            Notifier.ShowSuccess("Successfully scheduled an emergency.");
             hiddenAllButton();
             this.Visibility = Visibility.Collapsed;
         }
@@ -74,6 +76,23 @@ namespace hospital.View.UserControls
             btnSuggestedTwo.Visibility = Visibility.Collapsed;
             btnSuggestedThree.Visibility = Visibility.Collapsed;
 
+        }
+        private Notifier GetNotifier()
+        {
+            return new Notifier(cfg =>
+            {
+                cfg.PositionProvider = new WindowPositionProvider(
+                    parentWindow: Application.Current.MainWindow,
+                    corner: Corner.TopRight,
+                    offsetX: 10,
+                    offsetY: 10);
+
+                cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+                    notificationLifetime: TimeSpan.FromSeconds(3),
+                    maximumNotificationCount: MaximumNotificationCount.FromCount(5));
+
+                cfg.Dispatcher = Application.Current.Dispatcher;
+            });
         }
     }
 }

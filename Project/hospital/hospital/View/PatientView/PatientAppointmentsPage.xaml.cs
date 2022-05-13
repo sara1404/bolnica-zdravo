@@ -113,6 +113,19 @@ namespace hospital.View
             blockedUser.IsBlocked = true;
             uc.UpdateByUsername(uc.CurentLoggedUser.Username, blockedUser);
         }
+        public void LogoutUser()
+        {
+            uc.CurentLoggedUser = null;
+            MainWindow mw = new MainWindow();
+            mw.Show();
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(PatientHomeWindow))
+                {
+                    (window as PatientHomeWindow).Close();
+                }
+            }
+        }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
@@ -122,6 +135,7 @@ namespace hospital.View
                 if (IsTroll())
                 {
                     BlockPatient();
+                    LogoutUser();
                 }
                 ac.DeleteAppointment(Convert.ToInt32(appointmentTable.SelectedItem.ToString()));
             }

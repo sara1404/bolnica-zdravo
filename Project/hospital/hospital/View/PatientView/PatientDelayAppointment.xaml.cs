@@ -84,6 +84,20 @@ namespace hospital.View
             uc.UpdateByUsername(uc.CurentLoggedUser.Username, blockedUser);
         }
 
+        public void LogoutUser()
+        {
+            uc.CurentLoggedUser = null;
+            MainWindow mw = new MainWindow();
+            mw.Show();
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(PatientHomeWindow))
+                {
+                    (window as PatientHomeWindow).Close();
+                }
+            }
+        }
+
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
             if(appointmentTable.SelectedItem != null)
@@ -92,6 +106,7 @@ namespace hospital.View
                 if (IsTroll())
                 {
                     BlockPatient();
+                    LogoutUser();
                 }
                 ac.UpdateAppointment(selectedAppointment, (Appointment)appointmentTable.SelectedItem);
                 Close();

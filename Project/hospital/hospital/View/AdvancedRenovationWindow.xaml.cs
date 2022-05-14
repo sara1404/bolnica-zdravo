@@ -32,6 +32,7 @@ namespace hospital.View
             roomController = app.roomController;
             scheduledAdvancedRenovationController = app.scheduledAdvancedRenovationController;
             listViewRooms.ItemsSource = roomController.FindAll();
+            scheduleBtn.IsEnabled = false;
         }
 
         private void Show_Appointments_Click(object sender, KeyEventArgs e)
@@ -69,11 +70,6 @@ namespace hospital.View
         private void DisplayError() {
             durationRenovation.Text = "Invalid input";
             durationRenovation.Foreground = Brushes.Red;
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
 
         private void Schedule_Advanced_Renovation(object sender, RoutedEventArgs e)
@@ -119,6 +115,25 @@ namespace hospital.View
             if (rooms[0].floor != rooms[1].floor || rooms[0].floor != room.floor)
                 return false;
             return true;
+        }
+
+        private void IsFormFilled(object sender, SelectionChangedEventArgs e)
+        {
+            IsFormFilledValidation();
+        }
+
+        private void IsFormFilled(object sender, TextChangedEventArgs e)
+        {
+            IsFormFilledValidation();
+        }
+
+        private void IsFormFilledValidation() {
+            if (listViewRooms.SelectedItems.Count != 0 && renovationListView.SelectedItems.Count != 0 && newRoom.Text != "" && newCode.Text != "" && newPurpose.Text != ""
+                && floor.Text != "" && description.Text != "") {
+                scheduleBtn.IsEnabled = true;
+                return;
+            }
+            scheduleBtn.IsEnabled = false;
         }
     }
 }

@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:hospital.View"
         mc:Ignorable="d"
         Title="AdvancedRenovationWindow" Height="450" Width="800">
-    <Grid>
+    <Window.Resources>
+        <ResourceDictionary Source="ManagerResources.xaml"></ResourceDictionary>
+    </Window.Resources>
+    <Grid Background="#1d1b1f">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -22,8 +25,8 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="4">
-            <ListView x:Name="listViewRooms" Height="252" Margin="27,0,25,0" SelectionMode="Multiple">
+        <StackPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="4" Background="#1d1b1f">
+            <ListView x:Name="listViewRooms" Height="252" Margin="27,0,25,0" SelectionMode="Multiple" Background="#1d1b1f" BorderBrush="#bc84fc" SelectionChanged="IsFormFilled">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Rooms"/>
@@ -33,7 +36,7 @@
         </StackPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="4" Margin="0,0,16,51">
-            <Border HorizontalAlignment="Left" Height="51" VerticalAlignment="Top" Width="240" BorderBrush="Black" BorderThickness="1,1,1,0">
+            <Border HorizontalAlignment="Left" Height="51" VerticalAlignment="Top" Width="240" BorderThickness="1,1,1,0">
                 <StackPanel Orientation="Horizontal" Margin="0,0,16,0">
                     <StackPanel Orientation="Vertical" VerticalAlignment="center">
                         <Label Content="Renovation duration in days:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="162" Height="28"/>
@@ -44,9 +47,9 @@
                 </StackPanel>
 
             </Border>
-            <ListView Height="151" VerticalAlignment="Top" x:Name="renovationListView" Margin="0,0,8,0"/>
+            <ListView Height="151" VerticalAlignment="Top" x:Name="renovationListView" Margin="0,0,8,0" BorderThickness="1" Background="#1d1b1f" SelectionChanged="IsFormFilled"/>
         </StackPanel>
-        <Border  BorderBrush="Black" BorderThickness="1"  Grid.Column="2" Grid.Row="1" Grid.RowSpan="4" Margin="10,0,31,10">
+        <Border  BorderThickness="1"  Grid.Column="2" Grid.Row="1" Grid.RowSpan="4" Margin="10,0,31,10">
             <Grid  Grid.Column="2" Grid.Row="1" Grid.RowSpan="4" Margin="21,0,21,38">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -66,28 +69,28 @@
                 <Label Content="New room information" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="10,0,1,0" Width="169"/>
 
                 <Label Content="Name:"  Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,1,21,3" Width="53"/>
-                <TextBox  x:Name="newRoom"  Grid.Row="1"  TextChanged="TextBox_TextChanged" Grid.ColumnSpan="2" Margin="91,7,10,4"/>
+                <TextBox  x:Name="newRoom"  Grid.Row="1" Grid.ColumnSpan="2" Margin="91,7,10,4" TextChanged="IsFormFilled"/>
 
                 <Label Content="Code:"  Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,2,27,2" Grid.RowSpan="2" Width="47" RenderTransformOrigin="0.319,0.436"/>
-                <TextBox x:Name="newCode"  Grid.Row="2"  TextChanged="TextBox_TextChanged" Grid.ColumnSpan="2" Margin="91,7,10,4" Grid.RowSpan="2"/>
+                <TextBox x:Name="newCode"  Grid.Row="2"  Grid.ColumnSpan="2" Margin="91,7,10,4" Grid.RowSpan="2" TextChanged="IsFormFilled"/>
 
 
                 <Label Content="Purpose:"  Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,2,15,2" Width="59"/>
-                <TextBox x:Name="newPurpose"  Grid.Row="4"  TextChanged="TextBox_TextChanged" Grid.ColumnSpan="2" Margin="91,7,10,4"/>
+                <TextBox x:Name="newPurpose"  Grid.Row="4"  TextChanged="IsFormFilled" Grid.ColumnSpan="2" Margin="91,7,10,4"/>
 
                 <Label Content="Floor:"  Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,3,21,1" Width="53"/>
-                <TextBox x:Name="floor"  Grid.Row="5"  TextChanged="TextBox_TextChanged" Grid.ColumnSpan="2" Margin="91,7,10,4"/>
+                <TextBox x:Name="floor"  Grid.Row="5"  TextChanged="IsFormFilled" Grid.ColumnSpan="2" Margin="91,7,10,4"/>
 
                 <Label Content="Renovation description:"  Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,4,22,0" Width="142"/>
-                <TextBox x:Name="description"  Grid.Row="7" Grid.RowSpan="2"  TextChanged="TextBox_TextChanged" Grid.ColumnSpan="2" Margin="21,9.571,11,-6.571"/>
+                <TextBox x:Name="description"  Grid.Row="7" Grid.RowSpan="2"  TextChanged="IsFormFilled" Grid.ColumnSpan="2" Margin="21,9.571,11,-6.571"/>
 
 
 
 
             </Grid>
         </Border>
-        <Button Content="SCHEDULE" HorizontalAlignment="Left" Margin="207,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="132" Grid.ColumnSpan="2" Height="39" Click="Schedule_Advanced_Renovation"/>
-        <Button Content="CANCEL" HorizontalAlignment="Left" Margin="122,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="132" Height="39" Grid.Column="1"/>
+        <Button x:Name="scheduleBtn" Content="SCHEDULE" HorizontalAlignment="Left" Margin="207,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="132" Grid.ColumnSpan="2" Height="39" Click="Schedule_Advanced_Renovation" FontSize="14"/>
+        <Button Content="CANCEL" HorizontalAlignment="Left" Margin="122,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="132" Height="39" Grid.Column="1" FontSize="14"/>
 
     </Grid>
 </Window>

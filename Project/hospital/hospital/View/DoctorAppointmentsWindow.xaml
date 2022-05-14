@@ -7,12 +7,12 @@
         mc:Ignorable="d"
         Title="DoctorAppointmentsWindow" Height="450" Width="800">
     <Grid>
-        <DataGrid x:Name="Table" ItemsSource="{Binding Path=Appointments}" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns ="True"  HorizontalAlignment="Left" Height="253" Margin="211,10,0,0" VerticalAlignment="Top" Width="573" />
-        <Button Content="New" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="86" Click="New_Click"/>
-        <Button Content="Edit" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" Width="75" Click="Edit_Click"/>
-        <Button Content="Delete" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top" Width="75" Click="Delete_Click"/>
-        <Button Content="View Info" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top" Width="75" Click="Info_Click"/>
-        <Button Content="For Other Doctor" x:Name="btnOtherDoctor" HorizontalAlignment="Left" Margin="10,248,0,0" VerticalAlignment="Top" Width="110" Height="21" Click="btnOtherDoctor_Click"/>
+        <DataGrid x:Name="Table" ItemsSource="{Binding Path=Appointments}" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns ="True"  HorizontalAlignment="Left" Height="400" Margin="129,10,0,0" VerticalAlignment="Top" Width="655" />
+        <Button Content="New" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="114" Click="New_Click" Height="50"/>
+        <Button Content="Edit" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" Width="114" Click="Edit_Click" Height="50"/>
+        <Button Content="Delete" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top" Width="114" Click="Delete_Click" RenderTransformOrigin="0.603,-0.861" Height="50"/>
+        <Button Content="View Info" HorizontalAlignment="Left" Margin="10,175,0,0" VerticalAlignment="Top" Width="114" Click="Info_Click" Height="50"/>
+        <Button Content="For Other Doctor" x:Name="btnOtherDoctor" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" Width="114" Height="50" Click="btnOtherDoctor_Click"/>
 
     </Grid>
 </Window>

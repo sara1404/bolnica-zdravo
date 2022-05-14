@@ -7,12 +7,16 @@
         mc:Ignorable="d"
         Title="DoctorHomeWindow" Height="450" Width="800">
     <Grid >
-        <Button Content="Appointments" HorizontalAlignment="Left" Margin="46,52,0,0" VerticalAlignment="Top" Width="95" Click="Appointment_Click"/>
-        <Button Content="Medical Records" HorizontalAlignment="Left" Margin="46,116,0,0" VerticalAlignment="Top" Width="95" Click="MedicalRecord_Click"/>
-        <Button Content="Therapy" HorizontalAlignment="Left" Margin="46,173,0,0" VerticalAlignment="Top" Width="95" Click="Therapy_Click"/>
-        <Button Content="Logout" x:Name="btnLogout" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="688,52,0,0" Click="btnLogout_Click"/>
-        <Button Content="Vacation Request" HorizontalAlignment="Left" Margin="201,355,0,0" VerticalAlignment="Top" Width="114" Click="Vacation_Click"/>
-        <Button Content="Medicine Review" HorizontalAlignment="Left" Margin="46,355,0,0" VerticalAlignment="Top" Width="114" Click="Medicine_Click"/>
+        <Button Content="Appointments" HorizontalAlignment="Left" Margin="27,52,0,0" VerticalAlignment="Top" Width="114" Click="Appointment_Click" Height="50"/>
+        <Button Content="Medical Records" HorizontalAlignment="Left" Margin="27,116,0,0" VerticalAlignment="Top" Width="114" Click="MedicalRecord_Click" Height="50"/>
+        <Button Content="Therapy" HorizontalAlignment="Left" Margin="27,186,0,0" VerticalAlignment="Top" Width="114" Click="Therapy_Click" Height="50"/>
+        <Button Content="Logout" x:Name="btnLogout" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="27,10,0,0" Click="btnLogout_Click"/>
+        <Button Content="Vacation Request" HorizontalAlignment="Left" Margin="163,344,0,0" VerticalAlignment="Top" Width="114" Click="Vacation_Click" Height="50"/>
+        <Button Content="Medicine Review" HorizontalAlignment="Left" Margin="27,344,0,0" VerticalAlignment="Top" Width="114" Click="Medicine_Click" Height="50"/>
+        <Button Content="Exemptions" HorizontalAlignment="Left" Margin="27,254,0,0" VerticalAlignment="Top" Width="114" Height="50"/>
+        <Button Content="Equipment request" HorizontalAlignment="Left" Margin="301,344,0,0" VerticalAlignment="Top" Width="114" Height="50"/>
+        <Button Content="Calendar" HorizontalAlignment="Left" Margin="433,344,0,0" VerticalAlignment="Top" Width="114" Height="50"/>
+        <Button Content="Tutorial" HorizontalAlignment="Left" Margin="649,344,0,0" VerticalAlignment="Top" Width="114" Height="50"/>
 
     </Grid>
 </Window>

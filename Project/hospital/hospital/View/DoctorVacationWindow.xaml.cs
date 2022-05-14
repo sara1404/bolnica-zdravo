@@ -46,35 +46,45 @@ namespace hospital.View
             loggedInDoctor = dc.GetByUsername(uc.CurentLoggedUser.Username);
         }
 
-        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        private bool checkOverlapWithAppointments()
         {
-            bool canReserve = true;
-            bool isOverlappingWithOtherDoctorWithSameSpecialization = false;
-            foreach(Appointment appointment in Appointments)
+            foreach (Appointment appointment in Appointments)
             {
-                if(appointment.StartTime > dpStartDate.SelectedDate && appointment.StartTime < dpEndDate.SelectedDate)
+                if (appointment.StartTime > dpStartDate.SelectedDate && appointment.StartTime < dpEndDate.SelectedDate)
                 {
-                    canReserve = false;
+                    return true;
                 }
             }
-            foreach(VacationRequest vacationRequest in vc.FindAll())
+            return false;
+        }
+
+        private bool checkOverlapWithOtherDoctorWithSameSpecialization()
+        {
+            foreach (VacationRequest vacationRequest in vc.FindAll())
             {
-                if(loggedInDoctor.Specialization == dc.GetByUsername(vacationRequest.DoctorId).Specialization)
+                if (loggedInDoctor.Specialization == dc.GetByUsername(vacationRequest.DoctorId).Specialization)
                 {
-                    if(dpStartDate.SelectedDate > vacationRequest.StartDate && dpStartDate.SelectedDate < vacationRequest.EndDate
+                    if (dpStartDate.SelectedDate > vacationRequest.StartDate && dpStartDate.SelectedDate < vacationRequest.EndDate
                         && dpEndDate.SelectedDate > vacationRequest.StartDate && dpEndDate.SelectedDate < vacationRequest.EndDate)
                     {
-                        isOverlappingWithOtherDoctorWithSameSpecialization = true;
+                        return true;
                     }
                 }
             }
-            if(canReserve == true && cbHighPriority.IsChecked == true && dpStartDate.SelectedDate < dpEndDate.SelectedDate)
+            return false;
+        }
+        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            bool isOveralappingWithAppointments = checkOverlapWithAppointments();
+            bool isOverlappingWithOtherDoctorWithSameSpecialization = checkOverlapWithOtherDoctorWithSameSpecialization();
+            
+            if(isOveralappingWithAppointments == false && cbHighPriority.IsChecked == true && dpStartDate.SelectedDate < dpEndDate.SelectedDate)
             {
                 VacationRequest newRequest = new VacationRequest((DateTime)dpStartDate.SelectedDate, (DateTime)dpEndDate.SelectedDate, (bool)cbHighPriority.IsChecked, tbNote.Text, uc.CurentLoggedUser.Username, -1);
                 vc.Create(newRequest);
                 MessageBox.Show("High priority vacation request sent!");
             }
-            else if(isOverlappingWithOtherDoctorWithSameSpecialization == false && canReserve == true && dpEndDate.SelectedDate != null && dpStartDate.SelectedDate != null && dpStartDate.SelectedDate < dpEndDate.SelectedDate)
+            else if(isOverlappingWithOtherDoctorWithSameSpecialization == false && isOveralappingWithAppointments == false && dpEndDate.SelectedDate != null && dpStartDate.SelectedDate != null && dpStartDate.SelectedDate < dpEndDate.SelectedDate)
             {
                 VacationRequest newRequest = new VacationRequest((DateTime)dpStartDate.SelectedDate, (DateTime)dpEndDate.SelectedDate, (bool)cbHighPriority.IsChecked, tbNote.Text, uc.CurentLoggedUser.Username, -1);
                 vc.Create(newRequest);

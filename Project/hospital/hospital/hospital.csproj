@@ -228,6 +228,9 @@
     <Compile Include="View\PatientView\PatientMakeAppointmentFirst.xaml.cs">
       <DependentUpon>PatientMakeAppointmentFirst.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PatientView\PatientMakeAppointmentSecond.xaml.cs">
+      <DependentUpon>PatientMakeAppointmentSecond.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RoomRenovationPage.xaml.cs">
       <DependentUpon>RoomRenovationPage.xaml</DependentUpon>
     </Compile>
@@ -420,6 +423,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PatientView\PatientMakeAppointmentFirst.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientView\PatientMakeAppointmentSecond.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

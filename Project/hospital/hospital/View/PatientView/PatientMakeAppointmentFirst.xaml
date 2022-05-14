@@ -22,8 +22,7 @@
         <RadioButton x:Name="rbDoctor" Content="Doctor" HorizontalAlignment="Left" Margin="96,198,0,0" VerticalAlignment="Top"/>
         <RadioButton x:Name="rbDate" Content="Date" HorizontalAlignment="Left" Margin="172,198,0,0" VerticalAlignment="Top"/>
         <Label Content="Priority:" HorizontalAlignment="Left" Margin="10,192,0,0" VerticalAlignment="Top"/>
-        <DataGrid x:Name="appointmentTable" AutoGenerateColumns="True" IsReadOnly="True" HorizontalAlignment="Left" Height="289" Margin="250,59,0,0" VerticalAlignment="Top" Width="527" />
-        <Button x:Name="btnConfirm" Content="Confirm" HorizontalAlignment="Left" Margin="552,420,0,0" VerticalAlignment="Top" Width="75" Click="btnConfirm_Click"/>
+        <Label x:Name="lbWarning" Content="" HorizontalAlignment="Left" Margin="11,223,0,0" VerticalAlignment="Top" Width="205" Foreground="Red" FontStyle="Italic"/>
 
     </Grid>
 </Page>

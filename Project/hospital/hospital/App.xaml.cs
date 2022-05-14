@@ -14,6 +14,7 @@ using ToastNotifications.Position;
 using ToastNotifications.Lifetime;
 using System.Collections.Generic;
 using hospital.View;
+using Syncfusion.UI.Xaml.Scheduler;
 
 namespace hospital
 {

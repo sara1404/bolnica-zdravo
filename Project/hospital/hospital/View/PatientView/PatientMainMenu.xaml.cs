@@ -29,6 +29,7 @@ namespace hospital.View
             InitializeComponent();
             App app = Application.Current as App;
             uc = app.userController;
+            lbWelcome.Content = "Welcome " + uc.CurentLoggedUser.Username + "!";
             foreach (Window window in Application.Current.Windows)
             {
                 if (window.GetType() == typeof(PatientHomeWindow))
@@ -64,12 +65,17 @@ namespace hospital.View
 
         private void btnDoctorGrading_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new PatientHospitalPoll();
+            Main.Content = new PatientGradingPage();
         }
 
         private void btnDoctorPoll_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new PatientDoctorPoll();
+        }
+
+        private void btnHospitalPoll_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new PatientHospitalPoll();
         }
     }
 }

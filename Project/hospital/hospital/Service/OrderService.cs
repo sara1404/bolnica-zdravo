@@ -54,9 +54,9 @@ namespace Service
         private void CheckTimeHasExpired()
         {
             Thread.Sleep(10000);
-            foreach (Order order in FindAll())
+            foreach (Order order in FindAll().ToList())
             {
-                if (order.OrderDate.AddDays(3) < DateTime.Now)
+                if (order.OrderDate.AddSeconds(3) < DateTime.Now)
                 {
                     AddEquipmentInWarehouse(order);
                     _orderRepository.DeleteById(order.Id);

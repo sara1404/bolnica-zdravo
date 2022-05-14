@@ -6,6 +6,7 @@ using Repository;
 using hospital;
 using System.Windows;
 using Controller;
+using System.Linq;
 
 namespace Service
 {
@@ -90,19 +91,12 @@ namespace Service
             {
                 allTimeSlots.Add(day.AddMinutes(i * 30));
             }
-            // add logged in patients appointments
-            foreach (Appointment a in appointmentRepository.FindAll())
-            {
-                if (a.patientUsername.Equals(patientUsername))
-                {
-                    startTimes.Add(a.StartTime);
-                }
-            }
+            
             // remove those appointments from available timeslots
-            foreach (DateTime time in startTimes)
+            /*foreach (DateTime time in startTimes)
             {
                 allTimeSlots.Remove(time);
-            }
+            }*/
 
             // search all available timeslots
             foreach (DateTime time in allTimeSlots)
@@ -123,6 +117,19 @@ namespace Service
                     if (!found)
                     {
                         retVal.Add(new Appointment(-1, d.Username, patientUsername, time));
+                    }
+                }
+            }
+
+            foreach (Appointment appointment in retVal.ToList())
+            {
+                foreach (Appointment a in appointmentRepository.FindAll())
+                {
+                    if (a.patientUsername.Equals(patientUsername))
+                    {
+                        if(appointment.StartTime == a.StartTime && appointment.patientUsername.Equals(patientUsername)){
+                            retVal.Remove(appointment);
+                        }
                     }
                 }
             }

@@ -8,6 +8,9 @@
       d:DesignHeight="768" d:DesignWidth="1024"
       Title="MainPage">
 
+    <Page.Resources>
+        <ResourceDictionary Source="ManagerResources.xaml"></ResourceDictionary>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -36,35 +39,35 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
 
             </Grid.ColumnDefinitions>
-            <Border Grid.Row="0" BorderBrush="Black" BorderThickness="0,2,2,2">
+            <Border Grid.Row="0" BorderBrush="#bc84fc" BorderThickness="0,2,2,2" Background="#1d1b1f">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
                         <Image HorizontalAlignment="Left" Height="46" Margin="40 40 0 0" VerticalAlignment="Top" Width="46" Source="../Resources/Images/account.png"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <Label Content="Dusan" HorizontalAlignment="Left" Margin="40 30 0 0" VerticalAlignment="Top"/>
-                        <Label Content="dusan@zdravocorp.com" HorizontalAlignment="Left"  Margin="40 0 0 0" VerticalAlignment="Top"/>
-                        <Label Content="Manager" HorizontalAlignment="Left"  Margin="40 0 0 0" VerticalAlignment="Top" RenderTransformOrigin="0.163,0.423"/>
+                        <Label Content="Dusan" HorizontalAlignment="Left" Margin="40 30 0 0" VerticalAlignment="Top" Foreground="white"/>
+                        <Label Content="dusan@zdravocorp.com" HorizontalAlignment="Left"  Margin="40 0 0 0" VerticalAlignment="Top" Foreground="white"/>
+                        <Label Content="Manager" HorizontalAlignment="Left"  Margin="40 0 0 0" VerticalAlignment="Top" RenderTransformOrigin="0.163,0.423" Foreground="white"/>
                     </StackPanel>
                 </StackPanel>
             </Border>
 
-            <Border BorderBrush="Black" BorderThickness="0,0,2,0"  Grid.Row="1" Grid.RowSpan="5" >
+            <Border BorderBrush="#bc84fc" BorderThickness="0,0,2,0"  Grid.Row="1" Grid.RowSpan="5" Background="#1d1b1f">
                 <StackPanel  Grid.Row="1" Grid.RowSpan="3" VerticalAlignment="Center">
-                    <Button Content="Rooms" HorizontalAlignment="Center" Margin="0, 20" Width="153" Height="49" Click="Room_Button_Click" FontSize="18"/>
-                    <Button Content="Equipment" HorizontalAlignment="Center" Margin="0, 20" Width="153" Height="49" Click="Equipment_Button_Click" FontSize="18"/>
-                    <Button Content="Renovation" HorizontalAlignment="Center" Margin="0, 20"  Width="153" Height="49" Click="Renovation_Button_Click" FontSize="18"/>
-                    <Button Content="Reviews" HorizontalAlignment="Center" Margin="0, 20"  Width="153" Height="49" FontSize="18"/>
-                    <Button Content="Medication" HorizontalAlignment="Center" Margin="0, 20" Width="153" Height="49" FontSize="18" Click="Medication_Button_Click"/>
+                    <Button Content="Rooms" HorizontalAlignment="Center" Margin="0, 20" Width="153" Height="49" Click="Room_Button_Click" FontSize="20" Background="#bc84fc" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+                    <Button Content="Equipment" HorizontalAlignment="Center" Margin="0, 20" Width="153" Height="49" Click="Equipment_Button_Click" FontSize="20" Background="#bc84fc" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+                    <Button Content="Renovation" HorizontalAlignment="Center" Margin="0, 20"  Width="153" Height="49" Click="Renovation_Button_Click" FontSize="20" Background="#bc84fc" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+                    <Button Content="Reviews" HorizontalAlignment="Center" Margin="0, 20"  Width="153" Height="49" FontSize="20" Background="#bc84fc" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+                    <Button Content="Medication" HorizontalAlignment="Center" Margin="0, 20" Width="153" Height="49" FontSize="20" Click="Medication_Button_Click" Background="#bc84fc" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
                 </StackPanel>
             </Border>
 
 
         </Grid>
 
-        <StackPanel  Grid.Column="2" Grid.ColumnSpan="5" Grid.Row="0" Grid.RowSpan="1" VerticalAlignment="Stretch">
-            <Border BorderBrush="Black" BorderThickness="0,2,0,2">
-                <Grid Height="60" DockPanel.Dock="Top">
+        <StackPanel  Grid.Column="2" Grid.ColumnSpan="5" Grid.Row="0" Grid.RowSpan="1" VerticalAlignment="Stretch" Background="#121212">
+            <Border BorderBrush="#bc84fc" BorderThickness="0,2,0,2">
+                <Grid Height="60" DockPanel.Dock="Top" Background="#1d1b1f">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
@@ -87,7 +90,13 @@
                     </Button>
                 </Grid>
             </Border>
-            <DataGrid x:Name="currentActionsDataGrid" Margin="0, 100, 0, 0" DockPanel.Dock="Bottom" Height="407" Width="569">
+            <DataGrid x:Name="currentActionsDataGrid" Margin="0, 100, 0, 0" DockPanel.Dock="Bottom" Height="407" Width="569" Background="#1d1b1f" Foreground="White">
+                <DataGrid.Resources>
+                    <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="#bc84fc" />
+                        <Setter Property="Foreground" Value="White" />
+                    </Style>
+                </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Action" Width="285"/>
                     <DataGridTextColumn Header="Time" Width="284"/>

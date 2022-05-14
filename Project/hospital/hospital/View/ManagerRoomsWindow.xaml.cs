@@ -55,5 +55,31 @@ namespace hospital.View
                 new DeleteRoomWindow().Show();
             }
         }
+
+        private void Filter(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter) {
+                if (quantitySearch.Text == "" && typeSearch.Text != "")
+                    dataGridRooms.ItemsSource = roomController.FindRoomsByEquipmentType(typeSearch.Text);
+                else if (quantitySearch.Text != "" && typeSearch.Text == "")
+                    dataGridRooms.ItemsSource = roomController.FindRoomsByEquipmentQuantity(Int32.Parse(quantitySearch.Text));
+                else if (quantitySearch.Text != "" && typeSearch.Text != "")
+                    dataGridRooms.ItemsSource = roomController.FindRoomsByEquipmentTypeAndQuantity(typeSearch.Text, Int32.Parse(quantitySearch.Text));
+                else
+                    dataGridRooms.ItemsSource = roomController.FindAll();
+            }
+        }
+
+        private void Filter(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            if (quantitySearch.Text == "" && typeSearch.Text != "")
+                dataGridRooms.ItemsSource = roomController.FindRoomsByEquipmentType(typeSearch.Text);
+            else if (quantitySearch.Text != "" && typeSearch.Text == "")
+                dataGridRooms.ItemsSource = roomController.FindRoomsByEquipmentQuantity(Int32.Parse(quantitySearch.Text));
+            else if (quantitySearch.Text != "" && typeSearch.Text != "")
+                dataGridRooms.ItemsSource = roomController.FindRoomsByEquipmentTypeAndQuantity(typeSearch.Text, Int32.Parse(quantitySearch.Text));
+            else
+                dataGridRooms.ItemsSource = roomController.FindAll();
+        }
     }
 }

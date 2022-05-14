@@ -7,11 +7,13 @@
       mc:Ignorable="d" 
       d:DesignHeight="768" d:DesignWidth="1024"
       Title="MedicinePage">
-
+    <Page.Resources>
+        <ResourceDictionary Source="ManagerResources.xaml"></ResourceDictionary>
+    </Page.Resources>
     <Grid>
-        <StackPanel  Grid.Column="0" Grid.ColumnSpan="7" Grid.Row="0" Grid.RowSpan="1" VerticalAlignment="Stretch">
-            <Border BorderBrush="Black" BorderThickness="0,2,0,2">
-                <Grid Height="60" DockPanel.Dock="Top">
+        <StackPanel  Grid.Column="0" Grid.ColumnSpan="7" Grid.Row="0" Grid.RowSpan="1" VerticalAlignment="Stretch"  Background="#121212">
+            <Border BorderBrush="#bc84fc" BorderThickness="0,2,0,2">
+                <Grid Height="60" DockPanel.Dock="Top" Background="#1d1b1f">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
@@ -43,13 +45,21 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Content="ADD MEDICINE" HorizontalAlignment="Left" Margin="145,121,0,0" VerticalAlignment="Top" Width="175" Height="49" Click="Add_Medicine_Click"/>
-        <DataGrid x:Name="medicineDataGrid" IsReadOnly="True" SelectionUnit="FullRow" Height="454" Margin="145,211,120,0" VerticalAlignment="Top" PreviewKeyDown="KeyPressed">
+        <Button Content="ADD MEDICINE" HorizontalAlignment="Left" Margin="145,121,0,0" VerticalAlignment="Top" Width="175" Height="49" Click="Add_Medicine_Click" Background="#bc84fc" FontSize="16"/>
+        <DataGrid x:Name="medicineDataGrid" IsReadOnly="True" SelectionUnit="FullRow" Height="454" Margin="145,211,120,0" VerticalAlignment="Top" PreviewKeyDown="KeyPressed" Background="#1d1b1f">
+            <DataGrid.Resources>
+                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="#bc84fc" />
+                    <Setter Property="Foreground" Value="White" />
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Width="250" Binding="{Binding Name}">
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                            <Setter Property="Background" Value="#bc84fc" />
+                            <Setter Property="Foreground" Value="White" />
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
@@ -57,6 +67,8 @@
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                            <Setter Property="Background" Value="#bc84fc" />
+                            <Setter Property="Foreground" Value="White" />
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
@@ -64,6 +76,8 @@
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                            <Setter Property="Background" Value="#bc84fc" />
+                            <Setter Property="Foreground" Value="White" />
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>

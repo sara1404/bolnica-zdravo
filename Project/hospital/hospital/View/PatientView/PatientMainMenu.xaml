@@ -26,7 +26,7 @@
         <Button x:Name="btnExamption" Content="Examption" HorizontalAlignment="Left" Margin="555,97,0,0" VerticalAlignment="Top" Width="160" Height="75"/>
         <Button x:Name="btnTherapy" Content="Therapy" HorizontalAlignment="Left" Margin="94,216,0,0" VerticalAlignment="Top" Width="160" Height="75"/>
         <Button x:Name="btnDoctorGrading" Content="Doctor grading" HorizontalAlignment="Left" Margin="327,216,0,0" VerticalAlignment="Top" Width="160" Height="75" Click="btnDoctorGrading_Click"/>
-        <Button x:Name="btnMedicalRecord" Content="Medical record" HorizontalAlignment="Left" Margin="555,216,0,0" VerticalAlignment="Top" Width="160" Height="75"/>
+        <Button x:Name="btnMedicalRecord" Content="Medical record" HorizontalAlignment="Left" Margin="555,216,0,0" VerticalAlignment="Top" Width="160" Height="75" Click="btnMedicalRecord_Click"/>
         <Button x:Name="btnDoctorPoll" Content="Doctor poll" HorizontalAlignment="Left" Margin="327,331,0,0" VerticalAlignment="Top" Width="160" Click="btnDoctorPoll_Click" Height="75"/>
         <Button x:Name="btnHospitalPoll" Content="Hospital poll" HorizontalAlignment="Left" Margin="94,331,0,0" VerticalAlignment="Top" Width="160" Height="75" Click="btnHospitalPoll_Click"/>
         <Separator HorizontalAlignment="Left" Height="18" Margin="10,45,0,0" VerticalAlignment="Top" Width="780"/>

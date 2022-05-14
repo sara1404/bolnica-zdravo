@@ -36,9 +36,22 @@ namespace Repository
         public int GetNewId()
         {
             if (appointments.Count == 0)
+            {
                 return 0;
-            else 
-                return appointments[appointments.Count - 1].Id + 1;
+            }
+            else
+            {
+                int max = 0;
+                foreach(Appointment a in appointments)
+                {
+                    if(a.Id > max)
+                    {
+                        max = a.Id;
+                    }
+                }
+                return max + 1;
+            }
+                
         }
         public Appointment FindById(int id)
         {

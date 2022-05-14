@@ -71,26 +71,32 @@ namespace Service
 
         private ObservableCollection<Appointment> FindAvailableAppointmentsNextTwoHours(List<Doctor> requiredDoctor, string patientUsername)
         {
-             List<DateTime> timeSlots = MakeTimeSlotsNextTwoHours();
-             ObservableCollection<Appointment> availableAppointment = new ObservableCollection<Appointment>();
-             foreach (Doctor doctor in requiredDoctor)
-             {
-                 ObservableCollection<Appointment> allAvailableAppointmenTodaytByDoctor = _appointmentService.GetFreeAppointmentsByDateAndDoctor(DateTime.Now, doctor.Username, patientUsername);
+            ObservableCollection<Appointment> availableAppointment = new ObservableCollection<Appointment>();
+            ObservableCollection<Appointment> allAvailableAppointmenToday = _appointmentService.GetFreeAppointmentsByDate(DateTime.Now, patientUsername);
 
-                 foreach (Appointment appointment in allAvailableAppointmenTodaytByDoctor)
-                 {
-                     foreach (DateTime dateTime in timeSlots)
-                     {
-                         if (appointment.StartTime == dateTime)
-                         {
-                             appointment.roomId = doctor.OrdinationId;
-                             availableAppointment.Add(appointment);
-                         }
-                     }
-                 }
-             } 
+            foreach (Appointment appointment in allAvailableAppointmenToday)
+            {
+                if (CheckFreeAppointmentNextTwoHours(appointment) != null)
+                {
+                    availableAppointment.Add(CheckFreeAppointmentNextTwoHours(appointment));
+                }
+                else
+                    continue;
+            }
+            return SortAppointmentByTime(availableAppointment);
+        }
 
-             return SortAppointmentByTime(availableAppointment);
+        private Appointment CheckFreeAppointmentNextTwoHours( Appointment appointment)
+        {
+            foreach (DateTime dateTime in MakeTimeSlotsNextTwoHours())
+            {
+                if (appointment.StartTime == dateTime)
+                {
+                    appointment.roomId = doctorService.GetByUsername(appointment.doctorUsername).OrdinationId;
+                    return appointment;
+                }
+            }
+            return null;
         }
 
         private ObservableCollection<Appointment> SortAppointmentByTime(ObservableCollection<Appointment> availableAppointment)

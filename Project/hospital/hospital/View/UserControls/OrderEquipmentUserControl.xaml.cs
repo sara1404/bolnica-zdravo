@@ -14,6 +14,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Controller;
 using Model;
+using ToastNotifications;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Messages;
+using ToastNotifications.Position;
 
 namespace hospital.View.UserControls
 {
@@ -23,11 +27,13 @@ namespace hospital.View.UserControls
     public partial class OrderEquipmentUserControl : UserControl
     {
         private OrderController _orderController;
+        private Notifier Notifier { get; set; }
         public OrderEquipmentUserControl()
         {
             InitializeComponent();
             App app = Application.Current as App;
             _orderController = app.orderController;
+            Notifier = GetNotifier();
         }
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
@@ -35,6 +41,7 @@ namespace hospital.View.UserControls
             if (isValidate())
             {
                 Equipment newEquipment = new Equipment(txtType.Text, Int32.Parse(txtQuantity.Text));
+                Notifier.ShowSuccess("Order successfully");
                 _orderController.Create(new Order(DateTime.Now, newEquipment));
             }
         }
@@ -61,7 +68,7 @@ namespace hospital.View.UserControls
                     errQuantity.Text = "Quantity can't be negative";
                 if (txtQuantity.Text.Any(char.IsLetter))
                     errQuantity.Text = "Must be number";
-                }
+            }
         }
 
         private bool isValidate()
@@ -88,10 +95,13 @@ namespace hospital.View.UserControls
             {
                 errQuantity.Text = "Must be filled";
                 isCorrected[1] = false;
-            }else if(txtQuantity.Text.Contains("-")){
+            }
+            else if (txtQuantity.Text.Contains("-"))
+            {
                 errQuantity.Text = "Quantity can't be negative";
                 isCorrected[1] = false;
-            }else if (txtQuantity.Text.Any(char.IsLetter))
+            }
+            else if (txtQuantity.Text.Any(char.IsLetter))
             {
                 errQuantity.Text = "Must be number";
                 isCorrected[1] = false;
@@ -102,6 +112,24 @@ namespace hospital.View.UserControls
                 isCorrected[1] = true;
             }
             return (isCorrected[0] && isCorrected[1]);
+        }
+
+        private Notifier GetNotifier()
+        {
+            return new Notifier(cfg =>
+            {
+                cfg.PositionProvider = new WindowPositionProvider(
+                    parentWindow: Application.Current.MainWindow,
+                    corner: Corner.TopRight,
+                    offsetX: 10,
+                    offsetY: 10);
+
+                cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+                    notificationLifetime: TimeSpan.FromSeconds(3),
+                    maximumNotificationCount: MaximumNotificationCount.FromCount(5));
+
+                cfg.Dispatcher = Application.Current.Dispatcher;
+            });
         }
     }
 }

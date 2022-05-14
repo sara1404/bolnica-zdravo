@@ -7,10 +7,10 @@
         mc:Ignorable="d"
         Title="DoctorMedicineWindow" Height="450" Width="800">
     <Grid>
-        <DataGrid x:Name="medicineTable" ItemsSource="{Binding Path=medicineList}" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns ="True" HorizontalAlignment="Left" Height="277" Margin="10,58,0,0" VerticalAlignment="Top" Width="358"/>
+        <DataGrid x:Name="medicineTable" ItemsSource="{Binding Path=medicineList}" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns ="True" HorizontalAlignment="Left" Height="340" Margin="10,58,0,0" VerticalAlignment="Top" Width="358"/>
         <Label Content="Available medicine:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,27,0,0" Width="118"/>
-        <Button x:Name="btnReport" Content="Report non-valid medicine" HorizontalAlignment="Left" Margin="629,287,0,0" VerticalAlignment="Top" Width="155" Height="48" Click="btnReport_Click"/>
-        <TextBox x:Name="tbNote" HorizontalAlignment="Left" Height="224" Margin="404,58,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="380"/>
+        <Button x:Name="btnReport" Content="Report non-valid medicine" HorizontalAlignment="Left" Margin="404,350,0,0" VerticalAlignment="Top" Width="380" Height="48" Click="btnReport_Click"/>
+        <TextBox x:Name="tbNote" HorizontalAlignment="Left" Height="271" Margin="404,58,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="380"/>
         <Label Content="Note:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="404,27,0,0" Width="48" RenderTransformOrigin="-1.029,0.473"/>
 
     </Grid>

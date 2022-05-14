@@ -7,27 +7,28 @@
         mc:Ignorable="d"
         Title="DoctorMakeNewAppointmentForOtherDoctors" Height="450" Width="800">
     <Grid>
-        <Grid>
-            <ComboBox x:Name="cmbPatients" SelectionChanged="cmbPatients_SelectionChanged" HorizontalAlignment="Left" Margin="115,39,0,0" VerticalAlignment="Top" Width="120"/>
-            <Label Content="Patient:" HorizontalAlignment="Left" Margin="33,36,0,0" VerticalAlignment="Top"/>
-            <Label Content="Date:" HorizontalAlignment="Left" Margin="33,106,0,0" VerticalAlignment="Top"/>
-            <DatePicker x:Name="date" HorizontalAlignment="Left" Margin="115,108,0,0" VerticalAlignment="Top" Width="120"/>
-            <Label Content="Operation:" HorizontalAlignment="Left" Margin="32,137,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="btnShow" Content="Show" HorizontalAlignment="Left" Margin="32,199,0,0" VerticalAlignment="Top" Width="86" Height="21" Click="btnShow_Click"/>
-            <DataGrid x:Name="appointmentTable"  AutoGenerateColumns="True" IsReadOnly="True" HorizontalAlignment="Left" Height="321" Margin="338,36,0,0" VerticalAlignment="Top" Width="446" />
+        <Grid Margin="0,0,-0.4,0">
+            <ComboBox x:Name="cmbPatients" SelectionChanged="cmbPatients_SelectionChanged" HorizontalAlignment="Left" Margin="138,10,0,0" VerticalAlignment="Top" Width="120"/>
+            <Label Content="Patient:" HorizontalAlignment="Left" Margin="33,10,0,0" VerticalAlignment="Top"/>
+            <Label Content="Date:" HorizontalAlignment="Left" Margin="32,71,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.571,-0.527"/>
+            <DatePicker x:Name="date" HorizontalAlignment="Left" Margin="138,73,0,0" VerticalAlignment="Top" Width="120"/>
+            <Label Content="Operation:" HorizontalAlignment="Left" Margin="33,102,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="btnShow" Content="Show" HorizontalAlignment="Left" Margin="32,164,0,0" VerticalAlignment="Top" Width="86" Height="21" Click="btnShow_Click"/>
+            <DataGrid x:Name="appointmentTable"  AutoGenerateColumns="True" IsReadOnly="True" HorizontalAlignment="Left" Height="321" Margin="338,10
+                      ,0,0" VerticalAlignment="Top" Width="446" />
             <!--<DataGrid.Columns>
                 <DataGridTextColumn Header="Doctor name" Binding="{Binding Doctor}"/>
                 <DataGridTextColumn Header="Date" Binding="{Binding StartTime}" Width="*"/>
             </DataGrid.Columns>-->
 
-            <Button x:Name="btnConfirm" Content="Confirm" HorizontalAlignment="Left" Margin="338,372,0,0" VerticalAlignment="Top" Width="75" Click="btnConfirm_Click"/>
-            <TextBox x:Name="tbDescription"  HorizontalAlignment="Left" Height="101" Margin="32,256,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="266"/>
-            <Label Content="Description:" HorizontalAlignment="Left" Margin="32,225,0,0" VerticalAlignment="Top" Width="118"/>
-            <CheckBox x:Name="cbOperation" Checked="cbOperation_Checked" Unchecked="cbOperation_Unchecked" Content="Yes" HorizontalAlignment="Left" Margin="115,143,0,0" VerticalAlignment="Top"/>
-            <Label Content="Operation Room:" HorizontalAlignment="Left" Margin="32,168,0,0" VerticalAlignment="Top"/>
-            <ComboBox x:Name="cmbOpRoom" IsEnabled="False" HorizontalAlignment="Left" Margin="138,171,0,0" VerticalAlignment="Top" Width="120"/>
-            <Label Content="Doctor:" HorizontalAlignment="Left" Margin="32,67,0,0" VerticalAlignment="Top"/>
-            <ComboBox x:Name="cmbDoctor" SelectionChanged="cmbDoctor_SelectionChanged" HorizontalAlignment="Left" Margin="115,70,0,0" VerticalAlignment="Top" Width="120"/>
+            <Button x:Name="btnConfirm" Content="Confirm" HorizontalAlignment="Left" Margin="338,352,0,0" VerticalAlignment="Top" Width="446" Click="btnConfirm_Click" Height="50"/>
+            <TextBox x:Name="tbDescription"  HorizontalAlignment="Left" Height="110" Margin="32,221,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="266"/>
+            <Label Content="Description:" HorizontalAlignment="Left" Margin="33,190,0,0" VerticalAlignment="Top" Width="118"/>
+            <CheckBox x:Name="cbOperation" Checked="cbOperation_Checked" Unchecked="cbOperation_Unchecked" Content="Yes" HorizontalAlignment="Left" Margin="138,108,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.403,-1.072"/>
+            <Label Content="Operation Room:" HorizontalAlignment="Left" Margin="32,133,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.538,-0.715"/>
+            <ComboBox x:Name="cmbOpRoom" IsEnabled="False" HorizontalAlignment="Left" Margin="138,136,0,0" VerticalAlignment="Top" Width="120"/>
+            <Label Content="Doctor:" HorizontalAlignment="Left" Margin="33,40,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.536,-0.059"/>
+            <ComboBox x:Name="cmbDoctor" SelectionChanged="cmbDoctor_SelectionChanged" HorizontalAlignment="Left" Margin="138,40,0,0" VerticalAlignment="Top" Width="120"/>
 
         </Grid>
 

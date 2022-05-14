@@ -29,7 +29,7 @@
         <TextBox x:Name="quantitySearch" HorizontalAlignment="Left" Height="23" Margin="610,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="40" PreviewKeyDown="Filter"/>
         <Label Content="Quantity:" HorizontalAlignment="Left" Margin="544,67,0,0" VerticalAlignment="Top" Foreground="white" FontSize="14"/>
         <Label Content="Equipment:" HorizontalAlignment="Left" Margin="383,67,0,0" VerticalAlignment="Top" Foreground="white" FontSize="14"/>
-        <TextBox x:Name="typeSearch" HorizontalAlignment="Left" Height="23" Margin="463,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70" PreviewKeyDown="Filter"/>
+        <TextBox x:Name="typeSearch" HorizontalAlignment="Left" Height="23" Margin="463,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70" TextChanged="Filter"/>
 
     </Grid>
 </Window>

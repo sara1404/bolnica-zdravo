@@ -37,11 +37,7 @@ namespace hospital.View
             ingridients.Add("penicilin");
             ingridientsField.ItemsSource = ingridients;
             alternativesField.ItemsSource = medicineController.FindAll();
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
+            scheduleBtn.IsEnabled = false;
         }
 
         private void Add_Medicine_Click(object sender, RoutedEventArgs e)
@@ -49,6 +45,8 @@ namespace hospital.View
             try
             {
                 int quantity = Int32.Parse(quanityField.Text);
+                if (ValidateQuantity() || ValidateIngridients())
+                    throw new Exception();
                 AddMedicine();
                 this.Close();
             }
@@ -56,6 +54,18 @@ namespace hospital.View
                 MessageBox.Show("Invalid input for quanity");
                 return;
             }
+        }
+
+        private bool ValidateQuantity() {
+            if (Int32.Parse(quanityField.Text) < 0)
+                return false;
+            return true;
+        }
+
+        private bool ValidateIngridients() {
+            if (GetIngridients().Count == 0)
+                return false;
+            return true;
         }
 
         private void AddMedicine() {
@@ -101,6 +111,25 @@ namespace hospital.View
         private void Cancel_Medicine_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void IsFormFilled(object sender, TextChangedEventArgs e)
+        {
+            IsFormFilledValidation();
+        }
+
+        private void IsFormFilled(object sender, SelectionChangedEventArgs e)
+        {
+            IsFormFilledValidation();
+        }
+
+        private void IsFormFilledValidation() {
+            if (nameField.Text != "" && codeField.Text != "" && quanityField.Text != "" && ingridientsField.SelectedItems.Count > 0) {
+                scheduleBtn.IsEnabled = true;
+                return;
+            }
+            scheduleBtn.IsEnabled = false;
+
         }
     }
 }

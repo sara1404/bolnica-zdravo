@@ -53,7 +53,7 @@ namespace Repository
             List<Room> filteredRooms = new List<Room>();
             foreach (Room room in rooms) {
                 foreach (Equipment eq in room.equipment) {
-                    if (eq.type.Equals(type))
+                    if (eq.type.Contains(type))
                         filteredRooms.Add(room);
                 }
             }
@@ -85,7 +85,7 @@ namespace Repository
             {
                 foreach (Equipment eq in room.equipment)
                 {
-                    if (eq.quantity >= quantity && eq.type.Equals(type))
+                    if (eq.quantity >= quantity && eq.type.Contains(type))
                     {
                         filteredRooms.Add(room);
                         break;

@@ -16,11 +16,13 @@
                         <TextBox x:Name="txtQuantity" Width="132" Height="25" Margin="239,92,75,283" TextChanged="time_TextChanged"/>
                         <TextBlock FontSize="15" FontWeight="DemiBold" Width="60" Height="25" Margin="75,92,311,283" Text="Quantity"/>
                         <TextBox x:Name="txtType" Width="132" Height="25" Margin="239,34,75,341" TextChanged="time_TextChanged"/>
-                        
+
                         <TextBlock x:Name="errType" Height="20" Width="132" Foreground="red" Margin="239,59,75,321"></TextBlock>
                         <TextBlock x:Name="errQuantity" Height="20" Width="132" Foreground="red" Margin="239,117,75,263"></TextBlock>
                         <Button x:Name="btnSubmit" Content="Submit"  VerticalAlignment="Top" Height="26" Width="75"  Margin="296,360,75,0" Click="btnSubmit_Click"/>
                         <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Height="26" Margin="78,360,0,0" Click="btnCancel_Click"/>
+                        <TextBlock FontSize="15" FontWeight="DemiBold" Width="60" Height="25" Margin="75,149,311,226" Text="Describe"/>
+                        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="296" Height="131" Margin="78,179,0,0"/>
                     </Grid>
                 </StackPanel>
             </Border>

@@ -1,1 +1,1 @@
-[{"Id":100,"OrderDate":"2022-05-12T12:53:18.8517631+02:00","Equipment":{"type":"Maske","quantity":100}}]
+[]

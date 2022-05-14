@@ -10,22 +10,31 @@
     <Page.Resources>
         <DataTemplate x:Key="pollTemplate">
             <StackPanel>
-                <!--<TextBlock Text="{Binding Path=Category}" />-->
-                <TextBlock Text="{Binding Path=Question}" HorizontalAlignment="Left"/>
-                <RadioButton x:Name="rbOne" HorizontalAlignment="Left">1</RadioButton>
-                <RadioButton x:Name="rbTwo" HorizontalAlignment="Left">2</RadioButton>
-                <RadioButton x:Name="rbThree" HorizontalAlignment="Left">3</RadioButton>
-                <RadioButton x:Name="rbFour" HorizontalAlignment="Left">4</RadioButton>
-                <RadioButton x:Name="rbFive" HorizontalAlignment="Left">5</RadioButton>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="600*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="20*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding Path=Question}" Grid.Column="0"/>
+                    <RadioButton x:Name="rbOne" Grid.Column="1">1</RadioButton>
+                    <RadioButton x:Name="rbTwo" Grid.Column="2">2</RadioButton>
+                    <RadioButton x:Name="rbThree" Grid.Column="3">3</RadioButton>
+                    <RadioButton x:Name="rbFour" Grid.Column="4">4</RadioButton>
+                    <RadioButton x:Name="rbFive" Grid.Column="5">5</RadioButton>
+                </Grid>
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
 
     <Grid>
-        <ListBox x:Name="lbPoll" ItemsSource="{Binding Path=Poll}" ItemTemplate="{StaticResource pollTemplate}" HorizontalAlignment="Left" Height="338" Margin="10,43,0,0" VerticalAlignment="Top" Width="768"/>
-        <ComboBox x:Name="cbAppointments" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="768" SelectionChanged="cbAppointments_SelectionChanged"/>
-        <Button x:Name="btnConfirm" Content="Confirm" HorizontalAlignment="Left" Margin="703,386,0,0" VerticalAlignment="Top" Width="75" Click="btnConfirm_Click"/>
-        <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="10,386,0,0" VerticalAlignment="Top" Width="75" Click="btnBack_Click"/>
+        <ListBox x:Name="lbPoll" ItemsSource="{Binding Path=Poll}" ItemTemplate="{StaticResource pollTemplate}" HorizontalAlignment="Left" Height="357" Margin="10,43,0,0" VerticalAlignment="Top" Width="780" BorderBrush="White"/>
+        <ComboBox x:Name="cbAppointments" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="780" SelectionChanged="cbAppointments_SelectionChanged"/>
+        <Button x:Name="btnConfirm" Content="Confirm" HorizontalAlignment="Left" Margin="715,420,0,0" VerticalAlignment="Top" Width="75" Click="btnConfirm_Click"/>
+        <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="10,420,0,0" VerticalAlignment="Top" Width="75" Click="btnBack_Click"/>
 
     </Grid>
 </Page>

@@ -7,7 +7,16 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PatientAppointmentsPage">
-
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
     <Grid>
         <DataGrid x:Name="appointmentTable" ItemsSource="{Binding Appointments}" AutoGenerateColumns="True" IsReadOnly="True" HorizontalAlignment="Left" Height="378" Margin="10,20,0,0" VerticalAlignment="Top" Width="780">
             <!--<DataGrid.Columns>
@@ -15,9 +24,9 @@
             <DataGridTextColumn Header="Date" Binding="{Binding StartTime}" Width="*"/>
         </DataGrid.Columns>-->
         </DataGrid>
-        <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="10,420,0,0" VerticalAlignment="Top" Width="75" Click="btnBack_Click"/>
-        <Button x:Name="btnDelay" Content="Delay" HorizontalAlignment="Left" Margin="576,420,0,0" VerticalAlignment="Top" Width="75" Click="btnDelay_Click"/>
-        <Button x:Name="btnCancel" Content="Cancel appointment" HorizontalAlignment="Left" Margin="672,420,0,0" VerticalAlignment="Top" Width="118" Click="btnCancel_Click"/>
+        <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="10,408,0,0" VerticalAlignment="Top" Width="75" Click="btnBack_Click"/>
+        <Button x:Name="btnDelay" Content="Delay" HorizontalAlignment="Left" Margin="540,408,0,0" VerticalAlignment="Top" Width="75" Click="btnDelay_Click"/>
+        <Button x:Name="btnCancel" Content="Cancel appointment" HorizontalAlignment="Left" Margin="630,408,0,0" VerticalAlignment="Top" Width="160" Click="btnCancel_Click"/>
 
     </Grid>
 </Page>

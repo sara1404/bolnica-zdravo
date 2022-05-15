@@ -8,33 +8,43 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PatientDoctorPoll">
     <Page.Resources>
-        <DataTemplate x:Key="pollTemplate">
-            <StackPanel>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="600*"/>
-                        <ColumnDefinition Width="20*"/>
-                        <ColumnDefinition Width="20*"/>
-                        <ColumnDefinition Width="20*"/>
-                        <ColumnDefinition Width="20*"/>
-                        <ColumnDefinition Width="20*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="{Binding Path=Question}" Grid.Column="0"/>
-                    <RadioButton x:Name="rbOne" Grid.Column="1">1</RadioButton>
-                    <RadioButton x:Name="rbTwo" Grid.Column="2">2</RadioButton>
-                    <RadioButton x:Name="rbThree" Grid.Column="3">3</RadioButton>
-                    <RadioButton x:Name="rbFour" Grid.Column="4">4</RadioButton>
-                    <RadioButton x:Name="rbFive" Grid.Column="5">5</RadioButton>
-                </Grid>
-            </StackPanel>
-        </DataTemplate>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate x:Key="pollTemplate">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="600*"/>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="20*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Path=Question}" Grid.Column="0"/>
+                        <RadioButton x:Name="rbOne" Grid.Column="1">1</RadioButton>
+                        <RadioButton x:Name="rbTwo" Grid.Column="2">2</RadioButton>
+                        <RadioButton x:Name="rbThree" Grid.Column="3">3</RadioButton>
+                        <RadioButton x:Name="rbFour" Grid.Column="4">4</RadioButton>
+                        <RadioButton x:Name="rbFive" Grid.Column="5">5</RadioButton>
+                    </Grid>
+                </StackPanel>
+            </DataTemplate>
+        </ResourceDictionary>
     </Page.Resources>
 
     <Grid>
-        <ListBox x:Name="lbPoll" ItemsSource="{Binding Path=Poll}" ItemTemplate="{StaticResource pollTemplate}" HorizontalAlignment="Left" Height="357" Margin="10,43,0,0" VerticalAlignment="Top" Width="780" BorderBrush="White"/>
-        <ComboBox x:Name="cbAppointments" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="780" SelectionChanged="cbAppointments_SelectionChanged"/>
-        <Button x:Name="btnConfirm" Content="Confirm" HorizontalAlignment="Left" Margin="715,420,0,0" VerticalAlignment="Top" Width="75" Click="btnConfirm_Click"/>
-        <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="10,420,0,0" VerticalAlignment="Top" Width="75" Click="btnBack_Click"/>
+        <ListBox x:Name="lbPoll" ItemsSource="{Binding Path=Poll}" ItemTemplate="{StaticResource pollTemplate}" HorizontalAlignment="Left" Height="332" Margin="10,43,0,0" VerticalAlignment="Top" Width="780" BorderBrush="White"/>
+        <ComboBox x:Name="cbAppointments" ItemsSource="{Binding Path=Appointments}" DisplayMemberPath="AppointmentDisplayProperty"  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="780" SelectionChanged="cbAppointments_SelectionChanged"/>
+        <Button x:Name="btnConfirm" Content="Confirm" HorizontalAlignment="Left" Margin="700,414,0,0" VerticalAlignment="Top" Width="90" Click="btnConfirm_Click"/>
+        <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="10,414,0,0" VerticalAlignment="Top" Width="75" Click="btnBack_Click"/>
+        <Label x:Name="lbWarning" Content="" HorizontalAlignment="Left" Margin="10,385,0,0" VerticalAlignment="Top" Width="475" Foreground="#DDFF0000" FontStyle="Italic"/>
 
     </Grid>
 </Page>

@@ -4,6 +4,7 @@ using hospital.Model;
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,9 +27,10 @@ namespace hospital.View.PatientView
     {
         private App app;
         private AppointmentController ac;
-        private PollBlueprintController pbc;
+        private PollController pbc;
         private UserController uc;
         public List<PollQuestion> Poll { get; set; }
+        public ObservableCollection<Appointment> Appointments { get; set; }
         public PatientDoctorPoll()
         {
             InitializeComponent();
@@ -36,7 +38,7 @@ namespace hospital.View.PatientView
             pbc = app.pollBlueprintController;
             uc = app.userController;
             ac = app.appointmentController;
-            cbAppointments.ItemsSource = ac.GetAppointmentByPatient(uc.CurentLoggedUser.Username);
+            Appointments = ac.GetAppointmentByPatient(uc.CurentLoggedUser.Username);
             DataContext = this;
             Poll = pbc.GetDoctorPollQuestions();
         }
@@ -79,7 +81,6 @@ namespace hospital.View.PatientView
                     //lbPoll.Visibility = Visibility.Visible;
                 }
             }
-            
         }
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
@@ -91,25 +92,22 @@ namespace hospital.View.PatientView
                     Appointment appointment = (Appointment)cbAppointments.SelectedItem;
                     if (!pbc.AppointmentPollAlreadyFilled(appointment.Id))
                     {
-                        PollBlueprint poll = FillPoll();
-                        poll.Username = uc.CurentLoggedUser.Username;
-                        poll.AppointmentId = appointment.Id;
-                        pbc.SavePoll(poll);
+                        pbc.SavePoll(FillPoll());
                         app.PatientBackToMainMenu();
                     }
                     else
                     {
-                        MessageBox.Show("You have already answered the poll for this appointment!");
+                        lbWarning.Content = "You have already answered the poll for this appointment!";
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Please choose an appointment!");
+                    lbWarning.Content = "Please choose an appointment!";
                 }
             }
             else
             {
-                MessageBox.Show("Please answer all of the questions!");
+                lbWarning.Content = "Please answer all of the questions!";
             }
         }
 
@@ -142,7 +140,6 @@ namespace hospital.View.PatientView
                     else
                         grade = 5;
 
-
                     foreach (PollCategory category in poll.Categories)
                     {
                         foreach (PollQuestion pollQuestion in category.PollQuestions)
@@ -155,6 +152,9 @@ namespace hospital.View.PatientView
                     }
                 }
             }
+            Appointment appointment = (Appointment)cbAppointments.SelectedItem;
+            poll.Username = uc.CurentLoggedUser.Username;
+            poll.AppointmentId = appointment.Id;
             return poll;
         }
         private bool CheckIfFilled()

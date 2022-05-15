@@ -8,23 +8,23 @@ using System.Threading.Tasks;
 
 namespace hospital.Controller
 {
-    public class PollBlueprintController
+    public class PollController
     {
-        private PollBlueprintService pbs;
+        private PollService pollService;
         
-        public PollBlueprintController(PollBlueprintService _pbs)
+        public PollController(PollService _pollService)
         {
-            pbs = _pbs;
+            pollService = _pollService;
         }
         
         public PollBlueprint GetHospitalPollBlueprint()
         {
-            return pbs.GetHospitalPollBlueprint();
+            return pollService.GetHospitalPollBlueprint();
         }
 
         public PollBlueprint GetDoctorPollBlueprint()
         {
-            return pbs.GetDoctorPollBlueprint();
+            return pollService.GetDoctorPollBlueprint();
         }
 
         public List<PollQuestion> GetHospitalPollQuestions()
@@ -55,24 +55,17 @@ namespace hospital.Controller
 
         public bool HospitalPollAlreadyFilled(string username)
         {
-            foreach(PollBlueprint poll in pbs.GetHospitalPollResults())
-            {
-                if(poll.Username.Equals(username))
-                {
-                    return true;
-                }
-            }
-            return false;
+            return pollService.HospitalPollAlreadyFilled(username);
         }
 
         public bool AppointmentPollAlreadyFilled(int appointmentId)
         {
-            return pbs.AppointmentPollAlreadyFilled(appointmentId);
+            return pollService.AppointmentPollAlreadyFilled(appointmentId);
         }
 
         public void SavePoll(PollBlueprint poll)
         {
-            pbs.SavePoll(poll);
+            pollService.SavePoll(poll);
         }
     }
 }

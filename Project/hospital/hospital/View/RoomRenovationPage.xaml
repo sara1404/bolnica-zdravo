@@ -45,10 +45,10 @@
                     </Grid.ColumnDefinitions>
 
                     <Image DockPanel.Dock="Left" Height="56" Width="100" Source="../Resources/Images/logo.png" Grid.Column="0"/>
-                    <Button Height="30" DockPanel.Dock ="Right"  Grid.Column="4" Margin="88,15,10,15" Click="Logout_Click">
+                    <Button DockPanel.Dock ="Right"  Grid.Column="4" Margin="88,2,10,30" Click="Logout_Click">
                         <Button.Template>
                             <ControlTemplate>
-                                <Image Source="../Resources/Images/logout.png"/>
+                                <Image Source="../Resources/Images/logout_white.png" Margin="0,0,-3,-14"/>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
@@ -57,10 +57,10 @@
 
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0">
-            <Button Height="30" Click="Back_Click" Margin="0,0,26,0">
+            <Button Height="66" Click="Back_Click" >
                 <Button.Template>
                     <ControlTemplate>
-                        <Image Source="../Resources/Images/back.png"/>
+                        <Image Source="../Resources/Images/back_white.png"/>
                     </ControlTemplate>
                 </Button.Template>
             </Button>

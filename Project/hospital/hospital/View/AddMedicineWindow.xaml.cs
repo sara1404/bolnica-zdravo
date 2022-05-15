@@ -44,28 +44,42 @@ namespace hospital.View
         {
             try
             {
-                int quantity = Int32.Parse(quanityField.Text);
-                if (ValidateQuantity() || ValidateIngridients())
-                    throw new Exception();
+                Validate();
                 AddMedicine();
-                this.Close();
+                Close();
             }
             catch (Exception ex) {
-                MessageBox.Show("Invalid input for quanity");
-                return;
+                MessageBox.Show(ex.Message);
             }
         }
 
-        private bool ValidateQuantity() {
-            if (Int32.Parse(quanityField.Text) < 0)
-                return false;
-            return true;
+        private void Validate()
+        {
+            ValidateId();
+            ValidateQuantity();
+            ValidateIngridients();
         }
 
-        private bool ValidateIngridients() {
+        private void ValidateId() {
+            string id = codeField.Text;
+            if (medicineController.FindById(id) != null)
+                throw new Exception("Medicine with this id already exists!");
+        }
+
+        private void ValidateQuantity() {
+            int value;
+            bool isValid = Int32.TryParse(quanityField.Text, out value);
+
+            if (!isValid)
+                throw new Exception("Quantity should be a number!");
+
+            if (value < 0)
+                throw new Exception("Quantity should be positive!");
+        }
+
+        private void ValidateIngridients() {
             if (GetIngridients().Count == 0)
-                return false;
-            return true;
+                throw new Exception("There should be at least one ingredient!");
         }
 
         private void AddMedicine() {
@@ -100,14 +114,15 @@ namespace hospital.View
             return alternatives;
         }
 
-        private List<string> GetIngridients() {
+        private List<string> GetIngridients()
+        {
             List<string> ingridients = new List<string>();
-            for (int i = 0; i < ingridientsField.SelectedItems.Count; i++) {
+            for (int i = 0; i < ingridientsField.SelectedItems.Count; i++)
+            {
                 ingridients.Add((string)ingridientsField.SelectedItems[i]);
             }
             return ingridients;
         }
-
         private void Cancel_Medicine_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -129,7 +144,6 @@ namespace hospital.View
                 return;
             }
             scheduleBtn.IsEnabled = false;
-
         }
     }
 }

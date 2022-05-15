@@ -60,6 +60,7 @@ namespace Repository
             return filteredRooms;
         }
 
+
         public List<Room> FindRoomsByEquipmentQuantity(int quantity) {
             List<Room> filteredRooms = new List<Room>();
             foreach (Room room in rooms)

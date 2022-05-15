@@ -84,38 +84,81 @@ namespace hospital.View
         }
 
         private void ScheduleMergingRooms(List<Room> rooms, TimeInterval interval) {
+            try {
+                ValidateId(newCode.Text);
+                ValidateFloor();
+                CreateMergeRenovation(rooms, interval);
+                Close();
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void CreateMergeRenovation(List<Room> rooms, TimeInterval interval){
             rooms.Add((Room)listViewRooms.SelectedItems[0]);
             rooms.Add((Room)listViewRooms.SelectedItems[1]);
             Room resultRoom = new Room(newRoom.Text, newPurpose.Text, Int32.Parse(floor.Text), newCode.Text);
-            ScheduledAdvancedRenovation newRenovation = new ScheduledAdvancedRenovation(scheduledAdvancedRenovationController.FindAll().Count.ToString(),
+            CheckRoomFloor(rooms, resultRoom);
+            ScheduledAdvancedRenovation newRenovation = new ScheduledAdvancedRenovation(GenerateId().ToString(),
                 resultRoom, interval, description.Text, rooms, "merge");
-            if (!checkRoomFloor(rooms, resultRoom)) {
-                MessageBox.Show("Cannot merge rooms on different floors");
-                return;
-            }
             scheduledAdvancedRenovationController.Create(newRenovation);
-            this.Close();
         }
 
+
         private void ScheduleSplitingRoom(List<Room> rooms, TimeInterval interval) {
+            try
+            {
+                ValidateId(newCode.Text.Split(',')[0]);
+                ValidateId(newCode.Text.Split(',')[1]);
+                ValidateFloor();
+                CreateSplitRenovation(rooms, interval);
+                this.Close();
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void CreateSplitRenovation(List<Room> rooms, TimeInterval interval) {
             Room room = (Room)listViewRooms.SelectedItem;
             rooms.Add(new Room(newRoom.Text.Split(',')[0], newPurpose.Text.Split(',')[0], Int32.Parse(floor.Text), newCode.Text.Split(',')[0]));
             rooms.Add(new Room(newRoom.Text.Split(',')[1], newPurpose.Text.Split(',')[1], Int32.Parse(floor.Text), newCode.Text.Split(',')[1]));
-            ScheduledAdvancedRenovation newRenovation = new ScheduledAdvancedRenovation(scheduledAdvancedRenovationController.FindAll().Count.ToString(),
+            CheckRoomFloor(rooms, (Room)listViewRooms.SelectedItem);
+            ScheduledAdvancedRenovation newRenovation = new ScheduledAdvancedRenovation(GenerateId().ToString(),
                 room, interval, description.Text, rooms, "split");
-            if (!checkRoomFloor(rooms, room)) {
-                MessageBox.Show("Cannot merge rooms on different floors");
-                return;
-            }
             scheduledAdvancedRenovationController.Create(newRenovation);
-            this.Close();
         }
 
-        private bool checkRoomFloor(List<Room> rooms, Room room) {
-            if (rooms[0].floor != rooms[1].floor || rooms[0].floor != room.floor)
-                return false;
-            return true;
+        private int GenerateId() {
+            if (scheduledAdvancedRenovationController.FindAll().Count == 0)
+                return 0;
+            return Int32.Parse(scheduledAdvancedRenovationController.FindAll()[scheduledAdvancedRenovationController.FindAll().Count - 1]._Id) + 1;
         }
+
+        private void CheckRoomFloor(List<Room> rooms, Room room) {
+            if (rooms[0].floor != rooms[1].floor || rooms[0].floor != room.floor)
+                throw new Exception("Rooms must be on the same floor!");
+        }
+
+        private void ValidateId(string id)
+        {
+            if (roomController.FindRoomById(id) != null)
+                throw new Exception("Room with this id already exists!");
+        }
+
+        private void ValidateFloor()
+        {
+            int value;
+            bool isValid = Int32.TryParse(floor.Text, out value);
+
+            if (!isValid)
+                throw new Exception("Floor should be a number!");
+
+            if (value < 0)
+                throw new Exception("Floor should be positive!");
+        }
+
 
         private void IsFormFilled(object sender, SelectionChangedEventArgs e)
         {

@@ -47,6 +47,7 @@ namespace hospital
 
         public PollController pollBlueprintController { get; set; }
 
+        public IngridientsController ingridientsController { get; set; }
 
         public Notifier Notifier { get; set; }
 
@@ -128,6 +129,9 @@ namespace hospital
             PollService pollBlueprintService = new PollService(pollBlueprintRepository, pollResultRepository);
             pollBlueprintController = new PollController(pollBlueprintService);
 
+            IngridientsRepository ingridientsRepository = new IngridientsRepository();
+            IngridientsService ingridientsService = new IngridientsService(ingridientsRepository);
+            ingridientsController = new IngridientsController(ingridientsService);
             
             roomRepository.LoadRoomData();
             scheduledRelocationRepository.LoadRelocationData();
@@ -136,6 +140,7 @@ namespace hospital
 
 
             scheduledAdvancedRenovationRepository.LoadRenovationData();
+            ingridientsRepository.LoadIngridientsData();
 
             orderThread = new Thread(orderService.orderTracker);
             orderThread.Start();

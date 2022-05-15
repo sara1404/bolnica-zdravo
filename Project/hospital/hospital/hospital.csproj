@@ -94,6 +94,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controller\DoctorController.cs" />
+    <Compile Include="Controller\IngridientsController.cs" />
     <Compile Include="Controller\InvalidMedicineReportController.cs" />
     <Compile Include="Controller\EmergencyController.cs" />
     <Compile Include="Controller\MedicineController.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Controller\UserController.cs" />
     <Compile Include="DTO\EmergencyDTO.cs" />
     <Compile Include="Controller\VacationRequestController.cs" />
+    <Compile Include="FileHandler\IngridientsFileHandler.cs" />
     <Compile Include="FileHandler\InvalidMedicineReportFileHandler.cs" />
     <Compile Include="FileHandler\MedicalRecordFileHandler.cs" />
     <Compile Include="FileHandler\MedicineFileHandler.cs" />
@@ -132,6 +134,7 @@
     <Compile Include="Model\VacationRequest.cs" />
     <Compile Include="Repository\AppointmentRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
+    <Compile Include="Repository\IngridientsRepository.cs" />
     <Compile Include="Repository\InvalidMedicineReportRepository.cs" />
     <Compile Include="Repository\MedicalRecordsRepository.cs" />
     <Compile Include="Repository\MedicineRepository.cs" />
@@ -149,6 +152,7 @@
     <Compile Include="Service\AppointmentService.cs" />
     <Compile Include="Service\DoctorService.cs" />
     <Compile Include="Service\EmergencyService.cs" />
+    <Compile Include="Service\IngridientsService.cs" />
     <Compile Include="Service\InvalidMedicineReportService.cs" />
     <Compile Include="Service\MedicalRecordsService.cs" />
     <Compile Include="Service\MedicineService.cs" />
@@ -684,6 +688,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\user_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Data\IngridientsData.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets')" />

@@ -30,12 +30,7 @@ namespace hospital.View
             App app = Application.Current as App;
             medicineController = app.medicineController;
             roomController = app.roomController;
-            ingridients.Add("kikiriki");
-            ingridients.Add("silicijum-fosfat");
-            ingridients.Add("kalcijum");
-            ingridients.Add("natrijum-hlorid");
-            ingridients.Add("penicilin");
-            ingridientsField.ItemsSource = ingridients;
+            ingridientsField.ItemsSource = app.ingridientsController.FindAll();
             alternativesField.ItemsSource = medicineController.FindAll();
             scheduleBtn.IsEnabled = false;
         }

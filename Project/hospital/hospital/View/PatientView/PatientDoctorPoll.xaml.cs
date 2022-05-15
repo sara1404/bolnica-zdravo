@@ -71,19 +71,16 @@ namespace hospital.View.PatientView
             app.PatientBackToMainMenu();
         }
 
-        private void cbAppointments_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            if(cbAppointments.SelectedItem != null)
+            if (IsValidated())
             {
-                Appointment appointment = (Appointment)cbAppointments.SelectedItem;
-                if (!pbc.AppointmentPollAlreadyFilled(appointment.Id))
-                {
-                    //lbPoll.Visibility = Visibility.Visible;
-                }
+                pbc.SavePoll(FillPoll());
+                app.PatientBackToMainMenu();
             }
         }
 
-        private void btnConfirm_Click(object sender, RoutedEventArgs e)
+        private bool IsValidated()
         {
             if (CheckIfFilled())
             {
@@ -92,22 +89,24 @@ namespace hospital.View.PatientView
                     Appointment appointment = (Appointment)cbAppointments.SelectedItem;
                     if (!pbc.AppointmentPollAlreadyFilled(appointment.Id))
                     {
-                        pbc.SavePoll(FillPoll());
-                        app.PatientBackToMainMenu();
+                        return true;
                     }
                     else
                     {
                         lbWarning.Content = "You have already answered the poll for this appointment!";
+                        return false;
                     }
                 }
                 else
                 {
                     lbWarning.Content = "Please choose an appointment!";
+                    return false;
                 }
             }
             else
             {
                 lbWarning.Content = "Please answer all of the questions!";
+                return false;
             }
         }
 

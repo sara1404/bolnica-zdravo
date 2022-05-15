@@ -51,7 +51,7 @@ namespace hospital.Controller
             return renovationService.FindIntervalsForSplitingRoom(room, renovationDuration);
         }
 
-        public void RelocationTracker() {
+        public void RenovationTracker() {
             renovationService.RenovationTracker();
         }
     }

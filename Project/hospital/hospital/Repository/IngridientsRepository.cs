@@ -30,10 +30,5 @@ namespace hospital.Repository
                 }
             }
         }
-
-        public void WriteRoomData()
-        {
-            ingridientsFileHandler.Write(ingridients.ToList());
-        }
     }
 }

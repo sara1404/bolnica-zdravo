@@ -42,6 +42,21 @@ namespace hospital.Model
 
         }
 
+        public bool IsOverlaping(TimeInterval interval) {
+            return DateIsInInterval(this, interval._Start.Date) || DateIsInInterval(this, interval._End.Date)
+                       || IsInsideInterval(this, interval) || IsInsideInterval(interval, this);
+        }
+
+        private bool DateIsInInterval(TimeInterval interval, DateTime date)
+        {
+            return interval._Start.Date <= date && interval._End >= date;
+        }
+
+        private bool IsInsideInterval(TimeInterval outside, TimeInterval inside)
+        {
+            return outside._Start <= inside._Start && outside._End >= inside._End;
+        }
+
         public override string ToString()
         {
             return start + "\n" + end;

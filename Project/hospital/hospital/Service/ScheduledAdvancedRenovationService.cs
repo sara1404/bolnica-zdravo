@@ -107,30 +107,22 @@ namespace hospital.Service
         private void MoveEquipmentToWarehouse(ScheduledAdvancedRenovation renovation)
         {
             if (renovation.flag.Equals("split"))
-                MoveEquipmentToWarehouseWhenSplit(renovation);
+                MoveEquipmentToWarehouseFromRoom(renovation, renovation._Room);
             else if (renovation.flag.Equals("merge"))
-                MoveEquipmentToWarehouseWhenMerge(renovation);
+                MoveEquipmentToWarehouseFromRooms(renovation);
         }
 
-        private void MoveEquipmentToWarehouseWhenSplit(ScheduledAdvancedRenovation renovation) {
-            foreach (Equipment eq in renovation._Room.equipment)
+        private void MoveEquipmentToWarehouseFromRoom(ScheduledAdvancedRenovation renovation, Room room) {
+            foreach (Equipment eq in room.equipment)
             {
                 roomService.FindRoomByPurpose("warehouse").AddEquipment(eq);
             }
-            renovation._Room.equipment.Clear();
+            room.equipment.Clear();
         }
 
-        private void MoveEquipmentToWarehouseWhenMerge(ScheduledAdvancedRenovation renovation) {
-            foreach (Equipment eq in renovation.rooms[0].equipment)
-            {
-                roomService.FindRoomByPurpose("warehouse").AddEquipment(eq);
-            }
-            foreach (Equipment eq in renovation.rooms[1].equipment)
-            {
-                roomService.FindRoomByPurpose("warehouse").AddEquipment(eq);
-            }
-            renovation.rooms[0].equipment.Clear();
-            renovation.rooms[1].equipment.Clear();
+        private void MoveEquipmentToWarehouseFromRooms(ScheduledAdvancedRenovation renovation) {
+            MoveEquipmentToWarehouseFromRoom(renovation, renovation.rooms[0]);
+            MoveEquipmentToWarehouseFromRoom(renovation, renovation.rooms[1]);
         }
 
 

@@ -640,5 +640,14 @@
   <ItemGroup>
     <Resource Include="Resources\Images\fast-forward.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\logout_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\back_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\user_white.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

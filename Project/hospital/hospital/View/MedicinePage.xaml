@@ -27,10 +27,10 @@
                     </Grid.ColumnDefinitions>
 
                     <Image DockPanel.Dock="Left" Height="56" Width="100" Source="../Resources/Images/logo.png" Grid.Column="0"/>
-                    <Button Height="30" DockPanel.Dock ="Right"  Grid.Column="4" Margin="88,15,10,15" Click="Logout_Click">
+                    <Button DockPanel.Dock ="Right"  Grid.Column="4" Margin="88,15,10,23" Click="Logout_Click">
                         <Button.Template>
                             <ControlTemplate>
-                                <Image Source="../Resources/Images/logout.png"/>
+                                <Image Source="../Resources/Images/logout_white.png" Margin="0,-6,0,-11"/>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
@@ -41,12 +41,12 @@
         <Button Click="Back_Click" Margin="10,121,920,569">
             <Button.Template>
                 <ControlTemplate>
-                    <Image Source="../Resources/Images/back.png"/>
+                    <Image Source="../Resources/Images/back_white.png"/>
                 </ControlTemplate>
             </Button.Template>
         </Button>
         <Button Content="ADD MEDICINE" HorizontalAlignment="Left" Margin="145,121,0,0" VerticalAlignment="Top" Width="175" Height="49" Click="Add_Medicine_Click" Background="#bc84fc" FontSize="16"/>
-        <DataGrid x:Name="medicineDataGrid" IsReadOnly="True" SelectionUnit="FullRow" Height="454" Margin="145,211,120,0" VerticalAlignment="Top" PreviewKeyDown="KeyPressed" Background="#1d1b1f">
+        <DataGrid AutoGenerateColumns="False" x:Name="medicineDataGrid" IsReadOnly="True" SelectionUnit="FullRow" Height="454" Margin="145,211,120,0" VerticalAlignment="Top" PreviewKeyDown="KeyPressed" Background="#1d1b1f">
             <DataGrid.Resources>
                 <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="#bc84fc" />

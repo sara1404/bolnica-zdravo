@@ -145,5 +145,14 @@ namespace Repository
             }
         }
 
+        public List<Appointment> FindAppointmentsForSpecifiedRoom(Room room) {
+            List<Appointment> appointmentsInRoom = new List<Appointment>();
+            foreach (Appointment appointment in appointments) {
+                if (appointment.RoomId.Equals(room.id)) {
+                    appointmentsInRoom.Add(appointment);
+                }
+            }
+            return appointmentsInRoom;
+        }
     }
 }

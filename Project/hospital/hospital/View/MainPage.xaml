@@ -42,7 +42,7 @@
             <Border Grid.Row="0" BorderBrush="#bc84fc" BorderThickness="0,2,2,2" Background="#1d1b1f">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
-                        <Image HorizontalAlignment="Left" Height="46" Margin="40 40 0 0" VerticalAlignment="Top" Width="46" Source="../Resources/Images/account.png"/>
+                        <Image HorizontalAlignment="Left" Height="46" Margin="40 40 0 0" VerticalAlignment="Top" Width="46" Source="../Resources/Images/user_white.png"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
                         <Label Content="Dusan" HorizontalAlignment="Left" Margin="40 30 0 0" VerticalAlignment="Top" Foreground="white"/>
@@ -81,10 +81,10 @@
                     </Grid.ColumnDefinitions>
 
                     <Image DockPanel.Dock="Left" Height="56" Width="100" Source="../Resources/Images/logo.png" Grid.Column="0"/>
-                    <Button Height="30" DockPanel.Dock ="Right"  Grid.Column="4" Margin="88,15,10,15" Click="Logout_Click">
+                    <Button DockPanel.Dock ="Right"  Grid.Column="4" Margin="88,10,10,25" Click="Logout_Click" RenderTransformOrigin="0.48,2.372">
                         <Button.Template>
                             <ControlTemplate>
-                                <Image Source="../Resources/Images/logout.png"/>
+                                <Image Source="../Resources/Images/logout_white.png" Margin="0,-4,0,-15"/>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>

@@ -45,10 +45,10 @@
                     </Grid.ColumnDefinitions>
 
                     <Image DockPanel.Dock="Left" Height="56" Width="100" Source="../Resources/Images/logo.png" Grid.Column="0"/>
-                    <Button Height="30" DockPanel.Dock ="Right"  Grid.Column="4" Margin="88,15,10,15" Click="Logout_Click">
+                    <Button DockPanel.Dock ="Right"  Grid.Column="4" Margin="88,15,10,21" Click="Logout_Click">
                         <Button.Template>
                             <ControlTemplate>
-                                <Image Source="../Resources/Images/logout.png"/>
+                                <Image Source="../Resources/Images/logout_white.png" Margin="0,-2,0,-7"/>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
@@ -72,10 +72,10 @@
             <Button Content="Schedule relocation" HorizontalAlignment="Left" Margin="105,40,0,40" VerticalAlignment="Top" Width="177" Height="54" Click="Show_Relocation_Window_Click" FontSize="16"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="1">
-            <Button Height="30" Click="Back_Click">
+            <Button Height="30" Click="Back_Click" Margin="0,0,22,0">
                 <Button.Template>
                     <ControlTemplate>
-                        <Image Source="../Resources/Images/back.png"/>
+                        <Image Source="../Resources/Images/back_white.png" Margin="0,-12,0,-22"/>
                     </ControlTemplate>
                 </Button.Template>
             </Button>

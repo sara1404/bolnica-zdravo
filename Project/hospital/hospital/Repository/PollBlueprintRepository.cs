@@ -36,7 +36,7 @@ namespace hospital.Repository
                 {
                     new PollQuestion(6, "How do you rate our recommended appointments functionality?"),
                     new PollQuestion(7, "How do you rate our appointment scheduling system?"),
-                    new PollQuestion(8, "How do you rate our ...?")
+                    new PollQuestion(8, "How do you rate our waiting rooms?")
                 }),
             };
             blueprints.Add(hospitalPoll);
@@ -46,23 +46,23 @@ namespace hospital.Repository
             doctorPoll.PollName = "Doctor poll";
             doctorPoll.Categories = new List<PollCategory>()
             {
-                new PollCategory(0, "A", new List<PollQuestion>()
+                new PollCategory(0, "Doctor", new List<PollQuestion>()
                 {
-                    new PollQuestion(0, "Aaaa"),
-                    new PollQuestion(1, "Bbbb"),
-                    new PollQuestion(2, "Cccc"),
+                    new PollQuestion(0, "How polite was your doctor?"),
+                    new PollQuestion(1, "How kind was your doctor?"),
+                    new PollQuestion(2, "How would you rate doctors expertise?"),
                 }),
-                new PollCategory(1, "B", new List<PollQuestion>()
+                new PollCategory(1, "Appointment", new List<PollQuestion>()
                 {
-                    new PollQuestion(3, "Aaaa"),
-                    new PollQuestion(4, "Bbbb"),
-                    new PollQuestion(5, "Cccc"),
+                    new PollQuestion(3, "How appropriate were the medicines the doctor gave you?"),
+                    new PollQuestion(4, "Did you have to wait for a long time?"),
+                    new PollQuestion(5, "Did you spend a lot of time on appointment?"),
                 }),
-                new PollCategory(2, "C", new List<PollQuestion>()
+                new PollCategory(2, "Ordination", new List<PollQuestion>()
                 {
-                    new PollQuestion(6, "Aaaa"),
-                    new PollQuestion(7, "Bbbb"),
-                    new PollQuestion(8, "Cccc"),
+                    new PollQuestion(6, "Rate the cleanliness of the ordination?"),
+                    new PollQuestion(7, "How equiped was the ordination?"),
+                    new PollQuestion(8, "How are you satasfied with our waiting room?"),
                 }),
             };
             blueprints.Add(doctorPoll);

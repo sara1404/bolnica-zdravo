@@ -53,6 +53,13 @@ namespace Model
         public string Description { get => description; set => description = value; }
         public DateTime StartTime { get => startTime; set => startTime = value; }
         public int Duration { get => duration; set => duration = value; }
+        public string AppointmentDisplayProperty
+        {
+            get
+            {
+                return id.ToString() + " " + doctorUsername + " " + startTime.ToString();
+            }
+        }
         public string DoctorUsername
         {
             get

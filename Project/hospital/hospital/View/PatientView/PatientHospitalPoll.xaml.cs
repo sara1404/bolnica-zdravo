@@ -25,7 +25,7 @@ namespace hospital.View.PatientView
     public partial class PatientHospitalPoll : Page
     {
         private App app;
-        private PollBlueprintController pbc;
+        private PollController pbc;
         private UserController uc;
         public List<PollQuestion> Poll { get; set; }
         public PatientHospitalPoll()
@@ -48,20 +48,18 @@ namespace hospital.View.PatientView
         {
             if (!CheckIfFilled())
             {
-                MessageBox.Show("Please answer all of the questions!");
+                lbWarning.Content = "Please answer all of the questions!";
             }
             else
             {
                 if (!pbc.HospitalPollAlreadyFilled(uc.CurentLoggedUser.Username))
                 {
-                    PollBlueprint poll = FillPoll();
-                    poll.Username = uc.CurentLoggedUser.Username;
-                    pbc.SavePoll(poll);
+                    pbc.SavePoll(FillPoll());
                     app.PatientBackToMainMenu();
                 }
                 else
                 {
-                    MessageBox.Show("You have already filled this poll!");
+                    lbWarning.Content = "You have already filled this poll!";
                 }
             }
         }
@@ -108,6 +106,7 @@ namespace hospital.View.PatientView
                     }
                 }
             }
+            poll.Username = uc.CurentLoggedUser.Username;
             return poll;
         }
 

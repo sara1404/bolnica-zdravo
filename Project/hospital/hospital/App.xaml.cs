@@ -45,7 +45,7 @@ namespace hospital
 
         public EmergencyController emergencyController { get; set; }
 
-        public PollBlueprintController pollBlueprintController { get; set; }
+        public PollController pollBlueprintController { get; set; }
 
 
         public Notifier Notifier { get; set; }
@@ -125,8 +125,8 @@ namespace hospital
 
             PollBlueprintRepository pollBlueprintRepository = new PollBlueprintRepository();
             PollResultRepository pollResultRepository = new PollResultRepository();
-            PollBlueprintService pollBlueprintService = new PollBlueprintService(pollBlueprintRepository, pollResultRepository);
-            pollBlueprintController = new PollBlueprintController(pollBlueprintService);
+            PollService pollBlueprintService = new PollService(pollBlueprintRepository, pollResultRepository);
+            pollBlueprintController = new PollController(pollBlueprintService);
 
             
             roomRepository.LoadRoomData();

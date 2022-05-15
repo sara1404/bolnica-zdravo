@@ -100,7 +100,7 @@
     <Compile Include="Controller\NotificationController.cs" />
     <Compile Include="Controller\OrderController.cs" />
     <Compile Include="Controller\ScheduledAdvancedRenovationController.cs" />
-    <Compile Include="Controller\PollBlueprintController.cs" />
+    <Compile Include="Controller\PollController.cs" />
     <Compile Include="Controller\ScheduledBasicRenovationController.cs" />
     <Compile Include="Controller\ScheduledRelocationController.cs" />
     <Compile Include="Controller\UserController.cs" />
@@ -155,7 +155,7 @@
     <Compile Include="Service\NotificationService.cs" />
     <Compile Include="Service\OrderService.cs" />
     <Compile Include="Service\PatientService.cs" />
-    <Compile Include="Service\PollBlueprintService.cs" />
+    <Compile Include="Service\PollService.cs" />
     <Compile Include="Service\RoomService.cs" />
     <Compile Include="Service\ScheduledAdvancedRenovationService.cs" />
     <Compile Include="Service\ScheduledBasicRenovationService.cs" />

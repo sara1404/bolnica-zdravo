@@ -45,6 +45,43 @@ namespace Controller
             return patientService.UpdateById(username, patient);
         }
 
+        public void BlockPatient(string patientUsername)
+        {
+            Patient currentPatient = FindById(patientUsername);
+            currentPatient.IsBlocked = true;
+            User blockedUser = userService.FindByUsername(patientUsername);
+            blockedUser.IsBlocked = true;
+            userService.UpdateByUsername(patientUsername, blockedUser);
+        }
+
+        public bool IsTroll(string patientUsername)
+        {
+            Patient currentPatient = FindById(patientUsername);
+            int delayOrCancelCnt = 0;
+            foreach (DateTime time in currentPatient.DelayOrCancelAppointment)
+            {
+                if (time >= DateTime.Now.AddDays(-30))
+                {
+                    delayOrCancelCnt++;
+                }
+            }
+            if (delayOrCancelCnt >= 5)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void AddDelayOrCancelAppointment(string patientUsername)
+        {
+            Patient currentPatient = FindById(patientUsername);
+            currentPatient.DelayOrCancelAppointment.Add(DateTime.Now);
+            UpdateByUsername(patientUsername, currentPatient);
+        }
+
         private void isValidate(Patient patient)
         {
             if (patient.FirstName.Trim().Equals(""))

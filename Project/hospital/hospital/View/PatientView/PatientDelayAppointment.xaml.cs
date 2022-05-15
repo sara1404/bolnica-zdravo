@@ -48,42 +48,6 @@ namespace hospital.View
                 appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)newDate.SelectedDate, selectedAppointment.DoctorUsername,uc.CurentLoggedUser.Username);
             }
         }
-        private void AddDelayOrCancelAppointment()
-        {
-            Patient currentPatient = pc.FindById(uc.CurentLoggedUser.Username);
-            currentPatient.DelayOrCancelAppointment.Add(DateTime.Now);
-            pc.UpdateByUsername(uc.CurentLoggedUser.Username, currentPatient);
-        }
-        private bool IsTroll()
-        {
-            Patient currentPatient = pc.FindById(uc.CurentLoggedUser.Username);
-            int delayOrCancelCnt = 0;
-            foreach (DateTime time in currentPatient.DelayOrCancelAppointment)
-            {
-                if (time >= DateTime.Now.AddDays(-30))
-                {
-                    delayOrCancelCnt++;
-                }
-            }
-            if (delayOrCancelCnt >= 5)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public void BlockPatient()
-        {
-            Patient currentPatient = pc.FindById(uc.CurentLoggedUser.Username);
-            currentPatient.IsBlocked = true;
-            User blockedUser = uc.CurentLoggedUser;
-            blockedUser.IsBlocked = true;
-            uc.UpdateByUsername(uc.CurentLoggedUser.Username, blockedUser);
-        }
-
         public void LogoutUser()
         {
             uc.CurentLoggedUser = null;
@@ -102,10 +66,10 @@ namespace hospital.View
         {
             if(appointmentTable.SelectedItem != null)
             {
-                AddDelayOrCancelAppointment();
-                if (IsTroll())
+                pc.AddDelayOrCancelAppointment(uc.CurentLoggedUser.Username);
+                if (pc.IsTroll(uc.CurentLoggedUser.Username))
                 {
-                    BlockPatient();
+                    pc.BlockPatient(uc.CurentLoggedUser.Username);
                     LogoutUser();
                 }
                 ac.UpdateAppointment(selectedAppointment, (Appointment)appointmentTable.SelectedItem);

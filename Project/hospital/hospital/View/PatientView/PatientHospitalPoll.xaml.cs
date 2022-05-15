@@ -46,21 +46,10 @@ namespace hospital.View.PatientView
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            if (!CheckIfFilled())
+            if (IsValidated())
             {
-                lbWarning.Content = "Please answer all of the questions!";
-            }
-            else
-            {
-                if (!pbc.HospitalPollAlreadyFilled(uc.CurentLoggedUser.Username))
-                {
-                    pbc.SavePoll(FillPoll());
-                    app.PatientBackToMainMenu();
-                }
-                else
-                {
-                    lbWarning.Content = "You have already filled this poll!";
-                }
+                pbc.SavePoll(FillPoll());
+                app.PatientBackToMainMenu();
             }
         }
 
@@ -110,7 +99,26 @@ namespace hospital.View.PatientView
             return poll;
         }
 
-
+        private bool IsValidated()
+        {
+            if (!CheckIfFilled())
+            {
+                lbWarning.Content = "Please answer all of the questions!";
+                return false;
+            }
+            else
+            {
+                if (!pbc.HospitalPollAlreadyFilled(uc.CurentLoggedUser.Username))
+                {
+                    return true;
+                }
+                else
+                {
+                    lbWarning.Content = "You have already filled this poll!";
+                    return false;
+                }
+            }
+        }
         private bool CheckIfFilled()
         {
             foreach (var listIterator in lbPoll.Items)

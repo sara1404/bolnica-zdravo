@@ -21,7 +21,7 @@ namespace Model
 
         public Specialization Specialization { get => specialization; set => specialization = value; }
 
-        public Doctor(string name, string surname, Specialization specialization = Specialization.general)
+        public Doctor(string name, string surname, Specialization specialization = Specialization.General)
         {
             Name = name;
             Surname = surname;

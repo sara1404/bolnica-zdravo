@@ -1,0 +1,88 @@
+﻿<Page x:Class="hospital.View.MedicinePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:hospital.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="768" d:DesignWidth="1024"
+      Title="MedicinePage">
+    <Page.Resources>
+        <ResourceDictionary Source="ManagerResources.xaml"></ResourceDictionary>
+    </Page.Resources>
+    <Grid>
+        <StackPanel  Grid.Column="0" Grid.ColumnSpan="7" Grid.Row="0" Grid.RowSpan="1" VerticalAlignment="Stretch"  Background="#121212">
+            <Border BorderBrush="#bc84fc" BorderThickness="0,2,0,2">
+                <Grid Height="60" DockPanel.Dock="Top" Background="#1d1b1f">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+
+                    </Grid.ColumnDefinitions>
+
+                    <Image DockPanel.Dock="Left" Height="56" Width="100" Source="../Resources/Images/logo.png" Grid.Column="0"/>
+                    <Button DockPanel.Dock ="Right"  Grid.Column="4" Margin="88,15,10,23" Click="Logout_Click">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Image Source="../Resources/Images/logout_white.png" Margin="0,-6,0,-11"/>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </Border>
+
+        </StackPanel>
+        <Button Click="Back_Click" Margin="10,121,920,569">
+            <Button.Template>
+                <ControlTemplate>
+                    <Image Source="../Resources/Images/back_white.png"/>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button Content="ADD MEDICINE" HorizontalAlignment="Left" Margin="145,121,0,0" VerticalAlignment="Top" Width="175" Height="49" Click="Add_Medicine_Click" Background="#bc84fc" FontSize="16"/>
+        <DataGrid AutoGenerateColumns="False" x:Name="medicineDataGrid" IsReadOnly="True" SelectionUnit="FullRow" Height="454" Margin="145,211,120,0" VerticalAlignment="Top" PreviewKeyDown="KeyPressed" Background="#1d1b1f">
+            <DataGrid.Resources>
+                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="#bc84fc" />
+                    <Setter Property="Foreground" Value="White" />
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Width="250" Binding="{Binding Name}">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                            <Setter Property="Background" Value="#bc84fc" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Code" Width="250" Binding="{Binding Id}">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                            <Setter Property="Background" Value="#bc84fc" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Quantity" Width="233" Binding="{Binding quantity}">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                            <Setter Property="Background" Value="#bc84fc" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Page>

@@ -1,16 +1,40 @@
-﻿<Window x:Class="hospital.View.DoctorHomeWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:hospital.View"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="hospital.View.DoctorHomeWindow"
         mc:Ignorable="d"
-        Title="DoctorHomeWindow" Height="450" Width="800">
+        Title="DoctorHomeWindow" Height="500
+    " Width="800">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid >
-        <Button Content="Appointments" HorizontalAlignment="Left" Margin="46,52,0,0" VerticalAlignment="Top" Width="95" Click="Appointment_Click"/>
-        <Button Content="Medical Records" HorizontalAlignment="Left" Margin="46,116,0,0" VerticalAlignment="Top" Width="95" Click="MedicalRecord_Click"/>
-        <Button Content="Therapy" HorizontalAlignment="Left" Margin="46,173,0,0" VerticalAlignment="Top" Width="95" Click="Therapy_Click"/>
-        <Button Content="Logout" x:Name="btnLogout" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="688,52,0,0" Click="btnLogout_Click"/>
+        <Button Content="Appointments" FontSize="12" HorizontalAlignment="Left" Margin="27,52,0,0" VerticalAlignment="Top" Width="114" Click="Appointment_Click" Height="50"/>
+        <Button Content="Medical&#10;Records" FontSize="12" HorizontalAlignment="Left" Margin="27,138,0,0" VerticalAlignment="Top" Width="114" Click="MedicalRecord_Click" Height="50"/>
+        <Button Content="Therapy" FontSize="12" HorizontalAlignment="Left" Margin="27,224,0,0" VerticalAlignment="Top" Width="114" Click="Therapy_Click" Height="50"/>
+        <Button x:Name="btnLogout" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="688,10,0,0" Click="btnLogout_Click" Height="33">
+            <Image Source="../Resources/Images/logout.png" Height="29" Width="44"/>
+        </Button>
+        <Button Content="Vacation&#10;Request" FontSize="12" HorizontalAlignment="Left" Margin="163,390,0,0" VerticalAlignment="Top" Width="114" Click="Vacation_Click" Height="50"/>
+        <Button Content="Medicine&#10; Review" FontSize="12" HorizontalAlignment="Left" Margin="27,390,0,0" VerticalAlignment="Top" Width="114" Click="Medicine_Click" Height="50"/>
+        <Button Content="Exemptions" FontSize="12" HorizontalAlignment="Left" Margin="27,302,0,0" VerticalAlignment="Top" Width="114" Height="50"/>
+        <Button Content="Equipment&#10;   request" FontSize="12" HorizontalAlignment="Left" Margin="304,390,0,0" VerticalAlignment="Top" Width="114" Height="50"/>
+        <Button Content="Calendar" FontSize="12" HorizontalAlignment="Left" Margin="441,390,0,0" VerticalAlignment="Top" Width="114" Height="50" RenderTransformOrigin="0.53,1.228"/>
+        <Button Content="Tutorial" FontSize="12" HorizontalAlignment="Left" Margin="649,390,0,0" VerticalAlignment="Top" Width="114" Height="50"/>
+
+        <syncfusion:SfScheduler HorizontalAlignment="Left" Margin="163,52,0,0" ViewType="Month" VerticalAlignment="Top" Height="250" Width="600"/>
 
     </Grid>
 </Window>

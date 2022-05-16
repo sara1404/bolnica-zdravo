@@ -6,26 +6,38 @@
         xmlns:local="clr-namespace:hospital.View"
         mc:Ignorable="d"
         Title="DoctorEditAppointment" Height="450" Width="800">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid>
         <Grid>
-            <Label Content="Patient:" HorizontalAlignment="Left" Margin="33,36,0,0" VerticalAlignment="Top"/>
-            <Label Content="Date:" HorizontalAlignment="Left" Margin="33,73,0,0" VerticalAlignment="Top"/>
-            <DatePicker x:Name="date" HorizontalAlignment="Left" Margin="115,75,0,0" VerticalAlignment="Top" Width="120"/>
-            <Label Content="Operation:" HorizontalAlignment="Left" Margin="32,107,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="btnShow" Content="Show" HorizontalAlignment="Left" Margin="33,182,0,0" VerticalAlignment="Top" Width="86" Height="21" Click="btnShow_Click"/>
-            <DataGrid x:Name="appointmentTable"  AutoGenerateColumns="True" IsReadOnly="True" HorizontalAlignment="Left" Height="321" Margin="338,36,0,0" VerticalAlignment="Top" Width="446" />
+            <Label Content="Patient:" HorizontalAlignment="Left" Margin="33,18,0,0" VerticalAlignment="Top"/>
+            <Label Content="Date:" HorizontalAlignment="Left" Margin="33,51,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.725,-0.224"/>
+            <DatePicker x:Name="date" HorizontalAlignment="Left" Margin="139,51,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.517,0.187"/>
+            <Label Content="Operation:" HorizontalAlignment="Left" Margin="33,82,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="btnShow" FontSize="12" Content="Show" HorizontalAlignment="Left" Margin="33,144,0,0" VerticalAlignment="Top" Width="86" Height="26" Click="btnShow_Click"/>
+            <DataGrid x:Name="appointmentTable"  AutoGenerateColumns="True" IsReadOnly="True" HorizontalAlignment="Left" Height="321" Margin="338,10,0,0" VerticalAlignment="Top" Width="446" />
             <!--<DataGrid.Columns>
                 <DataGridTextColumn Header="Doctor name" Binding="{Binding Doctor}"/>
                 <DataGridTextColumn Header="Date" Binding="{Binding StartTime}" Width="*"/>
             </DataGrid.Columns>-->
 
-            <Button x:Name="btnConfirm" Content="Confirm" HorizontalAlignment="Left" Margin="338,372,0,0" VerticalAlignment="Top" Width="75" Click="btnConfirm_Click"/>
-            <TextBox x:Name="tbDescription"  HorizontalAlignment="Left" Height="123" Margin="32,234,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="266"/>
-            <Label Content="Description:" HorizontalAlignment="Left" Margin="32,203,0,0" VerticalAlignment="Top" Width="118"/>
-            <TextBox x:Name="tbPatient" HorizontalAlignment="Left" IsEnabled="False" Height="23" Margin="115,36,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-            <CheckBox x:Name="cbOperation" IsEnabled="False" Content="Yes" HorizontalAlignment="Left" Margin="115,113,0,0" VerticalAlignment="Top"/>
-            <Label Content="Operation Room:" HorizontalAlignment="Left" Margin="33,138,0,0" VerticalAlignment="Top"/>
-            <ComboBox x:Name="cmbOpRoom" IsManipulationEnabled="True" IsEnabled="False"  HorizontalAlignment="Left" Margin="139,138,0,0" VerticalAlignment="Top" Width="120"/>
+            <Button x:Name="btnConfirm" Content="Confirm" HorizontalAlignment="Left" Margin="338,344,0,0" VerticalAlignment="Top" Width="446" Click="btnConfirm_Click" Height="50"/>
+            <TextBox x:Name="tbDescription"  HorizontalAlignment="Left" Height="138" Margin="32,201,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="266"/>
+            <Label Content="Description:" HorizontalAlignment="Left" Margin="32,170,0,0" VerticalAlignment="Top" Width="118"/>
+            <TextBox x:Name="tbPatient" HorizontalAlignment="Left" IsEnabled="False" Height="23" Margin="139,18,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+            <CheckBox x:Name="cbOperation" IsEnabled="False" Content="Yes" HorizontalAlignment="Left" Margin="139,88,0,0" VerticalAlignment="Top"/>
+            <Label Content="Operation Room:" HorizontalAlignment="Left" Margin="33,113,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="cmbOpRoom" IsManipulationEnabled="True" IsEnabled="False"  HorizontalAlignment="Left" Margin="139,116,0,0" VerticalAlignment="Top" Width="120"/>
 
         </Grid>
 

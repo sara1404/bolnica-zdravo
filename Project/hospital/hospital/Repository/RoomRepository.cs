@@ -40,6 +40,62 @@ namespace Repository
             return null;
         }
 
+        public Room FindRoomByPurpose(string purpose) {
+            foreach (Room room in rooms)
+            {
+                if (room._Purpose.Equals(purpose))
+                    return room;
+            }
+            return null;
+        }
+
+        public List<Room> FindRoomsByEquipmentType(string type) {
+            List<Room> filteredRooms = new List<Room>();
+            foreach (Room room in rooms) {
+                foreach (Equipment eq in room.equipment) {
+                    if (eq.type.Contains(type))
+                        filteredRooms.Add(room);
+                }
+            }
+            return filteredRooms;
+        }
+
+
+        public List<Room> FindRoomsByEquipmentQuantity(int quantity) {
+            List<Room> filteredRooms = new List<Room>();
+            foreach (Room room in rooms)
+            {
+                if (RoomHasEnoughEquipment(quantity, room)) filteredRooms.Add(room);
+            }
+            return filteredRooms;
+        }
+
+        private bool RoomHasEnoughEquipment(int quantity, Room room)
+        {
+            foreach (Equipment eq in room.equipment)
+            {
+                if (eq.quantity >= quantity)
+                    return true;
+            }
+            return false;
+        }
+
+        public List<Room> FindRoomsByEquipmentTypeAndQuantity(string type, int quantity) {
+            List<Room> filteredRooms = new List<Room>();
+            foreach (Room room in rooms)
+            {
+                foreach (Equipment eq in room.equipment)
+                {
+                    if (eq.quantity >= quantity && eq.type.Contains(type))
+                    {
+                        filteredRooms.Add(room);
+                        break;
+                    }
+                }
+            }
+            return filteredRooms;
+        }
+
         public ref ObservableCollection<Room> FindAll()
         {
             return ref rooms;

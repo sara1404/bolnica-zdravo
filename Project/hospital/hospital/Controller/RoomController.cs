@@ -37,6 +37,22 @@ namespace Controller
             return roomService.FindRoomByName(name);
         }
 
+        public Room FindRoomByPurpose(string purpose) {
+            return roomService.FindRoomByPurpose(purpose);
+        }
+
+        public List<Room> FindRoomsByEquipmentType(string type) {
+            return roomService.FindRoomsByEquipmentType(type);
+        }
+
+        public List<Room> FindRoomsByEquipmentQuantity(int quantity) {
+            return roomService.FindRoomsByEquipmentQuantity(quantity);
+        }
+
+        public List<Room> FindRoomsByEquipmentTypeAndQuantity(string type, int quantity) {
+            return roomService.FindRoomsByEquipmentTypeAndQuantity(type, quantity);
+        }
+
         public ref ObservableCollection<Room> FindAll()
         {
             return ref roomService.FindAll();

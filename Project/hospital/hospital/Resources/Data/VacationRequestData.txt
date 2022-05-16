@@ -1,0 +1,5 @@
+<<<<<<< HEAD
+[{"StartDate":"2022-05-19T00:00:00","EndDate":"2022-05-26T00:00:00","IsHighPriority":false,"Note":"moram da odmorim od budala","Status":0,"DoctorId":"Skabo","Id":1}]
+=======
+[{"StartDate":"2022-05-18T00:00:00","EndDate":"2022-05-26T00:00:00","IsHighPriority":true,"Note":"eto zato","Status":0,"DoctorId":"Skabo","Id":1}]
+>>>>>>> feature/hospital-poll

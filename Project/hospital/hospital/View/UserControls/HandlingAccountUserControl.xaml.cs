@@ -115,5 +115,20 @@ namespace hospital.View.UserControls
                 editAccountUserControl.Visibility=Visibility.Visible;
             }
         }
+
+        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var tbx = sender as TextBox;
+            if (tbx != null)
+            {
+                var filteredList = Patients.Where(x => x.FirstName.ToLower().Contains(tbx.Text.ToLower()) || x.Username.ToLower().Contains(tbx.Text.ToLower()) || x.LastName.ToLower().Contains(tbx.Text.ToLower()) || x.Email.ToLower().Contains(tbx.Text.ToLower()) || x.PhoneNumber.ToLower().Contains(tbx.Text.ToLower())).ToList();
+                dateGridHandlingAccount.ItemsSource = null;
+                dateGridHandlingAccount.ItemsSource = filteredList;
+            }
+            else
+            {
+                dateGridHandlingAccount.ItemsSource = Patients;
+            }
+        }
     }
 }

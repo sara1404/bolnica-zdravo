@@ -29,34 +29,12 @@ namespace hospital.View.UserControls
             pc = app.patientController;
         }
 
-        private void btnRegister_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (isValidate())
-                {
-                    pc.Create(new Patient(txtFirstName.Text, txtSurname.Text, txtUsername.Text));
-                    this.Visibility = Visibility.Hidden;
-                }
-            }catch(Exception ex)
-            {
-                if(ex.Message.Equals("Username already exists !"))
-                {
-                txtUsername.BorderBrush = Brushes.Red;
-                errUsername.Text = ex.Message;
-                }
-            }
-        }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Visibility = Visibility.Hidden;
+            this.Visibility = Visibility.Collapsed;
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
 
         private bool isValidate()
         {
@@ -66,58 +44,70 @@ namespace hospital.View.UserControls
             {
                 isCorrected[i] = true;
             }
-            if (txtFirstName.Text.Trim().Equals(""))
+            if (txtFirstname.Text.Trim().Equals(""))
             {
                 errFirstname.Text = "Input first name";
-                txtFirstName.BorderBrush = Brushes.Red;
                 isCorrected[0] = false;
             }
-            else if (txtFirstName.Text.Any(char.IsDigit))
+            else if (txtFirstname.Text.Any(char.IsDigit))
             {
                 errFirstname.Text = "number isn't allowed";
-                txtFirstName.BorderBrush = Brushes.Red;
                 isCorrected[0] = false;
             }
             else
             {
                 errFirstname.Text = "";
-                txtFirstName.BorderBrush = Brushes.Gray;
                 isCorrected[0] = true;
             }
 
             //Surname validation
-            if (txtSurname.Text.Trim().Equals(""))
+            if (txtLastname.Text.Trim().Equals(""))
             {
-                errSurname.Text = "Input surname";
-                txtSurname.BorderBrush = Brushes.Red;
+                errLastname.Text = "Input surname";
                 isCorrected[1] = false;
             }
-            else if (txtSurname.Text.Any(char.IsDigit))
+            else if (txtLastname.Text.Any(char.IsDigit))
             {
-                errSurname.Text = "number isn't allowed";
-                txtSurname.BorderBrush = Brushes.Red;
+                errLastname.Text = "number isn't allowed";
                 isCorrected[1] = false;
             }
             else
             {
-                errSurname.Text = "";
-                txtSurname.BorderBrush = Brushes.Gray;
+                errLastname.Text = "";
                 isCorrected[1] = true;
             }
             //usernam validate
             if (txtUsername.Text.Trim().Equals(""))
             {
                 errUsername.Text = "Input username";
-                txtUsername.BorderBrush = Brushes.Red;
                 isCorrected[2] = false;
             }
             else
             {
                 errUsername.Text = "";
-                txtUsername.BorderBrush = Brushes.Gray;
                 isCorrected[2] = true;
             }
             return (isCorrected[0] && isCorrected[1] && isCorrected[2]);
+        }
+
+        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (isValidate())
+                {
+                    pc.Create(new Patient(txtFirstname.Text, txtLastname.Text, txtUsername.Text));
+                    this.Visibility = Visibility.Collapsed;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Equals("Username already exists !"))
+                {
+                    txtUsername.BorderBrush = Brushes.Red;
+                    errUsername.Text = ex.Message;
+                }
+            }
         }
     }
 }

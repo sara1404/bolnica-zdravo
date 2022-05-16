@@ -7,17 +7,30 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PatientMainMenu">
-
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
     <Grid>
-        <Button x:Name="btnLogout" HorizontalAlignment="Left" Margin="27,26,0,0" VerticalAlignment="Top" Width="36" Height="29" Background="Transparent" BorderBrush="Transparent" Click="btnLogout_Click">
-            <Image Source="../../Resources/Images/logout.png" Height="25" Width="25"></Image>
+        <Button x:Name="btnLogout"  HorizontalAlignment="Left" Margin="725,13,0,0" VerticalAlignment="Top" Width="51" Height="29" Click="btnLogout_Click" Background="Transparent" BorderBrush="Transparent">
+            <Image Source="../../Resources/Images/logout.png" Height="19" Width="23"></Image>
         </Button>
-        <Button x:Name="btnMakeAppointment" Content="Make appointment" HorizontalAlignment="Left" Margin="94,97,0,0" VerticalAlignment="Top" Width="160" Height="109" Click="btnMakeAppointment_Click"/>
-        <Button x:Name="btnAllAppointments" Content="All appointments" HorizontalAlignment="Left" Margin="329,97,0,0" VerticalAlignment="Top" Width="160" Height="109" Click="btnAllAppointments_Click"/>
-        <Button x:Name="btnExamption" Content="Examption" HorizontalAlignment="Left" Margin="555,97,0,0" VerticalAlignment="Top" Width="160" Height="109"/>
-        <Button x:Name="btnTherapy" Content="Therapy" HorizontalAlignment="Left" Margin="94,248,0,0" VerticalAlignment="Top" Width="160" Height="109"/>
-        <Button x:Name="btnDoctorGrading" Content="Doctor grading" HorizontalAlignment="Left" Margin="329,248,0,0" VerticalAlignment="Top" Width="160" Height="109" Click="btnDoctorGrading_Click"/>
-        <Button x:Name="btnMedicalRecord" Content="Medical record" HorizontalAlignment="Left" Margin="555,248,0,0" VerticalAlignment="Top" Width="160" Height="109"/>
+        <Button x:Name="btnMakeAppointment" Content="Make appointment" HorizontalAlignment="Left" Margin="94,97,0,0" VerticalAlignment="Top" Width="160" Height="75" Click="btnMakeAppointment_Click"/>
+        <Button x:Name="btnAllAppointments" Content="All appointments" HorizontalAlignment="Left" Margin="327,97,0,0" VerticalAlignment="Top" Width="160" Height="75" Click="btnAllAppointments_Click"/>
+        <Button x:Name="btnExamption" Content="Examption" HorizontalAlignment="Left" Margin="555,97,0,0" VerticalAlignment="Top" Width="160" Height="75"/>
+        <Button x:Name="btnTherapy" Content="Therapy" HorizontalAlignment="Left" Margin="94,216,0,0" VerticalAlignment="Top" Width="160" Height="75"/>
+        <Button x:Name="btnDoctorGrading" Content="Doctor grading" HorizontalAlignment="Left" Margin="327,216,0,0" VerticalAlignment="Top" Width="160" Height="75" Click="btnDoctorGrading_Click"/>
+        <Button x:Name="btnMedicalRecord" Content="Medical record" HorizontalAlignment="Left" Margin="555,216,0,0" VerticalAlignment="Top" Width="160" Height="75" Click="btnMedicalRecord_Click"/>
+        <Button x:Name="btnDoctorPoll" Content="Doctor poll" HorizontalAlignment="Left" Margin="327,331,0,0" VerticalAlignment="Top" Width="160" Click="btnDoctorPoll_Click" Height="75"/>
+        <Button x:Name="btnHospitalPoll" Content="Hospital poll" HorizontalAlignment="Left" Margin="94,331,0,0" VerticalAlignment="Top" Width="160" Height="75" Click="btnHospitalPoll_Click"/>
+        <Separator HorizontalAlignment="Left" Height="18" Margin="10,45,0,0" VerticalAlignment="Top" Width="780"/>
+        <Label x:Name="lbWelcome" Content="" HorizontalAlignment="Left" Margin="330,10,0,0" VerticalAlignment="Top" FontSize="20"/>
 
 
     </Grid>

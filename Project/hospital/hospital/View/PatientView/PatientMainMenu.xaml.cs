@@ -24,11 +24,14 @@ namespace hospital.View
     {
         private Frame Main;
         private UserController uc;
+        private PatientController pc;
         public PatientMainMenu()
         {
             InitializeComponent();
             App app = Application.Current as App;
             uc = app.userController;
+            pc = app.patientController;
+            lbWelcome.Content = "Welcome " + pc.FindById(uc.CurentLoggedUser.Username).FirstName + "!";
             foreach (Window window in Application.Current.Windows)
             {
                 if (window.GetType() == typeof(PatientHomeWindow))
@@ -65,6 +68,21 @@ namespace hospital.View
         private void btnDoctorGrading_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new PatientGradingPage();
+        }
+
+        private void btnDoctorPoll_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new PatientDoctorPoll();
+        }
+
+        private void btnHospitalPoll_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new PatientHospitalPoll();
+        }
+
+        private void btnMedicalRecord_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new PatientMedicalRecord();
         }
     }
 }

@@ -17,11 +17,6 @@ namespace Controller
 
         public void Create(Notification notification)
         {
-            if (notification.Username == null)
-            {
-                Console.WriteLine("JEste null");
-            }
-            Console.WriteLine(notification.Username);
             notificationService.Create(notification);
         }
 

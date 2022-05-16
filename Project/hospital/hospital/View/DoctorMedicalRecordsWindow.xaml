@@ -6,16 +6,30 @@
         xmlns:local="clr-namespace:hospital.View"
         mc:Ignorable="d"
         Title="DoctorMedicalRecordsWindow" Height="450" Width="800">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid>
-        <Label Content="Patient:" HorizontalAlignment="Left" Margin="33,36,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cmbPatients" HorizontalAlignment="Left" Margin="100,36,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cmbPatients_SelectionChanged"/>
-        <Label Content="Alergies:" HorizontalAlignment="Left" Margin="33,92,0,0" VerticalAlignment="Top"/>
-        <Label Content="Blood Type:" HorizontalAlignment="Left" Margin="33,162,0,0" VerticalAlignment="Top" Width="77"/>
-        <ComboBox x:Name="cmbBloodType" HorizontalAlignment="Left" Margin="125,165,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Notes:" HorizontalAlignment="Left" Margin="33,200,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnSubmit" Content="Submit changes" HorizontalAlignment="Left" Height="30" Margin="478,319,0,0" VerticalAlignment="Top" Width="261" Click="btnSubmit_Click"/>
-        <TextBox x:Name="tbAlergies" HorizontalAlignment="Left" Height="60" Margin="125,92,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="294"/>
-        <TextBox x:Name="tbNotes" HorizontalAlignment="Left" Height="149" Margin="125,200,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="294"/>
+        <Label Content="Patient:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmbPatients" HorizontalAlignment="Left" Margin="102,10,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cmbPatients_SelectionChanged"/>
+        <Label Content="Alergies:" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.081,-0.883"/>
+        <Label Content="Blood Type:" HorizontalAlignment="Left" Margin="10,137,0,0" VerticalAlignment="Top" Width="77"/>
+        <ComboBox x:Name="cmbBloodType" HorizontalAlignment="Left" Margin="102,140,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Notes:" HorizontalAlignment="Left" Margin="15,182,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnSubmit" Content="Submit changes" HorizontalAlignment="Left" Height="50" Margin="439,347,0,0" VerticalAlignment="Top" Width="345" Click="btnSubmit_Click"/>
+        <TextBox x:Name="tbAlergies" HorizontalAlignment="Left" Height="60" Margin="102,61,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="294"/>
+        <TextBox x:Name="tbNotes" HorizontalAlignment="Left" Height="215" Margin="102,182,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="294"/>
+        <DataGrid x:Name="AppointmentTable" ItemsSource="{Binding Path=appointments}" HorizontalAlignment="Left" Height="268" Margin="439,61,0,0" VerticalAlignment="Top" Width="345"/>
+        <Label Content="Appointment history:" HorizontalAlignment="Left" Margin="439,30,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.193,0.64"/>
 
     </Grid>
 </Window>

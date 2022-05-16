@@ -3,6 +3,7 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,9 +27,12 @@ namespace hospital.View
         private MedicalRecordsController mrc;
         private UserController uc;
         private PatientController pc;
+        private AppointmentController ac;
 
         private Doctor loggedInDoctor;
         private Patient selectedPatient;
+
+        public ObservableCollection<Appointment> appointments { get; set; }
 
         public ObservableCollection<BloodType> BloodTypes;
         public DoctorMedicalRecordsWindow()
@@ -40,6 +44,7 @@ namespace hospital.View
             mrc = app.mediicalRecordsController;
             uc = app.userController;
             pc = app.patientController;
+            ac = app.appointmentController;
             loggedInDoctor = dc.GetByUsername(uc.CurentLoggedUser.Username);
             cmbPatients.ItemsSource = loggedInDoctor.myPatients;//samo pacijente tog doktora ce da da
             BloodTypes = new ObservableCollection<BloodType>(Enum.GetValues(typeof(BloodType)).Cast<BloodType>().ToList());
@@ -59,6 +64,8 @@ namespace hospital.View
             tbAlergies.Text = mrc.FindById(selectedPatient.RecordId).Alergies;
             tbNotes.Text = mrc.FindById(selectedPatient.RecordId).Note;
             cmbBloodType.SelectedItem = mrc.FindById(selectedPatient.RecordId).BloodType;
+            appointments = ac.GetAppointmentByPatient(selectedPatient.Username);
+            AppointmentTable.ItemsSource = appointments;
         }
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)

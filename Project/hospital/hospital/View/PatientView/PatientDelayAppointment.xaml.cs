@@ -22,27 +22,20 @@ namespace hospital.View
     public partial class PatientDelayAppointment : Window
     {
         private AppointmentController ac;
+        private PatientController pc;
         private Appointment selectedAppointment;
         private UserController uc;
 
         public PatientDelayAppointment(Appointment a)
         {
             InitializeComponent();
-            /*foreach (Window window in Application.Current.Windows)
-            {
-                if (window.GetType() == typeof(PatientHomeWindow))
-                {
-                    selectedAppointment = (window as PatientHomeWindow).appointmentTable.SelectedItem as Appointment;
-                    tbxDoctor.Text = selectedAppointment.DoctorUsername;
-                    oldDate.SelectedDate = selectedAppointment.StartTime;
-                }
-            */
             selectedAppointment = a;
             tbxDoctor.Text = selectedAppointment.DoctorUsername;
             oldDate.SelectedDate = selectedAppointment.StartTime;
             App app = Application.Current as App;
             uc = app.userController;
             ac = app.appointmentController;
+            pc = app.patientController;
             newDate.DisplayDateStart = DateTime.Now > selectedAppointment.StartTime.AddDays(-4) ? DateTime.Now : selectedAppointment.StartTime.AddDays(-4);
             newDate.DisplayDateEnd = selectedAppointment.StartTime.AddDays(4);
             DataContext = this;
@@ -55,11 +48,30 @@ namespace hospital.View
                 appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)newDate.SelectedDate, selectedAppointment.DoctorUsername,uc.CurentLoggedUser.Username);
             }
         }
+        public void LogoutUser()
+        {
+            uc.CurentLoggedUser = null;
+            MainWindow mw = new MainWindow();
+            mw.Show();
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(PatientHomeWindow))
+                {
+                    (window as PatientHomeWindow).Close();
+                }
+            }
+        }
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
             if(appointmentTable.SelectedItem != null)
             {
+                pc.AddDelayOrCancelAppointment(uc.CurentLoggedUser.Username);
+                if (pc.IsTroll(uc.CurentLoggedUser.Username))
+                {
+                    pc.BlockPatient(uc.CurentLoggedUser.Username);
+                    LogoutUser();
+                }
                 ac.UpdateAppointment(selectedAppointment, (Appointment)appointmentTable.SelectedItem);
                 Close();
             }

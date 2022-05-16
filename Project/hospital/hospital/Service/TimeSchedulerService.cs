@@ -16,55 +16,22 @@ namespace hospital.Service
 
         private AppointmentRepository appointmentRepository;
         private ScheduledBasicRenovationRepository scheduledBasicRenovationRepository;
+        private ScheduledAdvancedRenovationRepository scheduledAdvancedRenovationRepository;
 
-        public TimeSchedulerService(AppointmentRepository appointmentRepository, ScheduledBasicRenovationRepository scheduledBasicRenovationRepository) {
+        public TimeSchedulerService(AppointmentRepository appointmentRepository, ScheduledBasicRenovationRepository scheduledBasicRenovationRepository, ScheduledAdvancedRenovationRepository scheduledAdvancedRenovationRepository)
+        {
             this.appointmentRepository = appointmentRepository;
             this.scheduledBasicRenovationRepository = scheduledBasicRenovationRepository;
+            this.scheduledAdvancedRenovationRepository = scheduledAdvancedRenovationRepository;
         }
 
-        public List<TimeInterval> FindFreeTimeIntervals(Room room, int renovationDuration) {
-            List<Appointment> appointments = appointmentRepository.FindAll().ToList();
+        public List<TimeInterval> FindFreeTimeIntervals(Room room, int renovationDuration)
+        {
             List<ScheduledBasicRenovation> renovations = scheduledBasicRenovationRepository.FindAll();
-            List<TimeInterval> freeTimeIntervals = new List<TimeInterval>();
-            DateTime now = DateTime.Now;
-            DateTime last = now.AddDays(30);
-            List<TimeInterval> forDeleting = new List<TimeInterval>();
-
-            while (true)
-            {
-                if (last.Date.CompareTo(now.Date.AddDays(renovationDuration)) < 0) break;
-                freeTimeIntervals.Add(new TimeInterval(now.Date, now.Date.AddDays(renovationDuration)));
-                now = now.Date.AddDays(1);
-            }
-            foreach (TimeInterval interval in freeTimeIntervals) {
-                foreach (Appointment appointment in appointments)
-                {
-                    if (appointment.RoomId.Equals(room._Name))
-                    {
-                        if (interval._Start.Date.CompareTo(appointment.StartTime.Date) == 0 || interval._End.Date.CompareTo(appointment.StartTime.Date) == 0 ||
-                            (interval._Start.Date.CompareTo(appointment.StartTime.Date) == -1 && interval._End.Date.CompareTo(appointment.StartTime.Date) == 1)) {
-                            forDeleting.Add(interval);
-                        }
-
-                    }
-                }
-            }
-
-            foreach (TimeInterval interval in freeTimeIntervals) {
-                foreach (ScheduledBasicRenovation renovation in renovations) {
-                    if (renovation._Room._Name.Equals(room._Name)) {
-                        if (interval._Start.Date.CompareTo(renovation._Interval._Start.Date) == 0 || interval._End.Date.CompareTo(renovation._Interval._Start.Date) == 0 ||
-                            (interval._Start.Date.CompareTo(renovation._Interval._Start.Date) == -1 && interval._End.Date.CompareTo(renovation._Interval._Start.Date) == 1))
-                        {
-                            forDeleting.Add(interval);
-                        }
-                    }
-                }
-            }
-            foreach (TimeInterval interval in forDeleting) {
-                freeTimeIntervals.Remove(interval);
-            }
-
+            List<TimeInterval> freeTimeIntervals = GenerateNextMonthIntervals(renovationDuration);
+            List<TimeInterval> forDeleting = FindUnavailableIntervalsByAppointments(freeTimeIntervals, appointmentRepository.FindAppointmentsForSpecifiedRoom(room));
+            forDeleting.AddRange(FindUnavailableIntervalsByBasicRenovations(freeTimeIntervals, renovations, room));
+            RemoveUnavailableIntervals(freeTimeIntervals, forDeleting);
             return freeTimeIntervals;
         }
 
@@ -81,6 +48,112 @@ namespace hospital.Service
             }
             return freeTimeIntervals;
         }
-            
+
+
+        public List<TimeInterval> FindTimeIntervalsForMergingRooms(List<Room> rooms, int renovationDuration)
+        {
+            List<TimeInterval> freeTimeIntervals = GenerateNextMonthIntervals(renovationDuration);
+            List<TimeInterval> forDeleting = FindUnavailableIntervalsByAppointments(freeTimeIntervals, appointmentRepository.FindAppointmentsForSpecifiedRoom(rooms[0]));
+            forDeleting.AddRange(FindUnavailableIntervalsByAppointments(freeTimeIntervals, appointmentRepository.FindAppointmentsForSpecifiedRoom(rooms[1])));
+            forDeleting.AddRange(FindUnavailableIntervalsByAdvancedRenovations(freeTimeIntervals, scheduledAdvancedRenovationRepository.FindForSpecifiedRoom(rooms[0])));
+            forDeleting.AddRange(FindUnavailableIntervalsByAdvancedRenovations(freeTimeIntervals, scheduledAdvancedRenovationRepository.FindForSpecifiedRoom(rooms[1])));
+            RemoveUnavailableIntervals(freeTimeIntervals, forDeleting);
+
+            return freeTimeIntervals;
+        }
+
+        public List<TimeInterval> FindTimeIntervalsForSplitingRoom(Room room, int renovationDuration)
+        {
+            List<Appointment> appointments = appointmentRepository.FindAppointmentsForSpecifiedRoom(room);
+            List<ScheduledAdvancedRenovation> renovations = scheduledAdvancedRenovationRepository.FindForSpecifiedRoom(room);
+            List<TimeInterval> freeTimeIntervals = GenerateNextMonthIntervals(renovationDuration);
+
+            List<TimeInterval> forDeleting = FindUnavailableIntervalsByAppointments(freeTimeIntervals, appointments);
+            forDeleting.AddRange(FindUnavailableIntervalsByAdvancedRenovations(freeTimeIntervals, renovations));
+            RemoveUnavailableIntervals(freeTimeIntervals, forDeleting);
+
+            return freeTimeIntervals;
+        }
+
+        private List<TimeInterval> GenerateNextMonthIntervals(int renovationDuration)
+        {
+            DateTime now = DateTime.Now;
+            DateTime last = now.AddDays(30);
+            List<TimeInterval> freeTimeIntervals = new List<TimeInterval>();
+
+            while (true)
+            {
+                if (last.Date.CompareTo(now.Date.AddDays(renovationDuration)) < 0) break;
+                freeTimeIntervals.Add(new TimeInterval(now.Date, now.Date.AddDays(renovationDuration)));
+                now = now.Date.AddDays(1);
+            }
+            return freeTimeIntervals;
+        }
+
+
+
+        private void RemoveUnavailableIntervals(List<TimeInterval> freeTimeIntervals, List<TimeInterval> forDeleting)
+        {
+            foreach (TimeInterval interval in forDeleting)
+            {
+                if (freeTimeIntervals.Contains(interval))
+                    freeTimeIntervals.Remove(interval);
+            }
+        }
+
+
+        private List<TimeInterval> FindUnavailableIntervalsByAppointments(List<TimeInterval> freeTimeIntervals, List<Appointment> appointments)
+        {
+            List<TimeInterval> unavailableIntervals = new List<TimeInterval>();
+            foreach (TimeInterval interval in freeTimeIntervals)
+            {
+                foreach (Appointment appointment in appointments)
+                {
+                    if (interval.IsOverlaping(new TimeInterval(appointment.StartTime, appointment.StartTime.AddMinutes(appointment.Duration)))) { }
+                    unavailableIntervals.Add(interval);
+                }
+            }
+            return unavailableIntervals;
+        }
+
+
+        private List<TimeInterval> FindUnavailableIntervalsByBasicRenovations(List<TimeInterval> freeTimeIntervals, List<ScheduledBasicRenovation> renovations, Room room)
+        {
+            List<TimeInterval> unavailableIntervals = new List<TimeInterval>();
+
+            foreach (TimeInterval interval in freeTimeIntervals)
+            {
+                foreach (ScheduledBasicRenovation renovation in renovations)
+                {
+                    if (renovation._Room._Name.Equals(room._Name))
+                    {
+                        if (interval._Start.Date.CompareTo(renovation._Interval._Start.Date) == 0 || interval._End.Date.CompareTo(renovation._Interval._Start.Date) == 0 ||
+                            (interval._Start.Date.CompareTo(renovation._Interval._Start.Date) == -1 && interval._End.Date.CompareTo(renovation._Interval._Start.Date) == 1))
+                        {
+                            unavailableIntervals.Add(interval);
+                        }
+                    }
+                }
+            }
+            return unavailableIntervals;
+        }
+
+        private List<TimeInterval> FindUnavailableIntervalsByAdvancedRenovations(List<TimeInterval> freeTimeIntervals, List<ScheduledAdvancedRenovation> renovations)
+        {
+            List<TimeInterval> unavailableIntervals = new List<TimeInterval>();
+
+            foreach (TimeInterval interval in freeTimeIntervals)
+            {
+                foreach (ScheduledAdvancedRenovation renovation in renovations)
+                {
+                    if (interval.IsOverlaping(renovation._Interval))
+                    {
+                        unavailableIntervals.Add(interval);
+
+                    }
+                }
+            }
+            return unavailableIntervals;
+        }
     }
 }

@@ -6,6 +6,7 @@ using Repository;
 using hospital;
 using System.Windows;
 using Controller;
+using System.Linq;
 
 namespace Service
 {
@@ -15,13 +16,17 @@ namespace Service
         private readonly DoctorRepository doctorRepository;
         private readonly UserController userController;
         private readonly NotificationRepository notificationRepository;
+        private readonly DoctorService doctorService;
+        private readonly RoomService _roomService;
 
-        public AppointmentService(AppointmentRepository appointmentRepository, DoctorRepository doctorRepository, UserController userController, NotificationRepository notificationRepository)
+        public AppointmentService(AppointmentRepository appointmentRepository, DoctorRepository doctorRepository, UserController userController, NotificationRepository notificationRepository, DoctorService doctorService,RoomService roomService)
         {
             this.appointmentRepository = appointmentRepository;
             this.doctorRepository = doctorRepository;
             this.userController = userController;
             this.notificationRepository = notificationRepository;
+            this.doctorService = doctorService;
+            this._roomService = roomService;
         }
 
         public Appointment Read(int id)
@@ -86,19 +91,12 @@ namespace Service
             {
                 allTimeSlots.Add(day.AddMinutes(i * 30));
             }
-            // add logged in patients appointments
-            foreach (Appointment a in appointmentRepository.FindAll())
-            {
-                if (a.patientUsername.Equals(patientUsername))
-                {
-                    startTimes.Add(a.StartTime);
-                }
-            }
+            
             // remove those appointments from available timeslots
-            foreach (DateTime time in startTimes)
+            /*foreach (DateTime time in startTimes)
             {
                 allTimeSlots.Remove(time);
-            }
+            }*/
 
             // search all available timeslots
             foreach (DateTime time in allTimeSlots)
@@ -119,6 +117,19 @@ namespace Service
                     if (!found)
                     {
                         retVal.Add(new Appointment(-1, d.Username, patientUsername, time));
+                    }
+                }
+            }
+
+            foreach (Appointment appointment in retVal.ToList())
+            {
+                foreach (Appointment a in appointmentRepository.FindAll())
+                {
+                    if (a.patientUsername.Equals(patientUsername))
+                    {
+                        if(appointment.StartTime == a.StartTime && appointment.patientUsername.Equals(patientUsername)){
+                            retVal.Remove(appointment);
+                        }
                     }
                 }
             }
@@ -358,22 +369,15 @@ namespace Service
 
         public ObservableCollection<Appointment> GetByPatient(string username)
         {
-            /*List<Appointment> otherPatients = new List<Appointment>();
+            ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
             foreach (Appointment a in appointmentRepository.FindAll())
             {
-                if (!a.PatientUsername.Equals(username))
+                if (a.PatientUsername.Equals(username))
                 {
-                    // finding all other patients
-                    otherPatients.Add(a);
+                    retVal.Add(a);
                 }
             }
-            foreach (Appointment a in otherPatients)
-            {
-                // deleting those other patients
-                appointmentRepository.DeleteById(a.Id);
-            }
-            //return retVal;*/
-            return appointmentRepository.FindAll();
+            return retVal;
         }
 
         public ObservableCollection<Appointment> GetByDoctorSpecialization(Specialization specialization)
@@ -533,7 +537,7 @@ namespace Service
                     newAppointmet.patientUsername = oldAppointment.patientUsername;
                     Update(oldAppointment, newAppointmet);
                     notificationRepository.Create(new Notification(oldAppointment.PatientUsername));
-                    notificationRepository.Create(new Notification(oldAppointment.DoctorUsername));
+                    notificationRepository.Create(new Notification (oldAppointment.doctorUsername));
                     return true;
                 }
             }

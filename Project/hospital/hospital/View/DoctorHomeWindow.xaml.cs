@@ -72,7 +72,7 @@ namespace hospital.View
         {
             this.Dispatcher.Invoke(() =>
             {
-                notifier.ShowInformation("Appointment has been moved. Look new appointment.");
+                notifier.ShowInformation("Check appointments.");
             });
         }
         Notifier notifier = new Notifier(cfg =>
@@ -119,6 +119,16 @@ namespace hospital.View
         private void Therapy_Click(object sender, RoutedEventArgs e)
         {
             new DoctorTherapyWindow().Show();
+        }
+
+        private void Vacation_Click(object sender, RoutedEventArgs e)
+        {
+            new DoctorVacationWindow().Show();
+        }
+
+        private void Medicine_Click(object sender, RoutedEventArgs e)
+        {
+            new DoctorMedicineWindow().Show();
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)

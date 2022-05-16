@@ -20,7 +20,7 @@ namespace Model
 
         public Notification() { }
         public Notification(string username) {
-            Username = username;
+            this.username = username;
         }
         public Notification(DateTime startTime, string text)
         {
@@ -72,7 +72,7 @@ namespace Model
                 DateTime iterator = startTime;
                 while(iterator <= current)
                 {
-                    iterator = iterator.AddHours(interval);
+                    iterator = iterator.AddMinutes(interval);
                 }
                 preTimer = new Timer();
                 TimeSpan timeToGo = iterator - current;
@@ -89,7 +89,7 @@ namespace Model
         {
             MessageBox.Show(text);
             timer = new Timer();
-            timer.Interval = 1000 * 60 * 60 * interval;
+            timer.Interval = 1000 * 60 * interval;
             timer.AutoReset = true;
             timer.Elapsed += NotifyPeriodically;
             timer.Enabled = true;
@@ -106,7 +106,7 @@ namespace Model
             }
         }
 
-        public string Username { get; set; }
+        public string Username { get { return username; } set { username = value; } }
         public string Text { get; set; }
     }
 }

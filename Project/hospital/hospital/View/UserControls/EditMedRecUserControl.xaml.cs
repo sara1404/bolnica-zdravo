@@ -29,7 +29,7 @@ namespace hospital.View.UserControls
         {
             InitializeComponent();
             App app = Application.Current as App;
-            mc = app.mediicalRecordsController;
+            mc = app.medicalRecordsController;
             pc = app.patientController;
             dc = app.doctorController;
         }

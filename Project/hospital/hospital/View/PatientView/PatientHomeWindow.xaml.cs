@@ -27,31 +27,29 @@ namespace hospital.View
     /// </summary>
     public partial class PatientHomeWindow : Window
     {
-        Timer preTimer;
         private NotificationController nc;
+        private MedicalRecord mr;
+
+        private List<Timer> timers;
+
         public PatientHomeWindow()
         {
             InitializeComponent();
             Main.Content = new PatientMainMenu();
 
-            // loading all notifications
             App app = Application.Current as App;
             nc = app.notificationController;
             User current = app.userController.CurentLoggedUser;
-            MedicalRecord mr = app.mediicalRecordsController.FindById(app.patientController.FindById(current.Username).RecordId);
-            if (mr != null && mr.Therapy != null)
-            {
-                foreach (Therapy t in mr.Therapy)
-                {
-                    new Notification(t.TimeStart, t.TimeEnd, t.Interval, "Take " + t.Medicine.Name);
-                }
-            }
+            mr = app.medicalRecordsController.FindById(app.patientController.FindById(current.Username).RecordId);
+            timers = new List<Timer>();
+
+            StartTherapyNotifications();
 
             foreach(Notification n in nc.FindAll().ToList())
             {
                 if (n.Username.Equals(current.Username))
                 {
-                    preTimer = new Timer(1000);
+                    Timer preTimer = new Timer(1000);
                     preTimer.AutoReset = false;
                     preTimer.Elapsed += RunOnce;
                     preTimer.Start();
@@ -59,16 +57,83 @@ namespace hospital.View
                 }
 
             }
-            
-
         }
         public void RunOnce(Object source, System.Timers.ElapsedEventArgs e)
         {
-            this.Dispatcher.Invoke(() =>
+            Dispatcher.Invoke(() =>
             {
                 notifier.ShowInformation("Check appointments");
             });
         }
+        
+
+        private void StartTherapyNotifications()
+        {
+            if (mr != null && mr.Therapy != null)
+            {
+                foreach (Therapy t in mr.Therapy)
+                {
+                    StartTherapyNotificationTimer(t);
+                }
+            }
+        }
+        private void StartTherapyNotificationTimer(Therapy therapy)
+        {
+            if (DateTime.Now <= therapy.TimeStart)
+            {
+                TimeSpan timeToGo = therapy.TimeStart - DateTime.Now;
+                Timer preTimer = new Timer();
+                preTimer.Interval = timeToGo.TotalMilliseconds;
+                preTimer.AutoReset = false;
+                preTimer.Elapsed += (sender, e) => RunPeriodically(sender, e, therapy);
+                preTimer.Start();
+                timers.Add(preTimer);
+            }
+            else if (DateTime.Now > therapy.TimeStart && DateTime.Now <= therapy.TimeEnd)
+            {
+                DateTime iterator = therapy.TimeStart;
+                while (iterator <= DateTime.Now)
+                {
+                    iterator = iterator.AddMinutes(therapy.Interval); // ADD HOURS
+                }
+                Timer preTimer = new Timer();
+                TimeSpan timeToGo = iterator - DateTime.Now;
+                preTimer.Interval = timeToGo.TotalMilliseconds;
+                preTimer.AutoReset = false;
+                preTimer.Elapsed += (sender, e) => RunPeriodically(sender, e, therapy);
+                preTimer.Start();
+                timers.Add(preTimer);
+            }
+        }
+
+        public void RunPeriodically(Object source, System.Timers.ElapsedEventArgs e, Therapy therapy)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                notifier.ShowInformation("Take " + therapy.Medicine + "!");
+            });
+            Timer timer = new Timer();
+            timer.Interval = 1000 * 60 * therapy.Interval; // ADD * 60
+            timer.AutoReset = true;
+            timer.Elapsed += (sender, e_) => NotifyPeriodically(sender, e_, timer, therapy);
+            timer.Enabled = true;
+            timer.Start();
+            timers.Add(timer);
+        }
+
+        public void NotifyPeriodically(Object source, System.Timers.ElapsedEventArgs e, Timer timer, Therapy therapy)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                notifier.ShowInformation("Take " + therapy.Medicine + "!");
+            });
+            if (therapy.TimeEnd <= DateTime.Now)
+            {
+                timer.Enabled = false;
+                timer.Stop();
+            }
+        }
+
         Notifier notifier = new Notifier(cfg =>
         {
             cfg.PositionProvider = new WindowPositionProvider(
@@ -83,5 +148,13 @@ namespace hospital.View
 
             cfg.Dispatcher = Application.Current.Dispatcher;
         });
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            foreach(Timer timer in timers)
+            {
+                timer.Stop();
+            }
+        }
     }
 }

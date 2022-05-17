@@ -168,11 +168,7 @@ namespace Service
             }
             foreach (DateTime time in allTimeSlots)
             {
-                App app = Application.Current as App;
-                PatientController pc = app.patientController;
-                DoctorController dc = app.doctorController;
                 retVal.Add(new Appointment(-1, username, patientUsername, time));
-                
             }
             return retVal;
         }

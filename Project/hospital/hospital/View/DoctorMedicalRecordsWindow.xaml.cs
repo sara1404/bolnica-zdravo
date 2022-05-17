@@ -41,7 +41,7 @@ namespace hospital.View
             this.DataContext = this;
             App app = Application.Current as App;
             dc = app.doctorController;
-            mrc = app.mediicalRecordsController;
+            mrc = app.medicalRecordsController;
             uc = app.userController;
             pc = app.patientController;
             ac = app.appointmentController;

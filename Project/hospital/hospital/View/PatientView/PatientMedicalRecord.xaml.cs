@@ -33,7 +33,7 @@ namespace hospital.View.PatientView
             app = Application.Current as App;
             pc = app.patientController;
             uc = app.userController;
-            mrc = app.mediicalRecordsController;
+            mrc = app.medicalRecordsController;
 
             Patient currentPatient = pc.FindById(uc.CurentLoggedUser.Username);
             tbName.Text = currentPatient.FirstName + " " + currentPatient.LastName;

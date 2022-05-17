@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Repository;
 using Model;
+using System.Timers;
 
 namespace Service
 {
@@ -13,11 +14,14 @@ namespace Service
     {
         private readonly NotificationRepository notificationRepository;
 
-        public NotificationService(NotificationRepository _repo) { notificationRepository = _repo; }
+        public NotificationService(NotificationRepository _repo)
+        {
+            notificationRepository = _repo;
+        }
 
         public void Create(Notification notification)
         {
-             notificationRepository.Create(notification);
+            notificationRepository.Create(notification);
         }
 
         public ObservableCollection<Notification> FindAll()

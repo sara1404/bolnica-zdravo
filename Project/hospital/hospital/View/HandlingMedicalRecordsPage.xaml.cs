@@ -36,12 +36,12 @@ namespace hospital.View
             InitializeComponent();
             this.DataContext = this;
             App app = Application.Current as App;
-            mc = app.mediicalRecordsController;
+            mc = app.medicalRecordsController;
             MedicalRecords = mc.FindAll();
             pc = app.patientController;
             Patients = pc.FindAll();
             dc = app.doctorController;
-            mc = app.mediicalRecordsController;
+            mc = app.medicalRecordsController;
             Doctors = dc.GetDoctors();
             BloodTypes = new ObservableCollection<BloodType>(Enum.GetValues(typeof(BloodType)).Cast<BloodType>().ToList());
         }

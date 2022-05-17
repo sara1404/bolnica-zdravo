@@ -9,104 +9,39 @@ namespace Model
 {
     public class Notification
     {
-        private string username;
-        private DateTime startTime;
-        private DateTime endTime;
-        private int interval;
-        private string text;
-        //private Timer preTimer;
-        private static Timer timer;
-        private static Timer preTimer;
+        private string _username;
+        private DateTime _startTime = DateTime.MinValue;
+        private DateTime _endTime = DateTime.MinValue;
+        private int _interval;
+        private string _text;
+
 
         public Notification() { }
-        public Notification(string username) {
-            this.username = username;
-        }
-        public Notification(DateTime startTime, string text)
+        public Notification(string username)
         {
-            // notification that runs only once, on specified time
-            DateTime current = DateTime.Now;
-            TimeSpan timeToGo = startTime - current;
-            if (current <= startTime)
-            {
-                this.text = text;
-                this.endTime = endTime;
-                preTimer = new Timer();
-                preTimer.Interval = timeToGo.TotalMilliseconds;
-                preTimer.AutoReset = false;
-                preTimer.Elapsed += RunOnce;
-                preTimer.Start();
-            }
+            _username = username;
         }
-        public void RunOnce(Object source, System.Timers.ElapsedEventArgs e)
+        public Notification(string username, DateTime startTime, DateTime endTime, int interval, string text)
         {
-            MessageBox.Show(text);
+            _username = username;
+            _startTime = startTime;
+            _endTime = endTime;
+            _interval = interval;
+            _text = text;
         }
 
-        public Notification(DateTime startTime, DateTime endTime, int interval, string text)
+        public Notification(string username, DateTime startTime, int interval, string text)
         {
-            // notification that runs periodically
-            DateTime current = DateTime.Now;
-            if(startTime >= endTime)
-            {
-                throw new Exception("Invalid arguments passed to notification constructor: endTime is before startTime!");
-            }
-            
-            if(current <= startTime)
-            {
-                TimeSpan timeToGo = startTime - current;
-                this.interval = interval;
-                this.text = text;
-                this.endTime = endTime;
-                preTimer = new Timer();
-                preTimer.Interval = timeToGo.TotalMilliseconds;
-                preTimer.AutoReset = false;
-                preTimer.Elapsed += RunPeriodically;
-                preTimer.Start();
-            }
-            else if(current > startTime && current <= endTime)
-            {
-                this.interval = interval;
-                this.text = text;
-                this.endTime = endTime;
-                DateTime iterator = startTime;
-                while(iterator <= current)
-                {
-                    iterator = iterator.AddMinutes(interval);
-                }
-                preTimer = new Timer();
-                TimeSpan timeToGo = iterator - current;
-                preTimer.Interval = timeToGo.TotalMilliseconds;
-                preTimer.AutoReset = false;
-                preTimer.Elapsed += RunPeriodically;
-                preTimer.Start();
-
-
-            }
+            _username = username;
+            _startTime = startTime;
+            _interval = interval;
+            _text = text;
         }
 
-        public void RunPeriodically(Object source, System.Timers.ElapsedEventArgs e)
-        {
-            MessageBox.Show(text);
-            timer = new Timer();
-            timer.Interval = 1000 * 60 * interval;
-            timer.AutoReset = true;
-            timer.Elapsed += NotifyPeriodically;
-            timer.Enabled = true;
-            timer.Start();
-            
-        }
-        public void NotifyPeriodically(Object source, System.Timers.ElapsedEventArgs e)
-        {
-            MessageBox.Show(text);
-            if(endTime <= DateTime.Now)
-            {
-                timer.Enabled = false;
-                timer.Stop();
-            }
-        }
-
-        public string Username { get { return username; } set { username = value; } }
+        public string Username { get { return _username; } set { _username = value; } }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public int Interval { get; set; }
         public string Text { get; set; }
     }
 }

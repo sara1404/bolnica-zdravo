@@ -42,7 +42,7 @@ namespace hospital.View
             App app = Application.Current as App;
             dc = app.doctorController;
             pc = app.patientController;
-            mrc = app.mediicalRecordsController;
+            mrc = app.medicalRecordsController;
             uc = app.userController;
             mc = app.medicineController;
 

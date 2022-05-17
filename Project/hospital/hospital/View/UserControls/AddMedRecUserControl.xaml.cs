@@ -53,7 +53,7 @@ namespace hospital.View.UserControls
                 errUsername.Text = "All patients have record";
             }
             dc = app.doctorController;
-            mc = app.mediicalRecordsController;
+            mc = app.medicalRecordsController;
             Doctors = dc.GetDoctors();
             BloodTypes = new ObservableCollection<BloodType>(Enum.GetValues(typeof(BloodType)).Cast<BloodType>().ToList());
             

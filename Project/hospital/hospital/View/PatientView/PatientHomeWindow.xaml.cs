@@ -47,6 +47,7 @@ namespace hospital.View
 
             foreach(Notification n in nc.FindAll().ToList())
             {
+                // startup notifications
                 if (n.Username.Equals(current.Username))
                 {
                     Timer preTimer = new Timer(1000);

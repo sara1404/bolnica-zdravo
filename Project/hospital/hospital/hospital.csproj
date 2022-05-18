@@ -240,6 +240,9 @@
     <Compile Include="View\PatientView\PatientAppointmentsPage.xaml.cs">
       <DependentUpon>PatientAppointmentsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PatientView\PatientCustomNotification.xaml.cs">
+      <DependentUpon>PatientCustomNotification.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PatientView\PatientDelayAppointment.xaml.cs">
       <DependentUpon>PatientDelayAppointment.xaml</DependentUpon>
     </Compile>
@@ -435,6 +438,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PatientView\PatientAppointmentsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientView\PatientCustomNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

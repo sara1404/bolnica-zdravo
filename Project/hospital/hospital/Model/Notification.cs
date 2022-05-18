@@ -30,11 +30,10 @@ namespace Model
             _text = text;
         }
 
-        public Notification(string username, DateTime startTime, int interval, string text)
+        public Notification(string username, DateTime startTime, string text)
         {
             _username = username;
             _startTime = startTime;
-            _interval = interval;
             _text = text;
         }
 

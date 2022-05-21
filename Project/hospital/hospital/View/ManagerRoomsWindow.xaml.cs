@@ -67,5 +67,11 @@ namespace hospital.View
             else
                 dataGridRooms.ItemsSource = roomController.FindAll();
         }
+
+        private void Close_Window(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                Close();
+        }
     }
 }

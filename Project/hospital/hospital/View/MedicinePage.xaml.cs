@@ -84,5 +84,10 @@ namespace hospital.View
         {
             NavigationService.GoBack();
         }
+
+        private void Add_Ingridients_Click(object sender, RoutedEventArgs e)
+        {
+            new AddIngridientsWindow().Show();
+        }
     }
 }

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:hospital.View"
         mc:Ignorable="d"
-        Title="BasicRenovationWindow" Height="500" Width="800">
+        Title="BasicRenovationWindow" Height="500" Width="800"
+        PreviewKeyDown="Close_Window">
     <Window.Resources>
         <ResourceDictionary Source="ManagerResources.xaml"></ResourceDictionary>
     </Window.Resources>
@@ -19,12 +20,12 @@
         </ListView>
         <Rectangle Fill="#bc84fc" HorizontalAlignment="Left" Height="51" Margin="435,51,0,0" Stroke="Black" VerticalAlignment="Top" Width="256"/>
         <Label Content="Renovation duration in days:" HorizontalAlignment="Left" Margin="442,61,0,0" VerticalAlignment="Top" Width="177" Height="27" FontSize="13" Foreground="black"/>
-        <TextBox x:Name="durationRenovation" HorizontalAlignment="Left" Height="24" Margin="619,64,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49" PreviewKeyDown="Show_Appointments_Click"/>
+        <TextBox x:Name="durationRenovation" HorizontalAlignment="Left" Height="24" Margin="619,64,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49" PreviewKeyDown="Show_Appointments_Click"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
         <ListView HorizontalAlignment="Left" Height="151" Margin="435,102,0,0" VerticalAlignment="Top" Width="256" x:Name="renovationListView" SelectionChanged="Validate"/>
         <Label Content="Renovation description:" HorizontalAlignment="Left" Margin="435,272,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.255,0.385" Width="154" Foreground="white"/>
-        <TextBox x:Name="descriptionInput" HorizontalAlignment="Left" Height="77" Margin="435,303,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="256" TextChanged="Validate"/>
-        <Button x:Name="ScheduleBtn" Content="SCHEDULE" HorizontalAlignment="Left" Margin="213,413,0,0" VerticalAlignment="Top" Width="128" Height="35" Click="Schedule_Renovation_Click" Background="#bc84fc" FontSize="16"/>
-        <Button Content="CANCEL" HorizontalAlignment="Left" Margin="407,413,0,0" VerticalAlignment="Top" Width="128" Height="35" Click="Cancel_Renovation_Click" Background="#bc84fc" FontSize="16"/>
+        <TextBox x:Name="descriptionInput" HorizontalAlignment="Left" Height="77" Margin="435,303,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="256" TextChanged="Validate"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+        <Button x:Name="ScheduleBtn" Content="SCHEDULE" HorizontalAlignment="Left" Margin="213,413,0,0" VerticalAlignment="Top" Width="128" Height="35" Click="Schedule_Renovation_Click" Background="#bc84fc" FontSize="16"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+        <Button Content="CANCEL" HorizontalAlignment="Left" Margin="407,413,0,0" VerticalAlignment="Top" Width="128" Height="35" Click="Cancel_Renovation_Click" Background="#bc84fc" FontSize="16"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
 
     </Grid>
 </Window>

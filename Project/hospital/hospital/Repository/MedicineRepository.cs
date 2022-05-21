@@ -18,14 +18,10 @@ namespace Repository
         {
             medicineList = new ObservableCollection<Medicine>();
             medicineFileHandler = new MedicineFileHandler();
-            //medicineList.Add(new Medicine("1", "xyzal 5mg"));
-            //medicineList.Add(new Medicine("2", "paracetamol 500mg"));
-            //medicineList.Add(new Medicine("3", "defrinol forte"));
-            //medicineList.Add(new Medicine("4", "pressing 10mg"));
-            //medicineList.Add(new Medicine("5", "febricet 500mg"));
         }
         public bool Create(Medicine medicine)
         {
+            medicine.Status = "approved";
             medicineList.Add(medicine);
             medicineFileHandler.Write(medicineList.ToList());
             return true;
@@ -60,8 +56,24 @@ namespace Repository
         {
             Medicine oldMedicine = FindById(id);
             oldMedicine.Name = newMedicine.Name;
+            oldMedicine.quantity = newMedicine.quantity;
+            oldMedicine.Alternatives = newMedicine.Alternatives;
+            oldMedicine.Ingridients = newMedicine.Ingridients;
+            oldMedicine.Status = "approved";
+            medicineFileHandler.Write(medicineList.ToList());
             return true;
         }
+
+        public List<Medicine> FindRejectedMedicines()
+        {
+            return medicineList.Where(medicine => medicine.Status.ToLower().Equals("rejected")).ToList();
+        }
+
+        public List<Medicine> FindApprovedMedicines()
+        {
+            return medicineList.Where(medicine => medicine.Status.ToLower().Equals("approved")).ToList();
+        }
+
         public bool DeleteById(string id)
         {
             medicineList.Remove(FindById(id));

@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="EditRoomWindow" Height="450" Width="800">
+        Title="EditRoomWindow" Height="450" Width="800"
+        PreviewKeyDown="Close_Window">
     <Window.Resources>
         <ResourceDictionary Source="ManagerResources.xaml"></ResourceDictionary>
     </Window.Resources>
@@ -14,13 +15,13 @@
         <Label Content="Id:" HorizontalAlignment="Left" Margin="173,156,0,0" VerticalAlignment="Top" FontSize="16px" Width="27" Foreground="white"/>
         <Label Content="Purpose:" HorizontalAlignment="Left" Margin="129,226,0,0" VerticalAlignment="Top" FontSize="16px" Width="71" Foreground="white"/>
         <Label Content="Floor:" HorizontalAlignment="Left" Margin="151,300,0,0" VerticalAlignment="Top" FontSize="16px" Width="49" Foreground="white"/>
-        <TextBox x:Name="roomName" HorizontalAlignment="Left" Height="23" Margin="300,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
-        <TextBox x:Name="roomId" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="300,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
-        <TextBox x:Name="roomPurpose" HorizontalAlignment="Left" Height="23" Margin="300,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
-        <TextBox x:Name="roomFloor" HorizontalAlignment="Left" Height="23" Margin="300,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141"/>
-        <Button  Content="APPLY" HorizontalAlignment="Left" Margin="226,358,0,0" VerticalAlignment="Top" Width="109" Height="36" Click="Edit_Room_Click" Background="#bc84fc" FontSize="16"/>
-        <Button Content="CANCEL" HorizontalAlignment="Left" Margin="424,358,0,0" VerticalAlignment="Top" Width="108" Height="36" Click="Cancel_Edit_Room_Click" Background="#bc84fc" FontSize="16"/>
-        <ListView x:Name="equipmentListView" HorizontalAlignment="Left" Height="237" VerticalAlignment="Top" Width="188" Margin="511,94,0,0" SelectionChanged="ListView_SelectionChanged">
+        <TextBox x:Name="roomName" HorizontalAlignment="Left" Height="23" Margin="300,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+        <TextBox x:Name="roomId" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="300,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+        <TextBox x:Name="roomPurpose" HorizontalAlignment="Left" Height="23" Margin="300,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+        <TextBox x:Name="roomFloor" HorizontalAlignment="Left" Height="23" Margin="300,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+        <Button  Content="APPLY" HorizontalAlignment="Left" Margin="226,358,0,0" VerticalAlignment="Top" Width="109" Height="36" Click="Edit_Room_Click" Background="#bc84fc" FontSize="16" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+        <Button Content="CANCEL" HorizontalAlignment="Left" Margin="424,358,0,0" VerticalAlignment="Top" Width="108" Height="36" Click="Cancel_Edit_Room_Click" Background="#bc84fc" FontSize="16" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+        <ListView x:Name="equipmentListView" HorizontalAlignment="Left" Height="237" VerticalAlignment="Top" Width="188" Margin="511,94,0,0" SelectionChanged="ListView_SelectionChanged" FocusVisualStyle="{DynamicResource MyFocusVisual}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

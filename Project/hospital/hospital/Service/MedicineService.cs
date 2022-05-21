@@ -40,5 +40,15 @@ namespace Service
         {
             return medicineRepository.DeleteById(id);
         }
+
+        public List<Medicine> FindRejectedMedicines()
+        {
+            return medicineRepository.FindRejectedMedicines();
+        }
+
+        public List<Medicine> FindApprovedMedicines()
+        {
+            return medicineRepository.FindApprovedMedicines();
+        }
     }
 }

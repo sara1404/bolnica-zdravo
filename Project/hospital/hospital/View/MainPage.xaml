@@ -81,7 +81,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Image DockPanel.Dock="Left" Height="56" Width="100" Source="../Resources/Images/logo.png" Grid.Column="0"/>
-                    <Button DockPanel.Dock ="Right"  Grid.Column="4" Margin="88,10,10,25" Click="Logout_Click" RenderTransformOrigin="0.48,2.372">
+                    <Button DockPanel.Dock ="Right"  Grid.Column="4" Margin="88,10,10,25" Click="Logout_Click" RenderTransformOrigin="0.48,2.372" FocusVisualStyle="{DynamicResource MyFocusVisual}">
                         <Button.Template>
                             <ControlTemplate>
                                 <Image Source="../Resources/Images/logout_white.png" Margin="0,-4,0,-15"/>
@@ -90,7 +90,7 @@
                     </Button>
                 </Grid>
             </Border>
-            <DataGrid x:Name="currentActionsDataGrid" Margin="0, 100, 0, 0" DockPanel.Dock="Bottom" Height="407" Width="569" Background="#1d1b1f" Foreground="White">
+            <DataGrid x:Name="currentActionsDataGrid" Margin="0, 100, 0, 0" DockPanel.Dock="Bottom" Height="407" Width="569" Background="#1d1b1f" Foreground="White" FocusVisualStyle="{DynamicResource MyFocusVisual}">
                 <DataGrid.Resources>
                     <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
                         <Setter Property="Background" Value="#bc84fc" />

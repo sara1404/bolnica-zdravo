@@ -5,6 +5,7 @@ using System.Windows;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Collections.Generic;
+using System.Windows.Input;
 
 namespace hospital.View
 {
@@ -50,6 +51,12 @@ namespace hospital.View
         private void Cancel_New_Room_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void Close_Window(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                Close();
         }
     }
 }

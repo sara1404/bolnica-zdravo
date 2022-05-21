@@ -1,1 +1,1 @@
-﻿["kikiriki", "silicijum","natrijum","natrijum-hlorid","kalcijum","cink","vitamin c","magnezijum"]
+["kikiriki","silicijum","natrijum","natrijum-hlorid","kalcijum","cink","vitamin c","magnezijum","sirup"]

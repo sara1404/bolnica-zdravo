@@ -116,7 +116,7 @@ namespace hospital
             vacationRequestController = new VacationRequestController(vacationRequestService);
 
 
-            InvalidMedicineReportRepository invalidMedicineReportRepository = new InvalidMedicineReportRepository();
+            InvalidMedicineReportRepository invalidMedicineReportRepository = new InvalidMedicineReportRepository(medicineRepository);
             InvalidMedicineReportService invalidMedicineReportService = new InvalidMedicineReportService(invalidMedicineReportRepository);
             invalidMedicineReportController = new InvalidMedicineReportController(invalidMedicineReportService);
             

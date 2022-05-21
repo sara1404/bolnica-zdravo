@@ -175,5 +175,11 @@ namespace hospital.View
             }
             ValidateInputs();
         }
+
+        private void Close_Window(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                Close();
+        }
     }
 }

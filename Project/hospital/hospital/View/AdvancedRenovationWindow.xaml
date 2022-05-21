@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:hospital.View"
         mc:Ignorable="d"
-        Title="AdvancedRenovationWindow" Height="450" Width="800">
+        Title="AdvancedRenovationWindow" Height="450" Width="800"
+        PreviewKeyDown="Close_Window">
     <Window.Resources>
         <ResourceDictionary Source="ManagerResources.xaml"></ResourceDictionary>
     </Window.Resources>
@@ -42,7 +43,7 @@
                         <Label Content="Renovation duration in days:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="162" Height="28"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                        <TextBox x:Name="durationRenovation" HorizontalAlignment="Left" Height="27"  TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="47" PreviewKeyDown="Show_Appointments_Click" Margin="10 0"/>
+                        <TextBox x:Name="durationRenovation" HorizontalAlignment="Left" Height="27"  TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="47" PreviewKeyDown="Show_Appointments_Click" Margin="10 0"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
                     </StackPanel>
                 </StackPanel>
 
@@ -69,28 +70,28 @@
                 <Label Content="New room information" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="10,0,1,0" Width="169"/>
 
                 <Label Content="Name:"  Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,1,21,3" Width="53"/>
-                <TextBox  x:Name="newRoom"  Grid.Row="1" Grid.ColumnSpan="2" Margin="91,7,10,4" TextChanged="IsFormFilled"/>
+                <TextBox  x:Name="newRoom"  Grid.Row="1" Grid.ColumnSpan="2" Margin="91,7,10,4" TextChanged="IsFormFilled"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
 
                 <Label Content="Code:"  Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,2,27,2" Grid.RowSpan="2" Width="47" RenderTransformOrigin="0.319,0.436"/>
-                <TextBox x:Name="newCode"  Grid.Row="2"  Grid.ColumnSpan="2" Margin="91,7,10,4" Grid.RowSpan="2" TextChanged="IsFormFilled"/>
+                <TextBox x:Name="newCode"  Grid.Row="2"  Grid.ColumnSpan="2" Margin="91,7,10,4" Grid.RowSpan="2" TextChanged="IsFormFilled"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
 
 
                 <Label Content="Purpose:"  Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,2,15,2" Width="59"/>
-                <TextBox x:Name="newPurpose"  Grid.Row="4"  TextChanged="IsFormFilled" Grid.ColumnSpan="2" Margin="91,7,10,4"/>
+                <TextBox x:Name="newPurpose"  Grid.Row="4"  TextChanged="IsFormFilled" Grid.ColumnSpan="2" Margin="91,7,10,4"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
 
                 <Label Content="Floor:"  Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,3,21,1" Width="53"/>
-                <TextBox x:Name="floor"  Grid.Row="5"  TextChanged="IsFormFilled" Grid.ColumnSpan="2" Margin="91,7,10,4"/>
+                <TextBox x:Name="floor"  Grid.Row="5"  TextChanged="IsFormFilled" Grid.ColumnSpan="2" Margin="91,7,10,4"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
 
                 <Label Content="Renovation description:"  Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,4,22,0" Width="142"/>
-                <TextBox x:Name="description"  Grid.Row="7" Grid.RowSpan="2"  TextChanged="IsFormFilled" Grid.ColumnSpan="2" Margin="21,9.571,11,-6.571"/>
+                <TextBox x:Name="description"  Grid.Row="7" Grid.RowSpan="2"  TextChanged="IsFormFilled" Grid.ColumnSpan="2" Margin="21,9.571,11,-6.571"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
 
 
 
 
             </Grid>
         </Border>
-        <Button x:Name="scheduleBtn" Content="SCHEDULE" HorizontalAlignment="Left" Margin="207,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="132" Grid.ColumnSpan="2" Height="39" Click="Schedule_Advanced_Renovation" FontSize="14"/>
-        <Button Content="CANCEL" HorizontalAlignment="Left" Margin="122,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="132" Height="39" Grid.Column="1" FontSize="14"/>
+        <Button x:Name="scheduleBtn" Content="SCHEDULE" HorizontalAlignment="Left" Margin="207,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="132" Grid.ColumnSpan="2" Height="39" Click="Schedule_Advanced_Renovation" FontSize="14"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+        <Button Content="CANCEL" HorizontalAlignment="Left" Margin="122,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="132" Height="39" Grid.Column="1" FontSize="14"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
 
     </Grid>
 </Window>

@@ -87,5 +87,11 @@ namespace hospital.View
         {
             this.Close();
         }
+
+        private void Close_Window(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                Close();
+        }
     }
 }

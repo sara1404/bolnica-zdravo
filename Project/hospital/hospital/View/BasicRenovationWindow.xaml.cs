@@ -100,5 +100,11 @@ namespace hospital.View
             }
             ScheduleBtn.IsEnabled = false;
         }
+
+        private void Close_Window(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                Close();
+        }
     }
 }

@@ -46,42 +46,23 @@
             </Button.Template>
         </Button>
         <Button Content="ADD MEDICINE" HorizontalAlignment="Left" Margin="145,121,0,0" VerticalAlignment="Top" Width="175" Height="49" Click="Add_Medicine_Click" Background="#bc84fc" FontSize="16"/>
-        <DataGrid AutoGenerateColumns="False" x:Name="medicineDataGrid" IsReadOnly="True" SelectionUnit="FullRow" Height="454" Margin="145,211,120,0" VerticalAlignment="Top" PreviewKeyDown="KeyPressed" Background="#1d1b1f">
-            <DataGrid.Resources>
-                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
-                    <Setter Property="Background" Value="#bc84fc" />
-                    <Setter Property="Foreground" Value="White" />
-                </Style>
-            </DataGrid.Resources>
+        <Button Content="ADD NEW INGRIDIENTS" HorizontalAlignment="Left" Margin="380,121,0,0" VerticalAlignment="Top" Width="175" Height="49" Click="Add_Ingridients_Click" Background="#bc84fc" FontSize="16"/>
+        <DataGrid ColumnWidth="*" AutoGenerateColumns="False" x:Name="medicineDataGrid" IsReadOnly="True" SelectionUnit="FullRow" Height="454" Margin="145,211,120,0" VerticalAlignment="Top" PreviewKeyDown="KeyPressed" Background="#1d1b1f">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Width="250" Binding="{Binding Name}">
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
-                            <Setter Property="Background" Value="#bc84fc" />
-                            <Setter Property="Foreground" Value="White" />
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Code" Width="250" Binding="{Binding Id}">
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
-                            <Setter Property="Background" Value="#bc84fc" />
-                            <Setter Property="Foreground" Value="White" />
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Quantity" Width="233" Binding="{Binding quantity}">
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
-                            <Setter Property="Background" Value="#bc84fc" />
-                            <Setter Property="Foreground" Value="White" />
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
+                <DataGridTextColumn Header="Name"  Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Code"  Binding="{Binding Id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding quantity}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}"></DataGridTextColumn>
             </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Status}" Value="rejected">
+                            <Setter Property="Background" Value="#632121"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
         </DataGrid>
 
     </Grid>

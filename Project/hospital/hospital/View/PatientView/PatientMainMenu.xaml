@@ -31,6 +31,7 @@
         <Button x:Name="btnHospitalPoll" Content="Hospital poll" HorizontalAlignment="Left" Margin="94,331,0,0" VerticalAlignment="Top" Width="160" Height="75" Click="btnHospitalPoll_Click"/>
         <Separator HorizontalAlignment="Left" Height="18" Margin="10,45,0,0" VerticalAlignment="Top" Width="780"/>
         <Label x:Name="lbWelcome" Content="" HorizontalAlignment="Left" Margin="330,10,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Button x:Name="btnCustomNotification" Content="Custom notification" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Click="btnCustomNotification_Click"/>
 
 
     </Grid>

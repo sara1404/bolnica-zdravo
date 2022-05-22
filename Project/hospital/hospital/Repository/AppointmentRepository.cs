@@ -14,11 +14,7 @@ namespace Repository
 
         public AppointmentRepository()
         {
-            // call filehandler read here
             appointmentsFileHandler = new FileHandler.AppointmentsFileHandler();
-            //appointments = (ObservableCollection<Appointment>)appointmentsFileHandler.Read();
-            PatientRepository pr = new PatientRepository();
-            DoctorRepository dr = new DoctorRepository();
 
             List<Appointment> deserializedList = appointmentsFileHandler.Read();
             if (deserializedList == null)
@@ -29,8 +25,6 @@ namespace Repository
             {
                 appointments = new ObservableCollection<Appointment>(appointmentsFileHandler.Read());
             }
-            //DateTime dt = new DateTime(2022, 4, 9, 15, 0, 0);
-            //appointments.Add(new Appointment(1, dr.FindByUsername("miromir"), pr.FindById("peromir"), dt));
         }
 
         public int GetNewId()
@@ -51,7 +45,6 @@ namespace Repository
                 }
                 return max + 1;
             }
-                
         }
         public Appointment FindById(int id)
         {

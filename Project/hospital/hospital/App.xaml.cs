@@ -32,7 +32,7 @@ namespace hospital
         public PatientController patientController { get; set; }
         public AppointmentController appointmentController { get; set; }
         public NotificationController notificationController { get; set; }
-        public MedicalRecordsController mediicalRecordsController { get; set; }
+        public MedicalRecordsController medicalRecordsController { get; set; }
         public DoctorController doctorController { get; set; }
         public UserController userController { get; set; }
         public OrderController orderController { get; set; }
@@ -57,10 +57,6 @@ namespace hospital
             UserRepository userRepository = new UserRepository();
             UserService userService = new UserService(userRepository);
             userController = new UserController(userService);
-
-            NotificationRepository notificationRepository = new NotificationRepository();
-            NotificationService notificationService = new NotificationService(notificationRepository);
-            notificationController = new NotificationController(notificationService);
 
             DoctorRepository doctorRepository = new DoctorRepository();
             DoctorService doctorService = new DoctorService(doctorRepository);
@@ -93,11 +89,15 @@ namespace hospital
             OrderService orderService = new OrderService(orderRepository,roomRepository);
             orderController = new OrderController(orderService);
 
+            NotificationRepository notificationRepository = new NotificationRepository();
+            NotificationService notificationService = new NotificationService(notificationRepository);
+            notificationController = new NotificationController(notificationService);
+
             AppointmentService appointmentService = new AppointmentService(appointmentRepository, doctorRepository, userController, notificationRepository, doctorService,roomService);
             appointmentController = new AppointmentController(appointmentService);
 
             MedicalRecordsService medicalRecordsService = new MedicalRecordsService(medicalRecordsRepository);
-            mediicalRecordsController = new MedicalRecordsController(medicalRecordsService);
+            medicalRecordsController = new MedicalRecordsController(medicalRecordsService);
 
 
             ScheduledAdvancedRenovationService scheduledAdvancedRenovationService = new ScheduledAdvancedRenovationService(scheduledAdvancedRenovationRepository, timeSchedulerService, roomService);
@@ -119,7 +119,6 @@ namespace hospital
             InvalidMedicineReportRepository invalidMedicineReportRepository = new InvalidMedicineReportRepository(medicineRepository);
             InvalidMedicineReportService invalidMedicineReportService = new InvalidMedicineReportService(invalidMedicineReportRepository);
             invalidMedicineReportController = new InvalidMedicineReportController(invalidMedicineReportService);
-            
 
             EmergencyService emergencyService = new EmergencyService(appointmentService, notificationRepository, doctorService, roomService);
             emergencyController = new EmergencyController(emergencyService);

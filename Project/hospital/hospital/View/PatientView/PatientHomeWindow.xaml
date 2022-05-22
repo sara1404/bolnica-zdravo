@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:hospital.View"
         mc:Ignorable="d"
-        Title="PatientHomeWindow" Height="489.062" Width="821.751">
+        Title="PatientHomeWindow" Height="489.062" Width="821.751" Closing="Window_Closing">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

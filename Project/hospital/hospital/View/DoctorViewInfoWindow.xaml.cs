@@ -31,7 +31,7 @@ namespace hospital.View
             InitializeComponent();
             App app = Application.Current as App;
             pc = app.patientController;
-            mrc = app.mediicalRecordsController;
+            mrc = app.medicalRecordsController;
             this.DataContext = this;
             foreach (Window window in Application.Current.Windows)
             {

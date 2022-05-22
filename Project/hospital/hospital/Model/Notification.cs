@@ -38,9 +38,9 @@ namespace Model
         }
 
         public string Username { get { return _username; } set { _username = value; } }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
-        public int Interval { get; set; }
-        public string Text { get; set; }
+        public DateTime StartTime { get { return _startTime; } set { _startTime = value; } }
+        public DateTime EndTime { get { return _endTime; } set { _endTime = value; } }
+        public int Interval { get { return _interval; } set { _interval = value; } }
+        public string Text { get { return _text; } set { _text = value; } }
     }
 }

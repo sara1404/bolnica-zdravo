@@ -29,7 +29,7 @@ namespace hospital.View
     {
         private NotificationController nc;
         private MedicalRecord mr;
-
+        private User current;
         private List<Timer> timers;
 
         public PatientHomeWindow()
@@ -39,34 +39,26 @@ namespace hospital.View
 
             App app = Application.Current as App;
             nc = app.notificationController;
-            User current = app.userController.CurentLoggedUser;
+            current = app.userController.CurentLoggedUser;
             mr = app.medicalRecordsController.FindById(app.patientController.FindById(current.Username).RecordId);
             timers = new List<Timer>();
 
             StartTherapyNotifications();
+            StartNotificationsFromFile();
 
-            foreach(Notification n in nc.FindAll().ToList())
+            // check appointments notification
+        }
+
+        private void StartNotificationsFromFile()
+        {
+            foreach (Notification n in nc.FindAll().ToList())
             {
-                // startup notifications
                 if (n.Username.Equals(current.Username))
                 {
-                    Timer preTimer = new Timer(1000);
-                    preTimer.AutoReset = false;
-                    preTimer.Elapsed += RunOnce;
-                    preTimer.Start();
-                    nc.Delete(n);
+                    StartNotification(n);
                 }
-
             }
         }
-        public void RunOnce(Object source, System.Timers.ElapsedEventArgs e)
-        {
-            Dispatcher.Invoke(() =>
-            {
-                notifier.ShowInformation("Check appointments");
-            });
-        }
-        
 
         private void StartTherapyNotifications()
         {
@@ -74,61 +66,103 @@ namespace hospital.View
             {
                 foreach (Therapy t in mr.Therapy)
                 {
-                    StartTherapyNotificationTimer(t);
+                    Notification n = new Notification("", t.TimeStart, t.TimeEnd, t.Interval, "Take " + t.Medicine + "!");
+                    StartNotification(n);
                 }
             }
         }
-        private void StartTherapyNotificationTimer(Therapy therapy)
+        
+        public void StartNotification(Notification notification)
         {
-            if (DateTime.Now <= therapy.TimeStart)
+            if (notification.StartTime != DateTime.MinValue && notification.EndTime == DateTime.MinValue)
             {
-                TimeSpan timeToGo = therapy.TimeStart - DateTime.Now;
+                // one time notification
+                StartOneTimeNotification(notification);
+            }
+            else if(notification.StartTime != DateTime.MinValue && notification.EndTime != DateTime.MinValue)
+            {
+                // periodical notification
+                StartPeriodicalNotification(notification);
+            }
+            else if (notification.StartTime == DateTime.MinValue && notification.EndTime == DateTime.MinValue)
+            {
+                // on startup notifications
+            }
+        }
+
+        private void StartOneTimeNotification(Notification notification)
+        {
+            if (DateTime.Now <= notification.StartTime)
+            {
+                TimeSpan timeToGo = notification.StartTime - DateTime.Now;
                 Timer preTimer = new Timer();
                 preTimer.Interval = timeToGo.TotalMilliseconds;
                 preTimer.AutoReset = false;
-                preTimer.Elapsed += (sender, e) => RunPeriodically(sender, e, therapy);
+                preTimer.Elapsed += (sender, e_) => RunOneTimeNotification(sender, e_, notification);
                 preTimer.Start();
                 timers.Add(preTimer);
             }
-            else if (DateTime.Now > therapy.TimeStart && DateTime.Now <= therapy.TimeEnd)
+        }
+
+        public void RunOneTimeNotification(Object source, System.Timers.ElapsedEventArgs e, Notification notification)
+        {
+            Dispatcher.Invoke(() =>
             {
-                DateTime iterator = therapy.TimeStart;
+                notifier.ShowInformation(notification.Text);
+            });
+        }
+
+        private void StartPeriodicalNotification(Notification notification)
+        {
+            if (DateTime.Now <= notification.StartTime)
+            {
+                TimeSpan timeToGo = notification.StartTime - DateTime.Now;
+                Timer preTimer = new Timer();
+                preTimer.Interval = timeToGo.TotalMilliseconds;
+                preTimer.AutoReset = false;
+                preTimer.Elapsed += (sender, e) => RunPeriodically(sender, e, notification);
+                preTimer.Start();
+                timers.Add(preTimer);
+            }
+            else if (DateTime.Now > notification.StartTime && DateTime.Now <= notification.EndTime)
+            {
+                DateTime iterator = notification.StartTime;
                 while (iterator <= DateTime.Now)
                 {
-                    iterator = iterator.AddMinutes(therapy.Interval); // ADD HOURS
+                    iterator = iterator.AddMinutes(notification.Interval); // ADD HOURS
                 }
                 Timer preTimer = new Timer();
                 TimeSpan timeToGo = iterator - DateTime.Now;
                 preTimer.Interval = timeToGo.TotalMilliseconds;
                 preTimer.AutoReset = false;
-                preTimer.Elapsed += (sender, e) => RunPeriodically(sender, e, therapy);
+                preTimer.Elapsed += (sender, e) => RunPeriodically(sender, e, notification);
                 preTimer.Start();
                 timers.Add(preTimer);
             }
         }
 
-        public void RunPeriodically(Object source, System.Timers.ElapsedEventArgs e, Therapy therapy)
+        public void RunPeriodically(Object source, System.Timers.ElapsedEventArgs e, Notification notification)
         {
             Dispatcher.Invoke(() =>
             {
-                notifier.ShowInformation("Take " + therapy.Medicine + "!");
+                notifier.ShowInformation(notification.Text);
             });
             Timer timer = new Timer();
-            timer.Interval = 1000 * 60 * therapy.Interval; // ADD * 60
+            timer.Interval = 1000 * 60 * notification.Interval; // ADD * 60
             timer.AutoReset = true;
-            timer.Elapsed += (sender, e_) => NotifyPeriodically(sender, e_, timer, therapy);
+            timer.Elapsed += (sender, e_) => NotifyPeriodically(sender, e_, timer, notification);
             timer.Enabled = true;
             timer.Start();
             timers.Add(timer);
         }
 
-        public void NotifyPeriodically(Object source, System.Timers.ElapsedEventArgs e, Timer timer, Therapy therapy)
+        public void NotifyPeriodically(Object source, System.Timers.ElapsedEventArgs e, Timer timer, Notification notification)
         {
             Dispatcher.Invoke(() =>
             {
-                notifier.ShowInformation("Take " + therapy.Medicine + "!");
+                notifier.ShowInformation(notification.Text);
             });
-            if (therapy.TimeEnd <= DateTime.Now)
+            if (notification.EndTime <= DateTime.Now)
             {
                 timer.Enabled = false;
                 timer.Stop();
@@ -149,13 +183,19 @@ namespace hospital.View
 
             cfg.Dispatcher = Application.Current.Dispatcher;
         });
+        
+        private void KillAllTimers()
+        {
+            foreach (Timer timer in timers)
+            {
+                timer.Enabled = false;
+                timer.Stop();
+            }
+        }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            foreach(Timer timer in timers)
-            {
-                timer.Stop();
-            }
+            KillAllTimers();
         }
     }
 }

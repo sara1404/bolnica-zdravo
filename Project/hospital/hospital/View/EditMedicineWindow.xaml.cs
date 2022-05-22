@@ -60,6 +60,7 @@ namespace hospital.View
         {
             Medicine newMedicine = new Medicine(codeField.Text, nameField.Text, GetIngridients(), nameField.Text,
                 Int32.Parse(quanityField.Text));
+            newMedicine.Alternatives = GetAlternatives();
             medicineController.UpdateById(codeField.Text, newMedicine);
         }
 
@@ -101,6 +102,16 @@ namespace hospital.View
             }
 
             return ingridients;
+        }
+
+        private List<Medicine> GetAlternatives()
+        {
+            List<Medicine> alternatives = new List<Medicine>();
+            for (int i = 0; i < alternativesField.SelectedItems.Count; i++)
+            {
+                alternatives.Add((Medicine)alternativesField.SelectedItems[i]);
+            }
+            return alternatives;
         }
 
         private void FormFilled(object sender, TextChangedEventArgs e)

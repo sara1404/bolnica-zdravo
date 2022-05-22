@@ -81,13 +81,13 @@ namespace hospital.View
             editWindow.nameField.Text = medicine.Name;
             editWindow.codeField.Text = medicine.Id;
             editWindow.quanityField.Text = medicine.quantity.ToString();
-            editWindow.alternativesField.ItemsSource = medicine.Alternatives;
+            editWindow.alternativesField.ItemsSource = medicineController.FindAll();
             editWindow.ingridientsField.ItemsSource = ingridientsController.FindAll();
-            Console.WriteLine("Broj selektovanih ingridienta je " + medicine.Ingridients.Count);
-            SetAllSelected(editWindow, medicine.Ingridients);
+            SetAllSelectedIngridients(editWindow, medicine.Ingridients);
+            SetAllSelectedAlternatives(editWindow, medicine.Alternatives);
         }
 
-        private void SetAllSelected(EditMedicineWindow editWindow, List<string> igridients)
+        private void SetAllSelectedIngridients(EditMedicineWindow editWindow, List<string> igridients)
         {
             editWindow.ingridientsField.SelectedItems.Clear();
             foreach (string ingridient in igridients)
@@ -96,7 +96,13 @@ namespace hospital.View
             }
         }
 
-
+        private void SetAllSelectedAlternatives(EditMedicineWindow editWindow, List<Medicine> alternatives) {
+            editWindow.alternativesField.SelectedItems.Clear();
+            foreach (Medicine alternative in alternatives)
+            {
+                editWindow.alternativesField.SelectedItems.Add(alternative);
+            }
+        }
 
 
         private void Back_Click(object sender, RoutedEventArgs e)

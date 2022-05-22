@@ -26,11 +26,6 @@
         <Button Content="CANCEL" HorizontalAlignment="Left" Margin="412,382,0,0" VerticalAlignment="Top" Width="137" Height="40" Click="Cancel_Medicine_Click"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
         <Label Content="Alternatives:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="225,241,0,0" FontSize="16" RenderTransformOrigin="0.506,-0.125"/>
         <ListView x:Name="alternativesField" HorizontalAlignment="Left" Height="80" Margin="339,250,0,0" VerticalAlignment="Top" Width="163" SelectionMode="Multiple">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
         </ListView>
     </Grid>
 </Window>

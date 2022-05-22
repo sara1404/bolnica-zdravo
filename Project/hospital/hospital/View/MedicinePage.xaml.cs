@@ -1,4 +1,5 @@
 ﻿using Controller;
+using hospital.Controller;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace hospital.View
     {
         private MedicineController medicineController;
         private UserController userController;
+        private IngridientsController ingridientsController;
         private ManagerMainWindow mainWindow;
 
         public MedicinePage()
@@ -32,11 +34,13 @@ namespace hospital.View
             mainWindow = SetMainWindow();
             App app = Application.Current as App;
             medicineController = app.medicineController;
+            ingridientsController = app.ingridientsController;
             medicineDataGrid.ItemsSource = medicineController.FindAll();
             userController = app.userController;
         }
 
-        private ManagerMainWindow SetMainWindow() {
+        private ManagerMainWindow SetMainWindow()
+        {
             foreach (Window win in Application.Current.Windows)
             {
                 if (win is ManagerMainWindow)
@@ -72,13 +76,28 @@ namespace hospital.View
             }
         }
 
-        private void FillForm(EditMedicineWindow editWindow, Medicine medicine) {
+        private void FillForm(EditMedicineWindow editWindow, Medicine medicine)
+        {
             editWindow.nameField.Text = medicine.Name;
             editWindow.codeField.Text = medicine.Id;
             editWindow.quanityField.Text = medicine.quantity.ToString();
             editWindow.alternativesField.ItemsSource = medicine.Alternatives;
-            editWindow.ingridientsField.ItemsSource = medicine.Ingridients;
+            editWindow.ingridientsField.ItemsSource = ingridientsController.FindAll();
+            Console.WriteLine("Broj selektovanih ingridienta je " + medicine.Ingridients.Count);
+            SetAllSelected(editWindow, medicine.Ingridients);
         }
+
+        private void SetAllSelected(EditMedicineWindow editWindow, List<string> igridients)
+        {
+            editWindow.ingridientsField.SelectedItems.Clear();
+            foreach (string ingridient in igridients)
+            {
+                editWindow.ingridientsField.SelectedItems.Add(ingridient);
+            }
+        }
+
+
+
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {

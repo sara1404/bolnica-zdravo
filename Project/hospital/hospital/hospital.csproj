@@ -170,22 +170,22 @@
     <Compile Include="Service\TimeSchedulerService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Service\VacationRequestService.cs" />
-    <Compile Include="View\AddIngridientsWindow.xaml.cs">
+    <Compile Include="View\Manager\AddIngridientsWindow.xaml.cs">
       <DependentUpon>AddIngridientsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\AddMedicineWindow.xaml.cs">
+    <Compile Include="View\Manager\AddMedicineWindow.xaml.cs">
       <DependentUpon>AddMedicineWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\AddRoomWindow.xaml.cs">
+    <Compile Include="View\Manager\AddRoomWindow.xaml.cs">
       <DependentUpon>AddRoomWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\AdvancedRenovationWindow.xaml.cs">
+    <Compile Include="View\Manager\AdvancedRenovationWindow.xaml.cs">
       <DependentUpon>AdvancedRenovationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\BasicRenovationWindow.xaml.cs">
+    <Compile Include="View\Manager\BasicRenovationWindow.xaml.cs">
       <DependentUpon>BasicRenovationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DeleteRoomWindow.xaml.cs">
+    <Compile Include="View\Manager\DeleteRoomWindow.xaml.cs">
       <DependentUpon>DeleteRoomWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DoctorAppointmentsWindow.xaml.cs">
@@ -215,31 +215,31 @@
     <Compile Include="View\DoctorViewInfoWindow.xaml.cs">
       <DependentUpon>DoctorViewInfoWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditMedicineWindow.xaml.cs">
+    <Compile Include="View\Manager\EditMedicineWindow.xaml.cs">
       <DependentUpon>EditMedicineWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditRoomWindow.xaml.cs">
+    <Compile Include="View\Manager\EditRoomWindow.xaml.cs">
       <DependentUpon>EditRoomWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EquipmentPage.xaml.cs">
+    <Compile Include="View\Manager\EquipmentPage.xaml.cs">
       <DependentUpon>EquipmentPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EquipmentRelocationWindow.xaml.cs">
+    <Compile Include="View\Manager\EquipmentRelocationWindow.xaml.cs">
       <DependentUpon>EquipmentRelocationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\HandlingMedicalRecordsPage.xaml.cs">
       <DependentUpon>HandlingMedicalRecordsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MainPage.xaml.cs">
+    <Compile Include="View\Manager\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ManagerMainWindow.xaml.cs">
+    <Compile Include="View\Manager\ManagerMainWindow.xaml.cs">
       <DependentUpon>ManagerMainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ManagerRoomsWindow.xaml.cs">
+    <Compile Include="View\Manager\ManagerRoomsWindow.xaml.cs">
       <DependentUpon>ManagerRoomsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MedicinePage.xaml.cs">
+    <Compile Include="View\Manager\MedicinePage.xaml.cs">
       <DependentUpon>MedicinePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PatientView\PatientAppointmentsPage.xaml.cs">
@@ -272,7 +272,7 @@
     <Compile Include="View\PatientView\PatientMedicalRecord.xaml.cs">
       <DependentUpon>PatientMedicalRecord.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\RoomRenovationPage.xaml.cs">
+    <Compile Include="View\Manager\RoomRenovationPage.xaml.cs">
       <DependentUpon>RoomRenovationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SecretaryHomeWindow.xaml.cs">
@@ -343,20 +343,20 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\AddIngridientsWindow.xaml" />
-    <Page Include="View\AddMedicineWindow.xaml">
+    <Page Include="View\Manager\AddIngridientsWindow.xaml" />
+    <Page Include="View\Manager\AddMedicineWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AdvancedRenovationWindow.xaml">
+    <Page Include="View\Manager\AdvancedRenovationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\BasicRenovationWindow.xaml">
+    <Page Include="View\Manager\BasicRenovationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DeleteRoomWindow.xaml">
+    <Page Include="View\Manager\DeleteRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -396,23 +396,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EditMedicineWindow.xaml">
+    <Page Include="View\Manager\EditMedicineWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EditRoomWindow.xaml">
+    <Page Include="View\Manager\EditRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EquipmentPage.xaml">
+    <Page Include="View\Manager\EquipmentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EquipmentRelocationWindow.xaml">
+    <Page Include="View\Manager\EquipmentRelocationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AddRoomWindow.xaml">
+    <Page Include="View\Manager\AddRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -420,23 +420,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainPage.xaml">
+    <Page Include="View\Manager\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ManagerMainWindow.xaml">
+    <Page Include="View\Manager\ManagerMainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ManagerResources.xaml">
+    <Page Include="View\Manager\ManagerResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ManagerRoomsWindow.xaml">
+    <Page Include="View\Manager\ManagerRoomsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MedicinePage.xaml">
+    <Page Include="View\Manager\MedicinePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -480,7 +480,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\RoomRenovationPage.xaml">
+    <Page Include="View\Manager\RoomRenovationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

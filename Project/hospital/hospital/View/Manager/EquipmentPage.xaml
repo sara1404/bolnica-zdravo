@@ -44,11 +44,11 @@
 
                     </Grid.ColumnDefinitions>
 
-                    <Image DockPanel.Dock="Left" Height="56" Width="100" Source="../Resources/Images/logo.png" Grid.Column="0"/>
+                    <Image DockPanel.Dock="Left" Height="56" Width="100" Source="../../Resources/Images/logo.png" Grid.Column="0"/>
                     <Button DockPanel.Dock ="Right"  Grid.Column="4" Margin="88,15,10,21" Click="Logout_Click" FocusVisualStyle="{DynamicResource MyFocusVisual}">
                         <Button.Template>
                             <ControlTemplate>
-                                <Image Source="../Resources/Images/logout_white.png" Margin="0,-2,0,-7"/>
+                                <Image Source="../../Resources/Images/logout_white.png" Margin="0,-2,0,-7"/>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
@@ -75,7 +75,7 @@
             <Button Height="30" Click="Back_Click" Margin="0,0,22,0" FocusVisualStyle="{DynamicResource MyFocusVisual}">
                 <Button.Template>
                     <ControlTemplate>
-                        <Image Source="../Resources/Images/back_white.png" Margin="0,-12,0,-22"/>
+                        <Image Source="../../Resources/Images/back_white.png" Margin="0,-12,0,-22"/>
                     </ControlTemplate>
                 </Button.Template>
             </Button>

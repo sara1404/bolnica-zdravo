@@ -57,7 +57,7 @@
                     <Button Content="Rooms" HorizontalAlignment="Center" Margin="0, 20" Width="153" Height="49" Click="Room_Button_Click" FontSize="20" Background="#bc84fc" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
                     <Button Content="Equipment" HorizontalAlignment="Center" Margin="0, 20" Width="153" Height="49" Click="Equipment_Button_Click" FontSize="20" Background="#bc84fc" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
                     <Button Content="Renovation" HorizontalAlignment="Center" Margin="0, 20"  Width="153" Height="49" Click="Renovation_Button_Click" FontSize="20" Background="#bc84fc" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
-                    <Button Content="Reviews" HorizontalAlignment="Center" Margin="0, 20"  Width="153" Height="49" FontSize="20" Background="#bc84fc" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+                    <Button Content="Reviews" HorizontalAlignment="Center" Margin="0, 20"  Width="153" Height="49" FontSize="20" Background="#bc84fc" FocusVisualStyle="{DynamicResource MyFocusVisual}" Click="Review_Click"/>
                     <Button Content="Medication" HorizontalAlignment="Center" Margin="0, 20" Width="153" Height="49" FontSize="20" Click="Medication_Button_Click" Background="#bc84fc" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
                 </StackPanel>
             </Border>

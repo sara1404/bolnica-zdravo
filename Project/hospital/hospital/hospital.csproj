@@ -215,6 +215,9 @@
     <Compile Include="View\DoctorViewInfoWindow.xaml.cs">
       <DependentUpon>DoctorViewInfoWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Manager\DoctorReviewWindow.xaml.cs">
+      <DependentUpon>DoctorReviewWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Manager\EditMedicineWindow.xaml.cs">
       <DependentUpon>EditMedicineWindow.xaml</DependentUpon>
     </Compile>
@@ -230,6 +233,9 @@
     <Compile Include="View\HandlingMedicalRecordsPage.xaml.cs">
       <DependentUpon>HandlingMedicalRecordsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Manager\HospitalReviewWindow.xaml.cs">
+      <DependentUpon>HospitalReviewWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Manager\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -241,6 +247,9 @@
     </Compile>
     <Compile Include="View\Manager\MedicinePage.xaml.cs">
       <DependentUpon>MedicinePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\ReviewPage.xaml.cs">
+      <DependentUpon>ReviewPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PatientView\PatientAppointmentsPage.xaml.cs">
       <DependentUpon>PatientAppointmentsPage.xaml</DependentUpon>
@@ -396,6 +405,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Manager\DoctorReviewWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Manager\EditMedicineWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -420,6 +433,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Manager\HospitalReviewWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Manager\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -437,6 +454,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Manager\MedicinePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\ReviewPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

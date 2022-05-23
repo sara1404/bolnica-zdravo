@@ -67,5 +67,24 @@ namespace hospital.Controller
         {
             pollService.SavePoll(poll);
         }
+
+        public List<PollBlueprint> FindPollResultsForDoctor(string id) {
+            return pollService.FindPollResultsForDoctor(id);
+        }
+
+        public double CalculateDoctorFinalGrade(string doctorId)
+        {
+            return pollService.CalculateDoctorFinalGrade(doctorId);
+        }
+
+        public double CalculateCategoryGrade(string doctorId, int categoryId)
+        {
+            return pollService.CalculateCategoryGrade(doctorId, categoryId);
+        }
+
+        public double CalculateQuestionGrade(string doctorId, int categoryId, int questionId)
+        {
+            return pollService.CalculateQuestionGrade(doctorId, categoryId, questionId);
+        }
     }
 }

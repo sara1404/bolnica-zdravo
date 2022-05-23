@@ -62,5 +62,58 @@ namespace hospital.Service
         {
             pollResultRepository.AddResult(poll);
         }
+
+        public List<PollBlueprint> FindPollResultsForDoctor(string id) {
+            return pollResultRepository.FindPollResultsForDoctor(id);
+        }
+
+
+        public double CalculateDoctorFinalGrade(string doctorId) {
+            double average = 0;
+            foreach (PollCategory category in GetDoctorPollBlueprint().Categories) {
+                average += CalculateCategoryGrade(doctorId, category.Id);
+            }
+            return Math.Round(average / GetDoctorPollBlueprint().Categories.Count, 1);
+        }
+
+        public double CalculateCategoryGrade(string doctorId, int categoryId) {
+            double average = 0;
+            int count = 0;
+            foreach (PollBlueprint poll in FindPollResultsForDoctor(doctorId))
+            {
+                foreach (PollCategory category in poll.Categories)
+                {
+                    if (category.Id == categoryId)
+                    {
+                        foreach (PollQuestion question in category.PollQuestions)
+                        {
+                            Console.WriteLine(question.Grade);
+                            average += question.Grade;
+                            count++;
+                        }
+                    }
+                }
+            }
+            return Math.Round(average / count, 1);
+        }
+
+        public double CalculateQuestionGrade(string doctorId, int categoryId, int questionId) {
+            double average = 0;
+            int count = 0;
+            foreach (PollBlueprint poll in FindPollResultsForDoctor(doctorId)) {
+                foreach (PollCategory category in poll.Categories) {
+                    if (category.Id == categoryId) {
+                        foreach (PollQuestion question in category.PollQuestions) {
+                            if (question.Id == questionId) {
+                                average += question.Grade;
+                                count++;
+                            }
+                        }
+                    }
+                }
+            }
+            return Math.Round(average / count, 1);
+        }
+
     }
 }

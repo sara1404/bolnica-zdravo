@@ -15,6 +15,9 @@ namespace Model
         public string doctorUsername;
         public string patientUsername;
         public string roomId;
+
+        private string doctorNote;
+        private string patientNote;
         
         public Appointment(int id, string doctorUsername, string patientUsername, DateTime startTime)
         {
@@ -93,6 +96,17 @@ namespace Model
 
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public string DoctorNote
+        {
+            get { return doctorNote; }
+            set { doctorNote = value; }
+        }
+        public string PatientNote
+        {
+            get { return patientNote; }
+            set { patientNote = value; }
+        }
 
         protected virtual void OnPropertyChanged(string name = "")
         {

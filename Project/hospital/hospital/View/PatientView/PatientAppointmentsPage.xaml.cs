@@ -1,4 +1,5 @@
 ﻿using Controller;
+using hospital.View.PatientView;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -101,6 +102,20 @@ namespace hospital.View
                     LogoutUser();
                 }
                 ac.DeleteAppointment(Convert.ToInt32(appointmentTable.SelectedItem.ToString()));
+            }
+        }
+
+        private void btnLeaveNote_Click(object sender, RoutedEventArgs e)
+        {
+            if(appointmentTable.SelectedItem != null && (appointmentTable.SelectedItem as Appointment).StartTime <= DateTime.Now)
+            {
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.GetType() == typeof(PatientHomeWindow))
+                    {
+                        (window as PatientHomeWindow).Main.Content = new PatientAppointmentNote((appointmentTable.SelectedItem as Appointment));
+                    }
+                }
             }
         }
     }

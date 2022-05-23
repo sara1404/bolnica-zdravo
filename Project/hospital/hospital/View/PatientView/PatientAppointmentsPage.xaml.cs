@@ -105,17 +105,22 @@ namespace hospital.View
             }
         }
 
+        private void GoToLeaveNotePage()
+        {
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(PatientHomeWindow))
+                {
+                    (window as PatientHomeWindow).Main.Content = new PatientAppointmentNote(appointmentTable.SelectedItem as Appointment);
+                }
+            }
+        }
+
         private void btnLeaveNote_Click(object sender, RoutedEventArgs e)
         {
             if(appointmentTable.SelectedItem != null && (appointmentTable.SelectedItem as Appointment).StartTime <= DateTime.Now)
             {
-                foreach (Window window in Application.Current.Windows)
-                {
-                    if (window.GetType() == typeof(PatientHomeWindow))
-                    {
-                        (window as PatientHomeWindow).Main.Content = new PatientAppointmentNote((appointmentTable.SelectedItem as Appointment));
-                    }
-                }
+                GoToLeaveNotePage();
             }
         }
     }

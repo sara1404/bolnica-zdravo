@@ -45,8 +45,6 @@ namespace hospital.View
 
             StartTherapyNotifications();
             StartNotificationsFromFile();
-
-            // check appointments notification
         }
 
         private void StartNotificationsFromFile()
@@ -76,12 +74,10 @@ namespace hospital.View
         {
             if (notification.StartTime != DateTime.MinValue && notification.EndTime == DateTime.MinValue)
             {
-                // one time notification
                 StartOneTimeNotification(notification);
             }
             else if(notification.StartTime != DateTime.MinValue && notification.EndTime != DateTime.MinValue)
             {
-                // periodical notification
                 StartPeriodicalNotification(notification);
             }
             else if (notification.StartTime == DateTime.MinValue && notification.EndTime == DateTime.MinValue)
@@ -95,12 +91,8 @@ namespace hospital.View
             if (DateTime.Now <= notification.StartTime)
             {
                 TimeSpan timeToGo = notification.StartTime - DateTime.Now;
-                Timer preTimer = new Timer();
-                preTimer.Interval = timeToGo.TotalMilliseconds;
-                preTimer.AutoReset = false;
+                Timer preTimer = MakeTimer(timeToGo.TotalMilliseconds, false, true);
                 preTimer.Elapsed += (sender, e_) => RunOneTimeNotification(sender, e_, notification);
-                preTimer.Start();
-                timers.Add(preTimer);
             }
         }
 
@@ -116,29 +108,25 @@ namespace hospital.View
         {
             if (DateTime.Now <= notification.StartTime)
             {
-                TimeSpan timeToGo = notification.StartTime - DateTime.Now;
-                Timer preTimer = new Timer();
-                preTimer.Interval = timeToGo.TotalMilliseconds;
-                preTimer.AutoReset = false;
+                Timer preTimer = MakeTimer((notification.StartTime - DateTime.Now).TotalMilliseconds, false, true);
                 preTimer.Elapsed += (sender, e) => RunPeriodically(sender, e, notification);
-                preTimer.Start();
-                timers.Add(preTimer);
             }
             else if (DateTime.Now > notification.StartTime && DateTime.Now <= notification.EndTime)
             {
-                DateTime iterator = notification.StartTime;
-                while (iterator <= DateTime.Now)
-                {
-                    iterator = iterator.AddMinutes(notification.Interval); // ADD HOURS
-                }
-                Timer preTimer = new Timer();
-                TimeSpan timeToGo = iterator - DateTime.Now;
-                preTimer.Interval = timeToGo.TotalMilliseconds;
-                preTimer.AutoReset = false;
+                TimeSpan timeToGo = IterateTime(notification.StartTime, notification.Interval) - DateTime.Now;
+                Timer preTimer = MakeTimer(timeToGo.TotalMilliseconds, false, true);
                 preTimer.Elapsed += (sender, e) => RunPeriodically(sender, e, notification);
-                preTimer.Start();
-                timers.Add(preTimer);
             }
+        }
+
+        private DateTime IterateTime(DateTime startTime, int interval)
+        {
+            DateTime iterator = startTime;
+            while (iterator <= DateTime.Now)
+            {
+                iterator = iterator.AddMinutes(interval); // ADD HOURS
+            }
+            return iterator;
         }
 
         public void RunPeriodically(Object source, System.Timers.ElapsedEventArgs e, Notification notification)
@@ -147,13 +135,8 @@ namespace hospital.View
             {
                 notifier.ShowInformation(notification.Text);
             });
-            Timer timer = new Timer();
-            timer.Interval = 1000 * 60 * notification.Interval; // ADD * 60
-            timer.AutoReset = true;
+            Timer timer = MakeTimer(1000 * 60 * notification.Interval, true, true); // add *60
             timer.Elapsed += (sender, e_) => NotifyPeriodically(sender, e_, timer, notification);
-            timer.Enabled = true;
-            timer.Start();
-            timers.Add(timer);
         }
 
         public void NotifyPeriodically(Object source, System.Timers.ElapsedEventArgs e, Timer timer, Notification notification)
@@ -167,6 +150,16 @@ namespace hospital.View
                 timer.Enabled = false;
                 timer.Stop();
             }
+        }
+
+        private Timer MakeTimer(double interval, bool autoReset, bool enabled)
+        {
+            Timer timer = new Timer(interval);
+            timer.AutoReset = autoReset;
+            timer.Enabled = enabled;
+            timer.Start();
+            timers.Add(timer);
+            return timer;
         }
 
         Notifier notifier = new Notifier(cfg =>

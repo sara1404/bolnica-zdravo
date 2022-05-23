@@ -60,7 +60,9 @@ namespace hospital.View.Manager
             q2.Content = pollController.CalculateQuestionGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[1].Id) + "/5";
             category1Q3.Text = pollController.GetDoctorPollBlueprint().Categories[0].PollQuestions[2].Question;
             q3.Content = pollController.CalculateQuestionGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[2].Id) + "/5";
-
+            FillGrades(category, grades1);
+            FillGrades(category, grades2);
+            FillGrades(category, grades3);
         }
         private void FillSecondCategoryQuestion()
         {
@@ -72,7 +74,9 @@ namespace hospital.View.Manager
             q5.Content = pollController.CalculateQuestionGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[1].Id) + "/5";
             category2Q3.Text = pollController.GetDoctorPollBlueprint().Categories[1].PollQuestions[2].Question;
             q6.Content = pollController.CalculateQuestionGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[2].Id) + "/5";
-
+            FillGrades(category, grades4);
+            FillGrades(category, grades5);
+            FillGrades(category, grades6);
         }
         private void FillThirdCategoryQuestion()
         {
@@ -84,7 +88,17 @@ namespace hospital.View.Manager
             q8.Content = pollController.CalculateQuestionGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[1].Id) + "/5";
             category3Q3.Text = pollController.GetDoctorPollBlueprint().Categories[2].PollQuestions[2].Question;
             q9.Content = pollController.CalculateQuestionGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[2].Id) + "/5";
+            FillGrades(category, grades7);
+            FillGrades(category, grades8);
+            FillGrades(category, grades9);
+        }
 
+        private void FillGrades(PollCategory category, TextBlock grades) {
+            grades.Text = "1|" + pollController.CountEachGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[0].Id)[0]
+                +"   2|" + pollController.CountEachGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[0].Id)[1] + 
+                "    3|" + pollController.CountEachGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[0].Id)[2] + 
+                "    4|" + pollController.CountEachGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[0].Id)[3] +
+                 "     5|" + pollController.CountEachGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[0].Id)[4];
         }
 
     }

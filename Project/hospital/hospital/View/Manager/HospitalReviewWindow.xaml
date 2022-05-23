@@ -6,7 +6,89 @@
         xmlns:local="clr-namespace:hospital.View.Manager"
         mc:Ignorable="d"
         Title="HospitalReviewWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Window.Resources>
+        <ResourceDictionary Source="ManagerResources.xaml"></ResourceDictionary>
+    </Window.Resources>
+    <Grid Background="#1d1b1f">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="97*"></RowDefinition>
+            <RowDefinition Height="87*"></RowDefinition>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="97*"></RowDefinition>
+            <RowDefinition Height="97*"></RowDefinition>
+            <RowDefinition Height="97*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60*"></ColumnDefinition>
+            <ColumnDefinition Width="55*"/>
+            <ColumnDefinition Width="114*"></ColumnDefinition>
+            <ColumnDefinition Width="114*"></ColumnDefinition>
+            <ColumnDefinition Width="114*"></ColumnDefinition>
+            <ColumnDefinition Width="114*"></ColumnDefinition>
+            <ColumnDefinition Width="114*"></ColumnDefinition>
+            <ColumnDefinition Width="114*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label Content="View hospital's grade"  FontSize="18" Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="0" Margin="55,0,59,86" Grid.RowSpan="2"/>
+        <Border BorderThickness="2"  Grid.Column="2" Grid.ColumnSpan="5" RenderTransformOrigin="0.5,0.5" Margin="57,55,111,55" Grid.RowSpan="2"/>
+        <Label Content="Hospital's final grade:" FontSize="14" Margin="73,64,114,55" Grid.RowSpan="2" Grid.ColumnSpan="4" Grid.Column="2" />
+        <Label x:Name="finalAverage" Content="" FontSize="14" Margin="10,64,46,65" Grid.Column="4" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5" >
+        </Label>
+        <Border BorderThickness="2" Grid.Row="1" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="4" Margin="0,43,0,0" HorizontalAlignment="Left" Width="251"/>
+        <Border BorderThickness="2" Grid.Row="1" Grid.RowSpan="5" Grid.Column="3" Grid.ColumnSpan="3" Margin="45,43,57,0"/>
+        <Border BorderThickness="2" Grid.Row="1" Grid.RowSpan="5" Grid.Column="5" Grid.ColumnSpan="3" Margin="77,43,0,0"/>
+        <Label x:Name="category1" Grid.Row="1" FontSize="14" Grid.ColumnSpan="3" Margin="10,56,0,0" Height="31" VerticalAlignment="Top" Grid.RowSpan="2"/>
+        <Label x:Name="category2" Grid.Row="1" Grid.Column="3" FontSize="14" Grid.ColumnSpan="3" Margin="66,56,102,5" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
+        </Label>
+        <Label x:Name="category3" Grid.Row="1" Grid.Column="6" FontSize="14" Margin="0,56,25,10" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+
+        <TextBlock x:Name="category1Q1" Grid.Row="3" FontSize="14" TextWrapping="Wrap" Foreground="White" Margin="0,10,58,48" Grid.ColumnSpan="3"/>
+        <TextBlock x:Name="grades1" Grid.Row="3" FontSize="14" TextWrapping="Wrap" Foreground="White" Margin="2,53,56,0" Grid.ColumnSpan="3"/>
+
+        <Label x:Name="q1" Content="" FontSize="14" Grid.Row="3" Grid.Column="2" Margin="41,10,0,24"/>
+
+        <TextBlock x:Name="category1Q2" Grid.Row="4" FontSize="14" TextWrapping="Wrap" Foreground="White" Margin="0,6,58,37" Grid.ColumnSpan="3"/>
+        <TextBlock x:Name="grades2" Grid.Row="4" FontSize="14" TextWrapping="Wrap" Foreground="White" Margin="0,60,58,93" Grid.ColumnSpan="3" Grid.RowSpan="2"/>
+
+        <Label x:Name="q2" Content="" FontSize="14" Grid.Row="4" Grid.Column="2" Margin="41,22,0,32"/>
+
+        <TextBlock x:Name="category1Q3" Grid.Row="5" FontSize="14" TextWrapping="Wrap" Foreground="White" Margin="0,4,58,40" Grid.ColumnSpan="3"/>
+        <TextBlock x:Name="grades3" Grid.Row="5" FontSize="14" TextWrapping="Wrap" Foreground="White" Margin="0,62,58,0" Grid.ColumnSpan="3"/>
+
+        <Label x:Name="q3" Content="" FontSize="14" Grid.Row="5" Grid.Column="2" Margin="41,27,0,24"/>
+
+
+        <TextBlock x:Name="category2Q1" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2" FontSize="14" TextWrapping="Wrap" Foreground="White" Margin="57,0,5,24"/>
+        <TextBlock x:Name="grades4" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2" FontSize="14" TextWrapping="Wrap" Foreground="White" Margin="57,62,5,0"/>
+
+        <Label x:Name="q4" Content="" FontSize="14" Grid.Row="3" Grid.Column="5" Margin="0,24,65,24"/>
+
+        <TextBlock x:Name="category2Q2" Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="3" FontSize="14" TextWrapping="Wrap" Foreground="White" Margin="57,10,114,32"/>
+        <TextBlock x:Name="grades5" Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" FontSize="14" TextWrapping="Wrap" Foreground="White" Margin="55,0,3,0" Height="32" VerticalAlignment="Bottom"/>
+
+        <Label x:Name="q5" Content="" FontSize="14" Grid.Row="4" Grid.Column="5" HorizontalAlignment="Left" Margin="0,10,0,24" Width="47" />
+
+        <TextBlock x:Name="category2Q3" Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="3" FontSize="14" TextWrapping="Wrap" Foreground="White" Margin="57,3,114,40"/>
+        <TextBlock x:Name="grades6" Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="3" FontSize="14" TextWrapping="Wrap" Foreground="White" Margin="57,62,114,0"/>
+
+        <Label x:Name="q6" Content="" FontSize="14" Grid.Row="5" Grid.Column="5" Margin="0,10,69,35" />
+
+
+        <TextBlock x:Name="category3Q1" Grid.Row="3" Grid.Column="5" Grid.ColumnSpan="3" FontSize="14" TextWrapping="Wrap" Foreground="White" Margin="92,0,78,48"/>
+        <TextBlock x:Name="grades7" Grid.Row="3" Grid.Column="5" Grid.ColumnSpan="3" FontSize="14" TextWrapping="Wrap" Foreground="White" Margin="92,62,78,0"/>
+
+        <Label x:Name="q7" Content="" FontSize="14" Grid.Row="3" Grid.Column="7" Margin="36,24,0,24"/>
+
+        <TextBlock x:Name="category3Q2" Grid.Row="4" Grid.Column="5" Grid.ColumnSpan="3" FontSize="14" TextWrapping="Wrap" Foreground="White" Margin="92,6,57,37"/>
+        <TextBlock x:Name="grades8" Grid.Row="4" Grid.Column="5" Grid.ColumnSpan="3" FontSize="14" TextWrapping="Wrap" Foreground="White" Margin="92,60,57,0"/>
+
+        <Label x:Name="q8" Content="" FontSize="14" Grid.Row="4" Grid.Column="7" Margin="57,22,0,24"/>
+
+        <TextBlock x:Name="category3Q3" Grid.Row="5" Grid.Column="5" Grid.ColumnSpan="3" FontSize="14" TextWrapping="Wrap" Foreground="White" Margin="92,5,78,40"/>
+        <TextBlock x:Name="grades9" Grid.Row="5" Grid.Column="5" Grid.ColumnSpan="3" FontSize="14" TextWrapping="Wrap" Foreground="White" Margin="92,57,78,0"/>
+
+        <Label x:Name="q9" Content="" FontSize="14" Grid.Row="5" Grid.Column="7" Margin="57,27,0,24"/>
+
+
     </Grid>
 </Window>

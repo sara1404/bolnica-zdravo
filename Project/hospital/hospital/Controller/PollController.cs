@@ -84,7 +84,31 @@ namespace hospital.Controller
 
         public double CalculateQuestionGrade(string doctorId, int categoryId, int questionId)
         {
-            return pollService.CalculateQuestionGrade(doctorId, categoryId, questionId);
+            return pollService.CalculateDoctorQuestionGrade(doctorId, categoryId, questionId);
+        }
+
+        public int[] CountEachGrade(string doctorId, int categoryId, int questionId) {
+            return pollService.CalculateCountOfEachGrade(doctorId, categoryId, questionId); 
+        }
+
+        public double CalculateHospitalFinalGrade()
+        {
+            return pollService.CalculateHospitalFinalGrade();
+        }
+
+        public double CalculateHospitalCategoryGrade(int categoryId)
+        {
+            return pollService.CalculateHospitalCategoryGrade(categoryId);
+        }
+
+        public double CalculateHospitalQuestionGrade(int categoryId, int questionId)
+        {
+            return pollService.CalculateHospitalQuestionGrade(categoryId, questionId);
+        }
+
+        public int[] CountEachHospitalGrade(int categoryId, int questionId)
+        {
+            return pollService.CalculateCountOfEachHospitalGrade(categoryId, questionId);
         }
     }
 }

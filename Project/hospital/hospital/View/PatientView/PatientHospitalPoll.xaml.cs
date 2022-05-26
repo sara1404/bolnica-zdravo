@@ -39,17 +39,11 @@ namespace hospital.View.PatientView
 
         }
 
-        private void btnBack_Click(object sender, RoutedEventArgs e)
-        {
-            app.PatientBackToMainMenu();
-        }
-
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
             if (IsValidated())
             {
                 pbc.SavePoll(FillPoll());
-                app.PatientBackToMainMenu();
             }
         }
 

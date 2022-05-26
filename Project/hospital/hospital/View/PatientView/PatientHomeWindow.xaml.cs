@@ -37,7 +37,7 @@ namespace hospital.View
         public PatientHomeWindow()
         {
             InitializeComponent();
-            Main.Content = new PatientMainMenu();
+            Main.Content = new PatientCalendar();
 
             app = Application.Current as App;
             nc = app.notificationController;

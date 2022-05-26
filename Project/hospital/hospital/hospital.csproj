@@ -266,9 +266,6 @@
     <Compile Include="View\PatientView\PatientHospitalPoll.xaml.cs">
       <DependentUpon>PatientHospitalPoll.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientView\PatientMainMenu.xaml.cs">
-      <DependentUpon>PatientMainMenu.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\PatientView\PatientMakeAppointmentFirst.xaml.cs">
       <DependentUpon>PatientMakeAppointmentFirst.xaml</DependentUpon>
     </Compile>
@@ -475,10 +472,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PatientView\PatientHospitalPoll.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\PatientView\PatientMainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

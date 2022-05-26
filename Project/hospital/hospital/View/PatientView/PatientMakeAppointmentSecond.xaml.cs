@@ -64,7 +64,6 @@ namespace hospital.View.PatientView
             if (appointmentTable.SelectedIndex != -1)
             {
                 ac.CreateAppointment((Appointment)appointmentTable.SelectedItem);
-                app.PatientBackToMainMenu();
             }
         }
 

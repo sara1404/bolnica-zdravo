@@ -37,10 +37,6 @@ namespace hospital.View.PatientView
             cbDoctor.ItemsSource = dc.GetDoctors();
         }
 
-        private void btnBack_Click(object sender, RoutedEventArgs e)
-        {
-            app.PatientBackToMainMenu();
-        }
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {

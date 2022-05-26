@@ -1,5 +1,6 @@
 ﻿using hospital.FileHandler;
 using hospital.Model;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +55,18 @@ namespace hospital.Repository
             renovations.Remove(renovation);
             renovationFileHandler.Write(this.renovations.ToList());
             return true;
+        }
+
+        public List<ScheduledBasicRenovation> FindForSpecifiedRoom(Room room) {
+            List<ScheduledBasicRenovation> scheduledBasicRenovation = new List<ScheduledBasicRenovation>();
+            foreach (ScheduledBasicRenovation renovation in renovations)
+            {
+                if (renovation._Room.id.Equals(room.id))
+                {
+                    scheduledBasicRenovation.Add(renovation);
+                }
+            }
+            return renovations;
         }
 
         public void LoadRenovationData()

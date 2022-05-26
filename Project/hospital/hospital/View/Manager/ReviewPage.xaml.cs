@@ -34,5 +34,15 @@ namespace hospital.View.Manager
         {
             new HospitalReviewWindow().Show();
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

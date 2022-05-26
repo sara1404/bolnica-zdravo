@@ -27,7 +27,8 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="4" Background="#1d1b1f">
-            <ListView x:Name="listViewRooms" Height="252" Margin="27,0,25,0" SelectionMode="Multiple" Background="#1d1b1f" BorderBrush="#bc84fc" SelectionChanged="IsFormFilled">
+            <ListView x:Name="listViewRooms" Height="252" Margin="27,0,25,0" SelectionMode="Multiple" Background="#1d1b1f" BorderBrush="#bc84fc" SelectionChanged="IsFormFilled" TabIndex="0">
+
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Rooms"/>
@@ -43,14 +44,14 @@
                         <Label Content="Renovation duration in days:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="162" Height="28"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                        <TextBox x:Name="durationRenovation" HorizontalAlignment="Left" Height="27"  TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="47" PreviewKeyDown="Show_Appointments_Click" Margin="10 0"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+                        <TextBox x:Name="durationRenovation" HorizontalAlignment="Left" Height="27"  TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="47" PreviewKeyDown="Show_Appointments_Click" Margin="10 0"  FocusVisualStyle="{DynamicResource MyFocusVisual}" TextChanged="IsFormFilled" TabIndex="1"/>
                     </StackPanel>
                 </StackPanel>
 
             </Border>
-            <ListView Height="151" VerticalAlignment="Top" x:Name="renovationListView" Margin="0,0,8,0" BorderThickness="1" Background="#1d1b1f" SelectionChanged="IsFormFilled"/>
+            <ListView Height="151" VerticalAlignment="Top" x:Name="renovationListView" Margin="0,0,8,0" BorderThickness="1" Background="#1d1b1f" SelectionChanged="IsFormFilled" TabIndex="2"/>
         </StackPanel>
-        <Border  BorderThickness="1"  Grid.Column="2" Grid.Row="1" Grid.RowSpan="4" Margin="10,0,31,10">
+        <!--<Border  BorderThickness="1"  Grid.Column="2" Grid.Row="1" Grid.RowSpan="4" Margin="10,0,31,10">
             <Grid  Grid.Column="2" Grid.Row="1" Grid.RowSpan="4" Margin="21,0,21,38">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -89,9 +90,14 @@
 
 
             </Grid>
-        </Border>
-        <Button x:Name="scheduleBtn" Content="SCHEDULE" HorizontalAlignment="Left" Margin="207,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="132" Grid.ColumnSpan="2" Height="39" Click="Schedule_Advanced_Renovation" FontSize="14"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
-        <Button Content="CANCEL" HorizontalAlignment="Left" Margin="122,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="132" Height="39" Grid.Column="1" FontSize="14"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+        </Border>-->
+        <Button x:Name="scheduleBtn" Content="SCHEDULE" TabIndex="6" HorizontalAlignment="Left" Margin="207,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="132" Grid.ColumnSpan="2" Height="39" Click="Schedule_Advanced_Renovation" FontSize="14"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+        <Button Content="CANCEL" TabIndex="7" HorizontalAlignment="Left" Margin="122,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="132" Height="39" Grid.Column="1" FontSize="14"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+        <RadioButton x:Name="mergeBtn" Grid.Column="2" Content="Merge rooms" GroupName="Option" HorizontalAlignment="Left" Margin="10,46,0,0" Grid.Row="3" VerticalAlignment="Top" Foreground="white"  IsEnabledChanged="IsFormFiled" TabIndex="3" FontSize="14"/>
+        <RadioButton x:Name="splitBtn" Grid.Column="2" Content="Split room"  GroupName="Option" HorizontalAlignment="Left" Margin="134,46,0,0" Grid.Row="3" VerticalAlignment="Top" Foreground="white"  IsEnabledChanged="IsFormFiled" TabIndex="4"  FontSize="14"/>
+        <TextBox x:Name="description" Grid.Column="2" HorizontalAlignment="Left" Margin="10,47,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="198" Height="98" Grid.RowSpan="2" TextChanged="IsFormFilled" TabIndex="5"/>
+        <Label Grid.Column="2" Content="Renovation description:" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" FontSize="14" Grid.RowSpan="2"/>
+        <Border BorderThickness="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="266,72,26,36" Grid.RowSpan="5"/>
 
     </Grid>
 </Window>

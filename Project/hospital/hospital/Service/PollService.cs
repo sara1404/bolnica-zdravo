@@ -36,9 +36,9 @@ namespace hospital.Service
 
         public bool AppointmentPollAlreadyFilled(int appointmentId)
         {
-            foreach(PollBlueprint poll in pollResultRepository.GetDoctorPollResults())
+            foreach (PollBlueprint poll in pollResultRepository.GetDoctorPollResults())
             {
-                if(poll.AppointmentId == appointmentId)
+                if (poll.AppointmentId == appointmentId)
                 {
                     return true;
                 }
@@ -63,15 +63,18 @@ namespace hospital.Service
             pollResultRepository.AddResult(poll);
         }
 
-        public List<PollBlueprint> FindPollResultsForDoctor(string id) {
+        public List<PollBlueprint> FindPollResultsForDoctor(string id)
+        {
             return pollResultRepository.FindPollResultsForDoctor(id);
         }
 
 
-        public double CalculateDoctorFinalGrade(string doctorId) {
+        public double CalculateDoctorFinalGrade(string doctorId)
+        {
             double average = 0;
-            foreach (PollCategory category in GetDoctorPollBlueprint().Categories) {
-                average += CalculateCategoryGrade(doctorId, category.Id);
+            foreach (PollCategory category in GetDoctorPollBlueprint().Categories)
+            {
+                average += CalculateCategoryGrade(FindPollResultsForDoctor(doctorId), category.Id);
             }
             return Math.Round(average / GetDoctorPollBlueprint().Categories.Count, 1);
         }
@@ -81,160 +84,48 @@ namespace hospital.Service
             double average = 0;
             foreach (PollCategory category in GetHospitalPollBlueprint().Categories)
             {
-                average += CalculateHospitalCategoryGrade(category.Id);
+                average += CalculateCategoryGrade(GetHospitalPollResults(), category.Id);
             }
             return Math.Round(average / GetHospitalPollBlueprint().Categories.Count, 1);
         }
 
-        public double CalculateCategoryGrade(string doctorId, int categoryId) {
+        public double CalculateCategoryGrade(List<PollBlueprint> polls, int categoryId)
+        {
+
             double average = 0;
-            int count = 0;
-            foreach (PollBlueprint poll in FindPollResultsForDoctor(doctorId))
+            foreach (PollBlueprint poll in polls)
             {
-                foreach (PollCategory category in poll.Categories)
-                {
-                    if (category.Id == categoryId)
-                    {
-                        foreach (PollQuestion question in category.PollQuestions)
-                        {
-                            Console.WriteLine(question.Grade);
-                            average += question.Grade;
-                            count++;
-                        }
-                    }
-                }
+                PollCategory category = poll.FindPollCategoryById(categoryId);
+                average += category.CalculateCategoryGradeSum();
             }
-            return Math.Round(average / count, 1);
+            return Math.Round(average / (polls.Count * 3), 1);
         }
 
-        public double CalculateHospitalCategoryGrade(int categoryId)
+        public double CalculateAverageForQuestion(List<PollBlueprint> polls, int categoryId, int questionId)
         {
             double average = 0;
-            int count = 0;
-            foreach (PollBlueprint poll in GetHospitalPollResults())
+            foreach (PollBlueprint poll in polls)
             {
-                foreach (PollCategory category in poll.Categories)
-                {
-                    if (category.Id == categoryId)
-                    {
-                        foreach (PollQuestion question in category.PollQuestions)
-                        {
-                            average += question.Grade;
-                            count++;
-                        }
-                    }
-                }
+                PollCategory category = poll.FindPollCategoryById(categoryId);
+                PollQuestion question = category.FindQuestionById(questionId);
+                average += question.Grade;
             }
-            return Math.Round(average / count, 1);
+
+            return Math.Round(average / polls.Count, 1);
         }
 
-        public double CalculateDoctorQuestionGrade(string doctorId, int categoryId, int questionId) {
-            double average = 0;
-            int count = 0;
-            foreach (PollBlueprint poll in FindPollResultsForDoctor(doctorId)) {
-                foreach (PollCategory category in poll.Categories) {
-                    if (category.Id == categoryId) {
-                        foreach (PollQuestion question in category.PollQuestions) {
-                            if (question.Id == questionId) {
-                                average += question.Grade;
-                                count++;
-                            }
-                        }
-                    }
-                }
-            }
-            return Math.Round(average / count, 1);
-        }
 
-        public double CalculateHospitalQuestionGrade(int categoryId, int questionId)
-        {
-            double average = 0;
-            int count = 0;
-            foreach (PollBlueprint poll in GetHospitalPollResults())
-            {
-                foreach (PollCategory category in poll.Categories)
-                {
-                    if (category.Id == categoryId)
-                    {
-                        foreach (PollQuestion question in category.PollQuestions)
-                        {
-                            if (question.Id == questionId)
-                            {
-                                average += question.Grade;
-                                count++;
-                            }
-                        }
-                    }
-                }
-            }
-            return Math.Round(average / count, 1);
-        }
-
-        public int[] CalculateCountOfEachGrade(string doctorId, int categoryId, int questionId) {
-            int[] result = { 0, 0, 0, 0, 0 };
-            foreach (PollBlueprint poll in FindPollResultsForDoctor(doctorId))
-            {
-                foreach (PollCategory category in poll.Categories)
-                {
-                    if (category.Id == categoryId)
-                    {
-                        foreach (PollQuestion question in category.PollQuestions)
-                        {
-                            if (question.Id == questionId)
-                            {
-                                result = CountEachGrade(question.Grade, result);
-                            }
-                        }
-                    }
-                }
-            }
-            return result;
-        }
-
-        public int[] CalculateCountOfEachHospitalGrade(int categoryId, int questionId)
+        public int[] CalculateCountOfEachGrade(List<PollBlueprint> polls, int categoryId, int questionId)
         {
             int[] result = { 0, 0, 0, 0, 0 };
-            foreach (PollBlueprint poll in GetHospitalPollResults())
+            foreach (PollBlueprint poll in polls)
             {
-                foreach (PollCategory category in poll.Categories)
-                {
-                    if (category.Id == categoryId)
-                    {
-                        foreach (PollQuestion question in category.PollQuestions)
-                        {
-                            if (question.Id == questionId)
-                            {
-                                result = CountEachGrade(question.Grade, result);
-                            }
-                        }
-                    }
-                }
+                PollCategory category = poll.FindPollCategoryById(categoryId);
+                PollQuestion question = category.FindQuestionById(questionId);
+                result[question.Grade - 1]++;
             }
+
             return result;
         }
-
-        public int[] CountEachGrade(int grade, int[] grades)
-        {
-            switch (grade)
-            {
-                case 1:
-                    grades[0]++;
-                    break;
-                case 2:
-                    grades[1]++;
-                    break;
-                case 3:
-                    grades[2]++;
-                    break;
-                case 4:
-                    grades[3]++;
-                    break;
-                case 5:
-                    grades[4]++;
-                    break;
-            }
-            return grades;
-        }
-
     }
 }

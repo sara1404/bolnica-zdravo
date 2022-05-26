@@ -13,7 +13,7 @@
     </Window.Resources>
     <Grid Background="#1d1b1f">
         <Button Content="Add room" HorizontalAlignment="Left" Margin="147,55,0,0" VerticalAlignment="Top" Width="115" Height="42" Click="Add_Room_Click" Background="#bc84fc" Foreground="white" FontSize="16" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
-        <DataGrid x:Name="dataGridRooms" IsReadOnly="True" HorizontalAlignment="Left" Margin="147,119,0,29"  SelectionUnit="FullRow" SelectionMode="Single" AutoGenerateColumns="False" Width="500" PreviewKeyDown="KeyPressed" FocusVisualStyle="{DynamicResource MyFocusVisual}">
+        <DataGrid ColumnWidth="*" x:Name="dataGridRooms" IsReadOnly="True" HorizontalAlignment="Left" Margin="147,119,0,29"  SelectionUnit="FullRow" SelectionMode="Single" AutoGenerateColumns="False" Width="500" PreviewKeyDown="KeyPressed" FocusVisualStyle="{DynamicResource MyFocusVisual}">
             <DataGrid.Resources>
                 <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="#bc84fc" />
@@ -21,10 +21,10 @@
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Width="120" Binding="{Binding _Name}"/>
-                <DataGridTextColumn Header="Id" Width="130" Binding="{Binding id}"/>
-                <DataGridTextColumn Header="Purpose" Width="130" Binding="{Binding _Purpose}" />
-                <DataGridTextColumn Header="Floor" Width="130" Binding="{Binding floor}"/>
+                <DataGridTextColumn Header="Name"  Binding="{Binding _Name}"/>
+                <DataGridTextColumn Header="Id"  Binding="{Binding id}"/>
+                <DataGridTextColumn Header="Purpose"  Binding="{Binding _Purpose}" />
+                <DataGridTextColumn Header="Floor"  Binding="{Binding floor}"/>
             </DataGrid.Columns>
         </DataGrid>
         <TextBox x:Name="quantitySearch" HorizontalAlignment="Left" Height="23" Margin="610,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="40" TextChanged="Filter" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>

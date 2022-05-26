@@ -54,9 +54,9 @@ namespace hospital.View.Manager
             q2.Content = pollController.CalculateHospitalQuestionGrade(category.Id, category.PollQuestions[1].Id) + "/5";
             category1Q3.Text = pollController.GetHospitalPollBlueprint().Categories[0].PollQuestions[2].Question;
             q3.Content = pollController.CalculateHospitalQuestionGrade(category.Id, category.PollQuestions[2].Id) + "/5";
-            FillGrades(category, grades1);
-            FillGrades(category, grades2);
-            FillGrades(category, grades3);
+            FillGrades(category, 0, grades1);
+            FillGrades(category, 1, grades2);
+            FillGrades(category, 2, grades3);
         }
         private void FillSecondCategoryQuestion()
         {
@@ -68,9 +68,9 @@ namespace hospital.View.Manager
             q5.Content = pollController.CalculateHospitalQuestionGrade(category.Id, category.PollQuestions[1].Id) + "/5";
             category2Q3.Text = pollController.GetHospitalPollBlueprint().Categories[1].PollQuestions[2].Question;
             q6.Content = pollController.CalculateHospitalQuestionGrade(category.Id, category.PollQuestions[2].Id) + "/5";
-            FillGrades(category, grades4);
-            FillGrades(category, grades5);
-            FillGrades(category, grades6);
+            FillGrades(category, 0, grades4);
+            FillGrades(category, 1, grades5);
+            FillGrades(category, 2, grades6);
         }
         private void FillThirdCategoryQuestion()
         {
@@ -82,18 +82,19 @@ namespace hospital.View.Manager
             q8.Content = pollController.CalculateHospitalQuestionGrade(category.Id, category.PollQuestions[1].Id) + "/5";
             category3Q3.Text = pollController.GetHospitalPollBlueprint().Categories[2].PollQuestions[2].Question;
             q9.Content = pollController.CalculateHospitalQuestionGrade(category.Id, category.PollQuestions[2].Id) + "/5";
-            FillGrades(category, grades7);
-            FillGrades(category, grades8);
-            FillGrades(category, grades9);
+            FillGrades(category, 0, grades7);
+            FillGrades(category, 1, grades8);
+            FillGrades(category, 2, grades9);
         }
 
-        private void FillGrades(PollCategory category, TextBlock grades)
+        private void FillGrades(PollCategory category, int question, TextBlock grades)
         {
-            grades.Text = "1|" + pollController.CountEachHospitalGrade(category.Id, category.PollQuestions[0].Id)[0]
-                + "   2|" + pollController.CountEachHospitalGrade(category.Id, category.PollQuestions[0].Id)[1] +
-                "    3|" + pollController.CountEachHospitalGrade(category.Id, category.PollQuestions[0].Id)[2] +
-                "    4|" + pollController.CountEachHospitalGrade(category.Id, category.PollQuestions[0].Id)[3] +
-                 "     5|" + pollController.CountEachHospitalGrade(category.Id, category.PollQuestions[0].Id)[4];
+            int[] gradesCount = pollController.CountEachHospitalGrade(category.Id, category.PollQuestions[question].Id);
+            grades.Text = "1|" + gradesCount[0] +
+                "   2|" + gradesCount[1] +
+                "    3|" + gradesCount[2] +
+                "    4|" + gradesCount[3] +
+                "     5|" + gradesCount[4];
         }
     }
 }

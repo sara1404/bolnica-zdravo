@@ -62,16 +62,9 @@ namespace hospital.Service
                     {
                         if (rel._Relocation._End.Date.CompareTo(now.Date) == 0)
                         {
-                            Room fromRoom = rel._FromRoom;
-                            Room toRoom = rel._ToRoom;
-                            string equipmentType = rel._TypeOfEquipment;
-                            int quantity = rel._Quantity;
-                            Equipment equipment = new Equipment(equipmentType, quantity);
-                            toRoom.AddEquipment(equipment);
-                            DeleteById(rel._Id);
+                            ExecuteRelocation(rel);
                         }
                     }
-
                 }
                 catch (Exception ex)
                 {
@@ -79,6 +72,14 @@ namespace hospital.Service
                 }
             }
 
+        }
+
+        private void ExecuteRelocation(ScheduledRelocation rel) {
+            Room toRoom = rel._ToRoom;
+            string equipmentType = rel._TypeOfEquipment;
+            int quantity = rel._Quantity;
+            toRoom.AddEquipment(new Equipment(equipmentType, quantity));
+            DeleteById(rel._Id);
         }
 
         public List<TimeInterval> FindRelocationIntervals(int relocationDuration) {

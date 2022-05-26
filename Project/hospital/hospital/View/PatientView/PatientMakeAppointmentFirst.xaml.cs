@@ -38,73 +38,57 @@ namespace hospital.View.PatientView
         }
 
 
-        private void btnNext_Click(object sender, RoutedEventArgs e)
+        private void btnShow_Click(object sender, RoutedEventArgs e)
         {
+            lbWarning.Content = "";
             bool priorityDoctor = (bool)rbDoctor.IsChecked;
             bool priorityDate = (bool)rbDate.IsChecked;
             Doctor doctor = (Doctor)cbDoctor.SelectedItem;
-            DateTime from, to;
-            if(dateFrom.SelectedDate == null)
-            {
-                from = DateTime.MinValue;
-            }
-            else
-            {
-                from = (DateTime)dateFrom.SelectedDate;
-            }
 
-            if (dateTo.SelectedDate == null)
-            {
-                to = DateTime.MinValue;
-            }
-            else
-            {
-                to = (DateTime)dateTo.SelectedDate;
-            }
 
-            foreach (Window window in Application.Current.Windows)
+            if (dateFrom.SelectedDate != null && dateTo.SelectedDate != null && cbDoctor.SelectedItem != null && (priorityDoctor || priorityDate))
             {
-                if (window.GetType() == typeof(PatientHomeWindow))
+                if (dateFrom.SelectedDate.Value.CompareTo(dateTo.SelectedDate.Value) < 0 && priorityDoctor)
                 {
-                    if (dateFrom.SelectedDate != null && dateTo.SelectedDate != null && cbDoctor.SelectedItem != null && (priorityDoctor || priorityDate))
-                    {
-                        if (dateFrom.SelectedDate.Value.CompareTo(dateTo.SelectedDate.Value) < 0 && priorityDoctor)
-                        {
-                            (window as PatientHomeWindow).Main.Content = new PatientMakeAppointmentSecond(doctor, from, to, priorityDoctor, priorityDate);
-                        }
-                        else if (dateFrom.SelectedDate.Value.CompareTo(dateTo.SelectedDate.Value) < 0 && priorityDate)
-                        {
-                            (window as PatientHomeWindow).Main.Content = new PatientMakeAppointmentSecond(doctor, from, to, priorityDoctor, priorityDate);
-                        }
-                        else if (dateFrom.SelectedDate.Value.CompareTo(dateTo.SelectedDate.Value) >= 0)
-                        {
-                            lbWarning.Content = "Date from needs to be before date to!";
-                        }
-                        else
-                        {
-                            lbWarning.Content = "Choose priority(and doctor)!";
-                        }
-                    }
-                    else if (cbDoctor.SelectedIndex != -1 && dateFrom.SelectedDate == null && !priorityDoctor && !priorityDate)
-                    {
-                        Doctor d = (Doctor)cbDoctor.SelectedItem;
-                        (window as PatientHomeWindow).Main.Content = new PatientMakeAppointmentSecond(doctor, from, to, priorityDoctor, priorityDate);
-
-                    }
-                    else if (cbDoctor.SelectedIndex == -1 && dateFrom.SelectedDate != null && !priorityDoctor && !priorityDate)
-                    {
-                        DateTime selectedDate = (DateTime)dateFrom.SelectedDate;
-                        (window as PatientHomeWindow).Main.Content = new PatientMakeAppointmentSecond(doctor, from, to, priorityDoctor, priorityDate);
-                    }
-                    else if (cbDoctor.SelectedIndex != -1 && dateFrom.SelectedDate != null && !priorityDoctor && !priorityDate)
-                    {
-                        DateTime selectedDate = (DateTime)dateFrom.SelectedDate;
-                        Doctor d = (Doctor)cbDoctor.SelectedItem;
-                        (window as PatientHomeWindow).Main.Content = new PatientMakeAppointmentSecond(doctor, from, to, priorityDoctor, priorityDate);
-                    }
-                    lbWarning.Content = "Wrong selection of parameters!";
+                    appointmentTable.ItemsSource = ac.GetRecommendedByDoctor((DateTime)dateFrom.SelectedDate, (DateTime)dateTo.SelectedDate, doctor);
+                }
+                else if (dateFrom.SelectedDate.Value.CompareTo(dateTo.SelectedDate.Value) < 0 && priorityDate)
+                {
+                    appointmentTable.ItemsSource = ac.GetRecommendedByDoctor((DateTime)dateFrom.SelectedDate, (DateTime)dateTo.SelectedDate, doctor);
+                }
+                else if (dateFrom.SelectedDate.Value.CompareTo(dateTo.SelectedDate.Value) >= 0)
+                {
+                    lbWarning.Content = "Date from needs to be before date to!";
+                }
+                else
+                {
+                    lbWarning.Content = "Choose priority(and doctor)!";
                 }
             }
-        } 
+            else if (cbDoctor.SelectedIndex != -1 && dateFrom.SelectedDate == null && !priorityDoctor && !priorityDate)
+            {
+                Doctor d = (Doctor)cbDoctor.SelectedItem;
+                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDoctor(d.Username);
+
+            }
+            else if (cbDoctor.SelectedIndex == -1 && dateFrom.SelectedDate != null && !priorityDoctor && !priorityDate)
+            {
+                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDate((DateTime)dateFrom.SelectedDate, uc.CurentLoggedUser.Username);
+            }
+            else if (cbDoctor.SelectedIndex != -1 && dateFrom.SelectedDate != null && !priorityDoctor && !priorityDate)
+            {
+                Doctor d = (Doctor)cbDoctor.SelectedItem;
+                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)dateFrom.SelectedDate, d.Username, uc.CurentLoggedUser.Username);
+            }
+        }
+
+        private void btnConfirm_Click(object sender, RoutedEventArgs e)
+        {
+            if (appointmentTable.SelectedIndex != -1)
+            {
+                ac.CreateAppointment((Appointment)appointmentTable.SelectedItem);
+                appointmentTable.ItemsSource = null;
+            }
+        }
     }
 }

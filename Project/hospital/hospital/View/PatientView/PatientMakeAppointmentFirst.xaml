@@ -24,11 +24,18 @@
         <Label Content="Date from:" HorizontalAlignment="Left" Margin="9,11,0,0" VerticalAlignment="Top"/>
         <Label Content="Date to:" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top"/>
         <Label Content="Doctor:" HorizontalAlignment="Left" Margin="9,102,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnNext" Content="Next" HorizontalAlignment="Left" Margin="715,408,0,0" VerticalAlignment="Top" Width="75" Click="btnNext_Click"/>
+        <Button x:Name="btnShow" Content="Show" HorizontalAlignment="Left" Margin="235,408,0,0" VerticalAlignment="Top" Width="75" Click="btnShow_Click" Padding="4"/>
         <RadioButton x:Name="rbDoctor" Content="Doctor" HorizontalAlignment="Left" Margin="95,146,0,0" VerticalAlignment="Top"/>
         <RadioButton x:Name="rbDate" Content="Date" HorizontalAlignment="Left" Margin="171,146,0,0" VerticalAlignment="Top"/>
         <Label Content="Priority:" HorizontalAlignment="Left" Margin="9,140,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbWarning" Content="" HorizontalAlignment="Left" Margin="10,171,0,0" VerticalAlignment="Top" Width="205" Foreground="Red" FontStyle="Italic"/>
+        <DataGrid x:Name="appointmentTable" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" Height="380" Margin="235,12,0,0" VerticalAlignment="Top" Width="555">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Doctor" Binding="{Binding DoctorUsername}" Width="*"/>
+                <DataGridTextColumn Header="Date and time" Binding="{Binding StartTime}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="btnConfirm" Content="Confirm" HorizontalAlignment="Left" Margin="715,408,0,0" VerticalAlignment="Top" Width="75" Padding="4" Click="btnConfirm_Click"/>
 
     </Grid>
 </Page>

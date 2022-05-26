@@ -48,7 +48,7 @@ namespace hospital.View
 
         private void btnAllAppointments_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new PatientAppointmentsPage();
+            Main.Content = new PatientCalendar();//new PatientAppointmentsPage();
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
@@ -63,11 +63,6 @@ namespace hospital.View
                     (window as PatientHomeWindow).Close();
                 }
             }
-        }
-
-        private void btnDoctorGrading_Click(object sender, RoutedEventArgs e)
-        {
-            Main.Content = new PatientGradingPage();
         }
 
         private void btnDoctorPoll_Click(object sender, RoutedEventArgs e)

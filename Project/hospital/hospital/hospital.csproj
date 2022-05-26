@@ -248,6 +248,9 @@
     <Compile Include="View\PatientView\PatientAppointmentsPage.xaml.cs">
       <DependentUpon>PatientAppointmentsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PatientView\PatientCalendar.xaml.cs">
+      <DependentUpon>PatientCalendar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PatientView\PatientCustomNotification.xaml.cs">
       <DependentUpon>PatientCustomNotification.xaml</DependentUpon>
     </Compile>
@@ -256,9 +259,6 @@
     </Compile>
     <Compile Include="View\PatientView\PatientDoctorPoll.xaml.cs">
       <DependentUpon>PatientDoctorPoll.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\PatientView\PatientGradingPage.xaml.cs">
-      <DependentUpon>PatientGradingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PatientView\PatientHomeWindow.xaml.cs">
       <DependentUpon>PatientHomeWindow.xaml</DependentUpon>
@@ -454,6 +454,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\PatientView\PatientCalendar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PatientView\PatientCustomNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -463,10 +467,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PatientView\PatientDoctorPoll.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\PatientView\PatientGradingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

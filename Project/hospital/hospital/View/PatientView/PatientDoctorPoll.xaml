@@ -18,14 +18,14 @@
 
             <DataTemplate x:Key="pollTemplate">
                 <StackPanel>
-                    <Grid>
+                    <Grid HorizontalAlignment="Stretch">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="600*"/>
-                            <ColumnDefinition Width="20*"/>
-                            <ColumnDefinition Width="20*"/>
-                            <ColumnDefinition Width="20*"/>
-                            <ColumnDefinition Width="20*"/>
-                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="50*"/>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="5*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="{Binding Path=Question}" Grid.Column="0"/>
                         <RadioButton x:Name="rbOne" Grid.Column="1">1</RadioButton>
@@ -40,7 +40,7 @@
     </Page.Resources>
 
     <Grid>
-        <ListBox x:Name="lbPoll" ItemsSource="{Binding Path=Poll}" ItemTemplate="{StaticResource pollTemplate}" HorizontalAlignment="Left" Height="332" Margin="10,43,0,0" VerticalAlignment="Top" Width="780" BorderBrush="White"/>
+        <ListBox x:Name="lbPoll" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=Poll}" ItemTemplate="{StaticResource pollTemplate}" HorizontalAlignment="Left" Height="332" Margin="10,43,0,0" VerticalAlignment="Top" Width="780" BorderBrush="White"/>
         <ComboBox x:Name="cbAppointments" ItemsSource="{Binding Path=Appointments}" DisplayMemberPath="AppointmentDisplayProperty"  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="780"/>
         <Button x:Name="btnConfirm" Content="Confirm" HorizontalAlignment="Left" Margin="700,414,0,0" VerticalAlignment="Top" Width="90" Click="btnConfirm_Click"/>
         <Label x:Name="lbWarning" Content="" HorizontalAlignment="Left" Margin="10,385,0,0" VerticalAlignment="Top" Width="475" Foreground="#DDFF0000" FontStyle="Italic"/>

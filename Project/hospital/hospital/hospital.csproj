@@ -209,6 +209,9 @@
     <Compile Include="View\DoctorTherapyWindow.xaml.cs">
       <DependentUpon>DoctorTherapyWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DoctorVacationViewWindow.xaml.cs">
+      <DependentUpon>DoctorVacationViewWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DoctorVacationWindow.xaml.cs">
       <DependentUpon>DoctorVacationWindow.xaml</DependentUpon>
     </Compile>
@@ -394,6 +397,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DoctorTherapyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DoctorVacationViewWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

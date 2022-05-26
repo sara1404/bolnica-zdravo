@@ -101,22 +101,7 @@ namespace Service
 
         private ObservableCollection<Appointment> SortAppointmentByTime(ObservableCollection<Appointment> availableAppointment)
         {
-            int size = availableAppointment.Count;
-
-            for (int i = 0; i < (size - 1); i++)
-            {
-                for (int j = 0; j < (size - i - 1); j++)
-                {
-                    if (availableAppointment[j].StartTime > availableAppointment[j + 1].StartTime)
-                    {
-                        Appointment temp = availableAppointment[j];
-                        availableAppointment[j] = availableAppointment[j + 1];
-                        availableAppointment[j + 1] = temp;
-                    }
-                }
-            }
-
-            return availableAppointment;
+            return new ObservableCollection<Appointment>(availableAppointment.ToList().OrderBy(x => x.StartTime));
         }
 
         private void MakeEmergencyOperation(ObservableCollection<Appointment> availableAppointment)

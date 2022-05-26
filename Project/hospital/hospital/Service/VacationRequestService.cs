@@ -12,9 +12,11 @@ namespace Service
     public class VacationRequestService
     {
         private readonly VacationRequestRepository vacationRequestRepository;
-        public VacationRequestService(VacationRequestRepository _repo)
+        private readonly NotificationRepository notificationRepository;
+        public VacationRequestService(VacationRequestRepository _repo, NotificationRepository notiRepo)
         {
             vacationRequestRepository = _repo;
+            notificationRepository = notiRepo;
         }
         public bool Create(VacationRequest vacationRequest)
         {
@@ -35,6 +37,29 @@ namespace Service
         public bool DeleteById(int id)
         {
             return vacationRequestRepository.DeleteById(id);
+        }
+
+        public void FinishRequest(string resultRequest, int requestId)
+        {
+            if (resultRequest.Equals("reject"))
+                RejectRequest(requestId);
+            else
+                ApproveRequest(requestId);
+        }
+        private void ApproveRequest(int requestId)
+        {
+            MakeNotification(requestId, "Your vacation request was approved.");
+        }
+        private void RejectRequest(int requestId)
+        {
+            MakeNotification(requestId, "Your vacation request was rejected.");
+
+        }
+        private void MakeNotification(int requestId,string notificationText)
+        {
+            Notification notification = new Notification(FindById(requestId).DoctorId, notificationText);
+            notificationRepository.Create(notification);
+            DeleteById(requestId);
         }
     }
 }

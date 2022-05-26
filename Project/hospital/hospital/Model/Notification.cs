@@ -21,6 +21,11 @@ namespace Model
         {
             _username = username;
         }
+        public Notification(string username,string text)
+        {
+            _username = username;
+            _text = text;
+        }
         public Notification(string username, DateTime startTime, DateTime endTime, int interval, string text)
         {
             _username = username;

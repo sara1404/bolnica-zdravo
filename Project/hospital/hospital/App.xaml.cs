@@ -112,7 +112,7 @@ namespace hospital
             medicineController = new MedicineController(medicineService);
 
             VacationRequestRepository vacationRequestRepository = new VacationRequestRepository();
-            VacationRequestService vacationRequestService = new VacationRequestService(vacationRequestRepository);
+            VacationRequestService vacationRequestService = new VacationRequestService(vacationRequestRepository,notificationRepository);
             vacationRequestController = new VacationRequestController(vacationRequestService);
 
 

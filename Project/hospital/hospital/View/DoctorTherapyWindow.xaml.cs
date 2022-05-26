@@ -67,21 +67,47 @@ namespace hospital.View
         {
             interval = int.Parse(cmbInterval.SelectedItem.ToString());
         }
-        private void Submit_Click(object sender, RoutedEventArgs e)
+        private bool checkAllergies()
         {
-            if(dpStartDate.SelectedDate.HasValue && dpEndDate.SelectedDate.HasValue && cmbStartHour.SelectedIndex != -1)
+            MedicalRecord record = mrc.FindById(selectedPatient.RecordId);
+            List<string> allergies = new List<string>();
+            if(record.Alergies != null)
+                allergies = record.Alergies.Split(',').ToList<string>();
+            foreach(string ingridient in selectedMedicine.Ingridients)
+            {
+                if(allergies.Contains(ingridient) || allergies.Contains(selectedMedicine.Name))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        private DateTime generateStartTime()
+        {
+            if (dpStartDate.SelectedDate.HasValue && dpEndDate.SelectedDate.HasValue && cmbStartHour.SelectedIndex != -1)
             {
                 int startHour = int.Parse(cmbStartHour.SelectedItem.ToString());
                 DateTime selectedDate = (DateTime)dpStartDate.SelectedDate;
                 DateTime startTime = new DateTime(selectedDate.Year, selectedDate.Month, selectedDate.Day, startHour, 0, 0);
-                if (cmbPatients.SelectedIndex != -1 && cmbMedicine.SelectedIndex != -1 && cmbInterval.SelectedIndex != -1
-                    && startTime > DateTime.Now && dpEndDate.SelectedDate.Value > startTime)
+                if (startTime > DateTime.Now && dpEndDate.SelectedDate.Value > startTime)
                 {
-                    Therapy newTherapy = new Therapy(startTime, dpEndDate.SelectedDate.Value, interval, selectedMedicine);
-                    mrc.AddTheraphy(selectedPatient.RecordId, newTherapy);
-                    this.Close();
+                    return startTime;
                 }
             }
+            return DateTime.MinValue; //ako vreme ne odgovara
+        }
+        private void Submit_Click(object sender, RoutedEventArgs e)
+        {
+            bool canTakeMedicine = checkAllergies();
+            DateTime startTime = generateStartTime();
+            if (cmbPatients.SelectedIndex != -1 && cmbMedicine.SelectedIndex != -1 && cmbInterval.SelectedIndex != -1
+                && canTakeMedicine && startTime != DateTime.MinValue)
+            {
+                Therapy newTherapy = new Therapy(startTime, dpEndDate.SelectedDate.Value, interval, selectedMedicine);
+                mrc.AddTheraphy(selectedPatient.RecordId, newTherapy);
+                this.Close();
+            }
+            
         }
 
     }

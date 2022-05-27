@@ -13,34 +13,29 @@ namespace hospital.Model
     }
     public class PollBlueprint
     {
-        private PollType type; // rename to type and add enum
-        private string pollName;
-        private string username;
-        private int appointmentId;
-        private List<PollCategory> categories;
-        
+        private PollType _type;
+        private string _pollName;
+        private string _username;
+        private int _appointmentId;
+        private List<PollCategory> _categories;
 
-        public PollType Type { get => type; set => type = value; }
-        public string PollName { get => pollName; set => pollName = value; }
-        public string Username { get => username; set => username = value; }
+        public PollType Type { get => _type; set => _type = value; }
+        public string PollName { get => _pollName; set => _pollName = value; }
+        public string Username { get => _username; set => _username = value; }
         public int AppointmentId
         {
             get
             {
-                return appointmentId;
+                return _appointmentId;
             }
             set
             {
-                if(type == PollType.DOCTOR_POLL)
+                if(_type == PollType.DOCTOR_POLL)
                 {
-                    appointmentId = value;
-                }
-                else
-                {
-                    // throw exception....
+                    _appointmentId = value;
                 }
             }
         }
-        public List<PollCategory> Categories { get => categories; set => categories = value; }
+        public List<PollCategory> Categories { get => _categories; set => _categories = value; }
     }
 }

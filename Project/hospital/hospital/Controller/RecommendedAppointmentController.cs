@@ -13,6 +13,16 @@ namespace Controller
     {
         private readonly RecommendedAppointmentService _recommendedAppointmentService;
 
+        public ObservableCollection<Appointment> GetRecommendedByDoctor(DateTime startDate, DateTime endDate, Doctor doctor, string patientUsername)
+        {
+            return _recommendedAppointmentService.GetRecommendedByDoctor(startDate, endDate, doctor, patientUsername);
+        }
+
+        public ObservableCollection<Appointment> GetRecommendedByDate(DateTime startDate, DateTime endDate, Doctor doctor, string patientUsername)
+        {
+            return _recommendedAppointmentService.GetRecommendedByDate(startDate, endDate, doctor, patientUsername);
+        }
+
         public RecommendedAppointmentController(RecommendedAppointmentService recommendedAppointmentService)
         {
             this._recommendedAppointmentService = recommendedAppointmentService;

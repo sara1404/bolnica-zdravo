@@ -23,6 +23,7 @@ namespace hospital.View.PatientView
     public partial class PatientMakeAppointmentFirst : Page
     {
         private AppointmentController ac;
+        private RecommendedAppointmentController rac;
         private UserController uc;
         private App app;
         public PatientMakeAppointmentFirst()
@@ -33,6 +34,7 @@ namespace hospital.View.PatientView
             app = Application.Current as App;
             uc = app.userController;
             ac = app.appointmentController;
+            rac = app.recommendedAppointmentController;
             DoctorController dc = app.doctorController;
             cbDoctor.ItemsSource = dc.GetDoctors();
         }
@@ -50,11 +52,11 @@ namespace hospital.View.PatientView
             {
                 if (dateFrom.SelectedDate.Value.CompareTo(dateTo.SelectedDate.Value) < 0 && priorityDoctor)
                 {
-                    appointmentTable.ItemsSource = ac.GetRecommendedByDoctor((DateTime)dateFrom.SelectedDate, (DateTime)dateTo.SelectedDate, doctor);
+                    appointmentTable.ItemsSource = rac.GetRecommendedByDoctor((DateTime)dateFrom.SelectedDate, (DateTime)dateTo.SelectedDate, doctor, uc.CurentLoggedUser.Username);
                 }
                 else if (dateFrom.SelectedDate.Value.CompareTo(dateTo.SelectedDate.Value) < 0 && priorityDate)
                 {
-                    appointmentTable.ItemsSource = ac.GetRecommendedByDoctor((DateTime)dateFrom.SelectedDate, (DateTime)dateTo.SelectedDate, doctor);
+                    appointmentTable.ItemsSource = rac.GetRecommendedByDate((DateTime)dateFrom.SelectedDate, (DateTime)dateTo.SelectedDate, doctor, uc.CurentLoggedUser.Username);
                 }
                 else if (dateFrom.SelectedDate.Value.CompareTo(dateTo.SelectedDate.Value) >= 0)
                 {

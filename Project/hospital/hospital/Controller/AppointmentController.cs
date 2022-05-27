@@ -71,14 +71,6 @@ namespace Controller
                 return false;
             }
         }
-        public ObservableCollection<Appointment> GetRecommendedByDoctor(DateTime startDate, DateTime endDate, Doctor doctor)
-        {
-            return appointmentService.GetRecommendedByDoctor(startDate, endDate, doctor);
-        }
-        public ObservableCollection<Appointment> GetRecommendedByDate(DateTime startDate, DateTime endDate, Doctor doctor)
-        {
-            return appointmentService.GetRecommendedByDate(startDate, endDate, doctor);
-        }
 
         public bool DeleteAppointment(int id)
         {

@@ -24,12 +24,6 @@ namespace Model
             _patientUsername = patientUsername;
             _startTime = startTime;
         }
-        public string Description { get => _description; set => _description = value; }
-        public DateTime StartTime { get => _startTime; set => _startTime = value; }
-        public int Duration { get => _duration; set => _duration = value; }
-        public string DoctorNote { get => _doctorNote; set => _doctorNote = value; }
-        public string PatientNote { get => _patientNote; set => _patientNote = value; }
-
         public int Id
         {
             get
@@ -80,6 +74,11 @@ namespace Model
                 OnPropertyChanged();
             }
         }
+        public DateTime StartTime { get => _startTime; set => _startTime = value; }
+        public string Description { get => _description; set => _description = value; }
+        public int Duration { get => _duration; set => _duration = value; }
+        public string DoctorNote { get => _doctorNote; set => _doctorNote = value; }
+        public string PatientNote { get => _patientNote; set => _patientNote = value; }
         public string RoomId
         {
             get

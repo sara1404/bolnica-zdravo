@@ -30,6 +30,7 @@ namespace hospital.View.UserControls
         private AppointmentController ac;
         private DoctorController dc;
         private ScheduledBasicRenovationController sbrc;
+        private RecommendedAppointmentController rc;
         public ObservableCollection<Patient> Patients { get; set; }
         public ObservableCollection<Doctor> Doctors { get; set; }
         public MakeAppointmentUserControl()
@@ -42,6 +43,7 @@ namespace hospital.View.UserControls
             ac = app.appointmentController;
             dc = app.doctorController;
             sbrc = app.scheduledBasicRenovationController;
+            rc = app.recommendedAppointmentController;
             Patients = pc.FindAll();
             Doctors = dc.GetDoctors();
         }
@@ -75,7 +77,7 @@ namespace hospital.View.UserControls
                 }
                 if (canMake)
                 {
-                    if (ac.tryMakeAppointment(txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1], cmbUsername.Text, ((Doctor)cmbDoctor.SelectedItem).OrdinationId, (DateTime)date.SelectedDate, (Doctor)cmbDoctor.SelectedItem))
+                    if (rc.tryMakeAppointment(txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1], cmbUsername.Text, ((Doctor)cmbDoctor.SelectedItem).OrdinationId, (DateTime)date.SelectedDate, (Doctor)cmbDoctor.SelectedItem))
                     {
                         this.Visibility = Visibility.Collapsed;
                         notifier.ShowSuccess("Appointment successfully scheduled");
@@ -207,10 +209,10 @@ namespace hospital.View.UserControls
                     else
                         btnRecTwo.Visibility = Visibility.Visible;
                     ObservableCollection<Appointment> apointments = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)date.SelectedDate, ((Doctor)cmbDoctor.SelectedItem).Username,cmbUsername.Text);
-                    ac.findFreeForward(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
-                    ac.findFreeBack(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
-                    btnRecOne.Content = "Doctor: " + dc.GetByUsername(ac.RecommendedOne.doctorUsername) + "\n" + ac.RecommendedOne.StartTime;
-                    btnRecTwo.Content = "Doctor: " + dc.GetByUsername(ac.RecommendedTwo.doctorUsername) + "\n" + ac.RecommendedTwo.StartTime;
+                    rc.findFreeForward(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
+                    rc.findFreeBack(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
+                    btnRecOne.Content = "Doctor: " + dc.GetByUsername(rc.RecommendedOne.doctorUsername) + "\n" + rc.RecommendedOne.StartTime;
+                    btnRecTwo.Content = "Doctor: " + dc.GetByUsername(rc.RecommendedTwo.doctorUsername) + "\n" + rc.RecommendedTwo.StartTime;
                 }
                 else
                 {
@@ -219,9 +221,9 @@ namespace hospital.View.UserControls
                     btnRecOne.Visibility = Visibility.Visible;
                     btnRecTwo.Visibility = Visibility.Visible;
                     ObservableCollection<Appointment> apointments = ac.GetFreeAppointmentsByDate((DateTime)date.SelectedDate,cmbUsername.Text);
-                    ac.findRecByTime(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
-                    btnRecOne.Content = "Doctor: " + dc.GetByUsername(ac.RecommendedOne.doctorUsername) + "\n" + ac.RecommendedOne.StartTime;
-                    btnRecTwo.Content = "Doctor: " + dc.GetByUsername(ac.RecommendedTwo.doctorUsername) + "\n" + ac.RecommendedTwo.StartTime;
+                    rc.findRecByTime(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
+                    btnRecOne.Content = "Doctor: " + dc.GetByUsername(rc.RecommendedOne.doctorUsername) + "\n" + rc.RecommendedOne.StartTime;
+                    btnRecTwo.Content = "Doctor: " + dc.GetByUsername(rc.RecommendedTwo.doctorUsername) + "\n" + rc.RecommendedTwo.StartTime;
                 }
             }
         }
@@ -241,7 +243,7 @@ namespace hospital.View.UserControls
 
         private void btnRecTwo_Click(object sender, RoutedEventArgs e)
         {
-            ac.CreateAppointment(ac.RecommendedTwo);
+            ac.CreateAppointment(rc.RecommendedTwo);
             notifier.ShowSuccess("Appointment successfully scheduled");
             this.Visibility = Visibility.Collapsed;
             cmbDoctor.Text = "";
@@ -257,7 +259,7 @@ namespace hospital.View.UserControls
 
         private void btnRecOne_Click(object sender, RoutedEventArgs e)
         {
-            ac.CreateAppointment(ac.RecommendedOne);
+            ac.CreateAppointment(rc.RecommendedOne);
             notifier.ShowSuccess("Appointment successfully scheduled");
             this.Visibility = Visibility.Collapsed;
             cmbDoctor.Text = "";

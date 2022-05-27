@@ -3,6 +3,7 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,7 @@ namespace hospital.View
     public partial class DoctorVacationWindow : Window
     {
         public ObservableCollection<Appointment> Appointments { get; set; }
+        public ObservableCollection<VacationRequest> Requests { get; set; }
         private CalendarDateRange invalidDates;
         private Doctor loggedInDoctor;
         private VacationRequestController vc;
@@ -44,6 +46,16 @@ namespace hospital.View
             dpStartDate.BlackoutDates.Add(invalidDates);
             dpEndDate.BlackoutDates.Add(invalidDates);
             loggedInDoctor = dc.GetByUsername(uc.CurentLoggedUser.Username);
+            Requests = vc.FindAll();
+
+            ICollectionView vacationView = CollectionViewSource.GetDefaultView(vc.FindAll());
+            vacationView.Filter = VacationFilter;
+        }
+
+        private bool VacationFilter(object item)
+        {
+            VacationRequest request = item as VacationRequest;
+            return request.DoctorId.Equals(loggedInDoctor.Username);
         }
 
         private bool checkOverlapWithAppointments()
@@ -113,6 +125,12 @@ namespace hospital.View
             invalidDates.End = DateTime.Today.AddDays(2);
             dpStartDate.BlackoutDates.Add(invalidDates);
             dpEndDate.BlackoutDates.Add(invalidDates);
+        }
+
+        private void btnInfo_Click(object sender, RoutedEventArgs e)
+        {
+            if(tableRequests.SelectedIndex != 1)
+                new DoctorVacationViewWindow().Show();
         }
     }
 }

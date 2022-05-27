@@ -211,6 +211,9 @@
     <Compile Include="View\DoctorTherapyWindow.xaml.cs">
       <DependentUpon>DoctorTherapyWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DoctorVacationViewWindow.xaml.cs">
+      <DependentUpon>DoctorVacationViewWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DoctorVacationWindow.xaml.cs">
       <DependentUpon>DoctorVacationWindow.xaml</DependentUpon>
     </Compile>
@@ -250,6 +253,9 @@
     <Compile Include="View\PatientView\PatientAppointmentsPage.xaml.cs">
       <DependentUpon>PatientAppointmentsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PatientView\PatientCalendar.xaml.cs">
+      <DependentUpon>PatientCalendar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PatientView\PatientCustomNotification.xaml.cs">
       <DependentUpon>PatientCustomNotification.xaml</DependentUpon>
     </Compile>
@@ -259,23 +265,14 @@
     <Compile Include="View\PatientView\PatientDoctorPoll.xaml.cs">
       <DependentUpon>PatientDoctorPoll.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientView\PatientGradingPage.xaml.cs">
-      <DependentUpon>PatientGradingPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\PatientView\PatientHomeWindow.xaml.cs">
       <DependentUpon>PatientHomeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PatientView\PatientHospitalPoll.xaml.cs">
       <DependentUpon>PatientHospitalPoll.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientView\PatientMainMenu.xaml.cs">
-      <DependentUpon>PatientMainMenu.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\PatientView\PatientMakeAppointmentFirst.xaml.cs">
       <DependentUpon>PatientMakeAppointmentFirst.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\PatientView\PatientMakeAppointmentSecond.xaml.cs">
-      <DependentUpon>PatientMakeAppointmentSecond.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PatientView\PatientMedicalRecord.xaml.cs">
       <DependentUpon>PatientMedicalRecord.xaml</DependentUpon>
@@ -399,6 +396,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\DoctorVacationViewWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DoctorVacationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -459,6 +460,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\PatientView\PatientCalendar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PatientView\PatientCustomNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -471,10 +476,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientView\PatientGradingPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\PatientView\PatientHomeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -483,15 +484,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientView\PatientMainMenu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\PatientView\PatientMakeAppointmentFirst.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\PatientView\PatientMakeAppointmentSecond.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

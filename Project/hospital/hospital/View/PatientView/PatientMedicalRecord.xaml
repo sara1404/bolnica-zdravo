@@ -18,23 +18,20 @@
         </ResourceDictionary>
     </Page.Resources>
     <Grid>
-        <TextBox x:Name="tbBloodType" HorizontalAlignment="Left" Height="23" Margin="145,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" IsEnabled="False"/>
-        <Label Content="Blood type:" HorizontalAlignment="Left" Margin="20,103,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbGender" HorizontalAlignment="Left" Height="23" Margin="340,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" IsEnabled="False"/>
-        <Label Content="Gender:" HorizontalAlignment="Left" Margin="275,67,0,0" VerticalAlignment="Top"/>
-        <Label Content="Alergens:" HorizontalAlignment="Left" Margin="20,140,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbName" HorizontalAlignment="Left" Height="23" Margin="145,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" IsEnabled="False"/>
-        <Label Content="Name:" HorizontalAlignment="Left" Margin="20,67,0,0" VerticalAlignment="Top"/>
-        <Label Content="Date of birth:" HorizontalAlignment="Left" Margin="440,67,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbDateOfBirth" HorizontalAlignment="Left" Height="23" Margin="540,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" IsEnabled="False"/>
-        <Label Content="Appointment list:" HorizontalAlignment="Left" Margin="20,231,0,0" VerticalAlignment="Top"/>
-        <Button Content="appointments" HorizontalAlignment="Left" Margin="145,231,0,0" VerticalAlignment="Top" Width="125" Height="24"/>
-        <TextBox x:Name="tbNote" HorizontalAlignment="Left" Height="130" Margin="145,270,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="645"/>
-        <Label Content="Note:" HorizontalAlignment="Left" Margin="20,270,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbBloodType" HorizontalAlignment="Left" Height="23" Margin="136,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" IsEnabled="False"/>
+        <Label Content="Blood type:" HorizontalAlignment="Left" Margin="11,47,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbGender" HorizontalAlignment="Left" Height="23" Margin="331,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" IsEnabled="False"/>
+        <Label Content="Gender:" HorizontalAlignment="Left" Margin="266,11,0,0" VerticalAlignment="Top"/>
+        <Label Content="Alergens:" HorizontalAlignment="Left" Margin="11,84,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbName" HorizontalAlignment="Left" Height="23" Margin="136,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" IsEnabled="False"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="11,11,0,0" VerticalAlignment="Top"/>
+        <Label Content="Date of birth:" HorizontalAlignment="Left" Margin="431,11,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbDateOfBirth" HorizontalAlignment="Left" Height="23" Margin="531,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" IsEnabled="False"/>
+        <Label Content="Appointment list:" HorizontalAlignment="Left" Margin="11,185,0,0" VerticalAlignment="Top"/>
+        <Button Content="appointments" HorizontalAlignment="Left" Margin="136,185,0,0" VerticalAlignment="Top" Width="125" Height="24"/>
+        <TextBox x:Name="tbNote" HorizontalAlignment="Left" Height="130" Margin="136,224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="645"/>
+        <Label Content="Note:" HorizontalAlignment="Left" Margin="11,224,0,0" VerticalAlignment="Top"/>
         <Button x:Name="btnConfirm" Content="Confirm" HorizontalAlignment="Left" Margin="700,408,0,0" VerticalAlignment="Top" Width="90"/>
-        <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="10,408,0,0" VerticalAlignment="Top" Width="75" Click="btnBack_Click"/>
-        <Separator HorizontalAlignment="Left" Height="5" Margin="10,45,0,0" VerticalAlignment="Top" Width="780"/>
-        <Label Content="Medical record" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Height="35" Width="185" FontSize="24"/>
-        <TextBox x:Name="tbAlergens" HorizontalAlignment="Left" Height="85" Margin="145,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" IsEnabled="False"/>
+        <TextBox x:Name="tbAlergens" HorizontalAlignment="Left" Height="85" Margin="136,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" IsEnabled="False"/>
     </Grid>
 </Page>

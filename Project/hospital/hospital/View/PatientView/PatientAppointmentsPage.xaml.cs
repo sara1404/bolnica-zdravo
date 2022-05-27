@@ -56,11 +56,6 @@ namespace hospital.View
             return appointment.PatientUsername.Equals(current.Username);
         }
 
-        private void btnBack_Click(object sender, RoutedEventArgs e)
-        {
-            app.PatientBackToMainMenu();
-        }
-
         private void btnDelay_Click(object sender, RoutedEventArgs e)
         {
             Appointment selectedAppointment = (Appointment)appointmentTable.SelectedItem;

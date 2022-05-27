@@ -36,10 +36,6 @@ namespace hospital.View.PatientView
             dateEnd.DisplayDateStart = DateTime.Now;
         }
 
-        private void btnBack_Click(object sender, RoutedEventArgs e)
-        {
-            app.PatientBackToMainMenu();
-        }
 
         private bool Validate()
         {

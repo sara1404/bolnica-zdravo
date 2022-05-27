@@ -19,6 +19,7 @@ using ToastNotifications.Lifetime;
 using ToastNotifications.Messages;
 using ToastNotifications.Position;
 using Controller;
+using hospital.View.PatientView;
 
 namespace hospital.View
 {
@@ -31,13 +32,14 @@ namespace hospital.View
         private MedicalRecord mr;
         private User current;
         private List<Timer> timers;
+        private App app;
 
         public PatientHomeWindow()
         {
             InitializeComponent();
-            Main.Content = new PatientMainMenu();
+            Main.Content = new PatientCalendar();
 
-            App app = Application.Current as App;
+            app = Application.Current as App;
             nc = app.notificationController;
             current = app.userController.CurentLoggedUser;
             mr = app.medicalRecordsController.FindById(app.patientController.FindById(current.Username).RecordId);
@@ -189,6 +191,55 @@ namespace hospital.View
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             KillAllTimers();
+        }
+
+        private void btnCalendar_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new PatientCalendar();
+        }
+
+        private void btnMakeAppointment_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new PatientMakeAppointmentFirst();
+        }
+
+        private void btnAppointments_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new PatientAppointmentsPage();
+        }
+
+        private void btnHospitalPoll_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new PatientHospitalPoll();
+        }
+
+        private void btnDoctorPoll_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new PatientDoctorPoll();
+        }
+
+        private void btnMedicalRecord_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new PatientMedicalRecord();
+        }
+
+        private void btnCustomNotification_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new PatientCustomNotification();
+        }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            app.userController.CurentLoggedUser = null;
+            MainWindow mw = new MainWindow();
+            mw.Show();
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(PatientHomeWindow))
+                {
+                    (window as PatientHomeWindow).Close();
+                }
+            }
         }
     }
 }

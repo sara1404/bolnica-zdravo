@@ -43,9 +43,5 @@ namespace hospital.View.PatientView
             tbNote.Text = mrc.FindById(currentPatient.RecordId).Note;
         }
 
-        private void btnBack_Click(object sender, RoutedEventArgs e)
-        {
-            app.PatientBackToMainMenu();
-        }
     }
 }

@@ -42,9 +42,5 @@ namespace hospital.View.PatientView
             ac.UpdateAppointment(oldAppointment, newAppointment);
         }
 
-        private void btnBack_Click(object sender, RoutedEventArgs e)
-        {
-            app.PatientBackToMainMenu();
-        }
     }
 }

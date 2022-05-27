@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:hospital.View"
         mc:Ignorable="d"
-        Title="PatientHomeWindow" Height="489.062" Width="821.751" Closing="Window_Closing">
+        Title="PatientHomeWindow" Height="551" Width="817.876" Closing="Window_Closing">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -17,7 +17,18 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid Margin="0,0,4,0">
-        <Frame NavigationUIVisibility="Hidden" x:Name="Main" Margin="0,0,0,0" Height="450" VerticalAlignment="Top" HorizontalAlignment="Left" Width="800"/>
-
+        <Frame NavigationUIVisibility="Hidden" x:Name="Main" Margin="0,47,0,0" Height="450" VerticalAlignment="Top" HorizontalAlignment="Left" Width="800"/>
+        <Button x:Name="btnCalendar" Content="Calendar" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Padding="4" Click="btnCalendar_Click"/>
+        <Button x:Name="btnMakeAppointment" Content="Make appointment" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" Width="75" Padding="4" Click="btnMakeAppointment_Click"/>
+        <Button x:Name="btnHospitalPoll" Content="Hospital poll" HorizontalAlignment="Left" Margin="250,10,0,0" VerticalAlignment="Top" Width="75" Padding="4" Click="btnHospitalPoll_Click"/>
+        <Button x:Name="btnLogout"  HorizontalAlignment="Left" Margin="753,13,0,0" VerticalAlignment="Top" Width="55" Height="29" Click="btnLogout_Click" Background="Transparent" BorderBrush="Transparent">
+            <Image Source="../../Resources/Images/logout.png" Height="19" Width="23"></Image>
+        </Button>
+        <Button x:Name="btnDoctorPoll" Content="Doctor poll" HorizontalAlignment="Left" Margin="330,10,0,0" VerticalAlignment="Top" Width="75" Padding="4" Click="btnDoctorPoll_Click"/>
+        <Button x:Name="btnAppointments" Content="All appointments" HorizontalAlignment="Left" Margin="170,10,0,0" VerticalAlignment="Top" Width="75" Padding="4" Click="btnAppointments_Click"/>
+        <Button x:Name="btnMedicalRecord" Content="Medical record" HorizontalAlignment="Left" Margin="410,10,0,0" VerticalAlignment="Top" Width="75" Padding="4" Click="btnMedicalRecord_Click"/>
+        <Button x:Name="btnCustomNotification" Content="Custom notification" HorizontalAlignment="Left" Margin="650,10,0,0" VerticalAlignment="Top" Width="75" Padding="4" Click="btnCustomNotification_Click"/>
+        <Button x:Name="btnTherapy" Content="Therapy" HorizontalAlignment="Left" Margin="490,10,0,0" VerticalAlignment="Top" Width="75" Padding="4"/>
+        <Button x:Name="btnGraph" Content="Graph" HorizontalAlignment="Left" Margin="570,10,0,0" VerticalAlignment="Top" Width="75" Padding="4"/>
     </Grid>
 </Window>

@@ -161,17 +161,6 @@ namespace hospital
             SystemTimer systemTimer = new SystemTimer(scheduledAdvancedRenovationService, scheduledBasicRenovationService, scheduledRelocationService);
         }
 
-        public void PatientBackToMainMenu()
-        {
-            foreach (Window window in Application.Current.Windows)
-            {
-                if (window.GetType() == typeof(PatientHomeWindow))
-                {
-                    (window as PatientHomeWindow).Main.Content = new PatientMainMenu();
-                }
-            }
-        }
-
         private void App_Closing(object sender, ExitEventArgs e)
         {
             roomRepository.WriteRoomData();

@@ -17,14 +17,14 @@
             </ResourceDictionary.MergedDictionaries>
             <DataTemplate x:Key="pollTemplate">
                 <StackPanel>
-                    <Grid>
+                    <Grid HorizontalAlignment="Stretch">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="10*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="50*"/>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="5*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="{Binding Path=Question}" Grid.Column="0"/>
                         <RadioButton x:Name="rbOne" Grid.Column="1">1</RadioButton>
@@ -39,9 +39,8 @@
 
     </Page.Resources>
     <Grid>
-        <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="10,408,0,0" VerticalAlignment="Top" Width="75" Click="btnBack_Click"/>
         <Button x:Name="btnConfirm" Content="Confirm" HorizontalAlignment="Left" Margin="695,408,0,0" VerticalAlignment="Top" Width="95" Click="btnConfirm_Click"/>
-        <ListBox x:Name="lbPoll" ItemsSource="{Binding Path=Poll}" ItemTemplate="{StaticResource pollTemplate}" HorizontalAlignment="Left" Height="360" Margin="10,10,0,0" VerticalAlignment="Top" Width="780" BorderBrush="White"/>
+        <ListBox x:Name="lbPoll" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=Poll}" ItemTemplate="{StaticResource pollTemplate}" HorizontalAlignment="Left" Height="360" Margin="10,10,0,0" VerticalAlignment="Top" Width="780" BorderBrush="White"/>
         <Label x:Name="lbWarning" Content="" HorizontalAlignment="Left" Margin="10,375,0,0" VerticalAlignment="Top" Height="28" Width="385" Foreground="#DDFF0000" FontStyle="Italic"/>
 
 

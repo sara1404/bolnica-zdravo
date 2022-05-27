@@ -44,6 +44,7 @@ namespace hospital
         public InvalidMedicineReportController invalidMedicineReportController { get; set; }
 
         public EmergencyController emergencyController { get; set; }
+        public RecommendedAppointmentController recommendedAppointmentController { get; set; }
 
         public PollController pollBlueprintController { get; set; }
 
@@ -120,8 +121,12 @@ namespace hospital
             InvalidMedicineReportService invalidMedicineReportService = new InvalidMedicineReportService(invalidMedicineReportRepository);
             invalidMedicineReportController = new InvalidMedicineReportController(invalidMedicineReportService);
 
-            EmergencyService emergencyService = new EmergencyService(appointmentService, notificationRepository, doctorService, roomService);
+            RecommendedAppointmentService recommendedAppointmentService = new RecommendedAppointmentService(appointmentService, notificationRepository);
+            recommendedAppointmentController = new RecommendedAppointmentController(recommendedAppointmentService);
+
+            EmergencyService emergencyService = new EmergencyService(appointmentService, notificationRepository, doctorService, roomService, recommendedAppointmentService);
             emergencyController = new EmergencyController(emergencyService);
+
 
             PollBlueprintRepository pollBlueprintRepository = new PollBlueprintRepository();
             PollResultRepository pollResultRepository = new PollResultRepository();

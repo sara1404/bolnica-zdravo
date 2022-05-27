@@ -85,38 +85,5 @@ namespace Controller
             appointmentService.Delete(id);
             return true;
         }
-
-
-        //secretary function for appointment--------------
-        public bool tryMakeAppointment(string _hours,string _minuts,string patientUsername,string roomId, DateTime date, Doctor doctor)
-        {
-            return appointmentService.tryMakeAppointment(_hours, _minuts, patientUsername, roomId,date,doctor);
-        }
-        public void findFreeForward(ObservableCollection<Appointment> apointments, string hours, string minuts)
-        {
-            appointmentService.findFreeForward(apointments, hours, minuts);
-        }
-        public Appointment RecommendedOne {
-            set { appointmentService.RecommendedOne = value; }
-            get { return appointmentService.RecommendedOne; }
-        }
-        public Appointment RecommendedTwo {
-            set { appointmentService.RecommendedTwo = value; }
-            get { return appointmentService.RecommendedTwo; }
-        }
-        public void findFreeBack(ObservableCollection<Appointment> apointments, string hours, string minuts)
-        {
-            appointmentService.findFreeBack(apointments, hours,minuts);
-        }
-        public void findRecByTime(ObservableCollection<Appointment> apointments, string hours, string minuts)
-        {
-            appointmentService.findRecByTime(apointments, hours,minuts);
-        }
-        public bool tryChangeAppointment(Appointment oldAppointment, DateTime newDate, string newTime)
-        {
-            return appointmentService.tryChangeAppointment(oldAppointment, newDate, newTime);
-        }
-        //------------------------------------------------
-
     }
 }

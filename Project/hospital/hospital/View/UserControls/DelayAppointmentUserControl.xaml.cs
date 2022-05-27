@@ -34,6 +34,7 @@ namespace hospital.View.UserControls
         private DoctorController dc;
         private NotificationController nc;
         private ScheduledBasicRenovationController sbrc;
+        private RecommendedAppointmentController rc;
         public ObservableCollection<Patient> Patients { get; set; }
         public ObservableCollection<Doctor> Doctors { get; set; }
         public DelayAppointmentUserControl()
@@ -48,6 +49,7 @@ namespace hospital.View.UserControls
             sbrc = app.scheduledBasicRenovationController;
             ac = app.appointmentController;
             dc = app.doctorController;
+            rc = app.recommendedAppointmentController;
             Patients = pc.FindAll();
             Doctors = dc.GetDoctors();
         }
@@ -174,7 +176,7 @@ namespace hospital.View.UserControls
 
         private void btnRecTwo_Click(object sender, RoutedEventArgs e)
         {
-            ac.tryChangeAppointment(CurrentAppointment, (DateTime)newDate.SelectedDate, ac.RecommendedTwo.StartTime.ToString().Split(' ')[1]);
+            rc.tryChangeAppointment(CurrentAppointment, (DateTime)newDate.SelectedDate, rc.RecommendedTwo.StartTime.ToString().Split(' ')[1]);
             this.Visibility = Visibility.Collapsed;
             cmbUsername.Text = "";
             date.Text = "";
@@ -190,7 +192,7 @@ namespace hospital.View.UserControls
 
         private void btnRecOne_Click(object sender, RoutedEventArgs e)
         {
-            ac.tryChangeAppointment(CurrentAppointment, (DateTime)newDate.SelectedDate, ac.RecommendedOne.StartTime.ToString().Split(' ')[1]);
+            rc.tryChangeAppointment(CurrentAppointment, (DateTime)newDate.SelectedDate, rc.RecommendedOne.StartTime.ToString().Split(' ')[1]);
             this.Visibility = Visibility.Collapsed;
             cmbUsername.Text = "";
             date.Text = "";
@@ -219,10 +221,10 @@ namespace hospital.View.UserControls
                 else
                     btnRecTwo.Visibility = Visibility.Visible;
                 ObservableCollection<Appointment> apointments = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)newDate.SelectedDate, CurrentAppointment.doctorUsername,cmbUsername.Text);
-                ac.findFreeForward(apointments, txtNewTime.Text.Split(':')[0], txtNewTime.Text.Split(':')[1]);
-                ac.findFreeBack(apointments, txtNewTime.Text.Split(':')[0], txtNewTime.Text.Split(':')[1]);
-                btnRecOne.Content = "Doctor: " + dc.GetByUsername(ac.RecommendedOne.doctorUsername) + "\n" + ac.RecommendedOne.StartTime;
-                btnRecTwo.Content = "Doctor: " + dc.GetByUsername(ac.RecommendedTwo.doctorUsername) + "\n" + ac.RecommendedTwo.StartTime;
+                rc.findFreeForward(apointments, txtNewTime.Text.Split(':')[0], txtNewTime.Text.Split(':')[1]);
+                rc.findFreeBack(apointments, txtNewTime.Text.Split(':')[0], txtNewTime.Text.Split(':')[1]);
+                btnRecOne.Content = "Doctor: " + dc.GetByUsername(rc.RecommendedOne.doctorUsername) + "\n" + rc.RecommendedOne.StartTime;
+                btnRecTwo.Content = "Doctor: " + dc.GetByUsername(rc.RecommendedTwo.doctorUsername) + "\n" + rc.RecommendedTwo.StartTime;
             }
         }
 
@@ -273,7 +275,7 @@ namespace hospital.View.UserControls
 
                             if (canMake)
                             {
-                                sucess = ac.tryChangeAppointment(appointment, (DateTime)newDate.SelectedDate, txtNewTime.Text);
+                                sucess = rc.tryChangeAppointment(appointment, (DateTime)newDate.SelectedDate, txtNewTime.Text);
                                 if (sucess)
                                 {
                                     notifier.ShowSuccess("Appointment has been moved successfully.");

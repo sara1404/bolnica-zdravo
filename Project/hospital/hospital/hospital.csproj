@@ -102,6 +102,7 @@
     <Compile Include="Controller\MedicineController.cs" />
     <Compile Include="Controller\NotificationController.cs" />
     <Compile Include="Controller\OrderController.cs" />
+    <Compile Include="Controller\RecommendedAppointmentController.cs" />
     <Compile Include="Controller\ScheduledAdvancedRenovationController.cs" />
     <Compile Include="Controller\PollController.cs" />
     <Compile Include="Controller\ScheduledBasicRenovationController.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Service\OrderService.cs" />
     <Compile Include="Service\PatientService.cs" />
     <Compile Include="Service\PollService.cs" />
+    <Compile Include="Service\RecommendedAppointmentService.cs" />
     <Compile Include="Service\RoomService.cs" />
     <Compile Include="Service\ScheduledAdvancedRenovationService.cs" />
     <Compile Include="Service\ScheduledBasicRenovationService.cs" />

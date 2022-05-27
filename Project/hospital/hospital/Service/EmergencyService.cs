@@ -18,13 +18,15 @@ namespace Service
         private readonly DoctorService doctorService;
         private readonly RoomService _roomService;
         private EmergencyDTO _emergencyDTO;
+        private RecommendedAppointmentService _recommendedAppointmentService;
 
-        public EmergencyService(AppointmentService appointmentService, NotificationRepository notificationRepository, DoctorService doctorService, RoomService roomService)
+        public EmergencyService(AppointmentService appointmentService, NotificationRepository notificationRepository, DoctorService doctorService, RoomService roomService, RecommendedAppointmentService rc)
         {
             this._notificationRepository = notificationRepository;
             this.doctorService = doctorService;
             this._roomService = roomService;
             this._appointmentService = appointmentService;
+            this._recommendedAppointmentService = rc;
         }
 
 
@@ -179,7 +181,7 @@ namespace Service
             {
                 if (delayAppointment.StartTime < appointment.StartTime)
                 {
-                    _appointmentService.RecommendedOne = appointment;
+                    _recommendedAppointmentService.RecommendedOne = appointment;
                     return;
                 }
             }
@@ -194,7 +196,7 @@ namespace Service
             foreach (Appointment appointment in FindAppointmentsForCancelation())
             {
                 FindNewSuggestedAppointment(appointment);
-                suggestionAppointments.Add(_appointmentService.RecommendedOne);
+                suggestionAppointments.Add(_recommendedAppointmentService.RecommendedOne);
             }
             return suggestionAppointments;
 

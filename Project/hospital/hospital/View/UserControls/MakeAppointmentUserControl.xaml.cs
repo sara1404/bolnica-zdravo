@@ -31,6 +31,7 @@ namespace hospital.View.UserControls
         private DoctorController dc;
         private ScheduledBasicRenovationController sbrc;
         private RecommendedAppointmentController rc;
+        private AvailableAppointmentController aac;
         public ObservableCollection<Patient> Patients { get; set; }
         public ObservableCollection<Doctor> Doctors { get; set; }
         public MakeAppointmentUserControl()
@@ -43,6 +44,7 @@ namespace hospital.View.UserControls
             ac = app.appointmentController;
             dc = app.doctorController;
             sbrc = app.scheduledBasicRenovationController;
+            aac = app.availableAppointmentController;
             rc = app.recommendedAppointmentController;
             Patients = pc.FindAll();
             Doctors = dc.GetDoctors();
@@ -208,7 +210,7 @@ namespace hospital.View.UserControls
                         btnRecTwo.Visibility = Visibility.Collapsed;
                     else
                         btnRecTwo.Visibility = Visibility.Visible;
-                    ObservableCollection<Appointment> apointments = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)date.SelectedDate, ((Doctor)cmbDoctor.SelectedItem).Username,cmbUsername.Text);
+                    ObservableCollection<Appointment> apointments = aac.GetFreeAppointmentsByDateAndDoctor((DateTime)date.SelectedDate, ((Doctor)cmbDoctor.SelectedItem).Username,cmbUsername.Text);
                     rc.findFreeForward(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
                     rc.findFreeBack(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
                     btnRecOne.Content = "Doctor: " + dc.GetByUsername(rc.RecommendedOne.DoctorUsername) + "\n" + rc.RecommendedOne.StartTime;
@@ -220,7 +222,7 @@ namespace hospital.View.UserControls
                     notFree.Text = "";
                     btnRecOne.Visibility = Visibility.Visible;
                     btnRecTwo.Visibility = Visibility.Visible;
-                    ObservableCollection<Appointment> apointments = ac.GetFreeAppointmentsByDate((DateTime)date.SelectedDate,cmbUsername.Text);
+                    ObservableCollection<Appointment> apointments = aac.GetFreeAppointmentsByDate((DateTime)date.SelectedDate,cmbUsername.Text);
                     rc.findRecByTime(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
                     btnRecOne.Content = "Doctor: " + dc.GetByUsername(rc.RecommendedOne.DoctorUsername) + "\n" + rc.RecommendedOne.StartTime;
                     btnRecTwo.Content = "Doctor: " + dc.GetByUsername(rc.RecommendedTwo.DoctorUsername) + "\n" + rc.RecommendedTwo.StartTime;

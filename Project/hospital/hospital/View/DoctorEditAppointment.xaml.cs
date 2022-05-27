@@ -27,6 +27,7 @@ namespace hospital.View
         private AppointmentController ac;
         private RoomController rc;
         private ScheduledBasicRenovationController sbrc;
+        private AvailableAppointmentController aac;
 
         private Appointment selectedAppointment;
         public DoctorEditAppointment()
@@ -35,6 +36,7 @@ namespace hospital.View
             App app = Application.Current as App;
             ac = app.appointmentController;
             rc = app.roomController;
+            aac = app.availableAppointmentController;
             sbrc = app.scheduledBasicRenovationController;
             this.DataContext = this;
             foreach (Window window in Application.Current.Windows)
@@ -62,7 +64,7 @@ namespace hospital.View
         {
             if (date.SelectedDate != null)
             {
-                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)date.SelectedDate, selectedAppointment.DoctorUsername, tbPatient.Text);
+                appointmentTable.ItemsSource = aac.GetFreeAppointmentsByDateAndDoctor((DateTime)date.SelectedDate, selectedAppointment.DoctorUsername, tbPatient.Text);
             }
         }
 

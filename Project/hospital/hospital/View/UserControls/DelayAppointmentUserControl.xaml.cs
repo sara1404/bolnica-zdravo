@@ -35,6 +35,7 @@ namespace hospital.View.UserControls
         private NotificationController nc;
         private ScheduledBasicRenovationController sbrc;
         private RecommendedAppointmentController rc;
+        private AvailableAppointmentController aac;
         public ObservableCollection<Patient> Patients { get; set; }
         public ObservableCollection<Doctor> Doctors { get; set; }
         public DelayAppointmentUserControl()
@@ -50,6 +51,7 @@ namespace hospital.View.UserControls
             ac = app.appointmentController;
             dc = app.doctorController;
             rc = app.recommendedAppointmentController;
+            aac = app.availableAppointmentController;
             Patients = pc.FindAll();
             Doctors = dc.GetDoctors();
         }
@@ -220,7 +222,7 @@ namespace hospital.View.UserControls
                     btnRecTwo.Visibility = Visibility.Collapsed;
                 else
                     btnRecTwo.Visibility = Visibility.Visible;
-                ObservableCollection<Appointment> apointments = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)newDate.SelectedDate, CurrentAppointment.DoctorUsername,cmbUsername.Text);
+                ObservableCollection<Appointment> apointments = aac.GetFreeAppointmentsByDateAndDoctor((DateTime)newDate.SelectedDate, CurrentAppointment.DoctorUsername,cmbUsername.Text);
                 rc.findFreeForward(apointments, txtNewTime.Text.Split(':')[0], txtNewTime.Text.Split(':')[1]);
                 rc.findFreeBack(apointments, txtNewTime.Text.Split(':')[0], txtNewTime.Text.Split(':')[1]);
                 btnRecOne.Content = "Doctor: " + dc.GetByUsername(rc.RecommendedOne.DoctorUsername) + "\n" + rc.RecommendedOne.StartTime;

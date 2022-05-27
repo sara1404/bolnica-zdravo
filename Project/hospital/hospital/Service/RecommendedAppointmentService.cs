@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Repository;
 using Model;
 using System.Collections.ObjectModel;
+using hospital.Service;
 
 namespace Service
 {
@@ -14,56 +15,30 @@ namespace Service
         private readonly AppointmentService _appointmentService;
         private readonly NotificationRepository _notificationRepository;
         private readonly DoctorRepository _doctorRepository;
+        private readonly AvailableAppointmentService _availableAppointmentService;
 
-
-        public RecommendedAppointmentService(AppointmentService appointmentService, NotificationRepository notificationRepository, DoctorRepository doctorRepository)
+        public RecommendedAppointmentService(AppointmentService appointmentService, NotificationRepository notificationRepository, DoctorRepository doctorRepository, AvailableAppointmentService availableAppointmentService)
         {
             _notificationRepository = notificationRepository;
             _appointmentService = appointmentService;
             _doctorRepository = doctorRepository;
+            _availableAppointmentService = availableAppointmentService;
         }
 
         public ObservableCollection<Appointment> GetRecommendedByDoctor(DateTime startDate, DateTime endDate, Doctor doctor, string patientUsername)
         {
             List<DateTime> startTimes = ConvertAppointmentsToStartTimes(_appointmentService.GetByDoctor(doctor.Username));
             startTimes.AddRange(ConvertAppointmentsToStartTimes(_appointmentService.GetByPatient(patientUsername)));
-            
-            // take all of the appointments of chosen doctor
-            /*foreach (Appointment a in _appointmentService.GetByDoctor(doctor.Username))
-            {
-                startTimes.Add(a.StartTime);
-            }*/
-
             List<DateTime> allTimeSlots = AddTimeSlots(startDate, endDate);
-
-            // remove that doctors appointments from all possible appointments
-            /*foreach (DateTime time in startTimes)
-            {
-                allTimeSlots.Remove(time);
-            }*/
             allTimeSlots.RemoveAll(x => startTimes.Contains(x));
-
             if (allTimeSlots.Count == 0)
             {
                 allTimeSlots.AddRange(ExpandDoctorTimeframePre(startDate));
                 allTimeSlots.AddRange(ExpandDoctorTimeframePost(endDate));
             }
-            // add patients appointments to the start times
-            /*foreach (Appointment a in _appointmentService.GetByPatient(username))
-            {
-                startTimes.Add(a.StartTime);
-            }*/
             startTimes.AddRange(ConvertAppointmentsToStartTimes(_appointmentService.GetByPatient(patientUsername)));
-
-            // remove all taken timeslots
-            /*foreach (DateTime time in startTimes)
-            {
-                allTimeSlots.Remove(time);
-            }*/
             allTimeSlots.RemoveAll(x => startTimes.Contains(x));
-
             ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
-            // offer the patient all found appointments
             foreach (DateTime time in allTimeSlots)
             {
                 retVal.Add(new Appointment(-1, doctor.Username, patientUsername, time));
@@ -74,38 +49,10 @@ namespace Service
         public ObservableCollection<Appointment> GetRecommendedByDate(DateTime startDate, DateTime endDate, Doctor doctor, string patientUsername)
         {
             List<DateTime> startTimes = ConvertAppointmentsToStartTimes(_appointmentService.GetByPatient(patientUsername));
-
-            // take all of the patients appointments
-            /*foreach (Appointment a in appointmentRepository.FindAll())
-            {
-                if (a.patientUsername.Equals(userController.CurentLoggedUser.Username))
-                {
-                    startTimes.Add(a.StartTime);
-                }
-            }*/
-            // add timeslots
             List<DateTime> allTimeSlots = AddTimeSlots(startDate, endDate);
-            /*for (DateTime dayIt = startDate; dayIt <= endDate; dayIt = dayIt.AddDays(1))
-            {
-                DateTime day = new DateTime(dayIt.Year, dayIt.Month, dayIt.Day, 7, 0, 0);
-                for (int i = 0; i < 24; i++)
-                {
-                    allTimeSlots.Add(day.AddMinutes(i * 30));
-                }
-            }*/
-
-
-            // remove the patients appointments from all timeslots
-            /*foreach (DateTime time in startTimes)
-            {
-                allTimeSlots.Remove(time);
-            }*/
-
             List<Appointment> appointments = new List<Appointment>();
-            // search all available timeslots
             foreach (DateTime time in allTimeSlots)
             {
-                // look for every doctor 
                 foreach (Doctor d in _doctorRepository.FindAll())
                 {
                     if (!DoctorHasAppointment(d, time))
@@ -114,10 +61,7 @@ namespace Service
                     }
                 }
             } 
-            
-            // if the doctor that we asked for has available appointments than we will remove all other doctors
             if (FoundDefaultDoctorsAppointment(allTimeSlots, doctor)) appointments.RemoveAll(x => !x.DoctorUsername.Equals(doctor.Username));
-
             return new ObservableCollection<Appointment>(appointments);
         }
 
@@ -203,7 +147,7 @@ namespace Service
 
         public bool tryMakeAppointment(string _hours, string _minuts, string patientUsername, string roomId, DateTime date, Doctor doctor)
         {
-            ObservableCollection<Appointment> apointments = _appointmentService.GetFreeAppointmentsByDateAndDoctor(date, doctor.Username, patientUsername);
+            ObservableCollection<Appointment> apointments = _availableAppointmentService.GetFreeAppointmentsByDateAndDoctor(date, doctor.Username, patientUsername);
             for (int i = 0; i < apointments.Count; i++)
             {
                 string time = (apointments[i]).StartTime.ToString();
@@ -323,7 +267,7 @@ namespace Service
         public bool tryChangeAppointment(Appointment oldAppointment, DateTime newDate, string newTime)
         {
             //svi SLOBODNi pregledi tog dana za tog doktora
-            ObservableCollection<Appointment> appointments = _appointmentService.GetFreeAppointmentsByDateAndDoctor(newDate, oldAppointment.DoctorUsername, oldAppointment.PatientUsername);
+            ObservableCollection<Appointment> appointments = _availableAppointmentService.GetFreeAppointmentsByDateAndDoctor(newDate, oldAppointment.DoctorUsername, oldAppointment.PatientUsername);
             //zeljeno vreme
             string newHours = newTime.Split(':')[0];
             string newMinuts = newTime.Split(':')[1];

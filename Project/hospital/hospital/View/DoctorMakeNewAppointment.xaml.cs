@@ -29,6 +29,7 @@ namespace hospital.View.UserControls
         private RoomController rc;
         private UserController uc;
         private ScheduledBasicRenovationController sbrc;
+        private AvailableAppointmentController aac;
 
         public Doctor loggedInDoctor;
         public Patient selectedPatient;
@@ -41,6 +42,8 @@ namespace hospital.View.UserControls
             pc = app.patientController;
             rc = app.roomController;
             uc = app.userController;
+            aac = app.availableAppointmentController;
+
             sbrc = app.scheduledBasicRenovationController;
             
             cmbPatients.ItemsSource = pc.FindAll();
@@ -57,13 +60,13 @@ namespace hospital.View.UserControls
             {
                 this.DataContext = this;
                 selectedPatient = (Patient)cmbPatients.SelectedItem;
-                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDoctor(loggedInDoctor.Username);
+                appointmentTable.ItemsSource = aac.GetFreeAppointmentsByDoctor(loggedInDoctor.Username, "");
             }
             if (cmbPatients.SelectedIndex != -1 && date.SelectedDate != null)
             {
                 DateTime selectedDate = (DateTime)date.SelectedDate;
                 selectedPatient = (Patient)cmbPatients.SelectedItem;
-                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor(selectedDate, loggedInDoctor.Username, cmbPatients.Text);
+                appointmentTable.ItemsSource = aac.GetFreeAppointmentsByDateAndDoctor(selectedDate, loggedInDoctor.Username, cmbPatients.Text);
             }
         }
 

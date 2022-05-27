@@ -8,25 +8,28 @@ using Model;
 using System.Collections.ObjectModel;
 using Repository;
 using DTO;
+using hospital.Service;
 
 namespace Service
 {
     public class EmergencyService
     {
         private readonly AppointmentService _appointmentService;
+        private readonly AvailableAppointmentService _availableAppointmentService;
         private readonly NotificationRepository _notificationRepository;
         private readonly DoctorService doctorService;
         private readonly RoomService _roomService;
         private EmergencyDTO _emergencyDTO;
         private RecommendedAppointmentService _recommendedAppointmentService;
 
-        public EmergencyService(AppointmentService appointmentService, NotificationRepository notificationRepository, DoctorService doctorService, RoomService roomService, RecommendedAppointmentService rc)
+        public EmergencyService(AppointmentService appointmentService, NotificationRepository notificationRepository, DoctorService doctorService, RoomService roomService, RecommendedAppointmentService rc, AvailableAppointmentService availableAppointmentService)
         {
             this._notificationRepository = notificationRepository;
             this.doctorService = doctorService;
             this._roomService = roomService;
             this._appointmentService = appointmentService;
             this._recommendedAppointmentService = rc;
+            _availableAppointmentService = availableAppointmentService;
         }
 
 
@@ -74,7 +77,7 @@ namespace Service
         private ObservableCollection<Appointment> FindAvailableAppointmentsNextTwoHours(List<Doctor> requiredDoctor, string patientUsername)
         {
             ObservableCollection<Appointment> availableAppointment = new ObservableCollection<Appointment>();
-            ObservableCollection<Appointment> allAvailableAppointmenToday = _appointmentService.GetFreeAppointmentsByDate(DateTime.Now, patientUsername);
+            ObservableCollection<Appointment> allAvailableAppointmenToday = _availableAppointmentService.GetFreeAppointmentsByDate(DateTime.Now, patientUsername);
 
             foreach (Appointment appointment in allAvailableAppointmenToday)
             {
@@ -176,7 +179,7 @@ namespace Service
 
         private void FindNewSuggestedAppointment(Appointment delayAppointment)
         {
-            ObservableCollection<Appointment> allFreeAppointment = _appointmentService.GetFreeAppointmentsByDateAndDoctor(delayAppointment.StartTime, delayAppointment.DoctorUsername, delayAppointment.PatientUsername);
+            ObservableCollection<Appointment> allFreeAppointment = _availableAppointmentService.GetFreeAppointmentsByDateAndDoctor(delayAppointment.StartTime, delayAppointment.DoctorUsername, delayAppointment.PatientUsername);
             foreach (Appointment appointment in allFreeAppointment)
             {
                 if (delayAppointment.StartTime < appointment.StartTime)

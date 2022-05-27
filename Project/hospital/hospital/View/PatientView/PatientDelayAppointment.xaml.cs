@@ -1,4 +1,5 @@
 ﻿using Controller;
+using hospital.Controller;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace hospital.View
         private PatientController pc;
         private Appointment selectedAppointment;
         private UserController uc;
+        private AvailableAppointmentController aac;
 
         public PatientDelayAppointment(Appointment a)
         {
@@ -36,6 +38,8 @@ namespace hospital.View
             uc = app.userController;
             ac = app.appointmentController;
             pc = app.patientController;
+            aac = app.availableAppointmentController;
+
             newDate.DisplayDateStart = DateTime.Now > selectedAppointment.StartTime.AddDays(-4) ? DateTime.Now : selectedAppointment.StartTime.AddDays(-4);
             newDate.DisplayDateEnd = selectedAppointment.StartTime.AddDays(4);
             DataContext = this;
@@ -45,7 +49,7 @@ namespace hospital.View
         {
             if (newDate.SelectedDate != null)
             {
-                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)newDate.SelectedDate, selectedAppointment.DoctorUsername,uc.CurentLoggedUser.Username);
+                appointmentTable.ItemsSource = aac.GetFreeAppointmentsByDateAndDoctor((DateTime)newDate.SelectedDate, selectedAppointment.DoctorUsername,uc.CurentLoggedUser.Username);
             }
         }
         public void LogoutUser()

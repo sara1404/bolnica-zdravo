@@ -1,4 +1,6 @@
 ﻿using Controller;
+using hospital.Controller;
+using hospital.Service;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -24,6 +26,7 @@ namespace hospital.View.PatientView
     {
         private AppointmentController ac;
         private RecommendedAppointmentController rac;
+        private AvailableAppointmentController aac;
         private UserController uc;
         private App app;
         public PatientMakeAppointmentFirst()
@@ -35,6 +38,7 @@ namespace hospital.View.PatientView
             uc = app.userController;
             ac = app.appointmentController;
             rac = app.recommendedAppointmentController;
+            aac = app.availableAppointmentController;
             DoctorController dc = app.doctorController;
             cbDoctor.ItemsSource = dc.GetDoctors();
         }
@@ -70,17 +74,17 @@ namespace hospital.View.PatientView
             else if (cbDoctor.SelectedIndex != -1 && dateFrom.SelectedDate == null && !priorityDoctor && !priorityDate)
             {
                 Doctor d = (Doctor)cbDoctor.SelectedItem;
-                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDoctor(d.Username);
+                appointmentTable.ItemsSource = aac.GetFreeAppointmentsByDoctor(d.Username, uc.CurentLoggedUser.Username);
 
             }
             else if (cbDoctor.SelectedIndex == -1 && dateFrom.SelectedDate != null && !priorityDoctor && !priorityDate)
             {
-                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDate((DateTime)dateFrom.SelectedDate, uc.CurentLoggedUser.Username);
+                appointmentTable.ItemsSource = aac.GetFreeAppointmentsByDate((DateTime)dateFrom.SelectedDate, uc.CurentLoggedUser.Username);
             }
             else if (cbDoctor.SelectedIndex != -1 && dateFrom.SelectedDate != null && !priorityDoctor && !priorityDate)
             {
                 Doctor d = (Doctor)cbDoctor.SelectedItem;
-                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)dateFrom.SelectedDate, d.Username, uc.CurentLoggedUser.Username);
+                appointmentTable.ItemsSource = aac.GetFreeAppointmentsByDateAndDoctor((DateTime)dateFrom.SelectedDate, d.Username, uc.CurentLoggedUser.Username);
             }
         }
 

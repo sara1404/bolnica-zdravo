@@ -50,7 +50,7 @@ namespace Service
             }
             foreach (Appointment a in appointmentRepository.FindAll())
             {
-                if (a.patientUsername.Equals("peromir"))
+                if (a.PatientUsername.Equals("peromir"))
                 {
                     startTimes.Add(a.StartTime);
                 }
@@ -114,9 +114,9 @@ namespace Service
             {
                 foreach (Appointment a in appointmentRepository.FindAll())
                 {
-                    if (a.patientUsername.Equals(patientUsername))
+                    if (a.PatientUsername.Equals(patientUsername))
                     {
-                        if(appointment.StartTime == a.StartTime && appointment.patientUsername.Equals(patientUsername)){
+                        if(appointment.StartTime == a.StartTime && appointment.PatientUsername.Equals(patientUsername)){
                             retVal.Remove(appointment);
                         }
                     }
@@ -146,7 +146,7 @@ namespace Service
             }
             foreach (Appointment a in appointmentRepository.FindAll())
             {
-                if (a.patientUsername.Equals(patientUsername))
+                if (a.PatientUsername.Equals(patientUsername))
                 {
                     startTimes.Add(a.StartTime);
                 }
@@ -179,7 +179,7 @@ namespace Service
             newAppointment.Id = oldAppointment.Id;
             newAppointment.DoctorUsername = oldAppointment.DoctorUsername;
             newAppointment.PatientUsername = oldAppointment.PatientUsername;
-            newAppointment.roomId = oldAppointment.roomId;
+            newAppointment.RoomId = oldAppointment.RoomId;
             appointmentRepository.AddAppointment(newAppointment);
         }
 
@@ -188,7 +188,6 @@ namespace Service
             return appointmentRepository.FindAll();
         }
 
-        // do not delete or change this method because it is used in GetRecommendedAppointments
         public ObservableCollection<Appointment> GetByDoctor(string username)
         {
             if(appointmentRepository.FindAll() == null)
@@ -221,17 +220,5 @@ namespace Service
             return retVal;
         }
 
-        public ObservableCollection<Appointment> GetByDoctorSpecialization(Specialization specialization)
-        {
-            ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
-            foreach (Appointment a in appointmentRepository.FindAll())
-            {
-                if (doctorRepository.FindByUsername(a.doctorUsername).Specialization == specialization)
-                {
-                    retVal.Add(a);
-                }
-            }
-            return retVal;
-        }
     }
 }

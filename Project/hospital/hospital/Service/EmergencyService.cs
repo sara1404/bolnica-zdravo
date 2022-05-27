@@ -40,7 +40,7 @@ namespace Service
             {
                 Console.WriteLine(ex.ToString());
             }
-            MakeNotification(oldAppointment.PatientUsername,oldAppointment.doctorUsername);
+            MakeNotification(oldAppointment.PatientUsername,oldAppointment.DoctorUsername);
         }
 
         public List<DateTime> MakeTimeSlotsNextTwoHours()
@@ -94,7 +94,7 @@ namespace Service
             {
                 if (appointment.StartTime == dateTime)
                 {
-                    appointment.roomId = doctorService.GetByUsername(appointment.doctorUsername).OrdinationId;
+                    appointment.RoomId = doctorService.GetByUsername(appointment.DoctorUsername).OrdinationId;
                     return appointment;
                 }
             }
@@ -114,7 +114,7 @@ namespace Service
                 {
                     app.RoomId = _roomService.FindRoomForOperationByTime(app.StartTime).id;
                     _appointmentService.Create(app);
-                    MakeNotification(app.patientUsername, app.doctorUsername);
+                    MakeNotification(app.PatientUsername, app.DoctorUsername);
                     return;
                 }
             }
@@ -139,7 +139,7 @@ namespace Service
             else
             {
                 _appointmentService.Create(availableAppointment[0]);
-                MakeNotification(patientUsername, availableAppointment[0].doctorUsername);
+                MakeNotification(patientUsername, availableAppointment[0].DoctorUsername);
             }
         }
         private void MakeNotification(string patientUsername,string doctorUsername)
@@ -176,7 +176,7 @@ namespace Service
 
         private void FindNewSuggestedAppointment(Appointment delayAppointment)
         {
-            ObservableCollection<Appointment> allFreeAppointment = _appointmentService.GetFreeAppointmentsByDateAndDoctor(delayAppointment.StartTime, delayAppointment.doctorUsername, delayAppointment.patientUsername);
+            ObservableCollection<Appointment> allFreeAppointment = _appointmentService.GetFreeAppointmentsByDateAndDoctor(delayAppointment.StartTime, delayAppointment.DoctorUsername, delayAppointment.PatientUsername);
             foreach (Appointment appointment in allFreeAppointment)
             {
                 if (delayAppointment.StartTime < appointment.StartTime)

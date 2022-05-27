@@ -212,8 +212,8 @@ namespace Service
                 string minuts = time.Split(':')[1];
                 if (_hours.Equals(hours) && _minuts.Equals(minuts))
                 {
-                    (apointments[i]).patientUsername = patientUsername;
-                    (apointments[i]).roomId = roomId;
+                    (apointments[i]).PatientUsername = patientUsername;
+                    (apointments[i]).RoomId = roomId;
                     _appointmentService.Create(apointments[i]);
                     return true;
                 }
@@ -292,7 +292,7 @@ namespace Service
             bool oneRecFilled = false;
             foreach (Appointment item in apointments)
             {
-                Console.WriteLine(item.doctorUsername + " " + item.StartTime);
+                Console.WriteLine(item.DoctorUsername + " " + item.StartTime);
             }
             foreach (Appointment appointment in apointments)
             {
@@ -323,7 +323,7 @@ namespace Service
         public bool tryChangeAppointment(Appointment oldAppointment, DateTime newDate, string newTime)
         {
             //svi SLOBODNi pregledi tog dana za tog doktora
-            ObservableCollection<Appointment> appointments = _appointmentService.GetFreeAppointmentsByDateAndDoctor(newDate, oldAppointment.doctorUsername, oldAppointment.patientUsername);
+            ObservableCollection<Appointment> appointments = _appointmentService.GetFreeAppointmentsByDateAndDoctor(newDate, oldAppointment.DoctorUsername, oldAppointment.PatientUsername);
             //zeljeno vreme
             string newHours = newTime.Split(':')[0];
             string newMinuts = newTime.Split(':')[1];
@@ -336,10 +336,10 @@ namespace Service
                 if (newHours.Equals(hours) && newMinuts.Equals(minuts))
                 {
                     Appointment newAppointmet = appointments[i];
-                    newAppointmet.patientUsername = oldAppointment.patientUsername;
+                    newAppointmet.PatientUsername = oldAppointment.PatientUsername;
                     _appointmentService.Update(oldAppointment, newAppointmet);
                     _notificationRepository.Create(new Notification(oldAppointment.PatientUsername));
-                    _notificationRepository.Create(new Notification(oldAppointment.doctorUsername));
+                    _notificationRepository.Create(new Notification(oldAppointment.DoctorUsername));
                     return true;
                 }
             }

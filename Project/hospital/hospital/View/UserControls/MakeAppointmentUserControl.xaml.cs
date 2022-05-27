@@ -211,8 +211,8 @@ namespace hospital.View.UserControls
                     ObservableCollection<Appointment> apointments = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)date.SelectedDate, ((Doctor)cmbDoctor.SelectedItem).Username,cmbUsername.Text);
                     rc.findFreeForward(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
                     rc.findFreeBack(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
-                    btnRecOne.Content = "Doctor: " + dc.GetByUsername(rc.RecommendedOne.doctorUsername) + "\n" + rc.RecommendedOne.StartTime;
-                    btnRecTwo.Content = "Doctor: " + dc.GetByUsername(rc.RecommendedTwo.doctorUsername) + "\n" + rc.RecommendedTwo.StartTime;
+                    btnRecOne.Content = "Doctor: " + dc.GetByUsername(rc.RecommendedOne.DoctorUsername) + "\n" + rc.RecommendedOne.StartTime;
+                    btnRecTwo.Content = "Doctor: " + dc.GetByUsername(rc.RecommendedTwo.DoctorUsername) + "\n" + rc.RecommendedTwo.StartTime;
                 }
                 else
                 {
@@ -222,8 +222,8 @@ namespace hospital.View.UserControls
                     btnRecTwo.Visibility = Visibility.Visible;
                     ObservableCollection<Appointment> apointments = ac.GetFreeAppointmentsByDate((DateTime)date.SelectedDate,cmbUsername.Text);
                     rc.findRecByTime(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
-                    btnRecOne.Content = "Doctor: " + dc.GetByUsername(rc.RecommendedOne.doctorUsername) + "\n" + rc.RecommendedOne.StartTime;
-                    btnRecTwo.Content = "Doctor: " + dc.GetByUsername(rc.RecommendedTwo.doctorUsername) + "\n" + rc.RecommendedTwo.StartTime;
+                    btnRecOne.Content = "Doctor: " + dc.GetByUsername(rc.RecommendedOne.DoctorUsername) + "\n" + rc.RecommendedOne.StartTime;
+                    btnRecTwo.Content = "Doctor: " + dc.GetByUsername(rc.RecommendedTwo.DoctorUsername) + "\n" + rc.RecommendedTwo.StartTime;
                 }
             }
         }

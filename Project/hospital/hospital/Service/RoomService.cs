@@ -86,7 +86,7 @@ namespace Service
                 bool isBussy = false;
                 foreach(Appointment appointment in _appointmentRepository.FindAll())
                 {
-                    if (dateTime == appointment.StartTime && appointment.roomId == room.id)
+                    if (dateTime == appointment.StartTime && appointment.RoomId == room.id)
                     {
                         isBussy = true;
                         break;

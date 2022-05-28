@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using Service;
+using hospital.DTO;
 
 namespace Controller
 {
@@ -63,7 +64,7 @@ namespace Controller
             return true;
         }
 
-        public Dictionary<DateTime, int> GetPopularTimes()
+        public List<ChartDataDTO> GetPopularTimes()
         {
             return appointmentService.GetPopularTimes();
         }

@@ -241,5 +241,10 @@ namespace hospital.View
                 }
             }
         }
+
+        private void btnGraph_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new PatientPopularTimes();
+        }
     }
 }

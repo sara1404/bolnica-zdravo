@@ -13,22 +13,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace hospital.View
+namespace hospital.View.PatientView
 {
     /// <summary>
-    /// Interaction logic for PatientDelayAppointment.xaml
+    /// Interaction logic for PatientDelayAppointmentPage.xaml
     /// </summary>
-    public partial class PatientDelayAppointment : Window
+    public partial class PatientDelayAppointmentPage : Page
     {
         private AppointmentController ac;
         private PatientController pc;
         private Appointment selectedAppointment;
         private UserController uc;
         private AvailableAppointmentController aac;
-
-        public PatientDelayAppointment(Appointment a)
+        public PatientDelayAppointmentPage(Appointment a)
         {
             InitializeComponent();
             selectedAppointment = a;
@@ -45,13 +45,6 @@ namespace hospital.View
             DataContext = this;
         }
 
-        private void btnShow_Click(object sender, RoutedEventArgs e)
-        {
-            if (newDate.SelectedDate != null)
-            {
-                appointmentTable.ItemsSource = aac.GetFreeAppointmentsByDateAndDoctor((DateTime)newDate.SelectedDate, selectedAppointment.DoctorUsername,uc.CurentLoggedUser.Username);
-            }
-        }
         public void LogoutUser()
         {
             uc.CurentLoggedUser = null;
@@ -66,9 +59,27 @@ namespace hospital.View
             }
         }
 
+        private void btnShow_Click(object sender, RoutedEventArgs e)
+        {
+            if (newDate.SelectedDate != null)
+            {
+                appointmentTable.ItemsSource = aac.GetFreeAppointmentsByDateAndDoctor((DateTime)newDate.SelectedDate, selectedAppointment.DoctorUsername, uc.CurentLoggedUser.Username);
+            }
+        }
+        private void GoToAppointmentsPage()
+        {
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(PatientHomeWindow))
+                {
+                    (window as PatientHomeWindow).Main.Content = new PatientAppointmentsPage();
+                }
+            }
+        }
+
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            if(appointmentTable.SelectedItem != null)
+            if (appointmentTable.SelectedItem != null)
             {
                 pc.AddDelayOrCancelAppointment(uc.CurentLoggedUser.Username);
                 if (pc.IsTroll(uc.CurentLoggedUser.Username))
@@ -77,7 +88,7 @@ namespace hospital.View
                     LogoutUser();
                 }
                 ac.UpdateAppointment(selectedAppointment, (Appointment)appointmentTable.SelectedItem);
-                Close();
+                GoToAppointmentsPage();
             }
         }
     }

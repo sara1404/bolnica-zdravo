@@ -62,5 +62,10 @@ namespace Controller
             appointmentService.Delete(id);
             return true;
         }
+
+        public Dictionary<DateTime, int> GetPopularTimes()
+        {
+            return appointmentService.GetPopularTimes();
+        }
     }
 }

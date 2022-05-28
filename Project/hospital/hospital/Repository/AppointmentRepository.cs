@@ -124,5 +124,22 @@ namespace Repository
             }
             return appointmentsInRoom;
         }
+
+        public Dictionary<DateTime, int> GetPopularTimes()
+        {
+            Dictionary<DateTime, int> retVal = new Dictionary<DateTime, int>();
+            foreach (Appointment a in appointments)
+            {
+                if (retVal.ContainsKey(a.StartTime))
+                {
+                    retVal[a.StartTime] = 1;
+                }
+                else
+                {
+                    retVal[a.StartTime] += 1;
+                }
+            }
+            return retVal;
+        }
     }
 }

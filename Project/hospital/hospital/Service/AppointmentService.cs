@@ -76,5 +76,10 @@ namespace Service
             }
             return retVal;
         }
+
+        public Dictionary<DateTime, int> GetPopularTimes()
+        {
+            return appointmentRepository.GetPopularTimes();
+        }
     }
 }

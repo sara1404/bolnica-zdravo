@@ -36,9 +36,9 @@ namespace Repository
             else
             {
                 int max = 0;
-                foreach(Appointment a in appointments)
+                foreach (Appointment a in appointments)
                 {
-                    if(a.Id > max)
+                    if (a.Id > max)
                     {
                         max = a.Id;
                     }
@@ -48,9 +48,9 @@ namespace Repository
         }
         public Appointment FindById(int id)
         {
-            foreach(Appointment a in appointments)
+            foreach (Appointment a in appointments)
             {
-                if(a.Id == id)
+                if (a.Id == id)
                 {
                     return a;
                 }
@@ -74,36 +74,6 @@ namespace Repository
             appointments.Add(_appointment);
             appointmentsFileHandler.Write(appointments.ToList());
         }
-
-        public void UpdateById(Appointment appointment, string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ObservableCollection<Appointment> Appointment
-        {
-            get
-            {
-                if (appointments == null)
-                {
-                    appointments = new ObservableCollection<Appointment>();
-                }
-
-                return appointments;
-            }
-            set
-            {
-                RemoveAllAppointment();
-                if (value != null)
-                {
-                    foreach (Model.Appointment oAppointment in value)
-                    {
-                        AddAppointment(oAppointment);
-                    }
-                }
-            }
-        }
-
 
         public void AddAppointment(Model.Appointment newAppointment)
         {
@@ -142,19 +112,13 @@ namespace Repository
             }
         }
 
-
-        public void RemoveAllAppointment()
+        public List<Appointment> FindAppointmentsForSpecifiedRoom(Room room)
         {
-            if (appointments != null)
-            {
-                appointments.Clear();
-            }
-        }
-
-        public List<Appointment> FindAppointmentsForSpecifiedRoom(Room room) {
             List<Appointment> appointmentsInRoom = new List<Appointment>();
-            foreach (Appointment appointment in appointments) {
-                if (appointment.RoomId.Equals(room.id)) {
+            foreach (Appointment appointment in appointments)
+            {
+                if (appointment.RoomId.Equals(room.id))
+                {
                     appointmentsInRoom.Add(appointment);
                 }
             }

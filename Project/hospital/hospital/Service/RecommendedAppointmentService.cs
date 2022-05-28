@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Repository;
 using Model;
 using System.Collections.ObjectModel;
+using hospital.Service;
 
 namespace Service
 {
@@ -13,18 +14,140 @@ namespace Service
     {
         private readonly AppointmentService _appointmentService;
         private readonly NotificationRepository _notificationRepository;
+        private readonly DoctorRepository _doctorRepository;
+        private readonly AvailableAppointmentService _availableAppointmentService;
 
-
-        public RecommendedAppointmentService(AppointmentService appointmentService, NotificationRepository notificationRepository)
+        public RecommendedAppointmentService(AppointmentService appointmentService, NotificationRepository notificationRepository, DoctorRepository doctorRepository, AvailableAppointmentService availableAppointmentService)
         {
-            this._notificationRepository = notificationRepository;
-            this._appointmentService = appointmentService;
+            _notificationRepository = notificationRepository;
+            _appointmentService = appointmentService;
+            _doctorRepository = doctorRepository;
+            _availableAppointmentService = availableAppointmentService;
         }
 
+        public ObservableCollection<Appointment> GetRecommendedByDoctor(DateTime startDate, DateTime endDate, Doctor doctor, string patientUsername)
+        {
+            List<DateTime> startTimes = ConvertAppointmentsToStartTimes(_appointmentService.GetByDoctor(doctor.Username));
+            startTimes.AddRange(ConvertAppointmentsToStartTimes(_appointmentService.GetByPatient(patientUsername)));
+            List<DateTime> allTimeSlots = AddTimeSlots(startDate, endDate);
+            allTimeSlots.RemoveAll(x => startTimes.Contains(x));
+            if (allTimeSlots.Count == 0)
+            {
+                allTimeSlots.AddRange(ExpandDoctorTimeframePre(startDate));
+                allTimeSlots.AddRange(ExpandDoctorTimeframePost(endDate));
+            }
+            startTimes.AddRange(ConvertAppointmentsToStartTimes(_appointmentService.GetByPatient(patientUsername)));
+            allTimeSlots.RemoveAll(x => startTimes.Contains(x));
+            ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
+            foreach (DateTime time in allTimeSlots)
+            {
+                retVal.Add(new Appointment(-1, doctor.Username, patientUsername, time));
+            }
+            return retVal;
+        }
+
+        public ObservableCollection<Appointment> GetRecommendedByDate(DateTime startDate, DateTime endDate, Doctor doctor, string patientUsername)
+        {
+            List<DateTime> startTimes = ConvertAppointmentsToStartTimes(_appointmentService.GetByPatient(patientUsername));
+            List<DateTime> allTimeSlots = AddTimeSlots(startDate, endDate);
+            List<Appointment> appointments = new List<Appointment>();
+            foreach (DateTime time in allTimeSlots)
+            {
+                foreach (Doctor d in _doctorRepository.FindAll())
+                {
+                    if (!DoctorHasAppointment(d, time))
+                    {
+                        appointments.Add(new Appointment(-1, d.Username, patientUsername, time));
+                    }
+                }
+            } 
+            if (FoundDefaultDoctorsAppointment(allTimeSlots, doctor)) appointments.RemoveAll(x => !x.DoctorUsername.Equals(doctor.Username));
+            return new ObservableCollection<Appointment>(appointments);
+        }
+
+        private bool FoundDefaultDoctorsAppointment(List<DateTime> allTimeSlots, Doctor doctor)
+        {
+            foreach (DateTime time in allTimeSlots)
+            {
+                foreach (Doctor d in _doctorRepository.FindAll())
+                {
+                    if (!DoctorHasAppointment(d, time))
+                    {
+                        if (d.Username.Equals(doctor.Username))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        private bool DoctorHasAppointment(Doctor d, DateTime time)
+        {
+            foreach (Appointment a in _appointmentService.GetByDoctor(d.Username))
+            {
+                if (a.StartTime == time)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        private List<DateTime> ConvertAppointmentsToStartTimes(ObservableCollection<Appointment> appointments)
+        {
+            List<DateTime> startTimes = new List<DateTime>();
+            foreach (Appointment a in appointments)
+            {
+                startTimes.Add(a.StartTime);
+            }
+            return startTimes;
+        }
+        private List<DateTime> AddTimeSlots(DateTime startDate, DateTime endDate)
+        {
+            List<DateTime> allTimeSlots = new List<DateTime>();
+            for (DateTime dayIt = startDate; dayIt <= endDate; dayIt = dayIt.AddDays(1))
+            {
+                DateTime day = new DateTime(dayIt.Year, dayIt.Month, dayIt.Day, 7, 0, 0);
+                for (int i = 0; i < 24; i++)
+                {
+                    allTimeSlots.Add(day.AddMinutes(i * 30));
+                }
+            }
+            return allTimeSlots;
+        }
+        private List<DateTime> ExpandDoctorTimeframePre(DateTime startDate)
+        {
+            List<DateTime> allTimeSlots = new List<DateTime>();
+            DateTime startDatePrev = startDate.CompareTo(DateTime.Today.AddDays(-4)) < 0 ? DateTime.Today.AddDays(1) : startDate.AddDays(-4);
+            for (DateTime dayIt = startDatePrev; dayIt <= startDate; dayIt = dayIt.AddDays(1))
+            {
+                DateTime day = new DateTime(dayIt.Year, dayIt.Month, dayIt.Day, 7, 0, 0);
+                for (int i = 0; i < 24; i++)
+                {
+                    allTimeSlots.Add(day.AddMinutes(i * 30));
+                }
+            }
+            return allTimeSlots;
+        }
+
+        private List<DateTime> ExpandDoctorTimeframePost(DateTime endDate)
+        {
+            List<DateTime> allTimeSlots = new List<DateTime>();
+            for (DateTime dayIt = endDate; dayIt <= endDate.AddDays(4); dayIt = dayIt.AddDays(1))
+            {
+                DateTime day = new DateTime(dayIt.Year, dayIt.Month, dayIt.Day, 7, 0, 0);
+                for (int i = 0; i < 24; i++)
+                {
+                    allTimeSlots.Add(day.AddMinutes(i * 30));
+                }
+            }
+            return allTimeSlots;
+        }
 
         public bool tryMakeAppointment(string _hours, string _minuts, string patientUsername, string roomId, DateTime date, Doctor doctor)
         {
-            ObservableCollection<Appointment> apointments = _appointmentService.GetFreeAppointmentsByDateAndDoctor(date, doctor.Username, patientUsername);
+            ObservableCollection<Appointment> apointments = _availableAppointmentService.GetFreeAppointmentsByDateAndDoctor(date, doctor.Username, patientUsername);
             for (int i = 0; i < apointments.Count; i++)
             {
                 string time = (apointments[i]).StartTime.ToString();
@@ -33,8 +156,8 @@ namespace Service
                 string minuts = time.Split(':')[1];
                 if (_hours.Equals(hours) && _minuts.Equals(minuts))
                 {
-                    (apointments[i]).patientUsername = patientUsername;
-                    (apointments[i]).roomId = roomId;
+                    (apointments[i]).PatientUsername = patientUsername;
+                    (apointments[i]).RoomId = roomId;
                     _appointmentService.Create(apointments[i]);
                     return true;
                 }
@@ -113,7 +236,7 @@ namespace Service
             bool oneRecFilled = false;
             foreach (Appointment item in apointments)
             {
-                Console.WriteLine(item.doctorUsername + " " + item.StartTime);
+                Console.WriteLine(item.DoctorUsername + " " + item.StartTime);
             }
             foreach (Appointment appointment in apointments)
             {
@@ -144,7 +267,7 @@ namespace Service
         public bool tryChangeAppointment(Appointment oldAppointment, DateTime newDate, string newTime)
         {
             //svi SLOBODNi pregledi tog dana za tog doktora
-            ObservableCollection<Appointment> appointments = _appointmentService.GetFreeAppointmentsByDateAndDoctor(newDate, oldAppointment.doctorUsername, oldAppointment.patientUsername);
+            ObservableCollection<Appointment> appointments = _availableAppointmentService.GetFreeAppointmentsByDateAndDoctor(newDate, oldAppointment.DoctorUsername, oldAppointment.PatientUsername);
             //zeljeno vreme
             string newHours = newTime.Split(':')[0];
             string newMinuts = newTime.Split(':')[1];
@@ -157,10 +280,10 @@ namespace Service
                 if (newHours.Equals(hours) && newMinuts.Equals(minuts))
                 {
                     Appointment newAppointmet = appointments[i];
-                    newAppointmet.patientUsername = oldAppointment.patientUsername;
+                    newAppointmet.PatientUsername = oldAppointment.PatientUsername;
                     _appointmentService.Update(oldAppointment, newAppointmet);
                     _notificationRepository.Create(new Notification(oldAppointment.PatientUsername));
-                    _notificationRepository.Create(new Notification(oldAppointment.doctorUsername));
+                    _notificationRepository.Create(new Notification(oldAppointment.DoctorUsername));
                     return true;
                 }
             }

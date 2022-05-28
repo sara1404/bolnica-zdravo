@@ -8,25 +8,28 @@ using Model;
 using System.Collections.ObjectModel;
 using Repository;
 using DTO;
+using hospital.Service;
 
 namespace Service
 {
     public class EmergencyService
     {
         private readonly AppointmentService _appointmentService;
+        private readonly AvailableAppointmentService _availableAppointmentService;
         private readonly NotificationRepository _notificationRepository;
         private readonly DoctorService doctorService;
         private readonly RoomService _roomService;
         private EmergencyDTO _emergencyDTO;
         private RecommendedAppointmentService _recommendedAppointmentService;
 
-        public EmergencyService(AppointmentService appointmentService, NotificationRepository notificationRepository, DoctorService doctorService, RoomService roomService, RecommendedAppointmentService rc)
+        public EmergencyService(AppointmentService appointmentService, NotificationRepository notificationRepository, DoctorService doctorService, RoomService roomService, RecommendedAppointmentService rc, AvailableAppointmentService availableAppointmentService)
         {
             this._notificationRepository = notificationRepository;
             this.doctorService = doctorService;
             this._roomService = roomService;
             this._appointmentService = appointmentService;
             this._recommendedAppointmentService = rc;
+            _availableAppointmentService = availableAppointmentService;
         }
 
 
@@ -40,7 +43,7 @@ namespace Service
             {
                 Console.WriteLine(ex.ToString());
             }
-            MakeNotification(oldAppointment.PatientUsername,oldAppointment.doctorUsername);
+            MakeNotification(oldAppointment.PatientUsername,oldAppointment.DoctorUsername);
         }
 
         public List<DateTime> MakeTimeSlotsNextTwoHours()
@@ -74,7 +77,7 @@ namespace Service
         private ObservableCollection<Appointment> FindAvailableAppointmentsNextTwoHours(List<Doctor> requiredDoctor, string patientUsername)
         {
             ObservableCollection<Appointment> availableAppointment = new ObservableCollection<Appointment>();
-            ObservableCollection<Appointment> allAvailableAppointmenToday = _appointmentService.GetFreeAppointmentsByDate(DateTime.Now, patientUsername);
+            ObservableCollection<Appointment> allAvailableAppointmenToday = _availableAppointmentService.GetFreeAppointmentsByDate(DateTime.Now, patientUsername);
 
             foreach (Appointment appointment in allAvailableAppointmenToday)
             {
@@ -94,7 +97,7 @@ namespace Service
             {
                 if (appointment.StartTime == dateTime)
                 {
-                    appointment.roomId = doctorService.GetByUsername(appointment.doctorUsername).OrdinationId;
+                    appointment.RoomId = doctorService.GetByUsername(appointment.DoctorUsername).OrdinationId;
                     return appointment;
                 }
             }
@@ -114,7 +117,7 @@ namespace Service
                 {
                     app.RoomId = _roomService.FindRoomForOperationByTime(app.StartTime).id;
                     _appointmentService.Create(app);
-                    MakeNotification(app.patientUsername, app.doctorUsername);
+                    MakeNotification(app.PatientUsername, app.DoctorUsername);
                     return;
                 }
             }
@@ -139,7 +142,7 @@ namespace Service
             else
             {
                 _appointmentService.Create(availableAppointment[0]);
-                MakeNotification(patientUsername, availableAppointment[0].doctorUsername);
+                MakeNotification(patientUsername, availableAppointment[0].DoctorUsername);
             }
         }
         private void MakeNotification(string patientUsername,string doctorUsername)
@@ -176,7 +179,7 @@ namespace Service
 
         private void FindNewSuggestedAppointment(Appointment delayAppointment)
         {
-            ObservableCollection<Appointment> allFreeAppointment = _appointmentService.GetFreeAppointmentsByDateAndDoctor(delayAppointment.StartTime, delayAppointment.doctorUsername, delayAppointment.patientUsername);
+            ObservableCollection<Appointment> allFreeAppointment = _availableAppointmentService.GetFreeAppointmentsByDateAndDoctor(delayAppointment.StartTime, delayAppointment.DoctorUsername, delayAppointment.PatientUsername);
             foreach (Appointment appointment in allFreeAppointment)
             {
                 if (delayAppointment.StartTime < appointment.StartTime)

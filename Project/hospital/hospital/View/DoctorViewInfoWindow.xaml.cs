@@ -38,7 +38,7 @@ namespace hospital.View
                 if (window.GetType() == typeof(DoctorAppointmentsWindow))
                 {
                     selectedAppointment = (window as DoctorAppointmentsWindow).Table.SelectedItem as Appointment;
-                    selectedPatient = pc.FindById(selectedAppointment.patientUsername);
+                    selectedPatient = pc.FindById(selectedAppointment.PatientUsername);
                     selectedMedicalRecord = mrc.FindById(selectedPatient.RecordId);
                     lbFirstName.Content = selectedPatient.FirstName;
                     lbLastName.Content = selectedPatient.LastName;

@@ -42,9 +42,9 @@ namespace hospital.Repository
         public List<PollBlueprint> GetHospitalPollResults()
         {
             List<PollBlueprint> retVal = new List<PollBlueprint>();
-            foreach(PollBlueprint poll in pollResults)
+            foreach (PollBlueprint poll in pollResults)
             {
-                if(poll.Type == PollType.HOSPITAL_POLL)
+                if (poll.Type == PollType.HOSPITAL_POLL)
                 {
                     retVal.Add(poll);
                 }

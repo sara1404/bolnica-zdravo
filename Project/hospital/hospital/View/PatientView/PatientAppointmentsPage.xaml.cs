@@ -96,7 +96,7 @@ namespace hospital.View
                     pc.BlockPatient(uc.CurentLoggedUser.Username);
                     LogoutUser();
                 }
-                ac.DeleteAppointment(Convert.ToInt32(appointmentTable.SelectedItem.ToString()));
+                ac.DeleteAppointment((appointmentTable.SelectedItem as Appointment).Id);
             }
         }
 

@@ -8,18 +8,18 @@ namespace hospital.Model
 {
     public class PollCategory
     {
-        private int id;
-        private string name;
-        private List<PollQuestion> pollQuestions;
+        private int _id;
+        private string _name;
+        private List<PollQuestion> _pollQuestions;
 
-        public PollCategory(int _id, string _name, List<PollQuestion> _pollQuestions)
+        public PollCategory(int id, string name, List<PollQuestion> pollQuestions)
         {
-            id = _id;
-            name = _name;
-            pollQuestions = _pollQuestions;
+            _id = id;
+            _name = name;
+            _pollQuestions = pollQuestions;
         }
-        public int Id { get => id; set => id = value; }
-        public string Name { get => name; set => name = value; }
-        public List<PollQuestion> PollQuestions { get => pollQuestions; set => pollQuestions = value; }
+        public int Id { get => _id; set => _id = value; }
+        public string Name { get => _name; set => _name = value; }
+        public List<PollQuestion> PollQuestions { get => _pollQuestions; set => _pollQuestions = value; }
     }
 }

@@ -31,6 +31,7 @@ namespace hospital
         public RoomController roomController { get; set; }
         public PatientController patientController { get; set; }
         public AppointmentController appointmentController { get; set; }
+        public AvailableAppointmentController availableAppointmentController { get; set; }
         public NotificationController notificationController { get; set; }
         public MedicalRecordsController medicalRecordsController { get; set; }
         public DoctorController doctorController { get; set; }
@@ -43,7 +44,6 @@ namespace hospital
         public MedicineController medicineController { get; set; }
         public VacationRequestController vacationRequestController { get; set; }
         public InvalidMedicineReportController invalidMedicineReportController { get; set; }
-
         public EmergencyController emergencyController { get; set; }
         public RecommendedAppointmentController recommendedAppointmentController { get; set; }
 
@@ -56,6 +56,7 @@ namespace hospital
         Thread orderThread;
         public App()
         {
+            // consider sorting App() so that it contains all repositories, file handlers, services and controllers IN THAT ORDER
             UserRepository userRepository = new UserRepository();
             UserService userService = new UserService(userRepository);
             userController = new UserController(userService);
@@ -96,12 +97,15 @@ namespace hospital
             NotificationService notificationService = new NotificationService(notificationRepository);
             notificationController = new NotificationController(notificationService);
 
+
+            AppointmentService appointmentService = new AppointmentService(appointmentRepository);
             MeetingRepository meetingRepository = new MeetingRepository();
             MeetingService meetingService = new MeetingService(meetingRepository);
             meetingController = new MeetingController(meetingService, notificationService);
 
-            AppointmentService appointmentService = new AppointmentService(appointmentRepository, doctorRepository, userController, notificationRepository, doctorService,roomService);
             appointmentController = new AppointmentController(appointmentService);
+            AvailableAppointmentService availableAppointmentService = new AvailableAppointmentService(appointmentService, doctorRepository);
+            availableAppointmentController = new AvailableAppointmentController(availableAppointmentService);
 
             MedicalRecordsService medicalRecordsService = new MedicalRecordsService(medicalRecordsRepository);
             medicalRecordsController = new MedicalRecordsController(medicalRecordsService);
@@ -127,10 +131,11 @@ namespace hospital
             InvalidMedicineReportService invalidMedicineReportService = new InvalidMedicineReportService(invalidMedicineReportRepository);
             invalidMedicineReportController = new InvalidMedicineReportController(invalidMedicineReportService);
 
-            RecommendedAppointmentService recommendedAppointmentService = new RecommendedAppointmentService(appointmentService, notificationRepository);
+            
+            RecommendedAppointmentService recommendedAppointmentService = new RecommendedAppointmentService(appointmentService, notificationRepository, doctorRepository, availableAppointmentService);
             recommendedAppointmentController = new RecommendedAppointmentController(recommendedAppointmentService);
 
-            EmergencyService emergencyService = new EmergencyService(appointmentService, notificationRepository, doctorService, roomService, recommendedAppointmentService);
+            EmergencyService emergencyService = new EmergencyService(appointmentService, notificationRepository, doctorService, roomService, recommendedAppointmentService, availableAppointmentService);
             emergencyController = new EmergencyController(emergencyService);
 
 

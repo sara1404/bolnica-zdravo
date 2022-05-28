@@ -99,12 +99,15 @@ namespace hospital.View
 
             revisionOfRestUserControl.Visibility = Visibility.Collapsed;
 
+            scheduleMeetingsUserControl.Visibility = Visibility.Collapsed;
+
             btnhandlingAccount.BorderBrush = Brushes.Transparent;
             btnhandlingMedRecord.BorderBrush = Brushes.Transparent;
             btnAppointment.BorderBrush = Brushes.Transparent;
             btnEmergency.BorderBrush = Brushes.Transparent;
             btnOrder.BorderBrush = Brushes.Transparent;
             btnVacation.BorderBrush = Brushes.Transparent;
+            btnMeetings.BorderBrush = Brushes.Transparent;
         }
 
         private void btnOrder_Click(object sender, RoutedEventArgs e)
@@ -121,6 +124,14 @@ namespace hospital.View
             btnVacation.BorderBrush = (Brush)(new BrushConverter().ConvertFrom("#c8d8e4"));
             btnVacation.BorderThickness = new Thickness(3, 0, 0, 0);
             revisionOfRestUserControl.Visibility = Visibility.Visible;
+        }
+
+        private void btnMeetings_Click(object sender, RoutedEventArgs e)
+        {
+            CloseAllUserControl();
+            btnMeetings.BorderBrush = (Brush)(new BrushConverter().ConvertFrom("#c8d8e4"));
+            btnMeetings.BorderThickness = new Thickness(3, 0, 0, 0);
+            scheduleMeetingsUserControl.Visibility = Visibility.Visible;
         }
     }
 }

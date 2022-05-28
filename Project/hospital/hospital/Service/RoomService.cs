@@ -40,6 +40,10 @@ namespace Service
         public Room FindRoomByPurpose(string purpose) {
             return roomRepository.FindRoomByPurpose(purpose);
         }
+        public List<Room> FindRoomsByPurpose(string purpose)
+        {
+            return roomRepository.FindRoomsByPurpose(purpose);
+        }
 
         public List<Room> FindRoomsByEquipmentType(string type) {
             return roomRepository.FindRoomsByEquipmentType(type);

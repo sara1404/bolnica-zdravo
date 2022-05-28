@@ -36,6 +36,7 @@ namespace hospital
         public DoctorController doctorController { get; set; }
         public UserController userController { get; set; }
         public OrderController orderController { get; set; }
+        public MeetingController meetingController { get; set; }
         public ScheduledRelocationController scheduledRelocationController { get; set; }
         public ScheduledBasicRenovationController scheduledBasicRenovationController { get; set; }
         public ScheduledAdvancedRenovationController scheduledAdvancedRenovationController { get; set; }
@@ -62,6 +63,7 @@ namespace hospital
             DoctorRepository doctorRepository = new DoctorRepository();
             DoctorService doctorService = new DoctorService(doctorRepository);
             doctorController = new DoctorController(doctorService);
+
 
             AppointmentRepository appointmentRepository = new AppointmentRepository();
             scheduledBasicRenovationRepository = new ScheduledBasicRenovationRepository();
@@ -93,6 +95,10 @@ namespace hospital
             NotificationRepository notificationRepository = new NotificationRepository();
             NotificationService notificationService = new NotificationService(notificationRepository);
             notificationController = new NotificationController(notificationService);
+
+            MeetingRepository meetingRepository = new MeetingRepository();
+            MeetingService meetingService = new MeetingService(meetingRepository);
+            meetingController = new MeetingController(meetingService, notificationService);
 
             AppointmentService appointmentService = new AppointmentService(appointmentRepository, doctorRepository, userController, notificationRepository, doctorService,roomService);
             appointmentController = new AppointmentController(appointmentService);

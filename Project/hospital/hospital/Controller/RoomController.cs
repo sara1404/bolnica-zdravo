@@ -40,6 +40,10 @@ namespace Controller
         public Room FindRoomByPurpose(string purpose) {
             return roomService.FindRoomByPurpose(purpose);
         }
+        public List<Room> FindRoomsByPurpose(string purpose)
+        {
+            return roomService.FindRoomsByPurpose(purpose);
+        }
 
         public List<Room> FindRoomsByEquipmentType(string type) {
             return roomService.FindRoomsByEquipmentType(type);

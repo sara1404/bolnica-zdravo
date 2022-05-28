@@ -48,6 +48,16 @@ namespace Repository
             }
             return null;
         }
+        public List<Room> FindRoomsByPurpose(string purpose)
+        {
+            List<Room> retVal = new List<Room>();
+            foreach (Room room in rooms)
+            {
+                if (room._Purpose.Equals(purpose))
+                    retVal.Add(room);
+            }
+            return retVal;
+        }
 
         public List<Room> FindRoomsByEquipmentType(string type) {
             List<Room> filteredRooms = new List<Room>();

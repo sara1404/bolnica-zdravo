@@ -100,6 +100,7 @@
     <Compile Include="Controller\InvalidMedicineReportController.cs" />
     <Compile Include="Controller\EmergencyController.cs" />
     <Compile Include="Controller\MedicineController.cs" />
+    <Compile Include="Controller\MeetingController.cs" />
     <Compile Include="Controller\NotificationController.cs" />
     <Compile Include="Controller\OrderController.cs" />
     <Compile Include="Controller\RecommendedAppointmentController.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="FileHandler\InvalidMedicineReportFileHandler.cs" />
     <Compile Include="FileHandler\MedicalRecordFileHandler.cs" />
     <Compile Include="FileHandler\MedicineFileHandler.cs" />
+    <Compile Include="FileHandler\MeetingFileHandler.cs" />
     <Compile Include="FileHandler\NotificationFileHandler.cs" />
     <Compile Include="FileHandler\OrderFileHandler.cs" />
     <Compile Include="FileHandler\ScheduledAdvancedRenovationFileHandler.cs" />
@@ -122,6 +124,7 @@
     <Compile Include="FileHandler\ScheduledRelocationFileHandler.cs" />
     <Compile Include="FileHandler\UserFileHandler.cs" />
     <Compile Include="Model\InvalidMedicineReport.cs" />
+    <Compile Include="Model\Meetings.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="FileHandler\VacationRequestFileHandler.cs" />
     <Compile Include="Model\ScheduledAdvancedRenovation.cs" />
@@ -141,6 +144,7 @@
     <Compile Include="Repository\InvalidMedicineReportRepository.cs" />
     <Compile Include="Repository\MedicalRecordsRepository.cs" />
     <Compile Include="Repository\MedicineRepository.cs" />
+    <Compile Include="Repository\MeetingRepository.cs" />
     <Compile Include="Repository\NotificationRepository.cs" />
     <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
@@ -159,6 +163,7 @@
     <Compile Include="Service\InvalidMedicineReportService.cs" />
     <Compile Include="Service\MedicalRecordsService.cs" />
     <Compile Include="Service\MedicineService.cs" />
+    <Compile Include="Service\MeetingService.cs" />
     <Compile Include="Service\NotificationService.cs" />
     <Compile Include="Service\OrderService.cs" />
     <Compile Include="Service\PatientService.cs" />
@@ -327,6 +332,9 @@
     </Compile>
     <Compile Include="View\UserControls\RevisionOfRestUserControl.xaml.cs">
       <DependentUpon>RevisionOfRestUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\SchedulingMeetingsUserControl.xaml.cs">
+      <DependentUpon>SchedulingMeetingsUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\SuggestedDelayUserControl.xaml.cs">
       <DependentUpon>SuggestedDelayUserControl.xaml</DependentUpon>
@@ -560,6 +568,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UserControls\SchedulingMeetingsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UserControls\SuggestedDelayUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -716,6 +728,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\vacation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\schedule.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Data\MeetingData.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets')" />

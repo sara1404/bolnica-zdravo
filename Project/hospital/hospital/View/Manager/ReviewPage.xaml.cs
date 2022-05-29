@@ -1,4 +1,5 @@
-﻿using System;
+﻿using hospital.VM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,27 +23,23 @@ namespace hospital.View.Manager
     {
         public ReviewPage()
         {
+            this.DataContext = new ReviewPageViewModel();
             InitializeComponent();
         }
 
-        private void Doctor_Review_Click(object sender, RoutedEventArgs e)
-        {
-            new DoctorReviewWindow().Show();
-        }
+        //private void Doctor_Review_Click(object sender, RoutedEventArgs e)
+        //{
+        //    new DoctorReviewWindow().Show();
+        //}
 
-        private void Hospital_Review_Click(object sender, RoutedEventArgs e)
-        {
-            new HospitalReviewWindow().Show();
-        }
+        //private void Hospital_Review_Click(object sender, RoutedEventArgs e)
+        //{
+        //    new HospitalReviewWindow().Show();
+        //}
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
+        //private void Logout_Click(object sender, RoutedEventArgs e)
+        //{
 
-        }
-
-        private void Logout_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        //}
     }
 }

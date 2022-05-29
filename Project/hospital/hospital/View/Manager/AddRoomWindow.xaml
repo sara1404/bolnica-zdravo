@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:hospital.View"
         mc:Ignorable="d"
         Title="AddRoomWindow" Height="450" Width="800"
-        PreviewKeyDown="Close_Window">
+        >
     <Window.Resources>
         <ResourceDictionary Source="ManagerResources.xaml"></ResourceDictionary>
     </Window.Resources>
@@ -16,18 +16,18 @@
         <Label Content="Id:" HorizontalAlignment="Left" Margin="253,156,0,0" VerticalAlignment="Top" FontSize="16px" Foreground="white"/>
         <Label Content="Purpose:" HorizontalAlignment="Left" Margin="209,226,0,0" VerticalAlignment="Top" FontSize="16px" Foreground="white"/>
         <Label Content="Floor:" HorizontalAlignment="Left" Margin="231,300,0,0" VerticalAlignment="Top" FontSize="16px" Foreground="white"/>
-        <TextBox x:Name="roomName" HorizontalAlignment="Left" Height="23" Margin="381,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
-        <TextBox x:Name="roomId"  HorizontalAlignment="Left" Height="23" Margin="381,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
-        <TextBox x:Name="roomPurpose" HorizontalAlignment="Left" Height="23" Margin="381,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
-        <ComboBox x:Name="roomFloor" HorizontalAlignment="Left" Height="23" Margin="381,308,0,0" VerticalAlignment="Top" Width="142"  FocusVisualStyle="{DynamicResource MyFocusVisual}">
+        <TextBox x:Name="roomName" Text="{Binding name}" HorizontalAlignment="Left" Height="23" Margin="381,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+        <TextBox x:Name="roomId" Text="{Binding id}"  HorizontalAlignment="Left" Height="23" Margin="381,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+        <TextBox x:Name="roomPurpose" Text="{Binding purpose}" HorizontalAlignment="Left" Height="23" Margin="381,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+        <ComboBox x:Name="roomFloor" Text="{Binding floor}" HorizontalAlignment="Left" Height="23" Margin="381,308,0,0" VerticalAlignment="Top" Width="142"  FocusVisualStyle="{DynamicResource MyFocusVisual}">
             <ComboBoxItem Content="1"/>
             <ComboBoxItem Content="2"/>
             <ComboBoxItem Content="3"/>
             <ComboBoxItem Content="4"/>
             <ComboBoxItem Content="5"/>
         </ComboBox>
-        <Button  Content="APPLY" HorizontalAlignment="Left" Margin="209,358,0,0" VerticalAlignment="Top" Width="109" Height="36" Click="Add_New_Room_Click" Background="#bc84fc"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
-        <Button Content="CANCEL" HorizontalAlignment="Left" Margin="414,358,0,0" VerticalAlignment="Top" Width="109" Height="36" Click="Cancel_New_Room_Click" Background="#bc84fc"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+        <Button  Content="APPLY" HorizontalAlignment="Left" Margin="209,358,0,0" VerticalAlignment="Top" Width="109" Height="36" Background="#bc84fc"  FocusVisualStyle="{DynamicResource MyFocusVisual}" Command="{Binding AddRoomCommand}"/>
+        <Button Content="CANCEL" HorizontalAlignment="Left" Margin="414,358,0,0" VerticalAlignment="Top" Width="109" Height="36" Background="#bc84fc"  FocusVisualStyle="{DynamicResource MyFocusVisual}" Command="{Binding CancelRoomCommand}"/>
 
     </Grid>
 </Window>

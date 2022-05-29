@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Controller;
+using hospital.Controller;
 using Model;
 
 namespace hospital.View
@@ -22,13 +23,44 @@ namespace hospital.View
     public partial class EditMedicineWindow : Window
     {
         private MedicineController medicineController;
+        private IngridientsController ingridientsController;
 
         public EditMedicineWindow()
         {
             InitializeComponent();
             App app = Application.Current as App;
             medicineController = app.medicineController;
+            ingridientsController = app.ingridientsController;
             codeField.IsEnabled = false;
+        }
+
+        public void FillForm()
+        {
+            Medicine medicine = this.DataContext as Medicine;
+            if (medicine == null) return;
+            alternativesField.ItemsSource = medicineController.FindAll();
+            ingridientsField.ItemsSource = ingridientsController.FindAll();
+            SetAllSelectedIngridients(medicine.Ingridients);
+            SetAllSelectedAlternatives(medicine.Alternatives);
+        }
+
+        private void SetAllSelectedIngridients(List<string> igridients)
+        {
+            ingridientsField.SelectedItems.Clear();
+            foreach (string ingridient in igridients)
+            {
+                ingridientsField.SelectedItems.Add(ingridient);
+
+            }
+        }
+
+        private void SetAllSelectedAlternatives(List<Medicine> alternatives)
+        {
+            alternativesField.SelectedItems.Clear();
+            foreach (Medicine alternative in alternatives)
+            {
+                alternativesField.SelectedItems.Add(alternative);
+            }
         }
 
         private void Cancel_Medicine_Click(object sender, RoutedEventArgs e)
@@ -110,6 +142,7 @@ namespace hospital.View
             for (int i = 0; i < alternativesField.SelectedItems.Count; i++)
             {
                 alternatives.Add((Medicine)alternativesField.SelectedItems[i]);
+                Console.WriteLine(alternatives.Count);
             }
             return alternatives;
         }

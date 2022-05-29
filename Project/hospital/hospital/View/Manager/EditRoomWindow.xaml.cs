@@ -1,4 +1,5 @@
 ﻿using Controller;
+using hospital.VM;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -22,76 +23,77 @@ namespace hospital.View
     /// Interaction logic for EditRoomWindow.xaml
     /// </summary>
     /// 
-    public partial class EditRoomWindow : Window, INotifyPropertyChanged
+    public partial class EditRoomWindow : Window
     {
-        private RoomController roomController;
-        private Room room;
+        //private RoomController roomController;
+        //private Room room;
         public EditRoomWindow(Room room) 
         {
+            this.DataContext = new EditRoomWindowViewModel(room);
             InitializeComponent();
-            App app = Application.Current as App;
-            this.room = room;
-            roomController = app.roomController;
+            //App app = Application.Current as App;
+            //this.room = room;
+            //roomController = app.roomController;
 
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        //public event PropertyChangedEventHandler PropertyChanged;
        
 
 
-        protected virtual void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
+        //protected virtual void OnPropertyChanged(string name)
+        //{
+        //    if (PropertyChanged != null)
+        //    {
+        //        PropertyChanged(this, new PropertyChangedEventArgs(name));
+        //    }
+        //}
 
-        private void ScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
+        //private void ScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        //{
 
-        }
+        //}
 
-        private void Edit_Room_Click(object sender, RoutedEventArgs e)
-        {
-            //var viewRoomsWindow = Application.Current.Windows.OfType<ManagerRoomsWindow>().FirstOrDefault();
+        //private void Edit_Room_Click(object sender, RoutedEventArgs e)
+        //{
+        //    //var viewRoomsWindow = Application.Current.Windows.OfType<ManagerRoomsWindow>().FirstOrDefault();
 
 
             
-            try
-            {
-                if (!Int32.TryParse(roomFloor.Text, out int res))
-                {
-                    MessageBox.Show("Not valid input for floor", "Error");
-                    return;
-                }
-                Room newRoom = new Room(roomName.Text, roomPurpose.Text, res, roomId.Text);
+        //    try
+        //    {
+        //        if (!Int32.TryParse(roomFloor.Text, out int res))
+        //        {
+        //            MessageBox.Show("Not valid input for floor", "Error");
+        //            return;
+        //        }
+        //        Room newRoom = new Room(roomName.Text, roomPurpose.Text, res, roomId.Text);
 
-                //roomController.DeleteById(room.id);
-                //roomController.Create(newRoom);
-                roomController.UpdateById(room.id, newRoom);
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            } 
-        }
+        //        //roomController.DeleteById(room.id);
+        //        //roomController.Create(newRoom);
+        //        roomController.UpdateById(room.id, newRoom);
+        //        this.Close();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //    } 
+        //}
 
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+        //private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
 
-        }
+        //}
 
-        private void Cancel_Edit_Room_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
+        //private void Cancel_Edit_Room_Click(object sender, RoutedEventArgs e)
+        //{
+        //    this.Close();
+        //}
 
-        private void Close_Window(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Escape)
-                Close();
-        }
+        //private void Close_Window(object sender, KeyEventArgs e)
+        //{
+        //    if (e.Key == Key.Escape)
+        //        Close();
+        //}
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Controller;
+using hospital.VM;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace hospital.View
         private List<string> ingridients = new List<string>();
         public AddMedicineWindow()
         {
+            this.DataContext = this;
             InitializeComponent();
             App app = Application.Current as App;
             medicineController = app.medicineController;
@@ -43,7 +45,8 @@ namespace hospital.View
                 AddMedicine();
                 Close();
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message);
             }
         }
@@ -55,13 +58,15 @@ namespace hospital.View
             ValidateIngridients();
         }
 
-        private void ValidateId() {
+        private void ValidateId()
+        {
             string id = codeField.Text;
             if (medicineController.FindById(id) != null)
                 throw new Exception("Medicine with this id already exists!");
         }
 
-        private void ValidateQuantity() {
+        private void ValidateQuantity()
+        {
             int value;
             bool isValid = Int32.TryParse(quanityField.Text, out value);
 
@@ -72,12 +77,14 @@ namespace hospital.View
                 throw new Exception("Quantity should be positive!");
         }
 
-        private void ValidateIngridients() {
+        private void ValidateIngridients()
+        {
             if (GetIngridients().Count == 0)
                 throw new Exception("There should be at least one ingredient!");
         }
 
-        private void AddMedicine() {
+        private void AddMedicine()
+        {
             Medicine medicine = new Medicine(codeField.Text, nameField.Text, GetIngridients(), nameField.Text, Int32.Parse(quanityField.Text));
             if (!IsMedicineNew(medicine))
                 return;
@@ -86,7 +93,8 @@ namespace hospital.View
             AddMedicineAsEquipment();
         }
 
-        private bool IsMedicineNew(Medicine medicine) {
+        private bool IsMedicineNew(Medicine medicine)
+        {
             if (medicineController.FindByName(medicine.Name) != null)
             {
                 MessageBox.Show("Medicine with this name already exists");
@@ -95,12 +103,14 @@ namespace hospital.View
             return true;
         }
 
-        private void AddMedicineAsEquipment() {
+        private void AddMedicineAsEquipment()
+        {
             Equipment equipment = new Equipment(nameField.Text, Int32.Parse(quanityField.Text));
             roomController.FindRoomByPurpose("warehouse").AddEquipment(equipment);
         }
 
-        private List<Medicine> GetAlternatives() {
+        private List<Medicine> GetAlternatives()
+        {
             List<Medicine> alternatives = new List<Medicine>();
             for (int i = 0; i < alternativesField.SelectedItems.Count; i++)
             {
@@ -133,8 +143,10 @@ namespace hospital.View
             IsFormFilledValidation();
         }
 
-        private void IsFormFilledValidation() {
-            if (nameField.Text != "" && codeField.Text != "" && quanityField.Text != "" && ingridientsField.SelectedItems.Count > 0) {
+        private void IsFormFilledValidation()
+        {
+            if (nameField.Text != "" && codeField.Text != "" && quanityField.Text != "" && ingridientsField.SelectedItems.Count > 0)
+            {
                 scheduleBtn.IsEnabled = true;
                 return;
             }

@@ -1,4 +1,5 @@
 ﻿using Controller;
+using hospital.VM;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -16,62 +17,58 @@ namespace hospital.View
     {
 
         //public ObservableCollection<Room> rooms { get; set; }
-        private RoomController roomController;
+        //private RoomController roomController;
 
         public ManagerRoomsWindow()
         {
+            this.DataContext = new RoomWindowViewModel();
             InitializeComponent();
-            this.DataContext = this;
-            App app = Application.Current as App;
-            roomController = app.roomController;
-            dataGridRooms.ItemsSource =  roomController.FindAll();
+            //App app = Application.Current as App;
+            //roomController = app.roomController;
+            //dataGridRooms.ItemsSource =  roomController.FindAll();
         }
 
-        private void Add_Room_Click(object sender, RoutedEventArgs e)
-        {
-            new AddRoomWindow().Show();
-        }
+        //private void Add_Room_Click(object sender, RoutedEventArgs e)
+        //{
+        //    new AddRoomWindow().Show();
+        //}
 
-        private void KeyPressed(object sender, KeyEventArgs e)
-        {
-            int selectedRow = dataGridRooms.SelectedIndex;
-            if (e.Key == Key.Enter && selectedRow != -1)
-            {
-                Room room = (Room)dataGridRooms.SelectedItem;
-                EditRoomWindow editWindow = new EditRoomWindow(room);
-                
-                editWindow.roomName.Text = room.name;
-                editWindow.roomId.Text = room.id;
-                editWindow.roomPurpose.Text = room.purpose;
-                editWindow.roomFloor.Text = room.floor.ToString();
-                foreach (Equipment eq in room.equipment)
-                {
-                    editWindow.equipmentListView.Items.Add(eq.type + " " + eq.quantity);
-                }
-                editWindow.Show();
-            }
-            else if (e.Key == Key.Delete && selectedRow != -1)
-            {
-                new DeleteRoomWindow().Show();
-            }
-        }
+        //private void KeyPressed(object sender, KeyEventArgs e)
+        //{
+        //    int selectedRow = dataGridRooms.SelectedIndex;
+        //    if (e.Key == Key.Enter && selectedRow != -1)
+        //    {
+        //        Room room = (Room)dataGridRooms.SelectedItem;
+        //        EditRoomWindow editWindow = new EditRoomWindow(room);
 
-        private void Filter(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-            if (quantitySearch.Text == "" && typeSearch.Text != "")
-                dataGridRooms.ItemsSource = roomController.FindRoomsByEquipmentType(typeSearch.Text);
-            else if (quantitySearch.Text != "" && typeSearch.Text == "")
-                dataGridRooms.ItemsSource = roomController.FindRoomsByEquipmentQuantity(Int32.Parse(quantitySearch.Text));
-            else if (quantitySearch.Text != "" && typeSearch.Text != "")
-                dataGridRooms.ItemsSource = roomController.FindRoomsByEquipmentTypeAndQuantity(typeSearch.Text, Int32.Parse(quantitySearch.Text));
-            else
-                dataGridRooms.ItemsSource = roomController.FindAll();
-        }
+        //        foreach (Equipment eq in room.equipment)
+        //        {
+        //            editWindow.equipmentListView.Items.Add(eq.type + " " + eq.quantity);
+        //        }
+        //        editWindow.Show();
+        //    }
+        //    else if (e.Key == Key.Delete && selectedRow != -1)
+        //    {
+        //        new DeleteRoomWindow().Show();
+        //    }
+        //}
 
-        private void Close_Window(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Escape)
-                Close();
-        }
+        //private void Filter(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        //{
+        //    if (quantitySearch.Text == "" && typeSearch.Text != "")
+        //        dataGridRooms.ItemsSource = roomController.FindRoomsByEquipmentType(typeSearch.Text);
+        //    else if (quantitySearch.Text != "" && typeSearch.Text == "")
+        //        dataGridRooms.ItemsSource = roomController.FindRoomsByEquipmentQuantity(Int32.Parse(quantitySearch.Text));
+        //    else if (quantitySearch.Text != "" && typeSearch.Text != "")
+        //        dataGridRooms.ItemsSource = roomController.FindRoomsByEquipmentTypeAndQuantity(typeSearch.Text, Int32.Parse(quantitySearch.Text));
+        //    else
+        //        dataGridRooms.ItemsSource = roomController.FindAll();
+        //}
+
+        //private void Close_Window(object sender, KeyEventArgs e)
+        //{
+        //    if (e.Key == Key.Escape)
+        //        Close();
+        //}
     }
 }

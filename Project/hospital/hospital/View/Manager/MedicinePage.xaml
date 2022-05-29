@@ -3,10 +3,14 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:cmd="clr-namespace:hospital.VM"
       xmlns:local="clr-namespace:hospital.View"
       mc:Ignorable="d" 
       d:DesignHeight="768" d:DesignWidth="1024"
       Title="MedicinePage">
+    <Page.InputBindings>
+        <KeyBinding Key="" Command="{Binding EditMedicineCommand}" CommandParameter="{Binding SelectedItem, ElementName=medicineDataGrid}"/>
+    </Page.InputBindings>
     <Page.Resources>
         <ResourceDictionary Source="ManagerResources.xaml"></ResourceDictionary>
     </Page.Resources>
@@ -17,6 +21,8 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
+
+
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -27,7 +33,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Image DockPanel.Dock="Left" Height="56" Width="100" Source="../../Resources/Images/logo.png" Grid.Column="0"/>
-                    <Button DockPanel.Dock ="Right"  Grid.Column="4" Margin="88,15,10,23" Click="Logout_Click">
+                    <Button DockPanel.Dock ="Right"  Grid.Column="4" Margin="88,15,10,23" Command="cmd:Commands.LogoutCommand">
                         <Button.Template>
                             <ControlTemplate>
                                 <Image Source="../../Resources/Images/logout_white.png" Margin="0,-6,0,-11"/>
@@ -38,17 +44,26 @@
             </Border>
 
         </StackPanel>
-        <Button Click="Back_Click" Margin="10,121,920,569">
+        <Button  Margin="10,121,920,569"
+                 Command="cmd:Commands.GoBackCommand"
+                 >
             <Button.Template>
                 <ControlTemplate>
                     <Image Source="../../Resources/Images/back_white.png"/>
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Content="ADD MEDICINE" HorizontalAlignment="Left" Margin="145,121,0,0" VerticalAlignment="Top" Width="175" Height="49" Click="Add_Medicine_Click" Background="#bc84fc" FontSize="16"/>
-        <Button Content="ADD NEW INGRIDIENTS" HorizontalAlignment="Left" Margin="380,121,0,0" VerticalAlignment="Top" Width="175" Height="49" Click="Add_Ingridients_Click" Background="#bc84fc" FontSize="16"/>
-        <DataGrid ColumnWidth="*" AutoGenerateColumns="False" x:Name="medicineDataGrid" IsReadOnly="True" SelectionUnit="FullRow" Height="454" Margin="145,211,120,0" VerticalAlignment="Top" PreviewKeyDown="KeyPressed" Background="#1d1b1f">
-            <DataGrid.Columns>
+        <Button HorizontalAlignment="Left" Margin="145,121,0,0" VerticalAlignment="Top" Width="175" Height="49"  Background="#bc84fc" FontSize="16" Command="{Binding AddMedicineCommand}">
+            <AccessText>_ADD MEDICINE</AccessText>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="380,121,0,0" VerticalAlignment="Top" Width="175" Height="49"  Background="#bc84fc" FontSize="16" Command="{Binding AddIngridientCommand}">
+            <AccessText>ADD NEW _INGRIDIENT</AccessText>
+        </Button>
+        <DataGrid ColumnWidth="*" AutoGenerateColumns="False" x:Name="medicineDataGrid" IsReadOnly="True" SelectionUnit="FullRow" Height="454" Margin="145,211,120,0" VerticalAlignment="Top" Background="#1d1b1f" ItemsSource="{Binding Medicines}">
+            <DataGrid.InputBindings>
+                <KeyBinding Key="Enter" Command="{Binding EditMedicineCommand}" CommandParameter="{Binding SelectedItem, ElementName=medicineDataGrid}"/>
+            </DataGrid.InputBindings>
+                    <DataGrid.Columns>
                 <DataGridTextColumn Header="Name"  Binding="{Binding Name}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Code"  Binding="{Binding Id}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Quantity" Binding="{Binding quantity}"></DataGridTextColumn>

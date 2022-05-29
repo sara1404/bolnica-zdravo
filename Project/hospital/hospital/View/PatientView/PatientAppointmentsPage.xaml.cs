@@ -63,11 +63,22 @@ namespace hospital.View
             {
                 if (ac.CanBeDelayed(selectedAppointment))
                 {
-                    new PatientDelayAppointment(selectedAppointment).Show();
+                    GoToDelayPage(selectedAppointment);
                 }
                 else
                 {
                     MessageBox.Show("You can't delay an appointment now!");
+                }
+            }
+        }
+
+        private void GoToDelayPage(Appointment appointment)
+        {
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(PatientHomeWindow))
+                {
+                    (window as PatientHomeWindow).Main.Content = new PatientDelayAppointmentPage(appointment);
                 }
             }
         }

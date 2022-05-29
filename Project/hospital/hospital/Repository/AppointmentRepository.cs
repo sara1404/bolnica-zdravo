@@ -1,3 +1,4 @@
+using hospital.DTO;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -123,6 +124,28 @@ namespace Repository
                 }
             }
             return appointmentsInRoom;
+        }
+
+        public List<ChartDataDTO> GetPopularTimes()
+        {
+            List<ChartDataDTO> retVal = new List<ChartDataDTO>();
+            foreach (Appointment a in appointments)
+            {
+                if (retVal.Find(x => x.Time == ConvertDateToHours(a.StartTime)) == null)
+                {
+                    retVal.Add(new ChartDataDTO(ConvertDateToHours(a.StartTime)));
+                }
+                else
+                {
+                    retVal.Find(x => x.Time == ConvertDateToHours(a.StartTime)).NumberOfAppointments++;
+                }
+            }
+            return retVal.OrderBy(x => x.Time).ToList();
+        }
+
+        private DateTime ConvertDateToHours(DateTime date)
+        {
+            return new DateTime(1, 1, 1, date.Hour, date.Minute, 0);
         }
     }
 }

@@ -11,10 +11,10 @@
 
     <Grid>
 
-        <syncfusion:SfScheduler x:Name="appointmentCalendar" HorizontalAlignment="Left" Margin="10,10,0,0" ViewType="Week" VerticalAlignment="Top" Height="430" Width="780" AllowedViewTypes="Month">
+        <syncfusion:SfScheduler x:Name="appointmentCalendar" AppointmentEditFlag="None" HorizontalAlignment="Left" Margin="10,10,0,0" ViewType="Week" VerticalAlignment="Top" Height="430" Width="780" AllowedViewTypes="Week">
             <syncfusion:SfScheduler.MonthViewSettings>
-                <syncfusion:MonthViewSettings AppointmentDisplayMode="Indicator"    
-                                      AppointmentDisplayCount="10"/>
+                <syncfusion:MonthViewSettings AppointmentDisplayMode="Appointment"  
+                                      AppointmentDisplayCount="5"/>
             </syncfusion:SfScheduler.MonthViewSettings>
         </syncfusion:SfScheduler>
     </Grid>

@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using Service;
+using hospital.DTO;
 
 namespace Controller
 {
@@ -61,6 +62,11 @@ namespace Controller
         {
             appointmentService.Delete(id);
             return true;
+        }
+
+        public List<ChartDataDTO> GetPopularTimes()
+        {
+            return appointmentService.GetPopularTimes();
         }
     }
 }

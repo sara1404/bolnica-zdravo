@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Syncfusion.Pdf;
 
 namespace hospital.View.PatientView
 {
@@ -35,9 +36,11 @@ namespace hospital.View.PatientView
                 ScheduleAppointment sa = new ScheduleAppointment();
                 sa.StartTime = a.StartTime;
                 sa.EndTime = a.StartTime.AddMinutes(30);
+                sa.IsAllDay = false;
                 sac.Add(sa);
             }
             appointmentCalendar.ItemsSource = sac;
+            
         }
     }
 }

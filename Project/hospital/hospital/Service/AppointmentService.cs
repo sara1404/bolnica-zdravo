@@ -7,6 +7,7 @@ using hospital;
 using System.Windows;
 using Controller;
 using System.Linq;
+using hospital.DTO;
 
 namespace Service
 {
@@ -75,6 +76,11 @@ namespace Service
                 }
             }
             return retVal;
+        }
+
+        public List<ChartDataDTO> GetPopularTimes()
+        {
+            return appointmentRepository.GetPopularTimes();
         }
     }
 }

@@ -21,5 +21,21 @@ namespace hospital.Model
         public int Id { get => _id; set => _id = value; }
         public string Name { get => _name; set => _name = value; }
         public List<PollQuestion> PollQuestions { get => _pollQuestions; set => _pollQuestions = value; }
+
+
+        public double CalculateCategoryGradeSum()
+        {
+            double sum = 0;
+            foreach(PollQuestion question in _pollQuestions)
+            {
+                sum += question.Grade;
+            }
+
+            return sum;
+        }
+
+        public PollQuestion FindQuestionById(int id) {
+            return _pollQuestions.FirstOrDefault(x => x.Id == id);
+        }
     }
 }

@@ -19,7 +19,13 @@
         <TextBox x:Name="roomName" HorizontalAlignment="Left" Height="23" Margin="381,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
         <TextBox x:Name="roomId"  HorizontalAlignment="Left" Height="23" Margin="381,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
         <TextBox x:Name="roomPurpose" HorizontalAlignment="Left" Height="23" Margin="381,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
-        <TextBox x:Name="roomFloor" HorizontalAlignment="Left" Height="23" Margin="381,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+        <ComboBox x:Name="roomFloor" HorizontalAlignment="Left" Height="23" Margin="381,308,0,0" VerticalAlignment="Top" Width="142"  FocusVisualStyle="{DynamicResource MyFocusVisual}">
+            <ComboBoxItem Content="1"/>
+            <ComboBoxItem Content="2"/>
+            <ComboBoxItem Content="3"/>
+            <ComboBoxItem Content="4"/>
+            <ComboBoxItem Content="5"/>
+        </ComboBox>
         <Button  Content="APPLY" HorizontalAlignment="Left" Margin="209,358,0,0" VerticalAlignment="Top" Width="109" Height="36" Click="Add_New_Room_Click" Background="#bc84fc"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
         <Button Content="CANCEL" HorizontalAlignment="Left" Margin="414,358,0,0" VerticalAlignment="Top" Width="109" Height="36" Click="Cancel_New_Room_Click" Background="#bc84fc"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
 

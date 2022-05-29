@@ -22,11 +22,6 @@
         <TextBox x:Name="nameField" HorizontalAlignment="Left" Height="27" Margin="339,61,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="163" RenderTransformOrigin="0.487,-0.037" TextChanged="IsFormFilled"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
         <TextBox x:Name="codeField" HorizontalAlignment="Left" Height="27" Margin="339,103,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="163" TextChanged="IsFormFilled"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
         <ListView x:Name="ingridientsField" HorizontalAlignment="Left" Height="85" Margin="339,148,0,0" VerticalAlignment="Top" Width="163" SelectionMode="Multiple" SelectionChanged="IsFormFilled"  FocusVisualStyle="{DynamicResource MyFocusVisual}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Ingridients"/>
-                </GridView>
-            </ListView.View>
         </ListView>
         <TextBox x:Name="quanityField" HorizontalAlignment="Left" Height="27" Margin="339,335,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="52" RenderTransformOrigin="0.448,3.417" TextChanged="IsFormFilled"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
         <Label Content="Add new medicine" HorizontalAlignment="Left" Margin="278,10,0,0" VerticalAlignment="Top" Width="210" FontSize="20" Foreground="white"/>
@@ -34,11 +29,6 @@
         <Button Content="CANCEL" HorizontalAlignment="Left" Margin="412,382,0,0" VerticalAlignment="Top" Width="137" Height="40" Click="Cancel_Medicine_Click" Background="#bc84fc" FontSize="16"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
         <Label Content="Alternatives:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="225,238,0,0" FontSize="16" RenderTransformOrigin="0.506,-0.125" Foreground="white"/>
         <ListView x:Name="alternativesField" HorizontalAlignment="Left" Height="84" Margin="339,246,0,0" VerticalAlignment="Top" Width="163" SelectionMode="Multiple" SelectionChanged="IsFormFilled"  FocusVisualStyle="{DynamicResource MyFocusVisual}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Alternatives"/>
-                </GridView>
-            </ListView.View>
         </ListView>
 
     </Grid>

@@ -36,9 +36,9 @@ namespace hospital.Service
 
         public bool AppointmentPollAlreadyFilled(int appointmentId)
         {
-            foreach(PollBlueprint poll in pollResultRepository.GetDoctorPollResults())
+            foreach (PollBlueprint poll in pollResultRepository.GetDoctorPollResults())
             {
-                if(poll.AppointmentId == appointmentId)
+                if (poll.AppointmentId == appointmentId)
                 {
                     return true;
                 }
@@ -61,6 +61,71 @@ namespace hospital.Service
         public void SavePoll(PollBlueprint poll)
         {
             pollResultRepository.AddResult(poll);
+        }
+
+        public List<PollBlueprint> FindPollResultsForDoctor(string id)
+        {
+            return pollResultRepository.FindPollResultsForDoctor(id);
+        }
+
+
+        public double CalculateDoctorFinalGrade(string doctorId)
+        {
+            double average = 0;
+            foreach (PollCategory category in GetDoctorPollBlueprint().Categories)
+            {
+                average += CalculateCategoryGrade(FindPollResultsForDoctor(doctorId), category.Id);
+            }
+            return Math.Round(average / GetDoctorPollBlueprint().Categories.Count, 1);
+        }
+
+        public double CalculateHospitalFinalGrade()
+        {
+            double average = 0;
+            foreach (PollCategory category in GetHospitalPollBlueprint().Categories)
+            {
+                average += CalculateCategoryGrade(GetHospitalPollResults(), category.Id);
+            }
+            return Math.Round(average / GetHospitalPollBlueprint().Categories.Count, 1);
+        }
+
+        public double CalculateCategoryGrade(List<PollBlueprint> polls, int categoryId)
+        {
+
+            double average = 0;
+            foreach (PollBlueprint poll in polls)
+            {
+                PollCategory category = poll.FindPollCategoryById(categoryId);
+                average += category.CalculateCategoryGradeSum();
+            }
+            return Math.Round(average / (polls.Count * 3), 1);
+        }
+
+        public double CalculateAverageForQuestion(List<PollBlueprint> polls, int categoryId, int questionId)
+        {
+            double average = 0;
+            foreach (PollBlueprint poll in polls)
+            {
+                PollCategory category = poll.FindPollCategoryById(categoryId);
+                PollQuestion question = category.FindQuestionById(questionId);
+                average += question.Grade;
+            }
+
+            return Math.Round(average / polls.Count, 1);
+        }
+
+
+        public int[] CalculateCountOfEachGrade(List<PollBlueprint> polls, int categoryId, int questionId)
+        {
+            int[] result = { 0, 0, 0, 0, 0 };
+            foreach (PollBlueprint poll in polls)
+            {
+                PollCategory category = poll.FindPollCategoryById(categoryId);
+                PollQuestion question = category.FindQuestionById(questionId);
+                result[question.Grade - 1]++;
+            }
+
+            return result;
         }
     }
 }

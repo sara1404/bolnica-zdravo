@@ -36,6 +36,7 @@
     </Style>
 
 
+
     <Style TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="Background" Value="#bc84fc" />
         <Setter Property="Height" Value="30"/>

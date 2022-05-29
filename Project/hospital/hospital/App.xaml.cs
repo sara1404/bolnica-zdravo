@@ -140,7 +140,7 @@ namespace hospital
 
 
             PollBlueprintRepository pollBlueprintRepository = new PollBlueprintRepository();
-            PollResultRepository pollResultRepository = new PollResultRepository();
+            PollResultRepository pollResultRepository = new PollResultRepository(appointmentRepository);
             PollService pollBlueprintService = new PollService(pollBlueprintRepository, pollResultRepository);
             pollBlueprintController = new PollController(pollBlueprintService);
 

@@ -37,5 +37,10 @@ namespace hospital.Model
             }
         }
         public List<PollCategory> Categories { get => _categories; set => _categories = value; }
+
+        public PollCategory FindPollCategoryById(int categoryId)
+        {
+            return _categories.FirstOrDefault(c => c.Id == categoryId);
+        }
     }
 }

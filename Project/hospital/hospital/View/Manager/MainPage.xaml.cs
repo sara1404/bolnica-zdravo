@@ -1,4 +1,5 @@
 ﻿using Controller;
+using hospital.View.Manager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,6 +71,11 @@ namespace hospital.View
         private void Medication_Button_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new MedicinePage();
+        }
+
+        private void Review_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new ReviewPage();
         }
     }
 

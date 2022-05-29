@@ -36,6 +36,7 @@ namespace hospital.View
             string id = roomId.Text;
             string purpose = roomPurpose.Text;
             string floor = roomFloor.Text;
+            Console.WriteLine(floor);
             Room newRoom = new Room(name, purpose, Int32.Parse(floor), id);
             try
             {

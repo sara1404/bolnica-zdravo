@@ -18,7 +18,13 @@
         <TextBox x:Name="roomName" HorizontalAlignment="Left" Height="23" Margin="300,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
         <TextBox x:Name="roomId" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="300,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
         <TextBox x:Name="roomPurpose" HorizontalAlignment="Left" Height="23" Margin="300,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
-        <TextBox x:Name="roomFloor" HorizontalAlignment="Left" Height="23" Margin="300,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+        <ComboBox x:Name="roomFloor" HorizontalAlignment="Left" Height="23" Margin="300,308,0,0" VerticalAlignment="Top" Width="141" FocusVisualStyle="{DynamicResource MyFocusVisual}">
+            <ComboBoxItem Content="1"/>
+            <ComboBoxItem Content="2"/>
+            <ComboBoxItem Content="3"/>
+            <ComboBoxItem Content="4"/>
+            <ComboBoxItem Content="5"/>
+        </ComboBox>
         <Button  Content="APPLY" HorizontalAlignment="Left" Margin="226,358,0,0" VerticalAlignment="Top" Width="109" Height="36" Click="Edit_Room_Click" Background="#bc84fc" FontSize="16" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
         <Button Content="CANCEL" HorizontalAlignment="Left" Margin="424,358,0,0" VerticalAlignment="Top" Width="108" Height="36" Click="Cancel_Edit_Room_Click" Background="#bc84fc" FontSize="16" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
         <ListView x:Name="equipmentListView" HorizontalAlignment="Left" Height="237" VerticalAlignment="Top" Width="188" Margin="511,94,0,0" SelectionChanged="ListView_SelectionChanged" FocusVisualStyle="{DynamicResource MyFocusVisual}">

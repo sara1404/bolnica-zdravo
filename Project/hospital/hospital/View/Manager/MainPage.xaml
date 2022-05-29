@@ -42,7 +42,7 @@
             <Border Grid.Row="0" BorderBrush="#bc84fc" BorderThickness="0,2,2,2" Background="#1d1b1f">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
-                        <Image HorizontalAlignment="Left" Height="46" Margin="40 40 0 0" VerticalAlignment="Top" Width="46" Source="../Resources/Images/user_white.png"/>
+                        <Image HorizontalAlignment="Left" Height="46" Margin="40 40 0 0" VerticalAlignment="Top" Width="46" Source="../../Resources/Images/user_white.png"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
                         <Label Content="Dusan" HorizontalAlignment="Left" Margin="40 30 0 0" VerticalAlignment="Top" Foreground="white"/>
@@ -57,7 +57,7 @@
                     <Button Content="Rooms" HorizontalAlignment="Center" Margin="0, 20" Width="153" Height="49" Click="Room_Button_Click" FontSize="20" Background="#bc84fc" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
                     <Button Content="Equipment" HorizontalAlignment="Center" Margin="0, 20" Width="153" Height="49" Click="Equipment_Button_Click" FontSize="20" Background="#bc84fc" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
                     <Button Content="Renovation" HorizontalAlignment="Center" Margin="0, 20"  Width="153" Height="49" Click="Renovation_Button_Click" FontSize="20" Background="#bc84fc" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
-                    <Button Content="Reviews" HorizontalAlignment="Center" Margin="0, 20"  Width="153" Height="49" FontSize="20" Background="#bc84fc" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+                    <Button Content="Reviews" HorizontalAlignment="Center" Margin="0, 20"  Width="153" Height="49" FontSize="20" Background="#bc84fc" FocusVisualStyle="{DynamicResource MyFocusVisual}" Click="Review_Click"/>
                     <Button Content="Medication" HorizontalAlignment="Center" Margin="0, 20" Width="153" Height="49" FontSize="20" Click="Medication_Button_Click" Background="#bc84fc" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
                 </StackPanel>
             </Border>
@@ -80,11 +80,11 @@
 
                     </Grid.ColumnDefinitions>
 
-                    <Image DockPanel.Dock="Left" Height="56" Width="100" Source="../Resources/Images/logo.png" Grid.Column="0"/>
+                    <Image DockPanel.Dock="Left" Height="56" Width="100" Source="../../Resources/Images/logo.png" Grid.Column="0"/>
                     <Button DockPanel.Dock ="Right"  Grid.Column="4" Margin="88,10,10,25" Click="Logout_Click" RenderTransformOrigin="0.48,2.372" FocusVisualStyle="{DynamicResource MyFocusVisual}">
                         <Button.Template>
                             <ControlTemplate>
-                                <Image Source="../Resources/Images/logout_white.png" Margin="0,-4,0,-15"/>
+                                <Image Source="../../Resources/Images/logout_white.png" Margin="0,-4,0,-15"/>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>

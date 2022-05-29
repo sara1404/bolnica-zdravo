@@ -67,5 +67,52 @@ namespace hospital.Controller
         {
             pollService.SavePoll(poll);
         }
+
+        public List<PollBlueprint> FindPollResultsForHospital() {
+            return pollService.GetHospitalPollResults();
+        }
+
+        public List<PollBlueprint> FindPollResultsForDoctor(string id) {
+            return pollService.FindPollResultsForDoctor(id);
+        }
+
+        public double CalculateDoctorFinalGrade(string doctorId)
+        {
+            return pollService.CalculateDoctorFinalGrade(doctorId);
+        }
+
+        public double CalculateCategoryGrade(string doctorId, int categoryId)
+        {
+            return pollService.CalculateCategoryGrade(FindPollResultsForDoctor(doctorId), categoryId);
+        }
+
+        public double CalculateDoctorQuestionGrade(string doctorId, int categoryId, int questionId)
+        {
+            return pollService.CalculateAverageForQuestion(FindPollResultsForDoctor(doctorId), categoryId, questionId);
+        }
+
+        public int[] CountEachGrade(string doctorId, int categoryId, int questionId) {
+            return pollService.CalculateCountOfEachGrade(FindPollResultsForDoctor(doctorId), categoryId, questionId); 
+        }
+
+        public double CalculateHospitalFinalGrade()
+        {
+            return pollService.CalculateHospitalFinalGrade();
+        }
+
+        public double CalculateHospitalCategoryGrade(int categoryId)
+        {
+            return pollService.CalculateCategoryGrade(FindPollResultsForHospital(), categoryId);
+        }
+
+        public double CalculateHospitalQuestionGrade(int categoryId, int questionId)
+        {
+            return pollService.CalculateAverageForQuestion(FindPollResultsForHospital(), categoryId, questionId);
+        }
+
+        public int[] CountEachHospitalGrade(int categoryId, int questionId)
+        {
+            return pollService.CalculateCountOfEachGrade(FindPollResultsForHospital(),categoryId, questionId);
+        }
     }
 }

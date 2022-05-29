@@ -30,7 +30,7 @@ namespace hospital.Service
             List<ScheduledBasicRenovation> renovations = scheduledBasicRenovationRepository.FindAll();
             List<TimeInterval> freeTimeIntervals = GenerateNextMonthIntervals(renovationDuration);
             List<TimeInterval> forDeleting = FindUnavailableIntervalsByAppointments(freeTimeIntervals, appointmentRepository.FindAppointmentsForSpecifiedRoom(room));
-            forDeleting.AddRange(FindUnavailableIntervalsByBasicRenovations(freeTimeIntervals, renovations, room));
+            forDeleting.AddRange(FindUnavailableIntervalsByBasicRenovations(freeTimeIntervals, scheduledBasicRenovationRepository.FindForSpecifiedRoom(room)));
             RemoveUnavailableIntervals(freeTimeIntervals, forDeleting);
             return freeTimeIntervals;
         }
@@ -117,7 +117,7 @@ namespace hospital.Service
         }
 
 
-        private List<TimeInterval> FindUnavailableIntervalsByBasicRenovations(List<TimeInterval> freeTimeIntervals, List<ScheduledBasicRenovation> renovations, Room room)
+        private List<TimeInterval> FindUnavailableIntervalsByBasicRenovations(List<TimeInterval> freeTimeIntervals, List<ScheduledBasicRenovation> renovations)
         {
             List<TimeInterval> unavailableIntervals = new List<TimeInterval>();
 
@@ -125,13 +125,9 @@ namespace hospital.Service
             {
                 foreach (ScheduledBasicRenovation renovation in renovations)
                 {
-                    if (renovation._Room._Name.Equals(room._Name))
+                    if (interval.IsOverlaping(renovation._Interval))
                     {
-                        if (interval._Start.Date.CompareTo(renovation._Interval._Start.Date) == 0 || interval._End.Date.CompareTo(renovation._Interval._Start.Date) == 0 ||
-                            (interval._Start.Date.CompareTo(renovation._Interval._Start.Date) == -1 && interval._End.Date.CompareTo(renovation._Interval._Start.Date) == 1))
-                        {
-                            unavailableIntervals.Add(interval);
-                        }
+                        unavailableIntervals.Add(interval);
                     }
                 }
             }

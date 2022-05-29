@@ -48,14 +48,5 @@ namespace Controller
             return medicineService.DeleteById(id);
         }
 
-        public List<Medicine> FindRejectedMedicines()
-        {
-            return medicineService.FindRejectedMedicines();
-        }
-
-        public List<Medicine> FindApprovedMedicines()
-        {
-            return medicineService.FindApprovedMedicines();
-        }
     }
 }

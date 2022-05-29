@@ -64,16 +64,6 @@ namespace Repository
             return true;
         }
 
-        public List<Medicine> FindRejectedMedicines()
-        {
-            return medicineList.Where(medicine => medicine.Status.ToLower().Equals("rejected")).ToList();
-        }
-
-        public List<Medicine> FindApprovedMedicines()
-        {
-            return medicineList.Where(medicine => medicine.Status.ToLower().Equals("approved")).ToList();
-        }
-
         public bool DeleteById(string id)
         {
             medicineList.Remove(FindById(id));

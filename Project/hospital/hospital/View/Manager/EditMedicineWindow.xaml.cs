@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,8 +60,18 @@ namespace hospital.View
             alternativesField.SelectedItems.Clear();
             foreach (Medicine alternative in alternatives)
             {
-                alternativesField.SelectedItems.Add(alternative);
+                alternativesField.SelectedItems.Add(GetMedicineOriginalReference(alternative));
             }
+        }
+
+        private Medicine GetMedicineOriginalReference(Medicine medicine)
+        {
+            ObservableCollection<Medicine> medicines = medicineController.FindAll();
+            foreach(Medicine med in medicines)
+            {
+                if (med.Id == medicine.Id) return med;
+            }
+            return null;
         }
 
         private void Cancel_Medicine_Click(object sender, RoutedEventArgs e)

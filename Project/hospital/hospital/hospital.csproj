@@ -742,7 +742,30 @@
   <ItemGroup>
     <Resource Include="Resources\Data\IngridientsData.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Images\icons8-hotel-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\icons8-hotel-building-30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\icons8-hotel-star-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\star.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\two-stars.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\stars.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\four.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\five.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

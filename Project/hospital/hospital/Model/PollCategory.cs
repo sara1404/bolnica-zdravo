@@ -37,5 +37,10 @@ namespace hospital.Model
         public PollQuestion FindQuestionById(int id) {
             return pollQuestions.FirstOrDefault(x => x.Id == id);
         }
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 }

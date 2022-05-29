@@ -32,76 +32,122 @@ namespace hospital.View.Manager
             pollController = app.pollBlueprintController;
             doctorController = app.doctorController;
             doctorsComboBox.ItemsSource = doctorController.GetDoctors();
+            categoryComboBox.ItemsSource = pollController.GetDoctorPollBlueprint().Categories;
         }
 
         private void Doctor_Changed(object sender, SelectionChangedEventArgs e)
         {
             FillFinalGrade();
-            FillCategories();
-            FillFirstCategoryQuestion();
-            FillSecondCategoryQuestion();
-            FillThirdCategoryQuestion();
+            FillCategoryInfo();
+            //FillFirstCategoryQuestion();
+            //FillSecondCategoryQuestion();
+            //FillThirdCategoryQuestion();
         }
 
         private void FillFinalGrade() {
             finalAverage.Content = pollController.CalculateDoctorFinalGrade(((Doctor)doctorsComboBox.SelectedItem).Username);
         }
-        private void FillCategories() {
-            category1.Content = pollController.GetDoctorPollBlueprint().Categories[0].Name + pollController.CalculateCategoryGrade(((Doctor)doctorsComboBox.SelectedItem).Username, pollController.GetDoctorPollBlueprint().Categories[0].Id);
-            category2.Content = pollController.GetDoctorPollBlueprint().Categories[1].Name + pollController.CalculateCategoryGrade(((Doctor)doctorsComboBox.SelectedItem).Username, pollController.GetDoctorPollBlueprint().Categories[1].Id); ;
-            category3.Content = pollController.GetDoctorPollBlueprint().Categories[2].Name + pollController.CalculateCategoryGrade(((Doctor)doctorsComboBox.SelectedItem).Username, pollController.GetDoctorPollBlueprint().Categories[2].Id); ;
+        private void FillCategories(int index) {
+            category1.Content = pollController.GetDoctorPollBlueprint().Categories[index].Name + "  " + pollController.CalculateCategoryGrade(((Doctor)doctorsComboBox.SelectedItem).Username, pollController.GetDoctorPollBlueprint().Categories[index].Id);
+            //category2.Content = pollController.GetDoctorPollBlueprint().Categories[1].Name + pollController.CalculateCategoryGrade(((Doctor)doctorsComboBox.SelectedItem).Username, pollController.GetDoctorPollBlueprint().Categories[1].Id); ;
+            //category3.Content = pollController.GetDoctorPollBlueprint().Categories[2].Name + pollController.CalculateCategoryGrade(((Doctor)doctorsComboBox.SelectedItem).Username, pollController.GetDoctorPollBlueprint().Categories[2].Id); ;
         }
 
         private void FillFirstCategoryQuestion() {
             PollCategory category = pollController.GetDoctorPollBlueprint().Categories[0];
             category1Q1.Text = pollController.GetDoctorPollBlueprint().Categories[0].PollQuestions[0].Question;
-            q1.Content = pollController.CalculateDoctorQuestionGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[0].Id) + "/5";
+            grades1.Text = pollController.CalculateDoctorQuestionGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[0].Id) + "/5";
             category1Q2.Text = pollController.GetDoctorPollBlueprint().Categories[0].PollQuestions[1].Question;
-            q2.Content = pollController.CalculateDoctorQuestionGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[1].Id) + "/5";
+            grades2.Text = pollController.CalculateDoctorQuestionGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[1].Id) + "/5";
             category1Q3.Text = pollController.GetDoctorPollBlueprint().Categories[0].PollQuestions[2].Question;
-            q3.Content = pollController.CalculateDoctorQuestionGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[2].Id) + "/5";
-            FillGrades(category, 0, grades1);
-            FillGrades(category, 1, grades2);
-            FillGrades(category, 2, grades3);
+            grades3.Text = pollController.CalculateDoctorQuestionGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[2].Id) + "/5";
+            FillGrades(category, 0);
+            FillGrades(category, 1);
+            FillGrades(category, 2);
         }
         private void FillSecondCategoryQuestion()
         {
             PollCategory category = pollController.GetDoctorPollBlueprint().Categories[1];
 
-            category2Q1.Text = pollController.GetDoctorPollBlueprint().Categories[1].PollQuestions[0].Question;
-            q4.Content = pollController.CalculateDoctorQuestionGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[0].Id) + "/5";
-            category2Q2.Text = pollController.GetDoctorPollBlueprint().Categories[1].PollQuestions[1].Question;
-            q5.Content = pollController.CalculateDoctorQuestionGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[1].Id) + "/5";
-            category2Q3.Text = pollController.GetDoctorPollBlueprint().Categories[1].PollQuestions[2].Question;
-            q6.Content = pollController.CalculateDoctorQuestionGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[2].Id) + "/5";
-            FillGrades(category, 0, grades4);
-            FillGrades(category, 1, grades5);
-            FillGrades(category, 2, grades6);
+            category1Q1.Text = pollController.GetDoctorPollBlueprint().Categories[1].PollQuestions[0].Question;
+            grades1.Text = pollController.CalculateDoctorQuestionGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[0].Id) + "/5";
+            category1Q2.Text = pollController.GetDoctorPollBlueprint().Categories[1].PollQuestions[1].Question;
+            grades2.Text = pollController.CalculateDoctorQuestionGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[1].Id) + "/5";
+            category1Q3.Text = pollController.GetDoctorPollBlueprint().Categories[1].PollQuestions[2].Question;
+            grades3.Text = pollController.CalculateDoctorQuestionGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[2].Id) + "/5";
+            FillGrades(category, 0);
+            FillGrades(category, 1);
+            FillGrades(category, 2);
         }
         private void FillThirdCategoryQuestion()
         {
             PollCategory category = pollController.GetDoctorPollBlueprint().Categories[2];
 
-            category3Q1.Text = pollController.GetDoctorPollBlueprint().Categories[2].PollQuestions[0].Question;
-            q7.Content = pollController.CalculateDoctorQuestionGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[0].Id) + "/5";
-            category3Q2.Text = pollController.GetDoctorPollBlueprint().Categories[2].PollQuestions[1].Question;
-            q8.Content = pollController.CalculateDoctorQuestionGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[1].Id) + "/5";
-            category3Q3.Text = pollController.GetDoctorPollBlueprint().Categories[2].PollQuestions[2].Question;
-            q9.Content = pollController.CalculateDoctorQuestionGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[2].Id) + "/5";
-            FillGrades(category, 0, grades7);
-            FillGrades(category, 1, grades8);
-            FillGrades(category, 2, grades9);
+            category1Q1.Text = pollController.GetDoctorPollBlueprint().Categories[2].PollQuestions[0].Question;
+            grades1.Text = pollController.CalculateDoctorQuestionGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[0].Id) + "/5";
+            category1Q2.Text = pollController.GetDoctorPollBlueprint().Categories[2].PollQuestions[1].Question;
+            grades2.Text = pollController.CalculateDoctorQuestionGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[1].Id) + "/5";
+            category1Q3.Text = pollController.GetDoctorPollBlueprint().Categories[2].PollQuestions[2].Question;
+            grades3.Text = pollController.CalculateDoctorQuestionGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[2].Id) + "/5";
+            FillGrades(category, 0);
+            FillGrades(category, 1);
+            FillGrades(category, 2);
         }
 
-        private void FillGrades(PollCategory category, int question, TextBlock grades)
+        private void FillGrades(PollCategory category, int question)
         {
             int[] gradesCount = pollController.CountEachGrade(((Doctor)doctorsComboBox.SelectedItem).Username, category.Id, category.PollQuestions[question].Id);
-            grades.Text = "1|" + gradesCount[0] +
-                "   2|" + gradesCount[1] +
-                "    3|" + gradesCount[2] +
-                "    4|" + gradesCount[3] +
-                "     5|" + gradesCount[4];
+            if (question == 0) {
+                g11.Text = gradesCount[0].ToString();
+                g12.Text = gradesCount[1].ToString();
+                g13.Text = gradesCount[2].ToString();
+                g14.Text = gradesCount[3].ToString();
+                g15.Text = gradesCount[4].ToString();
+            }
+            else if (question == 1)
+            {
+                g21.Text = gradesCount[0].ToString();
+                g22.Text = gradesCount[1].ToString();
+                g23.Text = gradesCount[2].ToString();
+                g24.Text = gradesCount[3].ToString();
+                g25.Text = gradesCount[4].ToString();
+            }
+            else if (question == 2)
+            {
+                g31.Text = gradesCount[0].ToString();
+                g32.Text = gradesCount[1].ToString();
+                g33.Text = gradesCount[2].ToString();
+                g34.Text = gradesCount[3].ToString();
+                g35.Text = gradesCount[4].ToString();
+            }
+            Console.WriteLine("okida");
         }
 
+        private void Category_Changed(object sender, SelectionChangedEventArgs e)
+        {
+            FillCategoryInfo();
+        }
+
+
+        private void FillCategoryInfo()
+        {
+            if (categoryComboBox.SelectedIndex == 0)
+            {
+                FillFirstCategoryQuestion();
+                FillCategories(0);
+
+            }
+            else if (categoryComboBox.SelectedIndex == 1)
+            {
+                FillSecondCategoryQuestion();
+                FillCategories(1);
+
+            }
+            else if (categoryComboBox.SelectedIndex == 2)
+            {
+                FillThirdCategoryQuestion();
+                FillCategories(2);
+            }
+        }
     }
 }

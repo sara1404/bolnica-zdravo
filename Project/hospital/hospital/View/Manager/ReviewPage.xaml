@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:cmd="clr-namespace:hospital.VM"
       xmlns:local="clr-namespace:hospital.View.Manager"
       mc:Ignorable="d" 
       d:DesignHeight="768" d:DesignWidth="1024"
@@ -27,7 +28,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Image DockPanel.Dock="Left" Height="56" Width="100" Source="../../Resources/Images/logo.png" Grid.Column="0"/>
-                    <Button DockPanel.Dock ="Right"  Grid.Column="4" Margin="88,2,10,30" Click="Logout_Click">
+                    <Button DockPanel.Dock ="Right"  Grid.Column="4" Margin="88,2,10,30" Command="cmd:Commands.LogoutCommand">
                         <Button.Template>
                             <ControlTemplate>
                                 <Image Source="../../Resources/Images/logout_white.png" Margin="0,0,-3,-14"/>
@@ -38,8 +39,17 @@
             </Border>
 
         </StackPanel>
-        <Button Content="Doctor review" HorizontalAlignment="Left" Margin="335,105,0,0" VerticalAlignment="Top" Height="52" Width="182" FontSize="18" Click="Doctor_Review_Click"/>
-        <Button Content="Hospital review" HorizontalAlignment="Left" Margin="83,105,0,0" VerticalAlignment="Top" Height="52" Width="182" FontSize="18" Click="Hospital_Review_Click"/>
+        <Button  Margin="10,121,920,569"
+                 Command="cmd:Commands.GoBackCommand"
+                 >
+            <Button.Template>
+                <ControlTemplate>
+                    <Image Source="../../Resources/Images/back_white.png"/>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button Content="Doctor review" Command="{Binding DoctorReviewCommand}" HorizontalAlignment="Left" Margin="335,105,0,0" VerticalAlignment="Top" Height="52" Width="182" FontSize="18" />
+        <Button Content="Hospital review" Command="{Binding HospitalReviewCommand}" HorizontalAlignment="Left" Margin="83,105,0,0" VerticalAlignment="Top" Height="52" Width="182" FontSize="18" />
         <Border BorderThickness="1" HorizontalAlignment="Left" Height="518" Margin="68,215,0,0" VerticalAlignment="Top" Width="898" BorderBrush="#121212">
             <Grid>
                 <Label Content="Category:" FontSize="16" Margin="29,20,780,455"/>
@@ -64,7 +74,7 @@
                 <TextBox HorizontalAlignment="Left" Margin="338,259,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" Height="74"/>
                 <Label Content="Question 3:" FontSize="16" Margin="620,353,170,122"/>
                 <Label Content="Question 3:" FontSize="16" Margin="333,353,459,122"/>
-                <TextBox HorizontalAlignment="Left" Margin="626,390,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" Height="74" TextChanged="TextBox_TextChanged"/>
+                <TextBox HorizontalAlignment="Left" Margin="626,390,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" Height="74" />
                 <TextBox HorizontalAlignment="Left" Margin="338,385,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" Height="74"/>
                 <Border BorderThickness="1" Margin="10,10,606,23"/>
                 <Border BorderThickness="1" Margin="605,10,24,23"/>
@@ -73,7 +83,7 @@
 
 
         </Border>
-        <Button Content="Create review" HorizontalAlignment="Left" Margin="756,105,0,0" VerticalAlignment="Top" Height="52" Width="182" FontSize="18" Click="Doctor_Review_Click"/>
+        <Button Content="Create review" HorizontalAlignment="Left" Margin="756,105,0,0" VerticalAlignment="Top" Height="52" Width="182" FontSize="18"/>
 
     </Grid>
 </Page>

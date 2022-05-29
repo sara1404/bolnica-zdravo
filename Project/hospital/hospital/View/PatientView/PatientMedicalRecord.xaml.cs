@@ -30,7 +30,8 @@ namespace hospital.View.PatientView
         public PatientMedicalRecord()
         {
             InitializeComponent();
-            app = Application.Current as App;
+            DataContext = new MedicalRecordViewModel();
+            /*app = Application.Current as App;
             pc = app.patientController;
             uc = app.userController;
             mrc = app.medicalRecordsController;
@@ -40,7 +41,7 @@ namespace hospital.View.PatientView
             tbGender.Text = currentPatient.Gender;
             tbDateOfBirth.Text = currentPatient.DateOfBirth.ToString();
             tbAlergens.Text = mrc.FindById(currentPatient.RecordId).Alergies;
-            tbNote.Text = mrc.FindById(currentPatient.RecordId).Note;
+            tbNote.Text = mrc.FindById(currentPatient.RecordId).Note;*/
         }
 
     }

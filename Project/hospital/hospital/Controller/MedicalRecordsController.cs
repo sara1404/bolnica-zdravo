@@ -42,18 +42,7 @@ namespace Controller
         }
         public bool CheckAllergies(int recordId, Medicine medicine)
         {
-            MedicalRecord record = FindById(recordId);
-            List<string> allergies = new List<string>();
-            if (record.Alergies != null)
-                allergies = record.Alergies.Split(',').ToList<string>();
-            foreach (string ingridient in medicine.Ingridients)
-            {
-                if (allergies.Contains(ingridient) || allergies.Contains(medicine.Name))
-                {
-                    return false;
-                }
-            }
-            return true;
+            return medicalRecordsService.CheckAllergies(recordId, medicine);
         }
     }
 }

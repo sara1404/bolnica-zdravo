@@ -72,28 +72,31 @@ namespace hospital.View
         {
             if (appointmentTable.SelectedItem != null)
             {
-
                 Appointment updatedAppointment = (Appointment)appointmentTable.SelectedItem;
                 updatedAppointment.Description = tbDescription.Text;
                 if (cmbOpRoom.SelectedIndex != -1)
                     updatedAppointment.RoomId = ((Room)cmbOpRoom.SelectedItem).id;
 
-                List<ScheduledBasicRenovation> renovationList = sbrc.FindAll();
-                bool canMake = true;
-                foreach (ScheduledBasicRenovation renovation in renovationList)
-                {
-                    if (renovation._Room.id == selectedAppointment.RoomId && renovation._Interval._Start < updatedAppointment.StartTime && renovation._Interval._End > updatedAppointment.StartTime)
-                    {
-                        MessageBox.Show("Invalid time because of renovations");
-                        canMake = false;
-                    }
-                }
+                bool canMake = checkRenovations(updatedAppointment);
                 if (canMake)
                 {
                     ac.UpdateAppointment(selectedAppointment, updatedAppointment);
                     this.Close();
                 }
             }
+        }
+        private bool checkRenovations(Appointment updatedAppointment)
+        {
+            List<ScheduledBasicRenovation> renovationList = sbrc.FindAll();
+            foreach (ScheduledBasicRenovation renovation in renovationList)
+            {
+                if (renovation._Room.id == selectedAppointment.RoomId && renovation._Interval._Start < updatedAppointment.StartTime && renovation._Interval._End > updatedAppointment.StartTime)
+                {
+                    MessageBox.Show("Invalid time because of renovations");
+                    return false;
+                }
+            }
+            return true;
         }
 
         private void cbOperation_Checked(object sender, RoutedEventArgs e)

@@ -82,22 +82,26 @@ namespace hospital.View.UserControls
                 else
                     selectedAppointment.RoomId = loggedInDoctor.OrdinationId;
 
-                List<ScheduledBasicRenovation> renovationList = sbrc.FindAll();
-                bool canMake = true;
-                foreach(ScheduledBasicRenovation renovation in renovationList)
-                {
-                    if(renovation._Room.id == selectedAppointment.RoomId && renovation._Interval._Start < selectedAppointment.StartTime && renovation._Interval._End > selectedAppointment.StartTime)
-                    {
-                        MessageBox.Show("Invalid time because of renovations");
-                        canMake = false;
-                    }
-                }
+                bool canMake = checkRenovation(selectedAppointment); 
                 if (canMake)
                 {
                     ac.CreateAppointment(selectedAppointment);
                     this.Close();
                 }
             }
+        }
+        public bool checkRenovation(Appointment selectedAppointment)
+        {
+            List<ScheduledBasicRenovation> renovationList = sbrc.FindAll();
+            foreach (ScheduledBasicRenovation renovation in renovationList)
+            {
+                if (renovation._Room.id == selectedAppointment.RoomId && renovation._Interval._Start < selectedAppointment.StartTime && renovation._Interval._End > selectedAppointment.StartTime)
+                {
+                    MessageBox.Show("Invalid time because of renovations");
+                    return false;
+                }
+            }
+            return true;
         }
 
         private void cbOperation_Checked(object sender, RoutedEventArgs e)

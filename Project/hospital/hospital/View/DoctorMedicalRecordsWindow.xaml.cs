@@ -55,12 +55,6 @@ namespace hospital.View
         private void cmbPatients_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedPatient = pc.FindById((string)cmbPatients.SelectedItem);
-            if( mrc.FindById(selectedPatient.RecordId) == null)
-            {
-                MedicalRecord medicalRecord = new MedicalRecord(selectedPatient.Username, "", loggedInDoctor.Username, BloodType.abPositive, "");
-                mrc.Create(medicalRecord);
-                selectedPatient.RecordId = medicalRecord.RecordId;
-            }
             tbAlergies.Text = mrc.FindById(selectedPatient.RecordId).Alergies;
             tbNotes.Text = mrc.FindById(selectedPatient.RecordId).Note;
             cmbBloodType.SelectedItem = mrc.FindById(selectedPatient.RecordId).BloodType;

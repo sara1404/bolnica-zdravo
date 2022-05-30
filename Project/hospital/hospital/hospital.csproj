@@ -287,6 +287,7 @@
     <Compile Include="View\Manager\MedicinePage.xaml.cs">
       <DependentUpon>MedicinePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PatientView\AppointmentNoteViewModel.cs" />
     <Compile Include="View\PatientView\MedicalRecordViewModel.cs" />
     <Compile Include="View\PatientView\PatientAppointmentNote.xaml.cs">
       <DependentUpon>PatientAppointmentNote.xaml</DependentUpon>

@@ -15,7 +15,7 @@ namespace Controller
 
         public AppointmentController(AppointmentService appointmentService)
         {
-            this._appointmentService = appointmentService;
+            _appointmentService = appointmentService;
         }
 
         public bool CreateAppointment(Appointment appointment)
@@ -29,18 +29,9 @@ namespace Controller
             return _appointmentService.GetByPatient(id);
         }
 
-        // service
-        public ObservableCollection<Appointment> GetPastAppointmentsByPatient(string id)
+        public ObservableCollection<Appointment> GetPastAppointmentsByPatient(string patientId)
         {
-            ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
-            foreach(Appointment a in _appointmentService.GetByPatient(id))
-            {
-                if(a.StartTime < DateTime.Now)
-                {
-                    appointments.Add(a);
-                }
-            }
-            return appointments;
+            return _appointmentService.GetPastAppointmentsByPatient(patientId);
         }
 
         public ObservableCollection<Appointment> GetAppointmentByDoctor(string username)
@@ -59,10 +50,9 @@ namespace Controller
             return true;
         }
 
-        // service
         public bool CanBeDelayed(Appointment appointment)
         {
-            return DateTime.Now <= appointment.StartTime.AddHours(-24);
+            return _appointmentService.CanBeDelayed(appointment);
         }
 
         public bool DeleteAppointment(int id)

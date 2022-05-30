@@ -47,11 +47,10 @@ namespace hospital.View
                     tbPatient.Text = selectedAppointment.PatientUsername; // changed because of changes in the model 
                     date.SelectedDate = selectedAppointment.StartTime;
                     tbDescription.Text = selectedAppointment.Description;
-                    if (rc.FindRoomById(selectedAppointment.RoomId) != null && rc.FindRoomById(selectedAppointment.RoomId)._Purpose == "operation") //Znaci mora ovako purpose da se zove
+                    if (rc.FindRoomById(selectedAppointment.RoomId) != null && rc.FindRoomById(selectedAppointment.RoomId)._Purpose == "operation")
                     {
-                        cmbOpRoom.ItemsSource = rc.FindAll();
-                        //cmbOpRoom.SelectedItem = (Room)selectedAppointment.operationRoom;
-                        cmbOpRoom.SelectedIndex = 0; //za sad je zakucano
+                        cmbOpRoom.ItemsSource = rc.FindRoomsByPurpose("operation");
+                        cmbOpRoom.SelectedItem = rc.FindRoomById(selectedAppointment.RoomId);
                         cbOperation.IsChecked = true;
                         cmbOpRoom.IsEnabled = true;
                     }

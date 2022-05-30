@@ -47,7 +47,7 @@ namespace hospital.View.UserControls
             sbrc = app.scheduledBasicRenovationController;
             
             cmbPatients.ItemsSource = pc.FindAll();
-            cmbOpRoom.ItemsSource = rc.FindAll();//dodati ovde proveru da izlistava samo "operation" sale
+            cmbOpRoom.ItemsSource = rc.FindRoomsByPurpose("operation");
             loggedInDoctor = dc.GetByUsername(uc.CurentLoggedUser.Username);
             if (loggedInDoctor.Specialization == Specialization.General)
                 cbOperation.IsEnabled = false;

@@ -4,6 +4,7 @@ using hospital.View;
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace hospital.ViewModel
 {
     public class MedicinePageViewModel
     {
-        public List<Medicine> Medicines { get; set; }
+        public ObservableCollection<Medicine> Medicines { get; set; }
         public Medicine SelectedItem { get; set; }
         public ICommand EditMedicineCommand => new EditWindowCommand();
         public ICommand AddMedicineCommand => new AddMedicineCommand();
@@ -28,7 +29,7 @@ namespace hospital.ViewModel
             medicineController = app.medicineController;
             ingridientsController = app.ingridientsController;
 
-            Medicines = app.medicineController.FindAll().ToList();
+            Medicines = app.medicineController.FindAll();
         }
 
         //private void FillForm(EditMedicineWindow editWindow, Medicine medicine)

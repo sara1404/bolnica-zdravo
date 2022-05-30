@@ -136,7 +136,7 @@ namespace hospital.View.PatientView
             }
             return true;
         }
-        // this function has been found online so DON'T F**ING TOUCH IT 
+
         private childItem FindVisualChild<childItem>(DependencyObject obj)
         where childItem : DependencyObject
         {

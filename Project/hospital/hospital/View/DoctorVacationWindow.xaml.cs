@@ -85,6 +85,11 @@ namespace hospital.View
             }
             return false;
         }
+        private void generateRequest()
+        {
+            VacationRequest newRequest = new VacationRequest((DateTime)dpStartDate.SelectedDate, (DateTime)dpEndDate.SelectedDate, (bool)cbHighPriority.IsChecked, tbNote.Text, uc.CurentLoggedUser.Username, -1);
+            vc.Create(newRequest);
+        }
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
             bool isOveralappingWithAppointments = checkOverlapWithAppointments();
@@ -92,14 +97,12 @@ namespace hospital.View
             
             if(isOveralappingWithAppointments == false && cbHighPriority.IsChecked == true && dpStartDate.SelectedDate < dpEndDate.SelectedDate)
             {
-                VacationRequest newRequest = new VacationRequest((DateTime)dpStartDate.SelectedDate, (DateTime)dpEndDate.SelectedDate, (bool)cbHighPriority.IsChecked, tbNote.Text, uc.CurentLoggedUser.Username, -1);
-                vc.Create(newRequest);
+                generateRequest();
                 MessageBox.Show("High priority vacation request sent!");
             }
             else if(isOverlappingWithOtherDoctorWithSameSpecialization == false && isOveralappingWithAppointments == false && dpEndDate.SelectedDate != null && dpStartDate.SelectedDate != null && dpStartDate.SelectedDate < dpEndDate.SelectedDate)
             {
-                VacationRequest newRequest = new VacationRequest((DateTime)dpStartDate.SelectedDate, (DateTime)dpEndDate.SelectedDate, (bool)cbHighPriority.IsChecked, tbNote.Text, uc.CurentLoggedUser.Username, -1);
-                vc.Create(newRequest);
+                generateRequest();
                 MessageBox.Show("Vacation request sent!");
             }
         }

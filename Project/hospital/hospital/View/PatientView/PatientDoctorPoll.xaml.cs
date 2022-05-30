@@ -38,14 +38,11 @@ namespace hospital.View.PatientView
             pbc = app.pollBlueprintController;
             uc = app.userController;
             ac = app.appointmentController;
-            Appointments = ac.GetAppointmentByPatient(uc.CurentLoggedUser.Username);
+            Appointments = ac.GetPastAppointmentsByPatient(uc.CurentLoggedUser.Username);
             DataContext = this;
             Poll = pbc.GetDoctorPollQuestions();
         }
 
-
-
-        // this function has been found online so DON'T F**ING TOUCH IT 
         private childItem FindVisualChild<childItem>(DependencyObject obj)
         where childItem : DependencyObject
         {

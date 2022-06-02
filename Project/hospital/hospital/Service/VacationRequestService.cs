@@ -48,18 +48,23 @@ namespace Service
         }
         private void ApproveRequest(int requestId)
         {
+            ChangeStatusOfRequest(requestId, Status.approved);
             MakeNotification(requestId, "Your vacation request was approved.");
         }
         private void RejectRequest(int requestId)
         {
+            ChangeStatusOfRequest(requestId,Status.rejected);
             MakeNotification(requestId, "Your vacation request was rejected.");
 
+        }
+        private void ChangeStatusOfRequest(int requestId,Status status)
+        {
+            vacationRequestRepository.UpdateStatus(requestId, status);
         }
         private void MakeNotification(int requestId,string notificationText)
         {
             Notification notification = new Notification(FindById(requestId).DoctorId, notificationText);
             notificationRepository.Create(notification);
-            DeleteById(requestId);
         }
     }
 }

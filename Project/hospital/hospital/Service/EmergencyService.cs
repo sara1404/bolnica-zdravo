@@ -147,8 +147,8 @@ namespace Service
         }
         private void MakeNotification(string patientUsername,string doctorUsername)
         {
-            _notificationRepository.Create(new Notification(patientUsername));
-            _notificationRepository.Create(new Notification(doctorUsername));
+            _notificationRepository.Create(new Notification(patientUsername,"New emergency !"));
+            _notificationRepository.Create(new Notification(doctorUsername, "New emergency !"));
         }
         private DateTime FindNearestBusyTimeSlot()
         {

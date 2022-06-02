@@ -17,10 +17,6 @@ namespace Model
 
 
         public Notification() { }
-        public Notification(string username)
-        {
-            _username = username;
-        }
         public Notification(string username,string text)
         {
             _username = username;

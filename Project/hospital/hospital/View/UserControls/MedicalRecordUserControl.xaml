@@ -6,6 +6,16 @@
              xmlns:local="clr-namespace:hospital.View.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="530" d:DesignWidth="950">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid Background="White">
         <StackPanel>
             <Border BorderBrush="gray" BorderThickness="2" Margin="0,40,0,0" Height="450" Width="750" CornerRadius="10">
@@ -18,32 +28,32 @@
                         <DockPanel>
                             <GroupBox DockPanel.Dock="Left" Header="General Information" Margin="10" BorderThickness="1" BorderBrush="Gray" FontSize="20" HorizontalAlignment="Left" Width="371">
                                 <Grid>
-                                    <TextBlock TextWrapping="Wrap" Text="First name" FontSize="15" FontWeight="DemiBold" Margin="40,27,237,296"/>
-                                    <TextBlock TextWrapping="Wrap" Text="Last name" FontSize="15" FontWeight="DemiBold" Margin="198,27,79,296"/>
-                                    <TextBox  x:Name="txtFirstName" IsEnabled="false" TextWrapping="Wrap" Height="24" Width="120" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="40,52,199,272"/>
-                                    <TextBox  x:Name="txtLastName" IsEnabled="false" TextWrapping="Wrap" Height="24" Width="120" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="198,52,41,272"/>
-                                    <TextBlock TextWrapping="Wrap" Text="Phone number" FontSize="15" FontWeight="DemiBold" Margin="40,98,211,223"/>
-                                    <TextBlock TextWrapping="Wrap" Text="ID" FontSize="15" FontWeight="DemiBold" Margin="198,98,79,224"/>
-                                    <TextBox  x:Name="txtPhone" IsEnabled="false" TextWrapping="Wrap" Height="24" Width="120" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="40,124,199,200"/>
-                                    <TextBox  x:Name="txtId" IsEnabled="false" TextWrapping="Wrap" Height="24" Width="120" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="198,124,41,200"/>
-                                    <TextBlock TextWrapping="Wrap" Text="Choosen doctor" FontSize="15" FontWeight="DemiBold" Margin="40,169,199,151"/>
-                                    <TextBox  x:Name="txtDoctor" IsEnabled="false" TextWrapping="Wrap" Height="24" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="40,197,41,127"/>
-                                    <TextBlock TextWrapping="Wrap" Text="Record ID" FontSize="15" FontWeight="DemiBold" Margin="40,243,211,77"/>
-                                    <TextBox  x:Name="txtRecordId" IsEnabled="false" TextWrapping="Wrap" Height="24" Width="120" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="198,243,41,81"/>
-                                    <TextBlock TextWrapping="Wrap" Text="Date of Birth" FontSize="15" FontWeight="DemiBold" Margin="40,290,211,29"/>
-                                    <TextBox  x:Name="txtDate" TextWrapping="Wrap" IsEnabled="false" Height="24" Width="120" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="198,290,41,34"/>
+                                    <TextBlock TextWrapping="Wrap" Text="First name" FontSize="15" FontWeight="DemiBold" Margin="40,27,237,275"/>
+                                    <TextBlock TextWrapping="Wrap" Text="Last name" FontSize="15" FontWeight="DemiBold" Margin="198,27,79,275"/>
+                                    <TextBox  x:Name="txtFirstName" IsEnabled="false" FontSize="12" TextWrapping="Wrap" Height="24" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="40,52,177,243"/>
+                                    <TextBox  x:Name="txtLastName" IsEnabled="false" FontSize="12" TextWrapping="Wrap" Height="24" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="198,52,21,243"/>
+                                    <TextBlock TextWrapping="Wrap" Text="Phone number" FontSize="15" FontWeight="DemiBold" Margin="40,98,211,203"/>
+                                    <TextBlock TextWrapping="Wrap" Text="ID" FontSize="15" FontWeight="DemiBold" Margin="198,98,79,203"/>
+                                    <TextBox  x:Name="txtPhone" IsEnabled="false" FontSize="12" TextWrapping="Wrap" Height="24" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="40,124,177,171"/>
+                                    <TextBox  x:Name="txtId" IsEnabled="false" FontSize="12" TextWrapping="Wrap" Height="24" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="198,124,21,171"/>
+                                    <TextBlock TextWrapping="Wrap" Text="Choosen doctor" FontSize="15" FontWeight="DemiBold" Margin="40,169,199,130"/>
+                                    <TextBox  x:Name="txtDoctor" IsEnabled="false" FontSize="12" TextWrapping="Wrap" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="40,197,41,98"/>
+                                    <TextBlock TextWrapping="Wrap" Text="Record ID" FontSize="15" FontWeight="DemiBold" Margin="40,243,211,54"/>
+                                    <TextBox  x:Name="txtRecordId" IsEnabled="false" FontSize="12" TextWrapping="Wrap" Width="120" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="198,243,35,54"/>
+                                    <TextBlock TextWrapping="Wrap" Text="Date of Birth" FontSize="15" FontWeight="DemiBold" Margin="40,290,211,7"/>
+                                    <TextBox  x:Name="txtDate" TextWrapping="Wrap" FontSize="12" IsEnabled="false" Width="120" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="198,290,35,7"/>
                                 </Grid>
                             </GroupBox>
                             <GroupBox DockPanel.Dock="Top" Header="Medical Information" Margin="10" BorderThickness="1" BorderBrush="Gray" FontSize="20" VerticalAlignment="Top" Width="330" Height="200">
                                 <Grid>
-                                    <TextBlock TextWrapping="Wrap" Height="25" Text="Blood type" FontSize="15" FontWeight="DemiBold" Margin="30,16,209,125"/>
-                                    <TextBox  x:Name="txtBlood" TextWrapping="Wrap" IsEnabled="false" Height="24" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="149,17,30,125"/>
-                                    <TextBlock TextWrapping="Wrap" Height="25" Text="Allergens" FontSize="15" FontWeight="DemiBold" Margin="30,58,209,83"/>
-                                    <ListBox x:Name="listAllergens" Margin="30,83,30,10" FontSize="13"/>
+                                    <TextBlock TextWrapping="Wrap" Text="Blood type" FontSize="15" FontWeight="DemiBold" Margin="30,9,192,101"/>
+                                    <TextBox  x:Name="txtBlood" TextWrapping="Wrap" FontSize="12" IsEnabled="false" Text="" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="149,10,30,101"/>
+                                    <TextBlock TextWrapping="Wrap" Height="25" Text="Allergens" FontSize="15" FontWeight="DemiBold" Margin="30,44,192,69"/>
+                                    <ListBox x:Name="listAllergens" BorderThickness="1"  BorderBrush="LightGray" Margin="30,68,30,0" FontSize="12"/>
                                 </Grid>
                             </GroupBox>
                             <GroupBox DockPanel.Dock="Right" Header="Note" BorderThickness="1" Margin="10" BorderBrush="Gray" FontSize="20" VerticalAlignment="Top" Width="330" Height="162">
-                                <TextBox x:Name="txtNote" IsEnabled="false" AcceptsReturn="True" BorderThickness="0" FontSize="13"></TextBox>
+                                <TextBox x:Name="txtNote" IsEnabled="false" AcceptsReturn="True" BorderThickness="0" FontSize="12"></TextBox>
                             </GroupBox>
                         </DockPanel>
                     </Grid>

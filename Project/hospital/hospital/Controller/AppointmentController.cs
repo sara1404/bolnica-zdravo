@@ -29,6 +29,7 @@ namespace Controller
             return _appointmentService.GetByPatient(id);
         }
 
+        // service
         public ObservableCollection<Appointment> GetPastAppointmentsByPatient(string id)
         {
             ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
@@ -58,17 +59,10 @@ namespace Controller
             return true;
         }
 
+        // service
         public bool CanBeDelayed(Appointment appointment)
         {
-            DateTime now = DateTime.Now;
-            if(now <= appointment.StartTime.AddHours(-24))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return DateTime.Now <= appointment.StartTime.AddHours(-24);
         }
 
         public bool DeleteAppointment(int id)

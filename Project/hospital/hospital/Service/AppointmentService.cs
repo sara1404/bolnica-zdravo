@@ -16,6 +16,7 @@ namespace Service
         private readonly AppointmentRepository _appointmentRepository;
         //private readonly RoomService _roomService; // ovaj servis je ostao viska, pogledati gde bi trebalo da se ubaci
 
+        //appointment managment service
         public AppointmentService(AppointmentRepository appointmentRepository)
         {
             this._appointmentRepository = appointmentRepository;

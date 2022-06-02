@@ -181,6 +181,7 @@
     <Compile Include="Repository\ScheduledAdvancedRenovationRepository.cs" />
     <Compile Include="Repository\ScheduledBasicRenovationRepository.cs" />
     <Compile Include="Repository\ScheduledRelocationRepository.cs" />
+    <Compile Include="Repository\TimeSchedulerRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\VacationRequestRepository.cs" />
     <Compile Include="Service\AppointmentService.cs" />

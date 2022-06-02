@@ -15,9 +15,9 @@ namespace Service
         {
             medicalRecordsRepository = _repo;
         }
-        public bool Create(MedicalRecord medicalRecord)
+        public void Create(MedicalRecord medicalRecord)
         {
-            return medicalRecordsRepository.Create(medicalRecord); 
+            medicalRecordsRepository.Create(medicalRecord); 
 
         }
 

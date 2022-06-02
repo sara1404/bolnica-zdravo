@@ -42,9 +42,9 @@ namespace Controller
             return userService.UpdateByUsername(username, user);
         }
 
-        public User sendDate(string username,string password)
+        public User SendDate(string username,string password)
         {
-           return CurentLoggedUser=userService.checkCredentials(username, password);
+           return CurentLoggedUser=userService.CheckCredentials(username, password);
         }
     }
 }

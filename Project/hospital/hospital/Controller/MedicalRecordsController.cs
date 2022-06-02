@@ -12,9 +12,9 @@ namespace Controller
         private readonly MedicalRecordsService medicalRecordsService;
         public int RecordId { get; set; }
         public MedicalRecordsController(MedicalRecordsService _service) { medicalRecordsService = _service; }
-        public bool Create(MedicalRecord medicalRecord)
+        public void Create(MedicalRecord medicalRecord)
         {
-            return medicalRecordsService.Create(medicalRecord);
+            medicalRecordsService.Create(medicalRecord);
         }
 
         public ObservableCollection<MedicalRecord> FindAll()

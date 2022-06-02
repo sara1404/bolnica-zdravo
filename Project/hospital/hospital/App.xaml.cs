@@ -158,7 +158,7 @@ namespace hospital
             scheduledAdvancedRenovationRepository.LoadRenovationData();
             ingridientsRepository.LoadIngridientsData();
 
-            orderThread = new Thread(orderService.orderTracker);
+            orderThread = new Thread(orderService.OrderTracker);
             orderThread.Start();
 
             Notifier = new Notifier(cfg =>

@@ -24,7 +24,7 @@ namespace hospital.View
     public partial class DoctorMakeNewAppointmentForOtherDoctors : Window
     {
         private DoctorController dc;
-        private AppointmentController ac;
+        private AppointmentManagementController ac;
         private PatientController pc;
         private RoomController rc;
         private UserController uc;

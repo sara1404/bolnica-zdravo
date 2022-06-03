@@ -45,6 +45,16 @@ namespace hospital.View.UserControls
             _currentSelected = (VacationRequest)dateGridHandlingRest.SelectedItem;
             if (_currentSelected != null)
             {
+                if(_currentSelected.Status == Status.approved || _currentSelected.Status == Status.rejected)
+                {
+                    btnApprove.IsEnabled = false;
+                    btnReject.IsEnabled = false;
+                }
+                else
+                {
+                    btnApprove.IsEnabled = true;
+                    btnReject.IsEnabled = true;
+                }
                 txtDate.Text = _currentSelected.StartDate.ToString().Split(' ')[0] + "-" + _currentSelected.EndDate.ToString().Split(' ')[0];
                 txtMotive.Text = _currentSelected.Note;
                 header.Header = _doctorController.GetByUsername(_currentSelected.DoctorId);

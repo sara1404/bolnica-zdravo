@@ -25,7 +25,7 @@ namespace hospital.View
     /// </summary>
     public partial class PatientAppointmentsPage : Page
     {
-        private AppointmentController ac;
+        private AppointmentManagementController ac;
         private PatientController pc;
         private UserController uc;
         private App app;

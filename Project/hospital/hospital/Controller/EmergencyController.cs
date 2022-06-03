@@ -17,9 +17,9 @@ namespace Controller
             this._emergencyService = emergencyService;
         }
 
-        public void tryMakeEmergencyAppointment(string patientUsername, Specialization requiredSpecialization, bool isOperation)
+        public void TryMakeEmergencyAppointment(string patientUsername, Specialization requiredSpecialization, bool isOperation)
         {
-            _emergencyService.tryMakeEmergencyAppointment(patientUsername, requiredSpecialization, isOperation);
+            _emergencyService.TryMakeEmergencyAppointment(patientUsername, requiredSpecialization, isOperation);
         }
         public List<Appointment> FindSuggestedAppointments()
         {

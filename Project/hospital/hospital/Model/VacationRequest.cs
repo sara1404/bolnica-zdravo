@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public enum Status { waiting, approved }
+    public enum Status { waiting, approved, rejected }
     public class VacationRequest
     {
         private string doctorId;
@@ -104,6 +104,16 @@ namespace Model
             set
             {
                 id = value;
+            }
+        }
+        public string VacationStatus
+        {
+            get
+            {
+                if (status == Status.approved) return "Approved";
+                if (status == Status.rejected) return "Rejected";
+                else
+                    return "Waiting";
             }
         }
 

@@ -14,7 +14,6 @@ namespace Repository
     {
         public NotificationFileHandler _notificationFileHandler;
         public ObservableCollection<Notification> _notifications;
-        private MedicalRecordsRepository _medicalRecordsRepository;
 
         public NotificationRepository()
         {

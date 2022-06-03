@@ -24,7 +24,7 @@ namespace hospital.View.UserControls
     public partial class DoctorMakeNewAppointment : Window
     {
         private DoctorController dc;
-        private AppointmentController ac;
+        private AppointmentManagementController ac;
         private PatientController pc;
         private RoomController rc;
         private UserController uc;
@@ -47,7 +47,7 @@ namespace hospital.View.UserControls
             sbrc = app.scheduledBasicRenovationController;
             
             cmbPatients.ItemsSource = pc.FindAll();
-            cmbOpRoom.ItemsSource = rc.FindAll();//dodati ovde proveru da izlistava samo "operation" sale
+            cmbOpRoom.ItemsSource = rc.FindRoomsByPurpose("operation");
             loggedInDoctor = dc.GetByUsername(uc.CurentLoggedUser.Username);
             if (loggedInDoctor.Specialization == Specialization.General)
                 cbOperation.IsEnabled = false;
@@ -82,22 +82,26 @@ namespace hospital.View.UserControls
                 else
                     selectedAppointment.RoomId = loggedInDoctor.OrdinationId;
 
-                List<ScheduledBasicRenovation> renovationList = sbrc.FindAll();
-                bool canMake = true;
-                foreach(ScheduledBasicRenovation renovation in renovationList)
-                {
-                    if(renovation._Room.id == selectedAppointment.RoomId && renovation._Interval._Start < selectedAppointment.StartTime && renovation._Interval._End > selectedAppointment.StartTime)
-                    {
-                        MessageBox.Show("Invalid time because of renovations");
-                        canMake = false;
-                    }
-                }
+                bool canMake = checkRenovation(selectedAppointment); 
                 if (canMake)
                 {
                     ac.CreateAppointment(selectedAppointment);
                     this.Close();
                 }
             }
+        }
+        public bool checkRenovation(Appointment selectedAppointment)
+        {
+            List<ScheduledBasicRenovation> renovationList = sbrc.FindAll();
+            foreach (ScheduledBasicRenovation renovation in renovationList)
+            {
+                if (renovation._Room.id == selectedAppointment.RoomId && renovation._Interval._Start < selectedAppointment.StartTime && renovation._Interval._End > selectedAppointment.StartTime)
+                {
+                    MessageBox.Show("Invalid time because of renovations");
+                    return false;
+                }
+            }
+            return true;
         }
 
         private void cbOperation_Checked(object sender, RoutedEventArgs e)

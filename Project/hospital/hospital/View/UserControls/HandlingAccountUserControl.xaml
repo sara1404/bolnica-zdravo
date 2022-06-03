@@ -6,25 +6,47 @@
              xmlns:local="clr-namespace:hospital.View.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="530" d:DesignWidth="950">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid Background="White">
         <StackPanel>
             <Border BorderBrush="gray" BorderThickness="2" Margin="0,40,0,0" Height="450" Width="750" CornerRadius="10">
                 <StackPanel>
                     <Label FontSize="25" FontWeight="DemiBold" Margin="0,0,0,0" HorizontalAlignment="Center">Handling account</Label>
                     <StackPanel Orientation="Horizontal"  Height="25" Width="500">
-                        <Button x:Name="btnAddAccount" Margin="0,0,5,0" BorderBrush="Transparent" Width="25" Background="Transparent" Click="btnAddAccount_Click">
+                        <Button x:Name="btnAddAccount" Padding="2,-6,2,0" Margin="0,0,5,0" BorderBrush="Transparent" Width="25" Background="Transparent" Click="btnAddAccount_Click">
                             <Image Source="../../Resources/Images/addition_24x24.png"></Image>
                         </Button>
-                        <Button x:Name="btnEdit" Margin="5,0,5,0"  BorderBrush="Transparent" Width="25" Background="Transparent" Click="btnEdit_Click">
+                        <Button x:Name="btnEdit" Margin="5,0,5,0" Padding="1,-10,0,0" BorderBrush="Transparent" Width="25" Background="Transparent" Click="btnEdit_Click">
                             <Image Source="../../Resources/Images/editing_24x24.png"></Image>
                         </Button>
-                        <Button x:Name="btnRemove" Margin="5,0,5,0"  BorderBrush="Transparent" Width="25" Background="Transparent" Click="btnRemove_Click">
+                        <Button x:Name="btnRemove" Padding="1,-6,2,0" Margin="5,0,5,0"  BorderBrush="Transparent" Width="25" Background="Transparent" Click="btnRemove_Click">
                             <Image Source="../../Resources/Images/delete_24x24.png"></Image>
                         </Button>
                         <Border Margin="280,0,0,0" Width="120" BorderBrush="DarkGray" BorderThickness="1">
                             <DockPanel Margin="-1,0,-1,0" Width="120">
-                                <TextBox x:Name="txtSearch" Text="" FontSize="15" HorizontalAlignment="Stretch" Width="95" Background="Transparent" BorderThickness="0" TextChanged="txtSearch_TextChanged"/>
-                                <Button BorderThickness="0" DockPanel.Dock="Left" HorizontalAlignment="Right" Height="25" Width="25" Background="Transparent"  BorderBrush="Gray">
+                                <TextBox x:Name="txtSearch" Text="" FontSize="12" HorizontalAlignment="Stretch" Width="95" Background="Transparent" BorderThickness="0" TextChanged="txtSearch_TextChanged"/>
+                                <TextBlock IsHitTestVisible="False" Text="Search" VerticalAlignment="Center" Margin="-90" Foreground="DarkGray">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Text, ElementName=txtSearch}" Value="">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <Button BorderThickness="0" Padding="0,0,0,0" DockPanel.Dock="Left" HorizontalAlignment="Right" Height="25" Width="25" Background="Transparent"  BorderBrush="Gray">
                                     <Image Source="../../Resources/Images/loupe.png"></Image>
                                 </Button>
                             </DockPanel>

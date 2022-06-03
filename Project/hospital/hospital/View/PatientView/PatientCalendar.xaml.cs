@@ -28,7 +28,7 @@ namespace hospital.View.PatientView
         {
             InitializeComponent();
             App app = Application.Current as App;
-            AppointmentController ac = app.appointmentController;
+            AppointmentManagementController ac = app.appointmentController;
             ScheduleAppointmentCollection sac = new ScheduleAppointmentCollection();
 
             foreach(Appointment a in ac.GetAppointmentByPatient(app.userController.CurentLoggedUser.Username))

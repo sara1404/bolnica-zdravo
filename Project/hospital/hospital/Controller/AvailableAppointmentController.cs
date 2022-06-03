@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace hospital.Controller
+namespace Controller
 {
     public class AvailableAppointmentController
     {

@@ -37,7 +37,7 @@ namespace Service
             return _orderRepository.FindAll();
         }
 
-        public void orderTracker()
+        public void OrderTracker()
         {
             while (true)
             {

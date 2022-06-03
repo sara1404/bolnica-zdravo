@@ -181,9 +181,10 @@
     <Compile Include="Repository\ScheduledAdvancedRenovationRepository.cs" />
     <Compile Include="Repository\ScheduledBasicRenovationRepository.cs" />
     <Compile Include="Repository\ScheduledRelocationRepository.cs" />
+    <Compile Include="Repository\TimeSchedulerRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\VacationRequestRepository.cs" />
-    <Compile Include="Service\AppointmentService.cs" />
+    <Compile Include="Service\AppointmentManagementService.cs" />
     <Compile Include="Service\AvailableAppointmentService.cs" />
     <Compile Include="Service\DoctorService.cs" />
     <Compile Include="Service\EmergencyService.cs" />
@@ -269,9 +270,9 @@
     <Compile Include="View\Manager\EquipmentRelocationWindow.xaml.cs">
       <DependentUpon>EquipmentRelocationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\HandlingMedicalRecordsPage.xaml.cs">
+    <!--<Compile Include="View\HandlingMedicalRecordsPage.xaml.cs">
       <DependentUpon>HandlingMedicalRecordsPage.xaml</DependentUpon>
-    </Compile>
+    </Compile>-->
     <Compile Include="View\Manager\FillTxtFieldCommand.cs" />
     <Compile Include="View\Manager\HospitalReviewWindow.xaml.cs">
       <DependentUpon>HospitalReviewWindow.xaml</DependentUpon>
@@ -365,6 +366,9 @@
     <Compile Include="View\UserControls\HandlingAccountUserControl.xaml.cs">
       <DependentUpon>HandlingAccountUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\HandlingAppointmentUserControl.xaml.cs">
+      <DependentUpon>HandlingAppointmentUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserControls\HandlingEmergencyUserControl.xaml.cs">
       <DependentUpon>HandlingEmergencyUserControl.xaml</DependentUpon>
     </Compile>
@@ -379,6 +383,9 @@
     </Compile>
     <Compile Include="View\UserControls\OrderEquipmentUserControl.xaml.cs">
       <DependentUpon>OrderEquipmentUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\PopUpUserControl.xaml.cs">
+      <DependentUpon>PopUpUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\RemoveAppointementUserControl.xaml.cs">
       <DependentUpon>RemoveAppointementUserControl.xaml</DependentUpon>
@@ -409,7 +416,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controller\AppointmentController.cs" />
+    <Compile Include="Controller\AppointmentManagementController.cs" />
     <Compile Include="Controller\MedicalRecordsController.cs" />
     <Compile Include="Controller\PatientController.cs" />
     <Compile Include="Controller\RoomController.cs" />
@@ -499,10 +506,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Manager\AddRoomWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\HandlingMedicalRecordsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -626,6 +629,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UserControls\HandlingAppointmentUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UserControls\HandlingEmergencyUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -643,6 +650,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\OrderEquipmentUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\PopUpUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -844,6 +855,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\five.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets')" />

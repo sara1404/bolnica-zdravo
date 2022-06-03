@@ -10,7 +10,7 @@ namespace Repository
 {
     public class AppointmentRepository
     {
-        public ObservableCollection<Appointment> appointments;
+        private ObservableCollection<Appointment> _appointments;
         public FileHandler.AppointmentsFileHandler appointmentsFileHandler;
 
         public AppointmentRepository()
@@ -20,24 +20,24 @@ namespace Repository
             List<Appointment> deserializedList = appointmentsFileHandler.Read();
             if (deserializedList == null)
             {
-                appointments = new ObservableCollection<Appointment>();
+                _appointments = new ObservableCollection<Appointment>();
             }
             else
             {
-                appointments = new ObservableCollection<Appointment>(appointmentsFileHandler.Read());
+                _appointments = new ObservableCollection<Appointment>(appointmentsFileHandler.Read());
             }
         }
 
         public int GetNewId()
         {
-            if (appointments.Count == 0)
+            if (_appointments.Count == 0)
             {
                 return 0;
             }
             else
             {
                 int max = 0;
-                foreach (Appointment a in appointments)
+                foreach (Appointment a in _appointments)
                 {
                     if (a.Id > max)
                     {
@@ -49,7 +49,7 @@ namespace Repository
         }
         public Appointment FindById(int id)
         {
-            foreach (Appointment a in appointments)
+            foreach (Appointment a in _appointments)
             {
                 if (a.Id == id)
                 {
@@ -61,19 +61,19 @@ namespace Repository
 
         public ObservableCollection<Appointment> FindAll()
         {
-            return appointments;
+            return _appointments;
         }
 
         public void DeleteById(int id)
         {
-            appointments.Remove(FindById(id));
-            appointmentsFileHandler.Write(appointments.ToList());
+            _appointments.Remove(FindById(id));
+            appointmentsFileHandler.Write(_appointments.ToList());
         }
 
         public void Create(Appointment _appointment)
         {
-            appointments.Add(_appointment);
-            appointmentsFileHandler.Write(appointments.ToList());
+            _appointments.Add(_appointment);
+            appointmentsFileHandler.Write(_appointments.ToList());
         }
 
         public void AddAppointment(Model.Appointment newAppointment)
@@ -83,15 +83,15 @@ namespace Repository
                 return;
             }
 
-            if (appointments == null)
+            if (_appointments == null)
             {
-                appointments = new ObservableCollection<Appointment>();
+                _appointments = new ObservableCollection<Appointment>();
             }
 
-            if (!appointments.Contains(newAppointment))
+            if (!_appointments.Contains(newAppointment))
             {
-                appointments.Add(newAppointment);
-                appointmentsFileHandler.Write(appointments.ToList());
+                _appointments.Add(newAppointment);
+                appointmentsFileHandler.Write(_appointments.ToList());
             }
         }
 
@@ -103,12 +103,12 @@ namespace Repository
                 return;
             }
 
-            if (appointments != null)
+            if (_appointments != null)
             {
-                if (appointments.Contains(oldAppointment))
+                if (_appointments.Contains(oldAppointment))
                 {
-                    appointments.Remove(oldAppointment);
-                    appointmentsFileHandler.Write(appointments.ToList());
+                    _appointments.Remove(oldAppointment);
+                    appointmentsFileHandler.Write(_appointments.ToList());
                 }
             }
         }
@@ -116,7 +116,7 @@ namespace Repository
         public List<Appointment> FindAppointmentsForSpecifiedRoom(Room room)
         {
             List<Appointment> appointmentsInRoom = new List<Appointment>();
-            foreach (Appointment appointment in appointments)
+            foreach (Appointment appointment in _appointments)
             {
                 if (appointment.RoomId.Equals(room.id))
                 {
@@ -129,7 +129,7 @@ namespace Repository
         public List<ChartDataDTO> GetPopularTimes()
         {
             List<ChartDataDTO> retVal = new List<ChartDataDTO>();
-            foreach (Appointment a in appointments)
+            foreach (Appointment a in _appointments)
             {
                 if (retVal.Find(x => x.Time == ConvertDateToHours(a.StartTime)) == null)
                 {

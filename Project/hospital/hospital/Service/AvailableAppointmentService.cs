@@ -4,17 +4,14 @@ using Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace hospital.Service
 {
     public class AvailableAppointmentService
     {
-        private readonly AppointmentService _appointmentService;
+        private readonly AppointmentManagementService _appointmentService;
         private readonly DoctorRepository _doctorRepository;
-        public AvailableAppointmentService(AppointmentService appointmentService, DoctorRepository doctorRepository)
+        public AvailableAppointmentService(AppointmentManagementService appointmentService, DoctorRepository doctorRepository)
         {
             _appointmentService = appointmentService;
             _doctorRepository = doctorRepository;
@@ -26,13 +23,13 @@ namespace hospital.Service
             startTimes.AddRange(ConvertAppointmentsToStartTimes(_appointmentService.GetByPatient(patientUsername)));
             List<DateTime> allTimeSlots = AddTimeSlots(DateTime.Now.AddDays(1), DateTime.Now.AddDays(1));
             allTimeSlots.RemoveAll(x => startTimes.Contains(x));
-            ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
+            ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
             foreach (DateTime time in allTimeSlots)
             {
-                retVal.Add(new Appointment(-1, doctorUsername, patientUsername, time));
+                appointments.Add(new Appointment(-1, doctorUsername, patientUsername, time));
             }
 
-            return retVal;
+            return appointments;
         }
 
         public ObservableCollection<Appointment> GetFreeAppointmentsByDate(DateTime date, string patientUsername)
@@ -40,19 +37,13 @@ namespace hospital.Service
             List<DateTime> startTimes = ConvertAppointmentsToStartTimes(_appointmentService.GetByPatient(patientUsername));
             List<DateTime> allTimeSlots = AddTimeSlots(date, date);
             allTimeSlots.RemoveAll(x => startTimes.Contains(x));
-            ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
+            List<Appointment> appointments = new List<Appointment>();
             foreach (DateTime time in allTimeSlots)
             {
-                foreach (Doctor d in _doctorRepository.FindAll())
-                {
-                    if (!DoctorHasAppointment(time, d.Username))
-                    {
-                        retVal.Add(new Appointment(-1, d.Username, patientUsername, time));
-                    }
-                }
+                appointments.AddRange(FillAppointmentsWithAllDoctors(time, patientUsername));
             }
 
-            return retVal;
+            return new ObservableCollection<Appointment>(appointments);
         }
 
         public ObservableCollection<Appointment> GetFreeAppointmentsByDateAndDoctor(DateTime date, string doctorUsername, string patientUsername)
@@ -61,12 +52,25 @@ namespace hospital.Service
             startTimes.AddRange(ConvertAppointmentsToStartTimes(_appointmentService.GetByPatient(patientUsername)));
             List<DateTime> allTimeSlots = AddTimeSlots(date, date);
             allTimeSlots.RemoveAll(x => startTimes.Contains(x));
-            ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
+            ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
             foreach (DateTime time in allTimeSlots)
             {
-                retVal.Add(new Appointment(-1, doctorUsername, patientUsername, time));
+                appointments.Add(new Appointment(-1, doctorUsername, patientUsername, time));
             }
-            return retVal;
+            return appointments;
+        }
+
+        private List<Appointment> FillAppointmentsWithAllDoctors(DateTime time, string patientUsername)
+        {
+            List<Appointment> appointments = new List<Appointment>();
+            foreach (Doctor d in _doctorRepository.FindAll())
+            {
+                if (!DoctorHasAppointment(time, d.Username))
+                {
+                    appointments.Add(new Appointment(-1, d.Username, patientUsername, time));
+                }
+            }
+            return appointments;
         }
 
         private List<DateTime> ConvertAppointmentsToStartTimes(ObservableCollection<Appointment> appointments)

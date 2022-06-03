@@ -11,6 +11,6 @@
 
 ## Regex
 To check if your branch name complies with this convention go to regex101.com and use this regex to check:  
-`(\bbugfix\b|\bhotfix\b|\bfeature\b)\/([A-Za-z0-9\-]+)`  
-`main`, `develop`, `refactor` branches are not to be renamed, i.e. you don't need to add the `/abc...` suffix to them  
+`(\bbugfix\b|\bhotfix\b|\bfeature\b|\brefactor\b)\/([A-Za-z0-9\-]+)`  
+`main`, `develop` branches are not to be renamed, i.e. you don't need to add the `/abc...` suffix to them  
 Please be sure that the **whole string** matches!  

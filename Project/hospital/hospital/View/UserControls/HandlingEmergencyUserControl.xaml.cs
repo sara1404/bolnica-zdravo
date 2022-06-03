@@ -30,7 +30,7 @@ namespace hospital.View.UserControls
         public ObservableCollection<Patient> Patients { get; set; }
         public ObservableCollection<Specialization> Specializations { get; set; }
         private PatientController _patientController;
-        private AppointmentController _appointmentController;
+        private AppointmentManagementController _appointmentController;
         private EmergencyController _emergencyController;
 
         private Notifier Notifier { get; set; }
@@ -59,7 +59,7 @@ namespace hospital.View.UserControls
             {
                 try
                 {
-                    _emergencyController.tryMakeEmergencyAppointment(cmbPatient.Text, GetSpecialization(cmbSpecialization.Text),(bool)cbOperation.IsChecked);
+                    _emergencyController.TryMakeEmergencyAppointment(cmbPatient.Text, GetSpecialization(cmbSpecialization.Text),(bool)cbOperation.IsChecked);
                     Notifier.ShowSuccess("Successfully scheduled an emergency.");
                 }catch(Exception ex)
                 {
@@ -92,6 +92,16 @@ namespace hospital.View.UserControls
                 default :
                     return Specialization.Oncologist;
             }
+        }
+
+        public void ResetFields()
+        {
+            cmbPatient.Text = "";
+            cmbSpecialization.Text = "";
+            cbOperation.IsChecked = false;
+            btnShowRec.Visibility= Visibility.Collapsed;
+            err.Visibility= Visibility.Collapsed;
+
         }
         private bool isValidate()
         {
@@ -127,7 +137,7 @@ namespace hospital.View.UserControls
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Visibility = Visibility.Collapsed;
+            ResetFields();
         }
 
         private void cmbSpecialization_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -12,12 +12,12 @@ namespace Service
 {
     public class RecommendedAppointmentService
     {
-        private readonly AppointmentService _appointmentService;
+        private readonly AppointmentManagementService _appointmentService;
         private readonly NotificationRepository _notificationRepository;
         private readonly DoctorRepository _doctorRepository;
         private readonly AvailableAppointmentService _availableAppointmentService;
 
-        public RecommendedAppointmentService(AppointmentService appointmentService, NotificationRepository notificationRepository, DoctorRepository doctorRepository, AvailableAppointmentService availableAppointmentService)
+        public RecommendedAppointmentService(AppointmentManagementService appointmentService, NotificationRepository notificationRepository, DoctorRepository doctorRepository, AvailableAppointmentService availableAppointmentService)
         {
             _notificationRepository = notificationRepository;
             _appointmentService = appointmentService;

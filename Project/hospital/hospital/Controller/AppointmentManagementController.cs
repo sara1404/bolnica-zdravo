@@ -9,11 +9,11 @@ using hospital.DTO;
 
 namespace Controller
 {
-    public class AppointmentController
+    public class AppointmentManagementController
     {
-        private readonly Service.AppointmentService _appointmentService;
+        private readonly Service.AppointmentManagementService _appointmentService;
 
-        public AppointmentController(AppointmentService appointmentService)
+        public AppointmentManagementController(AppointmentManagementService appointmentService)
         {
             _appointmentService = appointmentService;
         }

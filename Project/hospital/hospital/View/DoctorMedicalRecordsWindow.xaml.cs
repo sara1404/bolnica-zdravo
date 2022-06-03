@@ -27,7 +27,7 @@ namespace hospital.View
         private MedicalRecordsController mrc;
         private UserController uc;
         private PatientController pc;
-        private AppointmentController ac;
+        private AppointmentManagementController ac;
 
         private Doctor loggedInDoctor;
         private Patient selectedPatient;

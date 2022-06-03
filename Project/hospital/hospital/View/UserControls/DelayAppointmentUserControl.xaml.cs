@@ -30,7 +30,7 @@ namespace hospital.View.UserControls
     public partial class DelayAppointmentUserControl : UserControl
     {
         private PatientController pc;
-        private AppointmentController ac;
+        private AppointmentManagementController ac;
         private DoctorController dc;
         private NotificationController nc;
         private ScheduledBasicRenovationController sbrc;

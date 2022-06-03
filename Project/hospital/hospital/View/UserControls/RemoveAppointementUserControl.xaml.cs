@@ -27,7 +27,7 @@ namespace hospital.View.UserControls
     /// </summary>
     public partial class RemoveAppointementUserControl : UserControl
     {
-        public AppointmentController ac;
+        public AppointmentManagementController ac;
         public RemoveAppointementUserControl()
         {
             InitializeComponent();

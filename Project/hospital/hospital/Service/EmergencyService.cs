@@ -14,7 +14,7 @@ namespace Service
 {
     public class EmergencyService
     {
-        private readonly AppointmentService _appointmentService;
+        private readonly AppointmentManagementService _appointmentService;
         private readonly AvailableAppointmentService _availableAppointmentService;
         private readonly NotificationRepository _notificationRepository;
         private readonly DoctorService doctorService;
@@ -22,7 +22,7 @@ namespace Service
         private EmergencyDTO _emergencyDTO;
         private RecommendedAppointmentService _recommendedAppointmentService;
 
-        public EmergencyService(AppointmentService appointmentService, NotificationRepository notificationRepository, DoctorService doctorService, RoomService roomService, RecommendedAppointmentService rc, AvailableAppointmentService availableAppointmentService)
+        public EmergencyService(AppointmentManagementService appointmentService, NotificationRepository notificationRepository, DoctorService doctorService, RoomService roomService, RecommendedAppointmentService rc, AvailableAppointmentService availableAppointmentService)
         {
             this._notificationRepository = notificationRepository;
             this.doctorService = doctorService;

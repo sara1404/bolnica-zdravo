@@ -11,14 +11,13 @@ using hospital.DTO;
 
 namespace Service
 {
-    public class AppointmentService
+    public class AppointmentManagementService
     {
         private readonly AppointmentRepository _appointmentRepository;
 
-        //appointment managment service
-        public AppointmentService(AppointmentRepository appointmentRepository)
+        public AppointmentManagementService(AppointmentRepository appointmentRepository)
         {
-            this._appointmentRepository = appointmentRepository;
+            _appointmentRepository = appointmentRepository;
         }
 
         public void Create(Appointment appointment)

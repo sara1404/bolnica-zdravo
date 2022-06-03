@@ -184,7 +184,7 @@
     <Compile Include="Repository\TimeSchedulerRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\VacationRequestRepository.cs" />
-    <Compile Include="Service\AppointmentService.cs" />
+    <Compile Include="Service\AppointmentManagementService.cs" />
     <Compile Include="Service\AvailableAppointmentService.cs" />
     <Compile Include="Service\DoctorService.cs" />
     <Compile Include="Service\EmergencyService.cs" />
@@ -407,7 +407,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controller\AppointmentController.cs" />
+    <Compile Include="Controller\AppointmentManagementController.cs" />
     <Compile Include="Controller\MedicalRecordsController.cs" />
     <Compile Include="Controller\PatientController.cs" />
     <Compile Include="Controller\RoomController.cs" />

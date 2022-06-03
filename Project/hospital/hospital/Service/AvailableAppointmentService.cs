@@ -9,9 +9,9 @@ namespace hospital.Service
 {
     public class AvailableAppointmentService
     {
-        private readonly AppointmentService _appointmentService;
+        private readonly AppointmentManagementService _appointmentService;
         private readonly DoctorRepository _doctorRepository;
-        public AvailableAppointmentService(AppointmentService appointmentService, DoctorRepository doctorRepository)
+        public AvailableAppointmentService(AppointmentManagementService appointmentService, DoctorRepository doctorRepository)
         {
             _appointmentService = appointmentService;
             _doctorRepository = doctorRepository;

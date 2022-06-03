@@ -30,7 +30,7 @@ namespace hospital.View.UserControls
         public ObservableCollection<Patient> Patients { get; set; }
         public ObservableCollection<Specialization> Specializations { get; set; }
         private PatientController _patientController;
-        private AppointmentController _appointmentController;
+        private AppointmentManagementController _appointmentController;
         private EmergencyController _emergencyController;
 
         private Notifier Notifier { get; set; }

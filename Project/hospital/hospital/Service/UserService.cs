@@ -13,38 +13,38 @@ namespace Service
 {
    public  class UserService
     {
-        private readonly UserRepository userRepository;
+        private readonly UserRepository _userRepository;
 
-        public UserService(UserRepository _repo) { userRepository = _repo; }
+        public UserService(UserRepository _repo) { _userRepository = _repo; }
 
         public bool Create(User user)
         {
-            return userRepository.Create(user);
+            return _userRepository.Create(user);
         }
 
         public ObservableCollection<User> FindAll()
         {
-            return userRepository.FindAll();
+            return _userRepository.FindAll();
         }
 
         public User FindByUsername(string username)
         {
-            return userRepository.FindByUsername(username);
+            return _userRepository.FindByUsername(username);
         }
 
         public bool DeleteByUsername(string username)
         {
-            return userRepository.DeleteByUsername(username);
+            return _userRepository.DeleteByUsername(username);
         }
 
         public bool UpdateByUsername(string username, User user)
         {
-            return userRepository.UpdateByUsername(username, user);
+            return _userRepository.UpdateByUsername(username, user);
         }
 
-        public User checkCredentials(string username,string password)
+        public User CheckCredentials(string username,string password)
         {
-           ObservableCollection<User> users = userRepository.FindAll();
+           ObservableCollection<User> users = _userRepository.FindAll();
 
             foreach (User u in users){
                 if(u.Username.Equals(username) && u.Password.Equals(ComputeSha256Hash(password)))

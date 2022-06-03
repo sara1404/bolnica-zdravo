@@ -72,7 +72,8 @@ namespace hospital
 
             scheduledBasicRenovationRepository = new ScheduledBasicRenovationRepository();
             scheduledAdvancedRenovationRepository = new ScheduledAdvancedRenovationRepository();
-            TimeSchedulerService timeSchedulerService = new TimeSchedulerService(appointmentRepository, scheduledBasicRenovationRepository, scheduledAdvancedRenovationRepository);
+            TimeSchedulerRepository timeSchedulerRepository = new TimeSchedulerRepository(appointmentRepository, scheduledBasicRenovationRepository, scheduledAdvancedRenovationRepository);
+            TimeSchedulerService timeSchedulerService = new TimeSchedulerService(timeSchedulerRepository);
 
             ScheduledBasicRenovationService scheduledBasicRenovationService = new ScheduledBasicRenovationService(scheduledBasicRenovationRepository, timeSchedulerService);
             scheduledBasicRenovationController = new ScheduledBasicRenovationController(scheduledBasicRenovationService);
@@ -157,7 +158,7 @@ namespace hospital
             scheduledAdvancedRenovationRepository.LoadRenovationData();
             ingridientsRepository.LoadIngridientsData();
 
-            orderThread = new Thread(orderService.orderTracker);
+            orderThread = new Thread(orderService.OrderTracker);
             orderThread.Start();
 
             Notifier = new Notifier(cfg =>

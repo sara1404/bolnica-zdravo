@@ -38,7 +38,7 @@ namespace Service
             _appointmentService.Update(oldAppointment, newAppoitnemnt);
             try
             {
-                tryMakeEmergencyAppointment(_emergencyDTO.PatientUsername, _emergencyDTO.RequiredSpecialization, _emergencyDTO.IsOperation);
+                TryMakeEmergencyAppointment(_emergencyDTO.PatientUsername, _emergencyDTO.RequiredSpecialization, _emergencyDTO.IsOperation);
             }catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
@@ -123,7 +123,7 @@ namespace Service
             }
         }
 
-        public void tryMakeEmergencyAppointment(string patientUsername, Specialization requiredSpecialization, bool isOperation)
+        public void TryMakeEmergencyAppointment(string patientUsername, Specialization requiredSpecialization, bool isOperation)
         {
             _emergencyDTO = new EmergencyDTO(patientUsername, requiredSpecialization, isOperation);
 
@@ -147,8 +147,8 @@ namespace Service
         }
         private void MakeNotification(string patientUsername,string doctorUsername)
         {
-            _notificationRepository.Create(new Notification(patientUsername));
-            _notificationRepository.Create(new Notification(doctorUsername));
+            _notificationRepository.Create(new Notification(patientUsername,"New emergency !"));
+            _notificationRepository.Create(new Notification(doctorUsername, "New emergency !"));
         }
         private DateTime FindNearestBusyTimeSlot()
         {

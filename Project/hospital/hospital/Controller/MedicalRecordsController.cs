@@ -2,6 +2,8 @@ using Model;
 using System;
 using Service;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Controller
 {
@@ -10,9 +12,9 @@ namespace Controller
         private readonly MedicalRecordsService medicalRecordsService;
         public int RecordId { get; set; }
         public MedicalRecordsController(MedicalRecordsService _service) { medicalRecordsService = _service; }
-        public bool Create(MedicalRecord medicalRecord)
+        public void Create(MedicalRecord medicalRecord)
         {
-            return medicalRecordsService.Create(medicalRecord);
+            medicalRecordsService.Create(medicalRecord);
         }
 
         public ObservableCollection<MedicalRecord> FindAll()
@@ -37,6 +39,10 @@ namespace Controller
         public bool AddTheraphy(int id, Therapy therapy)
         {
             return medicalRecordsService.AddTheraphy(id, therapy);
+        }
+        public bool CheckAllergies(int recordId, Medicine medicine)
+        {
+            return medicalRecordsService.CheckAllergies(recordId, medicine);
         }
     }
 }

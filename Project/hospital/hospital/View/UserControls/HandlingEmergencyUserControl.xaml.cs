@@ -59,7 +59,7 @@ namespace hospital.View.UserControls
             {
                 try
                 {
-                    _emergencyController.tryMakeEmergencyAppointment(cmbPatient.Text, GetSpecialization(cmbSpecialization.Text),(bool)cbOperation.IsChecked);
+                    _emergencyController.TryMakeEmergencyAppointment(cmbPatient.Text, GetSpecialization(cmbSpecialization.Text),(bool)cbOperation.IsChecked);
                     Notifier.ShowSuccess("Successfully scheduled an emergency.");
                 }catch(Exception ex)
                 {

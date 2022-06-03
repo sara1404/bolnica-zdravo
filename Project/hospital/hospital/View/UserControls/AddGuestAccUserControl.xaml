@@ -6,6 +6,16 @@
              xmlns:local="clr-namespace:hospital.View.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="530" d:DesignWidth="950">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid Background="White">
         <StackPanel Background="white">
             <Border BorderBrush="gray" BorderThickness="2" Margin="0,40,0,0" Height="450" Width="450" CornerRadius="10">
@@ -24,8 +34,8 @@
                         <TextBlock x:Name="errLastname" Height="20" Width="132" Foreground="red" Margin="241,120,73,260"></TextBlock>
                         <TextBlock x:Name="errUsername" Height="20" Width="132" Foreground="red" Margin="239,181,75,199"></TextBlock>
 
-                        <Button x:Name="btnSubmit" Content="Create"  VerticalAlignment="Top" Height="26" Width="75"  Margin="296,360,75,0" Click="btnSubmit_Click"/>
-                        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Height="26" Margin="78,360,0,0" Click="btnCancel_Click"/>
+                        <Button x:Name="btnSubmit" Content="Create" FontSize="12"  VerticalAlignment="Top" Height="26" Width="75"  Margin="296,360,75,0" Click="btnSubmit_Click"/>
+                        <Button x:Name="btnCancel" Content="Cancel" FontSize="12" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Height="26" Margin="78,360,0,0" Click="btnCancel_Click"/>
                     </Grid>
                 </StackPanel>
             </Border>

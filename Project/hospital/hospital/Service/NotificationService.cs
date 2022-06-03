@@ -12,26 +12,26 @@ namespace Service
 {
     public class NotificationService
     {
-        private readonly NotificationRepository notificationRepository;
+        private readonly NotificationRepository _notificationRepository;
 
         public NotificationService(NotificationRepository _repo)
         {
-            notificationRepository = _repo;
+            _notificationRepository = _repo;
         }
 
         public void Create(Notification notification)
         {
-            notificationRepository.Create(notification);
+            _notificationRepository.Create(notification);
         }
 
         public ObservableCollection<Notification> FindAll()
         {
-            return notificationRepository.FindAll();
+            return _notificationRepository.FindAll();
         }
 
         public bool Delete(Notification n)
         {
-            return notificationRepository.Delete(n);
+            return _notificationRepository.Delete(n);
         }
     }
 }

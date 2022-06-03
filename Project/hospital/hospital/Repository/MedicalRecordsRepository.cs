@@ -28,11 +28,10 @@ namespace Repository
                 medicalRecords = new ObservableCollection<MedicalRecord>();
             }
         }
-        public bool Create(MedicalRecord medicalRecord)
+        public void Create(MedicalRecord medicalRecord)
         {
             medicalRecords.Add(medicalRecord);
             medicalRecordFileHandler.Write(this.medicalRecords.ToList());
-            return true;
         }
 
         public ObservableCollection<MedicalRecord> FindAll()

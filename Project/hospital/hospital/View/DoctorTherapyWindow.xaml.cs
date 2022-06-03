@@ -67,21 +67,6 @@ namespace hospital.View
         {
             interval = int.Parse(cmbInterval.SelectedItem.ToString());
         }
-        private bool checkAllergies()
-        {
-            MedicalRecord record = mrc.FindById(selectedPatient.RecordId);
-            List<string> allergies = new List<string>();
-            if(record.Alergies != null)
-                allergies = record.Alergies.Split(',').ToList<string>();
-            foreach(string ingridient in selectedMedicine.Ingridients)
-            {
-                if(allergies.Contains(ingridient) || allergies.Contains(selectedMedicine.Name))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
         private DateTime generateStartTime()
         {
             if (dpStartDate.SelectedDate.HasValue && dpEndDate.SelectedDate.HasValue && cmbStartHour.SelectedIndex != -1)
@@ -98,7 +83,7 @@ namespace hospital.View
         }
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
-            bool canTakeMedicine = checkAllergies();
+            bool canTakeMedicine = mrc.CheckAllergies(selectedPatient.RecordId, selectedMedicine);
             DateTime startTime = generateStartTime();
             if (cmbPatients.SelectedIndex != -1 && cmbMedicine.SelectedIndex != -1 && cmbInterval.SelectedIndex != -1
                 && canTakeMedicine && startTime != DateTime.MinValue)

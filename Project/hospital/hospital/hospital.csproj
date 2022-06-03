@@ -137,6 +137,7 @@
     <Compile Include="DTO\ChartDataDTO.cs" />
     <Compile Include="DTO\EmergencyDTO.cs" />
     <Compile Include="Controller\VacationRequestController.cs" />
+    <Compile Include="DTO\TherapyDTO.cs" />
     <Compile Include="FileHandler\IngridientsFileHandler.cs" />
     <Compile Include="FileHandler\InvalidMedicineReportFileHandler.cs" />
     <Compile Include="FileHandler\MedicalRecordFileHandler.cs" />

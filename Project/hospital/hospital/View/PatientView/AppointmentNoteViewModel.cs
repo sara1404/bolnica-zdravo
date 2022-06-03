@@ -14,7 +14,7 @@ namespace hospital.View.PatientView
         public string DoctorNote { get; set;}
         public string PatientNote { get; set; }
         public MyICommand ConfirmCommand { get; set; }
-        private AppointmentController ac;
+        private AppointmentManagementController ac;
         private Appointment oldAppointment;
 
         public AppointmentNoteViewModel(Appointment appointment)

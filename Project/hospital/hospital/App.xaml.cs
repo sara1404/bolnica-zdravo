@@ -30,7 +30,7 @@ namespace hospital
         public NotificationRepository notificationRepository;
         public RoomController roomController { get; set; }
         public PatientController patientController { get; set; }
-        public AppointmentController appointmentController { get; set; }
+        public AppointmentManagementController appointmentController { get; set; }
         public AvailableAppointmentController availableAppointmentController { get; set; }
         public NotificationController notificationController { get; set; }
         public MedicalRecordsController medicalRecordsController { get; set; }
@@ -99,12 +99,12 @@ namespace hospital
             notificationController = new NotificationController(notificationService);
 
 
-            AppointmentService appointmentService = new AppointmentService(appointmentRepository);
+            AppointmentManagementService appointmentService = new AppointmentManagementService(appointmentRepository);
             MeetingRepository meetingRepository = new MeetingRepository();
             MeetingService meetingService = new MeetingService(meetingRepository);
             meetingController = new MeetingController(meetingService, notificationService);
 
-            appointmentController = new AppointmentController(appointmentService);
+            appointmentController = new AppointmentManagementController(appointmentService);
             AvailableAppointmentService availableAppointmentService = new AvailableAppointmentService(appointmentService, doctorRepository);
             availableAppointmentController = new AvailableAppointmentController(availableAppointmentService);
 
@@ -158,7 +158,7 @@ namespace hospital
             scheduledAdvancedRenovationRepository.LoadRenovationData();
             ingridientsRepository.LoadIngridientsData();
 
-            orderThread = new Thread(orderService.orderTracker);
+            orderThread = new Thread(orderService.OrderTracker);
             orderThread.Start();
 
             Notifier = new Notifier(cfg =>

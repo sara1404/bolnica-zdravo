@@ -26,7 +26,7 @@ namespace hospital.View.PatientView
     public partial class PatientDoctorPoll : Page
     {
         private App app;
-        private AppointmentController ac;
+        private AppointmentManagementController ac;
         private PollController pbc;
         private UserController uc;
         public List<PollQuestion> Poll { get; set; }

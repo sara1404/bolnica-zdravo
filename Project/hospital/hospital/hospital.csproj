@@ -184,7 +184,7 @@
     <Compile Include="Repository\TimeSchedulerRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\VacationRequestRepository.cs" />
-    <Compile Include="Service\AppointmentService.cs" />
+    <Compile Include="Service\AppointmentManagementService.cs" />
     <Compile Include="Service\AvailableAppointmentService.cs" />
     <Compile Include="Service\DoctorService.cs" />
     <Compile Include="Service\EmergencyService.cs" />
@@ -377,6 +377,9 @@
     <Compile Include="View\UserControls\OrderEquipmentUserControl.xaml.cs">
       <DependentUpon>OrderEquipmentUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\PopUpUserControl.xaml.cs">
+      <DependentUpon>PopUpUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserControls\RemoveAppointementUserControl.xaml.cs">
       <DependentUpon>RemoveAppointementUserControl.xaml</DependentUpon>
     </Compile>
@@ -405,7 +408,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controller\AppointmentController.cs" />
+    <Compile Include="Controller\AppointmentManagementController.cs" />
     <Compile Include="Controller\MedicalRecordsController.cs" />
     <Compile Include="Controller\PatientController.cs" />
     <Compile Include="Controller\RoomController.cs" />
@@ -642,6 +645,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UserControls\PopUpUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UserControls\RemoveAppointementUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -840,6 +847,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\five.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets')" />

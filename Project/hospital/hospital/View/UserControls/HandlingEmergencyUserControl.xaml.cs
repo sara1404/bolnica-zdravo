@@ -30,7 +30,7 @@ namespace hospital.View.UserControls
         public ObservableCollection<Patient> Patients { get; set; }
         public ObservableCollection<Specialization> Specializations { get; set; }
         private PatientController _patientController;
-        private AppointmentController _appointmentController;
+        private AppointmentManagementController _appointmentController;
         private EmergencyController _emergencyController;
 
         private Notifier Notifier { get; set; }
@@ -59,7 +59,7 @@ namespace hospital.View.UserControls
             {
                 try
                 {
-                    _emergencyController.tryMakeEmergencyAppointment(cmbPatient.Text, GetSpecialization(cmbSpecialization.Text),(bool)cbOperation.IsChecked);
+                    _emergencyController.TryMakeEmergencyAppointment(cmbPatient.Text, GetSpecialization(cmbSpecialization.Text),(bool)cbOperation.IsChecked);
                     Notifier.ShowSuccess("Successfully scheduled an emergency.");
                 }catch(Exception ex)
                 {

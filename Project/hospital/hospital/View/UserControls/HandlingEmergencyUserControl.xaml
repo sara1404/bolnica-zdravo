@@ -6,6 +6,16 @@
              xmlns:local="clr-namespace:hospital.View.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="530" d:DesignWidth="950">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid Background="White">
         <StackPanel Background="white">
             <Border BorderBrush="gray" BorderThickness="2" Margin="0,40,0,0" Height="450" Width="450" CornerRadius="10">
@@ -28,8 +38,8 @@
                         <TextBlock x:Name="errPatient" Height="20" Width="132" Foreground="red" Margin="239,59,75,321"></TextBlock>
                         <TextBlock x:Name="errSpecialization" Height="20" Width="132" Foreground="red" Margin="241,119,73,261"></TextBlock>
                         <TextBlock x:Name="err" FontSize="20" TextWrapping="Wrap" FontWeight="DemiBold" Width="250" Foreground="red" Margin="121,249,75,76"/>
-                        <Button x:Name="btnSubmit" Content="Submit"  VerticalAlignment="Top" Height="26" Width="75"  Margin="296,360,75,0" Click="btnSubmit_Click"/>
-                        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Height="26" Margin="78,360,0,0" Click="btnCancel_Click"/>
+                        <Button x:Name="btnSubmit" FontSize="12" Content="Submit"  VerticalAlignment="Top" Height="26" Width="75"  Margin="296,360,75,0" Click="btnSubmit_Click"/>
+                        <Button x:Name="btnCancel" FontSize="12" Content="Cancel" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Height="26" Margin="78,360,0,0" Click="btnCancel_Click"/>
                     </Grid>
                 </StackPanel>
             </Border>

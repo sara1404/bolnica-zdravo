@@ -69,6 +69,11 @@ namespace Repository
             }
             return null;
         }
+        public void UpdateStatus(int requestId,Status status)
+        {
+            FindById(requestId).Status = status;
+            vacationRequestFileHandler.Write(this.vacationRequests.ToList());
+        }
         public bool DeleteById(int id)
         {
             vacationRequests.Remove(FindById(id));

@@ -29,7 +29,7 @@ namespace hospital.View
         private Doctor loggedInDoctor;
         private VacationRequestController vc;
         private UserController uc;
-        private AppointmentController ac;
+        private AppointmentManagementController ac;
         private DoctorController dc;
         
         public DoctorVacationWindow()

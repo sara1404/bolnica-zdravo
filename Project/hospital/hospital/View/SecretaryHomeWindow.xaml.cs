@@ -46,12 +46,24 @@ namespace hospital.View
             handlingMedRecordUserControl.Visibility = Visibility.Visible;
         }
 
-        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        private void btnUser_Click(object sender, RoutedEventArgs e)
         {
-            uc.CurentLoggedUser = null;
-            MainWindow mw = new MainWindow();
-            mw.Show();
-            this.Close();
+            /* uc.CurentLoggedUser = null;
+             MainWindow mw = new MainWindow();
+             mw.Show();
+             this.Close(); 
+
+             //CloseAllUserControl();
+             if(popUpUserControl.Visibility == Visibility.Visible)
+             {
+                 popUpUserControl.Visibility = Visibility.Collapsed;
+             }
+             else { popUpUserControl.Visibility = Visibility.Visible; }*/
+            if (AlertPopup.IsOpen == false)
+                AlertPopup.IsOpen = true;
+            else
+                AlertPopup.IsOpen = false;
+            
         }
 
         public string LoggedName {
@@ -78,6 +90,8 @@ namespace hospital.View
         }
         private void CloseAllUserControl()
         {
+            //popUpUserControl.Visibility= Visibility.Collapsed;
+
             handlingMedRecordUserControl.Visibility = Visibility.Collapsed;
             handlingMedRecordUserControl.addMedRecUserControl.Visibility = Visibility.Collapsed;
             handlingMedRecordUserControl.editMedRecUserControl.Visibility = Visibility.Collapsed;
@@ -100,7 +114,7 @@ namespace hospital.View
             revisionOfRestUserControl.Visibility = Visibility.Collapsed;
 
             scheduleMeetingsUserControl.Visibility = Visibility.Collapsed;
-
+            
             btnhandlingAccount.BorderBrush = Brushes.Transparent;
             btnhandlingMedRecord.BorderBrush = Brushes.Transparent;
             btnAppointment.BorderBrush = Brushes.Transparent;
@@ -133,5 +147,6 @@ namespace hospital.View
             btnMeetings.BorderThickness = new Thickness(3, 0, 0, 0);
             scheduleMeetingsUserControl.Visibility = Visibility.Visible;
         }
+
     }
 }

@@ -24,7 +24,7 @@ namespace hospital.View.PatientView
     /// </summary>
     public partial class PatientMakeAppointmentFirst : Page
     {
-        private AppointmentController ac;
+        private AppointmentManagementController ac;
         private RecommendedAppointmentController rac;
         private AvailableAppointmentController aac;
         private UserController uc;

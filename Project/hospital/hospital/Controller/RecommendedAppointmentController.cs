@@ -27,13 +27,13 @@ namespace Controller
         {
             this._recommendedAppointmentService = recommendedAppointmentService;
         }
-        public bool tryMakeAppointment(string _hours, string _minuts, string patientUsername, string roomId, DateTime date, Doctor doctor)
+        public bool TryMakeAppointment(string patientUsername, DateTime newDate, Doctor doctor)
         {
-            return _recommendedAppointmentService.tryMakeAppointment(_hours, _minuts, patientUsername, roomId, date, doctor);
+            return _recommendedAppointmentService.TryMakeAppointment(patientUsername, newDate, doctor);
         }
-        public void findFreeForward(ObservableCollection<Appointment> apointments, string hours, string minuts)
+        public void FindFreeForward(ObservableCollection<Appointment> apointments, DateTime time)
         {
-            _recommendedAppointmentService.findFreeForward(apointments, hours, minuts);
+            _recommendedAppointmentService.FindFreeForward(apointments, time);
         }
         public Appointment RecommendedOne
         {
@@ -45,17 +45,17 @@ namespace Controller
             set { _recommendedAppointmentService.RecommendedTwo = value; }
             get { return _recommendedAppointmentService.RecommendedTwo; }
         }
-        public void findFreeBack(ObservableCollection<Appointment> apointments, string hours, string minuts)
+        public void FindFreeBack(ObservableCollection<Appointment> apointments, DateTime time)
         {
-            _recommendedAppointmentService.findFreeBack(apointments, hours, minuts);
+            _recommendedAppointmentService.FindFreeBack(apointments, time);
         }
-        public void findRecByTime(ObservableCollection<Appointment> apointments, string hours, string minuts)
+        public void FindRecByTime(ObservableCollection<Appointment> apointments, DateTime time)
         {
-            _recommendedAppointmentService.findRecByTime(apointments, hours, minuts);
+            _recommendedAppointmentService.FindRecByTime(apointments, time);
         }
         public bool tryChangeAppointment(Appointment oldAppointment, DateTime newDate, string newTime)
         {
-            return _recommendedAppointmentService.tryChangeAppointment(oldAppointment, newDate, newTime);
+            return _recommendedAppointmentService.TryChangeAppointment(oldAppointment, newDate, newTime);
         }
     }
 }

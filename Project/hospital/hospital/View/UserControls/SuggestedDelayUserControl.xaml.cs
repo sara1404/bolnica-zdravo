@@ -26,7 +26,7 @@ namespace hospital.View.UserControls
     /// </summary>
     public partial class SuggestedDelayUserControl : UserControl
     {
-        private readonly AppointmentController _appointmentController;
+        private readonly AppointmentManagementController _appointmentController;
         private readonly EmergencyController _emergencyController;
         private List<Appointment> oldAppointments;
         private List<Appointment> newAppointments;

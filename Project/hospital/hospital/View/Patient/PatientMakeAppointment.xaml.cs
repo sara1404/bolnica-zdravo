@@ -1,6 +1,4 @@
 ﻿using Controller;
-using hospital.Controller;
-using hospital.Service;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -22,14 +20,12 @@ namespace hospital.View.PatientView
     /// <summary>
     /// Interaction logic for PatientMakeAppointmentFirst.xaml
     /// </summary>
-    public partial class PatientMakeAppointmentFirst : Page
+    public partial class PatientMakeAppointment : Page
     {
-        private AppointmentManagementController ac;
-        private RecommendedAppointmentController rac;
-        private AvailableAppointmentController aac;
+        private AppointmentController ac;
         private UserController uc;
         private App app;
-        public PatientMakeAppointmentFirst()
+        public PatientMakeAppointment()
         {
             InitializeComponent();
             dateFrom.DisplayDateStart = DateTime.Today;
@@ -37,8 +33,6 @@ namespace hospital.View.PatientView
             app = Application.Current as App;
             uc = app.userController;
             ac = app.appointmentController;
-            rac = app.recommendedAppointmentController;
-            aac = app.availableAppointmentController;
             DoctorController dc = app.doctorController;
             cbDoctor.ItemsSource = dc.GetDoctors();
         }
@@ -56,11 +50,11 @@ namespace hospital.View.PatientView
             {
                 if (dateFrom.SelectedDate.Value.CompareTo(dateTo.SelectedDate.Value) < 0 && priorityDoctor)
                 {
-                    appointmentTable.ItemsSource = rac.GetRecommendedByDoctor((DateTime)dateFrom.SelectedDate, (DateTime)dateTo.SelectedDate, doctor, uc.CurentLoggedUser.Username);
+                    appointmentTable.ItemsSource = ac.GetRecommendedByDoctor((DateTime)dateFrom.SelectedDate, (DateTime)dateTo.SelectedDate, doctor);
                 }
                 else if (dateFrom.SelectedDate.Value.CompareTo(dateTo.SelectedDate.Value) < 0 && priorityDate)
                 {
-                    appointmentTable.ItemsSource = rac.GetRecommendedByDate((DateTime)dateFrom.SelectedDate, (DateTime)dateTo.SelectedDate, doctor, uc.CurentLoggedUser.Username);
+                    appointmentTable.ItemsSource = ac.GetRecommendedByDoctor((DateTime)dateFrom.SelectedDate, (DateTime)dateTo.SelectedDate, doctor);
                 }
                 else if (dateFrom.SelectedDate.Value.CompareTo(dateTo.SelectedDate.Value) >= 0)
                 {
@@ -74,17 +68,17 @@ namespace hospital.View.PatientView
             else if (cbDoctor.SelectedIndex != -1 && dateFrom.SelectedDate == null && !priorityDoctor && !priorityDate)
             {
                 Doctor d = (Doctor)cbDoctor.SelectedItem;
-                appointmentTable.ItemsSource = aac.GetFreeAppointmentsByDoctor(d.Username, uc.CurentLoggedUser.Username);
+                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDoctor(d.Username);
 
             }
             else if (cbDoctor.SelectedIndex == -1 && dateFrom.SelectedDate != null && !priorityDoctor && !priorityDate)
             {
-                appointmentTable.ItemsSource = aac.GetFreeAppointmentsByDate((DateTime)dateFrom.SelectedDate, uc.CurentLoggedUser.Username);
+                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDate((DateTime)dateFrom.SelectedDate, uc.CurentLoggedUser.Username);
             }
             else if (cbDoctor.SelectedIndex != -1 && dateFrom.SelectedDate != null && !priorityDoctor && !priorityDate)
             {
                 Doctor d = (Doctor)cbDoctor.SelectedItem;
-                appointmentTable.ItemsSource = aac.GetFreeAppointmentsByDateAndDoctor((DateTime)dateFrom.SelectedDate, d.Username, uc.CurentLoggedUser.Username);
+                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)dateFrom.SelectedDate, d.Username, uc.CurentLoggedUser.Username);
             }
         }
 

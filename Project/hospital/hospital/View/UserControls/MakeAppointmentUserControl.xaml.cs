@@ -27,7 +27,7 @@ namespace hospital.View.UserControls
     public partial class MakeAppointmentUserControl : UserControl
     {
         private PatientController pc;
-        private AppointmentController ac;
+        private AppointmentManagementController ac;
         private DoctorController dc;
         private ScheduledBasicRenovationController sbrc;
         private RecommendedAppointmentController rc;

@@ -23,7 +23,7 @@ namespace hospital.View.PatientView
     /// </summary>
     public partial class PatientDelayAppointmentPage : Page
     {
-        private AppointmentManagementController ac;
+        private AppointmentController ac;
         private PatientController pc;
         private Appointment selectedAppointment;
         private UserController uc;

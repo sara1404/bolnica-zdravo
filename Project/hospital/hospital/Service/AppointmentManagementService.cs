@@ -11,16 +11,13 @@ using hospital.DTO;
 
 namespace Service
 {
-    public class AppointmentService
+    public class AppointmentManagementService
     {
         private readonly AppointmentRepository _appointmentRepository;
-        //private readonly RoomService _roomService; // ovaj servis je ostao viska, pogledati gde bi trebalo da se ubaci
 
-        //appointment managment service
-        public AppointmentService(AppointmentRepository appointmentRepository)
+        public AppointmentManagementService(AppointmentRepository appointmentRepository)
         {
-            this._appointmentRepository = appointmentRepository;
-            //this._roomService = roomService;
+            _appointmentRepository = appointmentRepository;
         }
 
         public void Create(Appointment appointment)
@@ -47,36 +44,53 @@ namespace Service
             return _appointmentRepository.FindAll();
         }
 
-        public ObservableCollection<Appointment> GetByDoctor(string username)
+        public ObservableCollection<Appointment> GetPastAppointmentsByPatient(string id)
         {
-            // refactor this method and GetByPatient so that if FindAll() returns null the method should return empty list
+            ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
+            foreach (Appointment a in GetByPatient(id))
+            {
+                if (a.StartTime < DateTime.Now)
+                {
+                    appointments.Add(a);
+                }
+            }
+            return appointments;
+        }
+
+        public bool CanBeDelayed(Appointment appointment)
+        {
+            return DateTime.Now <= appointment.StartTime.AddHours(-24);
+        }
+
+        public ObservableCollection<Appointment> GetByDoctor(string doctorUsername)
+        {
             if(_appointmentRepository.FindAll() == null)
             {
                 throw new Exception();
             }
-            ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
+            ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
 
             foreach (Appointment a in _appointmentRepository.FindAll())
             {
-                if (a.DoctorUsername.Equals(username))
+                if (a.DoctorUsername.Equals(doctorUsername))
                 {
-                    retVal.Add(a);
+                    appointments.Add(a);
                 }
             }
-            return retVal;
+            return appointments;
 
         }
-        public ObservableCollection<Appointment> GetByPatient(string username)
+        public ObservableCollection<Appointment> GetByPatient(string patientUsername)
         {
-            ObservableCollection<Appointment> retVal = new ObservableCollection<Appointment>();
+            ObservableCollection<Appointment> appointments = new ObservableCollection<Appointment>();
             foreach (Appointment a in _appointmentRepository.FindAll())
             {
-                if (a.PatientUsername.Equals(username))
+                if (a.PatientUsername.Equals(patientUsername))
                 {
-                    retVal.Add(a);
+                    appointments.Add(a);
                 }
             }
-            return retVal;
+            return appointments;
         }
 
         public List<ChartDataDTO> GetPopularTimes()

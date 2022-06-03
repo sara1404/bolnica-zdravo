@@ -28,7 +28,7 @@ namespace hospital.View
     public partial class DoctorHomeWindow : Window
     {
         public ObservableCollection<Appointment> Appointments { get; set; }
-        private AppointmentController ac;
+        private AppointmentManagementController ac;
         private DoctorController dc;
         private UserController uc;
         private NotificationController nc;

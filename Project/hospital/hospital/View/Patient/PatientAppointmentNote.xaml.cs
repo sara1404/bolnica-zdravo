@@ -24,7 +24,7 @@ namespace hospital.View.PatientView
     {
         private Appointment oldAppointment;
         private App app;
-        private AppointmentManagementController ac;
+        private AppointmentController ac;
         public PatientAppointmentNote(Appointment appointment)
         {
             InitializeComponent();

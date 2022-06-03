@@ -24,7 +24,7 @@ namespace hospital.View
     /// </summary>
     public partial class DoctorEditAppointment : Window
     {
-        private AppointmentController ac;
+        private AppointmentManagementController ac;
         private RoomController rc;
         private ScheduledBasicRenovationController sbrc;
         private AvailableAppointmentController aac;

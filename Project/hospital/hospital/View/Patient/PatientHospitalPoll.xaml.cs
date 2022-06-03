@@ -1,10 +1,9 @@
 ﻿using Controller;
 using hospital.Controller;
 using hospital.Model;
-using Model;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,46 +20,23 @@ using System.Windows.Shapes;
 namespace hospital.View.PatientView
 {
     /// <summary>
-    /// Interaction logic for PatientDoctorPoll.xaml
+    /// Interaction logic for PatientHospitalPoll.xaml
     /// </summary>
-    public partial class PatientDoctorPoll : Page
+    public partial class PatientHospitalPoll : Page
     {
         private App app;
-        private AppointmentManagementController ac;
         private PollController pbc;
         private UserController uc;
         public List<PollQuestion> Poll { get; set; }
-        public ObservableCollection<Appointment> Appointments { get; set; }
-        public PatientDoctorPoll()
+        public PatientHospitalPoll()
         {
             InitializeComponent();
             app = Application.Current as App;
             pbc = app.pollBlueprintController;
             uc = app.userController;
-            ac = app.appointmentController;
-            Appointments = ac.GetPastAppointmentsByPatient(uc.CurentLoggedUser.Username);
             DataContext = this;
-            Poll = pbc.GetDoctorPollQuestions();
-        }
+            Poll = pbc.GetHospitalPollQuestions();
 
-        private childItem FindVisualChild<childItem>(DependencyObject obj)
-        where childItem : DependencyObject
-        {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
-            {
-                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
-                if (child != null && child is childItem)
-                {
-                    return (childItem)child;
-                }
-                else
-                {
-                    childItem childOfChild = FindVisualChild<childItem>(child);
-                    if (childOfChild != null)
-                        return childOfChild;
-                }
-            }
-            return null;
         }
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
@@ -71,39 +47,9 @@ namespace hospital.View.PatientView
             }
         }
 
-        private bool IsValidated()
-        {
-            if (CheckIfFilled())
-            {
-                if (cbAppointments.SelectedItem != null)
-                {
-                    Appointment appointment = (Appointment)cbAppointments.SelectedItem;
-                    if (!pbc.AppointmentPollAlreadyFilled(appointment.Id))
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        lbWarning.Content = "You have already answered the poll for this appointment!";
-                        return false;
-                    }
-                }
-                else
-                {
-                    lbWarning.Content = "Please choose an appointment!";
-                    return false;
-                }
-            }
-            else
-            {
-                lbWarning.Content = "Please answer all of the questions!";
-                return false;
-            }
-        }
-
         private PollBlueprint FillPoll()
         {
-            PollBlueprint poll = pbc.GetDoctorPollBlueprint();
+            PollBlueprint poll = pbc.GetHospitalPollBlueprint();
             foreach (var listIterator in lbPoll.Items)
             {
                 PollQuestion question = (PollQuestion)listIterator;
@@ -127,14 +73,15 @@ namespace hospital.View.PatientView
                         grade = 3;
                     else if (fourChecked)
                         grade = 4;
-                    else
+                    else 
                         grade = 5;
+
 
                     foreach (PollCategory category in poll.Categories)
                     {
                         foreach (PollQuestion pollQuestion in category.PollQuestions)
                         {
-                            if (pollQuestion.Id == question.Id)
+                            if(pollQuestion.Id == question.Id)
                             {
                                 pollQuestion.Grade = grade;
                             }
@@ -142,10 +89,29 @@ namespace hospital.View.PatientView
                     }
                 }
             }
-            Appointment appointment = (Appointment)cbAppointments.SelectedItem;
             poll.Username = uc.CurentLoggedUser.Username;
-            poll.AppointmentId = appointment.Id;
             return poll;
+        }
+
+        private bool IsValidated()
+        {
+            if (!CheckIfFilled())
+            {
+                lbWarning.Content = "Please answer all of the questions!";
+                return false;
+            }
+            else
+            {
+                if (!pbc.HospitalPollAlreadyFilled(uc.CurentLoggedUser.Username))
+                {
+                    return true;
+                }
+                else
+                {
+                    lbWarning.Content = "You have already filled this poll!";
+                    return false;
+                }
+            }
         }
         private bool CheckIfFilled()
         {
@@ -165,10 +131,30 @@ namespace hospital.View.PatientView
                     {
                         return false;
                     }
-
+                    
                 }
             }
             return true;
+        }
+
+        private childItem FindVisualChild<childItem>(DependencyObject obj)
+        where childItem : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+                if (child != null && child is childItem)
+                {
+                    return (childItem)child;
+                }
+                else
+                {
+                    childItem childOfChild = FindVisualChild<childItem>(child);
+                    if (childOfChild != null)
+                        return childOfChild;
+                }
+            }
+            return null;
         }
     }
 }

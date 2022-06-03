@@ -31,11 +31,14 @@ namespace hospital.View.UserControls
         {
             uc.CurentLoggedUser = null;
             MainWindow mw = new MainWindow();
+            //Console.WriteLine(FindParentWindow(this));
+            Window parentWindow = Window.GetWindow(this);
+            parentWindow.Close();
             mw.Show();
-            FindParentWindow(this).Close();
         }
 
-        public static Window FindParentWindow(DependencyObject child)
+
+       /* public static Window FindParentWindow(DependencyObject child)
         {
             DependencyObject parent = VisualTreeHelper.GetParent(child);
 
@@ -52,6 +55,6 @@ namespace hospital.View.UserControls
                 //use recursion until it reaches a Window
                 return FindParentWindow(parent);
             }
-        }
+        }*/
     }
 }

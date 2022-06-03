@@ -70,6 +70,9 @@ namespace hospital.View.UserControls
             oldAppointments = HandlingEmergencyUserControl.OldAppointments;
             newAppointments = HandlingEmergencyUserControl.NewAppointments;
         }
+        private void ResetFields()
+        {
+        }
         private void hiddenAllButton()
         {
             btnSuggestedOne.Visibility = Visibility.Collapsed;

@@ -15,9 +15,6 @@ using Controller;
 
 namespace hospital.View
 {
-    /// <summary>
-    /// Interaction logic for SecretaryHomeWindow.xaml
-    /// </summary>
     public partial class SecretaryHomeWindow : Window
     {
         public UserController uc;
@@ -28,6 +25,7 @@ namespace hospital.View
             this.DataContext = this;
             App app = Application.Current as App;
             uc = app.userController;
+            Console.WriteLine(DateTime.Now.ToString());
         }
 
         private void handlingAccount_Click(object sender, RoutedEventArgs e)
@@ -48,17 +46,6 @@ namespace hospital.View
 
         private void btnUser_Click(object sender, RoutedEventArgs e)
         {
-            /* uc.CurentLoggedUser = null;
-             MainWindow mw = new MainWindow();
-             mw.Show();
-             this.Close(); 
-
-             //CloseAllUserControl();
-             if(popUpUserControl.Visibility == Visibility.Visible)
-             {
-                 popUpUserControl.Visibility = Visibility.Collapsed;
-             }
-             else { popUpUserControl.Visibility = Visibility.Visible; }*/
             if (AlertPopup.IsOpen == false)
                 AlertPopup.IsOpen = true;
             else
@@ -102,8 +89,9 @@ namespace hospital.View
             handlingAccountUserControl.Visibility = Visibility.Collapsed;
 
             handlingAppointmentUserControl.Visibility = Visibility.Collapsed;
-            handlingAppointmentUserControl.removeAppointmentUserControl.Visibility = Visibility.Collapsed;
-            handlingAppointmentUserControl.delayAppointmentUserControl.Visibility = Visibility.Collapsed;
+            //TODO
+            //handlingAppointmentUserControl.removeAppointmentUserControl.Visibility = Visibility.Collapsed;
+            //handlingAppointmentUserControl.delayAppointmentUserControl.Visibility = Visibility.Collapsed;
 
             handlingEmergencyUserControl.Visibility = Visibility.Collapsed;
             handlingEmergencyUserControl.addGuestuserControl.Visibility = Visibility.Collapsed;

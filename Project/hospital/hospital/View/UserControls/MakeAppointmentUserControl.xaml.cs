@@ -85,6 +85,7 @@ namespace hospital.View.UserControls
                     if (rc.TryMakeAppointment(cmbUsername.Text, newDate, (Doctor) cmbDoctor.SelectedItem))
                     {
                         this.Visibility = Visibility.Collapsed;
+                        ResetFields();
                         notifier.ShowSuccess("Appointment successfully scheduled");
                         return;
                     }
@@ -94,6 +95,16 @@ namespace hospital.View.UserControls
                     notFree.Text = "Appointment is not free";
                 }
             }
+        }
+        private void ResetFields()
+        {
+            cmbUsername.Text = "";
+            date.Text = "";
+            txtTime.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 12, 0, 0);
+            cmbDoctor.Text = "";
+            errDate.Text = "";
+            radioDoctor.IsChecked = false;
+            radioTime.IsChecked = false;
         }
 
         private bool isValidate()
@@ -276,23 +287,6 @@ namespace hospital.View.UserControls
             errDate.Text = "";
             btnRecOne.Visibility = Visibility.Collapsed;
             btnRecTwo.Visibility = Visibility.Collapsed;
-        }
-
-        private void btnDelay_Click(object sender, RoutedEventArgs e)
-        {
-            delayAppointmentUserControl.Visibility = Visibility.Visible;
-        }
-
-        private void btnRemove_Click(object sender, RoutedEventArgs e)
-        {
-            removeAppointmentUserControl.Visibility= Visibility.Visible;
-            removeAppointmentUserControl.cmbUsername.Text = "";
-            removeAppointmentUserControl.date.Text = "";
-            removeAppointmentUserControl.txtTime.Text = "";
-            removeAppointmentUserControl.notFree.Text = "";
-            removeAppointmentUserControl.errDate.Text = "";
-            removeAppointmentUserControl.errTime.Text = "";
-            removeAppointmentUserControl.errUsername.Text = "";
         }
     }
 }

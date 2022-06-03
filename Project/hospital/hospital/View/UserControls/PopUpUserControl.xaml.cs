@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 using Controller;
 namespace hospital.View.UserControls
 {
-    /// <summary>
-    /// Interaction logic for PopUpUserControl.xaml
-    /// </summary>
     public partial class PopUpUserControl : UserControl
     {
         UserController uc;
@@ -31,30 +28,9 @@ namespace hospital.View.UserControls
         {
             uc.CurentLoggedUser = null;
             MainWindow mw = new MainWindow();
-            //Console.WriteLine(FindParentWindow(this));
             Window parentWindow = Window.GetWindow(this);
             parentWindow.Close();
             mw.Show();
         }
-
-
-       /* public static Window FindParentWindow(DependencyObject child)
-        {
-            DependencyObject parent = VisualTreeHelper.GetParent(child);
-
-            //CHeck if this is the end of the tree
-            if (parent == null) return null;
-
-            Window parentWindow = parent as Window;
-            if (parentWindow != null)
-            {
-                return parentWindow;
-            }
-            else
-            {
-                //use recursion until it reaches a Window
-                return FindParentWindow(parent);
-            }
-        }*/
     }
 }

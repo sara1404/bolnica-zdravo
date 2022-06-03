@@ -29,26 +29,16 @@
                                 <Run Text="Show recommended"/>
                             </Underline>
                         </Button>
-                        <Button x:Name="btnDelay" Foreground="blue" Visibility="Visible"  HorizontalAlignment="Left" Margin="266,4,0,0" VerticalAlignment="Top" BorderBrush="Transparent" Background="white" Click="btnDelay_Click">
-                            <Underline>
-                                <Run Text="Delay appointment"/>
-                            </Underline>
-                        </Button>
-                        <Button x:Name="btnRemove" Foreground="blue" Visibility="Visible"  HorizontalAlignment="Left" Margin="75,4,0,0" VerticalAlignment="Top" BorderBrush="Transparent" Background="white" Click="btnRemove_Click">
-                            <Underline>
-                                <Run Text="Remove appointment"/>
-                            </Underline>
-                        </Button>
                         <TextBlock x:Name="errUsername" Height="20" Width="132" Foreground="red" Margin="239,59,75,321"/>
                         <TextBlock x:Name="errDate" Height="20" Width="132" Foreground="red" Margin="239,108,75,272"/>
                         <TextBlock x:Name="errTime" Height="20" Width="132" Foreground="red" Margin="239,155,75,225"/>
                         <TextBlock x:Name="errDoctor" Height="20" Width="132" Foreground="red" Margin="239,206,75,174"/>
                         <TextBlock x:Name="errPriority" Height="20" Width="132" Foreground="red" Margin="239,250,75,130"/>
                         <TextBlock x:Name="notFree" FontSize="20" FontWeight="DemiBold" Height="25" Width="250" Foreground="red" Margin="121,299,75,76"/>
-                        <Button x:Name="btnSubmit" Content="Submit"  VerticalAlignment="Top" Height="26" Width="75"  Margin="296,360,75,0" Click="btnSubmit_Click"/>
-                        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Height="26" Margin="78,360,0,0" Click="btnCancel_Click"/>
-                        <Button x:Name="btnRecTwo" Height="75" Width="130" Margin="78,263,238,62" Visibility="Collapsed" Background="white" Click="btnRecTwo_Click"/>
-                        <Button x:Name="btnRecOne" Height="75" Width="130" Margin="241,263,75,62" Visibility="Collapsed" Background="white" Click="btnRecOne_Click"/>
+                        <Button x:Name="btnSubmit" Content="Submit" FontSize="12"  VerticalAlignment="Top" Height="26" Width="75"  Margin="296,360,75,0" Click="btnSubmit_Click"/>
+                        <Button x:Name="btnCancel" Content="Cancel" FontSize="12" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Height="26" Margin="78,360,0,0" Click="btnCancel_Click"/>
+                        <Button x:Name="btnRecTwo" Padding="0" Height="75" Width="130" Margin="78,263,238,62" Visibility="Collapsed" Background="white" Click="btnRecTwo_Click"/>
+                        <Button x:Name="btnRecOne" Padding="0" Height="75" Width="130" Margin="241,263,75,62" Visibility="Collapsed" Background="white" Click="btnRecOne_Click"/>
                     </Grid>
                 </StackPanel>
             </Border>

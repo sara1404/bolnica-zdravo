@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="hospital.View.UserControls.HandlingMedRecordUserControl"
+﻿<UserControl x:Class="hospital.View.UserControls.HandlingAppointmentUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -17,23 +17,23 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid Background="White">
-        <StackPanel Background="white">
+        <StackPanel>
             <Border BorderBrush="gray" BorderThickness="2" Margin="0,40,0,0" Height="450" Width="750" CornerRadius="10">
                 <StackPanel>
-                    <Label FontSize="25" FontWeight="DemiBold" Margin="0,0,0,0" HorizontalAlignment="Center">Handling medical records</Label>
-                    <StackPanel Orientation="Horizontal"  Height="25" Width="475">
-                        <Button x:Name="btnAddAccount" Padding="2,-6,2,0" Click="btnAddAccount_Click" Margin="0,0,5,0" BorderBrush="Transparent" Width="25" Background="Transparent">
+                    <Label FontSize="25" FontWeight="DemiBold" Margin="0,0,0,0" HorizontalAlignment="Center">Handling appointment</Label>
+                    <StackPanel Orientation="Horizontal"  Height="25" Width="430">
+                        <Button x:Name="btnAdd" Padding="2,-6,2,0" Margin="0,0,5,0" BorderBrush="Transparent" Width="25" Background="Transparent" Click="btnAdd_Click">
                             <Image Source="../../Resources/Images/addition_24x24.png"></Image>
                         </Button>
-                        <Button x:Name="btnEdit" Margin="5,0,5,0" Padding="1,-10,0,0"  BorderBrush="Transparent" Width="25" Background="Transparent" Click="btnEdit_Click" >
+                        <Button x:Name="btnEdit" Padding="1,-10,0,0" Margin="5,0,5,0"  BorderBrush="Transparent" Width="25" Background="Transparent" Click="btnEdit_Click">
                             <Image Source="../../Resources/Images/editing_24x24.png"></Image>
                         </Button>
-                        <Button x:Name="btnRemove" Padding="1,-6,2,0" Margin="5,0,5,0"  BorderBrush="Transparent" Width="25" Background="Transparent" Click="btnRemove_Click" >
+                        <Button x:Name="btnRemove" Padding="1,-6,2,0" Margin="5,0,5,0"  BorderBrush="Transparent" Width="25" Background="Transparent" Click="btnRemove_Click">
                             <Image Source="../../Resources/Images/delete_24x24.png"></Image>
                         </Button>
-                        <Border Margin="255,0,0,0" Width="120" BorderBrush="DarkGray" BorderThickness="1">
+                        <Border Margin="210,0,0,0" Width="120" BorderBrush="DarkGray" BorderThickness="1">
                             <DockPanel Margin="-1,0,-1,0" Width="120">
-                                <TextBox x:Name="txtSearch" Text="" FontSize="15" HorizontalAlignment="Stretch" Width="95" Background="Transparent" BorderThickness="0" TextChanged="txtSearch_TextChanged"/>
+                                <TextBox x:Name="txtSearch" Text="" FontSize="12" HorizontalAlignment="Stretch" Width="95" Background="Transparent" BorderThickness="0" TextChanged="txtSearch_TextChanged"/>
                                 <TextBlock IsHitTestVisible="False" Text="Search" VerticalAlignment="Center" Margin="-90" Foreground="DarkGray">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
@@ -52,57 +52,50 @@
                             </DockPanel>
                         </Border>
                     </StackPanel>
-                    <DataGrid x:Name="dateGridHandlingMedicalRecord" Background="white" HorizontalContentAlignment="Center" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="475" Height="350" ItemsSource="{Binding Patients}" IsReadOnly ="True" SelectionMode="Single" HorizontalAlignment="Center" AutoGenerateColumns="False" CanUserResizeColumns="false" CanUserResizeRows="false">
+                    <DataGrid x:Name="dateGridHandlingAppointment" HorizontalContentAlignment="Center" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="430" Height="350" ItemsSource="{Binding Appointments}" IsReadOnly ="True" SelectionMode="Single" HorizontalAlignment="Center" AutoGenerateColumns="False" CanUserResizeColumns="false" CanUserResizeRows="false">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="First name"  Width="80"  Binding="{Binding FirstName}" >
+                            <DataGridTextColumn Header="Patient"  Width="70"  Binding="{Binding PatientUsername}" >
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Last name" Width="80" Binding="{Binding LastName}">
+                            <DataGridTextColumn Header="Doctor" Width="90" Binding="{Binding DoctorUsername}">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Date of Birth" Width="90" Binding="{Binding DateOfBirth}">
+                            <DataGridTextColumn Header="Start time" Width="130" Binding="{Binding StartTime}">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Record ID" Width="65" Binding="{Binding RecordId}" >
+                            <DataGridTextColumn Header="Duration" Width="60" Binding="{Binding Duration}" >
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Phone number" Width="100" Binding="{Binding PhoneNumber}">
+                            <DataGridTextColumn Header="Room" Width="60" Binding="{Binding RoomId}">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
-                            <DataGridTemplateColumn Header="More" >
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button x:Name="btnMore" Height="25" Padding="0,0,0,0" Content="..." Click="btnMore_Click"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
             </Border>
+
         </StackPanel>
-        <local:MedicalRecordUserControl x:Name="medRecUserControl" Visibility="Collapsed" Height="530"/>
-        <local:AddMedRecUserControl x:Name="addMedRecUserControl" Visibility="Collapsed" Height="530"/>
-        <local:EditMedRecUserControl x:Name="editMedRecUserControl" Visibility="Collapsed" Height="530"/>
+        <local:MakeAppointmentUserControl x:Name="makeAppointmentUserControl" Height="530" Visibility="Collapsed"/>
+        <local:DelayAppointmentUserControl x:Name="editAppointmentUsercontrol" Height="530" Visibility="Collapsed"/>
     </Grid>
 </UserControl>

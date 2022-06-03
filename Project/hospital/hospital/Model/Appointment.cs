@@ -76,7 +76,7 @@ namespace Model
         }
         public DateTime StartTime { get => _startTime; set => _startTime = value; }
         public string Description { get => _description; set => _description = value; }
-        public int Duration { get => _duration; set => _duration = value; }
+        public int Duration { get { return 30; } set => _duration = value; }
         public string DoctorNote { get => _doctorNote; set => _doctorNote = value; }
         public string PatientNote { get => _patientNote; set => _patientNote = value; }
         public string RoomId

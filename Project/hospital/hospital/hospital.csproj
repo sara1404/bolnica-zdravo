@@ -269,9 +269,6 @@
     <Compile Include="View\Manager\EquipmentRelocationWindow.xaml.cs">
       <DependentUpon>EquipmentRelocationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\HandlingMedicalRecordsPage.xaml.cs">
-      <DependentUpon>HandlingMedicalRecordsPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Manager\HospitalReviewWindow.xaml.cs">
       <DependentUpon>HospitalReviewWindow.xaml</DependentUpon>
     </Compile>
@@ -360,6 +357,9 @@
     </Compile>
     <Compile Include="View\UserControls\HandlingAccountUserControl.xaml.cs">
       <DependentUpon>HandlingAccountUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\HandlingAppointmentUserControl.xaml.cs">
+      <DependentUpon>HandlingAppointmentUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\HandlingEmergencyUserControl.xaml.cs">
       <DependentUpon>HandlingEmergencyUserControl.xaml</DependentUpon>
@@ -500,10 +500,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\HandlingMedicalRecordsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Manager\HospitalReviewWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -621,6 +617,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\HandlingAccountUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\HandlingAppointmentUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

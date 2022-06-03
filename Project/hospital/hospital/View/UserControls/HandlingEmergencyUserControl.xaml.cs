@@ -93,6 +93,16 @@ namespace hospital.View.UserControls
                     return Specialization.Oncologist;
             }
         }
+
+        public void ResetFields()
+        {
+            cmbPatient.Text = "";
+            cmbSpecialization.Text = "";
+            cbOperation.IsChecked = false;
+            btnShowRec.Visibility= Visibility.Collapsed;
+            err.Visibility= Visibility.Collapsed;
+
+        }
         private bool isValidate()
         {
             bool[] isCorrected = new bool[2];
@@ -127,7 +137,7 @@ namespace hospital.View.UserControls
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Visibility = Visibility.Collapsed;
+            ResetFields();
         }
 
         private void cmbSpecialization_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -32,7 +32,7 @@
                         <Button x:Name="btnShowRec" Foreground="blue" Visibility="Collapsed"  HorizontalAlignment="Left" Margin="78,224,0,0" VerticalAlignment="Top" BorderBrush="Transparent" Background="white" Click="btnShowRec_Click">
                             <Underline>Show recommended</Underline>
                         </Button>
-                        <Button x:Name="btnGuest" Foreground="blue" Visibility="Visible"  HorizontalAlignment="Left" Margin="256,4,0,0" VerticalAlignment="Top" BorderBrush="Transparent" Background="white" Click="btnGuest_Click">
+                        <Button x:Name="btnGuest" Foreground="blue" Visibility="Visible" BorderThickness="0"  HorizontalAlignment="Left" Margin="256,4,0,0" VerticalAlignment="Top" BorderBrush="Transparent" Background="white" Click="btnGuest_Click">
                             <Underline>Create guest account</Underline>
                         </Button>
                         <TextBlock x:Name="errPatient" Height="20" Width="132" Foreground="red" Margin="239,59,75,321"></TextBlock>

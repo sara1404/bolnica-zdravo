@@ -91,13 +91,19 @@
 
             </Grid>
         </Border>-->
-        <Button x:Name="scheduleBtn" Content="SCHEDULE" TabIndex="6" HorizontalAlignment="Left" Margin="207,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="132" Grid.ColumnSpan="2" Height="39" Click="Schedule_Advanced_Renovation" FontSize="14"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
-        <Button Content="CANCEL" TabIndex="7" HorizontalAlignment="Left" Margin="122,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="132" Height="39" Grid.Column="1" FontSize="14"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
-        <RadioButton x:Name="mergeBtn" Grid.Column="2" Content="Merge rooms" GroupName="Option" HorizontalAlignment="Left" Margin="10,46,0,0" Grid.Row="3" VerticalAlignment="Top" Foreground="white"  IsEnabledChanged="IsFormFiled" TabIndex="3" FontSize="14"/>
-        <RadioButton x:Name="splitBtn" Grid.Column="2" Content="Split room"  GroupName="Option" HorizontalAlignment="Left" Margin="134,46,0,0" Grid.Row="3" VerticalAlignment="Top" Foreground="white"  IsEnabledChanged="IsFormFiled" TabIndex="4"  FontSize="14"/>
-        <TextBox x:Name="description" Grid.Column="2" HorizontalAlignment="Left" Margin="10,47,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="198" Height="98" Grid.RowSpan="2" TextChanged="IsFormFilled" TabIndex="5"/>
+        <Button x:Name="scheduleBtn" TabIndex="6" HorizontalAlignment="Left" Margin="207,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="132" Grid.ColumnSpan="2" Height="39" Click="Schedule_Advanced_Renovation" FontSize="14"  FocusVisualStyle="{DynamicResource MyFocusVisual}">
+            <AccessText>_SAVE</AccessText>
+        </Button>
+        <Button TabIndex="7" HorizontalAlignment="Left" Margin="122,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="132" Height="39" Grid.Column="1" FontSize="14"  FocusVisualStyle="{DynamicResource MyFocusVisual}">
+            <AccessText>_CANCEL</AccessText>
+        </Button>
+        <RadioButton x:Name="mergeBtn" Grid.Column="2" Content="Merge rooms" GroupName="Option" HorizontalAlignment="Left" Margin="10,46,0,0" Grid.Row="3" VerticalAlignment="Top" Foreground="white"  Checked="IsFormFiled" TabIndex="3" FontSize="14"/>
+        <RadioButton x:Name="splitBtn" Grid.Column="2" Content="Split room"  GroupName="Option" HorizontalAlignment="Left" Margin="134,46,0,0" Grid.Row="3" VerticalAlignment="Top" Foreground="white"  Checked="IsFormFiled" TabIndex="4"  FontSize="14"/>
+        <TextBox x:Name="description" Grid.Column="2" HorizontalAlignment="Left" Margin="20,47,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="198" Height="98" Grid.RowSpan="2" TextChanged="IsFormFilled" TabIndex="5"/>
         <Label Grid.Column="2" Content="Renovation description:" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" FontSize="14" Grid.RowSpan="2"/>
         <Border BorderThickness="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="266,72,26,36" Grid.RowSpan="5"/>
+        <Button x:Name="demoBtn" Content="Demo" HorizontalAlignment="Left" Margin="190,17,0,0" VerticalAlignment="Top" Height="28" Width="51" Click="Start_Demo" Grid.Column="2"/>
+
 
     </Grid>
 </Window>

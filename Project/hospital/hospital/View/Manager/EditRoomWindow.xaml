@@ -25,8 +25,12 @@
             <ComboBoxItem Content="4"/>
             <ComboBoxItem Content="5"/>
         </ComboBox>
-        <Button  Content="APPLY" HorizontalAlignment="Left" Command="{Binding EditRoomCommand}" Margin="226,358,0,0" VerticalAlignment="Top" Width="109" Height="36" Background="#bc84fc" FontSize="16" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
-        <Button Content="CANCEL" HorizontalAlignment="Left" Command="{Binding CancelEditRoomCommand}" Margin="424,358,0,0" VerticalAlignment="Top" Width="108" Height="36" Background="#bc84fc" FontSize="16" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+        <Button HorizontalAlignment="Left" Command="{Binding EditRoomCommand}" Margin="226,358,0,0" VerticalAlignment="Top" Width="109" Height="36" Background="#bc84fc" FontSize="16" FocusVisualStyle="{DynamicResource MyFocusVisual}">
+            <AccessText>_SAVE</AccessText>
+        </Button>
+        <Button HorizontalAlignment="Left" Command="{Binding CancelEditRoomCommand}" Margin="424,358,0,0" VerticalAlignment="Top" Width="108" Height="36" Background="#bc84fc" FontSize="16" FocusVisualStyle="{DynamicResource MyFocusVisual}">
+            <AccessText>_CANCEL</AccessText>
+        </Button>
         <ListView x:Name="equipmentListView" ItemsSource="{Binding Equipment}" HorizontalAlignment="Left" Height="237" VerticalAlignment="Top" Width="188" Margin="511,94,0,0" FocusVisualStyle="{DynamicResource MyFocusVisual}">
             <ListView.View>
                 <GridView>

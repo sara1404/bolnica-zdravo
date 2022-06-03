@@ -40,8 +40,12 @@
                 <TextBox x:Name="newPurpose"  Grid.Row="3"  TextChanged="IsFormFilled" Grid.Column="1" Margin="0,8,101,3"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
 
                 <Label Content="Floor:"  Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,0,0,0" Width="53"/>
-                <Button x:Name="scheduleBtn" Content="SCHEDULE" HorizontalAlignment="Left" Margin="169,10,0,0" Grid.Row="6" VerticalAlignment="Top" Height="42" Width="130" Click="Schedule_Merging" Grid.RowSpan="2"/>
-                <Button Content="CANCEL" HorizontalAlignment="Left" Margin="24,10,0,0" Grid.Row="6" VerticalAlignment="Top" Height="42" Width="130" Grid.Column="1" Click="Cancel_Merging" RenderTransformOrigin="0.535,1.105" Grid.RowSpan="2"/>
+                <Button x:Name="scheduleBtn" HorizontalAlignment="Left" Margin="169,10,0,0" Grid.Row="6" VerticalAlignment="Top" Height="42" Width="130" Click="Schedule_Merging" Grid.RowSpan="2">
+                    <AccessText>_SAVE</AccessText>
+                </Button>
+                <Button HorizontalAlignment="Left" Margin="24,10,0,0" Grid.Row="6" VerticalAlignment="Top" Height="42" Width="130" Grid.Column="1" Click="Cancel_Merging" RenderTransformOrigin="0.535,1.105" Grid.RowSpan="2">
+                    <AccessText>_CANCEL</AccessText>
+                </Button>
                 <TextBox x:Name="floor"  Grid.Row="4"  TextChanged="IsFormFilled" Margin="338,10,101,1"  FocusVisualStyle="{DynamicResource MyFocusVisual}" Grid.ColumnSpan="2"/>
 
 

@@ -13,8 +13,12 @@
 
         <Label Content="Ingridients:" HorizontalAlignment="Left" Height="31" Margin="108,113,0,0" VerticalAlignment="Top" Width="125" FontSize="16"/>
         <TextBox x:Name="newIngridients" HorizontalAlignment="Left" Margin="216,113,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="166" Height="71"/>
-        <Button Content="CONFIRM" Margin="108,247,286,45" Click="Add_New_Ingridients"></Button>
-        <Button Content="CANCEL" Margin="276,247,118,45" Click="Cancel_Add_Ingridients"></Button>
+        <Button Margin="108,247,286,45" Click="Add_New_Ingridients">
+            <AccessText>_SAVE</AccessText>
+        </Button>
+        <Button Margin="276,247,118,45" Click="Cancel_Add_Ingridients">
+            <AccessText>_CANCEL</AccessText>
+        </Button>
 
 
     </Grid>

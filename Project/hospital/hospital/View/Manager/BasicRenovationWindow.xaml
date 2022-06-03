@@ -24,8 +24,13 @@
         <ListView HorizontalAlignment="Left" Height="151" Margin="435,102,0,0" VerticalAlignment="Top" Width="256" x:Name="renovationListView" SelectionChanged="Validate"/>
         <Label Content="Renovation description:" HorizontalAlignment="Left" Margin="435,272,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.255,0.385" Width="154" Foreground="white"/>
         <TextBox x:Name="descriptionInput" HorizontalAlignment="Left" Height="77" Margin="435,303,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="256" TextChanged="Validate"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
-        <Button x:Name="ScheduleBtn" Content="SCHEDULE" HorizontalAlignment="Left" Margin="213,413,0,0" VerticalAlignment="Top" Width="128" Height="35" Click="Schedule_Renovation_Click" Background="#bc84fc" FontSize="16"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
-        <Button Content="CANCEL" HorizontalAlignment="Left" Margin="407,413,0,0" VerticalAlignment="Top" Width="128" Height="35" Click="Cancel_Renovation_Click" Background="#bc84fc" FontSize="16"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+        <Button x:Name="ScheduleBtn" HorizontalAlignment="Left" Margin="213,413,0,0" VerticalAlignment="Top" Width="128" Height="35" Click="Schedule_Renovation_Click" Background="#bc84fc" FontSize="16"  FocusVisualStyle="{DynamicResource MyFocusVisual}">
+            <AccessText>_SAVE</AccessText>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="407,413,0,0" VerticalAlignment="Top" Width="128" Height="35" Click="Cancel_Renovation_Click" Background="#bc84fc" FontSize="16"  FocusVisualStyle="{DynamicResource MyFocusVisual}">
+            <AccessText>_CANCEL</AccessText>
+        </Button>
+        <Button Content="Demo" HorizontalAlignment="Left" Margin="724,10,0,0" VerticalAlignment="Top" Height="28" Width="51" Click="Start_Demo"/>
 
     </Grid>
 </Window>

@@ -66,8 +66,12 @@
             </Button>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="2">
-            <Button Content="BASIC RENOVATION" HorizontalAlignment="Left" Margin="0 90 0 50" VerticalAlignment="Top" Width="162" Height="47" Click="Basic_Renovation_Click" RenderTransformOrigin="0.909,0.441" Background="#bc84fc" FocusVisualStyle="{DynamicResource MyFocusVisual}" FontSize="13"/>
-            <Button Content="ADVANCED RENOVATION" HorizontalAlignment="Left" VerticalAlignment="Top" Width="162" Height="47" Click="Advanced_Renovation_Click" Background="#bc84fc" FocusVisualStyle="{DynamicResource MyFocusVisual}" FontSize="13"/>
+            <Button HorizontalAlignment="Left" Margin="0 90 0 50" VerticalAlignment="Top" Width="162" Height="47" Click="Basic_Renovation_Click" RenderTransformOrigin="0.909,0.441" Background="#bc84fc" FocusVisualStyle="{DynamicResource MyFocusVisual}" FontSize="13">
+                <AccessText>_Basic renovation</AccessText>
+            </Button>
+            <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="162" Height="47" Click="Advanced_Renovation_Click" Background="#bc84fc" FocusVisualStyle="{DynamicResource MyFocusVisual}" FontSize="13">
+                <AccessText>_Advanced renovation</AccessText>
+            </Button>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.RowSpan="4" Grid.Column="3" Grid.ColumnSpan="4">
             <DataGrid HorizontalAlignment="Left" Height="407" VerticalAlignment="Top" Width="544" Margin="-80,20,0,0" Background="#1d1b1f"/>

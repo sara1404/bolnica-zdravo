@@ -48,8 +48,12 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Content="Doctor review" Command="{Binding DoctorReviewCommand}" HorizontalAlignment="Left" Margin="335,105,0,0" VerticalAlignment="Top" Height="52" Width="182" FontSize="18" />
-        <Button Content="Hospital review" Command="{Binding HospitalReviewCommand}" HorizontalAlignment="Left" Margin="83,105,0,0" VerticalAlignment="Top" Height="52" Width="182" FontSize="18" />
+        <Button Command="{Binding DoctorReviewCommand}" HorizontalAlignment="Left" Margin="335,105,0,0" VerticalAlignment="Top" Height="52" Width="182" FontSize="18">
+            <AccessText>_Doctor review</AccessText>
+        </Button>
+        <Button Command="{Binding HospitalReviewCommand}" HorizontalAlignment="Left" Margin="83,105,0,0" VerticalAlignment="Top" Height="52" Width="182" FontSize="18">
+            <AccessText>_Hospital review</AccessText>
+        </Button>
         <Border BorderThickness="1" HorizontalAlignment="Left" Height="518" Margin="68,215,0,0" VerticalAlignment="Top" Width="898" BorderBrush="#121212">
             <Grid>
                 <Label Content="Category:" FontSize="16" Margin="29,20,780,455"/>

@@ -3,6 +3,7 @@ using hospital.View;
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -16,8 +17,10 @@ namespace hospital.VM
     {
         public ICommand EditCommand => new EditCommand();
         public ICommand AddCommand => new AddCommand();
+
+        public ICommand DeleteCommand => new DeleteCommand();
         public ICommand SearchCommand => new SearchCommand(this);
-        public List<Room> rooms;
+        public ObservableCollection<Room> rooms;
         private RoomController roomController;
 
         private string quantitySearch = "";
@@ -32,7 +35,7 @@ namespace hospital.VM
             }
         }
 
-        public List<Room> Rooms {
+        public ObservableCollection<Room> Rooms {
             get { return rooms; }
             set {
                 if (rooms != value)
@@ -56,7 +59,7 @@ namespace hospital.VM
         public RoomWindowViewModel() {
             App app = Application.Current as App;
             roomController = app.roomController;
-            Rooms = roomController.FindAll().ToList();
+            Rooms = roomController.FindAll();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -79,7 +82,7 @@ namespace hospital.VM
                 Rooms = roomController.FindRoomsByEquipmentTypeAndQuantity(typeSearch, Int32.Parse(quantitySearch));
             else
             {
-                Rooms = roomController.FindAll().ToList();
+                Rooms = roomController.FindAll();
             }
             OnPropertyChanged("Rooms");
         }
@@ -117,6 +120,26 @@ namespace hospital.VM
         public void Execute(object parameter)
         {
             new AddRoomWindow().Show();
+        }
+    }
+
+    public class DeleteCommand : ICommand
+    {
+        public event EventHandler CanExecuteChanged;
+
+        public bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
+        public void Execute(object parameter)
+        {
+            Room selected = parameter as Room;
+            if (selected != null)
+            {
+                DeleteRoomWindow deleteWindow = new DeleteRoomWindow(selected);
+                deleteWindow.Show();
+            }
         }
     }
 

@@ -1,12 +1,13 @@
 ﻿using Controller;
 using hospital.Controller;
 using hospital.Model;
+using hospital.View.Manager;
 using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -25,6 +26,9 @@ namespace hospital.View
     {
         private RoomController roomController;
         private ScheduledBasicRenovationController scheduledBasicRenovationController;
+        private Timer timer;
+        private bool timer_Elapsed = false;
+
         public BasicRenovationWindow()
         {
             App app = Application.Current as App;
@@ -44,36 +48,51 @@ namespace hospital.View
         private void Show_Appointments_Click(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter) {
-                int renovationDuration = 0;
-                try
-                {
-                    renovationDuration = Int32.Parse(durationRenovation.Text);
-                }
-                catch(Exception ex)
-                {
-                    durationRenovation.Foreground = Brushes.Red;
-                }
-                try
-                {
-                    if (roomRenovationListView.SelectedItem == null) throw new Exception();
-                    Room room = roomController.FindRoomByName(roomRenovationListView.SelectedItem.ToString());
-                    renovationListView.ItemsSource = scheduledBasicRenovationController.FindFreeTimeIntervals(room, renovationDuration);
-                }
-                catch(Exception ex) {
-                    roomRenovationListView.Foreground = Brushes.Red;
-                }
+                ListAppointments();
             }
            
         }
 
+        private void ListAppointments() {
+            int renovationDuration = 0;
+            try
+            {
+                renovationDuration = Int32.Parse(durationRenovation.Text);
+            }
+            catch (Exception ex)
+            {
+                durationRenovation.Foreground = Brushes.Red;
+            }
+            try
+            {
+                if (roomRenovationListView.SelectedItem == null) throw new Exception();
+                Room room = roomController.FindRoomByName(roomRenovationListView.SelectedItem.ToString());
+                renovationListView.ItemsSource = scheduledBasicRenovationController.FindFreeTimeIntervals(room, renovationDuration);
+            }
+            catch (Exception ex)
+            {
+                roomRenovationListView.Foreground = Brushes.Red;
+            }
+        }
+
         private void Schedule_Renovation_Click(object sender, RoutedEventArgs e)
         {
+            SaveRenovation();
+        }
+
+        private void SaveRenovation() {
             Room room = roomController.FindRoomByName(roomRenovationListView.SelectedItem.ToString());
             TimeInterval interval = (TimeInterval)renovationListView.SelectedItem;
             string description = descriptionInput.Text;
             ScheduledBasicRenovation renovation = new ScheduledBasicRenovation(scheduledBasicRenovationController.FindAll().Count.ToString(), room, interval, description);
             scheduledBasicRenovationController.Create(renovation);
             this.Close();
+        }
+
+        private void FocusOnSaveButton()
+        {
+            ScheduleBtn.BorderThickness = new Thickness(5, 5, 5, 5);
+            ScheduleBtn.BorderBrush = Brushes.Pink;
         }
 
         private void Cancel_Renovation_Click(object sender, RoutedEventArgs e)
@@ -106,5 +125,37 @@ namespace hospital.View
             if (e.Key == Key.Escape)
                 Close();
         }
+
+        private void Start_Demo(object sender, RoutedEventArgs e)
+        {
+            List<IDemoCommand> commands = new List<IDemoCommand>
+            {
+                new SelectFromListBoxCommand(roomRenovationListView, 1),
+                new FillTxtFieldCommand(durationRenovation, "0"),
+                new ActionExecuteCommand(ListAppointments),
+                new SelectFromListBoxCommand(renovationListView, 0),
+                new FillTxtFieldCommand(descriptionInput, "k"),
+                new FillTxtFieldCommand(descriptionInput, "kr"),
+                new FillTxtFieldCommand(descriptionInput, "kre"),
+                new FillTxtFieldCommand(descriptionInput, "krec"),
+                new FillTxtFieldCommand(descriptionInput, "krece"),
+                new FillTxtFieldCommand(descriptionInput, "krecen"),
+                new FillTxtFieldCommand(descriptionInput, "krecenj"),
+                new FillTxtFieldCommand(descriptionInput, "krecenje"),
+                new ActionExecuteCommand(FocusOnSaveButton),
+                new ActionExecuteCommand(SaveRenovation),
+
+            };
+
+            timer = new Timer((Object o) => TimerCallback(commands), null, 0,  1000);
+        }
+        private void TimerCallback(List<IDemoCommand> commands)
+        {
+            if (commands.Count == 0) return;
+            commands[0].execute();
+            commands.RemoveAt(0);
+        }
+
+
     }
 }

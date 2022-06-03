@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,6 +27,9 @@ namespace hospital.View
     {
         private RoomController roomController;
         private ScheduledAdvancedRenovationController scheduledAdvancedRenovationController;
+        private Timer timer;
+        private bool demoStarted;
+
         public AdvancedRenovationWindow()
         {
             InitializeComponent();
@@ -40,15 +44,19 @@ namespace hospital.View
         {
             if (e.Key == Key.Enter)
             {
-                int renovationDuration = Int32.Parse(durationRenovation.Text);
-                try
-                {
-                    CheckTypeOfAdvancedRenovation(renovationDuration);
-                }
-                catch (Exception ex)
-                {
-                    DisplayError();
-                }
+                ListAppointments();
+            }
+        }
+
+        private void ListAppointments() {
+            int renovationDuration = Int32.Parse(durationRenovation.Text);
+            try
+            {
+                CheckTypeOfAdvancedRenovation(renovationDuration);
+            }
+            catch (Exception ex)
+            {
+                DisplayError();
             }
         }
 
@@ -90,20 +98,33 @@ namespace hospital.View
         {
             if (mergeBtn.IsChecked == true)
             {
-                MergeRoomsWindow mergeRoomsWindow = new MergeRoomsWindow();
-                mergeRoomsWindow.floor.Text = ((Room)listViewRooms.SelectedItems[0]).floor.ToString();
-                if (mergeRoomsWindow.ShowDialog() == false && IsMergeFormFilled(mergeRoomsWindow.room))
-                {
-                    CreateMergeRenovation(new List<Room>(), (TimeInterval)renovationListView.SelectedItem, mergeRoomsWindow.room);
-                }
+                ScheduleMergeRenovation();
 
             }
             else if (splitBtn.IsChecked == true) {
-                SplitRoomWindow splitRoomWindow = new SplitRoomWindow();
-                splitRoomWindow.floor.Text = (((Room)listViewRooms.SelectedItems[0]).floor.ToString());
-                if (splitRoomWindow.ShowDialog() == false && IsSplitFormFilled(splitRoomWindow.rooms)) {
-                    Console.WriteLine((TimeInterval)renovationListView.SelectedItem);
-                    CreateSplitRenovation(splitRoomWindow.rooms, (TimeInterval)renovationListView.SelectedItem);
+                ScheduleSplitRenovation();
+            }
+        }
+
+        public void ScheduleMergeRenovation() {
+            MergeRoomsWindow mergeRoomsWindow = new MergeRoomsWindow(demoStarted);
+            mergeRoomsWindow.floor.Text = ((Room)listViewRooms.SelectedItems[0]).floor.ToString();
+            if (mergeRoomsWindow.ShowDialog() == false && IsMergeFormFilled(mergeRoomsWindow.room))
+            {
+                CreateMergeRenovation(new List<Room>(), (TimeInterval)renovationListView.SelectedItem, mergeRoomsWindow.room);
+            }
+        }
+
+        public void ScheduleSplitRenovation()
+        {
+            SplitRoomWindow splitRoomWindow = new SplitRoomWindow(demoStarted);
+            splitRoomWindow.floor.Text = (((Room)listViewRooms.SelectedItems[0]).floor.ToString());
+            if (splitRoomWindow.ShowDialog() == false && IsSplitFormFilled(splitRoomWindow.rooms))
+            {
+                CreateSplitRenovation(splitRoomWindow.rooms, (TimeInterval)renovationListView.SelectedItem);
+                if(demoStarted)
+                {
+                    MergeDemo();
                 }
             }
         }
@@ -244,5 +265,106 @@ namespace hospital.View
         {
             IsFormFilledValidation();
         }
-    }
+
+        private void SelectSplitRadioBtn() {
+            splitBtn.IsChecked = true;
+        }
+
+        private void SelectMergeRadioBtn() {
+            mergeBtn.IsChecked = true;
+        }
+
+        private void FocusOnSaveButton()
+        {
+            scheduleBtn.BorderThickness = new Thickness(5, 5, 5, 5);
+            scheduleBtn.BorderBrush = Brushes.Pink;
+        }
+
+        private void Start_Demo(object sender, RoutedEventArgs e)
+        {
+            demoStarted = true;
+            SplitDemo();
+        }
+
+        private void SplitDemo() {
+            List<IDemoCommand> commands = new List<IDemoCommand>
+            {
+                new SelectFromListBoxCommand(listViewRooms, 10),
+                new FillTxtFieldCommand(durationRenovation, "0"),
+                new ActionExecuteCommand(ListAppointments),
+                new SelectFromListBoxCommand(renovationListView, 0),
+                new FillTxtFieldCommand(description, "s"),
+                new FillTxtFieldCommand(description, "sp"),
+                new FillTxtFieldCommand(description, "spl"),
+                new FillTxtFieldCommand(description, "spli"),
+                new FillTxtFieldCommand(description, "split"),
+                new FillTxtFieldCommand(description, "spliti"),
+                new FillTxtFieldCommand(description, "splitin"),
+                new FillTxtFieldCommand(description, "spliting"),
+                new ActionExecuteCommand(SelectSplitRadioBtn),
+                new ActionExecuteCommand(FocusOnSaveButton),
+                new ActionExecuteCommand(ScheduleSplitRenovation),
+            };
+            timer = new Timer((Object o) => TimerCallback(commands, timer), null, 0, 500);
+        }
+
+        private void MergeDemo() {
+            listViewRooms.ItemsSource = roomController.FindAll();
+
+            List<IDemoCommand> commands = new List<IDemoCommand> {
+                new FillTxtFieldCommand(durationRenovation, ""),
+                new FillTxtFieldCommand(description, ""),
+                new SelectMultipleFromListViewCommand(listViewRooms, roomController),
+                new FillTxtFieldCommand(durationRenovation, "0"),
+                new ActionExecuteCommand(ListAppointments),
+                new SelectFromListBoxCommand(renovationListView, 0),
+                new FillTxtFieldCommand(description, "m"),
+                new FillTxtFieldCommand(description, "me"),
+                new FillTxtFieldCommand(description, "mer"),
+                new FillTxtFieldCommand(description, "merg"),
+                new FillTxtFieldCommand(description, "mergi"),
+                new FillTxtFieldCommand(description, "mergin"),
+                new FillTxtFieldCommand(description, "merging"),
+                new ActionExecuteCommand(SelectMergeRadioBtn),
+                new ActionExecuteCommand(FocusOnSaveButton),
+                new ActionExecuteCommand(ScheduleMergeRenovation)
+            };
+            timer = new Timer((Object o) => TimerCallback(commands, timer), null, 0, 500);
+        }
+
+        private void TimerCallback(List<IDemoCommand> commands, Timer timer)
+        {
+            Console.WriteLine(commands.Count);
+            if (commands.Count <= 1)
+            {
+                Console.WriteLine("Disposing");
+                IDemoCommand command = commands[0];
+                commands.Clear();
+                timer.Dispose();
+                command.execute();
+                return;
+            }
+            if(commands.Count == 0)
+            {
+                timer.Dispose();
+                return;
+            }
+            commands[0].execute();
+            commands.RemoveAt(0);
+        }
+
+        private void CleanAfterDemo() {
+            durationRenovation.Text = "";
+            renovationListView.Items.Clear();
+            description.Text = "";
+            splitBtn.IsChecked = false;
+        }
+
+        private void IsFormFiled(object sender, RoutedEventArgs e)
+        {
+            IsFormFilledValidation();
+        }
+     }
+
+
     }

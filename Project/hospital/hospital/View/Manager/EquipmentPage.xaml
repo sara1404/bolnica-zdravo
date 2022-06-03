@@ -68,7 +68,9 @@
 
         <StackPanel Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="3">
             <Button Content="Add new equipment" HorizontalAlignment="Left" Margin="105,40,0,40" VerticalAlignment="Top" Width="187" Height="54" FontSize="16" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
-            <Button Content="Schedule relocation" HorizontalAlignment="Left" Margin="105,40,0,40" VerticalAlignment="Top" Width="177" Height="54" Click="Show_Relocation_Window_Click" FontSize="16" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+            <Button HorizontalAlignment="Left" Margin="105,40,0,40" VerticalAlignment="Top" Width="177" Height="54" Click="Show_Relocation_Window_Click" FontSize="16" FocusVisualStyle="{DynamicResource MyFocusVisual}">
+                <AccessText>Schedule _relocation</AccessText>
+            </Button>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="1">
             <Button Height="30" Click="Back_Click" Margin="0,0,22,0" FocusVisualStyle="{DynamicResource MyFocusVisual}">

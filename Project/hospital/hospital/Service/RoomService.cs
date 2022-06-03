@@ -45,15 +45,15 @@ namespace Service
             return roomRepository.FindRoomsByPurpose(purpose);
         }
 
-        public List<Room> FindRoomsByEquipmentType(string type) {
+        public ObservableCollection<Room> FindRoomsByEquipmentType(string type) {
             return roomRepository.FindRoomsByEquipmentType(type);
         }
 
-        public List<Room> FindRoomsByEquipmentQuantity(int quantity) {
+        public ObservableCollection<Room> FindRoomsByEquipmentQuantity(int quantity) {
             return roomRepository.FindRoomsByEquipmentQuantity(quantity);
         }
 
-        public List<Room> FindRoomsByEquipmentTypeAndQuantity(string type, int quantity) {
+        public ObservableCollection<Room> FindRoomsByEquipmentTypeAndQuantity(string type, int quantity) {
             return roomRepository.FindRoomsByEquipmentTypeAndQuantity(type, quantity);
         }
         public ref ObservableCollection<Room> FindAll()

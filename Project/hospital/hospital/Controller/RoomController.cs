@@ -45,15 +45,15 @@ namespace Controller
             return roomService.FindRoomsByPurpose(purpose);
         }
 
-        public List<Room> FindRoomsByEquipmentType(string type) {
+        public ObservableCollection<Room> FindRoomsByEquipmentType(string type) {
             return roomService.FindRoomsByEquipmentType(type);
         }
 
-        public List<Room> FindRoomsByEquipmentQuantity(int quantity) {
+        public ObservableCollection<Room> FindRoomsByEquipmentQuantity(int quantity) {
             return roomService.FindRoomsByEquipmentQuantity(quantity);
         }
 
-        public List<Room> FindRoomsByEquipmentTypeAndQuantity(string type, int quantity) {
+        public ObservableCollection<Room> FindRoomsByEquipmentTypeAndQuantity(string type, int quantity) {
             return roomService.FindRoomsByEquipmentTypeAndQuantity(type, quantity);
         }
 

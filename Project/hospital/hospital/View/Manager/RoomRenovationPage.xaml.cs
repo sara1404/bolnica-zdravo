@@ -50,5 +50,6 @@ namespace hospital.View
         {
             NavigationService.GoBack();
         }
+
     }
 }

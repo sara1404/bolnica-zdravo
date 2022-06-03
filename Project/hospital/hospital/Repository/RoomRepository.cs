@@ -59,8 +59,8 @@ namespace Repository
             return retVal;
         }
 
-        public List<Room> FindRoomsByEquipmentType(string type) {
-            List<Room> filteredRooms = new List<Room>();
+        public ObservableCollection<Room> FindRoomsByEquipmentType(string type) {
+            ObservableCollection<Room> filteredRooms = new ObservableCollection<Room>();
             foreach (Room room in rooms) {
                 foreach (Equipment eq in room.equipment) {
                     if (eq.type.Contains(type))
@@ -71,8 +71,8 @@ namespace Repository
         }
 
 
-        public List<Room> FindRoomsByEquipmentQuantity(int quantity) {
-            List<Room> filteredRooms = new List<Room>();
+        public ObservableCollection<Room> FindRoomsByEquipmentQuantity(int quantity) {
+            ObservableCollection<Room> filteredRooms = new ObservableCollection<Room>();
             foreach (Room room in rooms)
             {
                 if (RoomHasEnoughEquipment(quantity, room)) filteredRooms.Add(room);
@@ -90,8 +90,8 @@ namespace Repository
             return false;
         }
 
-        public List<Room> FindRoomsByEquipmentTypeAndQuantity(string type, int quantity) {
-            List<Room> filteredRooms = new List<Room>();
+        public ObservableCollection<Room> FindRoomsByEquipmentTypeAndQuantity(string type, int quantity) {
+            ObservableCollection<Room> filteredRooms = new ObservableCollection<Room>();
             foreach (Room room in rooms)
             {
                 foreach (Equipment eq in room.equipment)

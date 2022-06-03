@@ -26,8 +26,12 @@
             <ComboBoxItem Content="4"/>
             <ComboBoxItem Content="5"/>
         </ComboBox>
-        <Button  Content="APPLY" HorizontalAlignment="Left" Margin="209,358,0,0" VerticalAlignment="Top" Width="109" Height="36" Background="#bc84fc"  FocusVisualStyle="{DynamicResource MyFocusVisual}" Command="{Binding AddRoomCommand}"/>
-        <Button Content="CANCEL" HorizontalAlignment="Left" Margin="414,358,0,0" VerticalAlignment="Top" Width="109" Height="36" Background="#bc84fc"  FocusVisualStyle="{DynamicResource MyFocusVisual}" Command="{Binding CancelRoomCommand}"/>
+        <Button HorizontalAlignment="Left" Margin="209,358,0,0" VerticalAlignment="Top" Width="109" Height="36" Background="#bc84fc"  FocusVisualStyle="{DynamicResource MyFocusVisual}" Command="{Binding AddRoomCommand}">
+            <AccessText>_SAVE</AccessText>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="414,358,0,0" VerticalAlignment="Top" Width="109" Height="36" Background="#bc84fc"  FocusVisualStyle="{DynamicResource MyFocusVisual}" Command="{Binding CancelRoomCommand}">
+            <AccessText>_CANCEL</AccessText>
+        </Button>
 
     </Grid>
 </Window>

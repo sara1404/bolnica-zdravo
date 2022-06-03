@@ -205,6 +205,7 @@
     <Compile Include="Service\TimeSchedulerService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Service\VacationRequestService.cs" />
+    <Compile Include="View\Manager\ActionExecuteCommand.cs" />
     <Compile Include="View\Manager\AddIngridientsWindow.xaml.cs">
       <DependentUpon>AddIngridientsWindow.xaml</DependentUpon>
     </Compile>
@@ -271,9 +272,11 @@
     <Compile Include="View\HandlingMedicalRecordsPage.xaml.cs">
       <DependentUpon>HandlingMedicalRecordsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Manager\FillTxtFieldCommand.cs" />
     <Compile Include="View\Manager\HospitalReviewWindow.xaml.cs">
       <DependentUpon>HospitalReviewWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Manager\IDemoCommand.cs" />
     <Compile Include="View\Manager\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -286,6 +289,8 @@
     <Compile Include="View\Manager\MedicinePage.xaml.cs">
       <DependentUpon>MedicinePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Manager\SelectFromListBoxCommand.cs" />
+    <Compile Include="View\Manager\SelectMultipleFromListViewCommand.cs" />
     <Compile Include="View\PatientView\MedicalRecordViewModel.cs" />
     <Compile Include="View\PatientView\PatientAppointmentNote.xaml.cs">
       <DependentUpon>PatientAppointmentNote.xaml</DependentUpon>
@@ -389,6 +394,7 @@
     </Compile>
     <Compile Include="VM\AddRoomWindowViewModel.cs" />
     <Compile Include="VM\Commands.cs" />
+    <Compile Include="VM\DeleteRoomWindowViewModel.cs" />
     <Compile Include="VM\EditRoomWindowViewModel.cs" />
     <Compile Include="VM\GoBackCommand.cs" />
     <Compile Include="VM\LogoutCommand.cs" />

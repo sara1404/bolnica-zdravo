@@ -18,7 +18,7 @@
         </ResourceDictionary>
     </Page.Resources>
     <Grid>
-        <DataGrid x:Name="appointmentTable" ItemsSource="{Binding Appointments}" AutoGenerateColumns="True" IsReadOnly="True" HorizontalAlignment="Left" Height="378" Margin="10,20,0,0" VerticalAlignment="Top" Width="780">
+        <DataGrid x:Name="appointmentTable" ItemsSource="{Binding Appointments}" AutoGenerateColumns="True" IsReadOnly="True" HorizontalAlignment="Left" Height="378" Margin="10,20,0,0" VerticalAlignment="Top" Width="780" SelectionChanged="appointmentTable_SelectionChanged">
             <!--<DataGrid.Columns>
             <DataGridTextColumn Header="Doctor name" Binding="{Binding Doctor}"/>
             <DataGridTextColumn Header="Date" Binding="{Binding StartTime}" Width="*"/>

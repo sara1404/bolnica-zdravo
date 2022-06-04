@@ -37,5 +37,15 @@ namespace Service
         {
             return _meetingRepository.DeleteById(id);
         }
+
+        public List<DateTime> FindAllMeetingsStartTime()
+        {
+            List<DateTime> meetingsStartTimes = new List<DateTime>();
+            foreach(Meetings meeting in FindAll())
+            {
+                meetingsStartTimes.Add(meeting.Date);
+            }
+            return meetingsStartTimes;
+        }
     }
 }

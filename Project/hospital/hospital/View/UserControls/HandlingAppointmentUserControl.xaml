@@ -21,7 +21,7 @@
             <Border BorderBrush="gray" BorderThickness="2" Margin="0,40,0,0" Height="450" Width="750" CornerRadius="10">
                 <StackPanel>
                     <Label FontSize="25" FontWeight="DemiBold" Margin="0,0,0,0" HorizontalAlignment="Center">Handling appointment</Label>
-                    <StackPanel Orientation="Horizontal"  Height="25" Width="430">
+                    <StackPanel Orientation="Horizontal"  Height="25" Width="480">
                         <Button x:Name="btnAdd" Padding="2,-6,2,0" Margin="0,0,5,0" BorderBrush="Transparent" Width="25" Background="Transparent" Click="btnAdd_Click">
                             <Image Source="../../Resources/Images/addition_24x24.png"></Image>
                         </Button>
@@ -31,7 +31,7 @@
                         <Button x:Name="btnRemove" Padding="1,-6,2,0" Margin="5,0,5,0"  BorderBrush="Transparent" Width="25" Background="Transparent" Click="btnRemove_Click">
                             <Image Source="../../Resources/Images/delete_24x24.png"></Image>
                         </Button>
-                        <Border Margin="210,0,0,0" Width="120" BorderBrush="DarkGray" BorderThickness="1">
+                        <Border Margin="260,0,0,0" Width="120" BorderBrush="DarkGray" BorderThickness="1">
                             <DockPanel Margin="-1,0,-1,0" Width="120">
                                 <TextBox x:Name="txtSearch" Text="" FontSize="12" HorizontalAlignment="Stretch" Width="95" Background="Transparent" BorderThickness="0" TextChanged="txtSearch_TextChanged"/>
                                 <TextBlock IsHitTestVisible="False" Text="Search" VerticalAlignment="Center" Margin="-90" Foreground="DarkGray">
@@ -52,9 +52,9 @@
                             </DockPanel>
                         </Border>
                     </StackPanel>
-                    <DataGrid x:Name="dateGridHandlingAppointment" HorizontalContentAlignment="Center" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="430" Height="350" ItemsSource="{Binding Appointments}" IsReadOnly ="True" SelectionMode="Single" HorizontalAlignment="Center" AutoGenerateColumns="False" CanUserResizeColumns="false" CanUserResizeRows="false">
+                    <DataGrid x:Name="dateGridHandlingAppointment" HorizontalContentAlignment="Center" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="480" Height="350" ItemsSource="{Binding Appointments}" IsReadOnly ="True" SelectionMode="Single" HorizontalAlignment="Center" AutoGenerateColumns="False" CanUserResizeColumns="false" CanUserResizeRows="false">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Patient"  Width="70"  Binding="{Binding PatientUsername}" >
+                            <DataGridTextColumn Header="Patient"  Width="85"  Binding="{Binding PatientUsername}" >
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
@@ -68,7 +68,7 @@
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Start time" Width="130" Binding="{Binding StartTime}">
+                            <DataGridTextColumn Header="Start time" Width="165" Binding="{Binding StartTime}">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>

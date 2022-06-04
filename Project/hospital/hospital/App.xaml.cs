@@ -105,7 +105,7 @@ namespace hospital
             meetingController = new MeetingController(meetingService, notificationService);
 
             appointmentController = new AppointmentManagementController(appointmentService);
-            AvailableAppointmentService availableAppointmentService = new AvailableAppointmentService(appointmentService, doctorRepository);
+            AvailableAppointmentService availableAppointmentService = new AvailableAppointmentService(appointmentService, doctorRepository, meetingService);
             availableAppointmentController = new AvailableAppointmentController(availableAppointmentService);
 
             MedicalRecordsService medicalRecordsService = new MedicalRecordsService(medicalRecordsRepository);

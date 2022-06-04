@@ -28,7 +28,7 @@
         <Button x:Name="btnAppointments" Content="All appointments" HorizontalAlignment="Left" Margin="170,10,0,0" VerticalAlignment="Top" Width="75" Padding="4" Click="btnAppointments_Click"/>
         <Button x:Name="btnMedicalRecord" Content="Medical record" HorizontalAlignment="Left" Margin="410,10,0,0" VerticalAlignment="Top" Width="75" Padding="4" Click="btnMedicalRecord_Click"/>
         <Button x:Name="btnCustomNotification" Content="Custom notification" HorizontalAlignment="Left" Margin="650,10,0,0" VerticalAlignment="Top" Width="75" Padding="4" Click="btnCustomNotification_Click"/>
-        <Button x:Name="btnTherapy" Content="Therapy" HorizontalAlignment="Left" Margin="490,10,0,0" VerticalAlignment="Top" Width="75" Padding="4"/>
+        <Button x:Name="btnTherapy" Content="Therapy" HorizontalAlignment="Left" Margin="490,10,0,0" VerticalAlignment="Top" Width="75" Padding="4" Click="btnTherapy_Click"/>
         <Button x:Name="btnGraph" Content="Graph" HorizontalAlignment="Left" Margin="570,10,0,0" VerticalAlignment="Top" Width="75" Padding="4" Click="btnGraph_Click"/>
     </Grid>
 </Window>

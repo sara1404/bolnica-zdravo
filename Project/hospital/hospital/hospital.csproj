@@ -335,6 +335,9 @@
     <Compile Include="View\PatientView\PatientPopularTimes.xaml.cs">
       <DependentUpon>PatientPopularTimes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PatientView\PatientTherapies.xaml.cs">
+      <DependentUpon>PatientTherapies.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PatientView\PopularTimesViewModel.cs" />
     <Compile Include="View\SecretaryHomeWindow.xaml.cs">
       <DependentUpon>SecretaryHomeWindow.xaml</DependentUpon>
@@ -587,6 +590,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PatientView\PatientPopularTimes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientView\PatientTherapies.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

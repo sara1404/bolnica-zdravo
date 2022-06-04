@@ -1,4 +1,5 @@
 using hospital;
+using hospital.DTO;
 using Model;
 using Repository;
 using System;
@@ -52,7 +53,6 @@ namespace Service
             return patientRepository.UpdateById(id, patient);
         }
 
-
         public int GetNewId()
         {
             medicalRecords = medicalRecordsRepository.FindAll();
@@ -60,6 +60,22 @@ namespace Service
                 return 333;
             else
                 return medicalRecords[medicalRecords.Count - 1].RecordId + 1;
+        }
+
+        public List<TherapyDTO> FindCurrentMonthTherapies(string id)
+        {
+            List<TherapyDTO> therapies = new List<TherapyDTO>();
+            MedicalRecord mr = medicalRecordsRepository.FindById(FindById(id).RecordId);
+            foreach (Therapy t in mr.Therapy)
+            {
+                DateTime iterator = t.TimeStart;
+                while(iterator < t.TimeEnd)
+                {
+                    iterator = iterator.AddHours(t.Interval);
+                    therapies.Add(new TherapyDTO(t.Medicine.Name, iterator));
+                }
+            }
+            return therapies;
         }
     }
 }

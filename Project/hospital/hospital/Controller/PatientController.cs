@@ -1,3 +1,4 @@
+using hospital.DTO;
 using Model;
 using Service;
 using System;
@@ -80,6 +81,11 @@ namespace Controller
             Patient currentPatient = FindById(patientUsername);
             currentPatient.DelayOrCancelAppointment.Add(DateTime.Now);
             UpdateByUsername(patientUsername, currentPatient);
+        }
+
+        public List<TherapyDTO> FindCurrentMonthTherapies(string id)
+        {
+            return patientService.FindCurrentMonthTherapies(id);
         }
 
         private void isValidate(Patient patient)

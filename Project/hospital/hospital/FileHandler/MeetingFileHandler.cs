@@ -12,12 +12,12 @@ namespace FileHandler
         private readonly string path = @"../../Resources/Data/MeetingData.txt";
 
 
-        public List<Meetings> Read()
+        public List<Meeting> Read()
         {
             try
             {
                 string serializedMeetings = System.IO.File.ReadAllText(path);
-                List<Meetings> meetings = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Meetings>>(serializedMeetings);
+                List<Meeting> meetings = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Meeting>>(serializedMeetings);
                 return meetings;
             }
             catch
@@ -26,7 +26,7 @@ namespace FileHandler
             }
         }
 
-        public void Write(List<Meetings> meetings)
+        public void Write(List<Meeting> meetings)
         {
             string serializedMeetings = Newtonsoft.Json.JsonConvert.SerializeObject(meetings);
             System.IO.File.WriteAllText(path, serializedMeetings);

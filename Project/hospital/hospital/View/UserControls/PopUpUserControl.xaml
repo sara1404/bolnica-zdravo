@@ -14,19 +14,6 @@
             </Path.Fill>
             <Path.Data>
                 <PathGeometry>
-                    <!--<PathFigure StartPoint="50,-20">
-                        <LineSegment Point="40,0"/>
-                        <LineSegment Point="10,0"/>
-                        <ArcSegment Size="10,10" IsLargeArc="False" SweepDirection="Counterclockwise" Point="0,10"/>
-                        <LineSegment Point="0,95"/>
-                        <ArcSegment Size="10,10" IsLargeArc="False" SweepDirection="Counterclockwise" Point="10,105"/>
-                        <LineSegment Point="90,105"/>
-                        <ArcSegment Size="10,10" IsLargeArc="False" SweepDirection="Counterclockwise" Point="100,95"/>
-                        <LineSegment Point="100,10"/>
-                        <ArcSegment Size="10,10" IsLargeArc="False" SweepDirection="Counterclockwise" Point="90,0"/>
-                        <LineSegment Point="60,0"/>
-                        <LineSegment Point="50,-20"/>
-                    </PathFigure>-->
                     <PathFigure StartPoint="50,0">
                         <LineSegment Point="40,20"/>
                         <LineSegment Point="10,20"/>

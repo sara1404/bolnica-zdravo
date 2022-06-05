@@ -17,18 +17,18 @@ namespace Service
         {
             _meetingRepository = _repo;
         }
-        public void Create(Meetings meeting)
+        public void Create(Meeting meeting)
         {
             _meetingRepository.Create(meeting);
 
         }
 
-        public ObservableCollection<Meetings> FindAll()
+        public ObservableCollection<Meeting> FindAll()
         {
             return _meetingRepository.FindAll();
         }
 
-        public Meetings FindById(int id)
+        public Meeting FindById(int id)
         {
             return _meetingRepository.FindById(id);
         }
@@ -36,6 +36,16 @@ namespace Service
         public bool DeleteById(int id)
         {
             return _meetingRepository.DeleteById(id);
+        }
+
+        public List<DateTime> FindAllMeetingsStartTime()
+        {
+            List<DateTime> meetingsStartTimes = new List<DateTime>();
+            foreach(Meeting meeting in FindAll())
+            {
+                meetingsStartTimes.Add(meeting.Date);
+            }
+            return meetingsStartTimes;
         }
     }
 }

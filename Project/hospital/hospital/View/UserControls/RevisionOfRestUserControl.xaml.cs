@@ -65,12 +65,14 @@ namespace hospital.View.UserControls
         {
             ResetFields();
             _vacationRequestController.FinishRequest("approve", _currentSelected.Id);
+            dateGridHandlingRest.Items.Refresh();
         }
 
         private void btnReject_Click(object sender, RoutedEventArgs e)
         {
             ResetFields();
             _vacationRequestController.FinishRequest("reject", _currentSelected.Id);
+            dateGridHandlingRest.Items.Refresh();
         }
         private void ResetFields()
         {

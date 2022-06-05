@@ -20,6 +20,7 @@ using ToastNotifications.Messages;
 using ToastNotifications.Position;
 using ToastNotifications.Lifetime;
 using System.Data;
+using System.Collections;
 
 namespace hospital.View.UserControls
 {
@@ -41,7 +42,7 @@ namespace hospital.View.UserControls
             date.DisplayDateStart = DateTime.Today;
             _roomController = app.roomController;
             _meetingController = app.meetingController;
-            Rooms = new ObservableCollection<Room>(_roomController.FindRoomsByPurpose("meetings"));
+            Rooms = new ObservableCollection<Room>(_roomController.FindRoomsByPurpose("meeting"));
             cbRooms.ItemsSource = Rooms;
             Notifier = GetNotifier();
         }
@@ -59,7 +60,7 @@ namespace hospital.View.UserControls
             DateTime meetingTime = (DateTime)timePicker.Value;
             DateTime meetingStartTime = new DateTime(meetingDate.Year, meetingDate.Month, meetingDate.Day, meetingTime.Hour, meetingTime.Minute, 0);
 
-            Meetings newMeeting = new Meetings(_doctors, meetingStartTime, cbRooms.Text,txtReason.Text);
+            Meeting newMeeting = new Meeting(_doctors, meetingStartTime, cbRooms.Text,txtReason.Text);
             _meetingController.Create(newMeeting);
             Notifier.ShowSuccess("Meeting successfully scheduled");
             ResetFields();

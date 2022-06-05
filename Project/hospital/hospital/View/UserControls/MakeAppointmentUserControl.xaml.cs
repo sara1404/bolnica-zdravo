@@ -32,6 +32,7 @@ namespace hospital.View.UserControls
         private ScheduledBasicRenovationController sbrc;
         private RecommendedAppointmentController rc;
         private AvailableAppointmentController aac;
+        private VacationRequestController vc;
         public ObservableCollection<Patient> Patients { get; set; }
         public ObservableCollection<Doctor> Doctors { get; set; }
         public MakeAppointmentUserControl()
@@ -45,6 +46,7 @@ namespace hospital.View.UserControls
             dc = app.doctorController;
             sbrc = app.scheduledBasicRenovationController;
             aac = app.availableAppointmentController;
+            vc = app.vacationRequestController;
             rc = app.recommendedAppointmentController;
             Patients = pc.FindAll();
             Doctors = dc.GetDoctors();
@@ -77,6 +79,10 @@ namespace hospital.View.UserControls
                         canMake = false;
                     }
                 }
+                if (CheckVacations())
+                {
+                    return;
+                }
                 if (canMake)
                 {
                     DateTime tmp = (DateTime) date.SelectedDate;
@@ -95,6 +101,22 @@ namespace hospital.View.UserControls
                     notFree.Text = "Appointment is not free";
                 }
             }
+        }
+
+        private bool CheckVacations()
+        {
+            foreach(VacationRequest vacation in vc.FindAll())
+            {
+                if (vacation.DoctorId == ((Doctor)cmbDoctor.SelectedItem).Username && vacation.StartDate < ((DateTime)date.SelectedDate) && vacation.EndDate> ((DateTime)date.SelectedDate))
+                {
+                    Console.WriteLine("1:" + vacation.DoctorId + "2:" +((Doctor)cmbDoctor.SelectedItem).Username);
+                    Console.WriteLine("1:" + vacation.StartDate + "2:" + ((DateTime)date.SelectedDate));
+                    Console.WriteLine("1:" + vacation.EndDate + "2:" + ((DateTime)date.SelectedDate));
+                    notFree.Text = "Doctor is on vacation";
+                    return true;
+                }
+            }
+            return false;
         }
         private void ResetFields()
         {
@@ -227,8 +249,8 @@ namespace hospital.View.UserControls
                     ObservableCollection<Appointment> apointments = aac.GetFreeAppointmentsByDateAndDoctor((DateTime)date.SelectedDate, ((Doctor)cmbDoctor.SelectedItem).Username,cmbUsername.Text);
                     rc.FindFreeForward(apointments, (DateTime) txtTime.Value);
                     rc.FindFreeBack(apointments, (DateTime) txtTime.Value);
-                    btnRecOne.Content = "Doctor: " + dc.GetByUsername(rc.RecommendedOne.DoctorUsername) + "\n" + rc.RecommendedOne.StartTime;
-                    btnRecTwo.Content = "Doctor: " + dc.GetByUsername(rc.RecommendedTwo.DoctorUsername) + "\n" + rc.RecommendedTwo.StartTime;
+                    recOne.Text = "Doctor: " + dc.GetByUsername(rc.RecommendedOne.DoctorUsername) + "\n" + rc.RecommendedOne.StartTime;
+                    recTwo.Text = "Doctor: " + dc.GetByUsername(rc.RecommendedTwo.DoctorUsername) + "\n" + rc.RecommendedTwo.StartTime;
                 }
                 else
                 {
@@ -238,8 +260,8 @@ namespace hospital.View.UserControls
                     btnRecTwo.Visibility = Visibility.Visible;
                     ObservableCollection<Appointment> apointments = aac.GetFreeAppointmentsByDate((DateTime)date.SelectedDate,cmbUsername.Text);
                     rc.FindRecByTime(apointments,(DateTime) txtTime.Value);
-                    btnRecOne.Content = "Doctor: " + dc.GetByUsername(rc.RecommendedOne.DoctorUsername) + "\n" + rc.RecommendedOne.StartTime;
-                    btnRecTwo.Content = "Doctor: " + dc.GetByUsername(rc.RecommendedTwo.DoctorUsername) + "\n" + rc.RecommendedTwo.StartTime;
+                    recOne.Text = "Doctor: " + dc.GetByUsername(rc.RecommendedOne.DoctorUsername) + "\n" + rc.RecommendedOne.StartTime;
+                    recTwo.Text = "Doctor: " + dc.GetByUsername(rc.RecommendedTwo.DoctorUsername) + "\n" + rc.RecommendedTwo.StartTime;
                 }
             }
         }

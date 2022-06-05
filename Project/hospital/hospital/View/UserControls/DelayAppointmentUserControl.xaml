@@ -25,19 +25,18 @@
                                 <Run Text="Show recommended"/>
                             </Underline>
                         </Button>
-                        <Button x:Name="btnDelay" Foreground="blue" Visibility="Visible"  HorizontalAlignment="Left" Margin="266,4,0,0" VerticalAlignment="Top" BorderBrush="Transparent" Background="white" Click="btnDelay_Click">
-                            <Underline>
-                                <Run Text="Make appointment"/>
-                            </Underline>
-                        </Button>
                         <TextBlock x:Name="errUsername" Height="20" Width="132" Foreground="red" Margin="239,59,75,321"/>
                         <TextBlock x:Name="errDate" Height="20" Width="132" Foreground="red" Margin="239,103,75,277"/>
                         <TextBlock x:Name="errTime" Height="20" Width="132" Foreground="red" Margin="239,148,75,232"/>
                         <TextBlock x:Name="notFree" FontSize="20" FontWeight="DemiBold" Height="25" Width="250" Foreground="red" Margin="121,282,75,93"/>
                         <Button x:Name="btnSubmit" Content="Submit"  VerticalAlignment="Top" Height="26" Width="75"  Margin="296,360,75,0" Click="btnSubmit_Click"/>
                         <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Height="26" Margin="78,360,0,0" Click="btnCancel_Click"/>
-                        <Button x:Name="btnRecTwo" Height="75" Width="130" Margin="78,263,238,62" Visibility="Collapsed" Background="white" Click="btnRecTwo_Click"/>
-                        <Button x:Name="btnRecOne" Height="75" Width="130" Margin="241,263,75,62" Visibility="Collapsed" Background="white" Click="btnRecOne_Click"/>
+                        <Button x:Name="btnRecTwo" HorizontalAlignment="Left" Height="75" Width="150" Margin="73,263,0,62" Visibility="Collapsed" Background="white" Click="btnRecTwo_Click">
+                            <TextBlock x:Name="recTwo" Padding="0,15,0,5" FontSize="12" Height="70" Foreground="Black" Width="140"/>
+                        </Button>
+                        <Button x:Name="btnRecOne" HorizontalAlignment="Left" Height="75" Width="150" Margin="232,263,0,62" Visibility="Collapsed" Background="white" Click="btnRecOne_Click">
+                            <TextBlock x:Name="recOne" Padding="0,15,0,5" FontSize="12" Height="70" Foreground="Black" Width="140"/>
+                        </Button>
                         <TextBlock FontSize="15" FontWeight="DemiBold" Height="25" Margin="75,168,298,207" Text="New date"/>
                         <DatePicker x:Name="newDate" HorizontalAlignment="Left"  Margin="239,168,0,0" VerticalAlignment="Top" Width="132" SelectedDateChanged="date_SelectedDateChanged"/>
                         <TextBlock FontSize="15" FontWeight="DemiBold" Height="25" Margin="75,212,290,163" Text="New time" RenderTransformOrigin="0.472,0.777"/>

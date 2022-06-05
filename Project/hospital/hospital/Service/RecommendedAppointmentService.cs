@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using Repository;
 using Model;
 using System.Collections.ObjectModel;
+using hospital.View.UserControls;
 using hospital.Service;
+
 
 namespace Service
 {
@@ -157,6 +159,7 @@ namespace Service
                     (apointments[i]).PatientUsername = patientUsername;
                     (apointments[i]).RoomId = doctor.OrdinationId;
                     _appointmentService.Create(apointments[i]);
+                    HandlingAppointmentUserControl.Appointments.Add(apointments[i]);
                     return true;
                 }
             }
@@ -166,14 +169,6 @@ namespace Service
         public Appointment RecommendedTwo { set; get; }
         public void FindFreeForward(ObservableCollection<Appointment> apointments, DateTime time)
         {
-           /* if ( time.Minute== 30)
-            {
-                time = new DateTime(time.Year, time.Month, time.Day, time.Hour+1, 0, 0);
-            }
-            else if (time.Minute == 0)
-            {
-                time = new DateTime(time.Year, time.Month, time.Day, time.Hour , 30, 0);
-            } */
             time = new DateTime(DateTime.Now.Year, time.Month, time.Day,
                 (time.Minute == 30) ? time.Hour + 1 : time.Hour,
                 (time.Minute == 30) ? 0 : 30, 0);
@@ -190,15 +185,6 @@ namespace Service
         }
         public void FindFreeBack(ObservableCollection<Appointment> apointments, DateTime time)
         {
-            /*if (time.Minute == 30)
-            {
-                time = new DateTime(time.Year, time.Month, time.Day, time.Hour, 0, 0);
-            }
-            else
-            {
-                time = new DateTime(time.Year, time.Month, time.Day, time.Hour-1, 30, 0);
-            } */
-
             time = new DateTime(DateTime.Now.Year, time.Month, time.Day,
                 (time.Minute == 30) ? time.Hour : time.Hour-1,
                 (time.Minute == 30) ? 0 : 30, 0);
@@ -212,7 +198,6 @@ namespace Service
                 }
             }
             FindFreeBack(apointments, time);
-
         }
 
         public void FindRecByTime(ObservableCollection<Appointment> apointments,DateTime time)
@@ -234,7 +219,6 @@ namespace Service
                     }
                 }
             }
-            //ako nije uspeo naci tacno taj nek nadje neke najblize
             FindFreeBack(apointments, time);
             if (!oneRecFilled)
                 FindFreeForward(apointments, time);
@@ -242,9 +226,7 @@ namespace Service
 
         public bool TryChangeAppointment(Appointment oldAppointment, DateTime newDate, string newTime)
         {
-            //svi SLOBODNi pregledi tog dana za tog doktora
             ObservableCollection<Appointment> appointments = _availableAppointmentService.GetFreeAppointmentsByDateAndDoctor(newDate, oldAppointment.DoctorUsername, oldAppointment.PatientUsername);
-            //zeljeno vreme
             string newHours = newTime.Split(':')[0];
             string newMinuts = newTime.Split(':')[1];
             for (int i = 0; i < appointments.Count; i++)

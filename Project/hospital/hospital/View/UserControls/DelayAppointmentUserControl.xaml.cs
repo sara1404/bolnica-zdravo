@@ -24,9 +24,6 @@ using hospital.Controller;
 
 namespace hospital.View.UserControls
 {
-    /// <summary>
-    /// Interaction logic for DelayAppointmentUserControl.xaml
-    /// </summary>
     public partial class DelayAppointmentUserControl : UserControl
     {
         private PatientController pc;
@@ -171,11 +168,6 @@ namespace hospital.View.UserControls
 
         }
 
-        private void btnDelay_Click(object sender, RoutedEventArgs e)
-        {
-            this.Visibility = Visibility.Collapsed;
-        }
-
         private void btnRecTwo_Click(object sender, RoutedEventArgs e)
         {
             rc.tryChangeAppointment(CurrentAppointment, (DateTime)newDate.SelectedDate, rc.RecommendedTwo.StartTime.ToString().Split(' ')[1]);
@@ -225,8 +217,8 @@ namespace hospital.View.UserControls
                 ObservableCollection<Appointment> apointments = aac.GetFreeAppointmentsByDateAndDoctor((DateTime)newDate.SelectedDate, CurrentAppointment.DoctorUsername,cmbUsername.Text);
                 rc.FindFreeForward(apointments,(DateTime) txtNewTime.Value);
                 rc.FindFreeBack(apointments, (DateTime) txtNewTime.Value);
-                btnRecOne.Content = "Doctor: " + dc.GetByUsername(rc.RecommendedOne.DoctorUsername) + "\n" + rc.RecommendedOne.StartTime;
-                btnRecTwo.Content = "Doctor: " + dc.GetByUsername(rc.RecommendedTwo.DoctorUsername) + "\n" + rc.RecommendedTwo.StartTime;
+                recOne.Text = "Doctor: " + dc.GetByUsername(rc.RecommendedOne.DoctorUsername) + "\n" + rc.RecommendedOne.StartTime;
+                recTwo.Text = "Doctor: " + dc.GetByUsername(rc.RecommendedTwo.DoctorUsername) + "\n" + rc.RecommendedTwo.StartTime;
             }
         }
 

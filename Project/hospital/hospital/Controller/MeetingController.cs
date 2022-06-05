@@ -14,12 +14,12 @@ namespace Controller
         private readonly MeetingService _meetingService;
         private readonly NotificationService _notificationService;
         public MeetingController(MeetingService _mservice, NotificationService _nservice) { _meetingService = _mservice; _notificationService = _nservice; }
-        public void Create(Meetings meeting)
+        public void Create(Meeting meeting)
         {
             _meetingService.Create(meeting);
             MakeNotification(meeting);
         }
-        private void MakeNotification(Meetings meeting)
+        private void MakeNotification(Meeting meeting)
         {
             foreach(string tmp in meeting.Doctors)
             {
@@ -27,12 +27,12 @@ namespace Controller
             }
         }
 
-        public ObservableCollection<Meetings> FindAll()
+        public ObservableCollection<Meeting> FindAll()
         {
             return _meetingService.FindAll();
         }
 
-        public Meetings FindById(int id)
+        public Meeting FindById(int id)
         {
             return _meetingService.FindById(id);
         }

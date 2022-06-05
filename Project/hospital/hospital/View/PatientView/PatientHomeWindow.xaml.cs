@@ -246,5 +246,10 @@ namespace hospital.View
         {
             Main.Content = new PatientPopularTimes();
         }
+
+        private void btnTherapy_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new PatientTherapies();
+        }
     }
 }

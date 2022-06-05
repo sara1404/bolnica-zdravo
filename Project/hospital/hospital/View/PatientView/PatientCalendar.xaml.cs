@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Syncfusion.Pdf;
+using hospital.DTO;
 
 namespace hospital.View.PatientView
 {
@@ -29,15 +30,18 @@ namespace hospital.View.PatientView
             InitializeComponent();
             App app = Application.Current as App;
             AppointmentManagementController ac = app.appointmentController;
+            PatientController pc = app.patientController;
             ScheduleAppointmentCollection sac = new ScheduleAppointmentCollection();
 
-            foreach(Appointment a in ac.GetAppointmentByPatient(app.userController.CurentLoggedUser.Username))
+            foreach (Appointment a in ac.GetAppointmentByPatient(app.userController.CurentLoggedUser.Username))
             {
                 ScheduleAppointment sa = new ScheduleAppointment();
                 sa.StartTime = a.StartTime;
                 sa.EndTime = a.StartTime.AddMinutes(30);
                 sa.IsAllDay = false;
                 sac.Add(sa);
+
+
             }
             appointmentCalendar.ItemsSource = sac;
             

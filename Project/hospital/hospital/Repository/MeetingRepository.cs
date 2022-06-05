@@ -12,40 +12,40 @@ namespace Repository
     public class MeetingRepository
     {
         public MeetingFileHandler meetingFileHandler;
-        public ObservableCollection<Meetings> meetings;
+        public ObservableCollection<Meeting> meetings;
 
         public MeetingRepository()
         {
             meetingFileHandler = new MeetingFileHandler();
 
 
-            List<Meetings> deserializedList = meetingFileHandler.Read();
+            List<Meeting> deserializedList = meetingFileHandler.Read();
             if (deserializedList != null)
             {
-                meetings = new ObservableCollection<Meetings>(meetingFileHandler.Read());
+                meetings = new ObservableCollection<Meeting>(meetingFileHandler.Read());
             }
             else
             {
-                meetings = new ObservableCollection<Meetings>();
+                meetings = new ObservableCollection<Meeting>();
             }
 
         }
 
 
-        public void Create(Meetings newMeeting)
+        public void Create(Meeting newMeeting)
         {
             newMeeting.Id = GetNewId();
             this.meetings.Add(newMeeting);
             meetingFileHandler.Write(this.meetings.ToList());
         }
-        public ObservableCollection<Meetings> FindAll()
+        public ObservableCollection<Meeting> FindAll()
         {
             return meetings;
         }
 
-        public Meetings FindById(int id)
+        public Meeting FindById(int id)
         {
-            foreach (Meetings o in meetings)
+            foreach (Meeting o in meetings)
             {
                 if (o.Id == id)
                 {
@@ -69,7 +69,7 @@ namespace Repository
             else
             {
                 int max = 0;
-                foreach (Meetings a in meetings)
+                foreach (Meeting a in meetings)
                 {
                     if (a.Id > max)
                     {

@@ -21,7 +21,8 @@ namespace hospital.View.UserControls
 {
     public partial class HandlingAppointmentUserControl : UserControl
     {
-        public ObservableCollection<Appointment> Appointments {get; set; }
+        public static ObservableCollection<Appointment> Appointments {get; set; }
+        private ObservableCollection<Appointment> comingAppointmnet = new ObservableCollection<Appointment>();
         private PatientController pc;
         private AppointmentManagementController ac;
         private DoctorController dc;
@@ -32,7 +33,12 @@ namespace hospital.View.UserControls
             this.DataContext = this;
             App app = Application.Current as App;
             ac = app.appointmentController;
-            Appointments = ac.GetAppointments();
+            foreach(Appointment appointment in ac.GetAppointments())
+                if(DateTime.Now < appointment.StartTime)
+                {
+                    comingAppointmnet.Add(appointment);
+                }
+            Appointments = comingAppointmnet;
 
         }
 
@@ -43,7 +49,8 @@ namespace hospital.View.UserControls
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-
+            if(dateGridHandlingAppointment.SelectedItem != null)
+                editAppointmentUsercontrol.Visibility = Visibility.Visible;
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
@@ -51,6 +58,7 @@ namespace hospital.View.UserControls
             if(dateGridHandlingAppointment.SelectedItem != null)
             {
                 ac.DeleteAppointment(((Appointment)dateGridHandlingAppointment.SelectedItem).Id);
+                Appointments.Remove(((Appointment)dateGridHandlingAppointment.SelectedItem));
             }
         }
 

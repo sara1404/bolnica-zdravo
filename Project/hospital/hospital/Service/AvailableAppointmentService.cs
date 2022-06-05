@@ -11,10 +11,12 @@ namespace hospital.Service
     {
         private readonly AppointmentManagementService _appointmentService;
         private readonly DoctorRepository _doctorRepository;
-        public AvailableAppointmentService(AppointmentManagementService appointmentService, DoctorRepository doctorRepository)
+        private readonly MeetingService _meetingService;
+        public AvailableAppointmentService(AppointmentManagementService appointmentService, DoctorRepository doctorRepository, MeetingService meetingService)
         {
             _appointmentService = appointmentService;
             _doctorRepository = doctorRepository;
+            _meetingService = meetingService;
         }
 
         public ObservableCollection<Appointment> GetFreeAppointmentsByDoctor(string doctorUsername, string patientUsername)
@@ -80,8 +82,10 @@ namespace hospital.Service
             {
                 startTimes.Add(a.StartTime);
             }
+            startTimes.AddRange(_meetingService.FindAllMeetingsStartTime());
             return startTimes;
         }
+
         private List<DateTime> AddTimeSlots(DateTime startDate, DateTime endDate)
         {
             List<DateTime> allTimeSlots = new List<DateTime>();

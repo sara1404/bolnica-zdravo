@@ -18,7 +18,15 @@
     </Window.Resources>
 
     <Grid>
-        <DataGrid x:Name="Table" ItemsSource="{Binding Path=Appointments}" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns ="True"  HorizontalAlignment="Left" Height="385" Margin="129,10,0,0" VerticalAlignment="Top" Width="655" />
+        <DataGrid x:Name="Table" ItemsSource="{Binding Path=Appointments}" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns ="False"  HorizontalAlignment="Left" Height="385" Margin="129,10,0,0" VerticalAlignment="Top" Width="655">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Patient" Binding="{Binding PatientUsername}"/>
+                <DataGridTextColumn Header="Time" Binding="{Binding StartTime}"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
+                <DataGridTextColumn Header="Room" Binding="{Binding RoomId}"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <Button Content="New" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="114" Click="New_Click" Height="50"/>
         <Button Content="Edit" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top" Width="114" Click="Edit_Click" Height="50"/>
         <Button Content="Delete" HorizontalAlignment="Left" Margin="10,173,0,0" VerticalAlignment="Top" Width="114" Click="Delete_Click" RenderTransformOrigin="0.603,-0.861" Height="50"/>

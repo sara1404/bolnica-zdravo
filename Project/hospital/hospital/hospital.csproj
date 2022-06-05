@@ -137,6 +137,7 @@
     <Compile Include="DTO\ChartDataDTO.cs" />
     <Compile Include="DTO\EmergencyDTO.cs" />
     <Compile Include="Controller\VacationRequestController.cs" />
+    <Compile Include="DTO\TherapyDTO.cs" />
     <Compile Include="FileHandler\IngridientsFileHandler.cs" />
     <Compile Include="FileHandler\InvalidMedicineReportFileHandler.cs" />
     <Compile Include="FileHandler\MedicalRecordFileHandler.cs" />
@@ -150,7 +151,7 @@
     <Compile Include="FileHandler\ScheduledRelocationFileHandler.cs" />
     <Compile Include="FileHandler\UserFileHandler.cs" />
     <Compile Include="Model\InvalidMedicineReport.cs" />
-    <Compile Include="Model\Meetings.cs" />
+    <Compile Include="Model\Meeting.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="FileHandler\VacationRequestFileHandler.cs" />
     <Compile Include="Model\ScheduledAdvancedRenovation.cs" />
@@ -296,6 +297,7 @@
     </Compile>
     <Compile Include="View\Manager\SelectFromListBoxCommand.cs" />
     <Compile Include="View\Manager\SelectMultipleFromListViewCommand.cs" />
+    <Compile Include="View\PatientView\AppointmentNoteViewModel.cs" />
     <Compile Include="View\PatientView\MedicalRecordViewModel.cs" />
     <Compile Include="View\PatientView\PatientAppointmentNote.xaml.cs">
       <DependentUpon>PatientAppointmentNote.xaml</DependentUpon>
@@ -341,6 +343,9 @@
     </Compile>
     <Compile Include="View\PatientView\PatientPopularTimes.xaml.cs">
       <DependentUpon>PatientPopularTimes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientView\PatientTherapies.xaml.cs">
+      <DependentUpon>PatientTherapies.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PatientView\PopularTimesViewModel.cs" />
     <Compile Include="View\SecretaryHomeWindow.xaml.cs">
@@ -594,6 +599,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PatientView\PatientPopularTimes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientView\PatientTherapies.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -862,6 +871,33 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\add-friend_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\bell_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\graph.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\medical-records %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\settings-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\medication.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\hospital_poll.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\doctor_poll.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\list.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets')" />

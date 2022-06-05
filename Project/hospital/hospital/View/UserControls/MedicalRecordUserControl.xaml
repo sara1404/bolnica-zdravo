@@ -20,7 +20,7 @@
         <StackPanel>
             <Border BorderBrush="gray" BorderThickness="2" Margin="0,40,0,0" Height="450" Width="750" CornerRadius="10">
                 <Grid>
-                    <Button x:Name="btnBack" Margin="10,5" Width="50" Height="30" Background="white"  BorderBrush="Transparent" HorizontalAlignment="left" VerticalAlignment="top" Click="btnBack_Click">
+                    <Button x:Name="btnBack"  Margin="12,1,0,0" Width="50" Height="30" Background="white" BorderBrush="Transparent" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnBack_Click">
                         <Image Source="../../Resources/Images/back.png"></Image>
                     </Button>
                     <Label FontSize="25" FontWeight="DemiBold" Margin="0,0,0,401" HorizontalAlignment="Center">Medical record</Label>

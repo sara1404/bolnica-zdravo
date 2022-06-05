@@ -22,24 +22,10 @@ namespace hospital.View.PatientView
     /// </summary>
     public partial class PatientAppointmentNote : Page
     {
-        private Appointment oldAppointment;
-        private App app;
-        private AppointmentManagementController ac;
         public PatientAppointmentNote(Appointment appointment)
         {
             InitializeComponent();
-            app = Application.Current as App;
-            ac = app.appointmentController;
-            tbDoctorsNote.Text = appointment.DoctorNote;
-            tbPatientsNote.Text = appointment.PatientNote;
-            oldAppointment = appointment;
-        }
-
-        private void btnConfirm_Click(object sender, RoutedEventArgs e)
-        {
-            Appointment newAppointment = oldAppointment;
-            newAppointment.PatientNote = tbPatientsNote.Text;
-            ac.UpdateAppointment(oldAppointment, newAppointment);
+            DataContext = new AppointmentNoteViewModel(appointment);
         }
 
     }

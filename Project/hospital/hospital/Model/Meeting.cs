@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Meetings
+    public class Meeting
     {
         private List<string> _doctors;
         private DateTime _date;
@@ -14,7 +14,7 @@ namespace Model
         private string _meetingTopic;
         private int _id;
 
-        public Meetings(List<string> doctors, DateTime date, string roomId, string meetingTopic)
+        public Meeting(List<string> doctors, DateTime date, string roomId, string meetingTopic)
         {
             Doctors = doctors;
             Date = date;

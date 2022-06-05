@@ -45,6 +45,10 @@ namespace hospital.View
             User current = app.userController.CurentLoggedUser;
             Appointments = ac.GetAppointments();
 
+            btnLeaveNote.IsEnabled = false;
+            btnCancel.IsEnabled = false;
+            btnDelay.IsEnabled = false;
+
             ICollectionView appointmentsView = CollectionViewSource.GetDefaultView(ac.GetAppointments());
             appointmentsView.Filter = UserFilter;
         }
@@ -127,6 +131,17 @@ namespace hospital.View
             if(appointmentTable.SelectedItem != null && (appointmentTable.SelectedItem as Appointment).StartTime <= DateTime.Now)
             {
                 GoToLeaveNotePage();
+            }
+        }
+
+        private void appointmentTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(appointmentTable.SelectedItem != null)
+            {
+                Appointment selectedAppointment = (Appointment)appointmentTable.SelectedItem;
+                btnDelay.IsEnabled = ac.CanBeDelayed(selectedAppointment);
+                btnLeaveNote.IsEnabled = selectedAppointment.StartTime <= DateTime.Now;
+                btnCancel.IsEnabled = selectedAppointment.StartTime >= DateTime.Now;
             }
         }
     }

@@ -23,10 +23,10 @@ namespace hospital
     /// </summary>
     public partial class App : Application
     {
-        public RoomRepository roomRepository;
-        public ScheduledRelocationRepository scheduledRelocationRepository;
-        public ScheduledBasicRenovationRepository scheduledBasicRenovationRepository;
-        public ScheduledAdvancedRenovationRepository scheduledAdvancedRenovationRepository;
+        public IRoomRepository roomRepository;
+        public IScheduledRelocationRepository scheduledRelocationRepository;
+        public IScheduledBasicRenovationRepository scheduledBasicRenovationRepository;
+        public IScheduledAdvancedRenovationRepository scheduledAdvancedRenovationRepository;
         public NotificationRepository notificationRepository;
         public RoomController roomController { get; set; }
         public PatientController patientController { get; set; }
@@ -78,7 +78,7 @@ namespace hospital
             ScheduledBasicRenovationService scheduledBasicRenovationService = new ScheduledBasicRenovationService(scheduledBasicRenovationRepository, timeSchedulerService);
             scheduledBasicRenovationController = new ScheduledBasicRenovationController(scheduledBasicRenovationService);
            // ScheduledBasicRenovationService scheduledBasicRenovationService = new ScheduledBasicRenovationService(scheduledBasicRenovationRepository, timeSchedulerService);
-            scheduledBasicRenovationController = new ScheduledBasicRenovationController(scheduledBasicRenovationService);
+           // scheduledBasicRenovationController = new ScheduledBasicRenovationController(scheduledBasicRenovationService);
 
             roomRepository = new RoomRepository();
             RoomService roomService = new RoomService(roomRepository, appointmentRepository, scheduledBasicRenovationService);

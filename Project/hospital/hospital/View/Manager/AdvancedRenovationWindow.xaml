@@ -26,6 +26,9 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
+        <Button x:Name="demoBtn" HorizontalAlignment="Left" Margin="190,17,0,0" VerticalAlignment="Top" Height="28" Width="51" Click="Start_Demo" Grid.Column="2">
+            <AccessText>_DEMO</AccessText>
+        </Button>
         <StackPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="4" Background="#1d1b1f">
             <ListView x:Name="listViewRooms" Height="252" Margin="27,0,25,0" SelectionMode="Multiple" Background="#1d1b1f" BorderBrush="#bc84fc" SelectionChanged="IsFormFilled" TabIndex="0">
 
@@ -97,12 +100,13 @@
         <Button TabIndex="7" HorizontalAlignment="Left" Margin="122,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="132" Height="39" Grid.Column="1" FontSize="14"  FocusVisualStyle="{DynamicResource MyFocusVisual}">
             <AccessText>_CANCEL</AccessText>
         </Button>
+        <TextBox x:Name="description" Grid.Column="2" HorizontalAlignment="Left" Margin="20,47,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="198" Height="98" Grid.RowSpan="2" TextChanged="IsFormFilled" TabIndex="5"/>
+
         <RadioButton x:Name="mergeBtn" Grid.Column="2" Content="Merge rooms" GroupName="Option" HorizontalAlignment="Left" Margin="10,46,0,0" Grid.Row="3" VerticalAlignment="Top" Foreground="white"  Checked="IsFormFiled" TabIndex="3" FontSize="14"/>
         <RadioButton x:Name="splitBtn" Grid.Column="2" Content="Split room"  GroupName="Option" HorizontalAlignment="Left" Margin="134,46,0,0" Grid.Row="3" VerticalAlignment="Top" Foreground="white"  Checked="IsFormFiled" TabIndex="4"  FontSize="14"/>
-        <TextBox x:Name="description" Grid.Column="2" HorizontalAlignment="Left" Margin="20,47,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="198" Height="98" Grid.RowSpan="2" TextChanged="IsFormFilled" TabIndex="5"/>
         <Label Grid.Column="2" Content="Renovation description:" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" FontSize="14" Grid.RowSpan="2"/>
         <Border BorderThickness="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="266,72,26,36" Grid.RowSpan="5"/>
-        <Button x:Name="demoBtn" Content="Demo" HorizontalAlignment="Left" Margin="190,17,0,0" VerticalAlignment="Top" Height="28" Width="51" Click="Start_Demo" Grid.Column="2"/>
+    
 
 
     </Grid>

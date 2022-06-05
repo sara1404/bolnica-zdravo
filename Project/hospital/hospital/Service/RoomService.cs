@@ -6,16 +6,17 @@ using System.Collections.ObjectModel;
 using Model;
 using hospital.Service;
 using hospital.Model;
+using hospital.Repository;
 
 namespace Service
 {
     public class RoomService
     {
-        private readonly RoomRepository roomRepository;
+        private readonly IRoomRepository roomRepository;
         private readonly AppointmentRepository _appointmentRepository;
         private readonly ScheduledBasicRenovationService _basicRenovation;
 
-        public RoomService(RoomRepository roomRepository, AppointmentRepository appointmentRepository, ScheduledBasicRenovationService basicRenovation)
+        public RoomService(IRoomRepository roomRepository, AppointmentRepository appointmentRepository, ScheduledBasicRenovationService basicRenovation)
         {
             this.roomRepository = roomRepository;
             this._appointmentRepository = appointmentRepository;
@@ -30,15 +31,15 @@ namespace Service
 
         public Room FindRoomById(String id)
         {
-            return roomRepository.FindRoomById(id);
+            return roomRepository.FindById(id);
         }
 
         public Room FindRoomByName(string name) {
-            return roomRepository.FindRoomByName(name);
+            return roomRepository.FindByName(name);
         }
 
         public Room FindRoomByPurpose(string purpose) {
-            return roomRepository.FindRoomByPurpose(purpose);
+            return roomRepository.FindByPurpose(purpose);
         }
         public List<Room> FindRoomsByPurpose(string purpose)
         {

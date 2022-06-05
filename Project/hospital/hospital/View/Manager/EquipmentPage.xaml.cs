@@ -1,4 +1,5 @@
 ﻿using Controller;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace hospital.View
             InitializeComponent();
             App app = Application.Current as App;
             uc = app.userController;
+            FillDataGrid();
         }
 
         private void Show_Relocation_Window_Click(object sender, RoutedEventArgs e)
@@ -44,6 +46,32 @@ namespace hospital.View
             uc.CurentLoggedUser = null;
             MainWindow mw = new MainWindow();
             mw.Show();
+        }
+
+        private void FillDataGrid() {
+            List<DamiEquipment> equipment = new List<DamiEquipment>();
+            equipment.Add(new DamiEquipment("DentCo", "Dentist chair", 50));
+            equipment.Add(new DamiEquipment("DentCo", "Dentist chair", 50));
+            equipment.Add(new DamiEquipment("DentCo", "Dentist chair", 50));
+            equipment.Add(new DamiEquipment("DentCo", "Dentist chair", 50));
+            equipment.Add(new DamiEquipment("DentCo", "Dentist chair", 50));
+            equipment.Add(new DamiEquipment("DentCo", "Dentist chair", 50));
+            equipment.Add(new DamiEquipment("DentCo", "Dentist chair", 50));
+            equipment.Add(new DamiEquipment("DentCo", "Dentist chair", 50));
+            equipmentDataGrid.ItemsSource = equipment;
+        }
+    }
+
+    public class DamiEquipment{
+        public string manufacturer { get; set; }
+        public string type { get; set; }
+        public int quantity { get; set; }
+
+        public DamiEquipment(string name, string type, int quantity)
+        {
+            this.manufacturer = name;
+            this.type = type;
+            this.quantity = quantity;
         }
     }
 }

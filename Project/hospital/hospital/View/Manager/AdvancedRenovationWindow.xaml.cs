@@ -261,11 +261,6 @@ namespace hospital.View
             scheduleBtn.IsEnabled = false;
         }
 
-        private void IsFormFiled(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            IsFormFilledValidation();
-        }
-
         private void SelectSplitRadioBtn() {
             splitBtn.IsChecked = true;
         }

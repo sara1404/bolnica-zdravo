@@ -88,7 +88,7 @@
         <Label x:Name="q9" Content="" FontSize="14" Grid.Row="5" Grid.Column="7" Margin="57,27,0,24"/>-->
 
         <Label Content="Category:" FontSize="16" Height="38" VerticalAlignment="Top" Grid.ColumnSpan="3" Margin="60,44,86,0"/>
-        <ComboBox x:Name="categoryComboBox" Grid.ColumnSpan="2" Margin="33,45,70,10" Grid.Column="2" SelectionChanged="Category_Change"/>
+        <ComboBox x:Name="categoryComboBox" Grid.ColumnSpan="2" Margin="33,45,70,10" Grid.Column="2" SelectionChanged="Category_Change" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
 
         <Border  Grid.Row="1" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="8" Height="317" VerticalAlignment="Bottom" Margin="0,0,57,0">
             <Grid Margin="70,-33,0,0" HorizontalAlignment="Left" Width="735">

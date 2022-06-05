@@ -13,10 +13,10 @@ namespace hospital.Service
 {
     public class ScheduledRelocationService
     {
-        private ScheduledRelocationRepository scheduledRelocationRepository;
+        private IScheduledRelocationRepository scheduledRelocationRepository;
         private TimeSchedulerService timeSchedulerService;
 
-        public ScheduledRelocationService(ScheduledRelocationRepository scheduledRelocationRepository, TimeSchedulerService timeSchedulerService)
+        public ScheduledRelocationService(IScheduledRelocationRepository scheduledRelocationRepository, TimeSchedulerService timeSchedulerService)
         {
             this.scheduledRelocationRepository = scheduledRelocationRepository;
             this.timeSchedulerService = timeSchedulerService;
@@ -49,29 +49,18 @@ namespace hospital.Service
             return scheduledRelocationRepository.DeleteById(id);
         }
 
-        public void relocationTracker()
+        public void RelocationTracker()
         {
-            while (true)
+            Thread.Sleep(3000);
+            DateTime now = DateTime.Now;
+            List<ScheduledRelocation> relocations = new List<ScheduledRelocation>(FindAll());
+            foreach (ScheduledRelocation rel in relocations)
             {
-                try
+                if (rel._Relocation._End.Date.CompareTo(now.Date) >= 0)
                 {
-                    Thread.Sleep(3000);
-                    DateTime now = DateTime.Now;
-                    List<ScheduledRelocation> relocations = FindAll();
-                    foreach (ScheduledRelocation rel in relocations)
-                    {
-                        if (rel._Relocation._End.Date.CompareTo(now.Date) == 0)
-                        {
-                            ExecuteRelocation(rel);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
+                    ExecuteRelocation(rel);
                 }
             }
-
         }
 
         private void ExecuteRelocation(ScheduledRelocation rel) {

@@ -12,10 +12,10 @@ namespace hospital.Repository
     public class TimeSchedulerRepository
     {
         private AppointmentRepository appointmentRepository;
-        private ScheduledBasicRenovationRepository scheduledBasicRenovationRepository;
-        private ScheduledAdvancedRenovationRepository scheduledAdvancedRenovationRepository;
+        private IScheduledBasicRenovationRepository scheduledBasicRenovationRepository;
+        private IScheduledAdvancedRenovationRepository scheduledAdvancedRenovationRepository;
 
-        public TimeSchedulerRepository(AppointmentRepository appointmentRepository, ScheduledBasicRenovationRepository scheduledBasicRenovationRepository, ScheduledAdvancedRenovationRepository scheduledAdvancedRenovationRepository)
+        public TimeSchedulerRepository(AppointmentRepository appointmentRepository, IScheduledBasicRenovationRepository scheduledBasicRenovationRepository, IScheduledAdvancedRenovationRepository scheduledAdvancedRenovationRepository)
         {
             this.appointmentRepository = appointmentRepository;
             this.scheduledBasicRenovationRepository = scheduledBasicRenovationRepository;

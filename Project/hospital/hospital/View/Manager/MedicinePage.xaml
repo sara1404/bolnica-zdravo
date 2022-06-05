@@ -33,7 +33,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Image DockPanel.Dock="Left" Height="56" Width="100" Source="../../Resources/Images/logo.png" Grid.Column="0"/>
-                    <Button DockPanel.Dock ="Right"  Grid.Column="4" Margin="88,15,10,23" Command="cmd:Commands.LogoutCommand">
+                    <Button DockPanel.Dock ="Right"  Grid.Column="4" Margin="88,15,10,23" Command="cmd:Commands.LogoutCommand" TabIndex="4">
                         <Button.Template>
                             <ControlTemplate>
                                 <Image Source="../../Resources/Images/logout_white.png" Margin="0,-6,0,-11"/>
@@ -45,7 +45,7 @@
 
         </StackPanel>
         <Button  Margin="10,121,920,569"
-                 Command="cmd:Commands.GoBackCommand"
+                 Command="cmd:Commands.GoBackCommand" TabIndex="0"
                  >
             <Button.Template>
                 <ControlTemplate>
@@ -53,13 +53,13 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button HorizontalAlignment="Left" Margin="145,121,0,0" VerticalAlignment="Top" Width="175" Height="49"  Background="#bc84fc" FontSize="16" Command="{Binding AddMedicineCommand}">
+        <Button TabIndex="1" HorizontalAlignment="Left" Margin="145,121,0,0" VerticalAlignment="Top" Width="175" Height="49"  Background="#bc84fc" FontSize="16" Command="{Binding AddMedicineCommand}">
             <AccessText>_ADD MEDICINE</AccessText>
         </Button>
-        <Button HorizontalAlignment="Left" Margin="380,121,0,0" VerticalAlignment="Top" Width="175" Height="49"  Background="#bc84fc" FontSize="16" Command="{Binding AddIngridientCommand}">
+        <Button TabIndex="2" HorizontalAlignment="Left" Margin="380,121,0,0" VerticalAlignment="Top" Width="175" Height="49"  Background="#bc84fc" FontSize="16" Command="{Binding AddIngridientCommand}">
             <AccessText>ADD NEW _INGRIDIENT</AccessText>
         </Button>
-        <DataGrid ColumnWidth="*" AutoGenerateColumns="False" x:Name="medicineDataGrid" IsReadOnly="True" SelectionUnit="FullRow" Height="454" Margin="145,211,120,0" VerticalAlignment="Top" Background="#1d1b1f" ItemsSource="{Binding Medicines}">
+        <DataGrid TabIndex="3" ColumnWidth="*" AutoGenerateColumns="False" x:Name="medicineDataGrid" IsReadOnly="True" SelectionUnit="FullRow" Height="454" Margin="145,211,120,0" VerticalAlignment="Top" Background="#1d1b1f" ItemsSource="{Binding Medicines}">
             <DataGrid.InputBindings>
                 <KeyBinding Key="Enter" Command="{Binding EditMedicineCommand}" CommandParameter="{Binding SelectedItem, ElementName=medicineDataGrid}"/>
             </DataGrid.InputBindings>

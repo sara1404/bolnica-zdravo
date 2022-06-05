@@ -12,10 +12,10 @@ namespace hospital.Service
 {
     public class ScheduledBasicRenovationService
     {
-        private ScheduledBasicRenovationRepository scheduledRenovationRepository;
+        private IScheduledBasicRenovationRepository scheduledRenovationRepository;
         private TimeSchedulerService timeSchedulerService;
 
-        public ScheduledBasicRenovationService(ScheduledBasicRenovationRepository scheduledRenovationRepository, TimeSchedulerService timeSchedulerService)
+        public ScheduledBasicRenovationService(IScheduledBasicRenovationRepository scheduledRenovationRepository, TimeSchedulerService timeSchedulerService)
         {
             this.scheduledRenovationRepository = scheduledRenovationRepository;
             this.timeSchedulerService = timeSchedulerService;
@@ -51,25 +51,15 @@ namespace hospital.Service
             return timeSchedulerService.FindFreeTimeIntervals(room, renovationDuration);
         }
 
-        public void renovationTracker()
+        public void RenovationTracker()
         {
-            while (true)
+            Thread.Sleep(3000);
+            DateTime now = DateTime.Now;
+            List<ScheduledBasicRenovation> renovations = FindAll();
+            foreach (ScheduledBasicRenovation renovation in renovations)
             {
-                try
-                {
-                    Thread.Sleep(3000);
-                    DateTime now = DateTime.Now;
-                    List<ScheduledBasicRenovation> renovations = FindAll();
-                    foreach (ScheduledBasicRenovation renovation in renovations)
-                    {
-                        if (renovation._Interval._End.CompareTo(now.Date) == 0)
-                            DeleteById(renovation._Id);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                if (renovation._Interval._End.CompareTo(now.Date) == 0)
+                    DeleteById(renovation._Id);
             }
         }
     }

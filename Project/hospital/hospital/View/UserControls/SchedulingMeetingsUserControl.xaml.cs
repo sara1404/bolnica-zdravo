@@ -60,7 +60,7 @@ namespace hospital.View.UserControls
             DateTime meetingTime = (DateTime)timePicker.Value;
             DateTime meetingStartTime = new DateTime(meetingDate.Year, meetingDate.Month, meetingDate.Day, meetingTime.Hour, meetingTime.Minute, 0);
 
-            Meetings newMeeting = new Meetings(_doctors, meetingStartTime, cbRooms.Text,txtReason.Text);
+            Meeting newMeeting = new Meeting(_doctors, meetingStartTime, cbRooms.Text,txtReason.Text);
             _meetingController.Create(newMeeting);
             Notifier.ShowSuccess("Meeting successfully scheduled");
             ResetFields();

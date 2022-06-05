@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,14 @@ namespace Model
         private string note;
         private Status status;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
         public VacationRequest() { }
         public VacationRequest(DateTime startDate, DateTime endDate, bool isHighPriority, string note, string doctorId, int id)
         {
@@ -38,6 +47,7 @@ namespace Model
             set
             {
                 startDate = value;
+                OnPropertyChanged("");
             }
         }
         public DateTime EndDate
@@ -49,6 +59,7 @@ namespace Model
             set
             {
                 endDate = value;
+                OnPropertyChanged("");
             }
         }
         public bool IsHighPriority
@@ -60,6 +71,7 @@ namespace Model
             set
             {
                 isHighPriority = value;
+                OnPropertyChanged("");
             }
         }
         public string Note
@@ -71,6 +83,7 @@ namespace Model
             set
             {
                 note = value;
+                OnPropertyChanged("");
             }
         }
         public Status Status
@@ -82,6 +95,7 @@ namespace Model
             set
             {
                 status = value;
+                OnPropertyChanged("");
             }
         }
         public string DoctorId
@@ -93,6 +107,7 @@ namespace Model
             set
             {
                 doctorId = value;
+                OnPropertyChanged("");
             }
         }
         public int Id
@@ -104,6 +119,7 @@ namespace Model
             set
             {
                 id = value;
+                OnPropertyChanged("");
             }
         }
         public string VacationStatus

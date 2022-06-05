@@ -45,7 +45,7 @@
                                         </Style>
                                     </DataGridTextColumn.HeaderStyle>
                                 </DataGridTextColumn>
-                                <DataGridTextColumn Header="Status" Width="*" Binding="{Binding VacationStatus}">
+                                <DataGridTextColumn Header="Status" Width="*" Binding="{Binding Status}">
                                     <DataGridTextColumn.HeaderStyle>
                                         <Style TargetType="DataGridColumnHeader">
                                             <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>

@@ -61,6 +61,11 @@ namespace Controller
             return true;
         }
 
+        public List<Appointment> GetAppointmenetsBetweenDate(DateTime startDate, DateTime endDate)
+        {
+            return _appointmentService.GetAppointmenetsBetweenDate(startDate, endDate);
+        }
+
         public List<ChartDataDTO> GetPopularTimes()
         {
             return _appointmentService.GetPopularTimes();

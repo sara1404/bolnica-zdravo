@@ -93,9 +93,23 @@ namespace Service
             return appointments;
         }
 
+        public List<Appointment> GetAppointmenetsBetweenDate(DateTime startDate, DateTime endDate)
+        {
+            List<Appointment> appointments = new List<Appointment>();
+            foreach(Appointment appointment in GetAll())
+            {
+                if(appointment.StartTime >= startDate && appointment.StartTime <= endDate)
+                {
+                    appointments.Add(appointment);
+                }
+            }
+            return appointments;
+        }
+
         public List<ChartDataDTO> GetPopularTimes()
         {
             return _appointmentRepository.GetPopularTimes();
         }
+
     }
 }

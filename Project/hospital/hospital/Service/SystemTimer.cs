@@ -35,8 +35,8 @@ namespace hospital.Service
         private void FireScheduledTask(Object source, ElapsedEventArgs e)
         {
             scheduledAdvancedRenovationService.RenovationTracker();
-            scheduledBasicRenovationService.renovationTracker();
-            scheduledRelocationService.relocationTracker();
+            scheduledBasicRenovationService.RenovationTracker();
+            scheduledRelocationService.RelocationTracker();
         }
     }
     

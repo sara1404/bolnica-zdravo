@@ -13,11 +13,11 @@ namespace hospital.Service
 {
     public class ScheduledAdvancedRenovationService
     {
-        private ScheduledAdvancedRenovationRepository scheduledRenovationRepository;
+        private IScheduledAdvancedRenovationRepository scheduledRenovationRepository;
         private TimeSchedulerService timeSchedulerService;
         private RoomService roomService;
 
-        public ScheduledAdvancedRenovationService(ScheduledAdvancedRenovationRepository scheduledRenovationRepository, TimeSchedulerService timeSchedulerService, RoomService roomService)
+        public ScheduledAdvancedRenovationService(IScheduledAdvancedRenovationRepository scheduledRenovationRepository, TimeSchedulerService timeSchedulerService, RoomService roomService)
         {
             this.scheduledRenovationRepository = scheduledRenovationRepository;
             this.timeSchedulerService = timeSchedulerService;

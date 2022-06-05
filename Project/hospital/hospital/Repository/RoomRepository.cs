@@ -1,4 +1,5 @@
 using FileHandler;
+using hospital.Repository;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Windows;
 
 namespace Repository
 {
-    public class RoomRepository
+    public class RoomRepository : IRoomRepository
     {
         ObservableCollection<Room> rooms;
 
@@ -22,7 +23,7 @@ namespace Repository
             rooms.Add(room);
         }
 
-        public Room FindRoomById(string id)
+        public Room FindById(string id)
         {
             foreach (Room room in rooms) {
                 if (room.id.Equals(id))
@@ -31,7 +32,7 @@ namespace Repository
             return null;
         }
 
-        public Room FindRoomByName(string name) {
+        public Room FindByName(string name) {
             foreach (Room room in rooms)
             {
                 if (room._Name.Equals(name))
@@ -40,7 +41,7 @@ namespace Repository
             return null;
         }
 
-        public Room FindRoomByPurpose(string purpose) {
+        public Room FindByPurpose(string purpose) {
             foreach (Room room in rooms)
             {
                 if (room._Purpose.Equals(purpose))

@@ -45,7 +45,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Image DockPanel.Dock="Left" Height="56" Width="100" Source="../../Resources/Images/logo.png" Grid.Column="0"/>
-                    <Button DockPanel.Dock ="Right"  Grid.Column="4" Margin="88,2,10,30" Click="Logout_Click">
+                    <Button TabIndex="3" DockPanel.Dock ="Right"  Grid.Column="4" Margin="88,2,10,30" Click="Logout_Click">
                         <Button.Template>
                             <ControlTemplate>
                                 <Image Source="../../Resources/Images/logout_white.png" Margin="0,0,-3,-14"/>
@@ -57,7 +57,7 @@
 
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0">
-            <Button Height="66" Click="Back_Click" >
+            <Button Height="66" Click="Back_Click" TabIndex="0" >
                 <Button.Template>
                     <ControlTemplate>
                         <Image Source="../../Resources/Images/back_white.png"/>
@@ -66,10 +66,10 @@
             </Button>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="2">
-            <Button HorizontalAlignment="Left" Margin="0 90 0 50" VerticalAlignment="Top" Width="162" Height="47" Click="Basic_Renovation_Click" RenderTransformOrigin="0.909,0.441" Background="#bc84fc" FocusVisualStyle="{DynamicResource MyFocusVisual}" FontSize="13">
+            <Button TabIndex="1" HorizontalAlignment="Left" Margin="0 90 0 50" VerticalAlignment="Top" Width="162" Height="47" Click="Basic_Renovation_Click" RenderTransformOrigin="0.909,0.441" Background="#bc84fc" FocusVisualStyle="{DynamicResource MyFocusVisual}" FontSize="13">
                 <AccessText>_Basic renovation</AccessText>
             </Button>
-            <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="162" Height="47" Click="Advanced_Renovation_Click" Background="#bc84fc" FocusVisualStyle="{DynamicResource MyFocusVisual}" FontSize="13">
+            <Button TabIndex="2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="162" Height="47" Click="Advanced_Renovation_Click" Background="#bc84fc" FocusVisualStyle="{DynamicResource MyFocusVisual}" FontSize="13">
                 <AccessText>_Advanced renovation</AccessText>
             </Button>
         </StackPanel>

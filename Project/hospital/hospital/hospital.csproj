@@ -171,6 +171,10 @@
     <Compile Include="Repository\DoctorRepository.cs" />
     <Compile Include="Repository\IngridientsRepository.cs" />
     <Compile Include="Repository\InvalidMedicineReportRepository.cs" />
+    <Compile Include="Repository\IRoomRepository.cs" />
+    <Compile Include="Repository\IScheduledAdvancedRenovationRepository.cs" />
+    <Compile Include="Repository\IScheduledBasicRenovationRepository.cs" />
+    <Compile Include="Repository\IScheduledRelocationRepository.cs" />
     <Compile Include="Repository\MedicalRecordsRepository.cs" />
     <Compile Include="Repository\MedicineRepository.cs" />
     <Compile Include="Repository\MeetingRepository.cs" />

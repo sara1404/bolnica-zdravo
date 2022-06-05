@@ -28,7 +28,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Image DockPanel.Dock="Left" Height="56" Width="100" Source="../../Resources/Images/logo.png" Grid.Column="0"/>
-                    <Button DockPanel.Dock ="Right"  Grid.Column="4" Margin="88,2,10,30" Command="cmd:Commands.LogoutCommand">
+                    <Button DockPanel.Dock ="Right"  Grid.Column="4" Margin="103,2,10,30" Command="cmd:Commands.LogoutCommand" TabIndex="4" FocusVisualStyle="{DynamicResource MyFocusVisual}">
                         <Button.Template>
                             <ControlTemplate>
                                 <Image Source="../../Resources/Images/logout_white.png" Margin="0,0,-3,-14"/>
@@ -40,7 +40,8 @@
 
         </StackPanel>
         <Button  Margin="10,121,920,569"
-                 Command="cmd:Commands.GoBackCommand"
+                 TabIndex="0"
+                 Command="cmd:Commands.GoBackCommand" FocusVisualStyle="{DynamicResource MyFocusVisual}"
                  >
             <Button.Template>
                 <ControlTemplate>
@@ -48,10 +49,10 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button Command="{Binding DoctorReviewCommand}" HorizontalAlignment="Left" Margin="335,105,0,0" VerticalAlignment="Top" Height="52" Width="182" FontSize="18">
+        <Button TabIndex="2" Command="{Binding DoctorReviewCommand}" HorizontalAlignment="Left" Margin="335,105,0,0" VerticalAlignment="Top" Height="52" Width="182" FontSize="18" FocusVisualStyle="{DynamicResource MyFocusVisual}">
             <AccessText>_Doctor review</AccessText>
         </Button>
-        <Button Command="{Binding HospitalReviewCommand}" HorizontalAlignment="Left" Margin="83,105,0,0" VerticalAlignment="Top" Height="52" Width="182" FontSize="18">
+        <Button TabIndex="1" Command="{Binding HospitalReviewCommand}" HorizontalAlignment="Left" Margin="83,105,0,0" VerticalAlignment="Top" Height="52" Width="182" FontSize="18" FocusVisualStyle="{DynamicResource MyFocusVisual}">
             <AccessText>_Hospital review</AccessText>
         </Button>
         <Border BorderThickness="1" HorizontalAlignment="Left" Height="518" Margin="68,215,0,0" VerticalAlignment="Top" Width="898" BorderBrush="#121212">

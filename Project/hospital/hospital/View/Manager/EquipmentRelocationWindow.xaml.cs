@@ -32,7 +32,6 @@ namespace hospital.View
         {
             InitializeComponent();
             App app = Application.Current as App;
-            //this.room = room;
             roomController = app.roomController;
             scheduledRelocationController = app.scheduledRelocationController;
             loadRoomsToComboBoxes();
@@ -50,66 +49,80 @@ namespace hospital.View
                     relocationListView.ItemsSource = scheduledRelocationController.FindRelocationIntervals(duration);
                 }
                 catch (Exception ex) {
-                    duration.Foreground = Brushes.Red;
-                    duration.Text = "Invalid input";
-                    return;
+                    MessageBox.Show("Invalid input for duration!");
                 }
             }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void Schedule_Relocation_Click(object sender, RoutedEventArgs e)
         {
-
-            try
-            {
-                Int32.Parse(quantity.Text);
-            }
-            catch (Exception ex) {
-                quantity.Text = "Invalid input";
-                quantity.Foreground = Brushes.Red;
-                return;
-            }
-
             Room fromRoomSelected = roomController.FindRoomByName(fromRoom.SelectedItem.ToString());
             Room toRoomSelected = roomController.FindRoomByName(toRoom.SelectedItem.ToString());
             string equip = equipment.SelectedItem.ToString();
-            int equipmentQuantity = Int32.Parse(quantity.Text);
             TimeInterval relocation = (TimeInterval)relocationListView.SelectedItem;
             string id = scheduledRelocationController.FindAll().Count.ToString();
-            ScheduledRelocation scheduledRelocation = new ScheduledRelocation(id, fromRoomSelected, toRoomSelected, equip, equipmentQuantity, relocation);
             try
             {
+                ValidateQuantity();
+                ScheduledRelocation scheduledRelocation = new ScheduledRelocation(id, fromRoomSelected, toRoomSelected, equip, Int32.Parse(quantity.Text), relocation);
                 scheduledRelocationController.Create(scheduledRelocation);
+                MoveEquipmentFromOriginalRoom(fromRoomSelected, equip, Int32.Parse(quantity.Text));
+                this.Close();
             }
             catch (Exception ex) {
                 MessageBox.Show(ex.Message);
-                return;
             }
-            foreach (Equipment eq in fromRoomSelected.equipment) {
-                if (eq.type.Equals(equip)) {
-                    if (eq.quantity < equipmentQuantity) {
-                        quantity.Text = "Unavailable amount";
-                        quantity.Foreground = Brushes.Red;
-                        return;
-                    }
-                    eq.quantity -= equipmentQuantity;
-                    if (eq.quantity == 0) {
-                        List<Equipment> equipTemp = fromRoomSelected.equipment.ToList();
-                        equipTemp.Remove(eq);
-                        fromRoomSelected.equipment = new List<Equipment>(equipTemp);
-                    }
-                }
-            }
-            this.Close();
         }
+
         private void Cancel_Relocation_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void MoveEquipmentFromOriginalRoom(Room fromRoomSelected, string equip, int equipmentQuantity) {
+            foreach (Equipment eq in fromRoomSelected.equipment)
+            {
+                if (eq.type.Equals(equip))
+                {
+                    try
+                    {
+                        ValidateQuantityInput(eq, equipmentQuantity);
+                        SubstractQuantity(eq, equipmentQuantity, fromRoomSelected);
+                    }
+                    catch(Exception ex) {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+        }
+
+        private void SubstractQuantity(Equipment eq, int equipmentQuantity, Room fromRoomSelected) {
+            eq.quantity -= equipmentQuantity;
+            if (eq.quantity == 0)
+            {
+                List<Equipment> equipTemp = fromRoomSelected.equipment.ToList();
+                equipTemp.Remove(eq);
+                fromRoomSelected.equipment = new List<Equipment>(equipTemp);
+            }
+        }
+
+        private void ValidateQuantityInput(Equipment eq, int equipmentQuantity) {
+            if (eq.quantity < equipmentQuantity)
+            {
+                throw new Exception("Room doesn't have enough equipment!");
+            }
+        }
+
+        private void ValidateQuantity()
+        {
+            int value;
+            bool isValid = Int32.TryParse(quantity.Text, out value);
+
+            if (!isValid)
+                throw new Exception("Quantity should be a number!");
+
+            if (value < 0)
+                throw new Exception("Quantity should be positive!");
         }
 
         private void loadRoomsToComboBoxes() {
@@ -166,14 +179,18 @@ namespace hospital.View
             {
                 if (room._Name.Equals(fromRoom.SelectedItem.ToString()))
                 {
-                    foreach (Equipment eq in room.equipment)
-                    {
-                        if(eq.type.Equals(equipment.SelectedItem.ToString()))
-                            quantity.Text = eq.quantity.ToString();
-                    }
+                    DisplayRoomEquipment(room);
                 }
             }
             ValidateInputs();
+        }
+
+        private void DisplayRoomEquipment(Room room) {
+            foreach (Equipment eq in room.equipment)
+            {
+                if (eq.type.Equals(equipment.SelectedItem.ToString()))
+                    quantity.Text = eq.quantity.ToString();
+            }
         }
 
         private void Close_Window(object sender, KeyEventArgs e)

@@ -46,6 +46,7 @@
 
                     <Image DockPanel.Dock="Left" Height="56" Width="100" Source="../../Resources/Images/logo.png" Grid.Column="0"/>
                     <Button DockPanel.Dock ="Right"  Grid.Column="4" Margin="88,15,10,21" Click="Logout_Click" FocusVisualStyle="{DynamicResource MyFocusVisual}">
+                        <AccessText>_LOG OUT</AccessText>
                         <Button.Template>
                             <ControlTemplate>
                                 <Image Source="../../Resources/Images/logout_white.png" Margin="0,-2,0,-7"/>
@@ -56,24 +57,26 @@
             </Border>
 
         </StackPanel>
-        <StackPanel Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="3">
-            <DataGrid HorizontalAlignment="Left" Height="460" VerticalAlignment="Top" Width="430" Background="#1d1b1f">
+        <StackPanel Grid.ColumnSpan="7" Grid.Row="1" Grid.RowSpan="4" Margin="146,80,146,0">
+            <DataGrid HorizontalAlignment="Left" Height="450" Width="720" Background="#1d1b1f" x:Name="equipmentDataGrid" ColumnWidth="*">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Type" Width="130"/>
-                    <DataGridTextColumn Header="Quantity" Width="160"/>
+                    <DataGridTextColumn Header="Type"  Binding="{Binding type}"/>
+                    <DataGridTextColumn Header="Quantity"  Binding="{Binding quantity}"/>
+                    <DataGridTextColumn Header="Manufacturer" Binding="{Binding manufacturer}"/>
                 </DataGrid.Columns>
+                
             </DataGrid>
         </StackPanel>
 
 
-        <StackPanel Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="3">
-            <Button Content="Add new equipment" HorizontalAlignment="Left" Margin="105,40,0,40" VerticalAlignment="Top" Width="187" Height="54" FontSize="16" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
-            <Button HorizontalAlignment="Left" Margin="105,40,0,40" VerticalAlignment="Top" Width="177" Height="54" Click="Show_Relocation_Window_Click" FontSize="16" FocusVisualStyle="{DynamicResource MyFocusVisual}">
+        <StackPanel Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="3">
+            <Button TabIndex="0" HorizontalAlignment="Left" Margin="105,145,0,40" VerticalAlignment="Top" Width="177" Height="54" Click="Show_Relocation_Window_Click" FontSize="16" FocusVisualStyle="{DynamicResource MyFocusVisual}">
                 <AccessText>Schedule _relocation</AccessText>
             </Button>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="1">
             <Button Height="30" Click="Back_Click" Margin="0,0,22,0" FocusVisualStyle="{DynamicResource MyFocusVisual}">
+                <AccessText>_Back</AccessText>
                 <Button.Template>
                     <ControlTemplate>
                         <Image Source="../../Resources/Images/back_white.png" Margin="0,-12,0,-22"/>

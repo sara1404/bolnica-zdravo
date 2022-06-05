@@ -20,8 +20,17 @@ namespace hospital.VM
         private string id;
         private string purpose;
         private string floor;
-        public int FloorIndex { get; set; }
-        private List<Equipment> Equipment { get; set; }
+        private int floorIndex;
+        public List<Equipment> Equipment { get; set; }
+        public int FloorIndex 
+        {
+            get => floorIndex;
+            set  {
+                Console.WriteLine("Hit");
+                floorIndex = value;
+                Floor = (floorIndex + 1).ToString();
+            } 
+        }
 
         public string Name {
             get { return name; }
@@ -50,6 +59,7 @@ namespace hospital.VM
         public string Floor {
             get { return floor; }
             set {
+                Console.WriteLine("stigao" + value);
                 floor = value;
                 OnPropertyChanged("Floor");
             }
@@ -85,6 +95,7 @@ namespace hospital.VM
                     MessageBox.Show("Not valid input for floor", "Error");
                     return;
                 }
+
                 Room newRoom = new Room(name, purpose, res, id);
                 roomController.UpdateById(id, newRoom);
             }

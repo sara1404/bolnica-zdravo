@@ -19,17 +19,17 @@
         <ComboBox x:Name="toRoom" HorizontalAlignment="Left" Margin="187,124,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Validate" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
         <ComboBox x:Name="equipment" HorizontalAlignment="Left" Margin="187,193,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="equipmentChosen" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
         <TextBox x:Name="quantity" HorizontalAlignment="Left" Height="23" Margin="187,267,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="Validate" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+        <Rectangle Fill="#bc84fc" HorizontalAlignment="Left" Height="50" Margin="435,56,0,0" Stroke="Black" VerticalAlignment="Top" Width="256"/>
+        <Label Content="Relocation duration in days:" HorizontalAlignment="Left" Margin="452,65,0,0" VerticalAlignment="Top" Width="162"/>
+        <TextBox x:Name="duration" HorizontalAlignment="Left" Height="23" Margin="619,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49" PreviewKeyDown="Show_Appointmets_Click" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+        <ListView HorizontalAlignment="Left" Height="184" Margin="435,106,0,0" VerticalAlignment="Top" Width="256" x:Name="relocationListView" SelectionChanged="Validate">
+        </ListView>
         <Button x:Name="scheduleBtn" HorizontalAlignment="Left" Margin="216,336,0,0" VerticalAlignment="Top" Width="128" Height="39" Click="Schedule_Relocation_Click" FocusVisualStyle="{DynamicResource MyFocusVisual}">
             <AccessText>_SAVE</AccessText>
         </Button>
         <Button HorizontalAlignment="Left" Margin="407,336,0,0" VerticalAlignment="Top" Width="128" Height="39" Click="Cancel_Relocation_Click" FocusVisualStyle="{DynamicResource MyFocusVisual}">
             <AccessText>_CANCEL</AccessText>
         </Button>
-        <Rectangle Fill="#bc84fc" HorizontalAlignment="Left" Height="50" Margin="435,56,0,0" Stroke="Black" VerticalAlignment="Top" Width="256"/>
-        <Label Content="Relocation duration in days:" HorizontalAlignment="Left" Margin="452,65,0,0" VerticalAlignment="Top" Width="162"/>
-        <TextBox x:Name="duration" HorizontalAlignment="Left" Height="23" Margin="619,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49" PreviewKeyDown="Show_Appointmets_Click" FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
-        <ListView HorizontalAlignment="Left" Height="184" Margin="435,106,0,0" VerticalAlignment="Top" Width="256" x:Name="relocationListView" SelectionChanged="Validate">
-          
-        </ListView>
+        
     </Grid>
 </Window>

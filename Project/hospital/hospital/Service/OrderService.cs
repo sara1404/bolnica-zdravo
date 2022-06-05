@@ -7,16 +7,17 @@ using Repository;
 using Model;
 using System.Collections.ObjectModel;
 using System.Threading;
+using hospital.Repository;
 
 namespace Service
 {
     public class OrderService
     {
         private readonly OrderRepository _orderRepository;
-        private readonly RoomRepository _roomRepository;
+        private readonly IRoomRepository _roomRepository;
         private ObservableCollection<Order> _orders;
 
-        public OrderService(OrderRepository orderRepo,RoomRepository roomRepo) { _orderRepository = orderRepo; _roomRepository = roomRepo; }
+        public OrderService(OrderRepository orderRepo,IRoomRepository roomRepo) { _orderRepository = orderRepo; _roomRepository = roomRepo; }
 
         public void Create(Order newOrder)
         {
@@ -65,7 +66,7 @@ namespace Service
         }
         private void AddEquipmentInWarehouse(Order order)
         {
-            Room warhouse = _roomRepository.FindRoomById("9559");
+            Room warhouse = _roomRepository.FindById("9559");
             warhouse.AddEquipment(order.Equipment);
         }
     }

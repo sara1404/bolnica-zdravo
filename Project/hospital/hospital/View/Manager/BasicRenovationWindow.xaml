@@ -11,6 +11,9 @@
         <ResourceDictionary Source="ManagerResources.xaml"></ResourceDictionary>
     </Window.Resources>
     <Grid Background="#1d1b1f">
+        <Button HorizontalAlignment="Left" Margin="724,10,0,0" VerticalAlignment="Top" Height="28" Width="51" Click="Start_Demo">
+            <AccessText>_DEMO</AccessText>
+        </Button>
         <ListView x:Name="roomRenovationListView" HorizontalAlignment="Left" Height="332" Margin="75,48,0,0" VerticalAlignment="Top" Width="198" SelectionChanged="Validate">
             <ListView.View>
                 <GridView>
@@ -30,7 +33,7 @@
         <Button HorizontalAlignment="Left" Margin="407,413,0,0" VerticalAlignment="Top" Width="128" Height="35" Click="Cancel_Renovation_Click" Background="#bc84fc" FontSize="16"  FocusVisualStyle="{DynamicResource MyFocusVisual}">
             <AccessText>_CANCEL</AccessText>
         </Button>
-        <Button Content="Demo" HorizontalAlignment="Left" Margin="724,10,0,0" VerticalAlignment="Top" Height="28" Width="51" Click="Start_Demo"/>
+       
 
     </Grid>
 </Window>

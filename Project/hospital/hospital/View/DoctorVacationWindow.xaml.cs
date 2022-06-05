@@ -64,7 +64,8 @@ namespace hospital.View
             {
                 if (appointment.StartTime > dpStartDate.SelectedDate && appointment.StartTime < dpEndDate.SelectedDate)
                 {
-                    return true;
+                    MessageBox.Show("You have appointments at that time");
+                    return true;                 
                 }
             }
             return false;
@@ -79,6 +80,7 @@ namespace hospital.View
                     if (dpStartDate.SelectedDate > vacationRequest.StartDate && dpStartDate.SelectedDate < vacationRequest.EndDate
                         && dpEndDate.SelectedDate > vacationRequest.StartDate && dpEndDate.SelectedDate < vacationRequest.EndDate)
                     {
+                        MessageBox.Show("There is already a doctor of the same specialization on vacation at that time");
                         return true;
                     }
                 }

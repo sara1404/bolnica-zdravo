@@ -89,15 +89,16 @@ namespace hospital.View
             handlingAccountUserControl.Visibility = Visibility.Collapsed;
 
             handlingAppointmentUserControl.Visibility = Visibility.Collapsed;
-            //TODO
-            //handlingAppointmentUserControl.removeAppointmentUserControl.Visibility = Visibility.Collapsed;
-            //handlingAppointmentUserControl.delayAppointmentUserControl.Visibility = Visibility.Collapsed;
+            handlingAppointmentUserControl.makeAppointmentUserControl.Visibility = Visibility.Collapsed;
+            handlingAppointmentUserControl.editAppointmentUsercontrol.Visibility = Visibility.Collapsed;
 
             handlingEmergencyUserControl.Visibility = Visibility.Collapsed;
             handlingEmergencyUserControl.addGuestuserControl.Visibility = Visibility.Collapsed;
             handlingEmergencyUserControl.suggestedDelayUserControl.Visibility = Visibility.Collapsed;
 
             orderEquipmentUserControl.Visibility = Visibility.Collapsed;
+
+            generateReportUsercontrol.Visibility = Visibility.Collapsed;
 
             revisionOfRestUserControl.Visibility = Visibility.Collapsed;
 
@@ -110,6 +111,7 @@ namespace hospital.View
             btnOrder.BorderBrush = Brushes.Transparent;
             btnVacation.BorderBrush = Brushes.Transparent;
             btnMeetings.BorderBrush = Brushes.Transparent;
+            btnPdf.BorderBrush = Brushes.Transparent;
         }
 
         private void btnOrder_Click(object sender, RoutedEventArgs e)
@@ -136,5 +138,12 @@ namespace hospital.View
             scheduleMeetingsUserControl.Visibility = Visibility.Visible;
         }
 
+        private void btnPdf_Click(object sender, RoutedEventArgs e)
+        {
+            CloseAllUserControl();
+            btnPdf.BorderBrush = (Brush)(new BrushConverter().ConvertFrom("#c8d8e4"));
+            btnPdf.BorderThickness = new Thickness(3, 0, 0, 0);
+            generateReportUsercontrol.Visibility = Visibility.Visible;
+        }
     }
 }

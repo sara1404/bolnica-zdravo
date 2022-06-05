@@ -118,7 +118,6 @@ namespace hospital.View.Manager
                 commands.Clear();
                 timer.Dispose();
                 command.execute();
-                //demoStarted = false;
                 return;
             }
             if (commands.Count == 0)

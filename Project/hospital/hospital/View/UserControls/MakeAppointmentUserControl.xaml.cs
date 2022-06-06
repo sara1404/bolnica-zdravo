@@ -107,11 +107,8 @@ namespace hospital.View.UserControls
         {
             foreach(VacationRequest vacation in vc.FindAll())
             {
-                if (vacation.DoctorId == ((Doctor)cmbDoctor.SelectedItem).Username && vacation.StartDate < ((DateTime)date.SelectedDate) && vacation.EndDate> ((DateTime)date.SelectedDate))
+                if (vacation.DoctorId == ((Doctor)cmbDoctor.SelectedItem).Username && vacation.StartDate < ((DateTime)date.SelectedDate) && vacation.EndDate> ((DateTime)date.SelectedDate) && vacation.Status == Status.approved)
                 {
-                    Console.WriteLine("1:" + vacation.DoctorId + "2:" +((Doctor)cmbDoctor.SelectedItem).Username);
-                    Console.WriteLine("1:" + vacation.StartDate + "2:" + ((DateTime)date.SelectedDate));
-                    Console.WriteLine("1:" + vacation.EndDate + "2:" + ((DateTime)date.SelectedDate));
                     notFree.Text = "Doctor is on vacation";
                     return true;
                 }

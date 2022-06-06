@@ -36,7 +36,7 @@
         <Label Content="Category:" FontSize="16" Grid.Row="0" Grid.ColumnSpan="3" Margin="51,72,100,69" Grid.RowSpan="2"/>
         <Border BorderThickness="2"  Grid.Column="3" Grid.ColumnSpan="4" RenderTransformOrigin="0.5,0.5" Margin="100,40,140,85" Grid.RowSpan="2"/>
         <Label Content="Doctor's final grade:" FontSize="16" Margin="114,53,61,87" Grid.RowSpan="2" Grid.ColumnSpan="3" Grid.Column="3"/>
-        <Label x:Name="finalAverage" Content="" Margin="53,50,32,86" Grid.Column="5" Grid.RowSpan="2" FontSize="15"/>
+        <Label x:Name="finalAverage" Content="" Margin="0,50,26,86" Grid.Column="5" Grid.RowSpan="2" FontSize="15" HorizontalAlignment="Right" Width="35"/>
 
         <Border  Grid.Row="1" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="8" Height="317" VerticalAlignment="Bottom" Margin="0,0,57,0">
             <Grid Margin="70,-33,0,0" HorizontalAlignment="Left" Width="735">
@@ -124,6 +124,6 @@
                 </Grid>
             </Grid>
         </Border>
-        
+
     </Grid>
 </Window>

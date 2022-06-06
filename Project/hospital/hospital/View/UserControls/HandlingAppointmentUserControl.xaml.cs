@@ -49,8 +49,13 @@ namespace hospital.View.UserControls
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            if(dateGridHandlingAppointment.SelectedItem != null)
+            if (dateGridHandlingAppointment.SelectedItem != null)
+            {
+                editAppointmentUsercontrol.cmbUsername.Text = ((Appointment)dateGridHandlingAppointment.SelectedItem).PatientUsername;
+                editAppointmentUsercontrol.date.SelectedDate = ((Appointment)dateGridHandlingAppointment.SelectedItem).StartTime;
+                editAppointmentUsercontrol.txtNewTime.Value = ((Appointment)dateGridHandlingAppointment.SelectedItem).StartTime;
                 editAppointmentUsercontrol.Visibility = Visibility.Visible;
+            }
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)

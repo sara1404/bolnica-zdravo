@@ -11,30 +11,60 @@ namespace Service
 {
     public class VacationRequestService
     {
-        private readonly VacationRequestRepository vacationRequestRepository;
-        public VacationRequestService(VacationRequestRepository _repo)
+        private readonly VacationRequestRepository _vacationRequestRepository;
+        private readonly NotificationRepository _notificationRepository;
+        public VacationRequestService(VacationRequestRepository _repo, NotificationRepository notiRepo)
         {
-            vacationRequestRepository = _repo;
+            _vacationRequestRepository = _repo;
+            _notificationRepository = notiRepo;
         }
         public bool Create(VacationRequest vacationRequest)
         {
-            return vacationRequestRepository.Create(vacationRequest);
+            return _vacationRequestRepository.Create(vacationRequest);
         }
         public ObservableCollection<VacationRequest> FindAll()
         {
-            return vacationRequestRepository.FindAll();
+            return _vacationRequestRepository.FindAll();
         }
         public VacationRequest FindById(int id)
         {
-            return vacationRequestRepository.FindById(id);
+            return _vacationRequestRepository.FindById(id);
         }
         public VacationRequest FindByDoctorId(string doctorId)
         {
-            return vacationRequestRepository.FindByDoctorId(doctorId);
+            return _vacationRequestRepository.FindByDoctorId(doctorId);
         }
         public bool DeleteById(int id)
         {
-            return vacationRequestRepository.DeleteById(id);
+            return _vacationRequestRepository.DeleteById(id);
+        }
+
+        public void FinishRequest(string resultRequest, int requestId)
+        {
+            if (resultRequest.Equals("reject"))
+                RejectRequest(requestId);
+            else
+                ApproveRequest(requestId);
+        }
+        private void ApproveRequest(int requestId)
+        {
+            ChangeStatusOfRequest(requestId, Status.approved);
+            MakeNotification(requestId, "Your vacation request was approved.");
+        }
+        private void RejectRequest(int requestId)
+        {
+            ChangeStatusOfRequest(requestId,Status.rejected);
+            MakeNotification(requestId, "Your vacation request was rejected.");
+
+        }
+        private void ChangeStatusOfRequest(int requestId,Status status)
+        {
+            _vacationRequestRepository.UpdateStatus(requestId, status);
+        }
+        private void MakeNotification(int requestId,string notificationText)
+        {
+            Notification notification = new Notification(FindById(requestId).DoctorId, notificationText);
+            _notificationRepository.Create(notification);
         }
     }
 }

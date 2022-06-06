@@ -26,7 +26,7 @@ namespace hospital.View.PatientView
     public partial class PatientDoctorPoll : Page
     {
         private App app;
-        private AppointmentController ac;
+        private AppointmentManagementController ac;
         private PollController pbc;
         private UserController uc;
         public List<PollQuestion> Poll { get; set; }
@@ -38,14 +38,11 @@ namespace hospital.View.PatientView
             pbc = app.pollBlueprintController;
             uc = app.userController;
             ac = app.appointmentController;
-            Appointments = ac.GetAppointmentByPatient(uc.CurentLoggedUser.Username);
+            Appointments = ac.GetPastAppointmentsByPatient(uc.CurentLoggedUser.Username);
             DataContext = this;
             Poll = pbc.GetDoctorPollQuestions();
         }
 
-
-
-        // this function has been found online so DON'T F**ING TOUCH IT 
         private childItem FindVisualChild<childItem>(DependencyObject obj)
         where childItem : DependencyObject
         {
@@ -66,17 +63,11 @@ namespace hospital.View.PatientView
             return null;
         }
 
-        private void btnBack_Click(object sender, RoutedEventArgs e)
-        {
-            app.PatientBackToMainMenu();
-        }
-
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
             if (IsValidated())
             {
                 pbc.SavePoll(FillPoll());
-                app.PatientBackToMainMenu();
             }
         }
 

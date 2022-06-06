@@ -27,9 +27,12 @@ namespace hospital.View.UserControls
     public partial class MakeAppointmentUserControl : UserControl
     {
         private PatientController pc;
-        private AppointmentController ac;
+        private AppointmentManagementController ac;
         private DoctorController dc;
         private ScheduledBasicRenovationController sbrc;
+        private RecommendedAppointmentController rc;
+        private AvailableAppointmentController aac;
+        private VacationRequestController vc;
         public ObservableCollection<Patient> Patients { get; set; }
         public ObservableCollection<Doctor> Doctors { get; set; }
         public MakeAppointmentUserControl()
@@ -42,6 +45,9 @@ namespace hospital.View.UserControls
             ac = app.appointmentController;
             dc = app.doctorController;
             sbrc = app.scheduledBasicRenovationController;
+            aac = app.availableAppointmentController;
+            vc = app.vacationRequestController;
+            rc = app.recommendedAppointmentController;
             Patients = pc.FindAll();
             Doctors = dc.GetDoctors();
         }
@@ -73,11 +79,19 @@ namespace hospital.View.UserControls
                         canMake = false;
                     }
                 }
+                if (CheckVacations())
+                {
+                    return;
+                }
                 if (canMake)
                 {
-                    if (ac.tryMakeAppointment(txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1], cmbUsername.Text, ((Doctor)cmbDoctor.SelectedItem).OrdinationId, (DateTime)date.SelectedDate, (Doctor)cmbDoctor.SelectedItem))
+                    DateTime tmp = (DateTime) date.SelectedDate;
+                    DateTime tmp1 = (DateTime)txtTime.Value;
+                    DateTime newDate = new DateTime(tmp.Year,tmp.Month,tmp.Day, tmp1.Hour, tmp1.Minute,0);
+                    if (rc.TryMakeAppointment(cmbUsername.Text, newDate, (Doctor) cmbDoctor.SelectedItem))
                     {
                         this.Visibility = Visibility.Collapsed;
+                        ResetFields();
                         notifier.ShowSuccess("Appointment successfully scheduled");
                         return;
                     }
@@ -87,6 +101,29 @@ namespace hospital.View.UserControls
                     notFree.Text = "Appointment is not free";
                 }
             }
+        }
+
+        private bool CheckVacations()
+        {
+            foreach(VacationRequest vacation in vc.FindAll())
+            {
+                if (vacation.DoctorId == ((Doctor)cmbDoctor.SelectedItem).Username && vacation.StartDate < ((DateTime)date.SelectedDate) && vacation.EndDate> ((DateTime)date.SelectedDate) && vacation.Status == Status.approved)
+                {
+                    notFree.Text = "Doctor is on vacation";
+                    return true;
+                }
+            }
+            return false;
+        }
+        private void ResetFields()
+        {
+            cmbUsername.Text = "";
+            date.Text = "";
+            txtTime.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 12, 0, 0);
+            cmbDoctor.Text = "";
+            errDate.Text = "";
+            radioDoctor.IsChecked = false;
+            radioTime.IsChecked = false;
         }
 
         private bool isValidate()
@@ -131,16 +168,16 @@ namespace hospital.View.UserControls
                 isCorrected[2] = true;
             }
             //time
-            if (txtTime.Text.Equals(""))
-            {
-                errTime.Text = "Must be filled";
-                isCorrected[3] = false;
-            }
-            else
-            {
-                errTime.Text = "";
-                isCorrected[3] = true;
-            }
+            //if (txtTime.Text.Equals(""))
+            //{
+               // errTime.Text = "Must be filled";
+               // isCorrected[3] = false;
+            //}
+            //else
+           // {
+            //    errTime.Text = "";
+            //    isCorrected[3] = true;
+           // }
             //radio
             if(radioDoctor.IsChecked == false && radioTime.IsChecked == false)
             {
@@ -198,19 +235,19 @@ namespace hospital.View.UserControls
                 {
                     btnShowRec.Visibility = Visibility.Collapsed;
                     notFree.Text = "";
-                    if (txtTime.Text.Split(':')[0].Equals("6") && txtTime.Text.Split(':')[1].Equals("30"))
+                    if (((DateTime) txtTime.Value).Hour.Equals("6") && ((DateTime)txtTime.Value).Minute.Equals("30"))
                         btnRecOne.Visibility = Visibility.Collapsed;
                     else
                         btnRecOne.Visibility = Visibility.Visible;
-                    if (txtTime.Text.Split(':')[0].Equals("7") &&txtTime.Text.Split(':')[1].Equals("00"))
+                    if (((DateTime)txtTime.Value).Hour.Equals("7") && ((DateTime)txtTime.Value).Minute.Equals("00"))
                         btnRecTwo.Visibility = Visibility.Collapsed;
                     else
                         btnRecTwo.Visibility = Visibility.Visible;
-                    ObservableCollection<Appointment> apointments = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)date.SelectedDate, ((Doctor)cmbDoctor.SelectedItem).Username,cmbUsername.Text);
-                    ac.findFreeForward(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
-                    ac.findFreeBack(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
-                    btnRecOne.Content = "Doctor: " + dc.GetByUsername(ac.RecommendedOne.doctorUsername) + "\n" + ac.RecommendedOne.StartTime;
-                    btnRecTwo.Content = "Doctor: " + dc.GetByUsername(ac.RecommendedTwo.doctorUsername) + "\n" + ac.RecommendedTwo.StartTime;
+                    ObservableCollection<Appointment> apointments = aac.GetFreeAppointmentsByDateAndDoctor((DateTime)date.SelectedDate, ((Doctor)cmbDoctor.SelectedItem).Username,cmbUsername.Text);
+                    rc.FindFreeForward(apointments, (DateTime) txtTime.Value);
+                    rc.FindFreeBack(apointments, (DateTime) txtTime.Value);
+                    recOne.Text = "Doctor: " + dc.GetByUsername(rc.RecommendedOne.DoctorUsername) + "\n" + rc.RecommendedOne.StartTime;
+                    recTwo.Text = "Doctor: " + dc.GetByUsername(rc.RecommendedTwo.DoctorUsername) + "\n" + rc.RecommendedTwo.StartTime;
                 }
                 else
                 {
@@ -218,10 +255,10 @@ namespace hospital.View.UserControls
                     notFree.Text = "";
                     btnRecOne.Visibility = Visibility.Visible;
                     btnRecTwo.Visibility = Visibility.Visible;
-                    ObservableCollection<Appointment> apointments = ac.GetFreeAppointmentsByDate((DateTime)date.SelectedDate,cmbUsername.Text);
-                    ac.findRecByTime(apointments, txtTime.Text.Split(':')[0], txtTime.Text.Split(':')[1]);
-                    btnRecOne.Content = "Doctor: " + dc.GetByUsername(ac.RecommendedOne.doctorUsername) + "\n" + ac.RecommendedOne.StartTime;
-                    btnRecTwo.Content = "Doctor: " + dc.GetByUsername(ac.RecommendedTwo.doctorUsername) + "\n" + ac.RecommendedTwo.StartTime;
+                    ObservableCollection<Appointment> apointments = aac.GetFreeAppointmentsByDate((DateTime)date.SelectedDate,cmbUsername.Text);
+                    rc.FindRecByTime(apointments,(DateTime) txtTime.Value);
+                    recOne.Text = "Doctor: " + dc.GetByUsername(rc.RecommendedOne.DoctorUsername) + "\n" + rc.RecommendedOne.StartTime;
+                    recTwo.Text = "Doctor: " + dc.GetByUsername(rc.RecommendedTwo.DoctorUsername) + "\n" + rc.RecommendedTwo.StartTime;
                 }
             }
         }
@@ -231,7 +268,7 @@ namespace hospital.View.UserControls
             cmbDoctor.Text = "";
             cmbUsername.Text = "";
             date.Text = "";
-            txtTime.Text =  "";
+            txtTime.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 12, 0, 0);
             radioDoctor.IsChecked = false;
             radioTime.IsChecked = false;
             errDate.Text = "";
@@ -241,13 +278,13 @@ namespace hospital.View.UserControls
 
         private void btnRecTwo_Click(object sender, RoutedEventArgs e)
         {
-            ac.CreateAppointment(ac.RecommendedTwo);
+            ac.CreateAppointment(rc.RecommendedTwo);
             notifier.ShowSuccess("Appointment successfully scheduled");
             this.Visibility = Visibility.Collapsed;
             cmbDoctor.Text = "";
             cmbUsername.Text = "";
             date.Text = "";
-            txtTime.Text = "";
+            txtTime.Value = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,12,0,0);
             radioDoctor.IsChecked = false;
             radioTime.IsChecked = false;
             errDate.Text = "";
@@ -257,35 +294,18 @@ namespace hospital.View.UserControls
 
         private void btnRecOne_Click(object sender, RoutedEventArgs e)
         {
-            ac.CreateAppointment(ac.RecommendedOne);
+            ac.CreateAppointment(rc.RecommendedOne);
             notifier.ShowSuccess("Appointment successfully scheduled");
             this.Visibility = Visibility.Collapsed;
             cmbDoctor.Text = "";
             cmbUsername.Text = "";
             date.Text = "";
-            txtTime.Text = "";
+            txtTime.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day,12,0,0);
             radioDoctor.IsChecked = false;
             radioTime.IsChecked = false;
             errDate.Text = "";
             btnRecOne.Visibility = Visibility.Collapsed;
             btnRecTwo.Visibility = Visibility.Collapsed;
-        }
-
-        private void btnDelay_Click(object sender, RoutedEventArgs e)
-        {
-            delayAppointmentUserControl.Visibility = Visibility.Visible;
-        }
-
-        private void btnRemove_Click(object sender, RoutedEventArgs e)
-        {
-            removeAppointmentUserControl.Visibility= Visibility.Visible;
-            removeAppointmentUserControl.cmbUsername.Text = "";
-            removeAppointmentUserControl.date.Text = "";
-            removeAppointmentUserControl.txtTime.Text = "";
-            removeAppointmentUserControl.notFree.Text = "";
-            removeAppointmentUserControl.errDate.Text = "";
-            removeAppointmentUserControl.errTime.Text = "";
-            removeAppointmentUserControl.errUsername.Text = "";
         }
     }
 }

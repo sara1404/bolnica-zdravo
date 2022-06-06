@@ -1,3 +1,4 @@
+using hospital.DTO;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -9,55 +10,48 @@ namespace Repository
 {
     public class AppointmentRepository
     {
-        public ObservableCollection<Appointment> appointments;
+        private ObservableCollection<Appointment> _appointments;
         public FileHandler.AppointmentsFileHandler appointmentsFileHandler;
 
         public AppointmentRepository()
         {
-            // call filehandler read here
             appointmentsFileHandler = new FileHandler.AppointmentsFileHandler();
-            //appointments = (ObservableCollection<Appointment>)appointmentsFileHandler.Read();
-            PatientRepository pr = new PatientRepository();
-            DoctorRepository dr = new DoctorRepository();
 
             List<Appointment> deserializedList = appointmentsFileHandler.Read();
             if (deserializedList == null)
             {
-                appointments = new ObservableCollection<Appointment>();
+                _appointments = new ObservableCollection<Appointment>();
             }
             else
             {
-                appointments = new ObservableCollection<Appointment>(appointmentsFileHandler.Read());
+                _appointments = new ObservableCollection<Appointment>(appointmentsFileHandler.Read());
             }
-            //DateTime dt = new DateTime(2022, 4, 9, 15, 0, 0);
-            //appointments.Add(new Appointment(1, dr.FindByUsername("miromir"), pr.FindById("peromir"), dt));
         }
 
         public int GetNewId()
         {
-            if (appointments.Count == 0)
+            if (_appointments.Count == 0)
             {
                 return 0;
             }
             else
             {
                 int max = 0;
-                foreach(Appointment a in appointments)
+                foreach (Appointment a in _appointments)
                 {
-                    if(a.Id > max)
+                    if (a.Id > max)
                     {
                         max = a.Id;
                     }
                 }
                 return max + 1;
             }
-                
         }
         public Appointment FindById(int id)
         {
-            foreach(Appointment a in appointments)
+            foreach (Appointment a in _appointments)
             {
-                if(a.Id == id)
+                if (a.Id == id)
                 {
                     return a;
                 }
@@ -67,50 +61,20 @@ namespace Repository
 
         public ObservableCollection<Appointment> FindAll()
         {
-            return appointments;
+            return _appointments;
         }
 
         public void DeleteById(int id)
         {
-            appointments.Remove(FindById(id));
-            appointmentsFileHandler.Write(appointments.ToList());
+            _appointments.Remove(FindById(id));
+            appointmentsFileHandler.Write(_appointments.ToList());
         }
 
         public void Create(Appointment _appointment)
         {
-            appointments.Add(_appointment);
-            appointmentsFileHandler.Write(appointments.ToList());
+            _appointments.Add(_appointment);
+            appointmentsFileHandler.Write(_appointments.ToList());
         }
-
-        public void UpdateById(Appointment appointment, string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ObservableCollection<Appointment> Appointment
-        {
-            get
-            {
-                if (appointments == null)
-                {
-                    appointments = new ObservableCollection<Appointment>();
-                }
-
-                return appointments;
-            }
-            set
-            {
-                RemoveAllAppointment();
-                if (value != null)
-                {
-                    foreach (Model.Appointment oAppointment in value)
-                    {
-                        AddAppointment(oAppointment);
-                    }
-                }
-            }
-        }
-
 
         public void AddAppointment(Model.Appointment newAppointment)
         {
@@ -119,15 +83,15 @@ namespace Repository
                 return;
             }
 
-            if (appointments == null)
+            if (_appointments == null)
             {
-                appointments = new ObservableCollection<Appointment>();
+                _appointments = new ObservableCollection<Appointment>();
             }
 
-            if (!appointments.Contains(newAppointment))
+            if (!_appointments.Contains(newAppointment))
             {
-                appointments.Add(newAppointment);
-                appointmentsFileHandler.Write(appointments.ToList());
+                _appointments.Add(newAppointment);
+                appointmentsFileHandler.Write(_appointments.ToList());
             }
         }
 
@@ -139,33 +103,49 @@ namespace Repository
                 return;
             }
 
-            if (appointments != null)
+            if (_appointments != null)
             {
-                if (appointments.Contains(oldAppointment))
+                if (_appointments.Contains(oldAppointment))
                 {
-                    appointments.Remove(oldAppointment);
-                    appointmentsFileHandler.Write(appointments.ToList());
+                    _appointments.Remove(oldAppointment);
+                    appointmentsFileHandler.Write(_appointments.ToList());
                 }
             }
         }
 
-
-        public void RemoveAllAppointment()
+        public List<Appointment> FindAppointmentsForSpecifiedRoom(Room room)
         {
-            if (appointments != null)
-            {
-                appointments.Clear();
-            }
-        }
-
-        public List<Appointment> FindAppointmentsForSpecifiedRoom(Room room) {
             List<Appointment> appointmentsInRoom = new List<Appointment>();
-            foreach (Appointment appointment in appointments) {
-                if (appointment.RoomId.Equals(room.id)) {
+            foreach (Appointment appointment in _appointments)
+            {
+                if (appointment.RoomId.Equals(room.id))
+                {
                     appointmentsInRoom.Add(appointment);
                 }
             }
             return appointmentsInRoom;
+        }
+
+        public List<ChartDataDTO> GetPopularTimes()
+        {
+            List<ChartDataDTO> retVal = new List<ChartDataDTO>();
+            foreach (Appointment a in _appointments)
+            {
+                if (retVal.Find(x => x.Time == ConvertDateToHours(a.StartTime)) == null)
+                {
+                    retVal.Add(new ChartDataDTO(ConvertDateToHours(a.StartTime)));
+                }
+                else
+                {
+                    retVal.Find(x => x.Time == ConvertDateToHours(a.StartTime)).NumberOfAppointments++;
+                }
+            }
+            return retVal.OrderBy(x => x.Time).ToList();
+        }
+
+        private DateTime ConvertDateToHours(DateTime date)
+        {
+            return new DateTime(1, 1, 1, date.Hour, date.Minute, 0);
         }
     }
 }

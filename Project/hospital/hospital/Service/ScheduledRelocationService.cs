@@ -13,10 +13,10 @@ namespace hospital.Service
 {
     public class ScheduledRelocationService
     {
-        private ScheduledRelocationRepository scheduledRelocationRepository;
+        private IScheduledRelocationRepository scheduledRelocationRepository;
         private TimeSchedulerService timeSchedulerService;
 
-        public ScheduledRelocationService(ScheduledRelocationRepository scheduledRelocationRepository, TimeSchedulerService timeSchedulerService)
+        public ScheduledRelocationService(IScheduledRelocationRepository scheduledRelocationRepository, TimeSchedulerService timeSchedulerService)
         {
             this.scheduledRelocationRepository = scheduledRelocationRepository;
             this.timeSchedulerService = timeSchedulerService;
@@ -49,36 +49,26 @@ namespace hospital.Service
             return scheduledRelocationRepository.DeleteById(id);
         }
 
-        public void relocationTracker()
+        public void RelocationTracker()
         {
-            while (true)
+            Thread.Sleep(3000);
+            DateTime now = DateTime.Now;
+            List<ScheduledRelocation> relocations = new List<ScheduledRelocation>(FindAll());
+            foreach (ScheduledRelocation rel in relocations)
             {
-                try
+                if (rel._Relocation._End.Date.CompareTo(now.Date) >= 0)
                 {
-                    Thread.Sleep(3000);
-                    DateTime now = DateTime.Now;
-                    List<ScheduledRelocation> relocations = FindAll();
-                    foreach (ScheduledRelocation rel in relocations)
-                    {
-                        if (rel._Relocation._End.Date.CompareTo(now.Date) == 0)
-                        {
-                            Room fromRoom = rel._FromRoom;
-                            Room toRoom = rel._ToRoom;
-                            string equipmentType = rel._TypeOfEquipment;
-                            int quantity = rel._Quantity;
-                            Equipment equipment = new Equipment(equipmentType, quantity);
-                            toRoom.AddEquipment(equipment);
-                            DeleteById(rel._Id);
-                        }
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
+                    ExecuteRelocation(rel);
                 }
             }
+        }
 
+        private void ExecuteRelocation(ScheduledRelocation rel) {
+            Room toRoom = rel._ToRoom;
+            string equipmentType = rel._TypeOfEquipment;
+            int quantity = rel._Quantity;
+            toRoom.AddEquipment(new Equipment(equipmentType, quantity));
+            DeleteById(rel._Id);
         }
 
         public List<TimeInterval> FindRelocationIntervals(int relocationDuration) {

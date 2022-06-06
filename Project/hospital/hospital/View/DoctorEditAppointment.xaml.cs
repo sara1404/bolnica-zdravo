@@ -24,9 +24,10 @@ namespace hospital.View
     /// </summary>
     public partial class DoctorEditAppointment : Window
     {
-        private AppointmentController ac;
+        private AppointmentManagementController ac;
         private RoomController rc;
         private ScheduledBasicRenovationController sbrc;
+        private AvailableAppointmentController aac;
 
         private Appointment selectedAppointment;
         public DoctorEditAppointment()
@@ -35,6 +36,7 @@ namespace hospital.View
             App app = Application.Current as App;
             ac = app.appointmentController;
             rc = app.roomController;
+            aac = app.availableAppointmentController;
             sbrc = app.scheduledBasicRenovationController;
             this.DataContext = this;
             foreach (Window window in Application.Current.Windows)
@@ -45,11 +47,10 @@ namespace hospital.View
                     tbPatient.Text = selectedAppointment.PatientUsername; // changed because of changes in the model 
                     date.SelectedDate = selectedAppointment.StartTime;
                     tbDescription.Text = selectedAppointment.Description;
-                    if (rc.FindRoomById(selectedAppointment.RoomId) != null && rc.FindRoomById(selectedAppointment.RoomId)._Purpose == "operation") //Znaci mora ovako purpose da se zove
+                    if (rc.FindRoomById(selectedAppointment.RoomId) != null && rc.FindRoomById(selectedAppointment.RoomId)._Purpose == "operation")
                     {
-                        cmbOpRoom.ItemsSource = rc.FindAll();
-                        //cmbOpRoom.SelectedItem = (Room)selectedAppointment.operationRoom;
-                        cmbOpRoom.SelectedIndex = 0; //za sad je zakucano
+                        cmbOpRoom.ItemsSource = rc.FindRoomsByPurpose("operation");
+                        cmbOpRoom.SelectedItem = rc.FindRoomById(selectedAppointment.RoomId);
                         cbOperation.IsChecked = true;
                         cmbOpRoom.IsEnabled = true;
                     }
@@ -62,7 +63,7 @@ namespace hospital.View
         {
             if (date.SelectedDate != null)
             {
-                appointmentTable.ItemsSource = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)date.SelectedDate, selectedAppointment.DoctorUsername, tbPatient.Text);
+                appointmentTable.ItemsSource = aac.GetFreeAppointmentsByDateAndDoctor((DateTime)date.SelectedDate, selectedAppointment.DoctorUsername, tbPatient.Text);
             }
         }
 
@@ -70,28 +71,31 @@ namespace hospital.View
         {
             if (appointmentTable.SelectedItem != null)
             {
-
                 Appointment updatedAppointment = (Appointment)appointmentTable.SelectedItem;
                 updatedAppointment.Description = tbDescription.Text;
                 if (cmbOpRoom.SelectedIndex != -1)
                     updatedAppointment.RoomId = ((Room)cmbOpRoom.SelectedItem).id;
 
-                List<ScheduledBasicRenovation> renovationList = sbrc.FindAll();
-                bool canMake = true;
-                foreach (ScheduledBasicRenovation renovation in renovationList)
-                {
-                    if (renovation._Room.id == selectedAppointment.RoomId && renovation._Interval._Start < updatedAppointment.StartTime && renovation._Interval._End > updatedAppointment.StartTime)
-                    {
-                        MessageBox.Show("Invalid time because of renovations");
-                        canMake = false;
-                    }
-                }
+                bool canMake = checkRenovations(updatedAppointment);
                 if (canMake)
                 {
                     ac.UpdateAppointment(selectedAppointment, updatedAppointment);
                     this.Close();
                 }
             }
+        }
+        private bool checkRenovations(Appointment updatedAppointment)
+        {
+            List<ScheduledBasicRenovation> renovationList = sbrc.FindAll();
+            foreach (ScheduledBasicRenovation renovation in renovationList)
+            {
+                if (renovation._Room.id == selectedAppointment.RoomId && renovation._Interval._Start < updatedAppointment.StartTime && renovation._Interval._End > updatedAppointment.StartTime)
+                {
+                    MessageBox.Show("Invalid time because of renovations");
+                    return false;
+                }
+            }
+            return true;
         }
 
         private void cbOperation_Checked(object sender, RoutedEventArgs e)

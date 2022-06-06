@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Repository
 {
@@ -13,9 +14,9 @@ namespace Repository
     {
         public ObservableCollection<InvalidMedicineReport> invalidMedicineReports;
         public InvalidMedicineReportFileHandler invalidMedicineReportFileHandler;
-        public InvalidMedicineReportRepository()
+        private MedicineRepository medicineRepository;
+        public InvalidMedicineReportRepository(MedicineRepository medicineRepository)
         {
-            
             invalidMedicineReportFileHandler = new InvalidMedicineReportFileHandler();
             List<InvalidMedicineReport> deserializedList = invalidMedicineReportFileHandler.Read();
             if (deserializedList != null)
@@ -26,11 +27,13 @@ namespace Repository
             {
                 invalidMedicineReports = new ObservableCollection<InvalidMedicineReport>();
             }
+            this.medicineRepository = medicineRepository;
         }
         public bool Create(InvalidMedicineReport invalidMedicineReport)
         {
             invalidMedicineReport.Id = generateId();
             invalidMedicineReports.Add(invalidMedicineReport);
+            medicineRepository.FindById(invalidMedicineReport.MedicineId).Status = "rejected";
             invalidMedicineReportFileHandler.Write(this.invalidMedicineReports.ToList());
             return true;
         }

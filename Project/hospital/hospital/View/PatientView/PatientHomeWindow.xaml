@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:hospital.View"
         mc:Ignorable="d"
-        Title="PatientHomeWindow" Height="489.062" Width="821.751">
+        Title="PatientHomeWindow" Height="551" Width="817.876" Closing="Window_Closing">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -17,7 +17,36 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid Margin="0,0,4,0">
-        <Frame NavigationUIVisibility="Hidden" x:Name="Main" Margin="0,0,0,0" Height="450" VerticalAlignment="Top" HorizontalAlignment="Left" Width="800"/>
-
+        <Frame NavigationUIVisibility="Hidden" x:Name="Main" Margin="0,47,0,0" Height="450" VerticalAlignment="Top" HorizontalAlignment="Left" Width="800"/>
+        <Button x:Name="btnCalendar" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="45" Padding="4" Click="btnCalendar_Click" Background="Transparent" BorderBrush="Transparent" ToolTip="Calendar">
+            <Image Source="../../Resources/Images/schedule.png" Height="19" Width="23"></Image>
+        </Button>
+        <Button x:Name="btnMakeAppointment" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" Width="45" Padding="4" Click="btnMakeAppointment_Click" Background="Transparent" BorderBrush="Transparent" ToolTip="Make new appointment">
+            <Image Source="../../Resources/Images/addition_24x24.png" Height="19" Width="23"></Image>
+        </Button>
+        <Button x:Name="btnHospitalPoll" HorizontalAlignment="Left" Margin="250,10,0,0" VerticalAlignment="Top" Width="45" Padding="4" Click="btnHospitalPoll_Click" Background="Transparent" BorderBrush="Transparent" ToolTip="Hospitall poll">
+            <Image Source="../../Resources/Images/hospital_poll.png" Height="19" Width="23"></Image>
+        </Button>
+        <Button x:Name="btnLogout"  HorizontalAlignment="Left" Margin="753,13,0,0" VerticalAlignment="Top" Width="45" Height="29" Click="btnLogout_Click" Background="Transparent" BorderBrush="Transparent" Padding="4" ToolTip="Logout">
+            <Image Source="../../Resources/Images/logout.png" Height="19" Width="36"></Image>
+        </Button>
+        <Button x:Name="btnDoctorPoll" HorizontalAlignment="Left" Margin="330,10,0,0" VerticalAlignment="Top" Width="45" Padding="4" Click="btnDoctorPoll_Click" Background="Transparent" BorderBrush="Transparent" ToolTip="Doctor poll">
+            <Image Source="../../Resources/Images/doctor_poll.png" Height="19" Width="23"></Image>
+        </Button>
+        <Button x:Name="btnAppointments" HorizontalAlignment="Left" Margin="170,10,0,0" VerticalAlignment="Top" Width="45" Padding="4" Click="btnAppointments_Click" Background="Transparent" BorderBrush="Transparent" ToolTip="All appointments">
+            <Image Source="../../Resources/Images/list.png" Height="19" Width="23"></Image>
+        </Button>
+        <Button x:Name="btnMedicalRecord" HorizontalAlignment="Left" Margin="410,10,0,0" VerticalAlignment="Top" Width="45" Padding="4" Click="btnMedicalRecord_Click" Background="Transparent" BorderBrush="Transparent" ToolTip="Medical record">
+            <Image Source="../../Resources/Images/medical-records_1_50x50.png" Height="19" Width="23"></Image>
+        </Button>
+        <Button x:Name="btnCustomNotification" HorizontalAlignment="Left" Margin="650,10,0,0" VerticalAlignment="Top" Width="45" Padding="4" Click="btnCustomNotification_Click" Background="Transparent" BorderBrush="Transparent" ToolTip="Custom notification">
+            <Image Source="../../Resources/Images/bell_icon.png" Height="19" Width="23"></Image>
+        </Button>
+        <Button x:Name="btnTherapy" HorizontalAlignment="Left" Margin="490,10,0,0" VerticalAlignment="Top" Width="45" Padding="4" Click="btnTherapy_Click" Background="Transparent" BorderBrush="Transparent" ToolTip="Therapy">
+            <Image Source="../../Resources/Images/medication.png" Height="19" Width="23"></Image>
+        </Button>
+        <Button x:Name="btnGraph" HorizontalAlignment="Left" Margin="570,10,0,0" VerticalAlignment="Top" Width="45" Padding="4" Click="btnGraph_Click" Background="Transparent" BorderBrush="Transparent" ToolTip="Popular times">
+            <Image Source="../../Resources/Images/graph.png" Height="19" Width="23"></Image>
+        </Button>
     </Grid>
 </Window>

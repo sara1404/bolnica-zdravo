@@ -70,9 +70,9 @@ namespace hospital.Repository
 
         public PollBlueprint GetHospitalPollBlueprint()
         {
-            foreach(PollBlueprint blueprint in blueprints)
+            foreach (PollBlueprint blueprint in blueprints)
             {
-                if(blueprint.Type == PollType.HOSPITAL_POLL)
+                if (blueprint.Type == PollType.HOSPITAL_POLL)
                 {
                     return blueprint;
                 }

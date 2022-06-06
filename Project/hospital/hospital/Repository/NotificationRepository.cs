@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using FileHandler;
 using Model;
 
@@ -11,42 +12,40 @@ namespace Repository
 {
     public class NotificationRepository
     {
-        public NotificationFileHandler notificationFileHandler;
-        public ObservableCollection<Notification> notifications;
+        public NotificationFileHandler _notificationFileHandler;
+        public ObservableCollection<Notification> _notifications;
 
         public NotificationRepository()
         {
-            notificationFileHandler = new NotificationFileHandler();
+            _notificationFileHandler = new NotificationFileHandler();
 
-
-            List<Notification> deserializedList = notificationFileHandler.Read();
+            List<Notification> deserializedList = _notificationFileHandler.Read();
             if (deserializedList != null)
             {
-                notifications = new ObservableCollection<Notification>(notificationFileHandler.Read());
+                _notifications = new ObservableCollection<Notification>(_notificationFileHandler.Read());
             }
             else
             {
-                notifications = new ObservableCollection<Notification>();
+                _notifications = new ObservableCollection<Notification>();
             }
         }
 
-
         public void Create(Notification notification)
         {
-            this.notifications.Add(notification);
-            notificationFileHandler.Write(this.notifications.ToList());
+            _notifications.Add(notification);
+            _notificationFileHandler.Write(_notifications.ToList());
         }
 
         public ObservableCollection<Notification> FindAll()
         {
-            return notifications;
+            return _notifications;
         }
 
         public bool Delete(Notification n)
         {
-            bool retVal= this.notifications.Remove(n);
-            notificationFileHandler.Write(this.notifications.ToList());
-            return retVal;  
+            bool retVal = _notifications.Remove(n);
+            _notificationFileHandler.Write(_notifications.ToList());
+            return retVal;
         }
     }
 }

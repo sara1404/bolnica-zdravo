@@ -1,15 +1,12 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace hospital.FileHandler
 {
     public class IngridientsFileHandler
     {
         private readonly string path = @"../../Resources/Data/IngridientsData.txt";
-
 
         public List<string> Read()
         {

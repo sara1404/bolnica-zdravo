@@ -1,11 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Xamarin.Forms.5.0.0.2012\build\Xamarin.Forms.props" Condition="Exists('..\packages\Xamarin.Forms.5.0.0.2012\build\Xamarin.Forms.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{8651F9B2-50CD-432A-B050-BFFE1BFC831B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
+    <!--<OutputType>Exe</OutputType>
+    <DisableWinExeInference>true</DisableWinExeInference>-->
     <RootNamespace>hospital</RootNamespace>
     <AssemblyName>hospital</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -46,11 +49,23 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Licensing, Version=20.1460.0.55, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Licensing.20.1.0.55\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    <Reference Include="Syncfusion.Compression.Base, Version=20.1460.0.57, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Compression.Base.20.1.0.57\lib\net46\Syncfusion.Compression.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Core.XForms, Version=20.1451.0.57, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Xamarin.Core.20.1.0.57\lib\netstandard2.0\Syncfusion.Core.XForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=20.1460.0.57, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.20.1.0.57\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Pdf.Base, Version=20.1460.0.57, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Pdf.Wpf.20.1.0.57\lib\net46\Syncfusion.Pdf.Base.dll</HintPath>
     </Reference>
     <Reference Include="Syncfusion.SfBusyIndicator.WPF, Version=20.1460.0.55, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.SfBusyIndicator.WPF.20.1.0.55\lib\net46\Syncfusion.SfBusyIndicator.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfChart.WPF, Version=20.1460.0.57, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfChart.WPF.20.1.0.57\lib\net46\Syncfusion.SfChart.WPF.dll</HintPath>
     </Reference>
     <Reference Include="Syncfusion.SfInput.WPF, Version=20.1460.0.55, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.SfInput.WPF.20.1.0.55\lib\net46\Syncfusion.SfInput.WPF.dll</HintPath>
@@ -69,6 +84,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -87,30 +104,46 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Forms.5.0.0.2012\lib\netstandard2.0\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Forms.5.0.0.2012\lib\netstandard2.0\Xamarin.Forms.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Forms.5.0.0.2012\lib\netstandard2.0\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BindableBase.cs" />
+    <Compile Include="Controller\AvailableAppointmentController.cs" />
     <Compile Include="Controller\DoctorController.cs" />
     <Compile Include="Controller\IngridientsController.cs" />
     <Compile Include="Controller\InvalidMedicineReportController.cs" />
     <Compile Include="Controller\EmergencyController.cs" />
     <Compile Include="Controller\MedicineController.cs" />
+    <Compile Include="Controller\MeetingController.cs" />
     <Compile Include="Controller\NotificationController.cs" />
     <Compile Include="Controller\OrderController.cs" />
+    <Compile Include="Controller\RecommendedAppointmentController.cs" />
     <Compile Include="Controller\ScheduledAdvancedRenovationController.cs" />
     <Compile Include="Controller\PollController.cs" />
     <Compile Include="Controller\ScheduledBasicRenovationController.cs" />
     <Compile Include="Controller\ScheduledRelocationController.cs" />
     <Compile Include="Controller\UserController.cs" />
+    <Compile Include="DTO\ChartDataDTO.cs" />
     <Compile Include="DTO\EmergencyDTO.cs" />
     <Compile Include="Controller\VacationRequestController.cs" />
+    <Compile Include="DTO\TherapyDTO.cs" />
     <Compile Include="FileHandler\IngridientsFileHandler.cs" />
     <Compile Include="FileHandler\InvalidMedicineReportFileHandler.cs" />
     <Compile Include="FileHandler\MedicalRecordFileHandler.cs" />
     <Compile Include="FileHandler\MedicineFileHandler.cs" />
+    <Compile Include="FileHandler\MeetingFileHandler.cs" />
     <Compile Include="FileHandler\NotificationFileHandler.cs" />
     <Compile Include="FileHandler\OrderFileHandler.cs" />
     <Compile Include="FileHandler\ScheduledAdvancedRenovationFileHandler.cs" />
@@ -119,6 +152,7 @@
     <Compile Include="FileHandler\ScheduledRelocationFileHandler.cs" />
     <Compile Include="FileHandler\UserFileHandler.cs" />
     <Compile Include="Model\InvalidMedicineReport.cs" />
+    <Compile Include="Model\Meeting.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="FileHandler\VacationRequestFileHandler.cs" />
     <Compile Include="Model\ScheduledAdvancedRenovation.cs" />
@@ -132,12 +166,18 @@
     <Compile Include="Model\ScheduledRelocation.cs" />
     <Compile Include="Model\Specialization.cs" />
     <Compile Include="Model\VacationRequest.cs" />
+    <Compile Include="MyICommand.cs" />
     <Compile Include="Repository\AppointmentRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />
     <Compile Include="Repository\IngridientsRepository.cs" />
     <Compile Include="Repository\InvalidMedicineReportRepository.cs" />
+    <Compile Include="Repository\IRoomRepository.cs" />
+    <Compile Include="Repository\IScheduledAdvancedRenovationRepository.cs" />
+    <Compile Include="Repository\IScheduledBasicRenovationRepository.cs" />
+    <Compile Include="Repository\IScheduledRelocationRepository.cs" />
     <Compile Include="Repository\MedicalRecordsRepository.cs" />
     <Compile Include="Repository\MedicineRepository.cs" />
+    <Compile Include="Repository\MeetingRepository.cs" />
     <Compile Include="Repository\NotificationRepository.cs" />
     <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\PatientRepository.cs" />
@@ -147,19 +187,23 @@
     <Compile Include="Repository\ScheduledAdvancedRenovationRepository.cs" />
     <Compile Include="Repository\ScheduledBasicRenovationRepository.cs" />
     <Compile Include="Repository\ScheduledRelocationRepository.cs" />
+    <Compile Include="Repository\TimeSchedulerRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\VacationRequestRepository.cs" />
-    <Compile Include="Service\AppointmentService.cs" />
+    <Compile Include="Service\AppointmentManagementService.cs" />
+    <Compile Include="Service\AvailableAppointmentService.cs" />
     <Compile Include="Service\DoctorService.cs" />
     <Compile Include="Service\EmergencyService.cs" />
     <Compile Include="Service\IngridientsService.cs" />
     <Compile Include="Service\InvalidMedicineReportService.cs" />
     <Compile Include="Service\MedicalRecordsService.cs" />
     <Compile Include="Service\MedicineService.cs" />
+    <Compile Include="Service\MeetingService.cs" />
     <Compile Include="Service\NotificationService.cs" />
     <Compile Include="Service\OrderService.cs" />
     <Compile Include="Service\PatientService.cs" />
     <Compile Include="Service\PollService.cs" />
+    <Compile Include="Service\RecommendedAppointmentService.cs" />
     <Compile Include="Service\RoomService.cs" />
     <Compile Include="Service\ScheduledAdvancedRenovationService.cs" />
     <Compile Include="Service\ScheduledBasicRenovationService.cs" />
@@ -168,19 +212,23 @@
     <Compile Include="Service\TimeSchedulerService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Service\VacationRequestService.cs" />
-    <Compile Include="View\AddMedicineWindow.xaml.cs">
+    <Compile Include="View\Manager\ActionExecuteCommand.cs" />
+    <Compile Include="View\Manager\AddIngridientsWindow.xaml.cs">
+      <DependentUpon>AddIngridientsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\AddMedicineWindow.xaml.cs">
       <DependentUpon>AddMedicineWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\AddRoomWindow.xaml.cs">
+    <Compile Include="View\Manager\AddRoomWindow.xaml.cs">
       <DependentUpon>AddRoomWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\AdvancedRenovationWindow.xaml.cs">
+    <Compile Include="View\Manager\AdvancedRenovationWindow.xaml.cs">
       <DependentUpon>AdvancedRenovationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\BasicRenovationWindow.xaml.cs">
+    <Compile Include="View\Manager\BasicRenovationWindow.xaml.cs">
       <DependentUpon>BasicRenovationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DeleteRoomWindow.xaml.cs">
+    <Compile Include="View\Manager\DeleteRoomWindow.xaml.cs">
       <DependentUpon>DeleteRoomWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DoctorAppointmentsWindow.xaml.cs">
@@ -204,50 +252,80 @@
     <Compile Include="View\DoctorTherapyWindow.xaml.cs">
       <DependentUpon>DoctorTherapyWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DoctorVacationViewWindow.xaml.cs">
+      <DependentUpon>DoctorVacationViewWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DoctorVacationWindow.xaml.cs">
       <DependentUpon>DoctorVacationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DoctorViewInfoWindow.xaml.cs">
       <DependentUpon>DoctorViewInfoWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditMedicineWindow.xaml.cs">
+    <Compile Include="View\Manager\DoctorReviewWindow.xaml.cs">
+      <DependentUpon>DoctorReviewWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\EditMedicineWindow.xaml.cs">
       <DependentUpon>EditMedicineWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditRoomWindow.xaml.cs">
+    <Compile Include="View\Manager\EditRoomWindow.xaml.cs">
       <DependentUpon>EditRoomWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EquipmentPage.xaml.cs">
+    <Compile Include="View\Manager\EquipmentPage.xaml.cs">
       <DependentUpon>EquipmentPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EquipmentRelocationWindow.xaml.cs">
+    <Compile Include="View\Manager\EquipmentRelocationWindow.xaml.cs">
       <DependentUpon>EquipmentRelocationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\HandlingMedicalRecordsPage.xaml.cs">
+    <!--<Compile Include="View\HandlingMedicalRecordsPage.xaml.cs">
       <DependentUpon>HandlingMedicalRecordsPage.xaml</DependentUpon>
+    </Compile>-->
+    <Compile Include="View\Manager\FillTxtFieldCommand.cs" />
+    <Compile Include="View\Manager\HospitalReviewWindow.xaml.cs">
+      <DependentUpon>HospitalReviewWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MainPage.xaml.cs">
+    <Compile Include="View\Manager\IDemoCommand.cs" />
+    <Compile Include="View\Manager\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ManagerMainWindow.xaml.cs">
+    <Compile Include="View\Manager\ManagerMainWindow.xaml.cs">
       <DependentUpon>ManagerMainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ManagerRoomsWindow.xaml.cs">
+    <Compile Include="View\Manager\ManagerRoomsWindow.xaml.cs">
       <DependentUpon>ManagerRoomsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MedicinePage.xaml.cs">
+    <Compile Include="View\Manager\MedicinePage.xaml.cs">
       <DependentUpon>MedicinePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\SelectFromListBoxCommand.cs" />
+    <Compile Include="View\Manager\SelectMultipleFromListViewCommand.cs" />
+    <Compile Include="View\PatientView\AppointmentNoteViewModel.cs" />
+    <Compile Include="View\PatientView\MedicalRecordViewModel.cs" />
+    <Compile Include="View\PatientView\PatientAppointmentNote.xaml.cs">
+      <DependentUpon>PatientAppointmentNote.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\MergeRoomsWindow.xaml.cs">
+      <DependentUpon>MergeRoomsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\ReviewPage.xaml.cs">
+      <DependentUpon>ReviewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Manager\SplitRoomWindow.xaml.cs">
+      <DependentUpon>SplitRoomWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PatientView\PatientAppointmentsPage.xaml.cs">
       <DependentUpon>PatientAppointmentsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientView\PatientDelayAppointment.xaml.cs">
-      <DependentUpon>PatientDelayAppointment.xaml</DependentUpon>
+    <Compile Include="View\PatientView\PatientCalendar.xaml.cs">
+      <DependentUpon>PatientCalendar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientView\PatientCustomNotification.xaml.cs">
+      <DependentUpon>PatientCustomNotification.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientView\PatientDelayAppointmentPage.xaml.cs">
+      <DependentUpon>PatientDelayAppointmentPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PatientView\PatientDoctorPoll.xaml.cs">
       <DependentUpon>PatientDoctorPoll.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\PatientView\PatientGradingPage.xaml.cs">
-      <DependentUpon>PatientGradingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PatientView\PatientHomeWindow.xaml.cs">
       <DependentUpon>PatientHomeWindow.xaml</DependentUpon>
@@ -255,21 +333,22 @@
     <Compile Include="View\PatientView\PatientHospitalPoll.xaml.cs">
       <DependentUpon>PatientHospitalPoll.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientView\PatientMainMenu.xaml.cs">
-      <DependentUpon>PatientMainMenu.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\PatientView\PatientMakeAppointmentFirst.xaml.cs">
       <DependentUpon>PatientMakeAppointmentFirst.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\PatientView\PatientMakeAppointmentSecond.xaml.cs">
-      <DependentUpon>PatientMakeAppointmentSecond.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PatientView\PatientMedicalRecord.xaml.cs">
       <DependentUpon>PatientMedicalRecord.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\RoomRenovationPage.xaml.cs">
+    <Compile Include="View\Manager\RoomRenovationPage.xaml.cs">
       <DependentUpon>RoomRenovationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PatientView\PatientPopularTimes.xaml.cs">
+      <DependentUpon>PatientPopularTimes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientView\PatientTherapies.xaml.cs">
+      <DependentUpon>PatientTherapies.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatientView\PopularTimesViewModel.cs" />
     <Compile Include="View\SecretaryHomeWindow.xaml.cs">
       <DependentUpon>SecretaryHomeWindow.xaml</DependentUpon>
     </Compile>
@@ -294,8 +373,14 @@
     <Compile Include="View\UserControls\EditMedRecUserControl.xaml.cs">
       <DependentUpon>EditMedRecUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\GenerateReportUserControl.xaml.cs">
+      <DependentUpon>GenerateReportUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserControls\HandlingAccountUserControl.xaml.cs">
       <DependentUpon>HandlingAccountUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\HandlingAppointmentUserControl.xaml.cs">
+      <DependentUpon>HandlingAppointmentUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\HandlingEmergencyUserControl.xaml.cs">
       <DependentUpon>HandlingEmergencyUserControl.xaml</DependentUpon>
@@ -312,12 +397,30 @@
     <Compile Include="View\UserControls\OrderEquipmentUserControl.xaml.cs">
       <DependentUpon>OrderEquipmentUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\PopUpUserControl.xaml.cs">
+      <DependentUpon>PopUpUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserControls\RemoveAppointementUserControl.xaml.cs">
       <DependentUpon>RemoveAppointementUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\RevisionOfRestUserControl.xaml.cs">
+      <DependentUpon>RevisionOfRestUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\SchedulingMeetingsUserControl.xaml.cs">
+      <DependentUpon>SchedulingMeetingsUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\SuggestedDelayUserControl.xaml.cs">
       <DependentUpon>SuggestedDelayUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VM\AddRoomWindowViewModel.cs" />
+    <Compile Include="VM\Commands.cs" />
+    <Compile Include="VM\DeleteRoomWindowViewModel.cs" />
+    <Compile Include="VM\EditRoomWindowViewModel.cs" />
+    <Compile Include="VM\GoBackCommand.cs" />
+    <Compile Include="VM\LogoutCommand.cs" />
+    <Compile Include="VM\MedicinePageViewModel.cs" />
+    <Compile Include="VM\ReviewPageViewModel.cs" />
+    <Compile Include="VM\RoomWindowViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -326,7 +429,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controller\AppointmentController.cs" />
+    <Compile Include="Controller\AppointmentManagementController.cs" />
     <Compile Include="Controller\MedicalRecordsController.cs" />
     <Compile Include="Controller\PatientController.cs" />
     <Compile Include="Controller\RoomController.cs" />
@@ -338,19 +441,20 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\AddMedicineWindow.xaml">
+    <Page Include="View\Manager\AddIngridientsWindow.xaml" />
+    <Page Include="View\Manager\AddMedicineWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AdvancedRenovationWindow.xaml">
+    <Page Include="View\Manager\AdvancedRenovationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\BasicRenovationWindow.xaml">
+    <Page Include="View\Manager\BasicRenovationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DeleteRoomWindow.xaml">
+    <Page Include="View\Manager\DeleteRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -382,6 +486,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\DoctorVacationViewWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DoctorVacationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -390,47 +498,67 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EditMedicineWindow.xaml">
+    <Page Include="View\Manager\DoctorReviewWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EditRoomWindow.xaml">
+    <Page Include="View\Manager\EditMedicineWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EquipmentPage.xaml">
+    <Page Include="View\Manager\EditRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EquipmentRelocationWindow.xaml">
+    <Page Include="View\Manager\EquipmentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AddRoomWindow.xaml">
+    <Page Include="View\Manager\EquipmentRelocationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\HandlingMedicalRecordsPage.xaml">
+    <Page Include="View\Manager\AddRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainPage.xaml">
+    <Page Include="View\Manager\HospitalReviewWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ManagerMainWindow.xaml">
+    <Page Include="View\Manager\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ManagerResources.xaml">
+    <Page Include="View\Manager\ManagerMainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ManagerRoomsWindow.xaml">
+    <Page Include="View\Manager\ManagerResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MedicinePage.xaml">
+    <Page Include="View\Manager\ManagerRoomsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\MedicinePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\MergeRoomsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\ReviewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Manager\SplitRoomWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientView\PatientAppointmentNote.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -438,15 +566,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientView\PatientDelayAppointment.xaml">
+    <Page Include="View\PatientView\PatientCalendar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientView\PatientCustomNotification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientView\PatientDelayAppointmentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PatientView\PatientDoctorPoll.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\PatientView\PatientGradingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -458,15 +590,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PatientView\PatientMainMenu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\PatientView\PatientMakeAppointmentFirst.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\PatientView\PatientMakeAppointmentSecond.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -474,7 +598,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\RoomRenovationPage.xaml">
+    <Page Include="View\Manager\RoomRenovationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientView\PatientPopularTimes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PatientView\PatientTherapies.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -510,7 +642,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UserControls\GenerateReportUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UserControls\HandlingAccountUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\HandlingAppointmentUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -534,7 +674,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UserControls\PopUpUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UserControls\RemoveAppointementUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\RevisionOfRestUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\SchedulingMeetingsUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -692,6 +844,72 @@
   <ItemGroup>
     <Resource Include="Resources\Data\IngridientsData.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\vacation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\schedule.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Data\MeetingData.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\icons8-hotel-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\icons8-hotel-building-30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\icons8-hotel-star-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\star.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\two-stars.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\stars.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\four.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\five.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\add-friend_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\bell_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\graph.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\medical-records %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\settings-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\medication.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\hospital_poll.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\doctor_poll.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\list.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\download %281%29.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -699,5 +917,8 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets'))" />
+    <Error Condition="!Exists('..\packages\Xamarin.Forms.5.0.0.2012\build\Xamarin.Forms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Forms.5.0.0.2012\build\Xamarin.Forms.props'))" />
+    <Error Condition="!Exists('..\packages\Xamarin.Forms.5.0.0.2012\build\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Forms.5.0.0.2012\build\Xamarin.Forms.targets'))" />
   </Target>
+  <Import Project="..\packages\Xamarin.Forms.5.0.0.2012\build\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.5.0.0.2012\build\Xamarin.Forms.targets')" />
 </Project>

@@ -15,9 +15,6 @@ using Controller;
 
 namespace hospital.View
 {
-    /// <summary>
-    /// Interaction logic for SecretaryHomeWindow.xaml
-    /// </summary>
     public partial class SecretaryHomeWindow : Window
     {
         public UserController uc;
@@ -28,6 +25,7 @@ namespace hospital.View
             this.DataContext = this;
             App app = Application.Current as App;
             uc = app.userController;
+            Console.WriteLine(DateTime.Now.ToString());
         }
 
         private void handlingAccount_Click(object sender, RoutedEventArgs e)
@@ -46,12 +44,13 @@ namespace hospital.View
             handlingMedRecordUserControl.Visibility = Visibility.Visible;
         }
 
-        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        private void btnUser_Click(object sender, RoutedEventArgs e)
         {
-            uc.CurentLoggedUser = null;
-            MainWindow mw = new MainWindow();
-            mw.Show();
-            this.Close();
+            if (AlertPopup.IsOpen == false)
+                AlertPopup.IsOpen = true;
+            else
+                AlertPopup.IsOpen = false;
+            
         }
 
         public string LoggedName {
@@ -78,6 +77,8 @@ namespace hospital.View
         }
         private void CloseAllUserControl()
         {
+            //popUpUserControl.Visibility= Visibility.Collapsed;
+
             handlingMedRecordUserControl.Visibility = Visibility.Collapsed;
             handlingMedRecordUserControl.addMedRecUserControl.Visibility = Visibility.Collapsed;
             handlingMedRecordUserControl.editMedRecUserControl.Visibility = Visibility.Collapsed;
@@ -88,8 +89,8 @@ namespace hospital.View
             handlingAccountUserControl.Visibility = Visibility.Collapsed;
 
             handlingAppointmentUserControl.Visibility = Visibility.Collapsed;
-            handlingAppointmentUserControl.removeAppointmentUserControl.Visibility = Visibility.Collapsed;
-            handlingAppointmentUserControl.delayAppointmentUserControl.Visibility = Visibility.Collapsed;
+            handlingAppointmentUserControl.makeAppointmentUserControl.Visibility = Visibility.Collapsed;
+            handlingAppointmentUserControl.editAppointmentUsercontrol.Visibility = Visibility.Collapsed;
 
             handlingEmergencyUserControl.Visibility = Visibility.Collapsed;
             handlingEmergencyUserControl.addGuestuserControl.Visibility = Visibility.Collapsed;
@@ -97,11 +98,20 @@ namespace hospital.View
 
             orderEquipmentUserControl.Visibility = Visibility.Collapsed;
 
+            generateReportUsercontrol.Visibility = Visibility.Collapsed;
+
+            revisionOfRestUserControl.Visibility = Visibility.Collapsed;
+
+            scheduleMeetingsUserControl.Visibility = Visibility.Collapsed;
+            
             btnhandlingAccount.BorderBrush = Brushes.Transparent;
             btnhandlingMedRecord.BorderBrush = Brushes.Transparent;
             btnAppointment.BorderBrush = Brushes.Transparent;
             btnEmergency.BorderBrush = Brushes.Transparent;
             btnOrder.BorderBrush = Brushes.Transparent;
+            btnVacation.BorderBrush = Brushes.Transparent;
+            btnMeetings.BorderBrush = Brushes.Transparent;
+            btnPdf.BorderBrush = Brushes.Transparent;
         }
 
         private void btnOrder_Click(object sender, RoutedEventArgs e)
@@ -110,6 +120,30 @@ namespace hospital.View
             btnOrder.BorderBrush = (Brush)(new BrushConverter().ConvertFrom("#c8d8e4"));
             btnOrder.BorderThickness = new Thickness(3, 0, 0, 0);
             orderEquipmentUserControl.Visibility = Visibility.Visible;
+        }
+
+        private void btnVacation_Click(object sender, RoutedEventArgs e)
+        {
+            CloseAllUserControl();
+            btnVacation.BorderBrush = (Brush)(new BrushConverter().ConvertFrom("#c8d8e4"));
+            btnVacation.BorderThickness = new Thickness(3, 0, 0, 0);
+            revisionOfRestUserControl.Visibility = Visibility.Visible;
+        }
+
+        private void btnMeetings_Click(object sender, RoutedEventArgs e)
+        {
+            CloseAllUserControl();
+            btnMeetings.BorderBrush = (Brush)(new BrushConverter().ConvertFrom("#c8d8e4"));
+            btnMeetings.BorderThickness = new Thickness(3, 0, 0, 0);
+            scheduleMeetingsUserControl.Visibility = Visibility.Visible;
+        }
+
+        private void btnPdf_Click(object sender, RoutedEventArgs e)
+        {
+            CloseAllUserControl();
+            btnPdf.BorderBrush = (Brush)(new BrushConverter().ConvertFrom("#c8d8e4"));
+            btnPdf.BorderThickness = new Thickness(3, 0, 0, 0);
+            generateReportUsercontrol.Visibility = Visibility.Visible;
         }
     }
 }

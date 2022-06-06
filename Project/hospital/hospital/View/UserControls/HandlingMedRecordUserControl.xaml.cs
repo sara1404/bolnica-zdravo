@@ -35,7 +35,7 @@ namespace hospital.View.UserControls
             InitializeComponent();
             this.DataContext = this;
             App app = Application.Current as App;
-            mc = app.mediicalRecordsController;
+            mc = app.medicalRecordsController;
             pc= app.patientController;
             dc = app.doctorController;
             Patients =  pc.FindAll();

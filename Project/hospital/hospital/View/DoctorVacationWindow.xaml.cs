@@ -3,6 +3,7 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,11 +24,12 @@ namespace hospital.View
     public partial class DoctorVacationWindow : Window
     {
         public ObservableCollection<Appointment> Appointments { get; set; }
+        public ObservableCollection<VacationRequest> Requests { get; set; }
         private CalendarDateRange invalidDates;
         private Doctor loggedInDoctor;
         private VacationRequestController vc;
         private UserController uc;
-        private AppointmentController ac;
+        private AppointmentManagementController ac;
         private DoctorController dc;
         
         public DoctorVacationWindow()
@@ -44,6 +46,16 @@ namespace hospital.View
             dpStartDate.BlackoutDates.Add(invalidDates);
             dpEndDate.BlackoutDates.Add(invalidDates);
             loggedInDoctor = dc.GetByUsername(uc.CurentLoggedUser.Username);
+            Requests = vc.FindAll();
+
+            ICollectionView vacationView = CollectionViewSource.GetDefaultView(vc.FindAll());
+            vacationView.Filter = VacationFilter;
+        }
+
+        private bool VacationFilter(object item)
+        {
+            VacationRequest request = item as VacationRequest;
+            return request.DoctorId.Equals(loggedInDoctor.Username);
         }
 
         private bool checkOverlapWithAppointments()
@@ -52,7 +64,8 @@ namespace hospital.View
             {
                 if (appointment.StartTime > dpStartDate.SelectedDate && appointment.StartTime < dpEndDate.SelectedDate)
                 {
-                    return true;
+                    MessageBox.Show("You have appointments at that time");
+                    return true;                 
                 }
             }
             return false;
@@ -67,11 +80,17 @@ namespace hospital.View
                     if (dpStartDate.SelectedDate > vacationRequest.StartDate && dpStartDate.SelectedDate < vacationRequest.EndDate
                         && dpEndDate.SelectedDate > vacationRequest.StartDate && dpEndDate.SelectedDate < vacationRequest.EndDate)
                     {
+                        MessageBox.Show("There is already a doctor of the same specialization on vacation at that time");
                         return true;
                     }
                 }
             }
             return false;
+        }
+        private void generateRequest()
+        {
+            VacationRequest newRequest = new VacationRequest((DateTime)dpStartDate.SelectedDate, (DateTime)dpEndDate.SelectedDate, (bool)cbHighPriority.IsChecked, tbNote.Text, uc.CurentLoggedUser.Username, -1);
+            vc.Create(newRequest);
         }
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
@@ -80,14 +99,12 @@ namespace hospital.View
             
             if(isOveralappingWithAppointments == false && cbHighPriority.IsChecked == true && dpStartDate.SelectedDate < dpEndDate.SelectedDate)
             {
-                VacationRequest newRequest = new VacationRequest((DateTime)dpStartDate.SelectedDate, (DateTime)dpEndDate.SelectedDate, (bool)cbHighPriority.IsChecked, tbNote.Text, uc.CurentLoggedUser.Username, -1);
-                vc.Create(newRequest);
+                generateRequest();
                 MessageBox.Show("High priority vacation request sent!");
             }
             else if(isOverlappingWithOtherDoctorWithSameSpecialization == false && isOveralappingWithAppointments == false && dpEndDate.SelectedDate != null && dpStartDate.SelectedDate != null && dpStartDate.SelectedDate < dpEndDate.SelectedDate)
             {
-                VacationRequest newRequest = new VacationRequest((DateTime)dpStartDate.SelectedDate, (DateTime)dpEndDate.SelectedDate, (bool)cbHighPriority.IsChecked, tbNote.Text, uc.CurentLoggedUser.Username, -1);
-                vc.Create(newRequest);
+                generateRequest();
                 MessageBox.Show("Vacation request sent!");
             }
         }
@@ -113,6 +130,12 @@ namespace hospital.View
             invalidDates.End = DateTime.Today.AddDays(2);
             dpStartDate.BlackoutDates.Add(invalidDates);
             dpEndDate.BlackoutDates.Add(invalidDates);
+        }
+
+        private void btnInfo_Click(object sender, RoutedEventArgs e)
+        {
+            if(tableRequests.SelectedIndex != 1)
+                new DoctorVacationViewWindow().Show();
         }
     }
 }

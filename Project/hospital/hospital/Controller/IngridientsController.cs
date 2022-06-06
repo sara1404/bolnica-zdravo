@@ -18,5 +18,9 @@ namespace hospital.Controller
         public List<string> FindAll() {
             return ingridientsService.FindAll();
         }
+
+        public void Create(string ingridient) {
+            ingridientsService.Create(ingridient);
+        }
     }
 }

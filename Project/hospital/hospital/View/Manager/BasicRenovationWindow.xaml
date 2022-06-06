@@ -1,0 +1,39 @@
+﻿<Window x:Class="hospital.View.BasicRenovationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:hospital.View"
+        mc:Ignorable="d"
+        Title="BasicRenovationWindow" Height="500" Width="800"
+        PreviewKeyDown="Close_Window">
+    <Window.Resources>
+        <ResourceDictionary Source="ManagerResources.xaml"></ResourceDictionary>
+    </Window.Resources>
+    <Grid Background="#1d1b1f">
+        <Button HorizontalAlignment="Left" Margin="724,10,0,0" VerticalAlignment="Top" Height="28" Width="51" Click="Start_Demo">
+            <AccessText>_DEMO</AccessText>
+        </Button>
+        <ListView x:Name="roomRenovationListView" HorizontalAlignment="Left" Height="332" Margin="75,48,0,0" VerticalAlignment="Top" Width="198" SelectionChanged="Validate">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Rooms"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Rectangle Fill="#bc84fc" HorizontalAlignment="Left" Height="51" Margin="435,51,0,0" Stroke="Black" VerticalAlignment="Top" Width="256"/>
+        <Label Content="Renovation duration in days:" HorizontalAlignment="Left" Margin="442,61,0,0" VerticalAlignment="Top" Width="177" Height="27" FontSize="13" Foreground="black"/>
+        <TextBox x:Name="durationRenovation" HorizontalAlignment="Left" Height="24" Margin="619,64,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49" PreviewKeyDown="Show_Appointments_Click"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+        <ListView HorizontalAlignment="Left" Height="151" Margin="435,102,0,0" VerticalAlignment="Top" Width="256" x:Name="renovationListView" SelectionChanged="Validate"/>
+        <Label Content="Renovation description:" HorizontalAlignment="Left" Margin="435,272,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.255,0.385" Width="154" Foreground="white"/>
+        <TextBox x:Name="descriptionInput" HorizontalAlignment="Left" Height="77" Margin="435,303,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="256" TextChanged="Validate"  FocusVisualStyle="{DynamicResource MyFocusVisual}"/>
+        <Button x:Name="ScheduleBtn" HorizontalAlignment="Left" Margin="213,413,0,0" VerticalAlignment="Top" Width="128" Height="35" Click="Schedule_Renovation_Click" Background="#bc84fc" FontSize="16"  FocusVisualStyle="{DynamicResource MyFocusVisual}">
+            <AccessText>_SAVE</AccessText>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="407,413,0,0" VerticalAlignment="Top" Width="128" Height="35" Click="Cancel_Renovation_Click" Background="#bc84fc" FontSize="16"  FocusVisualStyle="{DynamicResource MyFocusVisual}">
+            <AccessText>_CANCEL</AccessText>
+        </Button>
+       
+
+    </Grid>
+</Window>

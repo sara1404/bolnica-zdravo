@@ -1,0 +1,77 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:hospital.View.UserControls"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="hospital.View.UserControls.SchedulingMeetingsUserControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="530" d:DesignWidth="950">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="White">
+        <StackPanel>
+            <Border BorderBrush="gray" BorderThickness="2" Margin="0,40,0,0" Height="450" Width="750" CornerRadius="10">
+                <Grid>
+                    <Label FontSize="25" FontWeight="DemiBold" Margin="0,6,0,395" HorizontalAlignment="Center" Content="Scheduling meetings"/>
+                    <Grid Height="400" Width="740">
+                        <DataGrid x:Name="dateGridHandlingDoctors" Background="white" HorizontalContentAlignment="Center" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="330" Height="340" ItemsSource="{Binding Doctors}" IsReadOnly ="True" SelectionMode="Single" HorizontalAlignment="Left" AutoGenerateColumns="False" CanUserResizeColumns="false" CanUserResizeRows="false" Margin="14,50,0,10">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="First name"  Width="90"  Binding="{Binding Name}">
+                                    <DataGridTextColumn.HeaderStyle>
+                                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.HeaderStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Last name" Width="90" Binding="{Binding Surname}">
+                                    <DataGridTextColumn.HeaderStyle>
+                                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.HeaderStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Speciality" Width="70" Binding="{Binding Specialization}">
+                                    <DataGridTextColumn.HeaderStyle>
+                                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.HeaderStyle>
+                                </DataGridTextColumn>
+                                <DataGridTemplateColumn Header="    Call" Width="80" >
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="False"  Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Margin="2,0,2,0" HorizontalAlignment="Center" VerticalAlignment="Stretch" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <GroupBox x:Name="header" DockPanel.Dock="Right" Header="Meetings" Margin="400,40,10,0" BorderThickness="1" BorderBrush="Gray" FontSize="20" VerticalAlignment="Top" Width="330" Height="350">
+                            <Grid>
+                                <TextBlock TextWrapping="Wrap" Height="25" Text="Date" FontSize="15" FontWeight="DemiBold" Margin="32,14,0,248" HorizontalAlignment="Left" Width="67"/>
+                                <DatePicker x:Name="date" HorizontalAlignment="Left" Margin="149,15,0,0" FontSize="12" VerticalAlignment="Top" Width="139"/>
+                                <TextBlock TextWrapping="Wrap" Height="25" Text="Start time" FontSize="15" FontWeight="DemiBold" Margin="32,64,0,198" HorizontalAlignment="Left" Width="75"/>
+                                <TextBlock TextWrapping="Wrap" Height="25" Text="Meeting topic" FontSize="15" FontWeight="DemiBold" Margin="32,149,0,113" HorizontalAlignment="Left" Width="100"/>
+                                <TextBox x:Name="txtReason" BorderThickness="1" FontSize="12" HorizontalAlignment="Center" Margin="0,174,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="256" Height="73"/>
+                                <Button x:Name="btnSubmit"  Content="Submit"  VerticalAlignment="Top" Height="26" Width="75" FontSize="12"  Margin="209,258,28,0" Click="btnSubmit_Click"/>
+                                <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" FontSize="12"  Height="26"  Margin="32,258,0,0" Click="btnCancel_Click"/>
+                                <syncfusion:SfTimePicker x:Name="timePicker" AllowNull="True" HorizontalAlignment="Left" Height="23" FontSize="12" Margin="149,65,0,0" Value="12:00" VerticalAlignment="Top" Watermark="Pick a time" Width="139" />
+                                <TextBlock TextWrapping="Wrap" Height="25" Text="Room" FontSize="15" FontWeight="DemiBold" Margin="32,109,0,153" HorizontalAlignment="Left" Width="67"/>
+                                <ComboBox x:Name="cbRooms" FontSize="12" Margin="152,109,28,0" SelectionChanged="ComboBox_SelectionChanged" Height="20" VerticalAlignment="Top"/>
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
+                </Grid>
+            </Border>
+        </StackPanel>
+    </Grid>
+</UserControl>

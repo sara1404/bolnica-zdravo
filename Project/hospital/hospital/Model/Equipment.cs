@@ -11,5 +11,10 @@ namespace Model
             this.type = type;
             this.quantity = quantity;
         }
+
+        public override string ToString()
+        {
+            return type + " " + quantity;
+        }
     }
 }

@@ -20,6 +20,11 @@ namespace hospital.Repository
         public List<string> FindAll() {
             return ingridients;
         }
+
+        public void Create(string ingridient) {
+            ingridients.Add(ingridient);
+            WriteIngridientsData();
+        }
         public void LoadIngridientsData()
         {
             if (ingridientsFileHandler.Read() != null)
@@ -29,6 +34,10 @@ namespace hospital.Repository
                     ingridients.Add(ingridient);
                 }
             }
+        }
+
+        public void WriteIngridientsData() {
+            ingridientsFileHandler.Write(ingridients);
         }
     }
 }

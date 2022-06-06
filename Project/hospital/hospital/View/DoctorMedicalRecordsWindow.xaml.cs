@@ -27,7 +27,7 @@ namespace hospital.View
         private MedicalRecordsController mrc;
         private UserController uc;
         private PatientController pc;
-        private AppointmentController ac;
+        private AppointmentManagementController ac;
 
         private Doctor loggedInDoctor;
         private Patient selectedPatient;
@@ -41,7 +41,7 @@ namespace hospital.View
             this.DataContext = this;
             App app = Application.Current as App;
             dc = app.doctorController;
-            mrc = app.mediicalRecordsController;
+            mrc = app.medicalRecordsController;
             uc = app.userController;
             pc = app.patientController;
             ac = app.appointmentController;
@@ -55,12 +55,6 @@ namespace hospital.View
         private void cmbPatients_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedPatient = pc.FindById((string)cmbPatients.SelectedItem);
-            if( mrc.FindById(selectedPatient.RecordId) == null)
-            {
-                MedicalRecord medicalRecord = new MedicalRecord(selectedPatient.Username, "", loggedInDoctor.Username, BloodType.abPositive, "");
-                mrc.Create(medicalRecord);
-                selectedPatient.RecordId = medicalRecord.RecordId;
-            }
             tbAlergies.Text = mrc.FindById(selectedPatient.RecordId).Alergies;
             tbNotes.Text = mrc.FindById(selectedPatient.RecordId).Note;
             cmbBloodType.SelectedItem = mrc.FindById(selectedPatient.RecordId).BloodType;

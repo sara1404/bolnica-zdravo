@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-[{"StartDate":"2022-05-19T00:00:00","EndDate":"2022-05-26T00:00:00","IsHighPriority":false,"Note":"moram da odmorim od budala","Status":0,"DoctorId":"Skabo","Id":1}]
-=======
-[{"StartDate":"2022-05-18T00:00:00","EndDate":"2022-05-26T00:00:00","IsHighPriority":true,"Note":"eto zato","Status":0,"DoctorId":"Skabo","Id":1}]
->>>>>>> feature/hospital-poll
+[{"StartDate":"2022-06-09T00:00:00","EndDate":"2022-06-11T00:00:00","IsHighPriority":true,"Note":"asdf","Status":2,"DoctorId":"Skabo","Id":1,"VacationStatus":"Rejected"},{"StartDate":"2022-06-20T00:00:00","EndDate":"2022-06-23T00:00:00","IsHighPriority":true,"Note":"","Status":0,"DoctorId":"Skabo","Id":2,"VacationStatus":"Waiting"}]

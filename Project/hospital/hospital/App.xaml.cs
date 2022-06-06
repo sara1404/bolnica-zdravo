@@ -23,27 +23,29 @@ namespace hospital
     /// </summary>
     public partial class App : Application
     {
-        public RoomRepository roomRepository;
-        public ScheduledRelocationRepository scheduledRelocationRepository;
-        public ScheduledBasicRenovationRepository scheduledBasicRenovationRepository;
-        public ScheduledAdvancedRenovationRepository scheduledAdvancedRenovationRepository;
+        public IRoomRepository roomRepository;
+        public IScheduledRelocationRepository scheduledRelocationRepository;
+        public IScheduledBasicRenovationRepository scheduledBasicRenovationRepository;
+        public IScheduledAdvancedRenovationRepository scheduledAdvancedRenovationRepository;
         public NotificationRepository notificationRepository;
         public RoomController roomController { get; set; }
         public PatientController patientController { get; set; }
-        public AppointmentController appointmentController { get; set; }
+        public AppointmentManagementController appointmentController { get; set; }
+        public AvailableAppointmentController availableAppointmentController { get; set; }
         public NotificationController notificationController { get; set; }
-        public MedicalRecordsController mediicalRecordsController { get; set; }
+        public MedicalRecordsController medicalRecordsController { get; set; }
         public DoctorController doctorController { get; set; }
         public UserController userController { get; set; }
         public OrderController orderController { get; set; }
+        public MeetingController meetingController { get; set; }
         public ScheduledRelocationController scheduledRelocationController { get; set; }
         public ScheduledBasicRenovationController scheduledBasicRenovationController { get; set; }
         public ScheduledAdvancedRenovationController scheduledAdvancedRenovationController { get; set; }
         public MedicineController medicineController { get; set; }
         public VacationRequestController vacationRequestController { get; set; }
         public InvalidMedicineReportController invalidMedicineReportController { get; set; }
-
         public EmergencyController emergencyController { get; set; }
+        public RecommendedAppointmentController recommendedAppointmentController { get; set; }
 
         public PollController pollBlueprintController { get; set; }
 
@@ -54,17 +56,15 @@ namespace hospital
         Thread orderThread;
         public App()
         {
+            // consider sorting App() so that it contains all repositories, file handlers, services and controllers IN THAT ORDER
             UserRepository userRepository = new UserRepository();
             UserService userService = new UserService(userRepository);
             userController = new UserController(userService);
 
-            NotificationRepository notificationRepository = new NotificationRepository();
-            NotificationService notificationService = new NotificationService(notificationRepository);
-            notificationController = new NotificationController(notificationService);
-
             DoctorRepository doctorRepository = new DoctorRepository();
             DoctorService doctorService = new DoctorService(doctorRepository);
             doctorController = new DoctorController(doctorService);
+
 
             AppointmentRepository appointmentRepository = new AppointmentRepository();
             scheduledBasicRenovationRepository = new ScheduledBasicRenovationRepository();
@@ -72,12 +72,13 @@ namespace hospital
 
             scheduledBasicRenovationRepository = new ScheduledBasicRenovationRepository();
             scheduledAdvancedRenovationRepository = new ScheduledAdvancedRenovationRepository();
-            TimeSchedulerService timeSchedulerService = new TimeSchedulerService(appointmentRepository, scheduledBasicRenovationRepository, scheduledAdvancedRenovationRepository);
+            TimeSchedulerRepository timeSchedulerRepository = new TimeSchedulerRepository(appointmentRepository, scheduledBasicRenovationRepository, scheduledAdvancedRenovationRepository);
+            TimeSchedulerService timeSchedulerService = new TimeSchedulerService(timeSchedulerRepository);
 
             ScheduledBasicRenovationService scheduledBasicRenovationService = new ScheduledBasicRenovationService(scheduledBasicRenovationRepository, timeSchedulerService);
             scheduledBasicRenovationController = new ScheduledBasicRenovationController(scheduledBasicRenovationService);
            // ScheduledBasicRenovationService scheduledBasicRenovationService = new ScheduledBasicRenovationService(scheduledBasicRenovationRepository, timeSchedulerService);
-            scheduledBasicRenovationController = new ScheduledBasicRenovationController(scheduledBasicRenovationService);
+           // scheduledBasicRenovationController = new ScheduledBasicRenovationController(scheduledBasicRenovationService);
 
             roomRepository = new RoomRepository();
             RoomService roomService = new RoomService(roomRepository, appointmentRepository, scheduledBasicRenovationService);
@@ -93,11 +94,22 @@ namespace hospital
             OrderService orderService = new OrderService(orderRepository,roomRepository);
             orderController = new OrderController(orderService);
 
-            AppointmentService appointmentService = new AppointmentService(appointmentRepository, doctorRepository, userController, notificationRepository, doctorService,roomService);
-            appointmentController = new AppointmentController(appointmentService);
+            NotificationRepository notificationRepository = new NotificationRepository();
+            NotificationService notificationService = new NotificationService(notificationRepository);
+            notificationController = new NotificationController(notificationService);
+
+
+            AppointmentManagementService appointmentService = new AppointmentManagementService(appointmentRepository);
+            MeetingRepository meetingRepository = new MeetingRepository();
+            MeetingService meetingService = new MeetingService(meetingRepository);
+            meetingController = new MeetingController(meetingService, notificationService);
+
+            appointmentController = new AppointmentManagementController(appointmentService);
+            AvailableAppointmentService availableAppointmentService = new AvailableAppointmentService(appointmentService, doctorRepository, meetingService);
+            availableAppointmentController = new AvailableAppointmentController(availableAppointmentService);
 
             MedicalRecordsService medicalRecordsService = new MedicalRecordsService(medicalRecordsRepository);
-            mediicalRecordsController = new MedicalRecordsController(medicalRecordsService);
+            medicalRecordsController = new MedicalRecordsController(medicalRecordsService);
 
 
             ScheduledAdvancedRenovationService scheduledAdvancedRenovationService = new ScheduledAdvancedRenovationService(scheduledAdvancedRenovationRepository, timeSchedulerService, roomService);
@@ -112,20 +124,24 @@ namespace hospital
             medicineController = new MedicineController(medicineService);
 
             VacationRequestRepository vacationRequestRepository = new VacationRequestRepository();
-            VacationRequestService vacationRequestService = new VacationRequestService(vacationRequestRepository);
+            VacationRequestService vacationRequestService = new VacationRequestService(vacationRequestRepository,notificationRepository);
             vacationRequestController = new VacationRequestController(vacationRequestService);
 
 
-            InvalidMedicineReportRepository invalidMedicineReportRepository = new InvalidMedicineReportRepository();
+            InvalidMedicineReportRepository invalidMedicineReportRepository = new InvalidMedicineReportRepository(medicineRepository);
             InvalidMedicineReportService invalidMedicineReportService = new InvalidMedicineReportService(invalidMedicineReportRepository);
             invalidMedicineReportController = new InvalidMedicineReportController(invalidMedicineReportService);
-            
 
-            EmergencyService emergencyService = new EmergencyService(appointmentService, notificationRepository, doctorService, roomService);
+            
+            RecommendedAppointmentService recommendedAppointmentService = new RecommendedAppointmentService(appointmentService, notificationRepository, doctorRepository, availableAppointmentService);
+            recommendedAppointmentController = new RecommendedAppointmentController(recommendedAppointmentService);
+
+            EmergencyService emergencyService = new EmergencyService(appointmentService, notificationRepository, doctorService, roomService, recommendedAppointmentService, availableAppointmentService);
             emergencyController = new EmergencyController(emergencyService);
 
+
             PollBlueprintRepository pollBlueprintRepository = new PollBlueprintRepository();
-            PollResultRepository pollResultRepository = new PollResultRepository();
+            PollResultRepository pollResultRepository = new PollResultRepository(appointmentRepository);
             PollService pollBlueprintService = new PollService(pollBlueprintRepository, pollResultRepository);
             pollBlueprintController = new PollController(pollBlueprintService);
 
@@ -142,7 +158,7 @@ namespace hospital
             scheduledAdvancedRenovationRepository.LoadRenovationData();
             ingridientsRepository.LoadIngridientsData();
 
-            orderThread = new Thread(orderService.orderTracker);
+            orderThread = new Thread(orderService.OrderTracker);
             orderThread.Start();
 
             Notifier = new Notifier(cfg =>
@@ -160,17 +176,6 @@ namespace hospital
                 cfg.Dispatcher = Application.Current.Dispatcher;
             });
             SystemTimer systemTimer = new SystemTimer(scheduledAdvancedRenovationService, scheduledBasicRenovationService, scheduledRelocationService);
-        }
-
-        public void PatientBackToMainMenu()
-        {
-            foreach (Window window in Application.Current.Windows)
-            {
-                if (window.GetType() == typeof(PatientHomeWindow))
-                {
-                    (window as PatientHomeWindow).Main.Content = new PatientMainMenu();
-                }
-            }
         }
 
         private void App_Closing(object sender, ExitEventArgs e)

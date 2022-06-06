@@ -30,7 +30,7 @@ namespace hospital.View.UserControls
         public ObservableCollection<Patient> Patients { get; set; }
         public ObservableCollection<Specialization> Specializations { get; set; }
         private PatientController _patientController;
-        private AppointmentController _appointmentController;
+        private AppointmentManagementController _appointmentController;
         private EmergencyController _emergencyController;
 
         private Notifier Notifier { get; set; }
@@ -59,7 +59,7 @@ namespace hospital.View.UserControls
             {
                 try
                 {
-                    _emergencyController.tryMakeEmergencyAppointment(cmbPatient.Text, GetSpecialization(cmbSpecialization.Text),(bool)cbOperation.IsChecked);
+                    _emergencyController.TryMakeEmergencyAppointment(cmbPatient.Text, GetSpecialization(cmbSpecialization.Text),(bool)cbOperation.IsChecked);
                     Notifier.ShowSuccess("Successfully scheduled an emergency.");
                 }catch(Exception ex)
                 {
@@ -92,6 +92,16 @@ namespace hospital.View.UserControls
                 default :
                     return Specialization.Oncologist;
             }
+        }
+
+        public void ResetFields()
+        {
+            cmbPatient.Text = "";
+            cmbSpecialization.Text = "";
+            cbOperation.IsChecked = false;
+            btnShowRec.Visibility= Visibility.Collapsed;
+            err.Visibility= Visibility.Collapsed;
+
         }
         private bool isValidate()
         {
@@ -127,7 +137,7 @@ namespace hospital.View.UserControls
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Visibility = Visibility.Collapsed;
+            ResetFields();
         }
 
         private void cmbSpecialization_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -191,17 +201,17 @@ namespace hospital.View.UserControls
         private void SetOldValueOnButton(string button, List<Appointment> appointments)
         {
             if (button == "old1")
-                suggestedDelayUserControl.old1.Text = "Patient: " + appointments[0].patientUsername + "\n" + "Doctor: " + appointments[0].doctorUsername + "\n" + appointments[0].StartTime;
+                suggestedDelayUserControl.old1.Text = "Patient: " + appointments[0].PatientUsername + "\n" + "Doctor: " + appointments[0].DoctorUsername + "\n" + appointments[0].StartTime;
             else if (button == "old2")
-                suggestedDelayUserControl.old2.Text = "Patient: " + appointments[1].patientUsername + "\n" + "Doctor: " + appointments[1].doctorUsername + "\n" + appointments[1].StartTime;
+                suggestedDelayUserControl.old2.Text = "Patient: " + appointments[1].PatientUsername + "\n" + "Doctor: " + appointments[1].DoctorUsername + "\n" + appointments[1].StartTime;
             else if (button == "old3")
-                suggestedDelayUserControl.old3.Text = "Patient: " + appointments[2].patientUsername + "\n" + "Doctor: " + appointments[2].doctorUsername + "\n" + appointments[2].StartTime;
+                suggestedDelayUserControl.old3.Text = "Patient: " + appointments[2].PatientUsername + "\n" + "Doctor: " + appointments[2].DoctorUsername + "\n" + appointments[2].StartTime;
             else if (button == "new1")
-                suggestedDelayUserControl.new1.Text = "Patient: " + appointments[0].patientUsername + "\n" + "Doctor: " + appointments[0].doctorUsername + "\n" + appointments[0].StartTime;
+                suggestedDelayUserControl.new1.Text = "Patient: " + appointments[0].PatientUsername + "\n" + "Doctor: " + appointments[0].DoctorUsername + "\n" + appointments[0].StartTime;
             else if (button == "new2")
-                suggestedDelayUserControl.new2.Text = "Patient: " + appointments[1].patientUsername + "\n" + "Doctor: " + appointments[1].doctorUsername + "\n" + appointments[1].StartTime;
+                suggestedDelayUserControl.new2.Text = "Patient: " + appointments[1].PatientUsername + "\n" + "Doctor: " + appointments[1].DoctorUsername + "\n" + appointments[1].StartTime;
             else if (button == "new3")
-                suggestedDelayUserControl.new3.Text = "Patient: " + appointments[2].patientUsername + "\n" + "Doctor: " + appointments[2].doctorUsername + "\n" + appointments[2].StartTime;
+                suggestedDelayUserControl.new3.Text = "Patient: " + appointments[2].PatientUsername + "\n" + "Doctor: " + appointments[2].DoctorUsername + "\n" + appointments[2].StartTime;
         }
 
 

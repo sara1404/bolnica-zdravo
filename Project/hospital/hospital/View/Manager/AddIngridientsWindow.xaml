@@ -1,0 +1,25 @@
+﻿<Window x:Class="hospital.View.AddIngridientsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
+        Title="AddIngridientsWindow" Height="350" Width="500">
+    <Window.Resources>
+        <ResourceDictionary Source="ManagerResources.xaml"></ResourceDictionary>
+    </Window.Resources>
+    <Grid Background="#1d1b1f">
+        <Label Content="Add new ingridients" HorizontalAlignment="Left" Height="38" Margin="170,24,0,0" VerticalAlignment="Top" Width="282" FontSize="16"/>
+
+        <Label Content="Ingridients:" HorizontalAlignment="Left" Height="31" Margin="108,113,0,0" VerticalAlignment="Top" Width="125" FontSize="16"/>
+        <TextBox x:Name="newIngridients" HorizontalAlignment="Left" Margin="216,113,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="166" Height="71"/>
+        <Button Margin="108,247,286,45" Click="Add_New_Ingridients">
+            <AccessText>_SAVE</AccessText>
+        </Button>
+        <Button Margin="276,247,118,45" Click="Cancel_Add_Ingridients">
+            <AccessText>_CANCEL</AccessText>
+        </Button>
+
+
+    </Grid>
+</Window>

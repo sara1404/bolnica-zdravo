@@ -6,16 +6,17 @@ using System.Collections.ObjectModel;
 using Model;
 using hospital.Service;
 using hospital.Model;
+using hospital.Repository;
 
 namespace Service
 {
     public class RoomService
     {
-        private readonly RoomRepository roomRepository;
+        private readonly IRoomRepository roomRepository;
         private readonly AppointmentRepository _appointmentRepository;
         private readonly ScheduledBasicRenovationService _basicRenovation;
 
-        public RoomService(RoomRepository roomRepository, AppointmentRepository appointmentRepository, ScheduledBasicRenovationService basicRenovation)
+        public RoomService(IRoomRepository roomRepository, AppointmentRepository appointmentRepository, ScheduledBasicRenovationService basicRenovation)
         {
             this.roomRepository = roomRepository;
             this._appointmentRepository = appointmentRepository;
@@ -30,26 +31,30 @@ namespace Service
 
         public Room FindRoomById(String id)
         {
-            return roomRepository.FindRoomById(id);
+            return roomRepository.FindById(id);
         }
 
         public Room FindRoomByName(string name) {
-            return roomRepository.FindRoomByName(name);
+            return roomRepository.FindByName(name);
         }
 
         public Room FindRoomByPurpose(string purpose) {
-            return roomRepository.FindRoomByPurpose(purpose);
+            return roomRepository.FindByPurpose(purpose);
+        }
+        public List<Room> FindRoomsByPurpose(string purpose)
+        {
+            return roomRepository.FindRoomsByPurpose(purpose);
         }
 
-        public List<Room> FindRoomsByEquipmentType(string type) {
+        public ObservableCollection<Room> FindRoomsByEquipmentType(string type) {
             return roomRepository.FindRoomsByEquipmentType(type);
         }
 
-        public List<Room> FindRoomsByEquipmentQuantity(int quantity) {
+        public ObservableCollection<Room> FindRoomsByEquipmentQuantity(int quantity) {
             return roomRepository.FindRoomsByEquipmentQuantity(quantity);
         }
 
-        public List<Room> FindRoomsByEquipmentTypeAndQuantity(string type, int quantity) {
+        public ObservableCollection<Room> FindRoomsByEquipmentTypeAndQuantity(string type, int quantity) {
             return roomRepository.FindRoomsByEquipmentTypeAndQuantity(type, quantity);
         }
         public ref ObservableCollection<Room> FindAll()
@@ -86,7 +91,7 @@ namespace Service
                 bool isBussy = false;
                 foreach(Appointment appointment in _appointmentRepository.FindAll())
                 {
-                    if (dateTime == appointment.StartTime && appointment.roomId == room.id)
+                    if (dateTime == appointment.StartTime && appointment.RoomId == room.id)
                     {
                         isBussy = true;
                         break;

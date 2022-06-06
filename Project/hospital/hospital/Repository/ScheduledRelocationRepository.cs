@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace hospital.Repository
 {
-    public class ScheduledRelocationRepository
+    public class ScheduledRelocationRepository : IScheduledRelocationRepository
     {
         ScheduledRelocationFileHandler scheduledRelocationFileHandler;
         List<ScheduledRelocation> relocations;

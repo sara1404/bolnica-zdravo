@@ -1,4 +1,5 @@
 using FileHandler;
+using hospital.Repository;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Windows;
 
 namespace Repository
 {
-    public class RoomRepository
+    public class RoomRepository : IRoomRepository
     {
         ObservableCollection<Room> rooms;
 
@@ -22,7 +23,7 @@ namespace Repository
             rooms.Add(room);
         }
 
-        public Room FindRoomById(string id)
+        public Room FindById(string id)
         {
             foreach (Room room in rooms) {
                 if (room.id.Equals(id))
@@ -31,7 +32,7 @@ namespace Repository
             return null;
         }
 
-        public Room FindRoomByName(string name) {
+        public Room FindByName(string name) {
             foreach (Room room in rooms)
             {
                 if (room._Name.Equals(name))
@@ -40,7 +41,7 @@ namespace Repository
             return null;
         }
 
-        public Room FindRoomByPurpose(string purpose) {
+        public Room FindByPurpose(string purpose) {
             foreach (Room room in rooms)
             {
                 if (room._Purpose.Equals(purpose))
@@ -48,9 +49,19 @@ namespace Repository
             }
             return null;
         }
+        public List<Room> FindRoomsByPurpose(string purpose)
+        {
+            List<Room> retVal = new List<Room>();
+            foreach (Room room in rooms)
+            {
+                if (room._Purpose.Equals(purpose))
+                    retVal.Add(room);
+            }
+            return retVal;
+        }
 
-        public List<Room> FindRoomsByEquipmentType(string type) {
-            List<Room> filteredRooms = new List<Room>();
+        public ObservableCollection<Room> FindRoomsByEquipmentType(string type) {
+            ObservableCollection<Room> filteredRooms = new ObservableCollection<Room>();
             foreach (Room room in rooms) {
                 foreach (Equipment eq in room.equipment) {
                     if (eq.type.Contains(type))
@@ -61,8 +72,8 @@ namespace Repository
         }
 
 
-        public List<Room> FindRoomsByEquipmentQuantity(int quantity) {
-            List<Room> filteredRooms = new List<Room>();
+        public ObservableCollection<Room> FindRoomsByEquipmentQuantity(int quantity) {
+            ObservableCollection<Room> filteredRooms = new ObservableCollection<Room>();
             foreach (Room room in rooms)
             {
                 if (RoomHasEnoughEquipment(quantity, room)) filteredRooms.Add(room);
@@ -80,8 +91,8 @@ namespace Repository
             return false;
         }
 
-        public List<Room> FindRoomsByEquipmentTypeAndQuantity(string type, int quantity) {
-            List<Room> filteredRooms = new List<Room>();
+        public ObservableCollection<Room> FindRoomsByEquipmentTypeAndQuantity(string type, int quantity) {
+            ObservableCollection<Room> filteredRooms = new ObservableCollection<Room>();
             foreach (Room room in rooms)
             {
                 foreach (Equipment eq in room.equipment)

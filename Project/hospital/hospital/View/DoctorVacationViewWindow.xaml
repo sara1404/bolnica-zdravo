@@ -1,0 +1,17 @@
+﻿<Window x:Class="hospital.View.DoctorVacationViewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:hospital.View"
+        mc:Ignorable="d"
+        Title="DoctorVacationViewWindow" Height="450" Width="450">
+    <Grid>
+        <Label Content="Vacation request info" HorizontalAlignment="Left" FontWeight="ExtraBold" FontSize="22" Height="42" Margin="10,10,0,0" VerticalAlignment="Top" Width="247"/>
+        <Label Content="Status:" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" Width="92"/>
+        <Label x:Name="lbStatus" Content="Label" HorizontalAlignment="Left" Margin="102,52,0,0" VerticalAlignment="Top"/>
+        <Label Content="Note:" HorizontalAlignment="Left" Margin="10,83,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbNote" IsEnabled="False" HorizontalAlignment="Left" Height="149" Margin="102,83,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="294"/>
+
+    </Grid>
+</Window>

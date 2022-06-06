@@ -36,5 +36,9 @@ namespace Controller
         {
             return vacationRequestService.DeleteById(id);
         }
+        public void FinishRequest(string resultRequest, int requestId)
+        {
+            vacationRequestService.FinishRequest(resultRequest,requestId);
+        }
     }
 }

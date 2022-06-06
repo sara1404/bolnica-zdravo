@@ -1,4 +1,5 @@
 ﻿using Controller;
+using hospital.View.PatientView;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace hospital.View
     /// </summary>
     public partial class PatientAppointmentsPage : Page
     {
-        private AppointmentController ac;
+        private AppointmentManagementController ac;
         private PatientController pc;
         private UserController uc;
         private App app;
@@ -44,6 +45,10 @@ namespace hospital.View
             User current = app.userController.CurentLoggedUser;
             Appointments = ac.GetAppointments();
 
+            btnLeaveNote.IsEnabled = false;
+            btnCancel.IsEnabled = false;
+            btnDelay.IsEnabled = false;
+
             ICollectionView appointmentsView = CollectionViewSource.GetDefaultView(ac.GetAppointments());
             appointmentsView.Filter = UserFilter;
         }
@@ -55,11 +60,6 @@ namespace hospital.View
             return appointment.PatientUsername.Equals(current.Username);
         }
 
-        private void btnBack_Click(object sender, RoutedEventArgs e)
-        {
-            app.PatientBackToMainMenu();
-        }
-
         private void btnDelay_Click(object sender, RoutedEventArgs e)
         {
             Appointment selectedAppointment = (Appointment)appointmentTable.SelectedItem;
@@ -67,11 +67,22 @@ namespace hospital.View
             {
                 if (ac.CanBeDelayed(selectedAppointment))
                 {
-                    new PatientDelayAppointment(selectedAppointment).Show();
+                    GoToDelayPage(selectedAppointment);
                 }
                 else
                 {
                     MessageBox.Show("You can't delay an appointment now!");
+                }
+            }
+        }
+
+        private void GoToDelayPage(Appointment appointment)
+        {
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(PatientHomeWindow))
+                {
+                    (window as PatientHomeWindow).Main.Content = new PatientDelayAppointmentPage(appointment);
                 }
             }
         }
@@ -100,7 +111,37 @@ namespace hospital.View
                     pc.BlockPatient(uc.CurentLoggedUser.Username);
                     LogoutUser();
                 }
-                ac.DeleteAppointment(Convert.ToInt32(appointmentTable.SelectedItem.ToString()));
+                ac.DeleteAppointment((appointmentTable.SelectedItem as Appointment).Id);
+            }
+        }
+
+        private void GoToLeaveNotePage()
+        {
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(PatientHomeWindow))
+                {
+                    (window as PatientHomeWindow).Main.Content = new PatientAppointmentNote(appointmentTable.SelectedItem as Appointment);
+                }
+            }
+        }
+
+        private void btnLeaveNote_Click(object sender, RoutedEventArgs e)
+        {
+            if(appointmentTable.SelectedItem != null && (appointmentTable.SelectedItem as Appointment).StartTime <= DateTime.Now)
+            {
+                GoToLeaveNotePage();
+            }
+        }
+
+        private void appointmentTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(appointmentTable.SelectedItem != null)
+            {
+                Appointment selectedAppointment = (Appointment)appointmentTable.SelectedItem;
+                btnDelay.IsEnabled = ac.CanBeDelayed(selectedAppointment);
+                btnLeaveNote.IsEnabled = selectedAppointment.StartTime <= DateTime.Now;
+                btnCancel.IsEnabled = selectedAppointment.StartTime >= DateTime.Now;
             }
         }
     }

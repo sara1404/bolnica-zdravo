@@ -24,16 +24,15 @@ using hospital.Controller;
 
 namespace hospital.View.UserControls
 {
-    /// <summary>
-    /// Interaction logic for DelayAppointmentUserControl.xaml
-    /// </summary>
     public partial class DelayAppointmentUserControl : UserControl
     {
         private PatientController pc;
-        private AppointmentController ac;
+        private AppointmentManagementController ac;
         private DoctorController dc;
         private NotificationController nc;
         private ScheduledBasicRenovationController sbrc;
+        private RecommendedAppointmentController rc;
+        private AvailableAppointmentController aac;
         public ObservableCollection<Patient> Patients { get; set; }
         public ObservableCollection<Doctor> Doctors { get; set; }
         public DelayAppointmentUserControl()
@@ -48,6 +47,8 @@ namespace hospital.View.UserControls
             sbrc = app.scheduledBasicRenovationController;
             ac = app.appointmentController;
             dc = app.doctorController;
+            rc = app.recommendedAppointmentController;
+            aac = app.availableAppointmentController;
             Patients = pc.FindAll();
             Doctors = dc.GetDoctors();
         }
@@ -72,58 +73,24 @@ namespace hospital.View.UserControls
 
         private bool isValidate()
         {
-            bool[] isCorrected = new bool[5];
+            bool[] isCorrected = new bool[2];
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 2; i++)
             {
                 isCorrected[i] = true;
             }
-            //username
-            if (cmbUsername.Text.Equals(""))
+            if (newDate.Text.Equals(""))
             {
-                errUsername.Text = "Choose one option";
+                errNewDate.Text = "Choose one date";
                 isCorrected[0] = false;
             }
             else
             {
-                errUsername.Text = "";
+                errNewDate.Text = "";
                 isCorrected[0] = true;
             }
-            //date
-            if (date.Text.Equals(""))
-            {
-                errDate.Text = "Choose one date";
-                isCorrected[2] = false;
-            }
-            else
-            {
-                errDate.Text = "";
-                isCorrected[2] = true;
-            }
-            //time
-            if (txtTime.Text.Equals(""))
-            {
-                errTime.Text = "Must be filled";
-                isCorrected[3] = false;
-            }
-            else
-            {
-                errTime.Text = "";
-                isCorrected[3] = true;
-            }
-            //newdate
-            if (newDate.Text.Equals(""))
-            {
-                errNewDate.Text = "Choose one date";
-                isCorrected[1] = false;
-            }
-            else
-            {
-                errNewDate.Text = "";
-                isCorrected[1] = true;
-            }
             //newtime
-            if (txtNewTime.Text.Equals(""))
+            /*if (txtNewTime.Text.Equals(""))
             {
                 errNewTime.Text = "Must be filled";
                 isCorrected[4] = false;
@@ -132,10 +99,10 @@ namespace hospital.View.UserControls
             {
                 errNewTime.Text = "";
                 isCorrected[4] = true;
-            }
+            }*/
 
 
-            return (isCorrected[0] && isCorrected[1] && isCorrected[2] && isCorrected[3] && isCorrected[4]);
+            return (isCorrected[0] && isCorrected[1]);
         }
 
         private void cmbUsername_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -167,20 +134,15 @@ namespace hospital.View.UserControls
 
         }
 
-        private void btnDelay_Click(object sender, RoutedEventArgs e)
-        {
-            this.Visibility = Visibility.Collapsed;
-        }
-
         private void btnRecTwo_Click(object sender, RoutedEventArgs e)
         {
-            ac.tryChangeAppointment(CurrentAppointment, (DateTime)newDate.SelectedDate, ac.RecommendedTwo.StartTime.ToString().Split(' ')[1]);
+            rc.tryChangeAppointment(CurrentAppointment, (DateTime)newDate.SelectedDate, rc.RecommendedTwo.StartTime.ToString().Split(' ')[1]);
             this.Visibility = Visibility.Collapsed;
             cmbUsername.Text = "";
             date.Text = "";
-            txtTime.Text = "";
+            txtTime.Value = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,12,0,0);
             newDate.Text = "";
-            txtNewTime.Text = "";
+            txtNewTime.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 12, 0, 0);
             errNewDate.Text = "";
             errNewTime.Text = "";
             errDate.Text = "";
@@ -190,13 +152,13 @@ namespace hospital.View.UserControls
 
         private void btnRecOne_Click(object sender, RoutedEventArgs e)
         {
-            ac.tryChangeAppointment(CurrentAppointment, (DateTime)newDate.SelectedDate, ac.RecommendedOne.StartTime.ToString().Split(' ')[1]);
+            rc.tryChangeAppointment(CurrentAppointment, (DateTime)newDate.SelectedDate, rc.RecommendedOne.StartTime.ToString().Split(' ')[1]);
             this.Visibility = Visibility.Collapsed;
             cmbUsername.Text = "";
             date.Text = "";
-            txtTime.Text = "";
+            txtTime.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 12, 0, 0);
             newDate.Text = "";
-            txtNewTime.Text = "";
+            txtNewTime.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 12, 0, 0);
             errNewDate.Text = "";
             errNewTime.Text = "";
             errDate.Text = "";
@@ -210,19 +172,19 @@ namespace hospital.View.UserControls
             {
                 btnShowRec.Visibility = Visibility.Collapsed;
                 notFree.Text = "";
-                if (txtNewTime.Text.Split(':')[0].Equals("6") && txtNewTime.Text.Split(':')[1].Equals("30"))
+                if (((DateTime)txtNewTime.Value).Hour.Equals("6") && ((DateTime)txtNewTime.Value).Minute.Equals("30"))
                     btnRecOne.Visibility = Visibility.Collapsed;
                 else
                     btnRecOne.Visibility = Visibility.Visible;
-                if (txtNewTime.Text.Split(':')[0].Equals("7") && txtNewTime.Text.Split(':')[1].Equals("00"))
+                if (((DateTime)txtNewTime.Value).Hour.Equals("7") && ((DateTime)txtNewTime.Value).Minute.Equals("00"))
                     btnRecTwo.Visibility = Visibility.Collapsed;
                 else
                     btnRecTwo.Visibility = Visibility.Visible;
-                ObservableCollection<Appointment> apointments = ac.GetFreeAppointmentsByDateAndDoctor((DateTime)newDate.SelectedDate, CurrentAppointment.doctorUsername,cmbUsername.Text);
-                ac.findFreeForward(apointments, txtNewTime.Text.Split(':')[0], txtNewTime.Text.Split(':')[1]);
-                ac.findFreeBack(apointments, txtNewTime.Text.Split(':')[0], txtNewTime.Text.Split(':')[1]);
-                btnRecOne.Content = "Doctor: " + dc.GetByUsername(ac.RecommendedOne.doctorUsername) + "\n" + ac.RecommendedOne.StartTime;
-                btnRecTwo.Content = "Doctor: " + dc.GetByUsername(ac.RecommendedTwo.doctorUsername) + "\n" + ac.RecommendedTwo.StartTime;
+                ObservableCollection<Appointment> apointments = aac.GetFreeAppointmentsByDateAndDoctor((DateTime)newDate.SelectedDate, CurrentAppointment.DoctorUsername,cmbUsername.Text);
+                rc.FindFreeForward(apointments,(DateTime) txtNewTime.Value);
+                rc.FindFreeBack(apointments, (DateTime) txtNewTime.Value);
+                recOne.Text = "Doctor: " + dc.GetByUsername(rc.RecommendedOne.DoctorUsername) + "\n" + rc.RecommendedOne.StartTime;
+                recTwo.Text = "Doctor: " + dc.GetByUsername(rc.RecommendedTwo.DoctorUsername) + "\n" + rc.RecommendedTwo.StartTime;
             }
         }
 
@@ -233,38 +195,40 @@ namespace hospital.View.UserControls
         public Appointment CurrentAppointment {get;set;}
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
+            Console.WriteLine("AJDE");
             if (isValidate())
             {
                 Appointment oldAppointment;
                 bool sucess = false;
+                Console.WriteLine("GROBARI");
                 ObservableCollection<Appointment> appointments= ac.GetAppointmentByPatient(cmbUsername.Text);
-                string hours = txtTime.Text.Split(':')[0];
-                string minuts = txtTime.Text.Split(':')[1];
                 string dates = date.ToString().Split(' ')[0];
                 bool exists = false;
 
                 //da li je uopste uneta promena nekakva
-                if (date.Text.Equals(newDate.Text) && txtNewTime.Text.Trim().Equals(txtTime.Text.Trim()))
-                {
-                    notFree.Text = "No change occured";
-                }
-
+                /* if (date.Text.Equals(newDate.Text) && (DateTime) txtNewTime.Value.Equals(txtTime.Value))
+                 {
+                     notFree.Text = "No change occured";
+                 } */
 
                 foreach (Appointment appointment in appointments)
                 {
                         string hoursFromAppointment = appointment.StartTime.ToString().Split(' ')[1].Split(':')[0];
                         string minutsFromAppointment = appointment.StartTime.ToString().Split(' ')[1].Split(':')[1];
                         string dateFromAppointment = appointment.StartTime.ToString().Split(' ')[0];
-                        if (hoursFromAppointment.Equals(hours) && minutsFromAppointment.Equals(minuts) && dates.Equals(dateFromAppointment))
+                    Console.WriteLine(hoursFromAppointment + ":" + minutsFromAppointment + " / " + dateFromAppointment);
+                    //pogresno si izvedao gde sta setujes kad otvaras prozor pa pravi problem
+                    //Console.WriteLine(((DateTime)txtTime.Value).Hour + ":" + ((DateTime)txtTime.Value).Minute + " / " + dates);
+                        if (hoursFromAppointment.Equals(((DateTime) txtTime.Value).Hour) && minutsFromAppointment.Equals(((DateTime)txtTime.Value).Minute) && dates.Equals(dateFromAppointment))
                         {
                             exists = true;
                             CurrentAppointment = appointment;
-
+                        Console.WriteLine("USAO SAM ODJE");
                             List<ScheduledBasicRenovation> renovationList = sbrc.FindAll();
                             bool canMake = true;
                             foreach (ScheduledBasicRenovation renovation in renovationList)
                             {
-                                if (renovation._Room.id == dc.GetByUsername(appointment.doctorUsername).OrdinationId && renovation._Interval._Start <= (DateTime)newDate.SelectedDate && renovation._Interval._End >= (DateTime)newDate.SelectedDate)
+                                if (renovation._Room.id == dc.GetByUsername(appointment.DoctorUsername).OrdinationId && renovation._Interval._Start <= (DateTime)newDate.SelectedDate && renovation._Interval._End >= (DateTime)newDate.SelectedDate)
                                 {
                                     notifier.ShowError("Invalid time because of renovations");
                                     canMake = false;
@@ -273,7 +237,7 @@ namespace hospital.View.UserControls
 
                             if (canMake)
                             {
-                                sucess = ac.tryChangeAppointment(appointment, (DateTime)newDate.SelectedDate, txtNewTime.Text);
+                                sucess = rc.tryChangeAppointment(appointment, (DateTime)newDate.SelectedDate, txtNewTime.Value.ToString().Split(' ')[1]);
                                 if (sucess)
                                 {
                                     notifier.ShowSuccess("Appointment has been moved successfully.");

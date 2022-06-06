@@ -28,7 +28,7 @@ namespace hospital.View
     public partial class DoctorHomeWindow : Window
     {
         public ObservableCollection<Appointment> Appointments { get; set; }
-        private AppointmentController ac;
+        private AppointmentManagementController ac;
         private DoctorController dc;
         private UserController uc;
         private NotificationController nc;
@@ -62,17 +62,17 @@ namespace hospital.View
                     Timer preTimer;
                     preTimer = new Timer(1000);
                     preTimer.AutoReset = false;
-                    preTimer.Elapsed += RunOnce;
+                    preTimer.Elapsed += (sender, e_) => RunOneTimeNotification(sender, e_, n);
                     preTimer.Start();
                     nc.Delete(n);
                 }
             }
         }
-        public void RunOnce(Object source, System.Timers.ElapsedEventArgs e)
+        public void RunOneTimeNotification(Object source, System.Timers.ElapsedEventArgs e, Notification notification)
         {
-            this.Dispatcher.Invoke(() =>
+            Dispatcher.Invoke(() =>
             {
-                notifier.ShowInformation("Check appointments.");
+                notifier.ShowInformation(notification.Text);
             });
         }
         Notifier notifier = new Notifier(cfg =>

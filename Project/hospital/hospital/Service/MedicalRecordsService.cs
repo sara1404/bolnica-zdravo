@@ -3,6 +3,7 @@ using Repository;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Service
 {
@@ -14,9 +15,9 @@ namespace Service
         {
             medicalRecordsRepository = _repo;
         }
-        public bool Create(MedicalRecord medicalRecord)
+        public void Create(MedicalRecord medicalRecord)
         {
-            return medicalRecordsRepository.Create(medicalRecord); 
+            medicalRecordsRepository.Create(medicalRecord); 
 
         }
 
@@ -43,6 +44,20 @@ namespace Service
         {
             return medicalRecordsRepository.AddTheraphy(id, therapy);
         }
-
+        public bool CheckAllergies(int recordId, Medicine medicine)
+        {
+            MedicalRecord record = FindById(recordId);
+            List<string> allergies = new List<string>();
+            if (record.Alergies != null)
+                allergies = record.Alergies.Split(',').ToList<string>();
+            foreach (string ingridient in medicine.Ingridients)
+            {
+                if (allergies.Contains(ingridient) || allergies.Contains(medicine.Name))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }

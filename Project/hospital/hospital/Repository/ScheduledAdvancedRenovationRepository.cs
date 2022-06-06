@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace hospital.Repository
 {
-    public class ScheduledAdvancedRenovationRepository
+    public class ScheduledAdvancedRenovationRepository : IScheduledAdvancedRenovationRepository
     {
         private List<ScheduledAdvancedRenovation> renovations;
         private ScheduledAdvancedRenovationFileHandler renovationFileHandler;

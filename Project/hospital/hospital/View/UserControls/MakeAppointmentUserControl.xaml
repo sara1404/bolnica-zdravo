@@ -1,52 +1,51 @@
-﻿<UserControl x:Class="hospital.View.UserControls.MakeAppointmentUserControl"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:hospital.View.UserControls"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="hospital.View.UserControls.MakeAppointmentUserControl"
              mc:Ignorable="d" 
             d:DesignHeight="530" d:DesignWidth="950">
     <Grid Background="White">
         <StackPanel Background="white">
             <Border BorderBrush="gray" BorderThickness="2" Margin="0,40,0,0" Height="450" Width="450" CornerRadius="10">
                 <StackPanel>
-                    <Label FontSize="25" FontWeight="DemiBold" Margin="0,0,0,0" HorizontalAlignment="Center">Make appointment</Label>
+                    <Label FontSize="25" FontWeight="DemiBold" Margin="0,0,0,0" HorizontalAlignment="Center" Content="Make appointment"/>
                     <Grid Height="400">
                         <TextBlock FontSize="15" FontWeight="DemiBold" Width="60" Height="25" Margin="75,34,311,341" RenderTransformOrigin="0.428,2.257"><Run Text="Patient"/></TextBlock>
                         <ComboBox x:Name="cmbUsername" ItemsSource="{Binding Patients}" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="132" Height="25" Margin="239,34,0,0" SelectionChanged="cmbUsername_SelectionChanged"/>
                         <TextBlock FontSize="15" FontWeight="DemiBold" Width="60" Height="25" Margin="78,83,308,292" Text="Date"/>
                         <DatePicker x:Name="date" HorizontalAlignment="Left"  Margin="239,84,0,0" VerticalAlignment="Top" Width="132" SelectedDateChanged="date_SelectedDateChanged"/>
                         <TextBlock FontSize="15" FontWeight="DemiBold" Width="60" Height="25" Margin="75,133,311,242" Text="Time" RenderTransformOrigin="0.472,0.777"/>
-                        <TextBox x:Name="txtTime" Width="132" Height="25" Margin="239,133,75,242" TextChanged="time_TextChanged"/>
+                        <syncfusion:SfTimePicker x:Name="txtTime" AllowNull="True" HorizontalAlignment="Left" Height="24" Margin="239,133,0,0" Value="12:00" VerticalAlignment="Top" Watermark="Pick a time" Width="132"/>
                         <TextBlock FontSize="15" FontWeight="DemiBold" Height="25" Margin="78,184,298,191" Text="Doctor"/>
                         <ComboBox x:Name="cmbDoctor" ItemsSource="{Binding Doctors}" HorizontalAlignment="Left" Margin="239,181,0,0" VerticalAlignment="Top" Width="132" Height="25" SelectionChanged="cmbDoctor_SelectionChanged"/>
                         <TextBlock FontSize="15" FontWeight="DemiBold" Height="25" Margin="78,233,298,142" Text="Priority"/>
                         <RadioButton x:Name="radioDoctor" Content="Doctor" HorizontalAlignment="Left" Margin="250,235,0,0" VerticalAlignment="Top" Checked="radioDoctor_Checked"/>
                         <RadioButton x:Name="radioTime" Content="Time"  HorizontalAlignment="Left" Margin="326,235,0,0" VerticalAlignment="Top" Checked="radioTime_Checked" />
                         <Button x:Name="btnShowRec" Foreground="blue" Visibility="Collapsed"  HorizontalAlignment="Left" Margin="78,274,0,0" VerticalAlignment="Top" BorderBrush="Transparent" Background="white" Click="btnShowRec_Click">
-                            <Underline>Show recommended</Underline>
+                            <Underline>
+                                <Run Text="Show recommended"/>
+                            </Underline>
                         </Button>
-                        <Button x:Name="btnDelay" Foreground="blue" Visibility="Visible"  HorizontalAlignment="Left" Margin="266,4,0,0" VerticalAlignment="Top" BorderBrush="Transparent" Background="white" Click="btnDelay_Click">
-                            <Underline>Delay appointment</Underline>
-                        </Button>
-                        <Button x:Name="btnRemove" Foreground="blue" Visibility="Visible"  HorizontalAlignment="Left" Margin="75,4,0,0" VerticalAlignment="Top" BorderBrush="Transparent" Background="white" Click="btnRemove_Click">
-                            <Underline>Remove appointment</Underline>
-                        </Button>
-                        <TextBlock x:Name="errUsername" Height="20" Width="132" Foreground="red" Margin="239,59,75,321"></TextBlock>
-                        <TextBlock x:Name="errDate" Height="20" Width="132" Foreground="red" Margin="239,108,75,272"></TextBlock>
-                        <TextBlock x:Name="errTime" Height="20" Width="132" Foreground="red" Margin="239,158,75,222"></TextBlock>
-                        <TextBlock x:Name="errDoctor" Height="20" Width="132" Foreground="red" Margin="239,206,75,174"></TextBlock>
-                        <TextBlock x:Name="errPriority" Height="20" Width="132" Foreground="red" Margin="239,250,75,130"></TextBlock>
+                        <TextBlock x:Name="errUsername" Height="20" Width="132" Foreground="red" Margin="239,59,75,321"/>
+                        <TextBlock x:Name="errDate" Height="20" Width="132" Foreground="red" Margin="239,108,75,272"/>
+                        <TextBlock x:Name="errTime" Height="20" Width="132" Foreground="red" Margin="239,155,75,225"/>
+                        <TextBlock x:Name="errDoctor" Height="20" Width="132" Foreground="red" Margin="239,206,75,174"/>
+                        <TextBlock x:Name="errPriority" Height="20" Width="132" Foreground="red" Margin="239,250,75,130"/>
                         <TextBlock x:Name="notFree" FontSize="20" FontWeight="DemiBold" Height="25" Width="250" Foreground="red" Margin="121,299,75,76"/>
-                        <Button x:Name="btnSubmit" Content="Submit"  VerticalAlignment="Top" Height="26" Width="75"  Margin="296,360,75,0" Click="btnSubmit_Click"/>
-                        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Height="26" Margin="78,360,0,0" Click="btnCancel_Click"/>
-                        <Button x:Name="btnRecTwo" Height="75" Width="130" Margin="78,263,238,62" Visibility="Collapsed" Background="white" Click="btnRecTwo_Click"/>
-                        <Button x:Name="btnRecOne" Height="75" Width="130" Margin="241,263,75,62" Visibility="Collapsed" Background="white" Click="btnRecOne_Click"/>
+                        <Button x:Name="btnSubmit" Content="Submit" FontSize="12"  VerticalAlignment="Top" Height="26" Width="75"  Margin="296,360,75,0" Click="btnSubmit_Click"/>
+                        <Button x:Name="btnCancel" Content="Cancel" FontSize="12" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Height="26" Margin="78,360,0,0" Click="btnCancel_Click"/>
+                        <Button x:Name="btnRecTwo" HorizontalAlignment="Left" Height="75" Width="150" Margin="73,263,0,62" Visibility="Collapsed" Background="white" Click="btnRecTwo_Click">
+                            <TextBlock x:Name="recTwo" Padding="0,15,0,5" FontSize="12" Height="70" Foreground="Black" Width="140"/>
+                        </Button>
+                        <Button x:Name="btnRecOne" HorizontalAlignment="Left" Height="75" Width="150" Margin="232,263,0,62" Visibility="Collapsed" Background="white" Click="btnRecOne_Click">
+                            <TextBlock x:Name="recOne" Padding="0,15,0,5" FontSize="12" Height="70" Foreground="Black" Width="140"/>
+                        </Button>
                     </Grid>
                 </StackPanel>
             </Border>
         </StackPanel>
-        <local:DelayAppointmentUserControl x:Name="delayAppointmentUserControl" Visibility="Collapsed" Height="530"/>
-        <local:RemoveAppointementUserControl x:Name="removeAppointmentUserControl" Visibility="Collapsed" Height="530"/>
     </Grid>
 </UserControl>

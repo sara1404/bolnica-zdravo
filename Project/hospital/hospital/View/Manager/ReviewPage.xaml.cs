@@ -27,19 +27,5 @@ namespace hospital.View.Manager
             InitializeComponent();
         }
 
-        //private void Doctor_Review_Click(object sender, RoutedEventArgs e)
-        //{
-        //    new DoctorReviewWindow().Show();
-        //}
-
-        //private void Hospital_Review_Click(object sender, RoutedEventArgs e)
-        //{
-        //    new HospitalReviewWindow().Show();
-        //}
-
-        //private void Logout_Click(object sender, RoutedEventArgs e)
-        //{
-
-        //}
     }
 }

@@ -102,7 +102,6 @@ namespace hospital.View.Manager
                 commands.Clear();
                 timer.Dispose();
                 command.execute();
-                //demoStarted = false;
                 return;
             }
             if (commands.Count == 0)
@@ -113,33 +112,6 @@ namespace hospital.View.Manager
             commands[0].execute();
             commands.RemoveAt(0);
         }
-
-        //private void ScheduleMergingRooms(List<Room> rooms, TimeInterval interval)
-        //{
-        //    try
-        //    {
-        //        ValidateId(newCode.Text);
-        //        ValidateFloor();
-        //        CreateMergeRenovation(rooms, interval);
-        //        Close();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //}
-
-        //private void CreateMergeRenovation(List<Room> rooms, TimeInterval interval)
-        //{
-        //    rooms.Add((Room)listViewRooms.SelectedItems[0]);
-        //    rooms.Add((Room)listViewRooms.SelectedItems[1]);
-        //    Room resultRoom = new Room(newRoom.Text, newPurpose.Text, Int32.Parse(floor.Text), newCode.Text);
-        //    CheckRoomFloor(rooms, resultRoom);
-        //    ScheduledAdvancedRenovation newRenovation = new ScheduledAdvancedRenovation(GenerateId().ToString(),
-        //        resultRoom, interval, description.Text, rooms, "merge");
-        //    scheduledAdvancedRenovationController.Create(newRenovation);
-        //}
-
 
     }
 }

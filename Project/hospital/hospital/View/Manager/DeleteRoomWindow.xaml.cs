@@ -22,32 +22,11 @@ namespace hospital.View
     /// </summary>
     public partial class DeleteRoomWindow : Window
     {
-        //private RoomController roomController;
         public DeleteRoomWindow(Room room)
         {
             this.DataContext = new DeleteRoomWindowViewModel(room);
             InitializeComponent();
-            //App app = Application.Current as App;
-            //roomController = app.roomController;
         }
 
-        //private void Delete_Room_Click(object sender, RoutedEventArgs e)
-        //{
-        //    var viewRoomsWindow = Application.Current.Windows.OfType<ManagerRoomsWindow>().FirstOrDefault();
-        //    Room room = (Room)viewRoomsWindow.dataGridRooms.SelectedItem;
-        //    try
-        //    {
-        //        roomController.DeleteById(room.id);
-        //    }
-        //    catch (Exception ex) {
-        //        MessageBox.Show(ex.Message, "Error");
-        //    }
-        //    this.Close();
-        //}
-
-        //private void Cancel_Delete_Room(object sender, RoutedEventArgs e)
-        //{
-        //    this.Close();
-        //}
     }
 }

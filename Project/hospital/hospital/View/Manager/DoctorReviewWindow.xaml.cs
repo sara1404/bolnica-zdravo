@@ -39,9 +39,6 @@ namespace hospital.View.Manager
         {
             FillFinalGrade();
             FillCategoryInfo();
-            //FillFirstCategoryQuestion();
-            //FillSecondCategoryQuestion();
-            //FillThirdCategoryQuestion();
         }
 
         private void FillFinalGrade() {
@@ -49,8 +46,6 @@ namespace hospital.View.Manager
         }
         private void FillCategories(int index) {
             category1.Content = pollController.GetDoctorPollBlueprint().Categories[index].Name + "  " + pollController.CalculateCategoryGrade(((Doctor)doctorsComboBox.SelectedItem).Username, pollController.GetDoctorPollBlueprint().Categories[index].Id);
-            //category2.Content = pollController.GetDoctorPollBlueprint().Categories[1].Name + pollController.CalculateCategoryGrade(((Doctor)doctorsComboBox.SelectedItem).Username, pollController.GetDoctorPollBlueprint().Categories[1].Id); ;
-            //category3.Content = pollController.GetDoctorPollBlueprint().Categories[2].Name + pollController.CalculateCategoryGrade(((Doctor)doctorsComboBox.SelectedItem).Username, pollController.GetDoctorPollBlueprint().Categories[2].Id); ;
         }
 
         private void FillFirstCategoryQuestion() {
@@ -120,7 +115,6 @@ namespace hospital.View.Manager
                 g34.Text = gradesCount[3].ToString();
                 g35.Text = gradesCount[4].ToString();
             }
-            Console.WriteLine("okida");
         }
 
         private void Category_Changed(object sender, SelectionChangedEventArgs e)

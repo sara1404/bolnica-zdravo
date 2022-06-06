@@ -38,8 +38,6 @@ namespace hospital.View.Manager
         private void FillCategories(int index)
         {
             category1.Content = pollController.GetHospitalPollBlueprint().Categories[index].Name +"  "+ pollController.CalculateHospitalCategoryGrade(pollController.GetDoctorPollBlueprint().Categories[index].Id);
-            //category2.Content = pollController.GetHospitalPollBlueprint().Categories[1].Name + pollController.CalculateHospitalCategoryGrade(pollController.GetDoctorPollBlueprint().Categories[1].Id); ;
-            //category3.Content = pollController.GetHospitalPollBlueprint().Categories[2].Name + pollController.CalculateHospitalCategoryGrade(pollController.GetDoctorPollBlueprint().Categories[2].Id); ;
         }
 
         private void FillFirstCategoryQuestion()

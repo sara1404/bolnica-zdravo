@@ -149,31 +149,6 @@ namespace hospital.View
             return true;
         }
 
-        //private void Schedule_Advanced_Renovation(object sender, RoutedEventArgs e)
-        //{
-        //    List<Room> rooms = new List<Room>();
-        //    TimeInterval interval = (TimeInterval)renovationListView.SelectedItem;
-
-        //    if (listViewRooms.SelectedItems.Count >= 2)
-        //        ScheduleMergingRooms(rooms, interval);
-        //    else
-        //        ScheduleSplitingRoom(rooms, interval);
-        //}
-
-        //private void ScheduleMergingRooms(List<Room> rooms, TimeInterval interval)
-        //{
-        //    try
-        //    {
-        //        ValidateId(newCode.Text);
-        //        ValidateFloor();
-        //        CreateMergeRenovation(rooms, interval);
-        //        Close();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //}
 
         private void CreateMergeRenovation(List<Room> rooms, TimeInterval interval, Room resultRoom)
         {
@@ -183,23 +158,6 @@ namespace hospital.View
                 resultRoom, interval, description.Text, rooms, "merge");
             scheduledAdvancedRenovationController.Create(newRenovation);
         }
-
-
-        //private void ScheduleSplitingRoom(List<Room> rooms, TimeInterval interval)
-        //{
-        //    try
-        //    {
-        //        ValidateId(newCode.Text.Split(',')[0]);
-        //        ValidateId(newCode.Text.Split(',')[1]);
-        //        ValidateFloor();
-        //        CreateSplitRenovation(rooms, interval);
-        //        this.Close();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //}
 
         private void CreateSplitRenovation(List<Room> rooms, TimeInterval interval)
         {
@@ -216,30 +174,11 @@ namespace hospital.View
             return Int32.Parse(scheduledAdvancedRenovationController.FindAll()[scheduledAdvancedRenovationController.FindAll().Count - 1]._Id) + 1;
         }
 
-        //private void CheckRoomFloor(List<Room> rooms, Room room)
-        //{
-        //    if (rooms[0].floor != rooms[1].floor || rooms[0].floor != room.floor)
-        //        throw new Exception("Rooms must be on the same floor!");
-        //}
-
         private void ValidateId(string id)
         {
             if (roomController.FindRoomById(id) != null)
                 throw new Exception("Room with this id already exists!");
         }
-
-        //private void ValidateFloor()
-        //{
-        //    int value;
-        //    bool isValid = Int32.TryParse(floor.Text, out value);
-
-        //    if (!isValid)
-        //        throw new Exception("Floor should be a number!");
-
-        //    if (value < 0)
-        //        throw new Exception("Floor should be positive!");
-        //}
-
 
         private void IsFormFilled(object sender, SelectionChangedEventArgs e)
         {

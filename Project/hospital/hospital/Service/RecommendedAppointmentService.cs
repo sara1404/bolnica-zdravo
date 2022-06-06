@@ -175,7 +175,7 @@ namespace Service
 
             for (int i = 0; i < apointments.Count; i++)
             {
-                if ((apointments[i]).StartTime.Hour == (time.Hour % 13) && (apointments[i]).StartTime.Minute == time.Minute)
+                if ((apointments[i]).StartTime.Hour == (time.Hour) && (apointments[i]).StartTime.Minute == time.Minute)
                 {
                     RecommendedOne = apointments[i];
                     return;
@@ -191,7 +191,7 @@ namespace Service
 
             for (int i = 0; i < apointments.Count; i++)
             {
-                if ((apointments[i]).StartTime.Hour == (time.Hour % 12) && (apointments[i]).StartTime.Minute == time.Minute)
+                if ((apointments[i]).StartTime.Hour == (time.Hour) && (apointments[i]).StartTime.Minute == time.Minute)
                 {
                     RecommendedTwo = apointments[i];
                     return;

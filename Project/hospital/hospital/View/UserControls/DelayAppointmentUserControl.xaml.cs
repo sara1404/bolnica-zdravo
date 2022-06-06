@@ -73,55 +73,21 @@ namespace hospital.View.UserControls
 
         private bool isValidate()
         {
-            bool[] isCorrected = new bool[5];
+            bool[] isCorrected = new bool[2];
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 2; i++)
             {
                 isCorrected[i] = true;
             }
-            //username
-            if (cmbUsername.Text.Equals(""))
+            if (newDate.Text.Equals(""))
             {
-                errUsername.Text = "Choose one option";
+                errNewDate.Text = "Choose one date";
                 isCorrected[0] = false;
             }
             else
             {
-                errUsername.Text = "";
-                isCorrected[0] = true;
-            }
-            //date
-            if (date.Text.Equals(""))
-            {
-                errDate.Text = "Choose one date";
-                isCorrected[2] = false;
-            }
-            else
-            {
-                errDate.Text = "";
-                isCorrected[2] = true;
-            }
-            //time
-            /*if (txtTime.Text.Equals(""))
-            {
-                errTime.Text = "Must be filled";
-                isCorrected[3] = false;
-            }
-            else
-            {
-                errTime.Text = "";
-                isCorrected[3] = true;
-            } */
-            //newdate
-            if (newDate.Text.Equals(""))
-            {
-                errNewDate.Text = "Choose one date";
-                isCorrected[1] = false;
-            }
-            else
-            {
                 errNewDate.Text = "";
-                isCorrected[1] = true;
+                isCorrected[0] = true;
             }
             //newtime
             /*if (txtNewTime.Text.Equals(""))
@@ -136,7 +102,7 @@ namespace hospital.View.UserControls
             }*/
 
 
-            return (isCorrected[0] && isCorrected[1] && isCorrected[2] && isCorrected[3] && isCorrected[4]);
+            return (isCorrected[0] && isCorrected[1]);
         }
 
         private void cmbUsername_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -229,31 +195,35 @@ namespace hospital.View.UserControls
         public Appointment CurrentAppointment {get;set;}
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
+            Console.WriteLine("AJDE");
             if (isValidate())
             {
                 Appointment oldAppointment;
                 bool sucess = false;
+                Console.WriteLine("GROBARI");
                 ObservableCollection<Appointment> appointments= ac.GetAppointmentByPatient(cmbUsername.Text);
                 string dates = date.ToString().Split(' ')[0];
                 bool exists = false;
 
                 //da li je uopste uneta promena nekakva
-               /* if (date.Text.Equals(newDate.Text) && (DateTime) txtNewTime.Value.Trim().Equals(txtTime.Text.Trim()))
-                {
-                    notFree.Text = "No change occured";
-                }*/
-
+                /* if (date.Text.Equals(newDate.Text) && (DateTime) txtNewTime.Value.Equals(txtTime.Value))
+                 {
+                     notFree.Text = "No change occured";
+                 } */
 
                 foreach (Appointment appointment in appointments)
                 {
                         string hoursFromAppointment = appointment.StartTime.ToString().Split(' ')[1].Split(':')[0];
                         string minutsFromAppointment = appointment.StartTime.ToString().Split(' ')[1].Split(':')[1];
                         string dateFromAppointment = appointment.StartTime.ToString().Split(' ')[0];
+                    Console.WriteLine(hoursFromAppointment + ":" + minutsFromAppointment + " / " + dateFromAppointment);
+                    //pogresno si izvedao gde sta setujes kad otvaras prozor pa pravi problem
+                    //Console.WriteLine(((DateTime)txtTime.Value).Hour + ":" + ((DateTime)txtTime.Value).Minute + " / " + dates);
                         if (hoursFromAppointment.Equals(((DateTime) txtTime.Value).Hour) && minutsFromAppointment.Equals(((DateTime)txtTime.Value).Minute) && dates.Equals(dateFromAppointment))
                         {
                             exists = true;
                             CurrentAppointment = appointment;
-
+                        Console.WriteLine("USAO SAM ODJE");
                             List<ScheduledBasicRenovation> renovationList = sbrc.FindAll();
                             bool canMake = true;
                             foreach (ScheduledBasicRenovation renovation in renovationList)

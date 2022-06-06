@@ -14,12 +14,12 @@
                     <Label FontSize="25" FontWeight="DemiBold" Margin="0,0,0,0" HorizontalAlignment="Center" Content="Delay appointment"/>
                     <Grid Height="400">
                         <TextBlock FontSize="15" FontWeight="DemiBold" Width="60" Height="25" Margin="75,34,311,341" RenderTransformOrigin="0.428,2.257"><Run Text="Patient"/></TextBlock>
-                        <ComboBox x:Name="cmbUsername" ItemsSource="{Binding Patients}" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="132" Height="25" Margin="239,34,0,0" SelectionChanged="cmbUsername_SelectionChanged"/>
+                        <ComboBox x:Name="cmbUsername" IsEnabled="False" ItemsSource="{Binding Patients}" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="132" Height="25" Margin="239,34,0,0" SelectionChanged="cmbUsername_SelectionChanged"/>
                         <TextBlock FontSize="15" FontWeight="DemiBold" Width="60" Height="25" Margin="75,78,311,297" Text="Date"/>
-                        <DatePicker x:Name="date" HorizontalAlignment="Left"  Margin="239,79,0,0" VerticalAlignment="Top" Width="132" SelectedDateChanged="date_SelectedDateChanged"/>
+                        <DatePicker x:Name="date" IsEnabled="false" HorizontalAlignment="Left"  Margin="239,79,0,0" VerticalAlignment="Top" Width="132" SelectedDateChanged="date_SelectedDateChanged"/>
                         <TextBlock FontSize="15" FontWeight="DemiBold" Width="60" Height="25" Margin="75,123,311,252" Text="Time" RenderTransformOrigin="0.472,0.777"/>
 
-                        <syncfusion:SfTimePicker x:Name="txtNewTime" AllowNull="True" HorizontalAlignment="Left" Height="22" Margin="239,215,0,0" Value="12:00" VerticalAlignment="Top" Watermark="Pick a time" Width="132"/>
+                        <syncfusion:SfTimePicker x:Name="txtNewTime"  MinTime="7:00:00" MaxTime="19:00:00"  AllowNull="True" HorizontalAlignment="Left" Height="22" Margin="239,215,0,0" Value="12:00" VerticalAlignment="Top" Watermark="Pick a time" Width="132"/>
                         <Button x:Name="btnShowRec" Foreground="blue" Visibility="Collapsed"  HorizontalAlignment="Left" Margin="78,247,0,0" VerticalAlignment="Top" BorderBrush="Transparent" Background="white" Click="btnShowRec_Click">
                             <Underline>
                                 <Run Text="Show recommended"/>
@@ -41,7 +41,7 @@
                         <DatePicker x:Name="newDate" HorizontalAlignment="Left"  Margin="239,168,0,0" VerticalAlignment="Top" Width="132" SelectedDateChanged="date_SelectedDateChanged"/>
                         <TextBlock FontSize="15" FontWeight="DemiBold" Height="25" Margin="75,212,290,163" Text="New time" RenderTransformOrigin="0.472,0.777"/>
 
-                        <syncfusion:SfTimePicker x:Name="txtTime" AllowNull="True" HorizontalAlignment="Left" Height="22" Margin="239,123,0,0" Value="12:00" VerticalAlignment="Top" Watermark="Pick a time" Width="132"/>
+                        <syncfusion:SfTimePicker x:Name="txtTime" IsEnabled="False" AllowNull="True" MinTime="7:00:00" MaxTime="19:00:00" HorizontalAlignment="Left" Height="22" Margin="239,123,0,0" Value="12:00" VerticalAlignment="Top" Watermark="Pick a time" Width="132"/>
 
                         <TextBlock x:Name="errNewDate" Height="20" Width="132" Foreground="red" Margin="239,190,75,190"/>
                         <TextBlock x:Name="errNewTime" Height="20" Width="132" Foreground="red" Margin="239,237,75,143"/>

@@ -19,7 +19,7 @@
     <Grid Margin="0,0,4,0">
         <Frame NavigationUIVisibility="Hidden" x:Name="Main" Margin="0,47,0,0" Height="450" VerticalAlignment="Top" HorizontalAlignment="Left" Width="800"/>
         <Button x:Name="btnCalendar" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="45" Padding="4" Click="btnCalendar_Click" Background="Transparent" BorderBrush="Transparent" ToolTip="Calendar">
-            <Image Source="../../Resources/Images/schedule.png" Height="19" Width="23"></Image>
+            <Image Source="../../Resources/Images/schedule.png" Height="25" Width="25"></Image>
         </Button>
         <Button x:Name="btnMakeAppointment" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" Width="45" Padding="4" Click="btnMakeAppointment_Click" Background="Transparent" BorderBrush="Transparent" ToolTip="Make new appointment">
             <Image Source="../../Resources/Images/addition_24x24.png" Height="19" Width="23"></Image>

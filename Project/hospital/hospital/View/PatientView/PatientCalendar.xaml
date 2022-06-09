@@ -11,7 +11,7 @@
 
     <Grid>
 
-        <syncfusion:SfScheduler x:Name="appointmentCalendar" AppointmentEditFlag="None" HorizontalAlignment="Left" Margin="10,10,0,0" ViewType="Week" VerticalAlignment="Top" Height="430" Width="780" AllowedViewTypes="Week">
+        <syncfusion:SfScheduler x:Name="appointmentCalendar" AppointmentEditFlag="None" HorizontalAlignment="Right" Margin="0,0,10,20" ViewType="Week" VerticalAlignment="Bottom" Height="430" Width="780" AllowedViewTypes="Week">
             <syncfusion:SfScheduler.MonthViewSettings>
                 <syncfusion:MonthViewSettings AppointmentDisplayMode="Appointment"  
                                       AppointmentDisplayCount="5"/>

@@ -68,11 +68,14 @@ namespace Service
             MedicalRecord mr = medicalRecordsRepository.FindById(FindById(id).RecordId);
             foreach (Therapy t in mr.Therapy)
             {
-                DateTime iterator = t.TimeStart;
-                while(iterator < t.TimeEnd)
+                if (t.TimeStart.Month == DateTime.Now.Month && t.TimeStart.Year == DateTime.Now.Year)
                 {
-                    iterator = iterator.AddHours(t.Interval);
-                    therapies.Add(new TherapyDTO(t.Medicine.Name, iterator));
+                    DateTime iterator = t.TimeStart;
+                    while (iterator < t.TimeEnd)
+                    {
+                        iterator = iterator.AddHours(t.Interval);
+                        therapies.Add(new TherapyDTO(t.Medicine.Name, iterator));
+                    }
                 }
             }
             return therapies;

@@ -318,6 +318,7 @@
     <Compile Include="View\PatientView\PatientCalendar.xaml.cs">
       <DependentUpon>PatientCalendar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PatientView\PatientCalendarViewModel.cs" />
     <Compile Include="View\PatientView\PatientCustomNotification.xaml.cs">
       <DependentUpon>PatientCustomNotification.xaml</DependentUpon>
     </Compile>

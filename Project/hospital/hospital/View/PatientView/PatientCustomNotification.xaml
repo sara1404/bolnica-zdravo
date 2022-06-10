@@ -29,7 +29,9 @@
         <TextBox x:Name="tbInterval" HorizontalAlignment="Left" Height="23" Margin="135,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="73" TabIndex="6"/>
         <Label x:Name="lblRepeats" Content="Repeats every:" HorizontalAlignment="Left" Margin="30,214,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblHours" Content="hours" HorizontalAlignment="Left" Margin="214,215,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnConfirm" Content="Confirm" HorizontalAlignment="Left" Margin="700,408,0,0" VerticalAlignment="Top" Width="90" Click="btnConfirm_Click" TabIndex="7"/>
+        <Button x:Name="btnConfirm" HorizontalAlignment="Left" Margin="700,408,0,0" VerticalAlignment="Top" Width="90" Click="btnConfirm_Click" TabIndex="7" Padding="4">
+            <AccessText>_Confirm</AccessText>
+        </Button>
         <DatePicker x:Name="dateStart" HorizontalAlignment="Left" Margin="135,120,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.25,0.32" Width="117" TabIndex="2"/>
         <DatePicker x:Name="dateEnd" HorizontalAlignment="Left" Margin="135,170,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.513,0.4" Width="117" TabIndex="4"/>
         <Label x:Name="lblWarning" Content="" HorizontalAlignment="Left" Margin="10,379,0,0" VerticalAlignment="Top" Width="400" Foreground="#DDFF0000" FontStyle="Italic"/>

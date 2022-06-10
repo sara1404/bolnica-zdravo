@@ -158,6 +158,7 @@ namespace hospital.View.PatientView
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
+            lblWarning.Content = "";
             if (Validate())
             {
                 if ((bool)rbOneTime.IsChecked)

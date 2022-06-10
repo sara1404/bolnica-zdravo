@@ -49,10 +49,19 @@ namespace hospital.View.UserControls
 
                 //Set the standard font
                 PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);
+                PdfFont fontSmall = new PdfStandardFont(PdfFontFamily.Helvetica, 10);
+
+
+                PdfImage image = PdfImage.FromFile("../../Resources/Images/logo.png");
+                RectangleF bounds = new RectangleF(9, 0, 80, 40);
+                //Draws the image to the PDF page
+                page.Graphics.DrawImage(image, bounds);
 
                 //Draw the text
-                graphics.DrawString(dpFrom.Text.Split(' ')[0] + "-" + dpTo.Text.Split(' ')[0], font, PdfBrushes.Black, new PointF(200, 0));
-                dataTable.Columns.Add("ID");
+                graphics.DrawString("Report on scheduled",font, PdfBrushes.Black, new PointF(180, 0));
+                graphics.DrawString("Report on scheduled operations and examinations in: " + dpFrom.Text.Split(' ')[0] + " - " + dpTo.Text.Split(' ')[0] + ".", fontSmall, PdfBrushes.Black, new PointF(9, 60));
+                //graphics.DrawString(dpFrom.Text.Split(' ')[0] + "-" + dpTo.Text.Split(' ')[0], fontSmall, PdfBrushes.Black, new PointF(200, 0));
+
                 dataTable.Columns.Add("Patient");
                 dataTable.Columns.Add("Doctor");
                 dataTable.Columns.Add("Date");
@@ -61,11 +70,11 @@ namespace hospital.View.UserControls
                 dataTable.Columns.Add("Room");
                 foreach (Appointment appointment in _appointmentManagementController.GetAppointmenetsBetweenDate((DateTime)dpFrom.SelectedDate, (DateTime)dpTo.SelectedDate))
                 {
-                    dataTable.Rows.Add(new object[] {appointment.Id.ToString(),(_patientController.FindById(appointment.PatientUsername)).FirstName + " " + (_patientController.FindById(appointment.PatientUsername)).LastName, _doctorController.GetByUsername(appointment.DoctorUsername).ToString(),appointment.StartTime.ToString().Split(' ')[0], appointment.StartTime.ToString().Split(' ')[1],"30",appointment.RoomId });
+                    dataTable.Rows.Add(new object[] {(_patientController.FindById(appointment.PatientUsername)).FirstName + " " + (_patientController.FindById(appointment.PatientUsername)).LastName, _doctorController.GetByUsername(appointment.DoctorUsername).ToString(),appointment.StartTime.ToString().Split(' ')[0], appointment.StartTime.ToString().Split(' ')[1],"30",appointment.RoomId });
                 }
 
                 pdfGrid.DataSource = dataTable;
-                pdfGrid.Draw(page, new PointF(10, 50));
+                pdfGrid.Draw(page, new PointF(10, 90));
                 doc.Save("Output.pdf");
                 doc.Close(true);
             }

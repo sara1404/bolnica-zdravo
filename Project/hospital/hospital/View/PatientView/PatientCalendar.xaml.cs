@@ -1,22 +1,8 @@
 ﻿using Controller;
 using Model;
 using Syncfusion.UI.Xaml.Scheduler;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Syncfusion.Pdf;
-using hospital.DTO;
 
 namespace hospital.View.PatientView
 {
@@ -30,7 +16,6 @@ namespace hospital.View.PatientView
             InitializeComponent();
             App app = Application.Current as App;
             AppointmentManagementController ac = app.appointmentController;
-            PatientController pc = app.patientController;
             ScheduleAppointmentCollection sac = new ScheduleAppointmentCollection();
 
             foreach (Appointment a in ac.GetAppointmentByPatient(app.userController.CurentLoggedUser.Username))
@@ -39,9 +24,8 @@ namespace hospital.View.PatientView
                 sa.StartTime = a.StartTime;
                 sa.EndTime = a.StartTime.AddMinutes(30);
                 sa.IsAllDay = false;
+                sa.Subject = a.DoctorUsername;
                 sac.Add(sa);
-
-
             }
             appointmentCalendar.ItemsSource = sac;
             

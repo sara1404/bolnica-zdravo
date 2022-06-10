@@ -3,19 +3,13 @@ using hospital.Controller;
 using hospital.Model;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ToastNotifications;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Messages;
+using ToastNotifications.Position;
 
 namespace hospital.View.PatientView
 {
@@ -43,15 +37,36 @@ namespace hospital.View.PatientView
             if (IsValidated())
             {
                 pbc.SavePoll(FillPoll());
-            }
-            foreach (Window window in Application.Current.Windows)
-            {
-                if (window.GetType() == typeof(PatientHomeWindow))
+                foreach (Window window in Application.Current.Windows)
                 {
-                    (window as PatientHomeWindow).btnHospitalPoll.IsEnabled = false;
+                    if (window.GetType() == typeof(PatientHomeWindow))
+                    {
+                        (window as PatientHomeWindow).btnHospitalPoll.IsEnabled = false;
+                        (window as PatientHomeWindow).Main.Content = new PatientCalendar();
+                    }
                 }
+                Dispatcher.Invoke(() =>
+                {
+                    notifier.ShowInformation("Poll answers successfully saved!");
+                });
             }
+            
         }
+
+        Notifier notifier = new Notifier(cfg =>
+        {
+            cfg.PositionProvider = new WindowPositionProvider(
+                parentWindow: Application.Current.MainWindow,
+                corner: Corner.TopRight,
+                offsetX: 10,
+                offsetY: 10);
+
+            cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+                notificationLifetime: TimeSpan.FromSeconds(3),
+                maximumNotificationCount: MaximumNotificationCount.FromCount(5));
+
+            cfg.Dispatcher = Application.Current.Dispatcher;
+        });
 
         private PollBlueprint FillPoll()
         {

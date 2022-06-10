@@ -2,7 +2,6 @@
 using Model;
 using System;
 using System.Windows;
-using System.Windows.Threading;
 using ToastNotifications;
 using ToastNotifications.Lifetime;
 using ToastNotifications.Messages;
@@ -47,7 +46,7 @@ namespace hospital.View.PatientView
             }
             Application.Current.Dispatcher.Invoke(() =>
             {
-                notifier.ShowInformation("Patient note succesfully changed!");
+                notifier.ShowInformation("Patient note successfully changed!");
             });
         }
 

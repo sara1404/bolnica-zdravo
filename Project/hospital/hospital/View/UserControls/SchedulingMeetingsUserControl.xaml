@@ -18,11 +18,31 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid Background="White">
+        <Border Margin="113,91,696,414" Height="25" BorderBrush="DarkGray" BorderThickness="1">
+            <DockPanel Margin="-1,0,-1,0" Width="120">
+                <TextBox x:Name="txtSearch" Text="" FontSize="12" HorizontalAlignment="Stretch" Width="95" Background="Transparent" BorderThickness="0" TextChanged="txtSearch_TextChanged"/>
+                <TextBlock IsHitTestVisible="False" Text="Search" VerticalAlignment="Center" Margin="-90" Foreground="DarkGray">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=txtSearch}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+                <Button BorderThickness="0" Padding="0,0,0,0" DockPanel.Dock="Left" HorizontalAlignment="Right" Height="25" Width="25" Background="Transparent"  BorderBrush="Gray">
+                    <Image Source="../../Resources/Images/loupe.png"></Image>
+                </Button>
+            </DockPanel>
+        </Border>
         <StackPanel>
             <Border BorderBrush="gray" BorderThickness="2" Margin="0,40,0,0" Height="450" Width="750" CornerRadius="10">
                 <Grid>
                     <Label FontSize="25" FontWeight="DemiBold" Margin="0,6,0,395" HorizontalAlignment="Center" Content="Scheduling meetings"/>
-                    <Grid Height="400" Width="740">
+                    <Grid Height="400" Width="740" Margin="3,28,3,18">
                         <DataGrid x:Name="dateGridHandlingDoctors" Background="white" HorizontalContentAlignment="Center" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="330" Height="340" ItemsSource="{Binding Doctors}" IsReadOnly ="True" SelectionMode="Single" HorizontalAlignment="Left" AutoGenerateColumns="False" CanUserResizeColumns="false" CanUserResizeRows="false" Margin="14,50,0,10">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="First name"  Width="90"  Binding="{Binding Name}">

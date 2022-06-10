@@ -108,5 +108,20 @@ namespace hospital.View.UserControls
                 cfg.Dispatcher = Application.Current.Dispatcher;
             });
         }
+
+        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var tbx = sender as TextBox;
+            if (tbx != null)
+            {
+                var filteredList = Doctors.Where(x => x.Name.ToLower().Contains(tbx.Text.ToLower()) ||  x.Surname.ToLower().Contains(tbx.Text.ToLower()) || x.Specialization.ToString().ToLower().Contains(tbx.Text.ToLower()));
+                dateGridHandlingDoctors.ItemsSource = null;
+                dateGridHandlingDoctors.ItemsSource = filteredList;
+            }
+            else
+            {
+                dateGridHandlingDoctors.ItemsSource = Doctors;
+            }
+        }
     }
     }

@@ -20,6 +20,7 @@ using ToastNotifications.Messages;
 using ToastNotifications.Position;
 using Controller;
 using hospital.View.PatientView;
+using hospital.Controller;
 
 namespace hospital.View
 {
@@ -33,6 +34,7 @@ namespace hospital.View
         private User current;
         private List<Timer> timers;
         private App app;
+        private PollController pollController;
 
         public PatientHomeWindow()
         {
@@ -43,11 +45,13 @@ namespace hospital.View
             nc = app.notificationController;
             current = app.userController.CurentLoggedUser;
             mr = app.medicalRecordsController.FindById(app.patientController.FindById(current.Username).RecordId);
+            pollController = app.pollBlueprintController;
             timers = new List<Timer>();
 
             StartTherapyNotifications();
             StartNotificationsFromFile();
             lbPageName.Content = "Calendar";
+            btnHospitalPoll.IsEnabled = !pollController.HospitalPollAlreadyFilled(current.Username);
         }
 
         private void StartNotificationsFromFile()

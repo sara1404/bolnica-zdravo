@@ -36,7 +36,6 @@ namespace hospital.View.PatientView
             uc = app.userController;
             DataContext = this;
             Poll = pbc.GetHospitalPollQuestions();
-
         }
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
@@ -44,6 +43,13 @@ namespace hospital.View.PatientView
             if (IsValidated())
             {
                 pbc.SavePoll(FillPoll());
+            }
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(PatientHomeWindow))
+                {
+                    (window as PatientHomeWindow).btnHospitalPoll.IsEnabled = false;
+                }
             }
         }
 

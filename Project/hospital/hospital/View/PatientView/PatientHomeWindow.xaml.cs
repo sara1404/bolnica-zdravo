@@ -47,6 +47,7 @@ namespace hospital.View
 
             StartTherapyNotifications();
             StartNotificationsFromFile();
+            lbPageName.Content = "Calendar";
         }
 
         private void StartNotificationsFromFile()
@@ -196,36 +197,55 @@ namespace hospital.View
         private void btnCalendar_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new PatientCalendar();
+            lbPageName.Content = "Calendar";
         }
 
         private void btnMakeAppointment_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new PatientMakeAppointmentFirst();
+            lbPageName.Content = "Make an appointment";
         }
 
         private void btnAppointments_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new PatientAppointmentsPage();
+            lbPageName.Content = "All appointments";
         }
 
         private void btnHospitalPoll_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new PatientHospitalPoll();
+            lbPageName.Content = "Hospital poll";
         }
 
         private void btnDoctorPoll_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new PatientDoctorPoll();
+            lbPageName.Content = "Doctor poll";
         }
 
         private void btnMedicalRecord_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new PatientMedicalRecord();
+            lbPageName.Content = "Medical record";
         }
 
         private void btnCustomNotification_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new PatientCustomNotification();
+            lbPageName.Content = "Create custom notification";
+        }
+
+        private void btnGraph_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new PatientPopularTimes();
+            lbPageName.Content = "Popular times";
+        }
+
+        private void btnTherapy_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new PatientTherapies();
+            lbPageName.Content = "Therapies";
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
@@ -240,16 +260,6 @@ namespace hospital.View
                     (window as PatientHomeWindow).Close();
                 }
             }
-        }
-
-        private void btnGraph_Click(object sender, RoutedEventArgs e)
-        {
-            Main.Content = new PatientPopularTimes();
-        }
-
-        private void btnTherapy_Click(object sender, RoutedEventArgs e)
-        {
-            Main.Content = new PatientTherapies();
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:hospital.View"
         mc:Ignorable="d"
-        Title="PatientHomeWindow" Height="551" Width="817.876" Closing="Window_Closing">
+        Title="PatientHomeWindow" Height="576" Width="817.876" Closing="Window_Closing">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -17,7 +17,7 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid Margin="0,0,4,0">
-        <Frame NavigationUIVisibility="Hidden" x:Name="Main" Margin="0,47,0,0" Height="450" VerticalAlignment="Top" HorizontalAlignment="Left" Width="800"/>
+        <Frame NavigationUIVisibility="Hidden" x:Name="Main" Margin="0,90,0,0" Height="450" VerticalAlignment="Top" HorizontalAlignment="Left" Width="800"/>
         <Button x:Name="btnCalendar" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="45" Padding="4" Click="btnCalendar_Click" Background="Transparent" BorderBrush="Transparent" ToolTip="Calendar">
             <Image Source="../../Resources/Images/schedule.png" Height="25" Width="25"></Image>
         </Button>
@@ -48,5 +48,6 @@
         <Button x:Name="btnGraph" HorizontalAlignment="Left" Margin="570,10,0,0" VerticalAlignment="Top" Width="45" Padding="4" Click="btnGraph_Click" Background="Transparent" BorderBrush="Transparent" ToolTip="Popular times">
             <Image Source="../../Resources/Images/graph.png" Height="19" Width="23"></Image>
         </Button>
+        <Label x:Name="lbPageName" Content="Label" HorizontalAlignment="Left" Margin="10,47,0,0" VerticalAlignment="Top" Height="38" Width="365" FontSize="20"/>
     </Grid>
 </Window>

@@ -27,6 +27,11 @@ namespace Controller
             return userService.FindAll();
         }
 
+        public void ChangePassword(string username, string newPassword)
+        {
+            userService.ChangePassword(username, newPassword);
+        }
+
         public User FindByUsername(string username)
         {
             return userService.FindByUsername(username);

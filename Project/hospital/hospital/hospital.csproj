@@ -380,6 +380,9 @@
     <Compile Include="View\DoctorMakeNewAppointment.xaml.cs">
       <DependentUpon>DoctorMakeNewAppointment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\ChangePasswordUserControl.xaml.cs">
+      <DependentUpon>ChangePasswordUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserControls\DelayAppointmentUserControl.xaml.cs">
       <DependentUpon>DelayAppointmentUserControl.xaml</DependentUpon>
     </Compile>
@@ -428,6 +431,7 @@
     <Compile Include="View\UserControls\SuggestedDelayUserControl.xaml.cs">
       <DependentUpon>SuggestedDelayUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\ViewModel\ChangePasswordViewModel.cs" />
     <Compile Include="View\UserControls\ViewModel\OrderEquipmentViewModel.cs" />
     <Compile Include="View\UserControls\ViewModel\RelayCommand.cs" />
     <Compile Include="VM\AddRoomWindowViewModel.cs" />
@@ -645,6 +649,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DoctorMakeNewAppointment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\ChangePasswordUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

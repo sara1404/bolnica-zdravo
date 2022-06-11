@@ -79,9 +79,10 @@ namespace hospital.View
             btnEmergency.BorderThickness = new Thickness(3, 0, 0, 0);
             handlingEmergencyUserControl.Visibility = Visibility.Visible;
         }
-        private void CloseAllUserControl()
+        public void CloseAllUserControl()
         {
-            //popUpUserControl.Visibility= Visibility.Collapsed;
+            AlertPopup.IsOpen = false;
+            changePasswordUserControl.Visibility = Visibility.Collapsed;
 
             handlingMedRecordUserControl.Visibility = Visibility.Collapsed;
             handlingMedRecordUserControl.addMedRecUserControl.Visibility = Visibility.Collapsed;

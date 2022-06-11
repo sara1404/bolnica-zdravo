@@ -42,6 +42,10 @@ namespace Service
             return _userRepository.UpdateByUsername(username, user);
         }
 
+        public void ChangePassword(string username, string newPassword)
+        {
+            _userRepository.ChangePassword(username, newPassword);
+        }
         public User CheckCredentials(string username,string password)
         {
            ObservableCollection<User> users = _userRepository.FindAll();

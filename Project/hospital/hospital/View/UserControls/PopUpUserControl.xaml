@@ -32,12 +32,13 @@
             </Path.Data>
         </Path>
         <Grid>
-            <TextBlock FontWeight="DemiBold" Width="30" Height="20" Margin="10,43,41,-35">Help</TextBlock>
-            <ToggleButton 
-        Style="{StaticResource ToggleButtonStyle1}" Margin="30,40,-11,-38"/>
-            <TextBlock FontWeight="DemiBold" Width="50" Height="20" Margin="10,83,21,-75">Log out</TextBlock>
-            <Button x:Name="btnLogout" Width="30"  Height="20" Background="White" BorderBrush="Transparent" HorizontalAlignment="Right" Margin="0,83,-11,-75" Click="btnLogout_Click">
+            <TextBlock FontWeight="DemiBold" TextWrapping="Wrap" Width="60" Margin="10,38,41,-50">Change password</TextBlock>
+            <TextBlock FontWeight="DemiBold" Width="50" Height="20" Margin="10,83,51,-75">Log out</TextBlock>
+            <Button x:Name="btnLogout" Width="30"  Height="20" Background="White" BorderBrush="Transparent" HorizontalAlignment="Right" Margin="0,83,15,-75" Click="btnLogout_Click">
                 <Image Source="../../Resources/Images/logout.png"></Image>
+            </Button>
+            <Button x:Name="btnSetting" Width="30"  Height="20" Background="White" BorderBrush="Transparent" HorizontalAlignment="Right" Margin="0,44,15,-36" Click="btnSetting_Click">
+                <Image Source="../../Resources/Images/settings-icon.png"></Image>
             </Button>
         </Grid>
     </Canvas>

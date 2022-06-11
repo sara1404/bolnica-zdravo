@@ -17,6 +17,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ToastNotifications;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Messages;
+using ToastNotifications.Position;
 
 namespace hospital.View.PatientView
 {
@@ -38,7 +42,9 @@ namespace hospital.View.PatientView
             pbc = app.pollBlueprintController;
             uc = app.userController;
             ac = app.appointmentController;
-            Appointments = ac.GetPastAppointmentsByPatient(uc.CurentLoggedUser.Username);
+            List<Appointment> appointments = ac.GetPastAppointmentsByPatient(uc.CurentLoggedUser.Username).ToList();
+            appointments.RemoveAll(x => pbc.AppointmentPollAlreadyFilled(x.Id));
+            Appointments = new ObservableCollection<Appointment>(appointments);
             DataContext = this;
             Poll = pbc.GetDoctorPollQuestions();
         }
@@ -68,6 +74,17 @@ namespace hospital.View.PatientView
             if (IsValidated())
             {
                 pbc.SavePoll(FillPoll());
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.GetType() == typeof(PatientHomeWindow))
+                    {
+                        (window as PatientHomeWindow).Main.Content = new PatientCalendar();
+                    }
+                }
+                Dispatcher.Invoke(() =>
+                {
+                    notifier.ShowInformation("Poll answers successfully saved!");
+                });
             }
         }
 
@@ -103,7 +120,31 @@ namespace hospital.View.PatientView
 
         private PollBlueprint FillPoll()
         {
-            PollBlueprint poll = pbc.GetDoctorPollBlueprint();
+            PollBlueprint poll = new PollBlueprint();
+            poll.Type = PollType.DOCTOR_POLL;
+            poll.PollName = "Doctor poll";
+            poll.Categories = new List<PollCategory>()
+            {
+                new PollCategory(0, "Doctor", new List<PollQuestion>()
+                {
+                    new PollQuestion(0, "How polite was your doctor?"),
+                    new PollQuestion(1, "How kind was your doctor?"),
+                    new PollQuestion(2, "How would you rate doctors expertise?"),
+                }),
+                new PollCategory(1, "Appointment", new List<PollQuestion>()
+                {
+                    new PollQuestion(3, "How appropriate were the medicines the doctor gave you?"),
+                    new PollQuestion(4, "Did you have to wait for a long time?"),
+                    new PollQuestion(5, "Did you spend a lot of time on appointment?"),
+                }),
+                new PollCategory(2, "Ordination", new List<PollQuestion>()
+                {
+                    new PollQuestion(6, "Rate the cleanliness of the ordination?"),
+                    new PollQuestion(7, "How equiped was the ordination?"),
+                    new PollQuestion(8, "How are you satasfied with our waiting room?"),
+                }),
+            };
+
             foreach (var listIterator in lbPoll.Items)
             {
                 PollQuestion question = (PollQuestion)listIterator;
@@ -170,5 +211,20 @@ namespace hospital.View.PatientView
             }
             return true;
         }
+
+        Notifier notifier = new Notifier(cfg =>
+        {
+            cfg.PositionProvider = new WindowPositionProvider(
+                parentWindow: Application.Current.MainWindow,
+                corner: Corner.TopRight,
+                offsetX: 10,
+                offsetY: 10);
+
+            cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+                notificationLifetime: TimeSpan.FromSeconds(3),
+                maximumNotificationCount: MaximumNotificationCount.FromCount(5));
+
+            cfg.Dispatcher = Application.Current.Dispatcher;
+        });
     }
 }

@@ -20,21 +20,23 @@
     </Page.Resources>
     <Grid>
         
-        <TextBox x:Name="tbText" HorizontalAlignment="Left" Height="23" Margin="135,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="275"/>
+        <TextBox x:Name="tbText" HorizontalAlignment="Left" Height="23" Margin="135,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="275" TabIndex="1"/>
         <Label Content="Text:" HorizontalAlignment="Left" Margin="30,75,0,0" VerticalAlignment="Top"/>
         <Label Content="Starts at:" HorizontalAlignment="Left" Margin="30,121,0,0" VerticalAlignment="Top"/>
         <Label Content="Time:" HorizontalAlignment="Left" Margin="285,121,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblEndsAt" Content="Ends at:" HorizontalAlignment="Left" Margin="30,169,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblTimeEnd" Content="Time:" HorizontalAlignment="Left" Margin="285,169,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbInterval" HorizontalAlignment="Left" Height="23" Margin="135,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="73"/>
+        <TextBox x:Name="tbInterval" HorizontalAlignment="Left" Height="23" Margin="135,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="73" TabIndex="6"/>
         <Label x:Name="lblRepeats" Content="Repeats every:" HorizontalAlignment="Left" Margin="30,214,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblHours" Content="hours" HorizontalAlignment="Left" Margin="214,215,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnConfirm" Content="Confirm" HorizontalAlignment="Left" Margin="700,408,0,0" VerticalAlignment="Top" Width="90" Click="btnConfirm_Click"/>
-        <DatePicker x:Name="dateStart" HorizontalAlignment="Left" Margin="135,120,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.25,0.32" Width="117"/>
-        <DatePicker x:Name="dateEnd" HorizontalAlignment="Left" Margin="135,170,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.513,0.4" Width="117"/>
+        <Button x:Name="btnConfirm" HorizontalAlignment="Left" Margin="700,408,0,0" VerticalAlignment="Top" Width="90" Click="btnConfirm_Click" TabIndex="7" Padding="4">
+            <AccessText>_Confirm</AccessText>
+        </Button>
+        <DatePicker x:Name="dateStart" HorizontalAlignment="Left" Margin="135,120,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.25,0.32" Width="117" TabIndex="2"/>
+        <DatePicker x:Name="dateEnd" HorizontalAlignment="Left" Margin="135,170,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.513,0.4" Width="117" TabIndex="4"/>
         <Label x:Name="lblWarning" Content="" HorizontalAlignment="Left" Margin="10,379,0,0" VerticalAlignment="Top" Width="400" Foreground="#DDFF0000" FontStyle="Italic"/>
-        <syncfusion:SfTimePicker x:Name="timeStart" HorizontalAlignment="Left" Margin="340,121,0,0" VerticalAlignment="Top" FormatString="HH:mm" SelectorFormatString="HH:mm"/>
-        <syncfusion:SfTimePicker x:Name="timeEnd" HorizontalAlignment="Left" Margin="340,169,0,0" VerticalAlignment="Top" FormatString="HH:mm" SelectorFormatString="HH:mm"/>
+        <syncfusion:SfTimePicker x:Name="timeStart" HorizontalAlignment="Left" Margin="340,121,0,0" VerticalAlignment="Top" FormatString="HH:mm" SelectorFormatString="HH:mm" TabIndex="3"/>
+        <syncfusion:SfTimePicker x:Name="timeEnd" HorizontalAlignment="Left" Margin="340,169,0,0" VerticalAlignment="Top" FormatString="HH:mm" SelectorFormatString="HH:mm" TabIndex="5"/>
         
         <RadioButton x:Name="rbOneTime" Content="One-time" HorizontalAlignment="Left" Margin="30,30,0,0" VerticalAlignment="Top" Checked="rbOneTime_Checked"/>
         <RadioButton x:Name="rbPeriodically" Content="Periodically" HorizontalAlignment="Left" Margin="126,30,0,0" VerticalAlignment="Top" Checked="rbPeriodically_Checked" IsChecked="True"/>

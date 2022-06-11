@@ -1,25 +1,16 @@
-﻿using hospital.Model;
-using Model;
+﻿using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using ToastNotifications;
 using ToastNotifications.Lifetime;
 using ToastNotifications.Messages;
 using ToastNotifications.Position;
 using Controller;
 using hospital.View.PatientView;
+using hospital.Controller;
 
 namespace hospital.View
 {
@@ -33,6 +24,7 @@ namespace hospital.View
         private User current;
         private List<Timer> timers;
         private App app;
+        private PollController pollController;
 
         public PatientHomeWindow()
         {
@@ -43,10 +35,13 @@ namespace hospital.View
             nc = app.notificationController;
             current = app.userController.CurentLoggedUser;
             mr = app.medicalRecordsController.FindById(app.patientController.FindById(current.Username).RecordId);
+            pollController = app.pollBlueprintController;
             timers = new List<Timer>();
 
             StartTherapyNotifications();
             StartNotificationsFromFile();
+            lbPageName.Content = "Calendar";
+            btnHospitalPoll.IsEnabled = !pollController.HospitalPollAlreadyFilled(current.Username);
         }
 
         private void StartNotificationsFromFile()
@@ -196,36 +191,55 @@ namespace hospital.View
         private void btnCalendar_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new PatientCalendar();
+            lbPageName.Content = "Calendar";
         }
 
         private void btnMakeAppointment_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new PatientMakeAppointmentFirst();
+            lbPageName.Content = "Make an appointment";
         }
 
         private void btnAppointments_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new PatientAppointmentsPage();
+            lbPageName.Content = "All appointments";
         }
 
         private void btnHospitalPoll_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new PatientHospitalPoll();
+            lbPageName.Content = "Hospital poll";
         }
 
         private void btnDoctorPoll_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new PatientDoctorPoll();
+            lbPageName.Content = "Doctor poll";
         }
 
         private void btnMedicalRecord_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new PatientMedicalRecord();
+            lbPageName.Content = "Medical record";
         }
 
         private void btnCustomNotification_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new PatientCustomNotification();
+            lbPageName.Content = "Create custom notification";
+        }
+
+        private void btnGraph_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new PatientPopularTimes();
+            lbPageName.Content = "Popular times";
+        }
+
+        private void btnTherapy_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new PatientTherapies();
+            lbPageName.Content = "Therapies";
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
@@ -240,16 +254,6 @@ namespace hospital.View
                     (window as PatientHomeWindow).Close();
                 }
             }
-        }
-
-        private void btnGraph_Click(object sender, RoutedEventArgs e)
-        {
-            Main.Content = new PatientPopularTimes();
-        }
-
-        private void btnTherapy_Click(object sender, RoutedEventArgs e)
-        {
-            Main.Content = new PatientTherapies();
         }
     }
 }

@@ -18,15 +18,23 @@
         </ResourceDictionary>
     </Page.Resources>
     <Grid>
-        <DataGrid x:Name="appointmentTable" ItemsSource="{Binding Appointments}" AutoGenerateColumns="True" IsReadOnly="True" HorizontalAlignment="Left" Height="378" Margin="10,20,0,0" VerticalAlignment="Top" Width="780" SelectionChanged="appointmentTable_SelectionChanged">
-            <!--<DataGrid.Columns>
-            <DataGridTextColumn Header="Doctor name" Binding="{Binding Doctor}"/>
-            <DataGridTextColumn Header="Date" Binding="{Binding StartTime}" Width="*"/>
-        </DataGrid.Columns>-->
+        <DataGrid x:Name="appointmentTable" ItemsSource="{Binding Appointments}" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" Height="378" Margin="10,20,0,0" VerticalAlignment="Top" Width="780" SelectionChanged="appointmentTable_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Doctor name" Binding="{Binding DoctorUsername}" Width="*"/>
+                <DataGridTextColumn Header="Date" Binding="{Binding StartTime}" Width="2*"/>
+                <DataGridTextColumn Header="Room" Binding="{Binding RoomId}" Width="*"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="3*"/>
+            </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnDelay" Content="Delay" HorizontalAlignment="Left" Margin="625,408,0,0" VerticalAlignment="Top" Width="75" Click="btnDelay_Click"/>
-        <Button x:Name="btnCancel" Content="Cancel " HorizontalAlignment="Left" Margin="715,408,0,0" VerticalAlignment="Top" Width="75" Click="btnCancel_Click"/>
-        <Button x:Name="btnLeaveNote" Content="Leave a note" HorizontalAlignment="Left" Margin="495,408,0,0" VerticalAlignment="Top" Width="115" Click="btnLeaveNote_Click"/>
+        <Button x:Name="btnDelay" HorizontalAlignment="Left" Margin="625,408,0,0" VerticalAlignment="Top" Width="75" Click="btnDelay_Click">
+            <AccessText>_Delay</AccessText>
+        </Button>
+        <Button x:Name="btnCancel"  HorizontalAlignment="Left" Margin="715,408,0,0" VerticalAlignment="Top" Width="75" Click="btnCancel_Click">
+            <AccessText>_Cancel</AccessText>
+        </Button>
+        <Button x:Name="btnLeaveNote" HorizontalAlignment="Left" Margin="495,408,0,0" VerticalAlignment="Top" Width="115" Click="btnLeaveNote_Click">
+            <AccessText>_Leave a note</AccessText>
+        </Button>
 
     </Grid>
 </Page>

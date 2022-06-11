@@ -1,20 +1,12 @@
 ﻿using Controller;
 using Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ToastNotifications;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Messages;
+using ToastNotifications.Position;
 
 namespace hospital.View.PatientView
 {
@@ -46,7 +38,7 @@ namespace hospital.View.PatientView
             }
             else if ((bool)rbOneTime.IsChecked)
             {
-                if(dateStart.SelectedDate == null)
+                if (dateStart.SelectedDate == null)
                 {
                     lblWarning.Content = "Please select date!";
                     return false;
@@ -166,18 +158,42 @@ namespace hospital.View.PatientView
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            if (Validate() && (bool)rbOneTime.IsChecked)
+            lblWarning.Content = "";
+            if (Validate())
             {
-                Notification n = new Notification(uc.CurentLoggedUser.Username, JoinDateAndTimeStart(), tbText.Text);
-                nc.Create(n);
-                SendNotificationToHomeWindow(n);
-            }
-            else
-            {
-                Notification n = new Notification(uc.CurentLoggedUser.Username, JoinDateAndTimeStart(), JoinDateAndTimeEnd(), Int32.Parse(tbInterval.Text), tbText.Text);
-                nc.Create(n);
-                SendNotificationToHomeWindow(n);
+                if ((bool)rbOneTime.IsChecked)
+                {
+                    Notification n = new Notification(uc.CurentLoggedUser.Username, JoinDateAndTimeStart(), tbText.Text);
+                    nc.Create(n);
+                    SendNotificationToHomeWindow(n);
+                }
+                else
+                {
+                    Notification n = new Notification(uc.CurentLoggedUser.Username, JoinDateAndTimeStart(), JoinDateAndTimeEnd(), Int32.Parse(tbInterval.Text), tbText.Text);
+                    nc.Create(n);
+                    SendNotificationToHomeWindow(n);
+                }
+                Dispatcher.Invoke(() =>
+                {
+                    notifier.ShowInformation("Custom notification created!");
+                });
             }
         }
+
+        Notifier notifier = new Notifier(cfg =>
+        {
+            cfg.PositionProvider = new WindowPositionProvider(
+                parentWindow: Application.Current.MainWindow,
+                corner: Corner.TopRight,
+                offsetX: 10,
+                offsetY: 10);
+
+            cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+                notificationLifetime: TimeSpan.FromSeconds(3),
+                maximumNotificationCount: MaximumNotificationCount.FromCount(5));
+
+            cfg.Dispatcher = Application.Current.Dispatcher;
+        });
+
     }
 }

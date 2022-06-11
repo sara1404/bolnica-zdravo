@@ -22,7 +22,9 @@
         <TextBox x:Name="tbDoctorsNote" Text="{Binding DoctorNote}" HorizontalAlignment="Left" Height="144" Margin="10,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="780" IsEnabled="False"/>
         <Label Content="Patients note:" HorizontalAlignment="Left" Margin="10,185,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.309,0.769"/>
         <TextBox x:Name="tbPatientsNote" Text="{Binding PatientNote}" HorizontalAlignment="Left" Height="174" Margin="10,211,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="780"/>
-        <Button x:Name="btnConfirm" Command="{Binding ConfirmCommand}" Content="Confirm" HorizontalAlignment="Left" Margin="700,408,0,0" VerticalAlignment="Top" Width="90"/>
+        <Button x:Name="btnConfirm" Command="{Binding ConfirmCommand}" HorizontalAlignment="Left" Margin="700,408,0,0" VerticalAlignment="Top" Width="90">
+            <AccessText>_Confirm</AccessText>
+        </Button>
 
     </Grid>
 </Page>

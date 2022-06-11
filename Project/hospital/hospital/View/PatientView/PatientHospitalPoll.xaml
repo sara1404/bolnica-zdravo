@@ -39,7 +39,9 @@
 
     </Page.Resources>
     <Grid>
-        <Button x:Name="btnConfirm" Content="Confirm" HorizontalAlignment="Left" Margin="695,408,0,0" VerticalAlignment="Top" Width="95" Click="btnConfirm_Click"/>
+        <Button x:Name="btnConfirm" HorizontalAlignment="Left" Margin="700,408,0,0" VerticalAlignment="Top" Width="90" Click="btnConfirm_Click" Padding="4">
+            <AccessText>_Confirm</AccessText>
+        </Button>
         <ListBox x:Name="lbPoll" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=Poll}" ItemTemplate="{StaticResource pollTemplate}" HorizontalAlignment="Left" Height="360" Margin="10,10,0,0" VerticalAlignment="Top" Width="780" BorderBrush="White"/>
         <Label x:Name="lbWarning" Content="" HorizontalAlignment="Left" Margin="10,375,0,0" VerticalAlignment="Top" Height="28" Width="385" Foreground="#DDFF0000" FontStyle="Italic"/>
 

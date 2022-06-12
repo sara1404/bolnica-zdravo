@@ -431,10 +431,12 @@
     <Compile Include="View\UserControls\SuggestedDelayUserControl.xaml.cs">
       <DependentUpon>SuggestedDelayUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\ViewModel\AddGuestAccountViewModelcs.cs" />
     <Compile Include="View\UserControls\ViewModel\ChangePasswordViewModel.cs" />
     <Compile Include="View\UserControls\ViewModel\GenerateReportViewModel.cs" />
     <Compile Include="View\UserControls\ViewModel\OrderEquipmentViewModel.cs" />
     <Compile Include="View\UserControls\ViewModel\RelayCommand.cs" />
+    <Compile Include="View\UserControls\ViewModel\RevisionOfRestViewModel.cs" />
     <Compile Include="VM\AddRoomWindowViewModel.cs" />
     <Compile Include="VM\Commands.cs" />
     <Compile Include="VM\DeleteRoomWindowViewModel.cs" />

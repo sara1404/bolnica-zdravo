@@ -20,8 +20,8 @@
     </Page.Resources>
     <Grid>
 
-        <syncfusion:SfScheduler x:Name="therapyCalendar" AppointmentEditFlag="None" Margin="0,0,10,55" ViewType="Week" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="780" Height="395" AllowedViewTypes="Week"/>
-        <Button x:Name="btnPDF" HorizontalAlignment="Left" Margin="700,408,0,0" VerticalAlignment="Top" Width="90" Padding="4" Click="btnPDF_Click">
+        <syncfusion:SfScheduler x:Name="therapyCalendar" ItemsSource="{Binding Therapies}" AppointmentEditFlag="None" Margin="0,0,10,55" ViewType="Week" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="780" Height="395" AllowedViewTypes="Week"/>
+        <Button x:Name="btnPDF" Command="{Binding PDFCommand}" HorizontalAlignment="Left" Margin="700,408,0,0" VerticalAlignment="Top" Width="90" Padding="4">
             <AccessText>_PDF report</AccessText>
         </Button>
 

@@ -313,8 +313,8 @@
     </Compile>
     <Compile Include="View\Manager\SelectFromListBoxCommand.cs" />
     <Compile Include="View\Manager\SelectMultipleFromListViewCommand.cs" />
-    <Compile Include="View\PatientView\AppointmentNoteViewModel.cs" />
-    <Compile Include="View\PatientView\MedicalRecordViewModel.cs" />
+    <Compile Include="View\PatientView\ViewModel\AppointmentNoteViewModel.cs" />
+    <Compile Include="View\PatientView\ViewModel\MedicalRecordViewModel.cs" />
     <Compile Include="View\PatientView\PatientAppointmentNote.xaml.cs">
       <DependentUpon>PatientAppointmentNote.xaml</DependentUpon>
     </Compile>
@@ -333,7 +333,7 @@
     <Compile Include="View\PatientView\PatientCalendar.xaml.cs">
       <DependentUpon>PatientCalendar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientView\PatientCalendarViewModel.cs" />
+    <Compile Include="View\PatientView\ViewModel\PatientCalendarViewModel.cs" />
     <Compile Include="View\PatientView\PatientCustomNotification.xaml.cs">
       <DependentUpon>PatientCustomNotification.xaml</DependentUpon>
     </Compile>
@@ -364,7 +364,8 @@
     <Compile Include="View\PatientView\PatientTherapies.xaml.cs">
       <DependentUpon>PatientTherapies.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PatientView\PopularTimesViewModel.cs" />
+    <Compile Include="View\PatientView\ViewModel\PopularTimesViewModel.cs" />
+    <Compile Include="View\PatientView\ViewModel\TherapyViewModel.cs" />
     <Compile Include="View\SecretaryHomeWindow.xaml.cs">
       <DependentUpon>SecretaryHomeWindow.xaml</DependentUpon>
     </Compile>

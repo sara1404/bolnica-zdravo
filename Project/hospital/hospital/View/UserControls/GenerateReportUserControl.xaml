@@ -27,11 +27,11 @@
                         <TextBlock x:Name="errFrom" Height="20" Width="132" Foreground="red" Margin="239,59,75,321"></TextBlock>
                         <TextBlock x:Name="errTo" Height="20" Width="132" Foreground="red" Margin="239,117,75,263"></TextBlock>
                         <TextBlock FontSize="15" FontWeight="DemiBold" Width="60" Height="25" Margin="75,149,311,226" Text="Note"/>
-                        <TextBox HorizontalAlignment="Left" x:Name="txtNote" TextWrapping="Wrap" Text="" BorderThickness="1" VerticalAlignment="Top" Width="296" Height="131" Margin="78,179,0,0"/>
-                        <Button x:Name="btnSubmit" FontSize="12" Content="Submit"  VerticalAlignment="Top" Height="26" Width="75"  Margin="296,360,75,0" Click="btnSubmit_Click "/>
-                        <Button x:Name="btnCancel" FontSize="12" Content="Cancel" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Height="26" Margin="78,360,0,0" Click="btnCancel_Click"/>
-                        <DatePicker x:Name="dpFrom" HorizontalAlignment="Left" Margin="239,34,0,0" VerticalAlignment="Top" Width="135" SelectedDateChanged="dpFrom_SelectedDateChanged"/>
-                        <DatePicker x:Name="dpTo" HorizontalAlignment="Left" Margin="239,92,0,0" VerticalAlignment="Top" Width="135" SelectedDateChanged="dpTo_SelectedDateChanged"/>
+                        <TextBox HorizontalAlignment="Left" Text="{Binding Note}" x:Name="txtNote" TextWrapping="Wrap" BorderThickness="1" VerticalAlignment="Top" Width="296" Height="131" Margin="78,179,0,0"/>
+                        <Button x:Name="btnSubmit" Command="{Binding SubmitCommand}" FontSize="12" Content="Submit"  VerticalAlignment="Top" Height="26" Width="75"  Margin="296,360,75,0"/>
+                        <Button x:Name="btnCancel" Command="{Binding CancelCommand}" FontSize="12" Content="Cancel" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Height="26" Margin="78,360,0,0"/>
+                        <DatePicker  SelectedDate="{Binding DateFrom}" DisplayDateStart="{Binding DispleyDateStart}" HorizontalAlignment="Left" Margin="239,34,0,0" VerticalAlignment="Top" Width="135"/>
+                        <DatePicker  SelectedDate="{Binding DateTo}" DisplayDateEnd="{Binding DisplayDateEnd}" HorizontalAlignment="Left" Margin="239,92,0,0" VerticalAlignment="Top" Width="135"/>
                     </Grid>
                 </StackPanel>
             </Border>

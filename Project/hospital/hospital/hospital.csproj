@@ -432,6 +432,7 @@
       <DependentUpon>SuggestedDelayUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\ViewModel\ChangePasswordViewModel.cs" />
+    <Compile Include="View\UserControls\ViewModel\GenerateReportViewModel.cs" />
     <Compile Include="View\UserControls\ViewModel\OrderEquipmentViewModel.cs" />
     <Compile Include="View\UserControls\ViewModel\RelayCommand.cs" />
     <Compile Include="VM\AddRoomWindowViewModel.cs" />

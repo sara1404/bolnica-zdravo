@@ -36,8 +36,8 @@ namespace hospital.View.PatientView
         public PatientMakeAppointmentFirst()
         {
             InitializeComponent();
-            dateFrom.DisplayDateStart = DateTime.Today;
-            dateTo.DisplayDateStart = DateTime.Today;
+            dateFrom.DisplayDateStart = DateTime.Today.AddDays(1);
+            dateTo.DisplayDateStart = DateTime.Today.AddDays(1);
             app = Application.Current as App;
             uc = app.userController;
             ac = app.appointmentController;
@@ -45,6 +45,7 @@ namespace hospital.View.PatientView
             aac = app.availableAppointmentController;
             DoctorController dc = app.doctorController;
             cbDoctor.ItemsSource = dc.GetDoctors();
+            dateTo.IsEnabled = false;
         }
 
 
@@ -58,21 +59,17 @@ namespace hospital.View.PatientView
 
             if (dateFrom.SelectedDate != null && dateTo.SelectedDate != null && cbDoctor.SelectedItem != null && (priorityDoctor || priorityDate))
             {
-                if (dateFrom.SelectedDate.Value.CompareTo(dateTo.SelectedDate.Value) < 0 && priorityDoctor)
+                if (dateFrom.SelectedDate.Value.CompareTo(dateTo.SelectedDate.Value) <= 0 && priorityDoctor)
                 {
                     appointmentTable.ItemsSource = rac.GetRecommendedByDoctor((DateTime)dateFrom.SelectedDate, (DateTime)dateTo.SelectedDate, doctor, uc.CurentLoggedUser.Username);
                 }
-                else if (dateFrom.SelectedDate.Value.CompareTo(dateTo.SelectedDate.Value) < 0 && priorityDate)
+                else if (dateFrom.SelectedDate.Value.CompareTo(dateTo.SelectedDate.Value) <= 0 && priorityDate)
                 {
                     appointmentTable.ItemsSource = rac.GetRecommendedByDate((DateTime)dateFrom.SelectedDate, (DateTime)dateTo.SelectedDate, doctor, uc.CurentLoggedUser.Username);
                 }
-                else if (dateFrom.SelectedDate.Value.CompareTo(dateTo.SelectedDate.Value) >= 0)
+                else if (dateFrom.SelectedDate.Value.CompareTo(dateTo.SelectedDate.Value) > 0)
                 {
                     lbWarning.Content = "Date from needs to be before date to!";
-                }
-                else
-                {
-                    lbWarning.Content = "Choose priority(and doctor)!";
                 }
             }
             else if (cbDoctor.SelectedIndex != -1 && dateFrom.SelectedDate == null && !priorityDoctor && !priorityDate)
@@ -90,6 +87,22 @@ namespace hospital.View.PatientView
                 Doctor d = (Doctor)cbDoctor.SelectedItem;
                 appointmentTable.ItemsSource = aac.GetFreeAppointmentsByDateAndDoctor((DateTime)dateFrom.SelectedDate, d.Username, uc.CurentLoggedUser.Username);
             }
+            else
+            {
+                lbWarning.Content = "Please enter all search criteria!";
+            }
+        }
+
+        public void ClearFields()
+        {
+            dateFrom.SelectedDate = null;
+            dateTo.SelectedDate = null;
+            dateTo.IsEnabled = false;
+            cbDoctor.SelectedItem = null;
+            rbDate.IsChecked = false;
+            rbDoctor.IsChecked = false;
+            appointmentTable.ItemsSource = null;
+            lbWarning.Content = "";
         }
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
@@ -126,5 +139,20 @@ namespace hospital.View.PatientView
 
             cfg.Dispatcher = Application.Current.Dispatcher;
         });
+
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            ClearFields();
+        }
+
+        private void rbDoctor_Checked(object sender, RoutedEventArgs e)
+        {
+            dateTo.IsEnabled = true;
+        }
+
+        private void rbDate_Checked(object sender, RoutedEventArgs e)
+        {
+            dateTo.IsEnabled = true;
+        }
     }
 }

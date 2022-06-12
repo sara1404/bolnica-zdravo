@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 using ToastNotifications;
 using ToastNotifications.Lifetime;
 using ToastNotifications.Messages;
@@ -43,6 +44,7 @@ namespace hospital.View
             btnCancel.IsEnabled = false;
             btnDelay.IsEnabled = false;
 
+            appointmentTable.LoadingRow += appointmentTableLoadingRow;
             ICollectionView appointmentsView = CollectionViewSource.GetDefaultView(ac.GetAppointments());
             appointmentsView.Filter = UserFilter;
         }
@@ -52,6 +54,20 @@ namespace hospital.View
             Appointment appointment = item as Appointment;
             User current = app.userController.CurentLoggedUser;
             return appointment.PatientUsername.Equals(current.Username);
+        }
+
+        private void appointmentTableLoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            var row = e.Row;
+            Appointment appointment = row.DataContext as Appointment;
+            if (appointment.StartTime <= DateTime.Now)
+            {
+                row.Background = new SolidColorBrush(Colors.White);
+            }
+            else
+            {
+                row.Background = new SolidColorBrush(Colors.Orange);
+            }
         }
 
         private void btnDelay_Click(object sender, RoutedEventArgs e)

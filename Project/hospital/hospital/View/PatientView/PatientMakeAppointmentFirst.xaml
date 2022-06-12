@@ -40,7 +40,7 @@
         <Button x:Name="btnConfirm" HorizontalAlignment="Left" Margin="700,408,0,0" VerticalAlignment="Top" Width="90" Padding="4" Click="btnConfirm_Click" TabIndex="7">
             <AccessText>_Confirm</AccessText>
         </Button>
-        <Button x:Name="btnClear" HorizontalAlignment="Left" Margin="185,200,0,0" VerticalAlignment="Top" Width="33" Padding="4" Background="Transparent" BorderBrush="Transparent" Click="btnClear_Click">
+        <Button x:Name="btnClear" HorizontalAlignment="Left" Margin="185,200,0,0" VerticalAlignment="Top" Width="33" Padding="4" Background="Transparent" BorderBrush="Transparent" Click="btnClear_Click" ToolTip="Clear">
             <Image Source="../../Resources/Images/back.png"/>
         </Button>
 

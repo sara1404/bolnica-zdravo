@@ -32,5 +32,12 @@ namespace hospital.View.UserControls
             parentWindow.Close();
             mw.Show();
         }
+
+        private void btnSetting_Click(object sender, RoutedEventArgs e)
+        {
+            Window parentWindow = Window.GetWindow(this);
+            ((SecretaryHomeWindow)parentWindow).CloseAllUserControl();
+            ((SecretaryHomeWindow)parentWindow).changePasswordUserControl.Visibility = Visibility.Visible;
+        }
     }
 }

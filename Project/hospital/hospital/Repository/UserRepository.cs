@@ -56,7 +56,12 @@ namespace Repository
             return null;
         }
 
-
+        public void ChangePassword(string username, string newPassword)
+        {
+            User user = FindByUsername(username);
+            user.Password = newPassword;
+            userFileHandler.Write(this.users.ToList());
+        }
         public bool DeleteByUsername(string username)
         {
             bool reVal = users.Remove(FindByUsername(username));

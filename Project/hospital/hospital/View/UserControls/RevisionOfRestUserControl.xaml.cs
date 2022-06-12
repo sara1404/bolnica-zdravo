@@ -17,25 +17,26 @@ using Controller;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.ComponentModel;
+using ViewModel;
 
 namespace hospital.View.UserControls
 {
     public partial class RevisionOfRestUserControl : UserControl
     {
-        private VacationRequestController _vacationRequestController;
+      /*  private VacationRequestController _vacationRequestController;
         private DoctorController _doctorController;
         private ObservableCollection<VacationRequest> _vacationRequests;
-        private VacationRequest _currentSelected;
+        private VacationRequest _currentSelected; */
         public RevisionOfRestUserControl()
         {
-            this.DataContext = this;
-            App app = Application.Current as App;
+            this.DataContext = new RevisionOfRestViewModel();
+           /* App app = Application.Current as App;
             _vacationRequestController = app.vacationRequestController;
             _doctorController = app.doctorController;
-            _vacationRequests = _vacationRequestController.FindAll();
+            _vacationRequests = _vacationRequestController.FindAll(); */
             InitializeComponent();
         }
-        public ObservableCollection<VacationRequest> VacationRequests
+  /*      public ObservableCollection<VacationRequest> VacationRequests
         {
             get { return _vacationRequests; }
             set { _vacationRequests = value; }
@@ -79,6 +80,6 @@ namespace hospital.View.UserControls
             txtDate.Text = "";
             txtMotive.Text = "";
             txtReason.Text = "";
-        }
+        } */
     }
 }

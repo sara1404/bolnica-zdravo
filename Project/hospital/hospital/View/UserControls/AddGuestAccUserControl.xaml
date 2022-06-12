@@ -23,19 +23,19 @@
                     <Label FontSize="25" FontWeight="DemiBold" Margin="0,0,0,0" HorizontalAlignment="Center">Create guest account</Label>
                     <Grid Height="400">
                         <TextBlock FontSize="15" FontWeight="DemiBold" Height="25" Margin="75,34,266,341" RenderTransformOrigin="0.428,2.257"><Run Text="First name"/></TextBlock>
-                        <TextBox x:Name="txtFirstname" Height="25" Margin="239,34,75,340"/>
+                        <TextBox x:Name="txtFirstname" Text="{Binding Firstname}" Height="25" Margin="239,34,75,340"/>
                         <TextBlock FontSize="15" FontWeight="DemiBold" Height="25" Margin="78,94,266,281" Text="Last name"/>
-                        <TextBox x:Name="txtLastname" Height="25" Margin="239,95,75,280"/>
+                        <TextBox x:Name="txtLastname" Height="25" Text="{Binding Lastname}" Margin="239,95,75,280"/>
                         <TextBlock FontSize="15" FontWeight="DemiBold" Height="25" Margin="78,156,298,219" Text="Username"/>
-                        <TextBox x:Name="txtUsername" Height="25" Margin="239,156,75,219"/>
+                        <TextBox x:Name="txtUsername" Height="25" Text="{Binding Username}" Margin="239,156,75,219"/>
 
 
                         <TextBlock x:Name="errFirstname" Height="20" Width="132" Foreground="red" Margin="239,59,75,321"></TextBlock>
                         <TextBlock x:Name="errLastname" Height="20" Width="132" Foreground="red" Margin="241,120,73,260"></TextBlock>
                         <TextBlock x:Name="errUsername" Height="20" Width="132" Foreground="red" Margin="239,181,75,199"></TextBlock>
 
-                        <Button x:Name="btnSubmit" Content="Create" FontSize="12"  VerticalAlignment="Top" Height="26" Width="75"  Margin="296,360,75,0" Click="btnSubmit_Click"/>
-                        <Button x:Name="btnCancel" Content="Cancel" FontSize="12" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Height="26" Margin="78,360,0,0" Click="btnCancel_Click"/>
+                        <Button x:Name="btnSubmit" Content="Create" Command="{Binding SubmitCommand}" FontSize="12"  VerticalAlignment="Top" Height="26" Width="75"  Margin="296,360,75,0" Click="btnSubmit_Click"/>
+                        <Button x:Name="btnCancel" Content="Cancel" Command="{Binding CancelCommand}" FontSize="12" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Height="26" Margin="78,360,0,0" Click="btnCancel_Click"/>
                     </Grid>
                 </StackPanel>
             </Border>

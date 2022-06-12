@@ -12,21 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Controller;
-using Model;
-using ToastNotifications;
-using ToastNotifications.Lifetime;
-using ToastNotifications.Messages;
-using ToastNotifications.Position;
 using ViewModel;
 
 namespace hospital.View.UserControls
 {
-    public partial class OrderEquipmentUserControl : UserControl
+    public partial class ChangePasswordUserControl : UserControl
     {
-        public OrderEquipmentUserControl()
+        public ChangePasswordUserControl()
         {
-            this.DataContext = new OrderEquipmentViewModel();
+            this.DataContext = new ChangePasswordViewModel();
             InitializeComponent();
         }
     }

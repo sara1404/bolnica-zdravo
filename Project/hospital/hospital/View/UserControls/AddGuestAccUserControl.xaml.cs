@@ -16,9 +16,6 @@ using Controller;
 using Model;
 namespace hospital.View.UserControls
 {
-    /// <summary>
-    /// Interaction logic for AddGuestAccUserControl.xaml
-    /// </summary>
     public partial class AddGuestAccUserControl : UserControl
     {
         public PatientController pc;

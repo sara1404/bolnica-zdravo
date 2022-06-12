@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Controller;
+using hospital.View.UserControls;
 
 namespace hospital.View
 {
@@ -25,7 +26,10 @@ namespace hospital.View
             this.DataContext = this;
             App app = Application.Current as App;
             uc = app.userController;
-            Console.WriteLine(DateTime.Now.ToString());
+
+            btnhandlingAccount.BorderBrush = (Brush)(new BrushConverter().ConvertFrom("#c8d8e4"));
+            btnhandlingAccount.BorderThickness = new Thickness(3, 0, 0, 0);
+            handlingAccountUserControl.Visibility = Visibility.Visible;
         }
 
         private void handlingAccount_Click(object sender, RoutedEventArgs e)
@@ -75,9 +79,10 @@ namespace hospital.View
             btnEmergency.BorderThickness = new Thickness(3, 0, 0, 0);
             handlingEmergencyUserControl.Visibility = Visibility.Visible;
         }
-        private void CloseAllUserControl()
+        public void CloseAllUserControl()
         {
-            //popUpUserControl.Visibility= Visibility.Collapsed;
+            AlertPopup.IsOpen = false;
+            changePasswordUserControl.Visibility = Visibility.Collapsed;
 
             handlingMedRecordUserControl.Visibility = Visibility.Collapsed;
             handlingMedRecordUserControl.addMedRecUserControl.Visibility = Visibility.Collapsed;

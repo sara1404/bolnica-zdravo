@@ -2,6 +2,7 @@
 using hospital.DTO;
 using Model;
 using Syncfusion.Pdf;
+using Syncfusion.Pdf.Graphics;
 using Syncfusion.Pdf.Tables;
 using Syncfusion.UI.Xaml.Scheduler;
 using System;
@@ -55,17 +56,45 @@ namespace hospital.View.PatientView
 
             PdfPage page = doc.Pages.Add();
 
+            //Create a header and draw the image.
+
+            RectangleF bounds = new RectangleF(0, 0, doc.Pages[0].GetClientSize().Width, 80);
+
+            PdfPageTemplateElement header = new PdfPageTemplateElement(bounds);
+ 
+            PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 12);
+            PdfFont fontH1 = new PdfStandardFont(PdfFontFamily.Helvetica, 15);
+            PdfBrush brush = new PdfSolidBrush(System.Drawing.Color.Black);
+
+            Patient patient = pc.FindById(currentUser.Username);
+            string fullName = patient.FirstName.Trim() + " " + patient.LastName.Trim();
+
+            PdfCompositeField compositeField = new PdfCompositeField(font, brush, "Zdravo d.o.o. ambulanta Novi Sad");
+            PdfCompositeField compositeField1 = new PdfCompositeField(font, brush, "Tel/fax +381 234567");
+            PdfCompositeField compositeField2 = new PdfCompositeField(font, brush, "Pavla Pavlovića 7, Novi Sad 21000");
+            PdfCompositeField compositeField3 = new PdfCompositeField(fontH1, brush, "Lekovi za pacijenta: " + fullName);
+
+            compositeField.Bounds = header.Bounds;
+            compositeField.Draw(header.Graphics, new PointF(0, 0));
+            compositeField1.Draw(header.Graphics, new PointF(0, 10));
+            compositeField2.Draw(header.Graphics, new PointF(0, 20));
+            compositeField3.Draw(header.Graphics, new PointF(0, 50));
+
+            //Add the header at the top.
+
+            doc.Template.Top = header;
+
             PdfLightTable pdfLightTable = new PdfLightTable();
 
             DataTable table = new DataTable();
 
-            table.Columns.Add("Monday");
-            table.Columns.Add("Tuesday");
             table.Columns.Add("Wednesday");
             table.Columns.Add("Thursday");
             table.Columns.Add("Friday");
             table.Columns.Add("Saturday");
             table.Columns.Add("Sunday");
+            table.Columns.Add("Monday");
+            table.Columns.Add("Tuesday");
 
             List<string> row = new List<string>();
             for (int day = 1; day <= 31; day++)
@@ -85,9 +114,10 @@ namespace hospital.View.PatientView
                     row.Clear();
                 }
             }
+            pdfLightTable.Style.ShowHeader = true;
             pdfLightTable.BeginRowLayout += new BeginRowLayoutEventHandler(table_StartRowLayout);
             pdfLightTable.DataSource = table;
-            pdfLightTable.Draw(page, new PointF(0, 0));
+            pdfLightTable.Draw(page, new PointF(0, 40));
             doc.Save("therapy_report.pdf");
             doc.Close(true);
             Dispatcher.Invoke(() =>
@@ -126,6 +156,7 @@ namespace hospital.View.PatientView
         void table_StartRowLayout(object sender, BeginRowLayoutEventArgs args)
         {
             args.MinimalHeight = 40f;
+            args.CellStyle.BackgroundBrush = new PdfSolidBrush(System.Drawing.Color.LightBlue);
         }
     }
 }
